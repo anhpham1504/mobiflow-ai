@@ -37,6 +37,7 @@ try {
   if (migrationCount !== 3 || !vectorVersion || embeddingColumns !== 0 || !runtimePrivileges.rows[0].user_select || !runtimePrivileges.rows[0].audit_insert || runtimePrivileges.rows[0].audit_update || !runtimePrivileges.rows[0].public_code_sequence_usage) throw new Error('Clean migration privilege/vector verification failed.');
   console.log(JSON.stringify({ event: 'm2.clean-migration.verified', database: testDatabase, migrationCount, vectorVersion, embeddingColumns, runtimePrivileges: runtimePrivileges.rows[0] }));
   run(['--test', 'apps/api/test/auth.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
+  run(['--test', 'apps/api/test/workflow.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
 } finally {
   await admin.query(`SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${testDatabase}' AND pid <> pg_backend_pid()`);
   await admin.query(`DROP DATABASE IF EXISTS ${testDatabase}`);

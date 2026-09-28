@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 if (!existsSync('.env')) throw new Error('Run npm run env:setup first.');
 process.loadEnvFile('.env');
 const npm = process.env.npm_execpath;
-for (const args of [['run', 'build:foundation'], ['run', 'build', '-w', '@mobiflow/api']]) {
+for (const args of [['run', 'build:foundation'], ['run', 'prisma:generate'], ['run', 'build', '-w', '@mobiflow/api']]) {
   const result = spawnSync(process.execPath, [npm, ...args], { stdio: 'inherit' });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }

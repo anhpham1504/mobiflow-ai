@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/main.js",
-    "test": "npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs"
+    "test": "npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs"
   },
   "dependencies": {
     "@mobiflow/config": "0.1.0",

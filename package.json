@@ -29,10 +29,12 @@
     "demo:seed": "npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/dev/seed.mjs",
     "demo:reset": "node scripts/dev/deferred.mjs M10",
     "demo:preflight": "node scripts/dev/deferred.mjs M10",
-    "demo:warmup": "node scripts/dev/deferred.mjs M10"
+    "demo:warmup": "node scripts/dev/deferred.mjs M10",
+    "test:e2e:m3": "playwright test --config playwright.m3.config.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
+    "@playwright/test": "1.63.0",
     "@types/node": "24.10.1",
     "eslint": "9.39.4",
     "eslint-config-next": "16.3.6",

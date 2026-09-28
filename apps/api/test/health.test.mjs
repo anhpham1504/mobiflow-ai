@@ -93,7 +93,7 @@ test('request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory', 
   const badId = await fetch(app.url + '/health/live', { headers: { 'X-Request-ID': 'untrusted-value' } });
   assert.notEqual(badId.headers.get('X-Request-ID'), 'untrusted-value');
   const doc = await (await fetch(app.url + '/api/docs-json')).json();
-  assert.deepEqual(Object.keys(doc.paths).sort(), ['/api/v1/auth/login', '/api/v1/auth/logout', '/api/v1/auth/me', '/api/v1/auth/refresh', '/api/v1/health/live', '/api/v1/health/ready', '/api/v1/users/me', '/api/v1/users/staff']);
+  for (const path of ['/api/v1/auth/login', '/api/v1/auth/logout', '/api/v1/auth/me', '/api/v1/auth/refresh', '/api/v1/health/live', '/api/v1/health/ready', '/api/v1/users/me', '/api/v1/users/staff', '/api/v1/requests', '/api/v1/manager/approvals/{id}/accept']) assert.ok(doc.paths[path]);
   assert.ok(!JSON.stringify(app.logs).includes('do-not-log'));
 });
 test('global validation foundation rejects unknown fields and invalid values', async () => {

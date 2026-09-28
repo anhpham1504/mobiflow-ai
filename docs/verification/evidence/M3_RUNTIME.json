@@ -1,0 +1,167 @@
+{
+  "checkedAt": "2026-09-28T10:12:31.936Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "real PostgreSQL M2 schema, pgvector and deferred vector dimension",
+      "result": "PASS",
+      "details": {
+        "role": "mobiflow_app",
+        "version": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+        "vector": "0.8.6",
+        "requiredTables": 6,
+        "embeddingColumns": 0
+      }
+    },
+    {
+      "name": "running Docker API preserves M1 health contract",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T10:12:32.057Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "NOT_CONFIGURED",
+            "code": "NOT_CONFIGURED"
+          }
+        }
+      }
+    },
+    {
+      "name": "actual installed host Ollama LLM",
+      "result": "PASS",
+      "details": {
+        "configured": "qwen3:4b-instruct-2507-q4_K_M",
+        "installed": [
+          {
+            "name": "cieloforge/qwen2.5-coder-7b-instruct-spec:latest",
+            "digest": "2a7334474d98caf0d5624cd77d064450a63e494bb26ec260d9506ded77f99e6c"
+          },
+          {
+            "name": "qwen2.5-coder:7b",
+            "digest": "85952edbb869514d37198e9cac9a61ef2bca8d63dac08150116e458be7292253"
+          },
+          {
+            "name": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        ]
+      }
+    },
+    {
+      "name": "production web container responds",
+      "result": "PASS",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "name": "M2 OpenAPI contains safe auth and RBAC routes",
+      "result": "PASS",
+      "details": [
+        "/api/v1/health/live",
+        "/api/v1/health/ready",
+        "/api/v1/auth/login",
+        "/api/v1/auth/refresh",
+        "/api/v1/auth/logout",
+        "/api/v1/auth/me",
+        "/api/v1/users/me",
+        "/api/v1/users/staff",
+        "/api/v1/requests",
+        "/api/v1/requests/mine",
+        "/api/v1/staff/work-queue",
+        "/api/v1/manager/requests",
+        "/api/v1/manager/approvals",
+        "/api/v1/requests/{id}",
+        "/api/v1/manager/approvals/{id}",
+        "/api/v1/requests/{id}/history",
+        "/api/v1/requests/{id}/messages",
+        "/api/v1/requests/{id}/provide-info",
+        "/api/v1/requests/{id}/confirm",
+        "/api/v1/requests/{id}/reopen",
+        "/api/v1/requests/{id}/cancel",
+        "/api/v1/requests/{id}/start",
+        "/api/v1/requests/{id}/request-info",
+        "/api/v1/requests/{id}/resolve",
+        "/api/v1/manager/requests/{id}/triage",
+        "/api/v1/manager/requests/{id}/submit-approval",
+        "/api/v1/manager/approvals/{id}/accept",
+        "/api/v1/manager/approvals/{id}/modify",
+        "/api/v1/manager/approvals/{id}/reject",
+        "/api/v1/manager/requests/{id}/reassign",
+        "/api/v1/manager/requests/{id}/priority",
+        "/api/v1/requests/{id}/checklist",
+        "/api/v1/requests/{id}/checklist/{itemId}",
+        "/api/v1/notifications",
+        "/api/v1/notifications/{id}/read"
+      ]
+    },
+    {
+      "name": "production container login, protected profile and logout",
+      "result": "PASS",
+      "details": {
+        "login": 200,
+        "me": 200,
+        "logout": 204
+      }
+    },
+    {
+      "name": "Ollama offline leaves API alive and reports degraded readiness",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T10:12:32.880Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          }
+        }
+      }
+    }
+  ]
+}

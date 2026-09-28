@@ -18,15 +18,20 @@ import { AuthService } from './auth/auth.service.js';
 import { AuthorizationPolicyService } from './authorization/authorization-policy.service.js';
 import { UsersController } from './users/users.controller.js';
 import { API_ENV } from './tokens.js';
+import { RequestsController } from './requests/requests.controller.js';
+import { RequestStateMachineService } from './requests/request-state-machine.service.js';
+import { RequestQueryService } from './requests/request-query.service.js';
+import { WorkflowGuard } from './requests/workflow.guard.js';
 
 export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean } = {}) {
   const database = options.database ?? new PostgresProbe(env.DATABASE_URL, env.HEALTH_TIMEOUT_MS);
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
+      RequestStateMachineService, RequestQueryService, WorkflowGuard,
       { provide: API_ENV, useValue: env }, { provide: PrismaService, useValue: prisma },
       { provide: DATABASE_PROBE, useValue: database }, { provide: OLLAMA_HEALTH, useValue: new OllamaHealthClient(env) },
     ],
@@ -39,7 +44,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M2 domain and authentication').setDescription('Local infrastructure, rotating-session authentication, safe user profiles and manager staff directory.').setVersion('0.2.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M3 manual request workflow').setDescription('Versioned manual request lifecycle, ownership, assignment, SLA, notifications and authentication.').setVersion('0.3.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

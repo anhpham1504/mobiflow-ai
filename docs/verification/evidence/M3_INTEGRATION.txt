@@ -1,0 +1,82 @@
+
+> mobiflow-ai@0.1.0 test:integration
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-runtime.mjs && node --env-file=.env scripts/verification/m2-integration.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 195ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+PASS real PostgreSQL M2 schema, pgvector and deferred vector dimension
+PASS running Docker API preserves M1 health contract
+PASS actual installed host Ollama LLM
+PASS production web container responds
+PASS M2 OpenAPI contains safe auth and RBAC routes
+PASS production container login, protected profile and logout
+PASS Ollama offline leaves API alive and reports degraded readiness
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+3 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":3,"vectorVersion":"0.8.6","embeddingColumns":0,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+✔ M2 auth, RBAC, ownership, refresh lifecycle, seed and audit work against real PostgreSQL (2160.2357ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3207.6975
+✔ M3 manager cancellation covers assigned, working, waiting and reserved analyzing states; new manual draft and current policy are mandatory (2365.0313ms)
+✔ M3 actual HTTP full manual lifecycle, scope, checklist, wait/reply, reopen, SLA, notifications, concurrency and rollback with Ollama offline (2283.2092ms)
+✔ M3 rejection requires a new draft, policy priority changes preserve clock, cancellation and race losers make no duplicate effects (1471.3551ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7212.0694

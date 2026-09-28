@@ -1,0 +1,88 @@
+
+> mobiflow-ai@0.1.0 test
+> npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 191ms
+
+
+> @mobiflow/config@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ validates native and Docker Ollama origins and coerces bounded ports (3.3107ms)
+✔ rejects missing config, invalid protocols, bounds and reused secrets without echoing values (1.3721ms)
+✔ malformed URL values produce key-only diagnostics rather than URL parser errors (0.3284ms)
+✔ insecure refresh cookies are accepted only for the explicit loopback HTTP demo (0.3438ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 162.247
+
+> @mobiflow/api@0.1.0 test
+> npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+✔ ownership policy scopes USER to ownership, STAFF to current assignment and MANAGER to all requests (1.0204ms)
+✔ out-of-scope and absent requests have the same 404 policy result (0.4054ms)
+✔ API boots; complete Ollama fixture health gives READY and both route aliases work (149.5742ms)
+✔ Ollama offline is degraded while API liveness/core readiness survive (33.9853ms)
+✔ database outage is 503, independent liveness still 200 (32.2079ms)
+✔ missing vector extension is a core readiness failure (25.552ms)
+✔ missing model is not reported installed; unconfigured embedding is distinct (3.0929ms)
+✔ installed model with wrong capability is not considered ready (5.0596ms)
+✔ Ollama timeout is bounded and a malformed response is safely unavailable (210.4961ms)
+✔ request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory (46.3393ms)
+✔ global validation foundation rejects unknown fields and invalid values (2.7906ms)
+✔ malformed and oversized JSON receive safe client errors without exposing the body (32.8921ms)
+✔ login limits normalized account plus IP to 5 attempts per minute (0.8632ms)
+✔ login has an independent 20/minute IP bound and refresh has a 30/minute session plus IP bound (0.2105ms)
+✔ M3 exhaustive state/action/role matrix rejects the complement, including protected future AI transitions (4.2076ms)
+✔ SLA wait, resolve, reopen, exact deadline, hold and sticky breach use an injected deterministic time (0.5661ms)
+✔ SLA repeated exclusion cycles, no-op reassignment and cancellation preserve consumed budget (0.2134ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2022.936
+
+> @mobiflow/web@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ health client handles a typed 503 and rejects untrusted response shapes (40.2274ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 253.6907
