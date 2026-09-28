@@ -5,6 +5,11 @@ import type { Request, Response, NextFunction } from 'express';
 
 export const validationPipe = () => new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true, forbidUnknownValues: true, validationError: { target: false, value: false } });
 export type LogSink = (entry: Record<string, unknown>) => void;
+export class ApiError extends HttpException {
+  constructor(status: number, readonly code: string, readonly publicMessage: string, readonly retryAfterSeconds?: number) {
+    super(publicMessage, status);
+  }
+}
 export function requestContext(log: LogSink) {
   return (req: Request, res: Response, next: NextFunction) => {
     const proposed = req.header('X-Request-ID');
@@ -13,7 +18,10 @@ export function requestContext(log: LogSink) {
     res.setHeader('X-Request-ID', requestId);
     res.setHeader('Cache-Control', 'no-store');
     const start = performance.now();
-    res.once('finish', () => log({ event: 'http.request', requestId, method: req.method, route: req.route?.path ?? 'unmatched', status: res.statusCode, latencyMs: Math.round(performance.now() - start) }));
+    res.once('finish', () => {
+      const actor = (req as Request & { auth?: { id: string; sessionId: string } }).auth;
+      log({ event: 'http.request', requestId, method: req.method, route: req.route?.path ?? 'unmatched', status: res.statusCode, latencyMs: Math.round(performance.now() - start), ...(actor ? { actorId: actor.id, sessionId: actor.sessionId } : {}) });
+    });
     next();
   };
 }
@@ -25,9 +33,24 @@ export class ApiExceptionFilter implements ExceptionFilter {
     // Express body-parser's size error is not a Nest HttpException.
     const oversized = exception instanceof Error && 'type' in exception && exception.type === 'entity.too.large' && 'status' in exception && exception.status === 413;
     const status = exception instanceof HttpException ? exception.getStatus() : oversized ? 413 : 500;
-    const code = status === 400 ? 'INVALID_INPUT' : status === 404 ? 'NOT_FOUND' : status === 413 ? 'PAYLOAD_TOO_LARGE' : 'INTERNAL_ERROR';
+    const apiError = exception instanceof ApiError ? exception : undefined;
+    const code = apiError?.code ?? (status === 400 ? 'INVALID_INPUT' : status === 401 ? 'UNAUTHORIZED' : status === 403 ? 'FORBIDDEN' : status === 404 ? 'NOT_FOUND' : status === 413 ? 'PAYLOAD_TOO_LARGE' : status === 429 ? 'RATE_LIMITED' : 'INTERNAL_ERROR');
     const requestId: string = res.locals.requestId ?? randomUUID();
-    this.log({ event: 'http.error', requestId, status, code });
-    res.status(status).json({ error: { code, message: status < 500 ? 'The request could not be processed.' : 'An internal error occurred.' }, requestId });
+    if (apiError?.retryAfterSeconds) res.setHeader('Retry-After', String(apiError.retryAfterSeconds));
+    const internalErrorCode = status >= 500 && typeof exception === 'object' && exception !== null && 'code' in exception && typeof exception.code === 'string' && /^[A-Z0-9_-]{1,40}$/.test(exception.code) ? exception.code : undefined;
+    const databaseErrorCode = status >= 500 ? getDatabaseErrorCode(exception) : undefined;
+    this.log({ event: 'http.error', requestId, status, code, ...(internalErrorCode ? { internalErrorCode } : {}), ...(databaseErrorCode ? { databaseErrorCode } : {}) });
+    res.status(status).json({ error: { code, message: apiError?.publicMessage ?? (status < 500 ? 'The request could not be processed.' : 'An internal error occurred.') }, requestId });
   }
+}
+
+function getDatabaseErrorCode(exception: unknown): string | undefined {
+  if (typeof exception !== 'object' || exception === null || !('meta' in exception)) return undefined;
+  const meta = exception.meta;
+  if (typeof meta !== 'object' || meta === null || !('driverAdapterError' in meta)) return undefined;
+  const adapterError = meta.driverAdapterError;
+  if (typeof adapterError !== 'object' || adapterError === null || !('cause' in adapterError)) return undefined;
+  const cause = adapterError.cause;
+  if (typeof cause !== 'object' || cause === null || !('originalCode' in cause)) return undefined;
+  return typeof cause.originalCode === 'string' && /^[A-Z0-9]{3,10}$/.test(cause.originalCode) ? cause.originalCode : undefined;
 }

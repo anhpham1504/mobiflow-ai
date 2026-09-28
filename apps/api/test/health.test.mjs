@@ -31,7 +31,7 @@ async function api(t, { origin = 'http://127.0.0.1:1', database, changes = {} } 
   const env = parseApiEnvironment({ ...base, OLLAMA_BASE_URL: origin, ...changes });
   const created = await createApplication(env, { quiet: true, log: (entry) => logs.push(entry), database: database ?? { check: async () => ({ database: up, vector: up }), close: async () => {} } });
   await created.app.listen(0, '127.0.0.1');
-  t.after(async () => { await created.app.close(); await created.database.close(); });
+  t.after(async () => { await created.app.close(); await created.database.close(); await created.prisma.$disconnect(); });
   return { url: await created.app.getUrl(), logs, ...created };
 }
 
@@ -83,7 +83,7 @@ test('Ollama timeout is bounded and a malformed response is safely unavailable',
     assert.deepEqual(result.server, down); assert.ok(performance.now() - start < 2000);
   }
 });
-test('request IDs, sanitized errors, safe logs, CORS and Swagger health-only inventory', async (t) => {
+test('request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory', async (t) => {
   const app = await api(t);
   const id = '11111111-1111-4111-8111-111111111111';
   const response = await fetch(app.url + '/api/v1/missing?password=do-not-log', { headers: { 'X-Request-ID': id, Authorization: 'Bearer do-not-log', Origin: 'http://localhost:3000' } });
@@ -93,7 +93,7 @@ test('request IDs, sanitized errors, safe logs, CORS and Swagger health-only inv
   const badId = await fetch(app.url + '/health/live', { headers: { 'X-Request-ID': 'untrusted-value' } });
   assert.notEqual(badId.headers.get('X-Request-ID'), 'untrusted-value');
   const doc = await (await fetch(app.url + '/api/docs-json')).json();
-  assert.deepEqual(Object.keys(doc.paths).sort(), ['/api/v1/health/live', '/api/v1/health/ready']);
+  assert.deepEqual(Object.keys(doc.paths).sort(), ['/api/v1/auth/login', '/api/v1/auth/logout', '/api/v1/auth/me', '/api/v1/auth/refresh', '/api/v1/health/live', '/api/v1/health/ready', '/api/v1/users/me', '/api/v1/users/staff']);
   assert.ok(!JSON.stringify(app.logs).includes('do-not-log'));
 });
 test('global validation foundation rejects unknown fields and invalid values', async () => {

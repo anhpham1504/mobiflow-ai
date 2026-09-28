@@ -7,6 +7,7 @@ const httpUrl = z.url().refine((value) => {
 }, 'Expected an HTTP origin without credentials, query or path');
 const secret = z.string().min(32).refine((value) => !value.includes('CHANGE_ME'), 'Replace placeholder');
 const model = z.string().min(1).max(200).regex(/^[a-zA-Z0-9_.:/-]+$/);
+const explicitBoolean = z.enum(['true', 'false']).transform((value) => value === 'true');
 
 const apiEnvironmentSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
@@ -15,11 +16,20 @@ const apiEnvironmentSchema = z.object({
   WEB_ORIGIN: httpUrl.default('http://localhost:3000'),
   DATABASE_URL: z.url().refine((value) => URL.canParse(value) && ['postgres:', 'postgresql:'].includes(new URL(value).protocol), 'Expected PostgreSQL URL'),
   JWT_SECRET: secret, REFRESH_TOKEN_SECRET: secret,
+  JWT_ISSUER: z.string().min(1).max(100).default('mobiflow-ai'),
+  JWT_AUDIENCE: z.string().min(1).max(100).default('mobiflow-web'),
+  ACCESS_TOKEN_TTL_SECONDS: z.coerce.number().int().min(60).max(3600).default(900),
+  REFRESH_SESSION_TTL_SECONDS: z.coerce.number().int().min(3600).max(604800).default(604800),
+  AUTH_COOKIE_SECURE: explicitBoolean.default(false),
   AI_PROVIDER: z.literal('ollama').default('ollama'),
   OLLAMA_BASE_URL: httpUrl,
   OLLAMA_MODEL: model, OLLAMA_EMBEDDING_MODEL: model,
   HEALTH_TIMEOUT_MS: z.coerce.number().int().min(100).max(10000).default(2000),
-}).refine((env) => env.JWT_SECRET !== env.REFRESH_TOKEN_SECRET, { path: ['REFRESH_TOKEN_SECRET'], message: 'Secrets must be distinct' });
+}).refine((env) => env.JWT_SECRET !== env.REFRESH_TOKEN_SECRET, { path: ['REFRESH_TOKEN_SECRET'], message: 'Secrets must be distinct' })
+  .refine((env) => env.AUTH_COOKIE_SECURE || !URL.canParse(env.WEB_ORIGIN) || (() => {
+    const origin = new URL(env.WEB_ORIGIN);
+    return origin.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(origin.hostname);
+  })(), { path: ['AUTH_COOKIE_SECURE'], message: 'Insecure auth cookies are limited to the explicit loopback HTTP demo' });
 
 export type ApiEnvironment = z.infer<typeof apiEnvironmentSchema>;
 export function parseApiEnvironment(input: Record<string, unknown>): ApiEnvironment {

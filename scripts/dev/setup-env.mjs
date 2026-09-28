@@ -27,6 +27,7 @@ const content = [
   `DATABASE_URL=postgresql://mobiflow_app:${appPassword}@localhost:5432/mobiflow`,
   `MIGRATION_DATABASE_URL=postgresql://mobiflow_owner:${ownerPassword}@localhost:5432/mobiflow`,
   `JWT_SECRET=${randomBytes(32).toString('hex')}`, `REFRESH_TOKEN_SECRET=${randomBytes(32).toString('hex')}`,
+  'JWT_ISSUER=mobiflow-ai', 'JWT_AUDIENCE=mobiflow-web', 'ACCESS_TOKEN_TTL_SECONDS=900', 'REFRESH_SESSION_TTL_SECONDS=604800', 'AUTH_COOKIE_SECURE=false', 'DEMO_MODE=true',
   'AI_PROVIDER=ollama', `OLLAMA_BASE_URL=${origin}`, `OLLAMA_MODEL=${llm}`, `OLLAMA_EMBEDDING_MODEL=${embedding}`, 'HEALTH_TIMEOUT_MS=2000', '',
 ].join('\n');
 writeFileSync('.env', content, { flag: 'wx', mode: 0o600 });

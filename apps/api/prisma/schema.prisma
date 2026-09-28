@@ -1,4 +1,652 @@
-// M1 infrastructure only. Business models and Prisma Client generation start in M2.
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
 datasource db {
   provider = "postgresql"
+}
+
+enum Role {
+  USER
+  STAFF
+  MANAGER
+}
+
+enum RequestStatus {
+  NEW
+  AI_ANALYZING
+  TRIAGED
+  PENDING_APPROVAL
+  ASSIGNED
+  IN_PROGRESS
+  WAITING_USER
+  RESOLVED
+  CLOSED
+  CANCELED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum AiAnalysisStatus {
+  NOT_STARTED
+  RUNNING
+  SUCCEEDED
+  FAILED
+}
+
+enum ReviewKind {
+  AI
+  MANUAL
+}
+
+enum RequestMessageKind {
+  COMMENT
+  INFO_REQUEST
+  INFO_REPLY
+}
+
+enum AuditActorType {
+  USER
+  STAFF
+  MANAGER
+  AI
+  SYSTEM
+}
+
+enum AssignmentDecisionKind {
+  AI_ACCEPT
+  AI_MODIFY
+  MANUAL
+  REASSIGN
+}
+
+enum ChecklistProvenance {
+  APPROVAL
+  STAFF
+}
+
+enum AiPurpose {
+  ANALYSIS
+  RECOMMENDATION
+  COPILOT
+  RESOLUTION_SUMMARY
+}
+
+enum AiRunStatus {
+  QUEUED
+  RUNNING
+  SUCCEEDED
+  FAILED
+  CANCELED
+}
+
+enum RecommendationStatus {
+  PENDING
+  ACCEPTED
+  MODIFIED
+  REJECTED
+}
+
+enum EvidenceStatus {
+  SUFFICIENT
+  INSUFFICIENT_EVIDENCE
+}
+
+enum ToolCallStatus {
+  SUCCEEDED
+  FAILED
+}
+
+enum KnowledgeStatus {
+  UPLOADED
+  PROCESSING
+  READY
+  FAILED
+  DISABLED
+}
+
+enum SlaStatus {
+  SAFE
+  AT_RISK
+  BREACHED
+  PAUSED
+  MET
+}
+
+enum AuditOutcome {
+  SUCCEEDED
+  DENIED
+  FAILED
+}
+
+model User {
+  id                      String              @id @db.Uuid
+  email                   String              @unique @db.VarChar(254)
+  passwordHash            String              @db.Text
+  displayName             String              @db.VarChar(160)
+  role                    Role
+  active                  Boolean             @default(true)
+  available               Boolean             @default(true)
+  createdAt               DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt               DateTime            @updatedAt @db.Timestamptz(6)
+  sessions                RefreshSession[]
+  teamMembers             TeamMember[]
+  staffSkills             StaffSkill[]
+  createdRequests         Request[]           @relation("RequestCreator")
+  assignedRequests        Request[]           @relation("RequestAssignee")
+  messages                RequestMessage[]
+  attachments             RequestAttachment[]
+  assignments             Assignment[]        @relation("AssignedStaff")
+  assignmentsMade         Assignment[]        @relation("AssignmentManager")
+  resolutions             RequestResolution[]
+  checklists              Checklist[]
+  completedItems          ChecklistItem[]     @relation("ChecklistCompletedBy")
+  waivedItems             ChecklistItem[]     @relation("ChecklistWaivedBy")
+  initiatedRuns           AiRun[]
+  reviewedRecommendations AiRecommendation[]
+  uploadedDocuments       KnowledgeDocument[]
+  notifications           Notification[]
+  feedback                Feedback[]
+
+  @@index([role, active])
+}
+
+model RefreshSession {
+  id               String          @id @db.Uuid
+  userId           String          @db.Uuid
+  familyId         String          @db.Uuid
+  tokenHash        String          @unique @db.VarChar(64)
+  createdAt        DateTime        @default(now()) @db.Timestamptz(6)
+  expiresAt        DateTime        @db.Timestamptz(6)
+  consumedAt       DateTime?       @db.Timestamptz(6)
+  revokedAt        DateTime?       @db.Timestamptz(6)
+  replacedById     String?         @unique @db.Uuid
+  revocationReason String?         @db.VarChar(120)
+  user             User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  replacedBy       RefreshSession? @relation("SessionRotation", fields: [replacedById], references: [id], onDelete: Restrict)
+  replaces         RefreshSession? @relation("SessionRotation")
+
+  @@index([userId, revokedAt])
+  @@index([familyId])
+}
+
+model Team {
+  id          String       @id @db.Uuid
+  code        String       @unique @db.VarChar(80)
+  name        String       @db.VarChar(160)
+  active      Boolean      @default(true)
+  members     TeamMember[]
+  requests    Request[]
+  assignments Assignment[]
+}
+
+model TeamMember {
+  id     String  @id @db.Uuid
+  teamId String  @db.Uuid
+  userId String  @db.Uuid
+  active Boolean @default(true)
+  team   Team    @relation(fields: [teamId], references: [id], onDelete: Restrict)
+  user   User    @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@unique([teamId, userId])
+}
+
+model Skill {
+  id    String       @id @db.Uuid
+  code  String       @unique @db.VarChar(80)
+  name  String       @db.VarChar(160)
+  staff StaffSkill[]
+}
+
+model StaffSkill {
+  staffId String @db.Uuid
+  skillId String @db.Uuid
+  staff   User   @relation(fields: [staffId], references: [id], onDelete: Restrict)
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Restrict)
+
+  @@id([staffId, skillId])
+  @@index([skillId, staffId])
+}
+
+model Request {
+  id                      String                 @id @default(uuid()) @db.Uuid
+  publicCode              String                 @unique @db.VarChar(32)
+  createdById             String                 @db.Uuid
+  title                   String                 @db.VarChar(160)
+  description             String                 @db.Text
+  status                  RequestStatus          @default(NEW)
+  category                String?                @db.VarChar(40)
+  subcategory             String?                @db.VarChar(80)
+  priority                Priority               @default(MEDIUM)
+  teamId                  String?                @db.Uuid
+  currentAssigneeId       String?                @db.Uuid
+  version                 Int                    @default(1)
+  aiAnalysisStatus        AiAnalysisStatus       @default(NOT_STARTED)
+  activeAnalysisRunId     String?                @unique @db.Uuid
+  latestAnalysisId        String?                @unique @db.Uuid
+  triageDraftJson         Json?
+  manualDraftRevision     Int                    @default(0)
+  reviewKind              ReviewKind?
+  pendingRecommendationId String?                @unique @db.Uuid
+  pendingDraftRevision    Int?
+  currentResolutionId     String?                @unique @db.Uuid
+  createdAt               DateTime               @default(now()) @db.Timestamptz(6)
+  updatedAt               DateTime               @updatedAt @db.Timestamptz(6)
+  resolvedAt              DateTime?              @db.Timestamptz(6)
+  closedAt                DateTime?              @db.Timestamptz(6)
+  canceledAt              DateTime?              @db.Timestamptz(6)
+  cancellationReason      String?                @db.VarChar(2000)
+  createdBy               User                   @relation("RequestCreator", fields: [createdById], references: [id], onDelete: Restrict)
+  team                    Team?                  @relation(fields: [teamId], references: [id], onDelete: Restrict)
+  currentAssignee         User?                  @relation("RequestAssignee", fields: [currentAssigneeId], references: [id], onDelete: Restrict)
+  activeAnalysisRun       AiRun?                 @relation("ActiveAnalysis", fields: [activeAnalysisRunId], references: [id], onDelete: Restrict)
+  latestAnalysis          AiAnalysis?            @relation("LatestAnalysis", fields: [latestAnalysisId], references: [id], onDelete: Restrict)
+  pendingRecommendation   AiRecommendation?      @relation("PendingRecommendation", fields: [pendingRecommendationId], references: [id], onDelete: Restrict)
+  currentResolution       RequestResolution?     @relation("CurrentResolution", fields: [currentResolutionId], references: [id], onDelete: Restrict)
+  messages                RequestMessage[]
+  attachments             RequestAttachment[]
+  history                 RequestStatusHistory[]
+  assignments             Assignment[]
+  resolutions             RequestResolution[]    @relation("RequestResolutions")
+  checklist               Checklist?
+  aiRuns                  AiRun[]                @relation("RequestRuns")
+  analyses                AiAnalysis[]           @relation("RequestAnalyses")
+  recommendations         AiRecommendation[]     @relation("RequestRecommendations")
+  slaInstance             SlaInstance?
+  notifications           Notification[]
+  audits                  AuditLog[]
+  feedback                Feedback?
+
+  @@index([createdById, createdAt, id])
+  @@index([currentAssigneeId, status, createdAt, id])
+  @@index([status, createdAt, id])
+  @@index([category, priority])
+  @@index([teamId])
+}
+
+model RequestMessage {
+  id        String             @id @default(uuid()) @db.Uuid
+  requestId String             @db.Uuid
+  authorId  String             @db.Uuid
+  kind      RequestMessageKind
+  body      String             @db.VarChar(4000)
+  eventId   String             @unique @db.Uuid
+  createdAt DateTime           @default(now()) @db.Timestamptz(6)
+  request   Request            @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  author    User               @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  event     AuditLog           @relation(fields: [eventId], references: [id], onDelete: Restrict)
+
+  @@index([requestId, createdAt, id])
+}
+
+model RequestAttachment {
+  id               String   @id @default(uuid()) @db.Uuid
+  requestId        String   @db.Uuid
+  uploadedById     String   @db.Uuid
+  originalFileName String   @db.VarChar(255)
+  storageKey       String   @unique @db.Text
+  mimeType         String   @db.VarChar(120)
+  byteSize         BigInt
+  sha256           String   @db.VarChar(64)
+  createdAt        DateTime @default(now()) @db.Timestamptz(6)
+  request          Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  uploadedBy       User     @relation(fields: [uploadedById], references: [id], onDelete: Restrict)
+}
+
+model RequestStatusHistory {
+  id             String         @id @default(uuid()) @db.Uuid
+  requestId      String         @db.Uuid
+  fromStatus     RequestStatus?
+  toStatus       RequestStatus
+  action         String         @db.VarChar(120)
+  actorType      AuditActorType
+  actorId        String?        @db.Uuid
+  requestVersion Int
+  eventId        String         @unique @db.Uuid
+  createdAt      DateTime       @default(now()) @db.Timestamptz(6)
+  request        Request        @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  event          AuditLog       @relation(fields: [eventId], references: [id], onDelete: Restrict)
+
+  @@unique([requestId, requestVersion])
+  @@index([requestId, createdAt])
+}
+
+model Assignment {
+  id                 String                 @id @default(uuid()) @db.Uuid
+  requestId          String                 @db.Uuid
+  staffId            String                 @db.Uuid
+  teamId             String                 @db.Uuid
+  assignedById       String                 @db.Uuid
+  assignedAt         DateTime               @default(now()) @db.Timestamptz(6)
+  endedAt            DateTime?              @db.Timestamptz(6)
+  reason             String                 @db.VarChar(2000)
+  recommendationId   String?                @db.Uuid
+  decisionKind       AssignmentDecisionKind
+  finalDecisionJson  Json
+  managerChangesJson Json?
+  eventId            String                 @unique @db.Uuid
+  request            Request                @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  staff              User                   @relation("AssignedStaff", fields: [staffId], references: [id], onDelete: Restrict)
+  team               Team                   @relation(fields: [teamId], references: [id], onDelete: Restrict)
+  assignedBy         User                   @relation("AssignmentManager", fields: [assignedById], references: [id], onDelete: Restrict)
+  recommendation     AiRecommendation?      @relation(fields: [recommendationId], references: [id], onDelete: Restrict)
+  event              AuditLog               @relation(fields: [eventId], references: [id], onDelete: Restrict)
+
+  @@index([staffId, assignedAt])
+}
+
+model RequestResolution {
+  id           String    @id @default(uuid()) @db.Uuid
+  requestId    String    @db.Uuid
+  cycle        Int
+  resolvedById String    @db.Uuid
+  rootCause    String    @db.Text
+  resolution   String    @db.Text
+  verification String    @db.Text
+  resolvedAt   DateTime  @db.Timestamptz(6)
+  reopenedAt   DateTime? @db.Timestamptz(6)
+  confirmedAt  DateTime? @db.Timestamptz(6)
+  eventId      String    @unique @db.Uuid
+  request      Request   @relation("RequestResolutions", fields: [requestId], references: [id], onDelete: Restrict)
+  currentFor   Request?  @relation("CurrentResolution")
+  resolvedBy   User      @relation(fields: [resolvedById], references: [id], onDelete: Restrict)
+  event        AuditLog  @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  aiRuns       AiRun[]
+
+  @@unique([requestId, cycle])
+}
+
+model Checklist {
+  id          String              @id @default(uuid()) @db.Uuid
+  requestId   String              @unique @db.Uuid
+  createdById String?             @db.Uuid
+  provenance  ChecklistProvenance
+  sourceRunId String?             @db.Uuid
+  version     Int                 @default(1)
+  createdAt   DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime            @updatedAt @db.Timestamptz(6)
+  request     Request             @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  createdBy   User?               @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  sourceRun   AiRun?              @relation(fields: [sourceRunId], references: [id], onDelete: Restrict)
+  items       ChecklistItem[]
+}
+
+model ChecklistItem {
+  id             String    @id @default(uuid()) @db.Uuid
+  checklistId    String    @db.Uuid
+  ordinal        Int
+  text           String    @db.VarChar(500)
+  required       Boolean   @default(true)
+  sourceRefsJson Json
+  completedAt    DateTime? @db.Timestamptz(6)
+  completedById  String?   @db.Uuid
+  waivedAt       DateTime? @db.Timestamptz(6)
+  waivedById     String?   @db.Uuid
+  waiverReason   String?   @db.VarChar(2000)
+  createdAt      DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime  @updatedAt @db.Timestamptz(6)
+  checklist      Checklist @relation(fields: [checklistId], references: [id], onDelete: Restrict)
+  completedBy    User?     @relation("ChecklistCompletedBy", fields: [completedById], references: [id], onDelete: Restrict)
+  waivedBy       User?     @relation("ChecklistWaivedBy", fields: [waivedById], references: [id], onDelete: Restrict)
+
+  @@unique([checklistId, ordinal])
+}
+
+model Feedback {
+  id        String   @id @default(uuid()) @db.Uuid
+  requestId String   @unique @db.Uuid
+  userId    String   @db.Uuid
+  rating    Int
+  comment   String?  @db.VarChar(2000)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+}
+
+model AiRun {
+  id                    String             @id @default(uuid()) @db.Uuid
+  requestId             String?            @db.Uuid
+  resolutionId          String?            @db.Uuid
+  purpose               AiPurpose
+  action                String?            @db.VarChar(80)
+  initiatingActorId     String?            @db.Uuid
+  contextVersion        Int
+  provider              String             @db.VarChar(80)
+  model                 String?            @db.VarChar(200)
+  modelIdentityJson     Json?
+  promptVersion         String             @db.VarChar(80)
+  schemaVersion         String             @db.VarChar(80)
+  status                AiRunStatus        @default(QUEUED)
+  startedAt             DateTime?          @db.Timestamptz(6)
+  finishedAt            DateTime?          @db.Timestamptz(6)
+  latencyMs             Int?
+  retryCount            Int                @default(0)
+  inputSize             Int?
+  outputSize            Int?
+  errorCode             String?            @db.VarChar(120)
+  errorSummary          String?            @db.VarChar(1000)
+  safeResultJson        Json?
+  retrievalSnapshotJson Json?
+  leaseUntil            DateTime?          @db.Timestamptz(6)
+  deadlineAt            DateTime?          @db.Timestamptz(6)
+  createdAt             DateTime           @default(now()) @db.Timestamptz(6)
+  request               Request?           @relation("RequestRuns", fields: [requestId], references: [id], onDelete: Restrict)
+  activeFor             Request?           @relation("ActiveAnalysis")
+  resolution            RequestResolution? @relation(fields: [resolutionId], references: [id], onDelete: Restrict)
+  initiatingActor       User?              @relation(fields: [initiatingActorId], references: [id], onDelete: Restrict)
+  analyses              AiAnalysis[]
+  recommendations       AiRecommendation[]
+  toolCalls             AiToolCall[]
+  checklists            Checklist[]
+
+  @@index([requestId, createdAt])
+  @@index([status, leaseUntil])
+}
+
+model AiAnalysis {
+  id                 String   @id @default(uuid()) @db.Uuid
+  requestId          String   @db.Uuid
+  aiRunId            String   @unique @db.Uuid
+  intent             String   @db.VarChar(40)
+  category           String   @db.VarChar(40)
+  subcategory        String   @db.VarChar(80)
+  prioritySuggestion Priority
+  entitiesJson       Json
+  missingFieldsJson  Json
+  confidence         Decimal  @db.Decimal(4, 3)
+  reasonSummary      String   @db.VarChar(1000)
+  schemaVersion      String   @db.VarChar(80)
+  createdAt          DateTime @default(now()) @db.Timestamptz(6)
+  request            Request  @relation("RequestAnalyses", fields: [requestId], references: [id], onDelete: Restrict)
+  latestFor          Request? @relation("LatestAnalysis")
+  aiRun              AiRun    @relation(fields: [aiRunId], references: [id], onDelete: Restrict)
+
+  @@index([requestId, createdAt])
+}
+
+model AiRecommendation {
+  id                   String               @id @default(uuid()) @db.Uuid
+  requestId            String               @db.Uuid
+  aiRunId              String               @unique @db.Uuid
+  suggestedPriority    Priority
+  suggestedTeamId      String?              @db.Uuid
+  suggestedStaffId     String?              @db.Uuid
+  suggestedSlaMinutes  Int?
+  procedureRefsJson    Json
+  actionsJson          Json
+  similarCaseAlertJson Json
+  evidenceStatus       EvidenceStatus
+  reasonSummary        String               @db.VarChar(1000)
+  confidence           Decimal              @db.Decimal(4, 3)
+  status               RecommendationStatus @default(PENDING)
+  reviewedById         String?              @db.Uuid
+  reviewedAt           DateTime?            @db.Timestamptz(6)
+  managerChangesJson   Json?
+  finalDecisionJson    Json?
+  invalidatedAt        DateTime?            @db.Timestamptz(6)
+  invalidationReason   String?              @db.VarChar(1000)
+  createdAt            DateTime             @default(now()) @db.Timestamptz(6)
+  request              Request              @relation("RequestRecommendations", fields: [requestId], references: [id], onDelete: Restrict)
+  pendingFor           Request?             @relation("PendingRecommendation")
+  aiRun                AiRun                @relation(fields: [aiRunId], references: [id], onDelete: Restrict)
+  reviewedBy           User?                @relation(fields: [reviewedById], references: [id], onDelete: Restrict)
+  assignments          Assignment[]
+
+  @@index([status, createdAt])
+  @@index([requestId, createdAt])
+}
+
+model AiToolCall {
+  id                    String         @id @default(uuid()) @db.Uuid
+  aiRunId               String         @db.Uuid
+  ordinal               Int
+  toolName              String         @db.VarChar(120)
+  safeInputJson         Json
+  safeOutputSummaryJson Json
+  startedAt             DateTime       @db.Timestamptz(6)
+  finishedAt            DateTime       @db.Timestamptz(6)
+  latencyMs             Int
+  status                ToolCallStatus
+  errorCode             String?        @db.VarChar(120)
+  createdAt             DateTime       @default(now()) @db.Timestamptz(6)
+  aiRun                 AiRun          @relation(fields: [aiRunId], references: [id], onDelete: Restrict)
+
+  @@unique([aiRunId, ordinal])
+}
+
+model KnowledgeDocument {
+  id                String           @id @default(uuid()) @db.Uuid
+  title             String           @db.VarChar(200)
+  originalFileName  String           @db.VarChar(255)
+  storageKey        String           @unique @db.Text
+  mimeType          String           @db.VarChar(120)
+  byteSize          BigInt
+  sha256            String           @unique @db.VarChar(64)
+  status            KnowledgeStatus  @default(UPLOADED)
+  uploadedById      String           @db.Uuid
+  pageCount         Int?
+  version           Int              @default(1)
+  activeGeneration  Int?
+  indexManifestJson Json?
+  indexedAt         DateTime?        @db.Timestamptz(6)
+  errorCode         String?          @db.VarChar(120)
+  errorSummary      String?          @db.VarChar(1000)
+  leaseUntil        DateTime?        @db.Timestamptz(6)
+  deadlineAt        DateTime?        @db.Timestamptz(6)
+  createdAt         DateTime         @default(now()) @db.Timestamptz(6)
+  updatedAt         DateTime         @updatedAt @db.Timestamptz(6)
+  uploadedBy        User             @relation(fields: [uploadedById], references: [id], onDelete: Restrict)
+  chunks            KnowledgeChunk[]
+
+  @@index([status, createdAt])
+}
+
+model KnowledgeChunk {
+  id           String            @id @default(uuid()) @db.Uuid
+  sourceId     String            @unique @db.Uuid
+  documentId   String            @db.Uuid
+  generation   Int
+  chunkIndex   Int
+  content      String            @db.Text
+  contentHash  String            @db.VarChar(64)
+  pageNumber   Int?
+  section      String?           @db.VarChar(255)
+  startOffset  Int
+  endOffset    Int
+  metadataJson Json
+  createdAt    DateTime          @default(now()) @db.Timestamptz(6)
+  document     KnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Restrict)
+
+  @@unique([documentId, generation, chunkIndex])
+  @@index([documentId, generation])
+}
+
+model SlaPolicy {
+  id            String        @id @db.Uuid
+  category      String?       @db.VarChar(40)
+  priority      Priority
+  targetMinutes Int
+  active        Boolean       @default(true)
+  version       Int           @default(1)
+  createdAt     DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt     DateTime      @updatedAt @db.Timestamptz(6)
+  instances     SlaInstance[]
+}
+
+model SlaInstance {
+  id                       String         @id @default(uuid()) @db.Uuid
+  requestId                String         @unique @db.Uuid
+  policyId                 String         @db.Uuid
+  policyVersion            Int
+  targetSeconds            Int
+  startedAt                DateTime       @db.Timestamptz(6)
+  dueAt                    DateTime       @db.Timestamptz(6)
+  pausedAt                 DateTime?      @db.Timestamptz(6)
+  totalPausedSeconds       Int            @default(0)
+  resolvedHoldAt           DateTime?      @db.Timestamptz(6)
+  totalResolvedHoldSeconds Int            @default(0)
+  stoppedAt                DateTime?      @db.Timestamptz(6)
+  stopReason               String?        @db.VarChar(120)
+  status                   SlaStatus      @default(SAFE)
+  breachedAt               DateTime?      @db.Timestamptz(6)
+  assessedAt               DateTime       @db.Timestamptz(6)
+  version                  Int            @default(1)
+  request                  Request        @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  policy                   SlaPolicy      @relation(fields: [policyId], references: [id], onDelete: Restrict)
+  notifications            Notification[]
+
+  @@index([status, dueAt])
+}
+
+model Notification {
+  id                    String       @id @default(uuid()) @db.Uuid
+  recipientId           String       @db.Uuid
+  requestId             String?      @db.Uuid
+  eventId               String       @db.Uuid
+  type                  String       @db.VarChar(120)
+  safeActorMetadataJson Json
+  slaInstanceId         String?      @db.Uuid
+  warningLevel          String?      @db.VarChar(40)
+  createdAt             DateTime     @default(now()) @db.Timestamptz(6)
+  readAt                DateTime?    @db.Timestamptz(6)
+  recipient             User         @relation(fields: [recipientId], references: [id], onDelete: Restrict)
+  request               Request?     @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  event                 AuditLog     @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  slaInstance           SlaInstance? @relation(fields: [slaInstanceId], references: [id], onDelete: Restrict)
+
+  @@unique([recipientId, eventId, type])
+  @@index([recipientId, readAt, createdAt, id])
+}
+
+model AuditLog {
+  id                   String                 @id @default(uuid()) @db.Uuid
+  requestId            String?                @db.Uuid
+  actorType            AuditActorType
+  actorId              String?                @db.Uuid
+  initiatingActorId    String?                @db.Uuid
+  action               String                 @db.VarChar(120)
+  resourceType         String                 @db.VarChar(120)
+  resourceId           String                 @db.VarChar(200)
+  requestCorrelationId String                 @db.Uuid
+  safeBeforeJson       Json?
+  safeAfterJson        Json?
+  reason               String?                @db.VarChar(2000)
+  outcome              AuditOutcome
+  createdAt            DateTime               @default(now()) @db.Timestamptz(6)
+  request              Request?               @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  messages             RequestMessage[]
+  histories            RequestStatusHistory[]
+  assignments          Assignment[]
+  resolutions          RequestResolution[]
+  notifications        Notification[]
+
+  @@index([requestId, createdAt, id])
+  @@index([resourceType, resourceId, createdAt])
 }

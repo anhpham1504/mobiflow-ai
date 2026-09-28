@@ -11,8 +11,9 @@ COPY packages/eslint-config/package.json packages/eslint-config/package.json
 RUN --mount=type=cache,target=/root/.npm npm ci --ignore-scripts --no-audit --no-fund --loglevel=http
 
 FROM deps AS api-build
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 COPY . .
-RUN npm run build:foundation && npm run build -w @mobiflow/api
+RUN npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api
 
 FROM deps AS web-build
 COPY . .

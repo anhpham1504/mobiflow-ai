@@ -3,8 +3,8 @@ import { createApplication } from './app.js';
 
 async function main() {
   const env = parseApiEnvironment(process.env);
-  const { app, database } = await createApplication(env);
-  for (const signal of ['SIGINT', 'SIGTERM'] as const) process.once(signal, () => { void app.close().then(() => database.close()).finally(() => process.exit(0)); });
+  const { app, database, prisma } = await createApplication(env);
+  for (const signal of ['SIGINT', 'SIGTERM'] as const) process.once(signal, () => { void app.close().then(() => Promise.all([database.close(), prisma.$disconnect()])).finally(() => process.exit(0)); });
   await app.listen(env.API_PORT, env.API_HOST);
 }
 main().catch((error: unknown) => {

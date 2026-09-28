@@ -16,16 +16,17 @@
     "dev": "node scripts/dev/dev.mjs",
     "build:foundation": "npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config",
     "lint": "eslint . --max-warnings=0",
-    "typecheck": "npm run build:foundation && npm run typecheck -w @mobiflow/api && npm run typecheck -w @mobiflow/web",
-    "test": "npm run build:foundation && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web",
-    "build": "npm run build:foundation && npm run build -w @mobiflow/api && npm run build -w @mobiflow/web",
+    "prisma:generate": "node scripts/dev/prisma.mjs generate",
+    "typecheck": "npm run build:foundation && npm run prisma:generate && npm run typecheck -w @mobiflow/api && npm run typecheck -w @mobiflow/web",
+    "test": "npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web",
+    "build": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && npm run build -w @mobiflow/web",
     "env:setup": "node scripts/dev/setup-env.mjs",
     "db:validate": "node scripts/dev/prisma.mjs validate",
     "db:migrate": "node scripts/dev/prisma.mjs migrate deploy",
-    "test:integration": "node --env-file=.env scripts/verification/runtime.mjs",
+    "test:integration": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-runtime.mjs && node --env-file=.env scripts/verification/m2-integration.mjs",
     "e2e": "node scripts/dev/deferred.mjs M10",
     "ai:evaluate": "node scripts/dev/deferred.mjs M9",
-    "demo:seed": "node scripts/dev/deferred.mjs M2",
+    "demo:seed": "npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/dev/seed.mjs",
     "demo:reset": "node scripts/dev/deferred.mjs M10",
     "demo:preflight": "node scripts/dev/deferred.mjs M10",
     "demo:warmup": "node scripts/dev/deferred.mjs M10"
@@ -40,6 +41,14 @@
     "typescript-eslint": "8.70.1"
   },
   "allowScripts": {
-    "@scarf/scarf": false
+    "@scarf/scarf": false,
+    "@prisma/engines": false,
+    "prisma": false,
+    "argon2": true,
+    "unrs-resolver": false
+  },
+  "overrides": {
+    "deepmerge-ts": "8.0.2",
+    "mysql2": "3.24.4"
   }
 }

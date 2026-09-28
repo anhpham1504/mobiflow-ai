@@ -19,3 +19,9 @@ test('malformed URL values produce key-only diagnostics rather than URL parser e
     assert.throws(() => parseApiEnvironment({ ...valid, [key]: 'invalid-sensitive-value' }), (error) => error.message === `Invalid environment keys: ${key}`);
   }
 });
+
+test('insecure refresh cookies are accepted only for the explicit loopback HTTP demo', () => {
+  assert.equal(parseApiEnvironment({ ...valid, WEB_ORIGIN: 'http://127.0.0.1:3000', AUTH_COOKIE_SECURE: 'false' }).AUTH_COOKIE_SECURE, false);
+  assert.throws(() => parseApiEnvironment({ ...valid, WEB_ORIGIN: 'https://example.test', AUTH_COOKIE_SECURE: 'false' }), /AUTH_COOKIE_SECURE/);
+  assert.equal(parseApiEnvironment({ ...valid, WEB_ORIGIN: 'https://example.test', AUTH_COOKIE_SECURE: 'true' }).AUTH_COOKIE_SECURE, true);
+});
