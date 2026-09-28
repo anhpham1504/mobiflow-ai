@@ -1,0 +1,204 @@
+# ASTRA 6 HIGH — M0 EXECUTION PROMPT FOR MOBIFLOW AI
+
+Read `MOBIFLOW_AI_ASTRA6_M0_M10_MASTER_PLAN.md` in full and treat it as the canonical execution contract for this repository.
+
+Start with **Milestone M0 only**.
+
+Do not summarize the plan and do not implement M1 yet.
+
+## Your tasks for M0
+
+1. Inspect the entire current repository first.
+
+2. Identify the current repo state, existing files, configs, Git status, package manifests, Docker files, source code, tests, and documentation.
+
+3. Create:
+
+```text
+docs/verification/REPOSITORY_BASELINE.md
+```
+
+4. Create and fully specify the following files:
+
+```text
+AGENTS.md
+
+docs/specs/PROJECT_SPEC.md
+docs/specs/BUSINESS_WORKFLOW.md
+docs/specs/AUTHORIZATION_SPEC.md
+docs/specs/REQUEST_STATE_MACHINE.md
+docs/specs/AI_BEHAVIOR_SPEC.md
+docs/specs/AI_SAFETY_SPEC.md
+docs/specs/TOOL_CALLING_SPEC.md
+docs/specs/RAG_SPEC.md
+docs/specs/SLA_SPEC.md
+docs/specs/DATABASE_SPEC.md
+docs/specs/API_SPEC.md
+docs/specs/UI_SPEC.md
+docs/specs/TEST_STRATEGY.md
+docs/specs/DEMO_DATA_SPEC.md
+
+docs/architecture/ARCHITECTURE.md
+docs/architecture/AI_ARCHITECTURE.md
+
+docs/IMPLEMENTATION_PLAN.md
+```
+
+5. Create these ADRs:
+
+```text
+docs/architecture/adr/0001-monorepo.md
+docs/architecture/adr/0002-postgres-pgvector.md
+docs/architecture/adr/0003-local-ollama.md
+docs/architecture/adr/0004-controlled-ai-orchestration.md
+docs/architecture/adr/0005-human-in-the-loop.md
+```
+
+6. Preserve the V1 scope exactly as defined in the master plan:
+
+```text
+Roles:
+- USER
+- STAFF
+- MANAGER
+
+Architecture:
+- Next.js
+- NestJS
+- PostgreSQL
+- pgvector
+- Ollama
+- local-first runtime AI
+
+AI design:
+- controlled AI orchestration
+- RAG with real source grounding
+- tool allowlist
+- Human-in-the-loop approval
+- no uncontrolled autonomous agent
+- no direct AI bypass of backend permissions
+```
+
+7. Explicitly document all of the following:
+
+```text
+- request state machine
+- RBAC rules
+- ownership rules
+- AI permissions
+- AI prohibited actions
+- RAG source-grounding rules
+- AI tool allowlist
+- SLA behavior
+- demo data policy
+- security boundaries
+- non-goals
+- M1–M10 dependency map
+```
+
+8. Check all M0 documents for contradictions before finishing.
+
+9. Create:
+
+```text
+docs/verification/MILESTONE_0_VERIFICATION.md
+```
+
+Use the verification template defined in the master plan.
+
+10. Mark M0 as `PASS` only if:
+
+```text
+- all required specifications exist
+- architecture is internally consistent
+- business workflow is unambiguous
+- state transitions are fully documented
+- RBAC and ownership rules are explicit
+- AI permissions and restrictions are explicit
+- RAG and tool boundaries are explicit
+- security boundaries are documented
+- V1 scope is frozen
+- M1–M10 dependencies are clear
+- no release blocker remains
+```
+
+## Important execution rules
+
+- Do not implement application features during M0.
+- Do not implement M1.
+- Do not initialize unnecessary frameworks or dependencies unless required solely to inspect or organize the repository.
+- Do not change the approved architecture.
+- Do not expand V1 scope.
+- Do not invent requirements that are not supported by the master plan.
+- Do not fake verification results.
+- Do not fake completed checks.
+- Do not silently ignore contradictions.
+- Do not delete requirements from the master plan just to simplify implementation.
+- If something is ambiguous, choose the interpretation most consistent with the master plan and document the assumption.
+- Preserve local-first AI as the V1 runtime target.
+- Preserve Human-in-the-loop as a mandatory business control.
+- Preserve backend authorization as the source of truth.
+- Preserve the rule that AI output is untrusted and must be schema-validated.
+- Preserve the rule that AI cannot directly execute protected business decisions.
+
+## Quality requirements for M0 documents
+
+Every specification should be implementation-ready.
+
+Avoid vague statements such as:
+
+```text
+"implement authentication"
+"add AI"
+"support RAG"
+```
+
+Instead define:
+
+```text
+- actors
+- permissions
+- state transitions
+- invariants
+- inputs
+- outputs
+- validation
+- failure behavior
+- audit behavior
+- security boundaries
+- dependencies
+- acceptance criteria
+```
+
+Specifications must be sufficiently precise so that a later milestone can be implemented without rediscovering core business rules.
+
+## Required final response after M0
+
+When M0 is complete, stop.
+
+Do not proceed to M1 automatically.
+
+Report only:
+
+```text
+1. Files created
+2. Files modified
+3. Repository baseline summary
+4. Major architectural decisions
+5. Major business rules frozen
+6. AI architecture decisions
+7. Security boundaries
+8. Assumptions made
+9. Remaining ambiguities
+10. Release blockers
+11. M0 verification result: PASS or FAIL
+12. Whether the repository is ready for M1
+```
+
+If M0 is `FAIL`, explain exactly what prevents PASS.
+
+If M0 is `PASS`, stop and wait for explicit approval before starting M1.
+
+## Begin now
+
+Read the master plan completely first, inspect the repository, then execute **M0 only**.

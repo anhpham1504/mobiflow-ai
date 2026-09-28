@@ -1,0 +1,120 @@
+# API Specification
+
+Authority: master-plan §7 and M1–M9. This is the M0 transport contract; routes are not implemented yet. NestJS serves REST under `/api/v1`, with OpenAPI generated in M2 from implemented shared contracts. Public routes never expose arbitrary state updates, tool execution or model endpoints.
+
+## Common transport and validation
+
+JSON UTF-8 except multipart knowledge upload. Strict unknown-field rejection; UUID IDs; ISO-8601 UTC timestamps; string trim except passwords; no coercion of booleans/numbers/enums. General JSON body cap 64 KiB. Plain text only for request/message/reason/checklist fields; escape on display. Return `X-Request-ID`, generated server-side or accept a sanitized UUID supplied for correlation; never use correlation ID as authorization.
+
+Success shape `{data,requestId}`. Lists `{data:[],page:{nextCursor:null|string,hasMore:boolean},requestId}`; limit integer 1–100 default 20, opaque base64url cursor of validated `(createdAt,id)` pair; order createdAt DESC, id DESC unless history, which returns chronological order for the selected page. Scope/filter before pagination. Invalid cursor/filter yields 400; no hidden global totals. Date filters use inclusive from/exclusive to UTC with from<to. Filter status/priority/category/assigneeId by controlled values; assignee filter cannot enlarge actor scope.
+
+Error shape `{error:{code,message,details?:[{field,code}]},requestId}`. HTTP 400 malformed/schema invalid; 401 absent/expired/revoked identity; 403 wrong role/CSRF; 404 unknown or out-of-scope resource; 409 STALE_VERSION/INVALID_STATE/ALREADY_REVIEWED/DUPLICATE; 413 size; 415 media; 422 valid schema but invalid business references/invariants (e.g. missing policy/incomplete checklist); 429 RATE_LIMITED with Retry-After; 503 dependency unavailable for an immediate synchronous operation. Background AI failure appears as failed job with safe error on polling, not a fake successful analysis. No stack traces, SQL details, local paths or raw model errors.
+
+All request mutations after creation carry `expectedVersion:positive integer`, including message/checklist/AI commands, feedback and manager decisions. Success returns current Request DTO with incremented version for domain mutations. Read-only AI artifact generation checks expectedVersion but does not increment it unless publishing a state transition. A stale check happens again on job publication. Missing expectedVersion is 400. All commands require authentication unless explicitly public below.
+
+## Shared DTOs
+
+- RequestCreate: `{description:string[10..10000],title?:string[1..160]}`. No owner/role/status/priority allowed.
+- RequestView: id/publicCode/title/description/status/version/approved category?/subcategory?/priority/currentAssignee projection?/createdAt/updatedAt/terminal times/aiAnalysisStatus/missingFields/progress/SLA. Internal fields added only according to AUTHORIZATION_SPEC; `suggestedCategory` is distinct from approved `category`.
+- VersionCommand: `{expectedVersion}`; ReasonCommand adds `{reason:string[1..2000]}`; MessageCommand adds `{body:string[1..4000]}`.
+- FinalDecision: `{category,subcategory,priority,teamId,staffId,actions:[{text:string[1..500],required:boolean,sourceIds:string[]<=5,provenance:AI|HUMAN}]<=30,acknowledgedMissingFields:string[]<=6,reason:string[1..2000]}`. Compatible taxonomy, eligible team/staff and policy required. AI actions must cite current evidence; unsourced human actions need HUMAN provenance/reason. No arbitrary SLA minutes/status field. Empty checklist requires explicit reason.
+- ReviewCommand: `{expectedVersion,reviewKind:AI|MANUAL,recommendationId?:UUID,manualDraftRevision?:int}`; exactly the matching identity supplied. Accept adds acknowledgedMissingFields; Modify adds finalDecision; Reject adds reason.
+- Source: sourceId/documentId/chunkId/generation/title/pageNumber?/section?/excerpt/score, resolved by backend.
+- Job: `{aiRunId,status,purpose,requestId?,errorCode?,createdAt,finishedAt?}`; no prompts/secrets. Polling uses current permissions; source IDs are never filesystem paths.
+
+## Endpoint inventory
+
+Paths in tables are relative to `/api/v1`. Role/state abbreviations refer to exact rules in [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md) and [REQUEST_STATE_MACHINE](REQUEST_STATE_MACHINE.md).
+
+### Auth, user directory and health
+
+| Method and path | Actor / input | Result |
+|---|---|---|
+| POST /auth/login | Public; `{email,password}` plus trusted Origin and CSRF header | 200 `{accessToken,expiresIn:900,user}` + rotating HttpOnly refresh cookie; generic 401 failure |
+| POST /auth/refresh | Refresh cookie + Origin/CSRF header | 200 new access token/user + rotated cookie; replay/expiry 401, revoke family |
+| POST /auth/logout | Refresh cookie/session, Origin/CSRF header | 204, revoke/clear cookie idempotently; no response body |
+| GET /auth/me | Any active authenticated role | 200 own id/displayName/email/role |
+| GET /users/me | Any active authenticated role | 200 same safe profile projection; no edit/role-management route |
+| GET /users/staff | MANAGER; teamId?, skills?, limit/cursor | 200 bounded eligible directory with current skills/availability/workload; used for human modification |
+| GET /health/live | Public | 200 API liveness only, no secrets/config |
+| GET /health/ready | Public local deployment | 200 when API+DATABASE+VECTOR_EXTENSION ready, else 503; component statuses API/DATABASE/OLLAMA_SERVER/OLLAMA_LLM_MODEL/OLLAMA_EMBEDDING_MODEL/VECTOR_EXTENSION and aiReady boolean. Ollama failure alone means degraded AI, not process failure. No paths/model credentials. |
+
+Auth credential transport/lifetimes are fully specified in AUTHORIZATION_SPEC. Minimal public health is intentional; detailed operational configuration is never exposed.
+
+### Requests, conversations and staff work
+
+| Method and path | Actor / input / state | Success and effects |
+|---|---|---|
+| POST /requests | USER; RequestCreate | 201 RequestView NEW; creation history/audit; queued intake once enabled |
+| GET /requests/mine | USER; pagination/status/priority/category/date filters | 200 own scoped list |
+| GET /requests/:id | Own USER/current STAFF/MANAGER | 200 projected detail; unrelated resource 404 |
+| GET /requests/:id/history | Same read scope; pagination | 200 safe chronological domain events |
+| POST /requests/:id/messages | Scoped readers; MessageCommand; nonterminal | 201 message + request version; no state change |
+| POST /requests/:id/provide-info | Owning USER; MessageCommand; WAITING_USER | 200 RequestView IN_PROGRESS + reply/SLA resume |
+| POST /requests/:id/confirm | Owning USER; VersionCommand; RESOLVED | 200 CLOSED |
+| POST /requests/:id/reopen | Owning USER; ReasonCommand; RESOLVED | 200 IN_PROGRESS; preserved SLA/assignment |
+| POST /requests/:id/cancel | Owner/MANAGER by cancel matrix; ReasonCommand | 200 CANCELED; invalidate pending work |
+| POST /requests/:id/feedback | Owning USER; `{expectedVersion,rating:int[1..5],comment?:string<=2000}`; CLOSED | 201 Feedback + request version; second submission 409 |
+| GET /staff/work-queue | STAFF; scoped pagination/status/priority/category | 200 current assigned open work (ASSIGNED/IN_PROGRESS/WAITING_USER/RESOLVED); terminal history via authorized detail |
+| POST /requests/:id/start | Assigned STAFF; VersionCommand; ASSIGNED | 200 IN_PROGRESS |
+| POST /requests/:id/request-info | Assigned STAFF; MessageCommand; IN_PROGRESS | 200 WAITING_USER + question/SLA pause |
+| POST /requests/:id/checklist | Assigned STAFF; `{expectedVersion,sourceRunId?,items:[{text,required,sourceIds}]<=30}`; IN_PROGRESS | 200 saved/appended checklist; overall 30-item cap; explicit staff adoption of AI draft with provenance |
+| PATCH /requests/:id/checklist/:itemId | Assigned STAFF; `{expectedVersion,text?,required?,operation?:COMPLETE\|UNCOMPLETE\|WAIVE\|UNWAIVE,reason?}`; IN_PROGRESS | 200 checklist + request version; waiver needs reason; item must belong to request |
+| POST /requests/:id/resolve | Assigned STAFF; `{expectedVersion,rootCause,resolution,verification}` each 10–4000; IN_PROGRESS | 200 RESOLVED + immutable resolution event, frozen SLA and queued summary |
+
+Checklist creation is upsert of the one request checklist; supplied new items append, not silently replace approved/completed items. Text edits preserve before/after audit and source provenance; changing sourced text marks that edit human-authored. Completion/waiver changes timestamps as defined in DATABASE_SPEC. Generic message endpoints are never implicit state commands.
+
+### Manager review and commands
+
+| Method and path | Actor / input | Result |
+|---|---|---|
+| GET /manager/requests | MANAGER; bounded list filters | 200 all V1 matching requests |
+| POST /manager/requests/:id/triage | MANAGER; `{expectedVersion,finalDecision}`; NEW or TRIAGED | 200 TRIAGED/manual draft revision; cancels queued intake; active AI_ANALYZING returns 409 |
+| POST /manager/requests/:id/submit-approval | MANAGER; `{expectedVersion,manualDraftRevision}`; TRIAGED | 200 PENDING_APPROVAL MANUAL; notify managers |
+| POST /manager/requests/:id/ai/recommend | MANAGER; VersionCommand; TRIAGED | 202 Job; fixed pipeline; background SYSTEM publication creates PENDING_APPROVAL |
+| GET /manager/approvals | MANAGER; pagination | 200 current actionable pending reviews only |
+| GET /manager/approvals/:requestId | MANAGER | 200 review kind/reference/version, original AI/draft, evidence and decision form defaults |
+| POST /manager/approvals/:requestId/accept | MANAGER; ReviewCommand + acknowledgedMissingFields | 200 ASSIGNED; atomic decision/assignment/checklist/SLA/notifications/audit |
+| POST /manager/approvals/:requestId/modify | MANAGER; ReviewCommand + finalDecision | 200 ASSIGNED with immutable original and recorded changes |
+| POST /manager/approvals/:requestId/reject | MANAGER; ReviewCommand + reason | 200 TRIAGED; preserve rejected artifact, clear current review |
+| POST /manager/requests/:id/reassign | MANAGER; `{expectedVersion,teamId,staffId,reason}` | 200 RequestView; same state, new assignment, no clock reset |
+| POST /manager/requests/:id/priority | MANAGER; `{expectedVersion,priority,reason}` | 200 RequestView; same state, policy recalculation; ASSIGNED/IN_PROGRESS/WAITING_USER only |
+| GET /manager/audit | MANAGER; requestId?, actorType?, action?, dates, pagination | 200 safe audit events |
+
+State/eligibility/source/policy changed since review returns 409/422 with stable code and refresh guidance. No endpoint treats “accept” as an unchecked shortcut. Manual reviews do not generate fake AiRecommendation rows or AI acceptance statistics.
+
+### AI results and resolution retry
+
+| Method and path | Actor / input | Result |
+|---|---|---|
+| POST /requests/:id/ai/analyze | Own USER/MANAGER; VersionCommand; NEW and no active run | 202 Job; idempotent scheduling by persisted request/purpose key |
+| POST /requests/:id/ai/retry | Own USER/MANAGER; VersionCommand; NEW with failed intake | 202 new Job, preserving old failed telemetry |
+| POST /requests/:id/ai/copilot/action | Assigned STAFF; `{expectedVersion,action}` six-action enum; allowed Copilot states | 202 Job; no arbitrary prompt/context/tool fields |
+| GET /requests/:id/ai/explanation | Own USER/current STAFF/MANAGER | 200 role-projected facts/reason/sources; USER only progress/missing facts and approved resolution, not manager evidence |
+| GET /ai/runs/:id | Current permitted reader by purpose: owner/MANAGER intake status, assigned STAFF initiator for Copilot, MANAGER recommendations, scoped readers for safe resolution summary | 200 Job and safe typed result by projection; SYSTEM-scheduled intake is pollable by owner; staff cannot read manager review traces |
+| POST /requests/:id/ai/resolution-summary/retry | Current assigned STAFF or MANAGER; `{expectedVersion,resolutionId}`; RESOLVED/CLOSED | 202 Job only for latest effective resolution with failed summary; state/facts unchanged |
+
+Automatic intake/recommendation/summary uses the same internal services and current permissions. Requests are committed before model execution; 202 means accepted for work, not AI success. Existing active same-purpose run returns its job instead of launching another when version still matches; stale version returns 409. Browser polls with bounded backoff (2→5 seconds), stops on terminal status/navigation; server checks access every poll.
+
+### Knowledge, notifications and analytics
+
+| Method and path | Actor / input | Result |
+|---|---|---|
+| POST /knowledge/documents | MANAGER; multipart title 1–200 + one PDF/TXT file <=10 MiB | 202 document ID/status UPLOADED; strict upload rules; 409 duplicate hash |
+| GET /knowledge/documents | MANAGER all statuses; STAFF READY only; pagination | 200 authorized metadata |
+| GET /knowledge/documents/:id | MANAGER metadata; STAFF only READY | 200 metadata/status/generation and safe error on failed indexing |
+| GET /knowledge/documents/:id/content | MANAGER including historical audit; STAFF READY only | 200 controlled binary PDF or text download, authorized storage key; no client path |
+| GET /knowledge/sources/:sourceId | MANAGER or STAFF permitted current READY source; MANAGER may request historical=true for audit | 200 Source; historical result flagged unavailableForLiveUse; stale STAFF source 404 |
+| POST /knowledge/documents/:id/reindex | MANAGER; `{expectedVersion}` | 202 PROCESSING; rejects active job conflict; explicit reactivation if DISABLED |
+| POST /knowledge/documents/:id/disable | MANAGER; `{expectedVersion,reason}` | 200 DISABLED; invalidate live source use |
+| GET /notifications | Any authenticated role; own recipient only, unreadOnly?, pagination | 200 own safe notification records |
+| PATCH /notifications/:id/read | Recipient; `{read:boolean}` | 200 readAt updated/null, idempotent; no request version needed |
+| GET /analytics/overview | MANAGER; bounded date window | 200 real operational counts/average resolution with denominator/window/asOf |
+| GET /analytics/ai | MANAGER; bounded date window | 200 real run/review/latency aggregates + latest measured evaluation metadata or unavailable |
+| GET /analytics/sla | MANAGER; bounded date window | 200 persisted/recomputed risk and fulfilled/breached counts, excludes canceled |
+
+## Abuse controls, audit and contracts
+
+Initial per-process local-demo token buckets: login 5 attempts/minute per normalized account+IP and 20/minute per IP; refresh 30/minute per session+IP; all AI triggers 5/minute per actor plus one active request/purpose and global LLM concurrency 1; uploads/reindex 5/minute per manager plus index concurrency 1; reads 120/minute per actor; other writes 60/minute per actor. Proxy trust is explicitly configured, not any client-supplied forwarding header. Bounds are tunable config, recorded in API startup; no distributed rate limiter dependency in V1. All critical writes and denied sensitive actions use safe audit/log metadata.
+
+M2 shared contracts/OpenAPI must specify every DTO, enum, status, security scheme and error. Future generated clients use these contracts; UI cannot expand permissions. No externally consumed compatibility exists at baseline; once implemented, preserve `/api/v1` contract or document amendments. Tests cover every important endpoint with unauthenticated/wrong-role/wrong-owner, malformed input, stale version, successful mutation and relevant rollback cases.
