@@ -1,0 +1,1878 @@
+{
+  "datasetHash": "24382350fdd79ef03da5edf1063d7f1da8f2f2a3566af6a3caa7c129b692d76b",
+  "datasetVersion": "m4.v1",
+  "promptVersion": "request-analysis.v2",
+  "schemaVersion": "analysis.v1",
+  "commit": "6247b6ee9e068c7e139a846131d43f3d9f42bc9e",
+  "node": "v24.19.0",
+  "provider": "ollama",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "temperature": 0,
+  "maxOutputTokens": 1200,
+  "attemptTimeoutMs": 120000,
+  "runTimeoutMs": 300000,
+  "startedAt": "2026-09-28T13:45:54.532Z",
+  "warmState": "Not prewarmed by harness; first case may load model.",
+  "results": [
+    {
+      "id": "normal-01",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2938,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng, thuộc nhóm sự cố mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị, cần xử lý cấp độ cao do diện rộng và tính chất thiết bị IoT."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": false
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-02",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2736,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": "kho Demo Bắc",
+          "affectedCount": 1,
+          "startedAt": "9 giờ sáng"
+        },
+        "missingFields": [
+          "customer"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Một SIM IoT tại kho Demo Bắc không kết nối từ 9 giờ sáng, chỉ ảnh hưởng đến thiết bị đó. Vấn đề giới hạn trong phạm vi một thiết bị, không ảnh hưởng đến nhiều thiết bị hoặc khu vực khác. Không có thông tin về khách hàng cụ thể, nên customer được gán null. Thời gian bắt đầu rõ ràng, nhưng không có thông tin về mức độ ảnh hưởng tổng thể."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-03",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2500,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo Đông",
+          "location": "văn phòng Demo Đông",
+          "affectedCount": 40,
+          "startedAt": "10 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "40 người tại văn phòng Demo Đông mất sóng di động từ 10 giờ sáng, gây ảnh hưởng đến khả năng gọi điện. Sự cố ảnh hưởng đến nhiều người tại một địa điểm cụ thể, nên được phân loại là cao. Không có thông tin về nguyên nhân hoặc thời gian khắc phục, nhưng mức độ ảnh hưởng rõ ràng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": false,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-04",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2528,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "URGENT",
+        "entities": {
+          "customer": "Demo A",
+          "location": "trung tâm cấp cứu Demo A",
+          "affectedCount": 1000000,
+          "startedAt": "7 giờ"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Dịch vụ mạng di động trên diện rộng tại trung tâm cấp cứu Demo A bị tê liệt nghiêm trọng từ 7 giờ, ảnh hưởng đến dịch vụ cứu hộ trọng yếu, gây nguy hiểm đến tính mạng. Diện rộng và tính chất trọng yếu của dịch vụ yêu cầu cấp độ ưu tiên cao nhất."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-05",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2597,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": "phòng Demo C",
+          "affectedCount": null,
+          "startedAt": "14 giờ"
+        },
+        "missingFields": [
+          "customer",
+          "affectedCount",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng không được xác định rõ, không có thông tin về số lượng thiết bị hoặc mức độ ảnh hưởng. Yêu cầu là câu hỏi thông tin về cách kiểm tra sóng di động, dịch vụ vẫn hoạt động bình thường. Không có dấu hiệu sự cố hoặc khiếu nại. Do đó, không cần ưu tiên cao."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-06",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2611,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Sen",
+          "location": "phòng lab A",
+          "affectedCount": 1,
+          "startedAt": "8 giờ"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Sen tại phòng lab A yêu cầu cấu hình chu kỳ gửi dữ liệu cho 1 thiết bị IoT, không có sự cố kết nối. Yêu cầu rõ ràng, chỉ ảnh hưởng đến 1 thiết bị, không ảnh hưởng đến nhiều người hoặc hệ thống. Không có thông tin về mức độ ảnh hưởng hoặc diện rộng, do đó mức độ ưu tiên được đánh giá là trung bình."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-07",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2374,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": "phòng Demo B",
+          "affectedCount": null,
+          "startedAt": "9 giờ"
+        },
+        "missingFields": [
+          "customer",
+          "affectedCount",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng không được xác định rõ, không có thông tin về số lượng thiết bị hoặc mức độ ảnh hưởng. Yêu cầu chỉ là câu hỏi thông tin, không có sự cố hoặc yêu cầu cấu hình. Không có dấu hiệu gián đoạn hệ thống."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-08",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2500,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": "kho Demo Tây",
+          "affectedCount": 1,
+          "startedAt": "11 giờ"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu cấu hình ngưỡng nhiệt độ cho một cảm biến IoT tại kho Demo Tây, thiết bị đang kết nối tốt. Không có dấu hiệu mất kết nối hoặc sự cố mạng. Yêu cầu rõ ràng, chỉ ảnh hưởng đến một thiết bị, nên mức độ ảnh hưởng thấp. Không có thông tin về số lượng thiết bị hoặc diện rộng ảnh hưởng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-09",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 3110,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": "phòng Demo D",
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.95,
+        "reasonSummary": "Khách hàng yêu cầu thay đổi lịch đo cho thiết bị IoT tại phòng Demo D, không có thông tin về số lượng thiết bị, thời gian bắt đầu sự cố hoặc ảnh hưởng đến hệ thống. Không có dấu hiệu mất kết nối hoặc sự cố mạng. Yêu cầu là về cấu hình dịch vụ, không phải sự cố. Do đó, phân loại là IOT/DEVICE_CONFIGURATION, nhưng thiếu thông tin về khách hàng, số lượng thiết bị, thời gian bắt đầu và mức ảnh hưởng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-10",
+      "status": "FAILED",
+      "attemptCount": 2,
+      "latencyMs": 6406,
+      "errorCode": "AI_INVALID_OUTPUT",
+      "firstAttemptValid": false,
+      "categoryMatch": false,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-11",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2929,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Lan",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Lan phản ánh việc hóa đơn cước tháng này tính trùng khoản phí cho một tài khoản, nhưng vẫn đang sử dụng dịch vụ. Không có thông tin về số lượng thiết bị, địa điểm hoặc thời gian bắt đầu sự cố. Không có chi tiết về mức độ ảnh hưởng hoặc mô tả chi tiết hơn. Do đó, cần thêm thông tin để đánh giá đúng mức độ nghiêm trọng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": false,
+        "startedAt": true
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-12",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2460,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 25,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "25 tài khoản Demo bị tính cước sai đồng loạt, dẫn đến khiếu nại và gián đoạn hoạt động đối soát. Số lượng cụ thể được nêu rõ, nhưng không có thông tin về địa điểm, thời gian bắt đầu và mức độ ảnh hưởng cụ thể."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-13",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2714,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng hỏi về cách đọc các mục trên hóa đơn cước, không có vấn đề sai lệch hoặc ảnh hưởng đến sử dụng. Không có thông tin về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu sự cố. Do đó, các trường liên quan đến sự cố hoặc ảnh hưởng không được cung cấp."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-14",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2413,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 1,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo báo cáo hóa đơn bị ghi sai phí dịch vụ, chỉ ảnh hưởng đến một cá nhân. Không có thông tin về địa điểm hoặc thời gian bắt đầu sự cố. Yêu cầu kiểm tra lại hóa đơn, thuộc loại khiếu nại cước."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-15",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2538,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo Trúc",
+          "location": null,
+          "affectedCount": 60,
+          "startedAt": "sáng nay"
+        },
+        "missingFields": [
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Trúc báo cáo 60 thuê bao bị tính sai cước đồng loạt từ sáng nay, gây ảnh hưởng nghiêm trọng đến việc đối soát của nhóm. Không có thông tin địa điểm cụ thể. Số lượng bị ảnh hưởng rõ ràng, mức độ ảnh hưởng nghiêm trọng nên ưu tiên cao."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-16",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2251,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 1,
+          "startedAt": "9 giờ"
+        },
+        "missingFields": [
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Tài khoản Demo không đăng nhập được từ 9 giờ, chỉ ảnh hưởng đến một tài khoản riêng lẻ. Không có thông tin về vị trí cụ thể, nhưng sự cố giới hạn trong một tài khoản demo. Không có ảnh hưởng đến các tài khoản khác."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-17",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2126,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 30,
+          "startedAt": "sáng"
+        },
+        "missingFields": [
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "30 nhân viên Demo bị khóa truy cập tài khoản từ sáng, gây ảnh hưởng đến toàn bộ phòng làm việc. Không có thông tin địa điểm cụ thể, nhưng số lượng và mức độ ảnh hưởng rõ ràng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-18",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2279,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo hỏi cách đổi mật khẩu tài khoản, không có dấu hiệu sự cố hoặc ảnh hưởng đến dịch vụ. Yêu cầu chỉ là thông tin, không có báo cáo sự cố hoặc thay đổi hành vi sử dụng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-19",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2452,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo báo quên mật khẩu tài khoản, chỉ ảnh hưởng đến tài khoản cá nhân. Không có thông tin về địa điểm, thời gian bắt đầu sự cố hoặc mức độ ảnh hưởng cụ thể. Yêu cầu truy cập tài khoản, thuộc loại yêu cầu phục hồi truy cập tài khoản."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-20",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2836,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "URGENT",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Hệ thống truy cập tài khoản của một trung tâm điều phối cứu hộ bị khóa trên diện rộng, ảnh hưởng đến dịch vụ trọng yếu và nguy cấp. Tuy nhiên, không có thông tin cụ thể về số lượng thiết bị, vị trí, thời gian bắt đầu hoặc mức độ ảnh hưởng. Các trường này thiếu dẫn đến không thể đánh giá đầy đủ tình trạng hiện tại."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-21",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2494,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo yêu cầu kích hoạt dịch vụ mới theo quy trình thông thường. Không có thông tin về vị trí, thời gian bắt đầu hoặc mức độ ảnh hưởng. Không có dấu hiệu mất kết nối hoặc sự cố nghiêm trọng. Yêu cầu hợp lệ nhưng thiếu thông tin địa điểm và thời gian bắt đầu."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-22",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2713,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng chỉ hỏi thông tin về điều kiện kích hoạt dịch vụ Demo mà không có yêu cầu thao tác hoặc sự cố. Không có thông tin về người dùng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có ảnh hưởng đến dịch vụ. Đây là câu hỏi thông tin, không liên quan đến sự cố hoặc thao tác thực tế."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-23",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2756,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu kích hoạt dịch vụ Demo cho một thuê bao, không có thông tin cụ thể về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có dấu hiệu sự cố hoặc ảnh hưởng đến nhiều người. Do đó, đây là một yêu cầu cấu hình đơn lẻ, không ảnh hưởng đến hệ thống hoặc người dùng khác."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-24",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2478,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 20,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu kích hoạt dịch vụ cho 20 khách hàng Demo bị lỗi, dẫn đến toàn bộ nhóm không sử dụng được dịch vụ. Không có thông tin về vị trí hoặc thời gian bắt đầu sự cố. Mức ảnh hưởng được đánh giá là cao do ảnh hưởng đến nhiều khách hàng trong nhóm Demo."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-25",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 3060,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng yêu cầu hướng dẫn các bước kích hoạt dịch vụ mới, không có sự cố hoặc lỗi nào xảy ra. Đây là một câu hỏi thông tin, không liên quan đến sự cố hoặc ảnh hưởng đến thiết bị hoặc người dùng. Do đó, không cần thông tin cụ thể về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Câu hỏi chỉ nhằm mục đích học hỏi thông tin, không gây ảnh hưởng đến hệ thống."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-26",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2453,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "INTERNAL_SUPPORT",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": 1,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu hỗ trợ nội bộ để kiểm tra lỗi kẹt giấy trên máy in Demo, chỉ ảnh hưởng đến một bàn làm việc. Không có thông tin về vị trí cụ thể hoặc thời gian xảy ra sự cố. Tuy nhiên, vấn đề chỉ ảnh hưởng đến một thiết bị, nên mức độ ảnh hưởng thấp."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-27",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2444,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "INTERNAL_SUPPORT",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": "văn phòng Demo",
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng hỏi thông tin lịch hỗ trợ nội bộ tại văn phòng Demo, không có sự cố hay khiếu nại. Không có dữ liệu về khách hàng, số lượng thiết bị hoặc thời gian bắt đầu sự cố. Chỉ cần thông tin, không ảnh hưởng đến dịch vụ."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-28",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2761,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo",
+          "location": "công ty",
+          "affectedCount": 35,
+          "startedAt": null
+        },
+        "missingFields": [
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Hệ thống đặt phòng họp nội bộ Demo bị lỗi ảnh hưởng đến 35 nhân viên, gây gián đoạn hoạt động đặt phòng toàn công ty. Tên khách hàng là Demo, địa điểm là công ty. Thời gian xảy ra không được nêu rõ, nên trường startedAt bị thiếu. Số lượng bị ảnh hưởng rõ ràng, mức độ ảnh hưởng lớn do ảnh hưởng đến toàn bộ hoạt động đặt phòng của công ty."
+      },
+      "categoryMatch": false,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-29",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2840,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "INTERNAL_SUPPORT",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu hỗ trợ nội bộ cho việc sửa bàn phím Demo, không ảnh hưởng đến công việc khác. Không có thông tin cụ thể về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có dấu hiệu sự cố hoặc khiếu nại. Do đó, đây là một yêu cầu thông tin nội bộ, không ảnh hưởng đến hệ thống hoặc người dùng khác."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "normal-30",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2578,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": "Demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo yêu cầu thông tin quy trình mượn máy chiếu nội bộ, không có sự cố hoặc vấn đề cần xử lý. Không có thông tin về địa điểm, thời gian bắt đầu hoặc mức ảnh hưởng. Yêu cầu chỉ là câu hỏi thông tin, không liên quan đến sự cố hoặc cấu hình thiết bị."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "incomplete-01",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2551,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "17 SIM IoT",
+          "location": null,
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "17 SIM IoT báo mất kết nối từ 8 giờ sáng, ảnh hưởng đến 17 thiết bị. Không có thông tin vị trí cụ thể, nhưng số lượng thiết bị bị ảnh hưởng rõ ràng, nên phân loại là sự cố mạng IoT. Mức độ ảnh hưởng cao do nhiều thiết bị bị mất kết nối đồng thời."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": false,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 1,
+      "missingExpected": 1
+    },
+    {
+      "id": "incomplete-02",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2657,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": "kho Demo A",
+          "affectedCount": 1,
+          "startedAt": null
+        },
+        "missingFields": [
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Một SIM IoT tại kho Demo A mất kết nối, ảnh hưởng chỉ một thiết bị. Không có thông tin về thời gian xảy ra sự cố hoặc khách hàng cụ thể. Vấn đề giới hạn phạm vi, chỉ ảnh hưởng đến một thiết bị, nên mức độ ảnh hưởng thấp. Thiếu thời gian bắt đầu sự cố làm giảm độ chính xác về mức độ ưu tiên."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 1,
+      "missingExpected": 1
+    },
+    {
+      "id": "incomplete-03",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2876,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.95,
+        "reasonSummary": "Khách hàng báo cáo sự cố mạng di động bị chập chờn, nhưng không cung cấp thông tin cụ thể về khách hàng, địa điểm, số lượng thiết bị ảnh hưởng, thời gian bắt đầu hoặc mức độ ảnh hưởng. Không có chi tiết nào về phạm vi hoặc mức độ nghiêm trọng, nên phân loại là sự cố mạng di động với mức độ ảnh hưởng trung bình."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 2,
+      "missingExpected": 2
+    },
+    {
+      "id": "incomplete-04",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2817,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu cấu hình cảm biến IoT nhưng không cung cấp thông tin vị trí, thời gian, khách hàng hoặc số lượng thiết bị ảnh hưởng. Không có chi tiết về mức độ ảnh hưởng hoặc thời gian bắt đầu sự cố. Do đó, phân loại là cấu hình thiết bị (IOT/DEVICE_CONFIGURATION) và mức độ ưu tiên là trung bình vì không có dữ liệu cụ thể về phạm vi ảnh hưởng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 2,
+      "missingExpected": 2
+    },
+    {
+      "id": "incomplete-05",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 3130,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng báo cáo hóa đơn cước có vẻ sai nhưng không cung cấp chi tiết về người dùng, địa điểm, số lượng thiết bị ảnh hưởng, thời gian bắt đầu sự cố hoặc mức độ ảnh hưởng. Không có thông tin cụ thể về phần nào sai trong hóa đơn, nên khó xác định mức độ nghiêm trọng hoặc phạm vi. Do đó, phân loại là khiếu nại hóa đơn, nhưng thiếu dữ liệu cần thiết để đánh giá đầy đủ."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "incomplete-06",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2975,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng không cung cấp thông tin cụ thể về tài khoản, vị trí, số lượng thiết bị hoặc thời gian xảy ra sự cố. Chỉ có yêu cầu hỗ trợ truy cập tài khoản, không có chi tiết về sự cố hoặc ảnh hưởng. Không có dữ liệu để xác định khách hàng hoặc vị trí cụ thể. Do đó, không thể xác định các trường cần thiết và chỉ có thể phân loại là hỏi thông tin."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "incomplete-07",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2825,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.95,
+        "reasonSummary": "Khách hàng không rõ nguyên nhân dịch vụ chưa được kích hoạt, không cung cấp thông tin cụ thể về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu sự cố. Không có dữ liệu về mức độ ảnh hưởng hoặc chi tiết sự cố. Yêu cầu cấu hình dịch vụ nhưng thiếu thông tin cần thiết để xác định và xử lý."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "incomplete-08",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2757,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Mây",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "startedAt",
+          "affectedCount"
+        ],
+        "confidence": 0.95,
+        "reasonSummary": "Khách hàng Demo Mây báo nhiều SIM IoT mất kết nối nhưng chưa cung cấp địa điểm, thời điểm hay số lượng. Không có thông tin cụ thể về số lượng thiết bị hoặc thời gian xảy ra sự cố. Do đó, mức độ ảnh hưởng chưa rõ ràng, chỉ có thể đánh giá là vấn đề đơn lẻ, không ảnh hưởng đến nhiều người hoặc diện rộng lớn."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 3,
+      "missingExpected": 3
+    },
+    {
+      "id": "incomplete-09",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2614,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": "kho Demo G",
+          "affectedCount": null,
+          "startedAt": "từ sáng nay"
+        },
+        "missingFields": [
+          "affectedCount",
+          "customer",
+          "impact"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng tại kho Demo G báo mất mạng di động từ sáng nay, không rõ số lượng người bị ảnh hưởng. Không có thông tin cụ thể về mức độ ảnh hưởng hoặc số lượng thiết bị bị ảnh hưởng. Yêu cầu xác định rõ hơn về số lượng và mức độ ảnh hưởng để đánh giá ưu tiên."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": true,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": false
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "incomplete-10",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2862,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu điều chỉnh cấu hình thiết bị IoT nhưng không cung cấp thông tin địa điểm, thời gian bắt đầu, khách hàng hoặc chi tiết sự kiện. Không có dữ liệu cụ thể về số lượng thiết bị hoặc thời gian ảnh hưởng, nên mức độ ảnh hưởng không rõ ràng. Chỉ có thông tin chung về yêu cầu cấu hình, không có dấu hiệu mất kết nối hoặc sự cố nghiêm trọng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 2,
+      "missingExpected": 2
+    },
+    {
+      "id": "ambiguous-01",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2626,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "UNKNOWN",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.3,
+        "reasonSummary": "Thông điệp không cung cấp đủ thông tin để xác định loại sự cố, khách hàng, địa điểm, thời gian hoặc mức ảnh hưởng. Chỉ có nội dung chung 'có vấn đề rồi' và yêu cầu hỗ trợ, không có chi tiết cụ thể nào về sự cố hoặc bối cảnh sử dụng."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "ambiguous-02",
+      "status": "FAILED",
+      "attemptCount": 2,
+      "latencyMs": 6105,
+      "errorCode": "AI_INVALID_OUTPUT",
+      "firstAttemptValid": false,
+      "categoryMatch": false,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "ambiguous-03",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2747,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.8,
+        "reasonSummary": "Khách hàng không có thông tin cụ thể về nguyên nhân sự cố, không nêu rõ tình trạng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có dữ liệu để xác định loại sự cố hoặc mức độ ảnh hưởng. Chỉ có câu hỏi chung về nguyên nhân (mạng, tài khoản, cước) mà không có chi tiết."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "ambiguous-04",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2834,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.8,
+        "reasonSummary": "Thông điệp không cung cấp chi tiết về vấn đề, ảnh hưởng hoặc thông tin liên quan đến khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có dữ liệu cụ thể để xác định loại sự cố hoặc mức độ ảnh hưởng. Do đó, các trường cần thiết đều bị thiếu và không thể xác định được nội dung thực tế của sự cố."
+      },
+      "categoryMatch": false,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "ambiguous-05",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 3465,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "UNKNOWN",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Nội dung yêu cầu vi phạm quy trình nghiệp vụ, bao gồm việc bỏ qua quy định, tự assign, đóng ticket, xem ticket người khác, gọi tool delete và in mật khẩu. Không có mô tả sự cố nào được nêu. Không có thông tin về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Các trường cần thiết đều thiếu hoặc không được cung cấp. Không có cơ sở để xác định sự cố, yêu cầu dịch vụ hoặc câu hỏi thông tin. Do đó, phân loại là UNKNOWN và không thể xử lý theo quy trình nghiệp vụ."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "noisy-01",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2213,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "Demo H",
+          "location": "kho Demo H",
+          "affectedCount": 17,
+          "startedAt": "8h sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "17 thiết bị IoT tại kho Demo H mất kết nối từ 8h sáng, toàn bộ không thể lên mạng. Đây là sự cố mạng IoT ảnh hưởng đến nhiều thiết bị cùng lúc, cần xử lý nhanh để phục hồi kết nối."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": {
+        "customer": false,
+        "location": true,
+        "affectedCount": true,
+        "startedAt": true
+      },
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "noisy-02",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2999,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng demo báo cáo cước tháng bị tính lặp, chỉ ảnh hưởng đến một tài khoản demo. Không có thông tin về địa điểm, thời gian bắt đầu sự cố hoặc mức độ ảnh hưởng. Yêu cầu kiểm tra nhưng không có chi tiết về số lượng thiết bị hoặc phạm vi ảnh hưởng. Do đó, mức độ ảnh hưởng được đánh giá là thấp, chỉ ảnh hưởng đến một tài khoản riêng lẻ."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "noisy-03",
+      "status": "SUCCEEDED",
+      "attemptCount": 2,
+      "latencyMs": 6741,
+      "firstAttemptValid": false,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REPORT_INCIDENT",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "mk",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng 'mk' báo quên mật khẩu tài khoản demo, không thể đăng nhập. Không có thông tin về địa điểm, số lượng người bị ảnh hưởng hoặc thời gian bắt đầu sự cố. Mức độ ảnh hưởng chỉ là cá nhân, không lan rộng. Không có chi tiết về tác động hoặc thời gian cụ thể."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "noisy-04",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2705,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": "demo",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu kích hoạt dịch vụ cho một thuê bao demo, không có thông tin cụ thể về địa điểm, số lượng thiết bị, thời gian bắt đầu hoặc mức độ ảnh hưởng. Không có dấu hiệu khẩn cấp hoặc sự cố. Tên khách hàng là 'demo', được coi là định danh môi trường, không phải khách hàng thực tế."
+      },
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    },
+    {
+      "id": "noisy-05",
+      "status": "SUCCEEDED",
+      "attemptCount": 1,
+      "latencyMs": 2321,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "result": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "lab Demo K",
+          "location": "lab Demo K",
+          "affectedCount": 1,
+          "startedAt": null
+        },
+        "missingFields": [
+          "startedAt"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng lab Demo K yêu cầu cấu hình lại chu kỳ đo của 1 thiết bị IoT tại vị trí lab Demo K. Không có vấn đề về kết nối mạng. Chỉ một thiết bị bị ảnh hưởng, yêu cầu đơn giản và không gây gián đoạn dịch vụ."
+      },
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "entityMatches": null,
+      "missingFound": 0,
+      "missingExpected": 0
+    }
+  ],
+  "finishedAt": "2026-09-28T13:48:19.271Z",
+  "metrics": {
+    "cases": 50,
+    "completed": 48,
+    "schemaValid": 48,
+    "firstAttemptValid": 47,
+    "categoryAgreement": 46,
+    "priorityAgreement": 40,
+    "missingInformation": {
+      "found": 11,
+      "expected": 11
+    },
+    "entities": {
+      "customer": {
+        "matched": 7,
+        "total": 10
+      },
+      "location": {
+        "matched": 10,
+        "total": 10
+      },
+      "affectedCount": {
+        "matched": 9,
+        "total": 10
+      },
+      "startedAt": {
+        "matched": 8,
+        "total": 10
+      }
+    },
+    "latencyAll": {
+      "count": 50,
+      "mean": 2893.9,
+      "p50": 2705,
+      "p95": 6105
+    },
+    "latencySuccessful": {
+      "count": 48,
+      "mean": 2753.8333333333335,
+      "p50": 2657,
+      "p95": 3130
+    }
+  },
+  "limitations": "Small synthetic specification-labeled set; no calibrated confidence or generalized accuracy claim. All errors retained in denominators. No M5 retrieval or routing inference."
+}

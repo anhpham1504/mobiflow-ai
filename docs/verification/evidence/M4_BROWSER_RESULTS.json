@@ -1,0 +1,96 @@
+[
+  {
+    "source": "artifacts/m3/browser-results.json",
+    "stats": {
+      "startTime": "2026-09-28T14:08:40.555Z",
+      "duration": 12818.556999999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "M3 real browser: three-role manual workflow, waiting/reopen, stale protection, notification and responsive UI",
+        "ok": true,
+        "results": [
+          {
+            "status": "passed",
+            "duration": 10970,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "title": "M3 login keyboard focus and API offline error are recoverable",
+        "ok": true,
+        "results": [
+          {
+            "status": "passed",
+            "duration": 845,
+            "errors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "artifacts/m4/browser-online.json",
+    "stats": {
+      "startTime": "2026-09-28T14:09:49.050Z",
+      "duration": 15279.36,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "M4 actual Ollama intake, role projection, persisted reload, responsive keyboard UI and protected cache clearing",
+        "ok": true,
+        "results": [
+          {
+            "status": "passed",
+            "duration": 8481,
+            "errors": []
+          }
+        ]
+      },
+      {
+        "title": "M4 actual provider recovery: explicit retry from failed run succeeds and survives reload",
+        "ok": true,
+        "results": [
+          {
+            "status": "passed",
+            "duration": 5946,
+            "errors": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "artifacts/m4/browser-offline.json",
+    "stats": {
+      "startTime": "2026-09-28T14:09:18.774Z",
+      "duration": 7248.8,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "tests": [
+      {
+        "title": "M4 actual unreachable Ollama: controlled failure, bounded progress, keyboard retry and persisted failure",
+        "ok": true,
+        "results": [
+          {
+            "status": "passed",
+            "duration": 6388,
+            "errors": []
+          }
+        ]
+      }
+    ]
+  }
+]

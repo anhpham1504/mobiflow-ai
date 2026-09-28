@@ -1,0 +1,23 @@
+[
+  {
+    "Service": "api",
+    "State": "running",
+    "Health": "healthy",
+    "Image": "mobiflow-ai-api",
+    "Ports": "127.0.0.1:3001->3001/tcp"
+  },
+  {
+    "Service": "postgres",
+    "State": "running",
+    "Health": "healthy",
+    "Image": "pgvector/pgvector:0.8.6-pg17",
+    "Ports": "127.0.0.1:5432->5432/tcp"
+  },
+  {
+    "Service": "web",
+    "State": "running",
+    "Health": "healthy",
+    "Image": "mobiflow-ai-web",
+    "Ports": "127.0.0.1:3000->3000/tcp"
+  }
+]

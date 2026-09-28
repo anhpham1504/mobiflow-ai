@@ -1,12 +1,18 @@
 'use client';
-import {useEffect,useState,useSyncExternalStore} from 'react';
+import {useCallback,useEffect,useState,useSyncExternalStore} from 'react';
+import {AnalysisPanel} from './analysis-panel';
 import {requestResponseSchema,historyResponseSchema,staffDirectorySchema,finalDecisionSchema,taxonomy,categories,priorities,type RequestView,type HistoryEvent,type StaffOption,type FinalDecision} from '@mobiflow/contracts';
 import {api,ApiFailure,getProfile,serverProfile,subscribe} from '@/lib/session';
 import {SessionGate} from './session-shell';
 import {formatTime,statusLabels} from './request-list';
 const eventLabels:Record<string,string>={CREATE:'Tiếp nhận yêu cầu',MANUAL_TRIAGE:'Phân loại thủ công',SUBMIT_FOR_APPROVAL:'Gửi phương án để duyệt',APPROVE_AND_ASSIGN:'Duyệt và phân công',REJECT_APPROVAL:'Từ chối phương án',START_WORK:'Bắt đầu xử lý',REQUEST_USER_INFO:'Yêu cầu bổ sung thông tin',USER_PROVIDE_INFO:'Người gửi đã bổ sung',RESOLVE:'Hoàn tất xử lý',USER_REOPEN:'Yêu cầu xử lý lại',USER_CONFIRM:'Xác nhận và đóng',CANCEL:'Hủy yêu cầu',REASSIGN:'Phân công lại',PRIORITY:'Đổi ưu tiên',MESSAGE:'Tin nhắn',CHECKLIST_ADD:'Thêm bước xử lý',CHECKLIST_EDIT:'Cập nhật checklist'};
 
+Object.assign(eventLabels,{START_AI_ANALYSIS:'Bắt đầu phân tích AI',COMPLETE_AI_ANALYSIS:'Hoàn tất phân tích AI',FAIL_AI_ANALYSIS:'Phân tích AI không thành công',AI_ANALYSIS_QUEUED:'Đã xếp hàng phân tích',AI_RETRY_QUEUED:'Đã yêu cầu thử lại AI'});
+
 type Field={name:string;label:string;min?:number;max?:number};
+function ManualApproval({draft,disabled,run}:{draft:FinalDecision;disabled:boolean;run:(fields:string[])=>Promise<boolean>}){
+  return <form className="action-form" onSubmit={async e=>{e.preventDefault();await run(new FormData(e.currentTarget).getAll('acknowledgedMissingFields').map(String));}}><fieldset disabled={disabled}><legend>Duyệt và phân công</legend><p>Xem các trường còn thiếu trong phân tích AI. Chỉ xác nhận tiếp tục nếu đã chấp nhận thiếu thông tin này.</p>{[['location','địa điểm'],['startedAt','thời điểm bắt đầu']].map(([value,label])=><label key={value}><input type="checkbox" name="acknowledgedMissingFields" value={value} defaultChecked={draft.acknowledgedMissingFields.includes(value as 'location'|'startedAt')}/>Xác nhận tiếp tục dù thiếu {label}</label>)}<button>Duyệt và phân công</button></fieldset></form>;
+}
 function ActionForm({title,fields=[],run,disabled,button=title}:{title:string;fields?:Field[];run:(values:Record<string,string>)=>Promise<boolean>;disabled:boolean;button?:string}){
   return <form className="action-form" onSubmit={async e=>{e.preventDefault();const form=e.currentTarget;if(await run(Object.fromEntries(new FormData(form)) as Record<string,string>))form.reset();}}>
     <fieldset disabled={disabled}><legend>{title}</legend>{fields.map(f=><label key={f.name}>{f.label}<textarea name={f.name} required minLength={f.min??1} maxLength={f.max??2000} rows={3}/></label>)}<button>{button}</button></fieldset>
@@ -18,7 +24,7 @@ function ManagerPlan({request,staff,run,disabled}:{request:RequestView;staff:Sta
   const [validation,setValidation]=useState('');
   return <form className="action-form" onSubmit={async e=>{
     e.preventDefault();const f=new FormData(e.currentTarget),selected=String(f.get('assignment')).split('|');
-    const decision={category,subcategory:String(f.get('subcategory')),priority:String(f.get('priority')),teamId:selected[0],staffId:selected[1],actions:String(f.get('actions')).split('\n').map(s=>s.trim()).filter(Boolean).map(text=>({text,required:true,sourceIds:[],provenance:'HUMAN'})),acknowledgedMissingFields:[],reason:String(f.get('reason'))};
+    const decision={category,subcategory:String(f.get('subcategory')),priority:String(f.get('priority')),teamId:selected[0],staffId:selected[1],actions:String(f.get('actions')).split('\n').map(s=>s.trim()).filter(Boolean).map(text=>({text,required:true,sourceIds:[],provenance:'HUMAN'})),acknowledgedMissingFields:f.getAll('acknowledgedMissingFields').map(String),reason:String(f.get('reason'))};
     const checked=finalDecisionSchema.safeParse(decision);if(!checked.success){setValidation('Kiểm tra nhóm/phân loại, nhân sự, tối đa 30 bước (500 ký tự/bước) và lý do.');return;}
     setValidation('');await run('triage',{finalDecision:checked.data});
   }}><fieldset disabled={disabled}><legend>Chuẩn bị phân loại thủ công</legend>
@@ -29,21 +35,26 @@ function ManagerPlan({request,staff,run,disabled}:{request:RequestView;staff:Sta
     <label>Nhóm / Nhân sự xử lý<select name="assignment" required defaultValue={draft?draft.teamId+'|'+draft.staffId:''}><option value="">Chọn nhân sự đủ điều kiện</option>{staff.filter(s=>s.available).flatMap(s=>s.teams.map(t=><option key={t.id+s.id} value={t.id+'|'+s.id}>{t.name} / {s.displayName}</option>))}</select></label>
     <label>Các bước xử lý (mỗi dòng một bước bắt buộc)<textarea name="actions" rows={4} defaultValue={draft?.actions.map(a=>a.text).join('\n')??''}/></label>
     <label>Lý do phương án / lý do để trống checklist<textarea name="reason" required maxLength={2000} defaultValue={draft?.reason??''}/></label>
+    <fieldset><legend>Xác nhận tiếp tục dù thiếu thông tin (xem phân tích AI)</legend>{[['location','Địa điểm'],['startedAt','Thời điểm bắt đầu']].map(([value,label])=><label key={value}><input type="checkbox" name="acknowledgedMissingFields" value={value} defaultChecked={draft?.acknowledgedMissingFields.includes(value as 'location'|'startedAt')}/> {label}</label>)}</fieldset>
     {validation?<p role="alert">{validation}</p>:null}<button>Lưu bản nháp</button>
   </fieldset></form>;
 }
 export function RequestDetail({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'}){
+  const user=useSyncExternalStore(subscribe,getProfile,serverProfile);
+  return <RequestDetailContent key={id+':'+(user?.id??'anonymous')} id={id} role={role}/>;
+}
+function RequestDetailContent({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'}){
   const user=useSyncExternalStore(subscribe,getProfile,serverProfile);
   const [request,setRequest]=useState<RequestView|null>(null),[events,setEvents]=useState<HistoryEvent[]>([]),[staff,setStaff]=useState<StaffOption[]>([]),[historyNext,setHistoryNext]=useState<string|null>(null);
   const [loading,setLoading]=useState(true),[error,setError]=useState(''),[busy,setBusy]=useState(false),[stale,setStale]=useState(false),[revision,setRevision]=useState(0),[notice,setNotice]=useState('');
   useEffect(()=>{
     if(!user||user.role!==role)return;let active=true;const controller=new AbortController();
     const jobs=[api('/requests/'+id,requestResponseSchema,undefined,'GET',controller.signal),api('/requests/'+id+'/history',historyResponseSchema,undefined,'GET',controller.signal)] as const;
-    void Promise.all(jobs).then(([r,h])=>{if(active){setRequest(r.data);setEvents(h.data);setHistoryNext(h.page.nextCursor);setError('');setStale(false);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setLoading(false);});
+    void Promise.all(jobs).then(([r,h])=>{if(active){setRequest(r.data);setEvents(h.data);setHistoryNext(h.page.nextCursor);setError('');setStale(false);}}).catch(e=>{if(active){setError(e.message);if(e instanceof ApiFailure&&[401,403,404].includes(e.status)){setRequest(null);setEvents([]);}}}).finally(()=>{if(active)setLoading(false);});
     if(role==='MANAGER')void api('/users/staff',staffDirectorySchema,undefined,'GET',controller.signal).then(r=>{if(active)setStaff(r.data);}).catch(e=>{if(active)setError(e.message);});
     return()=>{active=false;controller.abort();};
   },[id,user,role,revision]);
-  const reload=()=>{setLoading(true);setRevision(v=>v+1);};
+  const reload=useCallback(()=>{setLoading(true);setRevision(v=>v+1);},[]);
   async function mutate(path:string,body:unknown={},method='POST') {
     if(!request||busy||stale)return false;
     setBusy(true);setError('');setNotice('');
@@ -67,11 +78,12 @@ export function RequestDetail({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'
     {!loading&&request?<><div className="workflow-heading"><div><p className="eyebrow">{request.publicCode}</p><h1>{request.title}</h1><span className="status-pill">{statusLabels[request.status]} · {request.priority}</span></div><button onClick={reload} disabled={busy}>Tải lại</button></div>
       <div className="detail-grid"><section className="workflow-card"><h2>Nội dung yêu cầu</h2><p className="preserve-text">{request.description}</p><p>Phân công: {request.currentAssignee?.displayName??'Chưa phân công'}</p><p>Nhóm vấn đề đã duyệt: {request.category??'Chưa duyệt'} {request.subcategory??''}</p><p>Tiếp nhận: {formatTime(request.createdAt)}</p></section>
       <section className="workflow-card"><h2>Thời hạn xử lý</h2>{request.sla?<><p><strong>{request.sla.status}</strong> · {request.sla.stopReason==='CLOSED'?'Đã hoàn tất và xác nhận':request.sla.stopReason==='CANCELED'?'Đã dừng do hủy':request.sla.pausedAt?'Tạm dừng: chờ bạn bổ sung':request.sla.resolvedHoldAt?'Dừng đếm: chờ xác nhận':'Đang tính thời gian xử lý'}</p><p>Hạn dự kiến: {formatTime(request.sla.dueAt)}</p><p>Ngân sách còn lại tại lần tải: {Math.ceil(request.sla.remainingSeconds/60)} phút</p>{request.sla.breachedAt?<p>Đã ghi nhận quá hạn: {formatTime(request.sla.breachedAt)}</p>:null}</>:<p>SLA bắt đầu sau lần phân công đầu tiên.</p>}</section></div>
+      <AnalysisPanel key={request.version} request={request} role={role} onFinished={reload} disabled={busy||stale}/>
       {request.currentResolution?<section className="workflow-card"><h2>Kết quả xử lý lần {request.currentResolution.cycle}</h2><h3>Nguyên nhân</h3><p>{request.currentResolution.rootCause}</p><h3>Khắc phục</h3><p>{request.currentResolution.resolution}</p><h3>Kiểm chứng</h3><p>{request.currentResolution.verification}</p></section>:null}
       <section className="workflow-card"><h2>Thao tác</h2>{stale?<p>Hãy tải lại dữ liệu trước khi thực hiện thao tác tiếp.</p>:null}
       {role==='MANAGER'&&['NEW','TRIAGED'].includes(request.status)?<ManagerPlan key={id+':'+request.manualDraftRevision} request={request} staff={staff} run={managerAction} disabled={disabled}/>:null}
       {role==='MANAGER'&&request.status==='TRIAGED'&&request.manualDraft?<ActionForm title="Gửi duyệt phương án" disabled={disabled} run={()=>managerAction('submit-approval',{manualDraftRevision:request.manualDraftRevision})}/>:null}
-      {role==='MANAGER'&&request.status==='PENDING_APPROVAL'&&request.manualDraft?<><ManualReview draft={request.manualDraft} staff={staff}/><ActionForm title="Duyệt và phân công" disabled={disabled} run={()=>mutate('/manager/approvals/'+id+'/accept',{...reviewBody,acknowledgedMissingFields:request.manualDraft!.acknowledgedMissingFields})}/><ActionForm title="Từ chối phương án" fields={reason} disabled={disabled} run={values=>mutate('/manager/approvals/'+id+'/reject',{...reviewBody,...values})}/></>:null}
+      {role==='MANAGER'&&request.status==='PENDING_APPROVAL'&&request.manualDraft?<><ManualReview draft={request.manualDraft} staff={staff}/><ManualApproval draft={request.manualDraft} disabled={disabled} run={acknowledgedMissingFields=>mutate('/manager/approvals/'+id+'/accept',{...reviewBody,acknowledgedMissingFields})}/><ActionForm title="Từ chối phương án" fields={reason} disabled={disabled} run={values=>mutate('/manager/approvals/'+id+'/reject',{...reviewBody,...values})}/></>:null}
       {role==='STAFF'&&request.status==='ASSIGNED'?<ActionForm title="Bắt đầu xử lý" disabled={disabled} run={()=>action('start')}/>:null}
       {role==='STAFF'&&request.status==='IN_PROGRESS'?<><ActionForm title="Yêu cầu bổ sung thông tin" fields={[{name:'body',label:'Câu hỏi gửi người yêu cầu',max:4000}]} disabled={disabled} run={v=>action('request-info',v)}/><ActionForm title="Hoàn tất xử lý" fields={[{name:'rootCause',label:'Nguyên nhân',min:10,max:4000},{name:'resolution',label:'Cách khắc phục',min:10,max:4000},{name:'verification',label:'Kết quả kiểm chứng',min:10,max:4000}]} disabled={disabled} run={v=>action('resolve',v)}/></>:null}
       {role==='USER'&&request.status==='WAITING_USER'?<ActionForm title="Cung cấp thông tin" fields={[{name:'body',label:'Thông tin bổ sung',max:4000}]} disabled={disabled} run={v=>action('provide-info',v)}/>:null}

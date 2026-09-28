@@ -22,16 +22,25 @@ import { RequestsController } from './requests/requests.controller.js';
 import { RequestStateMachineService } from './requests/request-state-machine.service.js';
 import { RequestQueryService } from './requests/request-query.service.js';
 import { WorkflowGuard } from './requests/workflow.guard.js';
+import { AnalysisController } from './ai/analysis.controller.js';
+import { AnalysisWorker } from './ai/analysis-worker.js';
+import { AnalysisQueryService } from './ai/analysis-query.service.js';
+import { OllamaProvider } from './ai/ollama-provider.js';
+import { AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,type AiProvider } from './ai/provider.js';
 
-export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean } = {}) {
+export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; aiWorker?:boolean } = {}) {
+  if(env.NODE_ENV!=='test'&&(options.aiProvider||options.aiWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
   const database = options.database ?? new PostgresProbe(env.DATABASE_URL, env.HEALTH_TIMEOUT_MS);
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
       RequestStateMachineService, RequestQueryService, WorkflowGuard,
+      AnalysisWorker,AnalysisQueryService,
+      {provide:AI_PROVIDER_TOKEN,useValue:options.aiProvider??new OllamaProvider(env)},
+      {provide:AI_LOG,useValue:log},{provide:AI_WORKER_ENABLED,useValue:options.aiWorker??env.NODE_ENV!=='test'},
       { provide: API_ENV, useValue: env }, { provide: PrismaService, useValue: prisma },
       { provide: DATABASE_PROBE, useValue: database }, { provide: OLLAMA_HEALTH, useValue: new OllamaHealthClient(env) },
     ],
@@ -44,7 +53,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M3 manual request workflow').setDescription('Versioned manual request lifecycle, ownership, assignment, SLA, notifications and authentication.').setVersion('0.3.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M4 structured intake').setDescription('Versioned manual workflow and bounded advisory AI analysis. AI failures preserve core readiness; job polling reports normalized failures.').setVersion('0.4.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

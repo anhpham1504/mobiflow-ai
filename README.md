@@ -2,7 +2,7 @@
 
 AI-native enterprise workflow automation platform with local AI.
 
-The repository contains the frozen M0 contract, M1 local infrastructure, M2 authentication/RBAC/database foundation and **M3 manual request workflow**. USER, STAFF and MANAGER can complete a request from creation through human triage, approval, assignment, resolution and owner confirmation without AI. M4 requires explicit approval.
+The repository contains the frozen M0 contract, M1 local infrastructure, M2 authentication/RBAC/database foundation, M3 manual request workflow and **M4 local structured intake**. USER, STAFF and MANAGER can complete the human workflow when AI is unavailable. M5 requires explicit approval.
 
 Start with [AGENTS.md](AGENTS.md), the [project scope and assumption register](docs/specs/PROJECT_SPEC.md), [architecture](docs/architecture/ARCHITECTURE.md), and [M1–M10 implementation/dependency map](docs/IMPLEMENTATION_PLAN.md). The [canonical master plan](docs/reference/MOBIFLOW_AI_ASTRA6_M0_M10_MASTER_PLAN.md) and [M0 execution request](docs/reference/M0_EXECUTION_PROMPT.txt) are preserved for provenance.
 
@@ -11,6 +11,8 @@ M0 evidence: [repository baseline](docs/verification/REPOSITORY_BASELINE.md), [c
 M1 results, exact versions, runtime evidence and limitations: [M1 verification](docs/verification/MILESTONE_1_VERIFICATION.md).
 
 Authentication and database baseline: [M2 verification](docs/verification/MILESTONE_2_VERIFICATION.md). Manual workflow, API/UI, SLA and test evidence: [M3 verification](docs/verification/MILESTONE_3_VERIFICATION.md).
+
+Local intake, live model evaluation, offline recovery and browser evidence: [M4 verification](docs/verification/MILESTONE_4_VERIFICATION.md).
 
 Use Node 24.19.x, npm 11.17.x and Docker Desktop (Linux containers). Ollama runs on Windows. From this directory:
 
@@ -30,6 +32,10 @@ Environment setup verifies the supplied installed model through Ollama and gener
 Open [the app](http://localhost:3000), [login](http://localhost:3000/login) and [Swagger](http://localhost:3001/api/docs). Native API uses `http://localhost:11434`; Compose API uses `http://host.docker.internal:11434`. The health screen reads actual API responses. The synthetic demo accounts are `user@mobiflow.local`, `staff.iot@mobiflow.local` and `manager@mobiflow.local`, with password `MobiFlowDemo!2026`. The seed requires the existing explicit demo-mode guard; these are local demo credentials, not production accounts.
 
 Create a request as USER. As MANAGER, open it, save a manual plan, submit it and explicitly approve assignment. As the selected STAFF, start work, request information if needed, complete or waive required checklist items and record a resolution. The owning USER can reopen or confirm closure. Reassignment and priority changes are manager actions; all request changes require the current version. A conflict requires reloading and reviewing before retrying.
+
+M4 automatically queues an intake run on creation. Processing moves NEW → AI_ANALYZING → TRIAGED; controlled failure returns NEW with manual work available. Wait for intake to finish before saving a manual plan, or save while still queued to supersede AI. Owner sees progress/missing facts, assigned staff sees extracted facts, manager sees the advisory analysis. Model confidence is uncalibrated and extracted facts can be wrong; compare them with the original request. AI never applies category, priority, assignment or SLA. Review and acknowledge missing location/time before approving a manual plan. Failed analysis can be explicitly retried from the request page after restoring Ollama.
+
+AI environment defaults: `AI_AUTO_ANALYZE=true`, `AI_ATTEMPT_TIMEOUT_MS=120000`, `AI_RUN_TIMEOUT_MS=300000`, `AI_TEMPERATURE=0`, `AI_MAX_OUTPUT_TOKENS=1200`. One generation per local API worker, at most two attempts per run; 24,000-character context and 32 KiB structured output. Disabling automatic intake is intended for the isolated AI-independent regression; explicit intake routes remain available. Production configuration cannot select a fake provider.
 
 For a native production boot after `npm run build`, run `node --env-file=.env apps/api/dist/main.js` and, in a second terminal, `npm run start -w @mobiflow/web`. The web command starts the built standalone server with its static assets.
 
@@ -54,10 +60,15 @@ npm run build
 docker compose config --quiet
 npm run test:integration
 npm run test:e2e:m3
+npm run eval:ai:m4
+npm run verify:runtime:m4
+npm run test:e2e:m4
 ```
 
 The integration command requires the running web/API/Postgres/host Ollama. It verifies actual DB/vector/LLM health, creates the dedicated `mobiflow_m2_test` database for clean migration/seed and real auth/workflow transaction tests, then removes that test database. Workflow integration runs with an unavailable Ollama address without stopping the shared host service. Sanitized runtime evidence is written to ignored `artifacts/m2/runtime.json`. Unit health tests use labeled HTTP fixtures; they are not live inference evaluation.
 
 The M3 browser command uses installed Microsoft Edge and the running seeded Docker stack. It creates synthetic requests, runs the three-role lifecycle, checks wait/reopen/conflict/permission behavior and saves `artifacts/m3/workflow-closed.png` plus a JSON test report. It does not reset the main database.
+
+M4 evaluation invokes real Ollama on all 50 fixed synthetic cases and writes `docs/verification/evidence/M4_AI_EVAL.json`. Runtime verification requires the seeded running stack and records real persisted inference. To exercise Docker offline without stopping shared Ollama, use a temporary Compose override with `services.api.environment.OLLAMA_BASE_URL: http://127.0.0.1:1`. Run `$env:M4_RUNTIME_MODE='offline'; npm run verify:runtime:m4` and `$env:M4_E2E_MODE='offline'; npm run test:e2e:m4`, then restore normal `docker compose up -d api web`. Remove the two temporary shell variables before online tests. The offline browser test records a failed request used by the online recovery test, so run it first. These tests create synthetic demo records and preserve them. Avoid overlapping live evaluations and intake tests on the same Ollama; each API actor is limited to five AI triggers per minute.
 
 The future `e2e`, `ai:evaluate`, `demo:reset`, `demo:preflight` and `demo:warmup` commands fail explicitly until their owning milestones; they never return a placeholder PASS. `demo:seed` and `test:e2e:m3` are implemented. The historical M0 checker is preserved unchanged and intentionally rejects post-M0 application scaffolding, so it is not a current application quality gate. Frozen M0 documents remain authoritative.

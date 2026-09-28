@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-09-28T14:03:33.170Z",
+  "mode": "offline",
+  "target": "docker",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "truthful core and AI readiness",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T14:03:33.212Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "NOT_CONFIGURED",
+            "code": "NOT_CONFIGURED"
+          }
+        }
+      }
+    },
+    {
+      "name": "four canonical AI routes in OpenAPI",
+      "result": "PASS",
+      "details": {
+        "version": "0.4.0"
+      }
+    },
+    {
+      "name": "offline manual approval, assignment and staff start",
+      "result": "PASS",
+      "details": {
+        "requestId": "4b5399ed-1cf6-4576-bc07-c946b0edcf04",
+        "status": "IN_PROGRESS"
+      }
+    },
+    {
+      "name": "incomplete-01 actual persisted inference",
+      "result": "PASS",
+      "details": {
+        "runId": "1cdf9f76-545f-43c0-afb6-10b4550a482d",
+        "status": "FAILED"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "caseId": "incomplete-01",
+      "requestId": "4b5399ed-1cf6-4576-bc07-c946b0edcf04",
+      "runId": "1cdf9f76-545f-43c0-afb6-10b4550a482d",
+      "status": "FAILED",
+      "modelIdentityJson": null,
+      "promptVersion": "request-analysis.v3",
+      "schemaVersion": "analysis.v1",
+      "latencyMs": 1009,
+      "retryCount": 1,
+      "contextVersion": 2,
+      "inputSize": 139,
+      "outputSize": null,
+      "errorCode": "AI_PROVIDER_UNAVAILABLE"
+    }
+  ]
+}

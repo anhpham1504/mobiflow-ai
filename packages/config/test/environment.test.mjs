@@ -3,6 +3,16 @@ import { test } from 'node:test';
 import { parseApiEnvironment } from '../dist/index.js';
 
 const valid = { DATABASE_URL: 'postgresql://app:local@localhost:5432/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), OLLAMA_BASE_URL: 'http://localhost:11434', OLLAMA_MODEL: 'installed:tag', OLLAMA_EMBEDDING_MODEL: 'unconfigured' };
+test('AI settings enable intake by default and enforce bounded inference at startup', () => {
+  const env=parseApiEnvironment(valid);
+  assert.equal(env.AI_AUTO_ANALYZE,true);
+  assert.equal(env.AI_ATTEMPT_TIMEOUT_MS,120000);
+  assert.equal(env.AI_RUN_TIMEOUT_MS,300000);
+  assert.equal(parseApiEnvironment({...valid,AI_AUTO_ANALYZE:'false'}).AI_AUTO_ANALYZE,false);
+  for(const change of [{AI_AUTO_ANALYZE:'yes'},{AI_ATTEMPT_TIMEOUT_MS:120001},{AI_RUN_TIMEOUT_MS:300001},{AI_TEMPERATURE:2},{AI_MAX_OUTPUT_TOKENS:4097},{AI_PROVIDER:'cloud'}]){
+    assert.throws(()=>parseApiEnvironment({...valid,...change}),/Invalid environment keys:/);
+  }
+});
 test('validates native and Docker Ollama origins and coerces bounded ports', () => {
   assert.equal(parseApiEnvironment({ ...valid, API_PORT: '3001' }).API_PORT, 3001);
   assert.equal(parseApiEnvironment({ ...valid, OLLAMA_BASE_URL: 'http://host.docker.internal:11434' }).AI_PROVIDER, 'ollama');

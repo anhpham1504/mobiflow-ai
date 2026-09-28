@@ -23,6 +23,9 @@ test('M3 real browser: three-role manual workflow, waiting/reopen, stale protect
     await user.getByLabel('Mô tả yêu cầu',{exact:true}).fill('Thiết bị IoT tại văn phòng demo mất kết nối từ sáng nay.');
     await user.getByRole('button',{name:'Gửi yêu cầu',exact:true}).click();
     await expect(user.getByRole('heading',{name:title,exact:true})).toBeVisible();
+    // M4 completes automatic intake first; all M3 manual workflow assertions remain.
+    await expect(user.getByText('Phân tích AI hoàn tất.',{exact:true})).toBeVisible({timeout:300000});
+    await refresh(user);
     const id=user.url().split('/').at(-1);
     await signIn(manager,'manager@mobiflow.local');
     await manager.goto('/manager/requests/'+id);
@@ -34,9 +37,11 @@ test('M3 real browser: three-role manual workflow, waiting/reopen, stale protect
     await manager.getByRole('button',{name:'Lưu bản nháp',exact:true}).click();await saved(manager);
     await manager.getByRole('button',{name:'Gửi duyệt phương án',exact:true}).click();
     await expect(manager.getByRole('button',{name:'Duyệt và phân công',exact:true})).toBeVisible();
+    await manager.getByLabel('Xác nhận tiếp tục dù thiếu địa điểm',{exact:true}).check();
+    await manager.getByLabel('Xác nhận tiếp tục dù thiếu thời điểm bắt đầu',{exact:true}).check();
     await manager.getByRole('button',{name:'Duyệt và phân công',exact:true}).click();
     await expect(manager.getByText('Đã phân công · HIGH',{exact:true})).toBeVisible();
-    // USER still holds NEW version: stale message must not be silently retried.
+    // USER still holds the pre-approval version: stale message must not be silently retried.
     await user.getByLabel('Nội dung tin nhắn',{exact:true}).fill('Tin nhắn trên phiên bản cũ');
     await user.getByRole('button',{name:'Gửi tin nhắn',exact:true}).click();
     await expect(user.getByRole('main').getByRole('alert')).toContainText('Yêu cầu đã thay đổi');

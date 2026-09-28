@@ -1,0 +1,95 @@
+
+> mobiflow-ai@0.1.0 test
+> npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 199ms
+
+
+> @mobiflow/config@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ AI settings enable intake by default and enforce bounded inference at startup (6.0461ms)
+✔ validates native and Docker Ollama origins and coerces bounded ports (0.3313ms)
+✔ rejects missing config, invalid protocols, bounds and reused secrets without echoing values (0.8399ms)
+✔ malformed URL values produce key-only diagnostics rather than URL parser errors (0.3341ms)
+✔ insecure refresh cookies are accepted only for the explicit loopback HTTP demo (0.2719ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 158.1459
+
+> @mobiflow/api@0.1.0 test
+> npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs test/analysis.test.mjs
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+✔ analysis strict schema rejects malformed data and every critical boundary without coercion (4.8151ms)
+✔ prompt delimits untrusted data, keeps fixed instructions, rejects oversized mandatory input (0.2877ms)
+✔ real HTTP adapter sends JSON schema, exact model, bounds and excludes provider thinking (48.0863ms)
+✔ provider maps missing/offline/disconnect/timeout/overflow/truncation and cancellation safely (147.3586ms)
+✔ bounded execution retries invalid output once, never retries known model absence, retains attempt count (2024.5007ms)
+✔ ownership policy scopes USER to ownership, STAFF to current assignment and MANAGER to all requests (1.102ms)
+✔ out-of-scope and absent requests have the same 404 policy result (0.441ms)
+✔ API boots; complete Ollama fixture health gives READY and both route aliases work (177.1836ms)
+✔ Ollama offline is degraded while API liveness/core readiness survive (39.5155ms)
+✔ offline server does not turn an unconfigured embedding into a configured outage (0.3954ms)
+✔ database outage is 503, independent liveness still 200 (27.0202ms)
+✔ missing vector extension is a core readiness failure (27.1249ms)
+✔ missing model is not reported installed; unconfigured embedding is distinct (3.0262ms)
+✔ installed model with wrong capability is not considered ready (5.2751ms)
+✔ Ollama timeout is bounded and a malformed response is safely unavailable (212.7592ms)
+✔ request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory (47.2656ms)
+✔ global validation foundation rejects unknown fields and invalid values (2.8032ms)
+✔ malformed and oversized JSON receive safe client errors without exposing the body (35.8779ms)
+✔ login limits normalized account plus IP to 5 attempts per minute (0.8556ms)
+✔ login has an independent 20/minute IP bound and refresh has a 30/minute session plus IP bound (0.211ms)
+✔ M3 exhaustive state/action/role matrix rejects the complement, including protected future AI transitions (4.3835ms)
+✔ SLA wait, resolve, reopen, exact deadline, hold and sticky breach use an injected deterministic time (0.604ms)
+✔ SLA repeated exclusion cycles, no-op reassignment and cancellation preserve consumed budget (0.1862ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2500.7051
+
+> @mobiflow/web@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ health client handles a typed 503 and rejects untrusted response shapes (36.6661ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 264.3733

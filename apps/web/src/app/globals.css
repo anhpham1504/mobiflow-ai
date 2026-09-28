@@ -24,6 +24,12 @@ main { max-width: 1130px; padding: 46px 52px 36px; margin: 0 auto; }.eyebrow { m
 .workflow-card h3 { font-size:15px; }
 form label { display:flex; flex-direction:column; gap:8px; margin:16px 0; font-weight:600; font-size:14px; }
 input,textarea,select { font:inherit; color:inherit; padding:11px 12px; border:1px solid #aab8c8; border-radius:6px; background:white; width:100%; min-width:0; }
+form label:has(input[type="checkbox"]) { flex-direction:row; align-items:center; min-height:44px; }
+input[type="checkbox"] { width:20px; height:20px; flex-shrink:0; padding:0; }
+.ai-analysis p { margin:12px 0; line-height:1.6; }
+.ai-analysis dl { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:18px; }
+.ai-analysis dt { color:#536277; font-size:13px; }.ai-analysis dd { margin:4px 0 0; }
+@media(max-width:500px){.ai-analysis dl{grid-template-columns:1fr}}
 textarea { resize:vertical; }
 button,.action-link { font:inherit; font-size:14px; background:var(--primary); color:white; border:1px solid var(--primary); border-radius:6px; padding:10px 16px; min-height:44px; cursor:pointer; text-decoration:none; }
 button:disabled { opacity:.55; cursor:wait; }

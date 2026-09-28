@@ -1,0 +1,72 @@
+
+> mobiflow-ai@0.1.0 build
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && npm run build -w @mobiflow/web
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 185ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/web@0.1.0 build
+> next build
+
+▲ Next.js 16.3.6 (Turbopack)
+✓ Running next.config.ts took 88ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1204ms
+  Running TypeScript ...
+  Finished TypeScript in 1602ms ...
+  Collecting page data using 19 workers ...
+  Generating static pages using 19 workers (0/14) ...
+  Generating static pages using 19 workers (3/14) 
+  Generating static pages using 19 workers (6/14) 
+  Generating static pages using 19 workers (10/14) 
+✓ Generating static pages using 19 workers (14/14) in 598ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ○ /login
+├ ○ /manager/approvals
+├ ƒ /manager/approvals/[id]
+├ ○ /manager/dashboard
+├ ○ /manager/requests
+├ ƒ /manager/requests/[id]
+├ ○ /notifications
+├ ○ /profile
+├ ○ /staff/dashboard
+├ ƒ /staff/requests/[id]
+├ ○ /staff/work-queue
+├ ○ /user/dashboard
+├ ○ /user/requests
+├ ƒ /user/requests/[id]
+└ ○ /user/requests/new
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

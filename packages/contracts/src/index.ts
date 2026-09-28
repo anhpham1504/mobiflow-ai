@@ -1,5 +1,6 @@
 import { z } from 'zod';
 export * from './workflow.js';
+export * from './analysis.js';
 
 export const componentSchema = z.object({
   status: z.enum(['UP', 'DOWN', 'NOT_CONFIGURED']),

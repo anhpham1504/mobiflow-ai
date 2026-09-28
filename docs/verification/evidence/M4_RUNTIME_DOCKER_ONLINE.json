@@ -1,0 +1,236 @@
+{
+  "checkedAt": "2026-09-28T14:05:03.170Z",
+  "mode": "online",
+  "target": "docker",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "truthful core and AI readiness",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T14:05:03.213Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "NOT_CONFIGURED",
+            "code": "NOT_CONFIGURED"
+          }
+        }
+      }
+    },
+    {
+      "name": "four canonical AI routes in OpenAPI",
+      "result": "PASS",
+      "details": {
+        "version": "0.4.0"
+      }
+    },
+    {
+      "name": "normal-01 actual persisted inference",
+      "result": "PASS",
+      "details": {
+        "runId": "674e3c2d-fa1c-4977-83ca-728a2e0ed2ae",
+        "status": "SUCCEEDED"
+      }
+    },
+    {
+      "name": "normal-11 actual persisted inference",
+      "result": "PASS",
+      "details": {
+        "runId": "23d9c0bf-84f9-443f-93d4-0f73b3e6a22a",
+        "status": "SUCCEEDED"
+      }
+    },
+    {
+      "name": "incomplete-01 actual persisted inference",
+      "result": "PASS",
+      "details": {
+        "runId": "5f6f95d7-38a1-4724-934c-73c5056bcb95",
+        "status": "SUCCEEDED"
+      }
+    },
+    {
+      "name": "ambiguous-01 actual persisted inference",
+      "result": "PASS",
+      "details": {
+        "runId": "eadaede4-7c6a-4969-9ade-b14f7a2e2b42",
+        "status": "SUCCEEDED"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "caseId": "normal-01",
+      "requestId": "9552e0fa-37b4-447e-881d-4cf2c439c25a",
+      "runId": "674e3c2d-fa1c-4977-83ca-728a2e0ed2ae",
+      "status": "SUCCEEDED",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "promptVersion": "request-analysis.v3",
+      "schemaVersion": "analysis.v1",
+      "latencyMs": 2835,
+      "retryCount": 0,
+      "contextVersion": 2,
+      "inputSize": 174,
+      "outputSize": 628,
+      "errorCode": null,
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng, thuộc nhóm sự cố mất kết nối mạng IoT. Số lượng thiết bị bị ảnh hưởng rõ ràng, thời gian bắt đầu được nêu cụ thể, nên phân loại là cao cấp (HIGH)."
+      }
+    },
+    {
+      "caseId": "normal-11",
+      "requestId": "ad285589-d36d-4cc5-809c-05c5668b6124",
+      "runId": "23d9c0bf-84f9-443f-93d4-0f73b3e6a22a",
+      "status": "SUCCEEDED",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "promptVersion": "request-analysis.v3",
+      "schemaVersion": "analysis.v1",
+      "latencyMs": 2968,
+      "retryCount": 0,
+      "contextVersion": 2,
+      "inputSize": 212,
+      "outputSize": 849,
+      "errorCode": null,
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Lan",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Lan phản ánh vấn đề về hóa đơn cước tính trùng khoản cho một tài khoản, vẫn sử dụng dịch vụ. Không có thông tin về số lượng thiết bị, địa điểm hoặc thời gian bắt đầu sự cố. Không có chi tiết về mức độ ảnh hưởng hoặc mô tả chi tiết sự cố. Do đó, cần bổ sung thông tin để đánh giá đúng mức độ nghiêm trọng."
+      }
+    },
+    {
+      "caseId": "incomplete-01",
+      "requestId": "b968c1d0-45e2-4121-900c-6c7904397525",
+      "runId": "5f6f95d7-38a1-4724-934c-73c5056bcb95",
+      "status": "SUCCEEDED",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "promptVersion": "request-analysis.v3",
+      "schemaVersion": "analysis.v1",
+      "latencyMs": 2679,
+      "retryCount": 0,
+      "contextVersion": 2,
+      "inputSize": 139,
+      "outputSize": 715,
+      "errorCode": null,
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": 17,
+          "startedAt": "08:00"
+        },
+        "missingFields": [
+          "customer",
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "17 SIM IoT thiết bị bị mất kết nối từ 8 giờ sáng, thuộc nhóm liên quan đến kết nối mạng IoT. Không có thông tin về khách hàng hoặc vị trí cụ thể, nhưng số lượng thiết bị bị ảnh hưởng rõ ràng, nên phân loại là cao. Cần xác minh thêm thông tin khách hàng và vị trí để xử lý chính xác."
+      }
+    },
+    {
+      "caseId": "ambiguous-01",
+      "requestId": "f2d460ce-5062-4254-8893-f0f267ecd909",
+      "runId": "eadaede4-7c6a-4969-9ade-b14f7a2e2b42",
+      "status": "SUCCEEDED",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "promptVersion": "request-analysis.v3",
+      "schemaVersion": "analysis.v1",
+      "latencyMs": 2365,
+      "retryCount": 0,
+      "contextVersion": 2,
+      "inputSize": 134,
+      "outputSize": 663,
+      "errorCode": null,
+      "analysis": {
+        "intent": "ASK_INFORMATION",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "LOW",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "description"
+        ],
+        "confidence": 0.3,
+        "reasonSummary": "Thông điệp không cung cấp đủ thông tin để xác định sự cố, khách hàng, địa điểm hoặc thời gian bắt đầu. Chỉ có tiêu đề và câu hỏi chung, không có chi tiết cụ thể về thiết bị, dịch vụ hoặc ảnh hưởng."
+      }
+    }
+  ]
+}

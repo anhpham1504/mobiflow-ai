@@ -30,7 +30,10 @@
     "demo:reset": "node scripts/dev/deferred.mjs M10",
     "demo:preflight": "node scripts/dev/deferred.mjs M10",
     "demo:warmup": "node scripts/dev/deferred.mjs M10",
-    "test:e2e:m3": "playwright test --config playwright.m3.config.mjs"
+    "test:e2e:m3": "playwright test --config playwright.m3.config.mjs",
+    "eval:ai:m4": "npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m4-evaluate.mjs",
+    "test:e2e:m4": "playwright test --config playwright.m4.config.mjs",
+    "verify:runtime:m4": "node --env-file=.env scripts/verification/m4-runtime.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

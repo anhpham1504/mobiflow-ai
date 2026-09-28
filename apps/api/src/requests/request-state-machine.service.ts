@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import type { ApiEnvironment } from '@mobiflow/config';
+import { API_ENV } from '../tokens.js';
+import { analysisSchema, analysisSchemaVersion } from '@mobiflow/contracts';
+import { promptVersion, type AnalysisInput } from '../ai/prompts/request-analysis.js';
+import type { executeAnalysis } from '../ai/analysis-execution.js';
 import { randomUUID } from 'node:crypto';
 import { finalDecisionSchema, type FinalDecision } from '@mobiflow/contracts';
 import { Prisma, type Request as DomainRequest } from '../generated/prisma/client.js';
@@ -21,7 +26,7 @@ export interface Command {
 }
 @Injectable()
 export class RequestStateMachineService {
-  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService) {}
+  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment) {}
 
   private async identity(tx: Tx, actor: AuthenticatedActor) {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actor.id}::uuid FOR SHARE`);
@@ -47,6 +52,7 @@ export class RequestStateMachineService {
       }});
       const event = await this.event(tx,request,actor,'CREATE',correlationId,now,undefined, {status:'NEW',version:1});
       await tx.requestStatusHistory.create({data:{requestId:request.id,toStatus:'NEW',action:'CREATE',actorType:actor.role,actorId:actor.id,requestVersion:1,eventId:event.id,createdAt:now}});
+      if(this.env.AI_AUTO_ANALYZE)await this.queueAnalysis(tx,request,actor.id,now);
       return request.id;
     });
   }
@@ -68,6 +74,7 @@ export class RequestStateMachineService {
       let recipients: string[] = [];
       const managers = async () => (await tx.user.findMany({where:{role:'MANAGER',active:true},select:{id:true}})).map(u=>u.id);
       if (action === 'MANUAL_TRIAGE') {
+        await tx.aiRun.updateMany({where:{requestId:id,purpose:'ANALYSIS',status:'QUEUED'},data:{status:'CANCELED',finishedAt:now,errorCode:'MANUAL_TRIAGE',errorSummary:'Superseded by human triage.'}});
         const decision = command.finalDecision!;
         const policy = await this.validateDecision(tx,decision);
         data.triageDraftJson = {...decision,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60};
@@ -89,6 +96,11 @@ export class RequestStateMachineService {
           const original = parse(finalDecisionSchema,this.draftFields(request.triageDraftJson));
           const decision = command.finalDecision ?? {...original,acknowledgedMissingFields:command.acknowledgedMissingFields as FinalDecision['acknowledgedMissingFields']};
           const policy = await this.validateDecision(tx,decision);
+          if(request.latestAnalysisId){
+            const analysis=await tx.aiAnalysis.findUniqueOrThrow({where:{id:request.latestAnalysisId}});
+            const missing=analysis.missingFieldsJson as string[];
+            if(missing.some(field=>['location','startedAt'].includes(field)&&!decision.acknowledgedMissingFields.includes(field as 'location'|'startedAt')))throw new ApiError(422,'MISSING_ACKNOWLEDGMENT','Acknowledge missing location/time before approval.');
+          }
           const draftSnapshot=request.triageDraftJson as Prisma.JsonObject;
           if(!command.finalDecision && (draftSnapshot.policyId!==policy.id || draftSnapshot.policyVersion!==policy.version || draftSnapshot.targetSeconds!==policy.targetMinutes*60)) throw new ApiError(422,'STALE_POLICY','The SLA policy changed. Modify or prepare a new draft before approval.');
           const snapshot = {...decision,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60};
@@ -158,6 +170,89 @@ export class RequestStateMachineService {
       if(notification) await tx.notification.createMany({data:[...new Set(recipients)].map(recipientId=>({recipientId,requestId:id,eventId:event.id,type:notification!,safeActorMetadataJson:{actorType:actor.role},createdAt:now})),skipDuplicates:true});
       return {id,message};
     },{isolationLevel:Prisma.TransactionIsolationLevel.ReadCommitted,timeout:15000});
+  }
+  private queueAnalysis(tx:Tx,request:DomainRequest,initiatingActorId:string,now:Date) {
+    return tx.aiRun.create({data:{requestId:request.id,purpose:'ANALYSIS',initiatingActorId,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion,schemaVersion:analysisSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+  }
+  async scheduleAnalysis(id:string,actor:AuthenticatedActor,expectedVersion:number,retry:boolean,correlationId:string){
+    if(!['USER','MANAGER'].includes(actor.role))throw new ApiError(403,'FORBIDDEN','This role cannot schedule intake.');
+    return this.prisma.$transaction(async tx=>{
+      await this.identity(tx,actor);
+      await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${id}::uuid FOR UPDATE`);
+      const request=await tx.request.findUnique({where:{id}});this.policy.assertCanReadRequest(actor,request);
+      if(!request)throw new ApiError(404,'NOT_FOUND','The resource was not found.');
+      if(request.version!==expectedVersion)throw new ApiError(409,'STALE_VERSION','Reload and review before retrying.');
+      const active=await tx.aiRun.findFirst({where:{requestId:id,purpose:'ANALYSIS',status:{in:['QUEUED','RUNNING']}}});
+      if(active)return active;
+      if(request.status!=='NEW'||(retry&&request.aiAnalysisStatus!=='FAILED'))throw new ApiError(409,'INVALID_STATE','Intake requires NEW; retry requires failed intake.');
+      const now=await this.now(tx),run=await this.queueAnalysis(tx,request,actor.id,now);
+      await this.event(tx,request,actor,retry?'AI_RETRY_QUEUED':'AI_ANALYSIS_QUEUED',correlationId,now);
+      return run;
+    });
+  }
+  private async systemEdge(tx:Tx,request:DomainRequest,runId:string,action:'START_AI_ANALYSIS'|'COMPLETE_AI_ANALYSIS'|'FAIL_AI_ANALYSIS',now:Date,data:Prisma.RequestUncheckedUpdateInput,initiator:string|null){
+    const target={START_AI_ANALYSIS:'AI_ANALYZING',COMPLETE_AI_ANALYSIS:'TRIAGED',FAIL_AI_ANALYSIS:'NEW'} as const;
+    const expected=action==='START_AI_ANALYSIS'?'NEW':'AI_ANALYZING';
+    if(request.status!==expected||(action!=='START_AI_ANALYSIS'&&request.activeAnalysisRunId!==runId))throw new ApiError(409,'INVALID_STATE','The intake capability is no longer active.');
+    const version=request.version+1;
+    const event=await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:initiator,action,resourceType:'AiRun',resourceId:runId,requestCorrelationId:runId,safeBeforeJson:{status:request.status,version:request.version},safeAfterJson:{status:target[action],version},outcome:action==='FAIL_AI_ANALYSIS'?'FAILED':'SUCCEEDED',createdAt:now}});
+    await tx.request.update({where:{id:request.id,version:request.version},data:{...data,status:target[action],version,updatedAt:now}});
+    await tx.requestStatusHistory.create({data:{requestId:request.id,fromStatus:request.status,toStatus:target[action],action,actorType:'SYSTEM',requestVersion:version,eventId:event.id,createdAt:now}});
+  }
+  private async analysisActor(tx:Tx,actorId:string|null,request:DomainRequest){
+    if(!actorId)return false;
+    await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actorId}::uuid FOR SHARE`);
+    const actor=await tx.user.findUnique({where:{id:actorId}});
+    return !!actor?.active&&(actor.role==='MANAGER'||(actor.role==='USER'&&actor.id===request.createdById));
+  }
+  async claimAnalysis(runId:string){
+    const pending=await this.prisma.aiRun.findUnique({where:{id:runId}});if(!pending?.requestId)return null;
+    return this.prisma.$transaction(async tx=>{
+      await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${pending.requestId}::uuid FOR UPDATE`);
+      const request=await tx.request.findUniqueOrThrow({where:{id:pending.requestId!}});
+      const run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),now=await this.now(tx);
+      if(run.status!=='QUEUED'||run.purpose!=='ANALYSIS')return null;
+      const authorized=await this.analysisActor(tx,run.initiatingActorId,request);
+      if(!authorized||request.status!=='NEW'||request.version!==run.contextVersion||!run.deadlineAt||run.deadlineAt<=now){
+        await this.failAnalysisLocked(tx,request,run,now,!authorized?'FORBIDDEN':run.deadlineAt&&run.deadlineAt<=now?'AI_TIMEOUT':'STALE_CONTEXT');return null;
+      }
+      const rows=await tx.requestMessage.findMany({where:{requestId:request.id},orderBy:[{createdAt:'desc'},{id:'desc'}],take:51,select:{id:true,body:true}});
+      const input:AnalysisInput={title:request.title,description:request.description,messages:[],historyTruncated:rows.length>50};
+      for(const message of rows.slice(0,50)){
+        if(JSON.stringify({...input,messages:[message,...input.messages]}).length>24000){input.historyTruncated=true;break;}
+        input.messages.unshift(message);
+      }
+      if(JSON.stringify(input).length>24000){await this.failAnalysisLocked(tx,request,run,now,'CONTEXT_TOO_LARGE');return null;}
+      const claimed=await tx.aiRun.update({where:{id:runId},data:{status:'RUNNING',startedAt:now,leaseUntil:run.deadlineAt,contextVersion:request.version+1,inputSize:JSON.stringify(input).length,retrievalSnapshotJson:{messageIds:input.messages.map(m=>m.id),historyTruncated:input.historyTruncated}}});
+      await this.systemEdge(tx,request,runId,'START_AI_ANALYSIS',now,{aiAnalysisStatus:'RUNNING',activeAnalysisRunId:runId},run.initiatingActorId);
+      return {run:claimed,input};
+    });
+  }
+  private async failAnalysisLocked(tx:Tx,request:DomainRequest,run:Prisma.AiRunGetPayload<object>,now:Date,code:string,latencyMs?:number){
+    if(!['QUEUED','RUNNING'].includes(run.status))return;
+    await tx.aiRun.update({where:{id:run.id},data:{status:'FAILED',finishedAt:now,leaseUntil:null,errorCode:code,errorSummary:'Analysis failed; retry or use manual triage.',...(latencyMs===undefined?{}:{latencyMs})}});
+    if(request.status==='AI_ANALYZING'&&request.activeAnalysisRunId===run.id){
+      await this.systemEdge(tx,request,run.id,'FAIL_AI_ANALYSIS',now,{activeAnalysisRunId:null,aiAnalysisStatus:'FAILED'},run.initiatingActorId);
+    }else{
+      if(request.status==='NEW')await tx.request.update({where:{id:request.id},data:{aiAnalysisStatus:'FAILED'}});
+      await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'AI_ANALYSIS_FAILED',resourceType:'AiRun',resourceId:run.id,requestCorrelationId:run.id,safeAfterJson:{errorCode:code},outcome:'FAILED',createdAt:now}});
+    }
+  }
+  async finishAnalysis(runId:string,result?:Awaited<ReturnType<typeof executeAnalysis>>,errorCode='AI_ANALYSIS_FAILED',latencyMs?:number){
+    const initial=await this.prisma.aiRun.findUnique({where:{id:runId}});if(!initial?.requestId)return;
+    await this.prisma.$transaction(async tx=>{
+      await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${initial.requestId}::uuid FOR UPDATE`);
+      const request=await tx.request.findUniqueOrThrow({where:{id:initial.requestId!}}),run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),now=await this.now(tx);
+      if(!['QUEUED','RUNNING'].includes(run.status))return;
+      const authorized=await this.analysisActor(tx,run.initiatingActorId,request);
+      const matches=request.status==='AI_ANALYZING'&&request.activeAnalysisRunId===runId&&request.version===run.contextVersion;
+      const expired=!run.deadlineAt||run.deadlineAt<=now;
+      if(!result||!matches||!authorized||expired){await this.failAnalysisLocked(tx,request,run,now,!authorized?'FORBIDDEN':expired?'AI_TIMEOUT':result&&!matches?'STALE_CONTEXT':errorCode,latencyMs??result?.latencyMs);return;}
+      const a=analysisSchema.parse(result.analysis);
+      const analysis=await tx.aiAnalysis.create({data:{requestId:request.id,aiRunId:run.id,intent:a.intent,category:a.category,subcategory:a.subcategory,prioritySuggestion:a.prioritySuggestion,entitiesJson:a.entities,missingFieldsJson:a.missingFields,confidence:a.confidence,reasonSummary:a.reasonSummary,schemaVersion:analysisSchemaVersion,createdAt:now}});
+      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:result.identity,errorCode:null,errorSummary:null}});
+      await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
+    });
   }
   private draftFields(value: Prisma.JsonValue | null) {
     if(!value||typeof value!=='object'||Array.isArray(value)) return null;

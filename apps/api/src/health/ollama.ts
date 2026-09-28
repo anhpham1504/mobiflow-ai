@@ -22,7 +22,7 @@ export class OllamaHealthClient implements OllamaHealthProvider {
     const signal = AbortSignal.timeout(this.env.HEALTH_TIMEOUT_MS);
     let names: Set<string>;
     try { names = new Set(tagsSchema.parse(await this.json('/api/tags', signal)).models.map((model) => model.name)); }
-    catch { return { server: down, llm: down, embedding: down }; }
+    catch { return { server: down, llm: this.env.OLLAMA_MODEL==='unconfigured'?{status:'NOT_CONFIGURED' as const,code:'NOT_CONFIGURED' as const}:down, embedding: this.env.OLLAMA_EMBEDDING_MODEL==='unconfigured'?{status:'NOT_CONFIGURED' as const,code:'NOT_CONFIGURED' as const}:down }; }
     const checkModel = async (name: string, capability: string): Promise<ComponentHealth> => {
       if (name === 'unconfigured') return { status: 'NOT_CONFIGURED', code: 'NOT_CONFIGURED' };
       // Exact installed tag matching. Never infer availability from a default name.

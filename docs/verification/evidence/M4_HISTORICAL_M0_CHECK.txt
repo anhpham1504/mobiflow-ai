@@ -1,0 +1,14 @@
+Required M0 documents: 25
+Authored Markdown files checked: 32
+Roles: 3; states: 10; transition rows: 20; tools: 6
+Local file links checked: 79
+Documentation assertions: 885
+FAIL: M0-only scope violated by application/infrastructure scaffold: package.json
+FAIL: M0-only scope violated by application/infrastructure scaffold: package-lock.json
+FAIL: M0-only scope violated by application/infrastructure scaffold: docker-compose.yml
+FAIL: M0-only scope violated by application/infrastructure scaffold: apps
+FAIL: M0-only scope violated by application/infrastructure scaffold: packages
+FAIL: M0-only scope violated by application/infrastructure scaffold: node_modules
+FAIL: M0-only scope violated by application/infrastructure scaffold: .env
+FAIL: M0-only scope violated by application/infrastructure scaffold: .env.example
+Documentation checks: FAIL (8 failures)

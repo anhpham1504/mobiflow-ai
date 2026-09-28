@@ -53,6 +53,10 @@ test('Ollama offline is degraded while API liveness/core readiness survive', asy
   assert.equal(data.status, 'DEGRADED'); assert.equal(data.components.OLLAMA_SERVER.status, 'DOWN');
   assert.equal((await fetch(app.url + '/health/live')).status, 200);
 });
+test('offline server does not turn an unconfigured embedding into a configured outage', async () => {
+  const result=await new OllamaHealthClient(parseApiEnvironment({...base,OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_EMBEDDING_MODEL:'unconfigured'})).healthCheck();
+  assert.equal(result.server.status,'DOWN');assert.equal(result.llm.status,'DOWN');assert.equal(result.embedding.status,'NOT_CONFIGURED');
+});
 test('database outage is 503, independent liveness still 200', async (t) => {
   const database = new PostgresProbe(base.DATABASE_URL, 200);
   const app = await api(t, { database });
