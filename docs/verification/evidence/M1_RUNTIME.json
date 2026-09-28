@@ -1,0 +1,145 @@
+{
+  "checkedAt": "2026-09-28T08:40:32.315Z",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "real PostgreSQL and pgvector",
+      "result": "PASS",
+      "details": {
+        "role": "mobiflow_app",
+        "version": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+        "vector": "0.8.6"
+      }
+    },
+    {
+      "name": "restricted runtime role and real vector operator",
+      "result": "PASS",
+      "details": {
+        "rolsuper": false,
+        "rolcreatedb": false,
+        "rolcreaterole": false
+      }
+    },
+    {
+      "name": "no M2 business tables",
+      "result": "PASS",
+      "details": [
+        {
+          "table_name": "_prisma_migrations"
+        }
+      ]
+    },
+    {
+      "name": "running API core readiness",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T08:40:32.408Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "NOT_CONFIGURED",
+            "code": "NOT_CONFIGURED"
+          }
+        }
+      }
+    },
+    {
+      "name": "actual installed LLM and live Ollama health",
+      "result": "PASS",
+      "details": {
+        "configured": "qwen3:4b-instruct-2507-q4_K_M",
+        "installed": [
+          {
+            "name": "cieloforge/qwen2.5-coder-7b-instruct-spec:latest",
+            "digest": "2a7334474d98caf0d5624cd77d064450a63e494bb26ec260d9506ded77f99e6c"
+          },
+          {
+            "name": "qwen2.5-coder:7b",
+            "digest": "85952edbb869514d37198e9cac9a61ef2bca8d63dac08150116e458be7292253"
+          },
+          {
+            "name": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        ],
+        "embedding": {
+          "status": "NOT_CONFIGURED",
+          "code": "NOT_CONFIGURED"
+        }
+      }
+    },
+    {
+      "name": "web responds",
+      "result": "PASS",
+      "details": {
+        "status": 200
+      }
+    },
+    {
+      "name": "health-only OpenAPI",
+      "result": "PASS",
+      "details": [
+        "/api/v1/health/live",
+        "/api/v1/health/ready"
+      ]
+    },
+    {
+      "name": "real offline Ollama connection, live API and real DB",
+      "result": "PASS",
+      "details": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "checkedAt": "2026-09-28T08:40:32.660Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          }
+        }
+      }
+    }
+  ]
+}

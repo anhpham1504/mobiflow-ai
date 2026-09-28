@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { parseApiEnvironment } from '../dist/index.js';
+
+const valid = { DATABASE_URL: 'postgresql://app:local@localhost:5432/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), OLLAMA_BASE_URL: 'http://localhost:11434', OLLAMA_MODEL: 'installed:tag', OLLAMA_EMBEDDING_MODEL: 'unconfigured' };
+test('validates native and Docker Ollama origins and coerces bounded ports', () => {
+  assert.equal(parseApiEnvironment({ ...valid, API_PORT: '3001' }).API_PORT, 3001);
+  assert.equal(parseApiEnvironment({ ...valid, OLLAMA_BASE_URL: 'http://host.docker.internal:11434' }).AI_PROVIDER, 'ollama');
+});
+test('rejects missing config, invalid protocols, bounds and reused secrets without echoing values', () => {
+  for (const change of [{ DATABASE_URL: undefined }, { API_PORT: 0 }, { HEALTH_TIMEOUT_MS: 50000 }, { OLLAMA_MODEL: '' }, { OLLAMA_BASE_URL: 'file:///private' }, { OLLAMA_BASE_URL: 'http://user:secret@localhost:11434' }, { REFRESH_TOKEN_SECRET: valid.JWT_SECRET }]) {
+    assert.throws(() => parseApiEnvironment({ ...valid, ...change }), /Invalid environment keys:/);
+  }
+  assert.throws(() => parseApiEnvironment({ ...valid, JWT_SECRET: 'private-value' }), (error) => !error.message.includes('private-value'));
+});
+
+test('malformed URL values produce key-only diagnostics rather than URL parser errors', () => {
+  for (const key of ['DATABASE_URL', 'OLLAMA_BASE_URL', 'WEB_ORIGIN']) {
+    assert.throws(() => parseApiEnvironment({ ...valid, [key]: 'invalid-sensitive-value' }), (error) => error.message === `Invalid environment keys: ${key}`);
+  }
+});

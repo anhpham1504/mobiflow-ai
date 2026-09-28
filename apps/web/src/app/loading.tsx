@@ -1,0 +1,1 @@
+export default function Loading() { return <div className="intro" role="status" aria-live="polite"><p className="eyebrow">MOBIFLOW AI</p><h1>Đang tải nền tảng…</h1><div className="loading-placeholder" aria-hidden="true" /></div>; }

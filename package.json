@@ -1,0 +1,45 @@
+{
+  "name": "mobiflow-ai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.17.0",
+  "engines": {
+    "node": ">=24.19.0 <25",
+    "npm": ">=11.17.0 <12"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev/dev.mjs",
+    "build:foundation": "npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "npm run build:foundation && npm run typecheck -w @mobiflow/api && npm run typecheck -w @mobiflow/web",
+    "test": "npm run build:foundation && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web",
+    "build": "npm run build:foundation && npm run build -w @mobiflow/api && npm run build -w @mobiflow/web",
+    "env:setup": "node scripts/dev/setup-env.mjs",
+    "db:validate": "node scripts/dev/prisma.mjs validate",
+    "db:migrate": "node scripts/dev/prisma.mjs migrate deploy",
+    "test:integration": "node --env-file=.env scripts/verification/runtime.mjs",
+    "e2e": "node scripts/dev/deferred.mjs M10",
+    "ai:evaluate": "node scripts/dev/deferred.mjs M9",
+    "demo:seed": "node scripts/dev/deferred.mjs M2",
+    "demo:reset": "node scripts/dev/deferred.mjs M10",
+    "demo:preflight": "node scripts/dev/deferred.mjs M10",
+    "demo:warmup": "node scripts/dev/deferred.mjs M10"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.39.4",
+    "@types/node": "24.10.1",
+    "eslint": "9.39.4",
+    "eslint-config-next": "16.3.6",
+    "prisma": "7.10.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.1"
+  },
+  "allowScripts": {
+    "@scarf/scarf": false
+  }
+}

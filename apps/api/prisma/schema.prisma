@@ -1,0 +1,4 @@
+// M1 infrastructure only. Business models and Prisma Client generation start in M2.
+datasource db {
+  provider = "postgresql"
+}
