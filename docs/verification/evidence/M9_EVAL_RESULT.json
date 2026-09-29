@@ -1,19 +1,19 @@
 {
   "snapshot": {
-    "runId": "c9fb5577-6c3e-46f8-8114-c5f9537b4a1c",
+    "runId": "4f2e9f8b-f736-4623-bee0-1042beb23e1f",
     "datasetVersion": "requests.m9.v2",
     "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
     "mode": "LIVE_OLLAMA",
-    "startedAt": "2026-09-29T14:13:09.814Z",
-    "finishedAt": "2026-09-29T14:17:47.313Z",
+    "startedAt": "2026-09-29T16:34:59.587Z",
+    "finishedAt": "2026-09-29T16:42:23.764Z",
     "provider": "ollama",
     "model": "qwen3:4b-instruct-2507-q4_K_M",
     "promptVersion": "request-analysis.v4",
     "schemaVersion": "analysis.v1",
     "totalCases": 100,
     "passed": {
-      "count": 68,
-      "rate": 0.68
+      "count": 69,
+      "rate": 0.69
     },
     "firstAttemptValid": {
       "count": 99,
@@ -36,16 +36,16 @@
       "rate": null
     },
     "latency": {
-      "mean": 2774.87,
-      "p50": 2704,
-      "p95": 3116,
-      "max": 6597
+      "mean": 4441.65,
+      "p50": 4377,
+      "p95": 5147,
+      "max": 9386
     },
     "averageAttempts": 1.01,
     "failureCounts": {},
     "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification and is reported separately as null."
   },
-  "commit": "9a9e506eb95393b53b3bf6f4eefac2e5eaee4fad",
+  "commit": "c0e7c9520ae4172b28415b609f8e66191d906803",
   "environment": {
     "node": "v24.19.0",
     "temperature": 0,
@@ -69,7 +69,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 6304,
+      "latencyMs": 4029,
       "failureCategory": null
     },
     {
@@ -88,7 +88,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2724,
+      "latencyMs": 3891,
       "failureCategory": null
     },
     {
@@ -107,7 +107,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2397,
+      "latencyMs": 3999,
       "failureCategory": null
     },
     {
@@ -127,7 +127,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2828,
+      "latencyMs": 3705,
       "failureCategory": null
     },
     {
@@ -147,7 +147,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2705,
+      "latencyMs": 3957,
       "failureCategory": null
     },
     {
@@ -156,7 +156,7 @@
         "normal"
       ],
       "status": "SUCCEEDED",
-      "passed": true,
+      "passed": false,
       "attempts": 1,
       "firstAttemptValid": true,
       "repairedSuccess": false,
@@ -164,9 +164,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": true,
+      "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2659,
+      "latencyMs": 3516,
       "failureCategory": null
     },
     {
@@ -185,7 +185,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2600,
+      "latencyMs": 3782,
       "failureCategory": null
     },
     {
@@ -204,7 +204,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2662,
+      "latencyMs": 3862,
       "failureCategory": null
     },
     {
@@ -223,7 +223,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3494,
+      "latencyMs": 5202,
       "failureCategory": null
     },
     {
@@ -242,7 +242,7 @@
       "categoryMatch": false,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2806,
+      "latencyMs": 4441,
       "failureCategory": null
     },
     {
@@ -262,7 +262,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3115,
+      "latencyMs": 4814,
       "failureCategory": null
     },
     {
@@ -281,7 +281,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2665,
+      "latencyMs": 4269,
       "failureCategory": null
     },
     {
@@ -300,7 +300,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3023,
+      "latencyMs": 4491,
       "failureCategory": null
     },
     {
@@ -319,7 +319,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2247,
+      "latencyMs": 3702,
       "failureCategory": null
     },
     {
@@ -338,7 +338,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2858,
+      "latencyMs": 4700,
       "failureCategory": null
     },
     {
@@ -357,7 +357,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2220,
+      "latencyMs": 3928,
       "failureCategory": null
     },
     {
@@ -376,7 +376,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 1921,
+      "latencyMs": 3105,
       "failureCategory": null
     },
     {
@@ -395,7 +395,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2268,
+      "latencyMs": 3722,
       "failureCategory": null
     },
     {
@@ -414,7 +414,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2421,
+      "latencyMs": 4031,
       "failureCategory": null
     },
     {
@@ -434,7 +434,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2802,
+      "latencyMs": 5626,
       "failureCategory": null
     },
     {
@@ -453,7 +453,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2456,
+      "latencyMs": 3794,
       "failureCategory": null
     },
     {
@@ -472,7 +472,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3119,
+      "latencyMs": 4341,
       "failureCategory": null
     },
     {
@@ -491,7 +491,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2843,
+      "latencyMs": 4743,
       "failureCategory": null
     },
     {
@@ -510,7 +510,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2453,
+      "latencyMs": 3861,
       "failureCategory": null
     },
     {
@@ -529,7 +529,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2979,
+      "latencyMs": 4543,
       "failureCategory": null
     },
     {
@@ -548,7 +548,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 2391,
+      "latencyMs": 4533,
       "failureCategory": null
     },
     {
@@ -567,7 +567,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 2389,
+      "latencyMs": 3998,
       "failureCategory": null
     },
     {
@@ -586,7 +586,7 @@
       "categoryMatch": false,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 2274,
+      "latencyMs": 3882,
       "failureCategory": null
     },
     {
@@ -603,9 +603,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": true,
+      "priorityMatch": false,
       "teamMatch": false,
-      "latencyMs": 2851,
+      "latencyMs": 4682,
       "failureCategory": null
     },
     {
@@ -624,7 +624,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 2562,
+      "latencyMs": 4592,
       "failureCategory": null
     },
     {
@@ -644,7 +644,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2483,
+      "latencyMs": 4339,
       "failureCategory": null
     },
     {
@@ -663,7 +663,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2586,
+      "latencyMs": 4202,
       "failureCategory": null
     },
     {
@@ -682,7 +682,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2918,
+      "latencyMs": 4680,
       "failureCategory": null
     },
     {
@@ -701,7 +701,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2784,
+      "latencyMs": 4633,
       "failureCategory": null
     },
     {
@@ -720,7 +720,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3059,
+      "latencyMs": 4891,
       "failureCategory": null
     },
     {
@@ -729,7 +729,7 @@
         "incomplete"
       ],
       "status": "SUCCEEDED",
-      "passed": true,
+      "passed": false,
       "attempts": 1,
       "firstAttemptValid": true,
       "repairedSuccess": false,
@@ -737,9 +737,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": true,
+      "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2981,
+      "latencyMs": 4344,
       "failureCategory": null
     },
     {
@@ -758,7 +758,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2743,
+      "latencyMs": 4542,
       "failureCategory": null
     },
     {
@@ -777,7 +777,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2717,
+      "latencyMs": 4478,
       "failureCategory": null
     },
     {
@@ -796,7 +796,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2534,
+      "latencyMs": 4270,
       "failureCategory": null
     },
     {
@@ -815,7 +815,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2518,
+      "latencyMs": 4518,
       "failureCategory": null
     },
     {
@@ -832,9 +832,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": true,
+      "priorityMatch": false,
       "teamMatch": false,
-      "latencyMs": 2603,
+      "latencyMs": 4248,
       "failureCategory": null
     },
     {
@@ -853,7 +853,7 @@
       "categoryMatch": false,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 2659,
+      "latencyMs": 4159,
       "failureCategory": null
     },
     {
@@ -873,7 +873,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": false,
-      "latencyMs": 2713,
+      "latencyMs": 4513,
       "failureCategory": null
     },
     {
@@ -893,7 +893,7 @@
       "categoryMatch": false,
       "priorityMatch": false,
       "teamMatch": false,
-      "latencyMs": 2789,
+      "latencyMs": 4641,
       "failureCategory": null
     },
     {
@@ -913,7 +913,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": false,
-      "latencyMs": 3064,
+      "latencyMs": 4850,
       "failureCategory": null
     },
     {
@@ -932,7 +932,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2210,
+      "latencyMs": 3623,
       "failureCategory": null
     },
     {
@@ -951,7 +951,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2857,
+      "latencyMs": 4803,
       "failureCategory": null
     },
     {
@@ -970,7 +970,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 6597,
+      "latencyMs": 9386,
       "failureCategory": null
     },
     {
@@ -989,7 +989,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2605,
+      "latencyMs": 3781,
       "failureCategory": null
     },
     {
@@ -1008,7 +1008,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2471,
+      "latencyMs": 4065,
       "failureCategory": null
     },
     {
@@ -1030,7 +1030,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2650,
+      "latencyMs": 4377,
       "failureCategory": null
     },
     {
@@ -1052,7 +1052,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2357,
+      "latencyMs": 3956,
       "failureCategory": null
     },
     {
@@ -1074,7 +1074,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2901,
+      "latencyMs": 4778,
       "failureCategory": null
     },
     {
@@ -1096,7 +1096,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2604,
+      "latencyMs": 4410,
       "failureCategory": null
     },
     {
@@ -1118,7 +1118,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2749,
+      "latencyMs": 4518,
       "failureCategory": null
     },
     {
@@ -1141,7 +1141,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2497,
+      "latencyMs": 4340,
       "failureCategory": null
     },
     {
@@ -1163,7 +1163,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2271,
+      "latencyMs": 4002,
       "failureCategory": null
     },
     {
@@ -1185,7 +1185,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3204,
+      "latencyMs": 4587,
       "failureCategory": null
     },
     {
@@ -1207,7 +1207,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3042,
+      "latencyMs": 4403,
       "failureCategory": null
     },
     {
@@ -1229,7 +1229,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2795,
+      "latencyMs": 5015,
       "failureCategory": null
     },
     {
@@ -1251,7 +1251,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2507,
+      "latencyMs": 4111,
       "failureCategory": null
     },
     {
@@ -1273,7 +1273,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2704,
+      "latencyMs": 4010,
       "failureCategory": null
     },
     {
@@ -1295,7 +1295,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2906,
+      "latencyMs": 4772,
       "failureCategory": null
     },
     {
@@ -1317,7 +1317,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2597,
+      "latencyMs": 4313,
       "failureCategory": null
     },
     {
@@ -1329,7 +1329,7 @@
         "batch-2"
       ],
       "status": "SUCCEEDED",
-      "passed": false,
+      "passed": true,
       "attempts": 1,
       "firstAttemptValid": true,
       "repairedSuccess": false,
@@ -1337,9 +1337,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": false,
+      "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2779,
+      "latencyMs": 4286,
       "failureCategory": null
     },
     {
@@ -1362,7 +1362,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2548,
+      "latencyMs": 4121,
       "failureCategory": null
     },
     {
@@ -1384,7 +1384,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2412,
+      "latencyMs": 4130,
       "failureCategory": null
     },
     {
@@ -1406,7 +1406,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3070,
+      "latencyMs": 4929,
       "failureCategory": null
     },
     {
@@ -1428,7 +1428,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2927,
+      "latencyMs": 4815,
       "failureCategory": null
     },
     {
@@ -1450,7 +1450,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2811,
+      "latencyMs": 4917,
       "failureCategory": null
     },
     {
@@ -1472,7 +1472,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2660,
+      "latencyMs": 4317,
       "failureCategory": null
     },
     {
@@ -1494,7 +1494,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2672,
+      "latencyMs": 4381,
       "failureCategory": null
     },
     {
@@ -1516,7 +1516,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2894,
+      "latencyMs": 4701,
       "failureCategory": null
     },
     {
@@ -1538,7 +1538,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2601,
+      "latencyMs": 4385,
       "failureCategory": null
     },
     {
@@ -1550,7 +1550,7 @@
         "batch-3"
       ],
       "status": "SUCCEEDED",
-      "passed": false,
+      "passed": true,
       "attempts": 1,
       "firstAttemptValid": true,
       "repairedSuccess": false,
@@ -1558,9 +1558,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": false,
+      "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2745,
+      "latencyMs": 4628,
       "failureCategory": null
     },
     {
@@ -1583,7 +1583,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2516,
+      "latencyMs": 4369,
       "failureCategory": null
     },
     {
@@ -1605,7 +1605,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2467,
+      "latencyMs": 4285,
       "failureCategory": null
     },
     {
@@ -1627,7 +1627,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3116,
+      "latencyMs": 5112,
       "failureCategory": null
     },
     {
@@ -1649,7 +1649,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2982,
+      "latencyMs": 4780,
       "failureCategory": null
     },
     {
@@ -1671,7 +1671,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2900,
+      "latencyMs": 5578,
       "failureCategory": null
     },
     {
@@ -1693,7 +1693,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2486,
+      "latencyMs": 4095,
       "failureCategory": null
     },
     {
@@ -1715,7 +1715,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2521,
+      "latencyMs": 4087,
       "failureCategory": null
     },
     {
@@ -1737,7 +1737,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2879,
+      "latencyMs": 4757,
       "failureCategory": null
     },
     {
@@ -1759,7 +1759,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2622,
+      "latencyMs": 4377,
       "failureCategory": null
     },
     {
@@ -1771,7 +1771,7 @@
         "batch-4"
       ],
       "status": "SUCCEEDED",
-      "passed": false,
+      "passed": true,
       "attempts": 1,
       "firstAttemptValid": true,
       "repairedSuccess": false,
@@ -1779,9 +1779,9 @@
       "referenceValid": true,
       "referenceApplicable": false,
       "categoryMatch": true,
-      "priorityMatch": false,
+      "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2814,
+      "latencyMs": 4504,
       "failureCategory": null
     },
     {
@@ -1804,7 +1804,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2525,
+      "latencyMs": 4184,
       "failureCategory": null
     },
     {
@@ -1826,7 +1826,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2536,
+      "latencyMs": 4198,
       "failureCategory": null
     },
     {
@@ -1848,7 +1848,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2921,
+      "latencyMs": 5147,
       "failureCategory": null
     },
     {
@@ -1870,7 +1870,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2900,
+      "latencyMs": 4830,
       "failureCategory": null
     },
     {
@@ -1892,7 +1892,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2839,
+      "latencyMs": 4501,
       "failureCategory": null
     },
     {
@@ -1914,7 +1914,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2631,
+      "latencyMs": 4143,
       "failureCategory": null
     },
     {
@@ -1936,7 +1936,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2536,
+      "latencyMs": 4191,
       "failureCategory": null
     },
     {
@@ -1958,7 +1958,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2914,
+      "latencyMs": 5193,
       "failureCategory": null
     },
     {
@@ -1980,7 +1980,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2552,
+      "latencyMs": 4427,
       "failureCategory": null
     },
     {
@@ -2002,7 +2002,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2940,
+      "latencyMs": 4571,
       "failureCategory": null
     },
     {
@@ -2025,7 +2025,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2622,
+      "latencyMs": 4739,
       "failureCategory": null
     },
     {
@@ -2047,7 +2047,7 @@
       "categoryMatch": true,
       "priorityMatch": false,
       "teamMatch": true,
-      "latencyMs": 2481,
+      "latencyMs": 4151,
       "failureCategory": null
     },
     {
@@ -2069,7 +2069,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2933,
+      "latencyMs": 5118,
       "failureCategory": null
     },
     {
@@ -2091,7 +2091,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 2978,
+      "latencyMs": 4867,
       "failureCategory": null
     },
     {
@@ -2113,7 +2113,7 @@
       "categoryMatch": true,
       "priorityMatch": true,
       "teamMatch": true,
-      "latencyMs": 3046,
+      "latencyMs": 4052,
       "failureCategory": null
     }
   ]

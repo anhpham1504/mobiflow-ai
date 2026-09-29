@@ -1,0 +1,9 @@
+
+> mobiflow-ai@0.1.0 lint
+> eslint . --max-warnings=0
+
+
+C:\Code\MobiFlow AI\scripts\verification\m10-eval-diagnostics.mjs
+  128:252  error  Parsing error: ',' expected
+
+✖ 1 problem (1 error, 0 warnings)

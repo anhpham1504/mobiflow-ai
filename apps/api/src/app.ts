@@ -72,12 +72,17 @@ export async function createApplication(env: ApiEnvironment, options: { database
   class AppModule {}
   const app = await NestFactory.create(AppModule, { bodyParser: false, logger: options.quiet ? false : new ConsoleLogger({ json: true }) });
   app.use(requestContext(log));
+  app.use((_request:Request,response:Response,next:()=>void)=>{
+    response.setHeader('X-Content-Type-Options','nosniff');response.setHeader('X-Frame-Options','DENY');
+    response.setHeader('Referrer-Policy','no-referrer');response.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
+    next();
+  });
   app.use(json({ limit: '64kb' }));
   app.setGlobalPrefix('api/v1');
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M9 evaluation analytics').setDescription('Manager-only measured operational, AI and evaluation analytics. Synthetic development evidence is kept distinct from workflow metrics.').setVersion('0.9.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M10 local release').setDescription('Local-first request workflow with bounded AI, retrieval, human approval, analytics, and explicit degraded operation.').setVersion('1.0.0-rc.1').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-29T15:01:42.314Z",
+  "at": "2026-09-29T18:19:28.622Z",
   "migrationCount": 6,
   "migrationHashes": {
     "202609280001_enable_vector": "c298ba7c691fd9d12e1ecb61c698906bd97ddf1336c0cbb22aed9abebc285d74",
@@ -9,7 +9,7 @@
     "20260929034000_m6_request_embeddings": "ec75a0f842d01fed272da6fb68985bf2f60d680f4f7d76d5930202c5f52b053b",
     "20260929043000_m6_request_cosine_index": "45833282b1a29e1185caedda0c054ca9b01b65c77b1057f9427aab6dede5a174"
   },
-  "filesScanned": 619,
+  "filesScanned": 778,
   "findings": [],
   "invariants": {
     "managerRoleGuard": true,

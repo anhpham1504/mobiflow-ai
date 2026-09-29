@@ -1,5 +1,7 @@
 # Implementation Plan
 
+Current execution status (2026-09-30): the user authorized M1–M10 sequentially after M0. M1–M9 are recorded PASS. M10 hardening, demo tooling, audits and all eight competition documents are implemented, but the M10 release gate is **BLOCKED** by the unresolved live-evaluation comparison. See [M10 verification](verification/MILESTONE_10_VERIFICATION.md) and [final verification](verification/FINAL_VERIFICATION.md). Git finalization is limited to a branch snapshot of this blocked state; no release tag, merge or M11 work is authorized. Historical M0-only boundaries below describe the original phase, not current authorization.
+
 Authority: canonical master-plan §§11–22 and §§33–46, constrained by the explicit M0-only execution request. This file is the dependency map and future work contract, not a claim that implementation is present. M0 must stop after verification; starting M1 requires explicit user approval.
 
 ## Sequence and dependencies

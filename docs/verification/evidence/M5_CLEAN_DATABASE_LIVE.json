@@ -1,57 +1,57 @@
 {
-  "at": "2026-09-29T14:46:03.438Z",
+  "at": "2026-09-29T17:20:36.434Z",
   "corpus": [
     {
       "code": "SOP-IOT-04",
-      "id": "588b56af-380f-439a-ab07-f5b276adcdff",
+      "id": "9b89be2b-67d6-478b-bebd-6e84e44563db",
       "generation": 1,
       "chunks": 2
     },
     {
       "code": "SOP-NET-02",
-      "id": "4f78dae6-e3ba-4216-aaa1-a299435fac83",
+      "id": "c0702d36-480f-4963-8971-6b5945787708",
       "generation": 1,
       "chunks": 2
     },
     {
       "code": "SLA-Policy",
-      "id": "35697f8b-a5eb-43a1-b3cb-b2325390db26",
+      "id": "b00cb915-f9c6-444b-81c5-e9358427b13b",
       "generation": 1,
       "chunks": 2
     },
     {
       "code": "FAQ-IoT",
-      "id": "1c17fd79-9e2a-453e-be53-43695bedbf2b",
+      "id": "00aafc1d-b91b-451a-805a-15440e6ef1c2",
       "generation": 1,
       "chunks": 1
     },
     {
       "code": "SOP-BILL-01",
-      "id": "58c3b8ef-3872-411c-94f9-e60bb66f99f7",
+      "id": "103265f2-f204-4fd2-b418-e93b7b96819c",
       "generation": 1,
       "chunks": 1
     },
     {
       "code": "SOP-ACCOUNT-01",
-      "id": "de527557-f7d4-46ff-9b0c-300cca7c5710",
+      "id": "512e9e8a-60d4-463a-ba8d-db9b81e8fc8f",
       "generation": 1,
       "chunks": 1
     },
     {
       "code": "SOP-SERVICE-01",
-      "id": "be981eb6-b936-4dc0-8579-10f7ddbff74d",
+      "id": "992f2ac1-af39-4c56-b1dc-cf9c6ae8b18d",
       "generation": 1,
       "chunks": 1
     },
     {
       "code": "SOP-FIBER-01",
-      "id": "a1243019-d44f-426e-8358-467053f2d1d8",
+      "id": "b7fa211b-3370-4ee0-9129-223afebd5bf4",
       "generation": 1,
       "chunks": 1
     },
     {
       "code": "ADVERSARIAL-01",
-      "id": "8de7971c-802c-4efb-b520-c1b17a8d53ae",
+      "id": "a7c3cb9c-640f-4628-8ecf-55adb9f93be4",
       "generation": 1,
       "chunks": 1
     }
@@ -65,15 +65,15 @@
     "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
   },
   "sourceIds": [
-    "KD-588b56af-380f-439a-ab07-f5b276adcdff-G1-C0"
+    "KD-9b89be2b-67d6-478b-bebd-6e84e44563db-G1-C0"
   ],
-  "runId": "30e9dbdb-d19b-48ce-bcbb-d19082bf7113",
+  "runId": "1578b5d9-808e-46ec-80c5-1cd532233738",
   "status": "SUCCEEDED",
   "citations": [
     {
       "quote": "Áp dụng cho SIM dữ liệu trong thiết bị IoT bị mất kết nối. Ghi nhận số thiết bị bị ảnh hưởng,",
-      "sourceId": "KD-588b56af-380f-439a-ab07-f5b276adcdff-G1-C0"
+      "sourceId": "KD-9b89be2b-67d6-478b-bebd-6e84e44563db-G1-C0"
     }
   ],
-  "latencyMs": 12405
+  "latencyMs": 8954
 }

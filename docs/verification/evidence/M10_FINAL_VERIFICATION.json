@@ -1,0 +1,362 @@
+{
+  "at": "2026-09-29T17:39:08.805Z",
+  "finalGate": "BLOCKED",
+  "implementationVerification": "PASS",
+  "releaseBlockers": [
+    "Unresolved M10 live-evaluation comparison: isolated priority pass-to-fail=2; per-case latency >1.5x=83."
+  ],
+  "sourceSha256": "36b0f51436d802a0cb383348ea0132d6bf6fad103b03237c38ca9e5b280dc192",
+  "sourceFileCount": 216,
+  "commands": {
+    "M10_LINT": {
+      "command": "npm run lint",
+      "startedAt": "2026-09-29T17:37:03.046Z",
+      "finishedAt": "2026-09-29T17:37:08.499Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_LINT-2026-09-29T17-37-03-046Z.txt"
+    },
+    "M10_TYPECHECK": {
+      "command": "npm run typecheck",
+      "startedAt": "2026-09-29T17:37:08.565Z",
+      "finishedAt": "2026-09-29T17:37:17.651Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_TYPECHECK-2026-09-29T17-37-08-565Z.txt"
+    },
+    "M10_UNIT": {
+      "command": "npm test",
+      "startedAt": "2026-09-29T17:17:16.606Z",
+      "finishedAt": "2026-09-29T17:17:31.147Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_UNIT-2026-09-29T17-17-16-606Z.txt"
+    },
+    "M10_BUILD": {
+      "command": "npm run build",
+      "startedAt": "2026-09-29T17:34:07.749Z",
+      "finishedAt": "2026-09-29T17:34:31.073Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_BUILD-2026-09-29T17-34-07-749Z.txt"
+    },
+    "M10_DB_VALIDATE": {
+      "command": "npm run db:validate",
+      "startedAt": "2026-09-29T17:14:17.217Z",
+      "finishedAt": "2026-09-29T17:14:18.484Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_DB_VALIDATE-2026-09-29T17-14-17-217Z.txt"
+    },
+    "M10_DB_MIGRATE": {
+      "command": "npm run db:migrate",
+      "startedAt": "2026-09-29T17:14:18.562Z",
+      "finishedAt": "2026-09-29T17:14:20.052Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_DB_MIGRATE-2026-09-29T17-14-18-562Z.txt"
+    },
+    "M10_INTEGRATION_SEED": {
+      "command": "npm run test:integration:m10",
+      "startedAt": "2026-09-29T17:26:42.649Z",
+      "finishedAt": "2026-09-29T17:26:59.521Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_INTEGRATION_SEED-2026-09-29T17-26-42-649Z.txt"
+    },
+    "M10_INTEGRATION_FINAL": {
+      "command": "node --env-file=.env scripts/verification/m2-integration.mjs",
+      "startedAt": "2026-09-29T17:20:00.941Z",
+      "finishedAt": "2026-09-29T17:23:42.472Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_INTEGRATION_FINAL-2026-09-29T17-20-00-941Z.txt"
+    },
+    "M10_RUNTIME_OUTAGE": {
+      "command": "npm run verify:runtime:m8",
+      "startedAt": "2026-09-29T17:14:17.450Z",
+      "finishedAt": "2026-09-29T17:14:32.280Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_RUNTIME_OUTAGE-2026-09-29T17-14-17-450Z.txt"
+    },
+    "M10_DOCKER_BUILD": {
+      "command": "docker compose build",
+      "startedAt": "2026-09-29T17:34:32.329Z",
+      "finishedAt": "2026-09-29T17:34:48.172Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_DOCKER_BUILD-2026-09-29T17-34-32-329Z.txt"
+    },
+    "M10_DEPENDENCY_AUDIT": {
+      "command": "npm audit --omit=dev --audit-level=high",
+      "startedAt": "2026-09-29T17:28:04.440Z",
+      "finishedAt": "2026-09-29T17:28:07.090Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_DEPENDENCY_AUDIT-2026-09-29T17-28-04-440Z.txt"
+    },
+    "M10_RESET_COMMAND": {
+      "command": "npm run demo:reset",
+      "startedAt": "2026-09-29T17:35:51.369Z",
+      "finishedAt": "2026-09-29T17:36:00.953Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_RESET_COMMAND-2026-09-29T17-35-51-369Z.txt"
+    },
+    "M10_DEMO_READY": {
+      "command": "npm run demo:ready",
+      "startedAt": "2026-09-29T17:36:02.282Z",
+      "finishedAt": "2026-09-29T17:37:31.014Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_DEMO_READY-2026-09-29T17-36-02-282Z.txt"
+    },
+    "M10_E2E": {
+      "command": "npm run test:e2e:m10",
+      "startedAt": "2026-09-29T17:34:53.310Z",
+      "finishedAt": "2026-09-29T17:34:58.278Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_E2E-2026-09-29T17-34-53-310Z.txt"
+    }
+  },
+  "browser": {
+    "M3": {
+      "path": "artifacts/m3/browser-results.json",
+      "startTime": "2026-09-29T16:13:04.680Z",
+      "duration": 19500.035,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M4_OFFLINE": {
+      "path": "artifacts/m4/browser-offline.json",
+      "startTime": "2026-09-29T16:14:10.590Z",
+      "duration": 7225.887000000001,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M4_ONLINE_RECOVERY": {
+      "path": "artifacts/m4/browser-online.json",
+      "startTime": "2026-09-29T16:14:29.535Z",
+      "duration": 71131.187,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M5": {
+      "path": "artifacts/m5/browser-results.json",
+      "startTime": "2026-09-29T16:15:46.798Z",
+      "duration": 12128.715,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M6": {
+      "path": "artifacts/m6/browser-results.json",
+      "startTime": "2026-09-29T16:16:04.424Z",
+      "duration": 59250.468,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M7": {
+      "path": "artifacts/m7/browser-results.json",
+      "startTime": "2026-09-29T17:29:45.491Z",
+      "duration": 29317.674000000003,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M8": {
+      "path": "artifacts/m8/browser-results.json",
+      "startTime": "2026-09-29T16:20:43.408Z",
+      "duration": 174862.344,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M9": {
+      "path": "artifacts/m9/browser-results.json",
+      "startTime": "2026-09-29T17:34:51.058Z",
+      "duration": 2143.6330000000003,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    },
+    "M10": {
+      "path": "artifacts/m10/browser-results.json",
+      "startTime": "2026-09-29T17:34:53.884Z",
+      "duration": 4365.394,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "status": "PASS",
+      "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+    }
+  },
+  "competitionDocuments": [
+    "docs/demo/COMPETITION_SUBMISSION.md",
+    "docs/demo/PRODUCT_DESCRIPTION.md",
+    "docs/demo/AI_MODEL_DISCLOSURE.md",
+    "docs/demo/DEMO_SCRIPT_5_MIN.md",
+    "docs/demo/DEMO_SCRIPT_10_MIN.md",
+    "docs/demo/JUDGE_QA.md",
+    "docs/demo/VIDEO_SHOT_LIST.md",
+    "docs/demo/BEFORE_AFTER_EVIDENCE.md"
+  ],
+  "documents": [
+    "docs/demo/COMPETITION_SUBMISSION.md",
+    "docs/demo/PRODUCT_DESCRIPTION.md",
+    "docs/demo/AI_MODEL_DISCLOSURE.md",
+    "docs/demo/DEMO_SCRIPT_5_MIN.md",
+    "docs/demo/DEMO_SCRIPT_10_MIN.md",
+    "docs/demo/JUDGE_QA.md",
+    "docs/demo/VIDEO_SHOT_LIST.md",
+    "docs/demo/BEFORE_AFTER_EVIDENCE.md",
+    "docs/demo/DEMO_RUNBOOK.md",
+    "docs/release/M10_RELEASE_CHECKLIST.md",
+    "docs/verification/MILESTONE_10_VERIFICATION.md",
+    "docs/verification/FINAL_VERIFICATION.md",
+    "docs/verification/SECURITY_AUDIT.md",
+    "docs/verification/AI_SAFETY_AUDIT.md"
+  ],
+  "preflightStatus": "PASS",
+  "warmup": {
+    "status": "PASS",
+    "llmLatencyMs": 4785,
+    "embeddingLatencyMs": 2991,
+    "businessMutation": "NONE"
+  },
+  "resetStatus": "PASS",
+  "shutdown": {
+    "startedAt": "2026-09-29T17:30:19.844Z",
+    "finishedAt": "2026-09-29T17:30:21.341Z",
+    "status": "PASS",
+    "elapsedMs": 1110,
+    "exitCode": 0,
+    "events": [
+      "shutdown.started",
+      "shutdown.complete"
+    ]
+  },
+  "docker": {
+    "at": "2026-09-29T17:37:31.759Z",
+    "runtimeStatus": "PASS",
+    "releaseGate": "BLOCKED",
+    "releaseBlocker": "M10 live evaluation comparison remains RED; see M10_EVAL_REGRESSION.json",
+    "services": {
+      "postgres": {
+        "state": "running",
+        "health": "healthy",
+        "image": "pgvector/pgvector:0.8.6-pg17"
+      },
+      "api": {
+        "state": "running",
+        "health": "healthy",
+        "image": "mobiflow-ai-api"
+      },
+      "web": {
+        "state": "running",
+        "health": "healthy",
+        "image": "mobiflow-ai-web"
+      }
+    },
+    "apiHttp": 200,
+    "webHttp": 200,
+    "coreReady": true,
+    "aiReady": true,
+    "ragStatus": "READY",
+    "counts": {
+      "users": 6,
+      "requests": 8,
+      "histories": 39,
+      "assignments": 6,
+      "resolutions": 3,
+      "feedback": 2,
+      "notifications": 8,
+      "ai_runs": 0,
+      "request_embeddings": 8,
+      "ready_documents": 9,
+      "chunks": 12
+    },
+    "migrations": [
+      "202609280001_enable_vector",
+      "20260928085048_m2_domain_auth",
+      "20260928092000_m2_public_code_sequence",
+      "20260928145100_m5_knowledge_vectors",
+      "20260929034000_m6_request_embeddings",
+      "20260929043000_m6_request_cosine_index"
+    ],
+    "models": {
+      "llm": {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "embedding": {
+        "name": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024
+      }
+    },
+    "dashboardSnapshot": {
+      "runId": "4f2e9f8b-f736-4623-bee0-1042beb23e1f",
+      "finishedAt": "2026-09-29T16:42:23.764Z",
+      "passed": 69
+    },
+    "git": {
+      "branch": "feat/m10-release-hardening",
+      "head": "c0e7c9520ae4172b28415b609f8e66191d906803",
+      "committed": false,
+      "pushed": false,
+      "tagged": false
+    }
+  },
+  "migrationCountBefore": 6,
+  "migrationCountAfter": 6,
+  "newMigration": false,
+  "historicalMigrationDiff": "PASS",
+  "gitDiffCheck": "PASS",
+  "evaluationEvidence": "M10_EVAL_REGRESSION.json",
+  "earlierLiveLimitation": "The earlier broad M10 run retained terminal R5 AI_TIMEOUT after two attempts; the subsequent final database suite passed with live R1-R8 all successful.",
+  "notRun": [
+    "Third 100-case confirmation run",
+    "Manual operator time benchmark",
+    "Fresh complete Internet-disconnection rehearsal",
+    "Video recording",
+    "External penetration test"
+  ],
+  "git": {
+    "committed": false,
+    "pushed": false,
+    "tagged": false,
+    "m11Started": false
+  }
+}

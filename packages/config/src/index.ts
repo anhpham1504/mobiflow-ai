@@ -5,7 +5,7 @@ const httpUrl = z.url().refine((value) => {
   const url = new URL(value);
   return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password && !url.search && !url.hash && url.pathname === '/';
 }, 'Expected an HTTP origin without credentials, query or path');
-const secret = z.string().min(32).refine((value) => !value.includes('CHANGE_ME'), 'Replace placeholder');
+const secret = z.string().min(32).refine((value) => !/change[_-]?me|placeholder|example|demo.?secret|test.?secret/i.test(value), 'Replace placeholder');
 const model = z.string().min(1).max(200).regex(/^[a-zA-Z0-9_.:/-]+$/);
 const explicitBoolean = z.enum(['true', 'false']).transform((value) => value === 'true');
 
@@ -42,7 +42,10 @@ const apiEnvironmentSchema = z.object({
   OLLAMA_BASE_URL: httpUrl,
   OLLAMA_MODEL: model, OLLAMA_EMBEDDING_MODEL: model,
   HEALTH_TIMEOUT_MS: z.coerce.number().int().min(100).max(10000).default(2000),
-}).refine((env) => env.JWT_SECRET !== env.REFRESH_TOKEN_SECRET, { path: ['REFRESH_TOKEN_SECRET'], message: 'Secrets must be distinct' })
+}).superRefine((env,context)=>{
+  if(env.JWT_SECRET===env.REFRESH_TOKEN_SECRET)context.addIssue({code:'custom',path:['REFRESH_TOKEN_SECRET'],message:'Secrets must be distinct'});
+  if(env.NODE_ENV==='production')for(const key of ['JWT_SECRET','REFRESH_TOKEN_SECRET'] as const)if(new Set(env[key]).size<8)context.addIssue({code:'custom',path:[key],message:'Production secret lacks entropy'});
+})
   .refine((env) => env.AUTH_COOKIE_SECURE || !URL.canParse(env.WEB_ORIGIN) || (() => {
     const origin = new URL(env.WEB_ORIGIN);
     return origin.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(origin.hostname);

@@ -1,0 +1,2120 @@
+{
+  "snapshot": {
+    "runId": "6bb44580-b395-4325-98f3-4437549b59dc",
+    "datasetVersion": "requests.m9.v2",
+    "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "mode": "LIVE_OLLAMA",
+    "startedAt": "2026-09-29T16:25:47.624Z",
+    "finishedAt": "2026-09-29T16:34:01.887Z",
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "request-analysis.v4",
+    "schemaVersion": "analysis.v1",
+    "totalCases": 100,
+    "passed": {
+      "count": 68,
+      "rate": 0.68
+    },
+    "firstAttemptValid": {
+      "count": 99,
+      "rate": 0.99
+    },
+    "repairedSuccess": {
+      "count": 1,
+      "rate": 0.01
+    },
+    "terminalFailure": {
+      "count": 0,
+      "rate": 0
+    },
+    "schemaValid": {
+      "count": 100,
+      "rate": 1
+    },
+    "referenceValid": {
+      "count": 0,
+      "rate": null
+    },
+    "latency": {
+      "mean": 4942.51,
+      "p50": 4786,
+      "p95": 5621,
+      "max": 11023
+    },
+    "averageAttempts": 1.01,
+    "failureCounts": {},
+    "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification and is reported separately as null."
+  },
+  "commit": "c0e7c9520ae4172b28415b609f8e66191d906803",
+  "environment": {
+    "node": "v24.19.0",
+    "temperature": 0,
+    "maxOutputTokens": 1200
+  },
+  "results": [
+    {
+      "id": "normal-01",
+      "tags": [
+        "normal",
+        "iot"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 8686,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-02",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4267,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-03",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4362,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-04",
+      "tags": [
+        "normal",
+        "critical"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4887,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-05",
+      "tags": [
+        "normal",
+        "question"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4384,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-06",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4344,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-07",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4221,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-08",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4317,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-09",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5622,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-10",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": false,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4914,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-11",
+      "tags": [
+        "normal",
+        "billing"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4864,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-12",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4337,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-13",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5195,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-14",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4068,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-15",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5125,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-16",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4061,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-17",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4122,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-18",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4495,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-19",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4420,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-20",
+      "tags": [
+        "normal",
+        "critical"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5386,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-21",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4063,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-22",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5686,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-23",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5004,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-24",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4657,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-25",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5612,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-26",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 4593,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-27",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 4476,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-28",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": false,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 4481,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-29",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": false,
+      "latencyMs": 5300,
+      "failureCategory": null
+    },
+    {
+      "id": "normal-30",
+      "tags": [
+        "normal"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 4814,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-01",
+      "tags": [
+        "incomplete",
+        "missing-location"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4786,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-02",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4894,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-03",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5148,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-04",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5083,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-05",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5479,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-06",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4663,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-07",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4877,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-08",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4901,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-09",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4681,
+      "failureCategory": null
+    },
+    {
+      "id": "incomplete-10",
+      "tags": [
+        "incomplete"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4800,
+      "failureCategory": null
+    },
+    {
+      "id": "ambiguous-01",
+      "tags": [
+        "ambiguous"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": false,
+      "latencyMs": 4584,
+      "failureCategory": null
+    },
+    {
+      "id": "ambiguous-02",
+      "tags": [
+        "ambiguous"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": false,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 4648,
+      "failureCategory": null
+    },
+    {
+      "id": "ambiguous-03",
+      "tags": [
+        "ambiguous",
+        "multiple-categories"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": false,
+      "latencyMs": 4729,
+      "failureCategory": null
+    },
+    {
+      "id": "ambiguous-04",
+      "tags": [
+        "ambiguous",
+        "urgent-wording"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 5501,
+      "failureCategory": null
+    },
+    {
+      "id": "ambiguous-05",
+      "tags": [
+        "ambiguous",
+        "prompt-injection"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": false,
+      "latencyMs": 5321,
+      "failureCategory": null
+    },
+    {
+      "id": "noisy-01",
+      "tags": [
+        "noisy"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4104,
+      "failureCategory": null
+    },
+    {
+      "id": "noisy-02",
+      "tags": [
+        "noisy"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5249,
+      "failureCategory": null
+    },
+    {
+      "id": "noisy-03",
+      "tags": [
+        "noisy"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 2,
+      "firstAttemptValid": false,
+      "repairedSuccess": true,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 11023,
+      "failureCategory": null
+    },
+    {
+      "id": "noisy-04",
+      "tags": [
+        "noisy"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4281,
+      "failureCategory": null
+    },
+    {
+      "id": "noisy-05",
+      "tags": [
+        "noisy"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4456,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-051",
+      "tags": [
+        "m9",
+        "network",
+        "normal",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4549,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-052",
+      "tags": [
+        "m9",
+        "iot",
+        "informal",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4315,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-053",
+      "tags": [
+        "m9",
+        "billing",
+        "normal",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5097,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-054",
+      "tags": [
+        "m9",
+        "account",
+        "normal",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4715,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-055",
+      "tags": [
+        "m9",
+        "service",
+        "normal",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4845,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-056",
+      "tags": [
+        "m9",
+        "other",
+        "ambiguous",
+        "missing",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4686,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-057",
+      "tags": [
+        "m9",
+        "vietnamese-no-accents",
+        "noisy",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4366,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-058",
+      "tags": [
+        "m9",
+        "injection-request",
+        "security",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5000,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-059",
+      "tags": [
+        "m9",
+        "injection-tool",
+        "security",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4897,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-060",
+      "tags": [
+        "m9",
+        "duplicate",
+        "stale-history",
+        "batch-1"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5456,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-061",
+      "tags": [
+        "m9",
+        "network",
+        "normal",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4546,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-062",
+      "tags": [
+        "m9",
+        "iot",
+        "informal",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4505,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-063",
+      "tags": [
+        "m9",
+        "billing",
+        "normal",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5202,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-064",
+      "tags": [
+        "m9",
+        "account",
+        "normal",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4604,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-065",
+      "tags": [
+        "m9",
+        "service",
+        "normal",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4593,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-066",
+      "tags": [
+        "m9",
+        "other",
+        "ambiguous",
+        "missing",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4462,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-067",
+      "tags": [
+        "m9",
+        "vietnamese-no-accents",
+        "noisy",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4507,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-068",
+      "tags": [
+        "m9",
+        "injection-request",
+        "security",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5370,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-069",
+      "tags": [
+        "m9",
+        "injection-tool",
+        "security",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5299,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-070",
+      "tags": [
+        "m9",
+        "duplicate",
+        "stale-history",
+        "batch-2"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5426,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-071",
+      "tags": [
+        "m9",
+        "network",
+        "normal",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4798,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-072",
+      "tags": [
+        "m9",
+        "iot",
+        "informal",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4786,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-073",
+      "tags": [
+        "m9",
+        "billing",
+        "normal",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5070,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-074",
+      "tags": [
+        "m9",
+        "account",
+        "normal",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4773,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-075",
+      "tags": [
+        "m9",
+        "service",
+        "normal",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4956,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-076",
+      "tags": [
+        "m9",
+        "other",
+        "ambiguous",
+        "missing",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4767,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-077",
+      "tags": [
+        "m9",
+        "vietnamese-no-accents",
+        "noisy",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4688,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-078",
+      "tags": [
+        "m9",
+        "injection-request",
+        "security",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5520,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-079",
+      "tags": [
+        "m9",
+        "injection-tool",
+        "security",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5284,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-080",
+      "tags": [
+        "m9",
+        "duplicate",
+        "stale-history",
+        "batch-3"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 6022,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-081",
+      "tags": [
+        "m9",
+        "network",
+        "normal",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4521,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-082",
+      "tags": [
+        "m9",
+        "iot",
+        "informal",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4507,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-083",
+      "tags": [
+        "m9",
+        "billing",
+        "normal",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5318,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-084",
+      "tags": [
+        "m9",
+        "account",
+        "normal",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4850,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-085",
+      "tags": [
+        "m9",
+        "service",
+        "normal",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5067,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-086",
+      "tags": [
+        "m9",
+        "other",
+        "ambiguous",
+        "missing",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4754,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-087",
+      "tags": [
+        "m9",
+        "vietnamese-no-accents",
+        "noisy",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4574,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-088",
+      "tags": [
+        "m9",
+        "injection-request",
+        "security",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5535,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-089",
+      "tags": [
+        "m9",
+        "injection-tool",
+        "security",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5381,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-090",
+      "tags": [
+        "m9",
+        "duplicate",
+        "stale-history",
+        "batch-4"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4974,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-091",
+      "tags": [
+        "m9",
+        "network",
+        "normal",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4580,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-092",
+      "tags": [
+        "m9",
+        "iot",
+        "informal",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4639,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-093",
+      "tags": [
+        "m9",
+        "billing",
+        "normal",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 5621,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-094",
+      "tags": [
+        "m9",
+        "account",
+        "normal",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4777,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-095",
+      "tags": [
+        "m9",
+        "service",
+        "normal",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4960,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-096",
+      "tags": [
+        "m9",
+        "other",
+        "ambiguous",
+        "missing",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5099,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-097",
+      "tags": [
+        "m9",
+        "vietnamese-no-accents",
+        "noisy",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": false,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "teamMatch": true,
+      "latencyMs": 4532,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-098",
+      "tags": [
+        "m9",
+        "injection-request",
+        "security",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5592,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-099",
+      "tags": [
+        "m9",
+        "injection-tool",
+        "security",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 5411,
+      "failureCategory": null
+    },
+    {
+      "id": "M9-100",
+      "tags": [
+        "m9",
+        "duplicate",
+        "stale-history",
+        "batch-5"
+      ],
+      "status": "SUCCEEDED",
+      "passed": true,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairedSuccess": false,
+      "schemaValid": true,
+      "referenceValid": true,
+      "referenceApplicable": false,
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "teamMatch": true,
+      "latencyMs": 4484,
+      "failureCategory": null
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+
+> mobiflow-ai@0.1.0 typecheck
+> npm run build:foundation && npm run prisma:generate && npm run typecheck -w @mobiflow/api && npm run typecheck -w @mobiflow/web
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 181ms
+
+
+> @mobiflow/api@0.1.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> @mobiflow/web@0.1.0 typecheck
+> next typegen && tsc --noEmit
+
+Generating route types...
+✓ Types generated successfully

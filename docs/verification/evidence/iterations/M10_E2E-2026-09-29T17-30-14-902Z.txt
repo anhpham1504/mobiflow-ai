@@ -1,0 +1,14 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m10
+> playwright test --config playwright.m10.config.mjs
+
+
+Running 3 tests using 1 worker
+
+(node:30224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 apps\web\e2e\m10.spec.mjs:9:1 › M10 demonstrated manager surface is responsive, keyboard reachable, and axe clean (1.6s)
+  ok 2 apps\web\e2e\m10.spec.mjs:19:1 › M10 analytics dependency error preserves a recoverable retry (1.2s)
+  ok 3 apps\web\e2e\m10.spec.mjs:25:1 › M10 truthful AI degraded state leaves the core UI usable (466ms)
+
+  3 passed (4.3s)

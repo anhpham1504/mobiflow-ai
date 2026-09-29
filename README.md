@@ -1,10 +1,12 @@
 # MobiFlow AI
 
+M10 release hardening and all eight competition documents are implemented on `feat/m10-release-hardening`. The release gate is **BLOCKED** by the unresolved longitudinal live-evaluation comparison. A branch snapshot does not constitute release approval. See [M10 verification](docs/verification/MILESTONE_10_VERIFICATION.md), [final verification](docs/verification/FINAL_VERIFICATION.md), [evaluation investigation](docs/evaluation/M10_EVALUATION_INVESTIGATION.md), and the [demo runbook](docs/demo/DEMO_RUNBOOK.md).
+
 Milestone 9 adds manager-only measured analytics and a reproducible 100-case synthetic development evaluation. Run `npm run ai:evaluate` with the configured local Ollama models, `npm run eval:compare:m9 -- <baseline.json> <current.json>` for explicit per-case regression checks, and `npm run test:e2e:m9` for the analytics dashboard. Results are development evidence, not generalized AI accuracy.
 
 AI-native enterprise workflow automation platform with local AI.
 
-The repository contains the frozen M0 contract and the completed M1–M8 implementation: local infrastructure, authentication/RBAC/database, manual request workflow, structured intake, local knowledge/RAG, bounded AI tools and recommendations, manager approval, and the staff Copilot/SLA/resolution-summary workflow. USER, STAFF and MANAGER can complete the human workflow when AI or embeddings are unavailable. M9 requires explicit approval.
+The repository contains the frozen M0 contract and authorized M1–M10 work: local infrastructure, authentication/RBAC/database, manual request workflow, structured intake, local knowledge/RAG, bounded AI tools, human approval, staff Copilot/SLA/resolution summary, measured analytics and release tooling. USER, STAFF and MANAGER can complete the human workflow when AI or embeddings are unavailable. M10 is not approved for release; no later milestone has started.
 
 Start with [AGENTS.md](AGENTS.md), the [project scope and assumption register](docs/specs/PROJECT_SPEC.md), [architecture](docs/architecture/ARCHITECTURE.md), and [M1–M10 implementation/dependency map](docs/IMPLEMENTATION_PLAN.md). The [canonical master plan](docs/reference/MOBIFLOW_AI_ASTRA6_M0_M10_MASTER_PLAN.md) and [M0 execution request](docs/reference/M0_EXECUTION_PROMPT.txt) are preserved for provenance.
 
@@ -34,7 +36,7 @@ Use Node 24.19.x, npm 11.17.x and Docker Desktop (Linux containers). Ollama runs
 
 ```powershell
 npm ci
-ollama list
+ollama.exe list
 npm run env:setup -- qwen3:4b-instruct-2507-q4_K_M
 docker compose up -d postgres
 npm run db:validate
@@ -103,4 +105,4 @@ M4 evaluation invokes real Ollama on all 50 fixed synthetic cases and writes `do
 
 M5 corpus ingestion uses the fixed synthetic files under `datasets/knowledge/`; it is idempotent by SHA-256 and writes sanitized metadata evidence. Retrieval evaluation uses 25 fixed queries and RAG evaluation compares 12 cases in non-RAG/RAG modes. The reported scores are development-set observations, not calibrated confidence or production accuracy. Runtime verification creates and removes a dedicated loopback test database for non-RAG/offline checks. Browser and runtime tests create synthetic records in the main demo database.
 
-The future `e2e`, `ai:evaluate`, `demo:reset`, `demo:preflight` and `demo:warmup` commands fail explicitly until their owning milestones; they never return a placeholder PASS. The historical M0 checker is preserved unchanged and intentionally rejects post-M0 application scaffolding, so it is not a current application quality gate. Frozen M0 documents remain authoritative.
+The root `e2e` command now runs the M10 browser gate. `ai:evaluate`, `demo:reset`, `demo:preflight`, `demo:warmup` and non-destructive `demo:ready` are implemented. Stop app writers before guarded reset; run ready after restarting. Preflight PASS is operational readiness, not a waiver of the release gate. The historical M0 checker remains unchanged and rejects post-M0 scaffolding; it is not the current application gate. The frozen specifications remain authoritative.

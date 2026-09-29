@@ -40,3 +40,9 @@ test('insecure refresh cookies are accepted only for the explicit loopback HTTP 
   assert.throws(() => parseApiEnvironment({ ...valid, WEB_ORIGIN: 'https://example.test', AUTH_COOKIE_SECURE: 'false' }), /AUTH_COOKIE_SECURE/);
   assert.equal(parseApiEnvironment({ ...valid, WEB_ORIGIN: 'https://example.test', AUTH_COOKIE_SECURE: 'true' }).AUTH_COOKIE_SECURE, true);
 });
+
+test('production rejects low-entropy and placeholder-like auth secrets with key-only diagnostics',()=>{
+  for(const [key,value] of [['JWT_SECRET','a'.repeat(40)],['REFRESH_TOKEN_SECRET','example-secret-value-12345678901234567890']]){
+    assert.throws(()=>parseApiEnvironment({...valid,NODE_ENV:'production',JWT_SECRET:'Aa3!secure-random-looking-value-012345',REFRESH_TOKEN_SECRET:'Bb7!different-random-looking-value-98765',[key]:value}),error=>error.message===`Invalid environment keys: ${key}`);
+  }
+});

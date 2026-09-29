@@ -1,0 +1,9 @@
+
+> mobiflow-ai@0.1.0 lint
+> eslint . --max-warnings=0
+
+
+C:\Code\MobiFlow AI\scripts\verification\m10-eval-diagnostics.mjs
+  5:36  error  'promptVersion' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 1 problem (1 error, 0 warnings)

@@ -1,0 +1,143 @@
+{
+  "at": "2026-09-29T17:14:17.319Z",
+  "baseline": {
+    "runId": "c9fb5577-6c3e-46f8-8114-c5f9537b4a1c",
+    "datasetVersion": "requests.m9.v2",
+    "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "mode": "LIVE_OLLAMA",
+    "startedAt": "2026-09-29T14:13:09.814Z",
+    "finishedAt": "2026-09-29T14:17:47.313Z",
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "request-analysis.v4",
+    "schemaVersion": "analysis.v1",
+    "totalCases": 100,
+    "passed": {
+      "count": 68,
+      "rate": 0.68
+    },
+    "firstAttemptValid": {
+      "count": 99,
+      "rate": 0.99
+    },
+    "repairedSuccess": {
+      "count": 1,
+      "rate": 0.01
+    },
+    "terminalFailure": {
+      "count": 0,
+      "rate": 0
+    },
+    "schemaValid": {
+      "count": 100,
+      "rate": 1
+    },
+    "referenceValid": {
+      "count": 0,
+      "rate": null
+    },
+    "latency": {
+      "mean": 2774.87,
+      "p50": 2704,
+      "p95": 3116,
+      "max": 6597
+    },
+    "averageAttempts": 1.01,
+    "failureCounts": {},
+    "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification and is reported separately as null."
+  },
+  "contended": {
+    "runId": "6bb44580-b395-4325-98f3-4437549b59dc",
+    "datasetVersion": "requests.m9.v2",
+    "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "mode": "LIVE_OLLAMA",
+    "startedAt": "2026-09-29T16:25:47.624Z",
+    "finishedAt": "2026-09-29T16:34:01.887Z",
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "request-analysis.v4",
+    "schemaVersion": "analysis.v1",
+    "totalCases": 100,
+    "passed": {
+      "count": 68,
+      "rate": 0.68
+    },
+    "firstAttemptValid": {
+      "count": 99,
+      "rate": 0.99
+    },
+    "repairedSuccess": {
+      "count": 1,
+      "rate": 0.01
+    },
+    "terminalFailure": {
+      "count": 0,
+      "rate": 0
+    },
+    "schemaValid": {
+      "count": 100,
+      "rate": 1
+    },
+    "referenceValid": {
+      "count": 0,
+      "rate": null
+    },
+    "latency": {
+      "mean": 4942.51,
+      "p50": 4786,
+      "p95": 5621,
+      "max": 11023
+    },
+    "averageAttempts": 1.01,
+    "failureCounts": {},
+    "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification and is reported separately as null."
+  },
+  "isolated": {
+    "runId": "4f2e9f8b-f736-4623-bee0-1042beb23e1f",
+    "datasetVersion": "requests.m9.v2",
+    "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "mode": "LIVE_OLLAMA",
+    "startedAt": "2026-09-29T16:34:59.587Z",
+    "finishedAt": "2026-09-29T16:42:23.764Z",
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "request-analysis.v4",
+    "schemaVersion": "analysis.v1",
+    "totalCases": 100,
+    "passed": {
+      "count": 69,
+      "rate": 0.69
+    },
+    "firstAttemptValid": {
+      "count": 99,
+      "rate": 0.99
+    },
+    "repairedSuccess": {
+      "count": 1,
+      "rate": 0.01
+    },
+    "terminalFailure": {
+      "count": 0,
+      "rate": 0
+    },
+    "schemaValid": {
+      "count": 100,
+      "rate": 1
+    },
+    "referenceValid": {
+      "count": 0,
+      "rate": null
+    },
+    "latency": {
+      "mean": 4441.65,
+      "p50": 4377,
+      "p95": 5147,
+      "max": 9386
+    },
+    "averageAttempts": 1.01,
+    "failureCounts": {},
+    "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification and is reported separately as null."
+  },
+  "additionalConfirmationRun": "NOT RUN: no changed inference contract or identified corrective intervention; two completed runs are sufficient to establish unresolved comparison failure.",
+  "status": "BLOCKED"
+}

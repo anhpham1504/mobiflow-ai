@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:integration:m10",
+  "startedAt": "2026-09-29T17:17:05.708Z",
+  "finishedAt": "2026-09-29T17:17:16.544Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_INTEGRATION_SEED-2026-09-29T17-17-05-708Z.txt"
+}

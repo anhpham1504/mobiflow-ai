@@ -4,9 +4,11 @@ import {usePathname,useRouter} from 'next/navigation';
 import {useEffect,useState,useSyncExternalStore} from 'react';
 import {getProfile,serverProfile,subscribe,refresh,logout,roleHome} from '@/lib/session';
 export function SessionNav(){
-  const user=useSyncExternalStore(subscribe,getProfile,serverProfile),router=useRouter();
-  const [error,setError]=useState('');
-  return <><nav aria-label="Điều hướng chính"><Link href="/" className="nav-item secondary">Trạng thái dịch vụ</Link>{user?<><Link className="nav-item" href={roleHome(user.role)}>Không gian làm việc</Link>{user.role==='MANAGER'?<><Link className="nav-item secondary" href="/manager/knowledge">Kho tài liệu</Link><Link className="nav-item secondary" href="/manager/analytics">Chất lượng & analytics</Link></>:null}<Link className="nav-item secondary" href="/notifications">Thông báo</Link><Link className="nav-item secondary" href="/profile">{user.displayName} · {user.role}</Link><button className="nav-item secondary" onClick={()=>{void logout().then(()=>router.push('/login')).catch(e=>setError(e.message));}}>Đăng xuất</button></>:<Link href="/login" className="nav-item">Đăng nhập</Link>}</nav>{error?<p role="alert">{error}</p>:null}</>;
+  const user=useSyncExternalStore(subscribe,getProfile,serverProfile),router=useRouter(),path=usePathname();
+  const [error,setError]=useState(''),[busy,setBusy]=useState(false);
+  const current=(href:string)=>href==='/'?path===href:path.startsWith(href);
+  const navLink=(href:string,label:string,primary=false)=><Link href={href} className={`nav-item${primary?'':' secondary'}`} aria-current={current(href)?'page':undefined}>{label}</Link>;
+  return <><nav aria-label="Điều hướng chính">{navLink('/','Trạng thái dịch vụ')}{user?<>{navLink(roleHome(user.role),'Không gian làm việc',true)}{user.role==='MANAGER'?<>{navLink('/manager/knowledge','Kho tài liệu')}{navLink('/manager/analytics','Chất lượng & analytics')}</>:null}{navLink('/notifications','Thông báo')}{navLink('/profile',`${user.displayName} · ${user.role}`)}<button className="nav-item secondary" disabled={busy} onClick={()=>{setBusy(true);setError('');void logout().then(()=>router.push('/login')).catch(e=>{setError(e.message);setBusy(false);});}}>{busy?'Đang đăng xuất…':'Đăng xuất'}</button></>:navLink('/login','Đăng nhập',true)}</nav>{error?<p className="form-error" role="alert">{error}</p>:null}</>;
 }
 export function SessionGate({role,children}:{role?:string;children:React.ReactNode}){
   const user=useSyncExternalStore(subscribe,getProfile,serverProfile),router=useRouter(),path=usePathname();

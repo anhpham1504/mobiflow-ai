@@ -1,0 +1,14 @@
+✔ observer preserves the exact production request and captures only safe metadata (43.5192ms)
+✔ observer retains a real two-attempt repair and its backoff, without an extra generation (1061.603ms)
+✔ known missing model is a single safe failure, not silently retried or dropped (8.0012ms)
+✔ metadata projection rejects unknown fields and distinguishes missing durations from zero (0.2614ms)
+✔ safe prompt characteristics have hashes, not raw prompts or arbitrary request options (0.4258ms)
+✔ fixed diagnostic sample and nearest-rank statistics do not select favorable results (0.212ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1298.4581

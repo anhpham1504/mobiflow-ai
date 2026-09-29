@@ -1,0 +1,2319 @@
+{
+  "at": "2026-09-29T17:57:07.986Z",
+  "baselineRef": "v0.9.0-m9",
+  "baselineCommit": "c0e7c9520ae4172b28415b609f8e66191d906803",
+  "head": "c0e7c9520ae4172b28415b609f8e66191d906803",
+  "branch": "feat/m10-release-hardening",
+  "changed": [],
+  "files": [
+    {
+      "path": ".env.example",
+      "m9NormalizedSha256": "10de9b59df3f75330df7f2a61554d436be25f68e5dae3b98c83e5fe084f576e9",
+      "m10NormalizedSha256": "10de9b59df3f75330df7f2a61554d436be25f68e5dae3b98c83e5fe084f576e9",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/analysis-execution.ts",
+      "m9NormalizedSha256": "f416ea46eb254526ad52617d918424a652e181ff60beee9107b7781e49480454",
+      "m10NormalizedSha256": "f416ea46eb254526ad52617d918424a652e181ff60beee9107b7781e49480454",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/analysis-query.service.ts",
+      "m9NormalizedSha256": "87ac7ab740593ba1ebf7963e1b4e383f9f8f602c3d98ab14c8d8f2b7a00738c7",
+      "m10NormalizedSha256": "87ac7ab740593ba1ebf7963e1b4e383f9f8f602c3d98ab14c8d8f2b7a00738c7",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/analysis-worker.ts",
+      "m9NormalizedSha256": "e2afe6f7950c28af5f9d6a3b342bd5c78fb9e6f0b8dc1da6c872cd9f0f42a2cb",
+      "m10NormalizedSha256": "e2afe6f7950c28af5f9d6a3b342bd5c78fb9e6f0b8dc1da6c872cd9f0f42a2cb",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/analysis.controller.ts",
+      "m9NormalizedSha256": "aed6fa1cd2a01eaab78ac0d9645a3033d4b22a9f038d9a7269083919eb923af2",
+      "m10NormalizedSha256": "aed6fa1cd2a01eaab78ac0d9645a3033d4b22a9f038d9a7269083919eb923af2",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/ollama-provider.ts",
+      "m9NormalizedSha256": "8e6c7426c758ab7c518e2af85749178f6333a27f2c0805d05b48a5b1cc0adc79",
+      "m10NormalizedSha256": "8e6c7426c758ab7c518e2af85749178f6333a27f2c0805d05b48a5b1cc0adc79",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/operational-ai.controller.ts",
+      "m9NormalizedSha256": "dee9dd92dcb47cbacf5a7c73f4260a7756108d59cc24f0f250fc84414c88299d",
+      "m10NormalizedSha256": "dee9dd92dcb47cbacf5a7c73f4260a7756108d59cc24f0f250fc84414c88299d",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/operational-ai.service.ts",
+      "m9NormalizedSha256": "62d9e32668329d925ff6911e1a5fe0507fb3d94d19b0e8dd37a41cc1a5f7ecb9",
+      "m10NormalizedSha256": "62d9e32668329d925ff6911e1a5fe0507fb3d94d19b0e8dd37a41cc1a5f7ecb9",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/operational-output.ts",
+      "m9NormalizedSha256": "9808a5c857515adc462f315ab26b2b1c96848754be78e6c1c634962c589d6c1c",
+      "m10NormalizedSha256": "9808a5c857515adc462f315ab26b2b1c96848754be78e6c1c634962c589d6c1c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/prompts/copilot.ts",
+      "m9NormalizedSha256": "3c91b30c2f9d82db8b2029eecb2f6c26530bf64636515447076e2f6c3b77fbba",
+      "m10NormalizedSha256": "3c91b30c2f9d82db8b2029eecb2f6c26530bf64636515447076e2f6c3b77fbba",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/prompts/recommendation.ts",
+      "m9NormalizedSha256": "d85e4031d0b81b9f96b1131192e19dd2367ec70b53e5e3536374b3a78aca7abf",
+      "m10NormalizedSha256": "d85e4031d0b81b9f96b1131192e19dd2367ec70b53e5e3536374b3a78aca7abf",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/prompts/request-analysis.ts",
+      "m9NormalizedSha256": "10bb1ae6fc1af17515ddb218cbabf7b84bc17b750491df41954608559fb0fed3",
+      "m10NormalizedSha256": "10bb1ae6fc1af17515ddb218cbabf7b84bc17b750491df41954608559fb0fed3",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/provider.ts",
+      "m9NormalizedSha256": "bf026b1fba73a0ac6ae6f12109001feecf9df8cafeff17d42105da3700949ec9",
+      "m10NormalizedSha256": "bf026b1fba73a0ac6ae6f12109001feecf9df8cafeff17d42105da3700949ec9",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/recommendation-output.ts",
+      "m9NormalizedSha256": "23f0fd8aee5391731592d1a7fd9bf3602ef1baa446ede85133e21765de8b5b74",
+      "m10NormalizedSha256": "23f0fd8aee5391731592d1a7fd9bf3602ef1baa446ede85133e21765de8b5b74",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/recommendation-validation.ts",
+      "m9NormalizedSha256": "0d60aef30d858450a191451ba1f183c644c1b6188d28d27c696c58aed4a4392c",
+      "m10NormalizedSha256": "0d60aef30d858450a191451ba1f183c644c1b6188d28d27c696c58aed4a4392c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/recommendation.controller.ts",
+      "m9NormalizedSha256": "2c1ee8211e407a812584e611138d32ee752d03fa02c1f6517006e2a7c12990b2",
+      "m10NormalizedSha256": "2c1ee8211e407a812584e611138d32ee752d03fa02c1f6517006e2a7c12990b2",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/recommendation.service.ts",
+      "m9NormalizedSha256": "b4eafb5b15d4c4a82ce5acd7fb2a850809a74a0c8f733d401168ce4f896d52be",
+      "m10NormalizedSha256": "b4eafb5b15d4c4a82ce5acd7fb2a850809a74a0c8f733d401168ce4f896d52be",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/tools/domain-tools.ts",
+      "m9NormalizedSha256": "5e80e24287e94bfc4a89cce0849b469d8741994efa489098f0b94caa2538c7b7",
+      "m10NormalizedSha256": "5e80e24287e94bfc4a89cce0849b469d8741994efa489098f0b94caa2538c7b7",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/tools/registry.ts",
+      "m9NormalizedSha256": "85ade5de020d23496a4064c0b5239518c9a7ab10fb7f10db12d4636f7081041c",
+      "m10NormalizedSha256": "85ade5de020d23496a4064c0b5239518c9a7ab10fb7f10db12d4636f7081041c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/tools/request-vectors.ts",
+      "m9NormalizedSha256": "b2fefd36fd45152b9bf07663d9a093d2aa4d0facf7077b21c67eb10080b7b86e",
+      "m10NormalizedSha256": "b2fefd36fd45152b9bf07663d9a093d2aa4d0facf7077b21c67eb10080b7b86e",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/ai/tools/staff.ts",
+      "m9NormalizedSha256": "99740faa7f40696399be671b148462b6f9ac8979d9b4a2a4a6d9e2461d369b5a",
+      "m10NormalizedSha256": "99740faa7f40696399be671b148462b6f9ac8979d9b4a2a4a6d9e2461d369b5a",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/analytics/analytics.controller.ts",
+      "m9NormalizedSha256": "e2438f9e30b6b22fa1b0754584ab96bc4bd5c4dc8bd017d9c987aa0fbf5fbf03",
+      "m10NormalizedSha256": "e2438f9e30b6b22fa1b0754584ab96bc4bd5c4dc8bd017d9c987aa0fbf5fbf03",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/analytics/analytics.service.ts",
+      "m9NormalizedSha256": "0c7a6f6b5ba4c99fc69c9c49c10aa146ae7015246750d2c07dd96fb59f3aea16",
+      "m10NormalizedSha256": "0c7a6f6b5ba4c99fc69c9c49c10aa146ae7015246750d2c07dd96fb59f3aea16",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/analytics/metrics.ts",
+      "m9NormalizedSha256": "817ad664f2688b50188bdcd46965bfc13032c41a6b2729199bd0d442525f4d93",
+      "m10NormalizedSha256": "817ad664f2688b50188bdcd46965bfc13032c41a6b2729199bd0d442525f4d93",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/chunker.ts",
+      "m9NormalizedSha256": "3dbc80ffb8431876942946020f6a8dd767a3da15d61ea91c55ba7fbc1223321f",
+      "m10NormalizedSha256": "3dbc80ffb8431876942946020f6a8dd767a3da15d61ea91c55ba7fbc1223321f",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/document.service.ts",
+      "m9NormalizedSha256": "5f43eda68738e1b02f3d0fbc0efcf57773bd83adf5af7f2e345ed65943447536",
+      "m10NormalizedSha256": "5f43eda68738e1b02f3d0fbc0efcf57773bd83adf5af7f2e345ed65943447536",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/embedding-provider.ts",
+      "m9NormalizedSha256": "3b008c483a73f980ec59f557e345fcdbe59f0687f3658371dd17075137a22c45",
+      "m10NormalizedSha256": "3b008c483a73f980ec59f557e345fcdbe59f0687f3658371dd17075137a22c45",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/file-store.ts",
+      "m9NormalizedSha256": "acf22a9cefc8765f912198c52f3c81fc081286884147992696714c7de598dc81",
+      "m10NormalizedSha256": "acf22a9cefc8765f912198c52f3c81fc081286884147992696714c7de598dc81",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/ingestion-worker.ts",
+      "m9NormalizedSha256": "946b1f6208224dcd11cca4e0c2b3fe455bae2986411d2e731c4d52ccee700fa8",
+      "m10NormalizedSha256": "946b1f6208224dcd11cca4e0c2b3fe455bae2986411d2e731c4d52ccee700fa8",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge-access.ts",
+      "m9NormalizedSha256": "9ac2846ccb804e7d252ed15c0107e67e9ba748308d59f183da53427106af9710",
+      "m10NormalizedSha256": "9ac2846ccb804e7d252ed15c0107e67e9ba748308d59f183da53427106af9710",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge.controller.ts",
+      "m9NormalizedSha256": "e746e5348444422fda3b4048e4c8297b07930b25c30502d32221bb830a485c2f",
+      "m10NormalizedSha256": "e746e5348444422fda3b4048e4c8297b07930b25c30502d32221bb830a485c2f",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge.guard.ts",
+      "m9NormalizedSha256": "2f44041f21f259639254e5d57b079ae24d7c76d71488e4b7addbeb49234e813c",
+      "m10NormalizedSha256": "2f44041f21f259639254e5d57b079ae24d7c76d71488e4b7addbeb49234e813c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/parser.ts",
+      "m9NormalizedSha256": "8e44a5c12f5a75588a34fc27bcd4ae25582ef4a38fce28ed783e3fd059afe577",
+      "m10NormalizedSha256": "8e44a5c12f5a75588a34fc27bcd4ae25582ef4a38fce28ed783e3fd059afe577",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/pdf-worker.ts",
+      "m9NormalizedSha256": "98287bcf58de20df1da9aaff13b5852ab0b58cb87449f40ea5f0edc9bceb343c",
+      "m10NormalizedSha256": "98287bcf58de20df1da9aaff13b5852ab0b58cb87449f40ea5f0edc9bceb343c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/rag-health.ts",
+      "m9NormalizedSha256": "bf455c9de5e4210f0d2547cfa8c93218b4a6f2a5fff5864a03b75291ef41f512",
+      "m10NormalizedSha256": "bf455c9de5e4210f0d2547cfa8c93218b4a6f2a5fff5864a03b75291ef41f512",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/rag-output.ts",
+      "m9NormalizedSha256": "1ef3a23583b943a2c7663fbdbe6a08a164c508b95e5202815083f7701412dc87",
+      "m10NormalizedSha256": "1ef3a23583b943a2c7663fbdbe6a08a164c508b95e5202815083f7701412dc87",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/retriever.ts",
+      "m9NormalizedSha256": "d3f3d00e86828833a10dc4e15d7d99b0cec6cf2477bd125177beee4afa3e173c",
+      "m10NormalizedSha256": "d3f3d00e86828833a10dc4e15d7d99b0cec6cf2477bd125177beee4afa3e173c",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/source.service.ts",
+      "m9NormalizedSha256": "cea2e335ce443ca4fde2899a524b655a7e3025103dd61d973715538e24162449",
+      "m10NormalizedSha256": "cea2e335ce443ca4fde2899a524b655a7e3025103dd61d973715538e24162449",
+      "equal": true
+    },
+    {
+      "path": "apps/api/src/knowledge/vector.repository.ts",
+      "m9NormalizedSha256": "c0556f646b2320743ea0047001d912ac2623eed5d008cbd30f383f0b56cc06fb",
+      "m10NormalizedSha256": "c0556f646b2320743ea0047001d912ac2623eed5d008cbd30f383f0b56cc06fb",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/M6_README.md",
+      "m9NormalizedSha256": "21e55ec48c0a9f49e5f35efe0abe4432434893d71eb7040f24ef99cb3621dbb7",
+      "m10NormalizedSha256": "21e55ec48c0a9f49e5f35efe0abe4432434893d71eb7040f24ef99cb3621dbb7",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/README.md",
+      "m9NormalizedSha256": "6cefd7a1c737d667f855ef2eb78100922f766686f6a17e4895e12dbac399d9a3",
+      "m10NormalizedSha256": "6cefd7a1c737d667f855ef2eb78100922f766686f6a17e4895e12dbac399d9a3",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/m6-cases.json",
+      "m9NormalizedSha256": "a6fd238fe50f143b49c61140f7604a3ca3bb795db0530903925e5ddcbc214bf2",
+      "m10NormalizedSha256": "a6fd238fe50f143b49c61140f7604a3ca3bb795db0530903925e5ddcbc214bf2",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/rag-analysis.json",
+      "m9NormalizedSha256": "67989350dfffd1311d0bf31f97c85c95fc4748dfac7640e2469eb92848f967f4",
+      "m10NormalizedSha256": "67989350dfffd1311d0bf31f97c85c95fc4748dfac7640e2469eb92848f967f4",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/rag-queries.json",
+      "m9NormalizedSha256": "74f09455381a3f126453fba5b351a18bff152b8d20ae9dc8fef695c5f3c69855",
+      "m10NormalizedSha256": "74f09455381a3f126453fba5b351a18bff152b8d20ae9dc8fef695c5f3c69855",
+      "equal": true
+    },
+    {
+      "path": "datasets/ai-evaluation/requests.json",
+      "m9NormalizedSha256": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+      "m10NormalizedSha256": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/package.json",
+      "m9NormalizedSha256": "ed94d7158c81ebb50b6cecc0b159c86bcff70602913dc52c8f469651eb3d021b",
+      "m10NormalizedSha256": "ed94d7158c81ebb50b6cecc0b159c86bcff70602913dc52c8f469651eb3d021b",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/analysis.ts",
+      "m9NormalizedSha256": "c07360e5d4d0442200e21114bdc9c25afd7d9fa19cd0d729e19c1bac0507b4e4",
+      "m10NormalizedSha256": "c07360e5d4d0442200e21114bdc9c25afd7d9fa19cd0d729e19c1bac0507b4e4",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/analytics.ts",
+      "m9NormalizedSha256": "82c6050f786b3ba3ecc811b6fb49d40515bab66c32d6892632181ceb5693908e",
+      "m10NormalizedSha256": "82c6050f786b3ba3ecc811b6fb49d40515bab66c32d6892632181ceb5693908e",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "m9NormalizedSha256": "6f80972be7a73c76d55ce1791e40b53a2c0bec7b6d2c606abdcf6456117d88c5",
+      "m10NormalizedSha256": "6f80972be7a73c76d55ce1791e40b53a2c0bec7b6d2c606abdcf6456117d88c5",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/knowledge.ts",
+      "m9NormalizedSha256": "1958a3c901cf05ede63b1f4769950ab7c7ea3800d529c24b1c72395177258f26",
+      "m10NormalizedSha256": "1958a3c901cf05ede63b1f4769950ab7c7ea3800d529c24b1c72395177258f26",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/recommendation.ts",
+      "m9NormalizedSha256": "5bdb15ca639b91470f07d1caed2da0252b4335334974693f44300e324064af0c",
+      "m10NormalizedSha256": "5bdb15ca639b91470f07d1caed2da0252b4335334974693f44300e324064af0c",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/src/workflow.ts",
+      "m9NormalizedSha256": "3f81364c378b633b6351b3af261e4baf9cc6d46763785b5d7ba29244bcfbc069",
+      "m10NormalizedSha256": "3f81364c378b633b6351b3af261e4baf9cc6d46763785b5d7ba29244bcfbc069",
+      "equal": true
+    },
+    {
+      "path": "packages/contracts/tsconfig.json",
+      "m9NormalizedSha256": "0b5ca40f86838b57207016f8478f77bbe0edcfda960e5f6307fc2aaf9c9a057d",
+      "m10NormalizedSha256": "0b5ca40f86838b57207016f8478f77bbe0edcfda960e5f6307fc2aaf9c9a057d",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/evidence-output.mjs",
+      "m9NormalizedSha256": "4ad2714cd57350ec0586f3b162ec955ae19da396f63898ee3df0fdfbcd1400da",
+      "m10NormalizedSha256": "4ad2714cd57350ec0586f3b162ec955ae19da396f63898ee3df0fdfbcd1400da",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m4-evaluate.mjs",
+      "m9NormalizedSha256": "51f898b424e7ec9c9614bcc6e0819a5fd97a13fa16a359c1fb8b15c0fa328cd0",
+      "m10NormalizedSha256": "51f898b424e7ec9c9614bcc6e0819a5fd97a13fa16a359c1fb8b15c0fa328cd0",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m5-rag.mjs",
+      "m9NormalizedSha256": "b32f4fc9e41bec63616290ae2ce5ccbfa4a8399282ccfd6795e3c210572e5aef",
+      "m10NormalizedSha256": "b32f4fc9e41bec63616290ae2ce5ccbfa4a8399282ccfd6795e3c210572e5aef",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m5-retrieval.mjs",
+      "m9NormalizedSha256": "2a32a699653074665f7249b629b165cc7589486dac631f3711f47c3191a1aa10",
+      "m10NormalizedSha256": "2a32a699653074665f7249b629b165cc7589486dac631f3711f47c3191a1aa10",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+      "m9NormalizedSha256": "a0f0a6fb98d92c23ce784d22265ff4f433ce379e9c5bcde802e9c7f2026350a4",
+      "m10NormalizedSha256": "a0f0a6fb98d92c23ce784d22265ff4f433ce379e9c5bcde802e9c7f2026350a4",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m8-summary-evaluate.mjs",
+      "m9NormalizedSha256": "ff2bb1458a0e3d1b43bdf3d1f7d62316c54b402d077f807a4c28baa3520b6dfc",
+      "m10NormalizedSha256": "ff2bb1458a0e3d1b43bdf3d1f7d62316c54b402d077f807a4c28baa3520b6dfc",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m9-compare.mjs",
+      "m9NormalizedSha256": "48f97bf1fdce399a789d29675c94f60f3c4e142451c229aa226ceff3d4f119d2",
+      "m10NormalizedSha256": "48f97bf1fdce399a789d29675c94f60f3c4e142451c229aa226ceff3d4f119d2",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m9-evaluate.mjs",
+      "m9NormalizedSha256": "2a68e8a0e7078f27944dac63f1e371aee99b7cd14300f8f6ebc68ff290516ab8",
+      "m10NormalizedSha256": "2a68e8a0e7078f27944dac63f1e371aee99b7cd14300f8f6ebc68ff290516ab8",
+      "equal": true
+    },
+    {
+      "path": "scripts/evaluation/m9-expand-dataset.mjs",
+      "m9NormalizedSha256": "5bb5bfa565419620c20b2d1fc4079cc7529ee46c3f06f4640bbd91c2d134dfe0",
+      "m10NormalizedSha256": "5bb5bfa565419620c20b2d1fc4079cc7529ee46c3f06f4640bbd91c2d134dfe0",
+      "equal": true
+    }
+  ],
+  "components": [
+    {
+      "component": "prompt/version/assembly",
+      "m9": "request-analysis.v4; analysisMessages; same versioned bilingual instructions",
+      "m10": "request-analysis.v4; analysisMessages; same versioned bilingual instructions",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "schema/strictness/taxonomy",
+      "m9": "analysis.v1; strict Zod; category/subcategory oneOf; unchanged six categories/four priorities",
+      "m10": "analysis.v1; strict Zod; category/subcategory oneOf; unchanged six categories/four priorities",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "context/preprocessing/truncation",
+      "m9": "title=input.slice(0,100); full description=input; messages=[]; historyTruncated=false; no normalization; no retrieval",
+      "m10": "title=input.slice(0,100); full description=input; messages=[]; historyTruncated=false; no normalization; no retrieval",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "routing/team/skills",
+      "m9": "M9 evaluator static category-to-team route after generation; no team/skill context enters prompt",
+      "m10": "M9 evaluator static category-to-team route after generation; no team/skill context enters prompt",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "format/stream/think",
+      "m9": "formatFor(input) JSON Schema; stream=false; think=false",
+      "m10": "formatFor(input) JSON Schema; stream=false; think=false",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "token/context/output limits",
+      "m9": "num_predict=1200; num_ctx=16384; messages<=24000 chars; raw output<=32768 bytes; envelope<=65536",
+      "m10": "num_predict=1200; num_ctx=16384; messages<=24000 chars; raw output<=32768 bytes; envelope<=65536",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "timeouts",
+      "m9": "attempt=120000ms; run=300000ms",
+      "m10": "attempt=120000ms; run=300000ms",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "retry/repair",
+      "m9": "at most two attempts; 1000ms retry delay; trusted validator feedback only",
+      "m10": "at most two attempts; 1000ms retry delay; trusted validator feedback only",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "sampling",
+      "m9": "temperature=0; seed=42; top_p/top_k absent (runtime/model defaults not archived per historical run)",
+      "m10": "temperature=0; seed=42; top_p/top_k absent (runtime/model defaults not archived per historical run)",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "keep_alive",
+      "m9": "absent from production request; runtime default not archived per run",
+      "m10": "absent from production request; runtime default not archived per run",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "provider URL",
+      "m9": "validated OLLAMA_BASE_URL; tracked example localhost:11434; actual historical run URL UNRECORDED",
+      "m10": "validated OLLAMA_BASE_URL; tracked example localhost:11434; actual historical run URL UNRECORDED",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "parser/validation",
+      "m9": "boundedJson + parseAnalysis + strict analysisSchema; no ORM changes",
+      "m10": "boundedJson + parseAnalysis + strict analysisSchema; no ORM changes",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "expected-label logic",
+      "m9": "exact category AND priority AND deterministic team; all 100 cases retained",
+      "m10": "exact category AND priority AND deterministic team; all 100 cases retained",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    },
+    {
+      "component": "comparator",
+      "m9": "same compareEvaluation; any pass-to-fail, schema/reference loss, more attempts, new failure or latency>1.5x fails",
+      "m10": "same compareEvaluation; any pass-to-fail, schema/reference loss, more attempts, new failure or latency>1.5x fails",
+      "changed": false,
+      "canAffectResult": "Yes if changed; no source change found. Runtime-only unknowns are explicitly noted."
+    }
+  ],
+  "configDiff": "diff --git a/packages/config/src/index.ts b/packages/config/src/index.ts\nindex 7737f00..bd10eef 100644\n--- a/packages/config/src/index.ts\n+++ b/packages/config/src/index.ts\n@@ -5,7 +5,7 @@ const httpUrl = z.url().refine((value) => {\n   const url = new URL(value);\n   return ['http:', 'https:'].includes(url.protocol) && !url.username && !url.password && !url.search && !url.hash && url.pathname === '/';\n }, 'Expected an HTTP origin without credentials, query or path');\n-const secret = z.string().min(32).refine((value) => !value.includes('CHANGE_ME'), 'Replace placeholder');\n+const secret = z.string().min(32).refine((value) => !/change[_-]?me|placeholder|example|demo.?secret|test.?secret/i.test(value), 'Replace placeholder');\n const model = z.string().min(1).max(200).regex(/^[a-zA-Z0-9_.:/-]+$/);\n const explicitBoolean = z.enum(['true', 'false']).transform((value) => value === 'true');\n \n@@ -42,7 +42,10 @@ const apiEnvironmentSchema = z.object({\n   OLLAMA_BASE_URL: httpUrl,\n   OLLAMA_MODEL: model, OLLAMA_EMBEDDING_MODEL: model,\n   HEALTH_TIMEOUT_MS: z.coerce.number().int().min(100).max(10000).default(2000),\n-}).refine((env) => env.JWT_SECRET !== env.REFRESH_TOKEN_SECRET, { path: ['REFRESH_TOKEN_SECRET'], message: 'Secrets must be distinct' })\n+}).superRefine((env,context)=>{\n+  if(env.JWT_SECRET===env.REFRESH_TOKEN_SECRET)context.addIssue({code:'custom',path:['REFRESH_TOKEN_SECRET'],message:'Secrets must be distinct'});\n+  if(env.NODE_ENV==='production')for(const key of ['JWT_SECRET','REFRESH_TOKEN_SECRET'] as const)if(new Set(env[key]).size<8)context.addIssue({code:'custom',path:[key],message:'Production secret lacks entropy'});\n+})\n   .refine((env) => env.AUTH_COOKIE_SECURE || !URL.canParse(env.WEB_ORIGIN) || (() => {\n     const origin = new URL(env.WEB_ORIGIN);\n     return origin.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(origin.hostname);",
+  "packageDiff": "diff --git a/package-lock.json b/package-lock.json\nindex 7b94624..943d956 100644\n--- a/package-lock.json\n+++ b/package-lock.json\n@@ -12,6 +12,7 @@\n         \"packages/*\"\n       ],\n       \"devDependencies\": {\n+        \"@axe-core/playwright\": \"4.13.0\",\n         \"@eslint/js\": \"9.39.4\",\n         \"@playwright/test\": \"1.63.0\",\n         \"@types/node\": \"24.10.1\",\n@@ -108,6 +109,19 @@\n         \"url\": \"https://github.com/sponsors/sindresorhus\"\n       }\n     },\n+    \"node_modules/@axe-core/playwright\": {\n+      \"version\": \"4.13.0\",\n+      \"resolved\": \"https://registry.npmjs.org/@axe-core/playwright/-/playwright-4.13.0.tgz\",\n+      \"integrity\": \"sha512-6YLx+kxXu5GJceG4ozFg+33a2EMTdjYwWGloJ3sb9Kta5pp+ZNS53uxGVog5JetIY8s++P5UrtX+cri+u0VAVg==\",\n+      \"dev\": true,\n+      \"license\": \"MPL-2.0\",\n+      \"dependencies\": {\n+        \"axe-core\": \"~4.13.0\"\n+      },\n+      \"peerDependencies\": {\n+        \"playwright-core\": \">= 1.0.0\"\n+      }\n+    },\n     \"node_modules/@babel/code-frame\": {\n       \"version\": \"7.29.7\",\n       \"resolved\": \"https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.29.7.tgz\",\ndiff --git a/package.json b/package.json\nindex 9abb664..bbb1e47 100644\n--- a/package.json\n+++ b/package.json\n@@ -18,20 +18,26 @@\n     \"lint\": \"eslint . --max-warnings=0\",\n     \"prisma:generate\": \"node scripts/dev/prisma.mjs generate\",\n     \"typecheck\": \"npm run build:foundation && npm run prisma:generate && npm run typecheck -w @mobiflow/api && npm run typecheck -w @mobiflow/web\",\n-    \"test\": \"npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web\",\n+    \"test\": \"npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web && npm run test:release:m10\",\n     \"build\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && npm run build -w @mobiflow/web\",\n     \"env:setup\": \"node scripts/dev/setup-env.mjs\",\n     \"db:validate\": \"node scripts/dev/prisma.mjs validate\",\n     \"db:migrate\": \"node scripts/dev/prisma.mjs migrate deploy\",\n     \"test:integration\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-runtime.mjs && node --env-file=.env scripts/verification/m2-integration.mjs\",\n-    \"e2e\": \"node scripts/dev/deferred.mjs M10\",\n+    \"e2e\": \"npm run test:e2e:m10\",\n     \"ai:evaluate\": \"npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m9-evaluate.mjs\",\n     \"dataset:prepare:m9\": \"node scripts/evaluation/m9-expand-dataset.mjs\",\n     \"eval:compare:m9\": \"node scripts/evaluation/m9-compare.mjs\",\n     \"demo:seed\": \"npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/dev/seed.mjs\",\n-    \"demo:reset\": \"node scripts/dev/deferred.mjs M10\",\n-    \"demo:preflight\": \"node scripts/dev/deferred.mjs M10\",\n-    \"demo:warmup\": \"node scripts/dev/deferred.mjs M10\",\n+    \"demo:reset\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/reset.mjs\",\n+    \"demo:preflight\": \"npm run build:foundation && npm run prisma:generate && node --env-file=.env scripts/demo/preflight.mjs\",\n+    \"preflight:m10\": \"npm run demo:preflight\",\n+    \"demo:warmup\": \"npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/warmup.mjs\",\n+    \"warmup:m10\": \"npm run demo:warmup\",\n+    \"demo:ready\": \"npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/ready.mjs\",\n+    \"test:release:m10\": \"node --test scripts/demo/*.test.mjs scripts/verification/*.test.mjs\",\n+    \"test:integration:m10\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m10-integration.mjs\",\n+    \"verify:adversarial:m10\": \"node scripts/verification/m10-adversarial.mjs\",\n     \"test:e2e:m3\": \"playwright test --config playwright.m3.config.mjs\",\n     \"eval:ai:m4\": \"npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m4-evaluate.mjs\",\n     \"test:e2e:m4\": \"playwright test --config playwright.m4.config.mjs\",\n@@ -51,6 +57,7 @@\n     \"test:integration:m9\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-integration.mjs --m6-only --pattern \\\"M9 analytics\\\"\",\n     \"test:e2e:m8\": \"playwright test --config playwright.m8.config.mjs\",\n     \"test:e2e:m9\": \"playwright test --config playwright.m9.config.mjs\",\n+    \"test:e2e:m10\": \"playwright test --config playwright.m10.config.mjs\",\n     \"eval:copilot:m8\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-copilot-evaluate.mjs\",\n     \"eval:summary:m8\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-summary-evaluate.mjs\",\n     \"verify:runtime:m8\": \"npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m8-runtime.mjs\",\n@@ -58,6 +65,7 @@\n     ,\"verify:security:m9\": \"node scripts/verification/m9-security.mjs\"\n   },\n   \"devDependencies\": {\n+    \"@axe-core/playwright\": \"4.13.0\",\n     \"@eslint/js\": \"9.39.4\",\n     \"@playwright/test\": \"1.63.0\",\n     \"@types/node\": \"24.10.1\",",
+  "actualConfig": {
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "baseUrl": "http://localhost:11434",
+    "temperature": 0,
+    "maxOutputTokens": 1200,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000
+  },
+  "dataset": {
+    "version": "requests.m9.v2",
+    "sha256": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "baselineSha256": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "identical": true,
+    "totalCases": 100,
+    "idsIdentical": true,
+    "allExpectedLabelsIdentical": true,
+    "resultArtifactsStoreLabels": false,
+    "labelProvenance": "Frozen tagged dataset plus matching dataset hashes; historical artifacts retain match flags, not expected or actual label text."
+  },
+  "selected": [
+    {
+      "id": "normal-06",
+      "syntheticInput": {
+        "title": "Khách hàng Demo Sen tại phòng lab A muốn cấu hình chu kỳ gửi dữ liệu cho 1 thiết bị IoT từ 8 giờ. Kh",
+        "description": "Khách hàng Demo Sen tại phòng lab A muốn cấu hình chu kỳ gửi dữ liệu cho 1 thiết bị IoT từ 8 giờ. Không có sự cố kết nối.",
+        "messages": [],
+        "historyTruncated": false
+      },
+      "expected": {
+        "category": "IOT",
+        "priority": "MEDIUM",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "expectedAtM9": {
+        "category": "IOT",
+        "priority": "MEDIUM",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "historical": {
+        "baseline": {
+          "actual": {
+            "category": "IOT",
+            "priority": "MEDIUM",
+            "team": "NETWORK_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 2659
+        },
+        "contended": {
+          "actual": {
+            "category": "IOT",
+            "priority": null,
+            "team": "NETWORK_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4344
+        },
+        "isolated": {
+          "actual": {
+            "category": "IOT",
+            "priority": null,
+            "team": "NETWORK_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 3516
+        }
+      }
+    },
+    {
+      "id": "incomplete-06",
+      "syntheticInput": {
+        "title": "Không truy cập được tài khoản, nhờ hỗ trợ.",
+        "description": "Không truy cập được tài khoản, nhờ hỗ trợ.",
+        "messages": [],
+        "historyTruncated": false
+      },
+      "expected": {
+        "category": "ACCOUNT",
+        "priority": "MEDIUM",
+        "team": "CUSTOMER_SUPPORT"
+      },
+      "expectedAtM9": {
+        "category": "ACCOUNT",
+        "priority": "MEDIUM",
+        "team": "CUSTOMER_SUPPORT"
+      },
+      "historical": {
+        "baseline": {
+          "actual": {
+            "category": "ACCOUNT",
+            "priority": "MEDIUM",
+            "team": "CUSTOMER_SUPPORT"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 2981
+        },
+        "contended": {
+          "actual": {
+            "category": "ACCOUNT",
+            "priority": null,
+            "team": "CUSTOMER_SUPPORT"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4663
+        },
+        "isolated": {
+          "actual": {
+            "category": "ACCOUNT",
+            "priority": null,
+            "team": "CUSTOMER_SUPPORT"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4344
+        }
+      }
+    },
+    {
+      "id": "M9-065",
+      "syntheticInput": {
+        "title": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 65.",
+        "description": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 65.",
+        "messages": [],
+        "historyTruncated": false
+      },
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "expectedAtM9": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "historical": {
+        "baseline": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": null,
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 2779
+        },
+        "contended": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4593
+        },
+        "isolated": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4286
+        }
+      }
+    },
+    {
+      "id": "M9-075",
+      "syntheticInput": {
+        "title": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 75.",
+        "description": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 75.",
+        "messages": [],
+        "historyTruncated": false
+      },
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "expectedAtM9": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "historical": {
+        "baseline": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": null,
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 2745
+        },
+        "contended": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4956
+        },
+        "isolated": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4628
+        }
+      }
+    },
+    {
+      "id": "M9-085",
+      "syntheticInput": {
+        "title": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 85.",
+        "description": "Đề nghị hướng dẫn kích hoạt dịch vụ thử nghiệm số 85.",
+        "messages": [],
+        "historyTruncated": false
+      },
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "expectedAtM9": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "historical": {
+        "baseline": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": null,
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": false,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 2814
+        },
+        "contended": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 5067
+        },
+        "isolated": {
+          "actual": {
+            "category": "SERVICE",
+            "priority": "LOW",
+            "team": "SERVICE_OPERATIONS"
+          },
+          "provenance": "Match=true implies equality to the frozen expected label; it is not an archived raw prediction. Match=false means exact alternative UNRECORDED, represented by null.",
+          "match": {
+            "category": true,
+            "priority": true,
+            "team": true
+          },
+          "attempts": 1,
+          "schemaValid": true,
+          "failureCategory": null,
+          "latencyMs": 4504
+        }
+      }
+    }
+  ],
+  "prompts": [
+    {
+      "id": "normal-01",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 226,
+        "messagesHash": "e6bc6f2b670a1e92e1a76b96e991ea9121bbf67b56d024e8fe105e817044a2f4",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "55de04459f22c54dee658e1b3f82078000c4d8e4c085e7f1cd1c76560f4b81bf",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "normal-06",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 289,
+        "messagesHash": "4d698b8001433606106f2e3869717685af5baf3e49a4b6565023bd1fdefd0d02",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "aeff6aff4da53d1d3aa96696c738f7e3dfa9ac49776f17bf362cb75f60e595c5",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "normal-11",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 285,
+        "messagesHash": "972bb82bdfea30d50fdbf37659f2a3f4a1a771949db044b226c62548c86559f7",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "0d3581fdfd1645359f559d37b330500d758b82e6d5ffc18e7cc4f3f7c39b942d",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "incomplete-01",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 148,
+        "messagesHash": "ab64917b55e7b1ebb1c5cebbfb9f5fc42dde981fee22cf5337012b411cea9915",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "55ddf918093b01d58dc227e4ea8b20ffb2783a765e7ea35892d18df1ce88476b",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "incomplete-06",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 152,
+        "messagesHash": "ca47b3d82170126787b949da376bd782f43f89f02e16d18de7ec901a92708569",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "2503111caf63ed391f37d82c9ff4d5620f9db30e661c61149540a91e7b8d2aa9",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "ambiguous-01",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 140,
+        "messagesHash": "bd20258d5112319e25397626fc5141f855c1ff5a8f5f438b84c429bef5547d83",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "4ee086bb360a9b81b4c8413efd2fc422de28302b10b7430ae8e947f8ada8e7b3",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "M9-057",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 180,
+        "messagesHash": "72ead9c906e1761ad9abaa8b51441cbeaafa3c03f47362e4c5fc3d1c26695c78",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "150a73afc3ac0ce578b57601339dcfa2bc7ba1cbc8b8693e7ae18a21fda718d0",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "M9-065",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 174,
+        "messagesHash": "d5e4ec883178679bb3e381a099df10130418fded84cb87fdcfef9fd8db049e94",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "d19d0492af9d396632640232689f3445591671afb74a8ed7780a3f52b90379b8",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "M9-075",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 174,
+        "messagesHash": "ca425a506db13bef3b19cc89622f6c7c303651e78a53cfa7673b61abe7229fb8",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "16ffd8f5f895374f84d6a0feef47351282551eafcd3c3ed42563c0b5c73e21fa",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    },
+    {
+      "id": "M9-085",
+      "current": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 174,
+        "messagesHash": "52f8454809975c7f2c10c1df32ede57eec5506966e269da267c65541963132b5",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "a20e4dfc86fdc1669ffde525a3f5625be93a6bf7740abd104ed56b92ff0d112c",
+        "messageCount": 2,
+        "structuredFormat": true
+      },
+      "m9Equivalence": "Reconstructible identically from byte-equivalent source/data and the same dependency lock entries. Historical wire prompt/token counts were NOT recorded; this is not a claim to possess those observations."
+    }
+  ],
+  "comparisons": {
+    "contended": {
+      "comparedCases": 100,
+      "regressions": [
+        {
+          "caseId": "normal-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2724,
+          "after": 4267
+        },
+        {
+          "caseId": "normal-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2397,
+          "after": 4362
+        },
+        {
+          "caseId": "normal-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2828,
+          "after": 4887
+        },
+        {
+          "caseId": "normal-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2705,
+          "after": 4384
+        },
+        {
+          "caseId": "normal-06",
+          "kind": "PASS_TO_FAIL",
+          "before": true,
+          "after": false
+        },
+        {
+          "caseId": "normal-06",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2659,
+          "after": 4344
+        },
+        {
+          "caseId": "normal-07",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2600,
+          "after": 4221
+        },
+        {
+          "caseId": "normal-08",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2662,
+          "after": 4317
+        },
+        {
+          "caseId": "normal-09",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3494,
+          "after": 5622
+        },
+        {
+          "caseId": "normal-10",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2806,
+          "after": 4914
+        },
+        {
+          "caseId": "normal-11",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3115,
+          "after": 4864
+        },
+        {
+          "caseId": "normal-12",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2665,
+          "after": 4337
+        },
+        {
+          "caseId": "normal-13",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3023,
+          "after": 5195
+        },
+        {
+          "caseId": "normal-14",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2247,
+          "after": 4068
+        },
+        {
+          "caseId": "normal-15",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2858,
+          "after": 5125
+        },
+        {
+          "caseId": "normal-16",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2220,
+          "after": 4061
+        },
+        {
+          "caseId": "normal-17",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 1921,
+          "after": 4122
+        },
+        {
+          "caseId": "normal-18",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2268,
+          "after": 4495
+        },
+        {
+          "caseId": "normal-19",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2421,
+          "after": 4420
+        },
+        {
+          "caseId": "normal-20",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2802,
+          "after": 5386
+        },
+        {
+          "caseId": "normal-21",
+          "kind": "PASS_TO_FAIL",
+          "before": true,
+          "after": false
+        },
+        {
+          "caseId": "normal-21",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2456,
+          "after": 4063
+        },
+        {
+          "caseId": "normal-22",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3119,
+          "after": 5686
+        },
+        {
+          "caseId": "normal-23",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2843,
+          "after": 5004
+        },
+        {
+          "caseId": "normal-24",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2453,
+          "after": 4657
+        },
+        {
+          "caseId": "normal-25",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2979,
+          "after": 5612
+        },
+        {
+          "caseId": "normal-26",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2391,
+          "after": 4593
+        },
+        {
+          "caseId": "normal-27",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2389,
+          "after": 4476
+        },
+        {
+          "caseId": "normal-28",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2274,
+          "after": 4481
+        },
+        {
+          "caseId": "normal-29",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2851,
+          "after": 5300
+        },
+        {
+          "caseId": "normal-30",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2562,
+          "after": 4814
+        },
+        {
+          "caseId": "incomplete-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2483,
+          "after": 4786
+        },
+        {
+          "caseId": "incomplete-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2586,
+          "after": 4894
+        },
+        {
+          "caseId": "incomplete-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2918,
+          "after": 5148
+        },
+        {
+          "caseId": "incomplete-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2784,
+          "after": 5083
+        },
+        {
+          "caseId": "incomplete-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3059,
+          "after": 5479
+        },
+        {
+          "caseId": "incomplete-06",
+          "kind": "PASS_TO_FAIL",
+          "before": true,
+          "after": false
+        },
+        {
+          "caseId": "incomplete-06",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2981,
+          "after": 4663
+        },
+        {
+          "caseId": "incomplete-07",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2743,
+          "after": 4877
+        },
+        {
+          "caseId": "incomplete-08",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2717,
+          "after": 4901
+        },
+        {
+          "caseId": "incomplete-09",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2534,
+          "after": 4681
+        },
+        {
+          "caseId": "incomplete-10",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2518,
+          "after": 4800
+        },
+        {
+          "caseId": "ambiguous-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2603,
+          "after": 4584
+        },
+        {
+          "caseId": "ambiguous-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2659,
+          "after": 4648
+        },
+        {
+          "caseId": "ambiguous-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2713,
+          "after": 4729
+        },
+        {
+          "caseId": "ambiguous-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2789,
+          "after": 5501
+        },
+        {
+          "caseId": "ambiguous-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3064,
+          "after": 5321
+        },
+        {
+          "caseId": "noisy-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2210,
+          "after": 4104
+        },
+        {
+          "caseId": "noisy-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2857,
+          "after": 5249
+        },
+        {
+          "caseId": "noisy-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 6597,
+          "after": 11023
+        },
+        {
+          "caseId": "noisy-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2605,
+          "after": 4281
+        },
+        {
+          "caseId": "noisy-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2471,
+          "after": 4456
+        },
+        {
+          "caseId": "M9-051",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2650,
+          "after": 4549
+        },
+        {
+          "caseId": "M9-052",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2357,
+          "after": 4315
+        },
+        {
+          "caseId": "M9-053",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2901,
+          "after": 5097
+        },
+        {
+          "caseId": "M9-054",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2604,
+          "after": 4715
+        },
+        {
+          "caseId": "M9-055",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2749,
+          "after": 4845
+        },
+        {
+          "caseId": "M9-056",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2497,
+          "after": 4686
+        },
+        {
+          "caseId": "M9-057",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2271,
+          "after": 4366
+        },
+        {
+          "caseId": "M9-058",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3204,
+          "after": 5000
+        },
+        {
+          "caseId": "M9-059",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3042,
+          "after": 4897
+        },
+        {
+          "caseId": "M9-060",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2795,
+          "after": 5456
+        },
+        {
+          "caseId": "M9-061",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2507,
+          "after": 4546
+        },
+        {
+          "caseId": "M9-062",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2704,
+          "after": 4505
+        },
+        {
+          "caseId": "M9-063",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2906,
+          "after": 5202
+        },
+        {
+          "caseId": "M9-064",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2597,
+          "after": 4604
+        },
+        {
+          "caseId": "M9-065",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2779,
+          "after": 4593
+        },
+        {
+          "caseId": "M9-066",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2548,
+          "after": 4462
+        },
+        {
+          "caseId": "M9-067",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2412,
+          "after": 4507
+        },
+        {
+          "caseId": "M9-068",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3070,
+          "after": 5370
+        },
+        {
+          "caseId": "M9-069",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2927,
+          "after": 5299
+        },
+        {
+          "caseId": "M9-070",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2811,
+          "after": 5426
+        },
+        {
+          "caseId": "M9-071",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2660,
+          "after": 4798
+        },
+        {
+          "caseId": "M9-072",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2672,
+          "after": 4786
+        },
+        {
+          "caseId": "M9-073",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2894,
+          "after": 5070
+        },
+        {
+          "caseId": "M9-074",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2601,
+          "after": 4773
+        },
+        {
+          "caseId": "M9-075",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2745,
+          "after": 4956
+        },
+        {
+          "caseId": "M9-076",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2516,
+          "after": 4767
+        },
+        {
+          "caseId": "M9-077",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2467,
+          "after": 4688
+        },
+        {
+          "caseId": "M9-078",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3116,
+          "after": 5520
+        },
+        {
+          "caseId": "M9-079",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2982,
+          "after": 5284
+        },
+        {
+          "caseId": "M9-080",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2900,
+          "after": 6022
+        },
+        {
+          "caseId": "M9-081",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2486,
+          "after": 4521
+        },
+        {
+          "caseId": "M9-082",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2521,
+          "after": 4507
+        },
+        {
+          "caseId": "M9-083",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2879,
+          "after": 5318
+        },
+        {
+          "caseId": "M9-084",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2622,
+          "after": 4850
+        },
+        {
+          "caseId": "M9-085",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2814,
+          "after": 5067
+        },
+        {
+          "caseId": "M9-086",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2525,
+          "after": 4754
+        },
+        {
+          "caseId": "M9-087",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2536,
+          "after": 4574
+        },
+        {
+          "caseId": "M9-088",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2921,
+          "after": 5535
+        },
+        {
+          "caseId": "M9-089",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2900,
+          "after": 5381
+        },
+        {
+          "caseId": "M9-090",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2839,
+          "after": 4974
+        },
+        {
+          "caseId": "M9-091",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2631,
+          "after": 4580
+        },
+        {
+          "caseId": "M9-092",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2536,
+          "after": 4639
+        },
+        {
+          "caseId": "M9-093",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2914,
+          "after": 5621
+        },
+        {
+          "caseId": "M9-094",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2552,
+          "after": 4777
+        },
+        {
+          "caseId": "M9-095",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2940,
+          "after": 4960
+        },
+        {
+          "caseId": "M9-096",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2622,
+          "after": 5099
+        },
+        {
+          "caseId": "M9-097",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2481,
+          "after": 4532
+        },
+        {
+          "caseId": "M9-098",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2933,
+          "after": 5592
+        },
+        {
+          "caseId": "M9-099",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2978,
+          "after": 5411
+        }
+      ],
+      "passed": false,
+      "latencyRatio": 1.5,
+      "exitCodeByUnchangedCliPolicy": 1,
+      "failToPass": [
+        "M9-065",
+        "M9-075",
+        "M9-085"
+      ]
+    },
+    "isolated": {
+      "comparedCases": 100,
+      "regressions": [
+        {
+          "caseId": "normal-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2397,
+          "after": 3999
+        },
+        {
+          "caseId": "normal-06",
+          "kind": "PASS_TO_FAIL",
+          "before": true,
+          "after": false
+        },
+        {
+          "caseId": "normal-10",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2806,
+          "after": 4441
+        },
+        {
+          "caseId": "normal-11",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3115,
+          "after": 4814
+        },
+        {
+          "caseId": "normal-12",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2665,
+          "after": 4269
+        },
+        {
+          "caseId": "normal-14",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2247,
+          "after": 3702
+        },
+        {
+          "caseId": "normal-15",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2858,
+          "after": 4700
+        },
+        {
+          "caseId": "normal-16",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2220,
+          "after": 3928
+        },
+        {
+          "caseId": "normal-17",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 1921,
+          "after": 3105
+        },
+        {
+          "caseId": "normal-18",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2268,
+          "after": 3722
+        },
+        {
+          "caseId": "normal-19",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2421,
+          "after": 4031
+        },
+        {
+          "caseId": "normal-20",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2802,
+          "after": 5626
+        },
+        {
+          "caseId": "normal-21",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2456,
+          "after": 3794
+        },
+        {
+          "caseId": "normal-23",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2843,
+          "after": 4743
+        },
+        {
+          "caseId": "normal-24",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2453,
+          "after": 3861
+        },
+        {
+          "caseId": "normal-25",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2979,
+          "after": 4543
+        },
+        {
+          "caseId": "normal-26",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2391,
+          "after": 4533
+        },
+        {
+          "caseId": "normal-27",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2389,
+          "after": 3998
+        },
+        {
+          "caseId": "normal-28",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2274,
+          "after": 3882
+        },
+        {
+          "caseId": "normal-29",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2851,
+          "after": 4682
+        },
+        {
+          "caseId": "normal-30",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2562,
+          "after": 4592
+        },
+        {
+          "caseId": "incomplete-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2483,
+          "after": 4339
+        },
+        {
+          "caseId": "incomplete-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2586,
+          "after": 4202
+        },
+        {
+          "caseId": "incomplete-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2918,
+          "after": 4680
+        },
+        {
+          "caseId": "incomplete-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2784,
+          "after": 4633
+        },
+        {
+          "caseId": "incomplete-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3059,
+          "after": 4891
+        },
+        {
+          "caseId": "incomplete-06",
+          "kind": "PASS_TO_FAIL",
+          "before": true,
+          "after": false
+        },
+        {
+          "caseId": "incomplete-07",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2743,
+          "after": 4542
+        },
+        {
+          "caseId": "incomplete-08",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2717,
+          "after": 4478
+        },
+        {
+          "caseId": "incomplete-09",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2534,
+          "after": 4270
+        },
+        {
+          "caseId": "incomplete-10",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2518,
+          "after": 4518
+        },
+        {
+          "caseId": "ambiguous-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2603,
+          "after": 4248
+        },
+        {
+          "caseId": "ambiguous-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2659,
+          "after": 4159
+        },
+        {
+          "caseId": "ambiguous-03",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2713,
+          "after": 4513
+        },
+        {
+          "caseId": "ambiguous-04",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2789,
+          "after": 4641
+        },
+        {
+          "caseId": "ambiguous-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3064,
+          "after": 4850
+        },
+        {
+          "caseId": "noisy-01",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2210,
+          "after": 3623
+        },
+        {
+          "caseId": "noisy-02",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2857,
+          "after": 4803
+        },
+        {
+          "caseId": "noisy-05",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2471,
+          "after": 4065
+        },
+        {
+          "caseId": "M9-051",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2650,
+          "after": 4377
+        },
+        {
+          "caseId": "M9-052",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2357,
+          "after": 3956
+        },
+        {
+          "caseId": "M9-053",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2901,
+          "after": 4778
+        },
+        {
+          "caseId": "M9-054",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2604,
+          "after": 4410
+        },
+        {
+          "caseId": "M9-055",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2749,
+          "after": 4518
+        },
+        {
+          "caseId": "M9-056",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2497,
+          "after": 4340
+        },
+        {
+          "caseId": "M9-057",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2271,
+          "after": 4002
+        },
+        {
+          "caseId": "M9-060",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2795,
+          "after": 5015
+        },
+        {
+          "caseId": "M9-061",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2507,
+          "after": 4111
+        },
+        {
+          "caseId": "M9-063",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2906,
+          "after": 4772
+        },
+        {
+          "caseId": "M9-064",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2597,
+          "after": 4313
+        },
+        {
+          "caseId": "M9-065",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2779,
+          "after": 4286
+        },
+        {
+          "caseId": "M9-066",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2548,
+          "after": 4121
+        },
+        {
+          "caseId": "M9-067",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2412,
+          "after": 4130
+        },
+        {
+          "caseId": "M9-068",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3070,
+          "after": 4929
+        },
+        {
+          "caseId": "M9-069",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2927,
+          "after": 4815
+        },
+        {
+          "caseId": "M9-070",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2811,
+          "after": 4917
+        },
+        {
+          "caseId": "M9-071",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2660,
+          "after": 4317
+        },
+        {
+          "caseId": "M9-072",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2672,
+          "after": 4381
+        },
+        {
+          "caseId": "M9-073",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2894,
+          "after": 4701
+        },
+        {
+          "caseId": "M9-074",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2601,
+          "after": 4385
+        },
+        {
+          "caseId": "M9-075",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2745,
+          "after": 4628
+        },
+        {
+          "caseId": "M9-076",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2516,
+          "after": 4369
+        },
+        {
+          "caseId": "M9-077",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2467,
+          "after": 4285
+        },
+        {
+          "caseId": "M9-078",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 3116,
+          "after": 5112
+        },
+        {
+          "caseId": "M9-079",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2982,
+          "after": 4780
+        },
+        {
+          "caseId": "M9-080",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2900,
+          "after": 5578
+        },
+        {
+          "caseId": "M9-081",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2486,
+          "after": 4095
+        },
+        {
+          "caseId": "M9-082",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2521,
+          "after": 4087
+        },
+        {
+          "caseId": "M9-083",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2879,
+          "after": 4757
+        },
+        {
+          "caseId": "M9-084",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2622,
+          "after": 4377
+        },
+        {
+          "caseId": "M9-085",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2814,
+          "after": 4504
+        },
+        {
+          "caseId": "M9-086",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2525,
+          "after": 4184
+        },
+        {
+          "caseId": "M9-087",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2536,
+          "after": 4198
+        },
+        {
+          "caseId": "M9-088",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2921,
+          "after": 5147
+        },
+        {
+          "caseId": "M9-089",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2900,
+          "after": 4830
+        },
+        {
+          "caseId": "M9-090",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2839,
+          "after": 4501
+        },
+        {
+          "caseId": "M9-091",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2631,
+          "after": 4143
+        },
+        {
+          "caseId": "M9-092",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2536,
+          "after": 4191
+        },
+        {
+          "caseId": "M9-093",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2914,
+          "after": 5193
+        },
+        {
+          "caseId": "M9-094",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2552,
+          "after": 4427
+        },
+        {
+          "caseId": "M9-095",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2940,
+          "after": 4571
+        },
+        {
+          "caseId": "M9-096",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2622,
+          "after": 4739
+        },
+        {
+          "caseId": "M9-097",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2481,
+          "after": 4151
+        },
+        {
+          "caseId": "M9-098",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2933,
+          "after": 5118
+        },
+        {
+          "caseId": "M9-099",
+          "kind": "SEVERE_LATENCY_REGRESSION",
+          "before": 2978,
+          "after": 4867
+        }
+      ],
+      "passed": false,
+      "latencyRatio": 1.5,
+      "exitCodeByUnchangedCliPolicy": 1,
+      "failToPass": [
+        "M9-065",
+        "M9-075",
+        "M9-085"
+      ]
+    }
+  },
+  "protectedEvidence": [
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T16-34-01-887Z.json",
+      "sha256": "1179ebb315f7a4e654e73601ea2499c13d34621752d434f53f5a89bdd90af50d"
+    },
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T16-42-23-764Z.json",
+      "sha256": "91ae88c1c197fe507602cd5d527753dff0b2222876b5a54feab9fce784b1d077"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_REGRESSION.json",
+      "sha256": "5cf0342b418997b4966077746b9cff00c9ec39d71fa13a2a2d457d0295bc2510"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_RESULT.json",
+      "sha256": "30948372e84b5fcaeb188dc866ff19cbbcd1916d4e628f52232e5772f8625285"
+    },
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T14-17-47-313Z.json",
+      "sha256": "2067dc7357ba4dad63a70d9f0a53cc5b58e171e59fd004fc6438d8e6c4c01f00"
+    },
+    {
+      "path": "docs/verification/evidence/M9_EVAL_REGRESSION.json",
+      "sha256": "9d578712cc2e9e48f4edde964ef62aa7ee50023e2ab607f970da90f0768e8d74"
+    },
+    {
+      "path": "docs/verification/evidence/M9_EVAL_RESULT.json",
+      "sha256": "91ae88c1c197fe507602cd5d527753dff0b2222876b5a54feab9fce784b1d077"
+    },
+    {
+      "path": "docs/verification/evidence/M9_RUNTIME_OFFLINE.json",
+      "sha256": "47dccfe0987f1428dd26fb7c13dc30cd287d1719e93a72af9f87a7bbd32aa072"
+    },
+    {
+      "path": "docs/verification/evidence/M9_SECURITY_SCAN.json",
+      "sha256": "456b90cdff533ce3369687da3f2ac20200aa934b82e0f8c22fa748279535d96c"
+    }
+  ],
+  "diagnosticProtocol": {
+    "priorityMaxPerCase": 5,
+    "priorityDedicatedRepeats": 4,
+    "priorityFifthRepeat": "one occurrence in the fixed microbenchmark",
+    "coldWarmProbe": "normal-01 twice before replays",
+    "sampleIds": [
+      "normal-01",
+      "normal-06",
+      "normal-11",
+      "incomplete-01",
+      "incomplete-06",
+      "ambiguous-01",
+      "M9-057",
+      "M9-065",
+      "M9-075",
+      "M9-085"
+    ],
+    "selection": "Declared before measurement: canonical stable pass, IOT/BILLING, missing facts, both blockers, ambiguity, Vietnamese without accents and all three fail-to-pass examples. Not selected by measured latency.",
+    "fullRun": "NOT AUTHORIZED by this runner; requires separately justified intervention."
+  }
+}

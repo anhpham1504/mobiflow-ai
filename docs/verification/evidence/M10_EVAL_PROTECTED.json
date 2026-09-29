@@ -1,0 +1,8 @@
+{
+  "command": "node --env-file=.env scripts/verification/m10-eval-diagnostics.mjs verify-protected",
+  "startedAt": "2026-09-29T18:11:14.133Z",
+  "finishedAt": "2026-09-29T18:11:14.290Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_EVAL_PROTECTED-2026-09-29T18-11-14-133Z.txt"
+}

@@ -1,10 +1,521 @@
 {
-  "at": "2026-09-29T14:51:51.031Z",
+  "at": "2026-09-29T17:11:16.217Z",
   "baseline": "m9-2026-09-29T14-17-47-313Z.json",
-  "current": "m9-2026-09-29T14-17-47-313Z.json",
+  "current": "m9-2026-09-29T16-42-23-764Z.json",
   "method": "Explicit per-case comparison; no aggregate quality score. A self-baseline verifies the mechanism only and is not a longitudinal quality claim.",
   "comparedCases": 100,
-  "regressions": [],
-  "passed": true,
+  "regressions": [
+    {
+      "caseId": "normal-03",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2397,
+      "after": 3999
+    },
+    {
+      "caseId": "normal-06",
+      "kind": "PASS_TO_FAIL",
+      "before": true,
+      "after": false
+    },
+    {
+      "caseId": "normal-10",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2806,
+      "after": 4441
+    },
+    {
+      "caseId": "normal-11",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 3115,
+      "after": 4814
+    },
+    {
+      "caseId": "normal-12",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2665,
+      "after": 4269
+    },
+    {
+      "caseId": "normal-14",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2247,
+      "after": 3702
+    },
+    {
+      "caseId": "normal-15",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2858,
+      "after": 4700
+    },
+    {
+      "caseId": "normal-16",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2220,
+      "after": 3928
+    },
+    {
+      "caseId": "normal-17",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 1921,
+      "after": 3105
+    },
+    {
+      "caseId": "normal-18",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2268,
+      "after": 3722
+    },
+    {
+      "caseId": "normal-19",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2421,
+      "after": 4031
+    },
+    {
+      "caseId": "normal-20",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2802,
+      "after": 5626
+    },
+    {
+      "caseId": "normal-21",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2456,
+      "after": 3794
+    },
+    {
+      "caseId": "normal-23",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2843,
+      "after": 4743
+    },
+    {
+      "caseId": "normal-24",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2453,
+      "after": 3861
+    },
+    {
+      "caseId": "normal-25",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2979,
+      "after": 4543
+    },
+    {
+      "caseId": "normal-26",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2391,
+      "after": 4533
+    },
+    {
+      "caseId": "normal-27",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2389,
+      "after": 3998
+    },
+    {
+      "caseId": "normal-28",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2274,
+      "after": 3882
+    },
+    {
+      "caseId": "normal-29",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2851,
+      "after": 4682
+    },
+    {
+      "caseId": "normal-30",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2562,
+      "after": 4592
+    },
+    {
+      "caseId": "incomplete-01",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2483,
+      "after": 4339
+    },
+    {
+      "caseId": "incomplete-02",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2586,
+      "after": 4202
+    },
+    {
+      "caseId": "incomplete-03",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2918,
+      "after": 4680
+    },
+    {
+      "caseId": "incomplete-04",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2784,
+      "after": 4633
+    },
+    {
+      "caseId": "incomplete-05",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 3059,
+      "after": 4891
+    },
+    {
+      "caseId": "incomplete-06",
+      "kind": "PASS_TO_FAIL",
+      "before": true,
+      "after": false
+    },
+    {
+      "caseId": "incomplete-07",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2743,
+      "after": 4542
+    },
+    {
+      "caseId": "incomplete-08",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2717,
+      "after": 4478
+    },
+    {
+      "caseId": "incomplete-09",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2534,
+      "after": 4270
+    },
+    {
+      "caseId": "incomplete-10",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2518,
+      "after": 4518
+    },
+    {
+      "caseId": "ambiguous-01",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2603,
+      "after": 4248
+    },
+    {
+      "caseId": "ambiguous-02",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2659,
+      "after": 4159
+    },
+    {
+      "caseId": "ambiguous-03",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2713,
+      "after": 4513
+    },
+    {
+      "caseId": "ambiguous-04",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2789,
+      "after": 4641
+    },
+    {
+      "caseId": "ambiguous-05",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 3064,
+      "after": 4850
+    },
+    {
+      "caseId": "noisy-01",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2210,
+      "after": 3623
+    },
+    {
+      "caseId": "noisy-02",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2857,
+      "after": 4803
+    },
+    {
+      "caseId": "noisy-05",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2471,
+      "after": 4065
+    },
+    {
+      "caseId": "M9-051",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2650,
+      "after": 4377
+    },
+    {
+      "caseId": "M9-052",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2357,
+      "after": 3956
+    },
+    {
+      "caseId": "M9-053",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2901,
+      "after": 4778
+    },
+    {
+      "caseId": "M9-054",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2604,
+      "after": 4410
+    },
+    {
+      "caseId": "M9-055",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2749,
+      "after": 4518
+    },
+    {
+      "caseId": "M9-056",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2497,
+      "after": 4340
+    },
+    {
+      "caseId": "M9-057",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2271,
+      "after": 4002
+    },
+    {
+      "caseId": "M9-060",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2795,
+      "after": 5015
+    },
+    {
+      "caseId": "M9-061",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2507,
+      "after": 4111
+    },
+    {
+      "caseId": "M9-063",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2906,
+      "after": 4772
+    },
+    {
+      "caseId": "M9-064",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2597,
+      "after": 4313
+    },
+    {
+      "caseId": "M9-065",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2779,
+      "after": 4286
+    },
+    {
+      "caseId": "M9-066",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2548,
+      "after": 4121
+    },
+    {
+      "caseId": "M9-067",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2412,
+      "after": 4130
+    },
+    {
+      "caseId": "M9-068",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 3070,
+      "after": 4929
+    },
+    {
+      "caseId": "M9-069",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2927,
+      "after": 4815
+    },
+    {
+      "caseId": "M9-070",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2811,
+      "after": 4917
+    },
+    {
+      "caseId": "M9-071",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2660,
+      "after": 4317
+    },
+    {
+      "caseId": "M9-072",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2672,
+      "after": 4381
+    },
+    {
+      "caseId": "M9-073",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2894,
+      "after": 4701
+    },
+    {
+      "caseId": "M9-074",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2601,
+      "after": 4385
+    },
+    {
+      "caseId": "M9-075",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2745,
+      "after": 4628
+    },
+    {
+      "caseId": "M9-076",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2516,
+      "after": 4369
+    },
+    {
+      "caseId": "M9-077",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2467,
+      "after": 4285
+    },
+    {
+      "caseId": "M9-078",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 3116,
+      "after": 5112
+    },
+    {
+      "caseId": "M9-079",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2982,
+      "after": 4780
+    },
+    {
+      "caseId": "M9-080",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2900,
+      "after": 5578
+    },
+    {
+      "caseId": "M9-081",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2486,
+      "after": 4095
+    },
+    {
+      "caseId": "M9-082",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2521,
+      "after": 4087
+    },
+    {
+      "caseId": "M9-083",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2879,
+      "after": 4757
+    },
+    {
+      "caseId": "M9-084",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2622,
+      "after": 4377
+    },
+    {
+      "caseId": "M9-085",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2814,
+      "after": 4504
+    },
+    {
+      "caseId": "M9-086",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2525,
+      "after": 4184
+    },
+    {
+      "caseId": "M9-087",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2536,
+      "after": 4198
+    },
+    {
+      "caseId": "M9-088",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2921,
+      "after": 5147
+    },
+    {
+      "caseId": "M9-089",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2900,
+      "after": 4830
+    },
+    {
+      "caseId": "M9-090",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2839,
+      "after": 4501
+    },
+    {
+      "caseId": "M9-091",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2631,
+      "after": 4143
+    },
+    {
+      "caseId": "M9-092",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2536,
+      "after": 4191
+    },
+    {
+      "caseId": "M9-093",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2914,
+      "after": 5193
+    },
+    {
+      "caseId": "M9-094",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2552,
+      "after": 4427
+    },
+    {
+      "caseId": "M9-095",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2940,
+      "after": 4571
+    },
+    {
+      "caseId": "M9-096",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2622,
+      "after": 4739
+    },
+    {
+      "caseId": "M9-097",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2481,
+      "after": 4151
+    },
+    {
+      "caseId": "M9-098",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2933,
+      "after": 5118
+    },
+    {
+      "caseId": "M9-099",
+      "kind": "SEVERE_LATENCY_REGRESSION",
+      "before": 2978,
+      "after": 4867
+    }
+  ],
+  "passed": false,
   "latencyRatio": 1.5
 }

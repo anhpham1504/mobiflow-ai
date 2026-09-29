@@ -1,0 +1,306 @@
+{
+  "at": "2026-09-29T17:59:33.177Z",
+  "diagnosticOnly": true,
+  "notOfficialEvaluation": true,
+  "progress": "docs/verification/evidence/iterations/M10_EVAL_DIAGNOSTIC-2026-09-29T17-58-29-697Z.jsonl",
+  "protectedBefore": {
+    "count": 9,
+    "unchanged": true
+  },
+  "protectedAfter": {
+    "count": 9,
+    "unchanged": true
+  },
+  "productionContractChanged": false,
+  "probes": [
+    {
+      "id": "normal-01",
+      "phase": "cold-probe",
+      "ordinal": 1,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng, thuộc nhóm sự cố mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị, cần xử lý cấp độ cao do diện rộng và tính nghiêm trọng."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "NETWORK",
+        "priority": "HIGH",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": true,
+      "latencyMs": 5502,
+      "timing": {
+        "casePreparationMs": 0.018,
+        "contextConstructionMs": 0.233,
+        "providerWallMs": 5500.833,
+        "finalValidationAndCompletionMs": 0.925,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 5502.156,
+        "metadataCollectionTailMs": 0.069
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 226,
+          "messagesHash": "e6bc6f2b670a1e92e1a76b96e991ea9121bbf67b56d024e8fe105e817044a2f4",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "55de04459f22c54dee658e1b3f82078000c4d8e4c085e7f1cd1c76560f4b81bf",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 22.09
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 5478.991,
+          "ollama": {
+            "total_duration": 5469792500,
+            "total_duration_ms": 5469.793,
+            "load_duration": 2902083000,
+            "load_duration_ms": 2902.083,
+            "prompt_eval_count": 1086,
+            "prompt_eval_duration": 357000000,
+            "prompt_eval_duration_ms": 357,
+            "eval_count": 161,
+            "eval_duration": 2180235000,
+            "eval_duration_ms": 2180.235,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "normal-01",
+      "phase": "warm-probe",
+      "ordinal": 2,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng, thuộc nhóm sự cố mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị, cần xử lý cấp độ cao do diện rộng và tính chất thiết bị IoT."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "NETWORK",
+        "priority": "HIGH",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": true,
+      "latencyMs": 2237,
+      "timing": {
+        "casePreparationMs": 0.003,
+        "contextConstructionMs": 0.027,
+        "providerWallMs": 2236.433,
+        "finalValidationAndCompletionMs": 0.084,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2236.574,
+        "metadataCollectionTailMs": 0.027
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 226,
+          "messagesHash": "e6bc6f2b670a1e92e1a76b96e991ea9121bbf67b56d024e8fe105e817044a2f4",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "55de04459f22c54dee658e1b3f82078000c4d8e4c085e7f1cd1c76560f4b81bf",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 7.335
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2229.458,
+          "ollama": {
+            "total_duration": 2218026900,
+            "total_duration_ms": 2218.027,
+            "load_duration": 2166400,
+            "load_duration_ms": 2.166,
+            "prompt_eval_count": 1086,
+            "prompt_eval_duration": 13633000,
+            "prompt_eval_duration_ms": 13.633,
+            "eval_count": 163,
+            "eval_duration": 2175312000,
+            "eval_duration_ms": 2175.312,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    }
+  ],
+  "allRequestCount": 20,
+  "allAttemptCount": 20,
+  "timingMeans": {
+    "casePreparationMs": {
+      "count": 10,
+      "mean": 0.003,
+      "p50": 0.002,
+      "p95": 0.007,
+      "max": 0.007
+    },
+    "contextConstructionMs": {
+      "count": 10,
+      "mean": 0.029,
+      "p50": 0.026,
+      "p95": 0.039,
+      "max": 0.039
+    },
+    "providerWallMs": {
+      "count": 10,
+      "mean": 2638.701,
+      "p50": 2565.861,
+      "p95": 2928.298,
+      "max": 2928.298
+    },
+    "finalValidationAndCompletionMs": {
+      "count": 10,
+      "mean": 0.076,
+      "p50": 0.059,
+      "p95": 0.198,
+      "max": 0.198
+    },
+    "repairProviderMs": {
+      "count": 10,
+      "mean": 0,
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+    },
+    "runnerWallMs": {
+      "count": 10,
+      "mean": 2638.834,
+      "p50": 2565.959,
+      "p95": 2928.396,
+      "max": 2928.396
+    }
+  },
+  "ollama": {
+    "total_duration_ms": {
+      "count": 10,
+      "mean": 2615.287,
+      "p50": 2540.931,
+      "p95": 2918.687,
+      "max": 2918.687
+    },
+    "load_duration_ms": {
+      "count": 10,
+      "mean": 2.661,
+      "p50": 2.674,
+      "p95": 3.452,
+      "max": 3.452
+    },
+    "prompt_eval_duration_ms": {
+      "count": 10,
+      "mean": 43.299,
+      "p50": 23.201,
+      "p95": 210.506,
+      "max": 210.506
+    },
+    "eval_duration_ms": {
+      "count": 10,
+      "mean": 2543.087,
+      "p50": 2489.761,
+      "p95": 2868.646,
+      "max": 2868.646
+    },
+    "prompt_eval_count": {
+      "count": 10,
+      "mean": 1073.2,
+      "p50": 1066,
+      "p95": 1099,
+      "max": 1099
+    },
+    "eval_count": {
+      "count": 10,
+      "mean": 189.6,
+      "p50": 186,
+      "p95": 216,
+      "max": 216
+    }
+  },
+  "interpretation": "Use current component measurements for attribution only. Historical request-level token and host telemetry are missing; no historical generation-speed claim can be derived from these probes alone."
+}

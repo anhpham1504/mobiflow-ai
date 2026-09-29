@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {existsSync,readFileSync} from 'node:fs';
+import {saveEvidence} from './evidence.mjs';
+const read=path=>JSON.parse(readFileSync(path,'utf8'));
+const directory='docs/verification/evidence/';
+const gates=['M10_LINT','M10_TYPECHECK','M10_UNIT','M10_BUILD','M10_DB_VALIDATE','M10_DB_MIGRATE','M10_INTEGRATION_SEED','M10_INTEGRATION_FINAL','M10_RUNTIME_OUTAGE','M10_DOCKER_BUILD','M10_DEPENDENCY_AUDIT','M10_RESET_COMMAND','M10_DEMO_READY','M10_E2E'];
+const commands=Object.fromEntries(gates.map(name=>{const result=read(directory+name+'.json');assert.equal(result.status,'PASS',name);return [name,result];}));
+const browserPaths={M3:'artifacts/m3/browser-results.json',M4_OFFLINE:'artifacts/m4/browser-offline.json',M4_ONLINE_RECOVERY:'artifacts/m4/browser-online.json',...Object.fromEntries([5,6,7,8,9,10].map(m=>['M'+m,`artifacts/m${m}/browser-results.json`]))};
+const browser=Object.fromEntries(Object.entries(browserPaths).map(([name,path])=>{const report=read(path);assert.equal(report.stats.unexpected,0,name);assert.equal(report.stats.flaky,0,name);assert.equal(report.stats.skipped,0,name);return [name,{path,...report.stats,status:'PASS',provenance:'Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns.'}];}));
+const competition=['COMPETITION_SUBMISSION','PRODUCT_DESCRIPTION','AI_MODEL_DISCLOSURE','DEMO_SCRIPT_5_MIN','DEMO_SCRIPT_10_MIN','JUDGE_QA','VIDEO_SHOT_LIST','BEFORE_AFTER_EVIDENCE'].map(name=>'docs/demo/'+name+'.md');
+const documents=[...competition,'docs/demo/DEMO_RUNBOOK.md','docs/release/M10_RELEASE_CHECKLIST.md','docs/verification/MILESTONE_10_VERIFICATION.md','docs/verification/FINAL_VERIFICATION.md','docs/verification/SECURITY_AUDIT.md','docs/verification/AI_SAFETY_AUDIT.md'];
+for(const path of documents)assert.ok(existsSync(path),path);
+execFileSync('git',['diff','--check'],{stdio:'pipe'});
+execFileSync('git',['diff','--exit-code','v0.9.0-m9','--','apps/api/prisma/migrations'],{stdio:'pipe'});
+const gitFiles=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','apps','packages','scripts','docker','docker-compose.yml','package.json','package-lock.json'],{encoding:'utf8'}).trim().split(/\r?\n/).sort();
+const sourceHash=createHash('sha256');for(const path of gitFiles){sourceHash.update(path+'\0');sourceHash.update(readFileSync(path));}
+const docker=read(directory+'M10_DOCKER.json');assert.equal(docker.runtimeStatus,'PASS');
+const preflight=read(directory+'M10_PREFLIGHT.json'),warmup=read(directory+'M10_WARMUP.json'),reset=read(directory+'M10_RESET.json'),shutdown=read(directory+'M10_GRACEFUL_SHUTDOWN.json');
+for(const [name,result] of Object.entries({preflight,warmup,reset,shutdown}))assert.equal(result.status,'PASS',name);
+const safety=read(directory+'M10_ADVERSARIAL.json');assert.deepEqual(safety.findings,[]);assert.ok(Object.values(safety.invariants).every(Boolean));
+const report={at:new Date().toISOString(),finalGate:'BLOCKED',implementationVerification:'PASS',releaseBlockers:['Unresolved M10 live-evaluation comparison: isolated priority pass-to-fail=2; per-case latency >1.5x=83.'],sourceSha256:sourceHash.digest('hex'),sourceFileCount:gitFiles.length,commands,browser,competitionDocuments:competition,documents,preflightStatus:preflight.status,warmup:{status:warmup.status,llmLatencyMs:warmup.llmLatencyMs,embeddingLatencyMs:warmup.embeddingLatencyMs,businessMutation:warmup.businessMutation},resetStatus:reset.status,shutdown,docker,migrationCountBefore:6,migrationCountAfter:6,newMigration:false,historicalMigrationDiff:'PASS',gitDiffCheck:'PASS',evaluationEvidence:'M10_EVAL_REGRESSION.json',earlierLiveLimitation:'The earlier broad M10 run retained terminal R5 AI_TIMEOUT after two attempts; the subsequent final database suite passed with live R1-R8 all successful.',notRun:['Third 100-case confirmation run','Manual operator time benchmark','Fresh complete Internet-disconnection rehearsal','Video recording','External penetration test'],git:{committed:false,pushed:false,tagged:false,m11Started:false}};
+await saveEvidence(directory+'M10_FINAL_VERIFICATION.json',report);
+console.log(JSON.stringify({finalGate:report.finalGate,implementationVerification:report.implementationVerification,sourceSha256:report.sourceSha256,competitionDocuments:competition.length,checks:Object.keys(commands).length,browser:browser.M10,releaseBlockers:report.releaseBlockers}));

@@ -1,0 +1,8 @@
+{
+  "command": "npm run demo:ready",
+  "startedAt": "2026-09-29T17:36:02.282Z",
+  "finishedAt": "2026-09-29T17:37:31.014Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_DEMO_READY-2026-09-29T17-36-02-282Z.txt"
+}

@@ -1,0 +1,1102 @@
+{
+  "at": "2026-09-29T17:59:33.177Z",
+  "diagnosticOnly": true,
+  "notOfficialEvaluation": true,
+  "progress": "docs/verification/evidence/iterations/M10_EVAL_DIAGNOSTIC-2026-09-29T17-58-29-697Z.jsonl",
+  "protectedBefore": {
+    "count": 9,
+    "unchanged": true
+  },
+  "protectedAfter": {
+    "count": 9,
+    "unchanged": true
+  },
+  "productionContractChanged": false,
+  "caseIds": [
+    "normal-01",
+    "normal-06",
+    "normal-11",
+    "incomplete-01",
+    "incomplete-06",
+    "ambiguous-01",
+    "M9-057",
+    "M9-065",
+    "M9-075",
+    "M9-085"
+  ],
+  "latency": {
+    "count": 10,
+    "mean": 2638.7,
+    "p50": 2566,
+    "p95": 2928,
+    "max": 2928
+  },
+  "runnerWall": {
+    "count": 10,
+    "mean": 2638.834,
+    "p50": 2565.959,
+    "p95": 2928.396,
+    "max": 2928.396
+  },
+  "results": [
+    {
+      "id": "normal-01",
+      "phase": "microbenchmark",
+      "ordinal": 1,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng, thuộc nhóm sự cố mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị, cần xử lý cấp độ cao do diện rộng và tính nghiêm trọng."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "NETWORK",
+        "priority": "HIGH",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": true,
+      "latencyMs": 2429,
+      "timing": {
+        "casePreparationMs": 0.001,
+        "contextConstructionMs": 0.024,
+        "providerWallMs": 2429.36,
+        "finalValidationAndCompletionMs": 0.064,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2429.471,
+        "metadataCollectionTailMs": 0.031
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 226,
+          "messagesHash": "e6bc6f2b670a1e92e1a76b96e991ea9121bbf67b56d024e8fe105e817044a2f4",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "55de04459f22c54dee658e1b3f82078000c4d8e4c085e7f1cd1c76560f4b81bf",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 15.383
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2414.284,
+          "ollama": {
+            "total_duration": 2402755500,
+            "total_duration_ms": 2402.756,
+            "load_duration": 3452400,
+            "load_duration_ms": 3.452,
+            "prompt_eval_count": 1086,
+            "prompt_eval_duration": 210506000,
+            "prompt_eval_duration_ms": 210.506,
+            "eval_count": 161,
+            "eval_duration": 2163179000,
+            "eval_duration_ms": 2163.179,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "normal-06",
+      "phase": "microbenchmark",
+      "ordinal": 2,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REQUEST_SERVICE",
+        "category": "IOT",
+        "subcategory": "DEVICE_CONFIGURATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Sen",
+          "location": "phòng lab A",
+          "affectedCount": 1,
+          "startedAt": "8 giờ"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Sen tại phòng lab A yêu cầu cấu hình chu kỳ gửi dữ liệu cho 1 thiết bị IoT, không có sự cố kết nối. Yêu cầu rõ ràng, chỉ ảnh hưởng đến 1 thiết bị, không ảnh hưởng đến nhiều người hoặc hệ thống. Cấu hình thiết bị IoT thuộc nhóm IOT/DEVICE_CONFIGURATION."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "IOT",
+        "priority": "MEDIUM",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": true,
+      "latencyMs": 2380,
+      "timing": {
+        "casePreparationMs": 0.002,
+        "contextConstructionMs": 0.024,
+        "providerWallMs": 2380.181,
+        "finalValidationAndCompletionMs": 0.107,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2380.342,
+        "metadataCollectionTailMs": 0.02
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 289,
+          "messagesHash": "4d698b8001433606106f2e3869717685af5baf3e49a4b6565023bd1fdefd0d02",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "aeff6aff4da53d1d3aa96696c738f7e3dfa9ac49776f17bf362cb75f60e595c5",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 12.291
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2368.21,
+          "ollama": {
+            "total_duration": 2355735300,
+            "total_duration_ms": 2355.735,
+            "load_duration": 2619900,
+            "load_duration_ms": 2.62,
+            "prompt_eval_count": 1099,
+            "prompt_eval_duration": 29792000,
+            "prompt_eval_duration_ms": 29.792,
+            "eval_count": 172,
+            "eval_duration": 2297078000,
+            "eval_duration_ms": 2297.078,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "normal-11",
+      "phase": "microbenchmark",
+      "ordinal": 3,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "BILLING",
+        "subcategory": "BILLING_DISCREPANCY",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "Demo Lan",
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "affectedCount",
+          "location",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng Demo Lan phản ánh việc hóa đơn cước tháng này tính trùng khoản phí cho một tài khoản, trong khi vẫn đang sử dụng dịch vụ. Không có thông tin về số lượng thiết bị, địa điểm hoặc thời gian bắt đầu sự cố. Không có chi tiết về mức độ ảnh hưởng hoặc mô tả chi tiết hơn. Do đó, cần thêm thông tin để xác định mức độ nghiêm trọng và phạm vi."
+      },
+      "actualTeam": "BILLING_SUPPORT",
+      "expected": {
+        "category": "BILLING",
+        "priority": "MEDIUM",
+        "team": "BILLING_SUPPORT"
+      },
+      "passed": true,
+      "latencyMs": 2924,
+      "timing": {
+        "casePreparationMs": 0.004,
+        "contextConstructionMs": 0.027,
+        "providerWallMs": 2923.989,
+        "finalValidationAndCompletionMs": 0.073,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2924.138,
+        "metadataCollectionTailMs": 0.019
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 285,
+          "messagesHash": "972bb82bdfea30d50fdbf37659f2a3f4a1a771949db044b226c62548c86559f7",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "0d3581fdfd1645359f559d37b330500d758b82e6d5ffc18e7cc4f3f7c39b942d",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 21.368
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2902.977,
+          "ollama": {
+            "total_duration": 2891620100,
+            "total_duration_ms": 2891.62,
+            "load_duration": 2846900,
+            "load_duration_ms": 2.847,
+            "prompt_eval_count": 1091,
+            "prompt_eval_duration": 30008000,
+            "prompt_eval_duration_ms": 30.008,
+            "eval_count": 212,
+            "eval_duration": 2830854000,
+            "eval_duration_ms": 2830.854,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "incomplete-01",
+      "phase": "microbenchmark",
+      "ordinal": 4,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "17 SIM IoT",
+          "location": null,
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [
+          "location"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "17 SIM IoT báo mất kết nối từ 8 giờ sáng, ảnh hưởng đến 17 thiết bị. Không có thông tin vị trí cụ thể, nhưng số lượng thiết bị bị ảnh hưởng rõ ràng, nên phân loại là sự cố mạng IoT. Mức độ ảnh hưởng cao do nhiều thiết bị bị mất kết nối đồng thời."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "NETWORK",
+        "priority": "HIGH",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": true,
+      "latencyMs": 2453,
+      "timing": {
+        "casePreparationMs": 0.001,
+        "contextConstructionMs": 0.021,
+        "providerWallMs": 2452.792,
+        "finalValidationAndCompletionMs": 0.059,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2452.892,
+        "metadataCollectionTailMs": 0.014
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 148,
+          "messagesHash": "ab64917b55e7b1ebb1c5cebbfb9f5fc42dde981fee22cf5337012b411cea9915",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "55ddf918093b01d58dc227e4ea8b20ffb2783a765e7ea35892d18df1ce88476b",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 10.075
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2443.041,
+          "ollama": {
+            "total_duration": 2431603600,
+            "total_duration_ms": 2431.604,
+            "load_duration": 2210300,
+            "load_duration_ms": 2.21,
+            "prompt_eval_count": 1062,
+            "prompt_eval_duration": 23201000,
+            "prompt_eval_duration_ms": 23.201,
+            "eval_count": 178,
+            "eval_duration": 2380194000,
+            "eval_duration_ms": 2380.194,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "incomplete-06",
+      "phase": "microbenchmark",
+      "ordinal": 5,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "ASK_INFORMATION",
+        "category": "ACCOUNT",
+        "subcategory": "ACCESS_ISSUE",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng không cung cấp thông tin cụ thể về tài khoản, vị trí, số lượng thiết bị hoặc thời gian xảy ra sự cố. Chỉ có yêu cầu hỗ trợ truy cập tài khoản, không có chi tiết về sự cố hoặc ảnh hưởng. Do đó, phân loại là truy cập tài khoản (ACCOUNT/ACCESS_ISSUE), mục đích là hỏi thông tin, và thiếu dữ liệu cần thiết để xác định mức độ ảnh hưởng hoặc phạm vi."
+      },
+      "actualTeam": "CUSTOMER_SUPPORT",
+      "expected": {
+        "category": "ACCOUNT",
+        "priority": "MEDIUM",
+        "team": "CUSTOMER_SUPPORT"
+      },
+      "passed": true,
+      "latencyMs": 2928,
+      "timing": {
+        "casePreparationMs": 0.002,
+        "contextConstructionMs": 0.026,
+        "providerWallMs": 2928.298,
+        "finalValidationAndCompletionMs": 0.047,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2928.396,
+        "metadataCollectionTailMs": 0.015
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 152,
+          "messagesHash": "ca47b3d82170126787b949da376bd782f43f89f02e16d18de7ec901a92708569",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "2503111caf63ed391f37d82c9ff4d5620f9db30e661c61149540a91e7b8d2aa9",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 8.736
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2919.884,
+          "ollama": {
+            "total_duration": 2918686700,
+            "total_duration_ms": 2918.687,
+            "load_duration": 2709300,
+            "load_duration_ms": 2.709,
+            "prompt_eval_count": 1058,
+            "prompt_eval_duration": 21650000,
+            "prompt_eval_duration_ms": 21.65,
+            "eval_count": 216,
+            "eval_duration": 2868646000,
+            "eval_duration_ms": 2868.646,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "ambiguous-01",
+      "phase": "microbenchmark",
+      "ordinal": 6,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "UNKNOWN",
+        "category": "OTHER",
+        "subcategory": "UNSPECIFIED",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.3,
+        "reasonSummary": "Thông điệp không cung cấp đủ thông tin để xác định loại sự cố, khách hàng, địa điểm, thời gian hoặc mức ảnh hưởng. Chỉ có nội dung chung 'có vấn đề rồi' và lời kêu gọi hỗ trợ, không có chi tiết cụ thể nào về sự cố hoặc bối cảnh sử dụng."
+      },
+      "actualTeam": "SERVICE_OPERATIONS",
+      "expected": {
+        "category": "OTHER",
+        "priority": "MEDIUM",
+        "team": "CUSTOMER_SUPPORT"
+      },
+      "passed": false,
+      "latencyMs": 2566,
+      "timing": {
+        "casePreparationMs": 0.002,
+        "contextConstructionMs": 0.023,
+        "providerWallMs": 2565.861,
+        "finalValidationAndCompletionMs": 0.054,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2565.959,
+        "metadataCollectionTailMs": 0.015
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 140,
+          "messagesHash": "bd20258d5112319e25397626fc5141f855c1ff5a8f5f438b84c429bef5547d83",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "4ee086bb360a9b81b4c8413efd2fc422de28302b10b7430ae8e947f8ada8e7b3",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 14.586
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2551.676,
+          "ollama": {
+            "total_duration": 2540931200,
+            "total_duration_ms": 2540.931,
+            "load_duration": 2701400,
+            "load_duration_ms": 2.701,
+            "prompt_eval_count": 1060,
+            "prompt_eval_duration": 22691000,
+            "prompt_eval_duration_ms": 22.691,
+            "eval_count": 186,
+            "eval_duration": 2489761000,
+            "eval_duration_ms": 2489.761,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "M9-057",
+      "phase": "microbenchmark",
+      "ordinal": 7,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "MOBILE_NETWORK",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": "khu demo 57",
+          "location": "khu demo 57",
+          "affectedCount": 3,
+          "startedAt": "tu sang"
+        },
+        "missingFields": [
+          "impact"
+        ],
+        "confidence": 0.95,
+        "reasonSummary": "Khách hàng khu demo 57 báo mất kết nối mạng, 3 thiết bị bị ảnh hưởng. Thời gian xảy ra từ sáng. Không có thông tin chi tiết về mức độ ảnh hưởng hoặc diện rộng cụ thể."
+      },
+      "actualTeam": "NETWORK_OPERATIONS",
+      "expected": {
+        "category": "NETWORK",
+        "priority": "HIGH",
+        "team": "NETWORK_OPERATIONS"
+      },
+      "passed": false,
+      "latencyMs": 2245,
+      "timing": {
+        "casePreparationMs": 0.007,
+        "contextConstructionMs": 0.037,
+        "providerWallMs": 2244.537,
+        "finalValidationAndCompletionMs": 0.198,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2244.796,
+        "metadataCollectionTailMs": 0.017
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 180,
+          "messagesHash": "72ead9c906e1761ad9abaa8b51441cbeaafa3c03f47362e4c5fc3d1c26695c78",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "150a73afc3ac0ce578b57601339dcfa2bc7ba1cbc8b8693e7ae18a21fda718d0",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 12.998
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2231.894,
+          "ollama": {
+            "total_duration": 2220295000,
+            "total_duration_ms": 2220.295,
+            "load_duration": 2673700,
+            "load_duration_ms": 2.674,
+            "prompt_eval_count": 1078,
+            "prompt_eval_duration": 26418000,
+            "prompt_eval_duration_ms": 26.418,
+            "eval_count": 161,
+            "eval_duration": 2164640000,
+            "eval_duration_ms": 2164.64,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "M9-065",
+      "phase": "microbenchmark",
+      "ordinal": 8,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu hướng dẫn kích hoạt dịch vụ thử nghiệm số 65, không có thông tin về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có chi tiết về mức độ ảnh hưởng hoặc sự kiện cụ thể. Do đó, đây là một yêu cầu cấu hình dịch vụ đơn lẻ, không ảnh hưởng đến nhiều người hoặc hệ thống."
+      },
+      "actualTeam": "SERVICE_OPERATIONS",
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "passed": false,
+      "latencyMs": 2784,
+      "timing": {
+        "casePreparationMs": 0.003,
+        "contextConstructionMs": 0.037,
+        "providerWallMs": 2783.586,
+        "finalValidationAndCompletionMs": 0.047,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2783.701,
+        "metadataCollectionTailMs": 0.026
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 174,
+          "messagesHash": "d5e4ec883178679bb3e381a099df10130418fded84cb87fdcfef9fd8db049e94",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "d19d0492af9d396632640232689f3445591671afb74a8ed7780a3f52b90379b8",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 12.705
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2771.244,
+          "ollama": {
+            "total_duration": 2758870400,
+            "total_duration_ms": 2758.87,
+            "load_duration": 2693200,
+            "load_duration_ms": 2.693,
+            "prompt_eval_count": 1066,
+            "prompt_eval_duration": 23948000,
+            "prompt_eval_duration_ms": 23.948,
+            "eval_count": 199,
+            "eval_duration": 2705857000,
+            "eval_duration_ms": 2705.857,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "M9-075",
+      "phase": "microbenchmark",
+      "ordinal": 9,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu hướng dẫn kích hoạt dịch vụ thử nghiệm số 75, không có thông tin về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có chi tiết về mức độ ảnh hưởng hoặc mô tả chi tiết yêu cầu. Do đó, phân loại là REQUEST_SERVICE trong nhóm SERVICE, mức độ ưu tiên là MEDIUM vì chỉ là yêu cầu hướng dẫn, không ảnh hưởng đến nhiều người hoặc hệ thống."
+      },
+      "actualTeam": "SERVICE_OPERATIONS",
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "passed": false,
+      "latencyMs": 2919,
+      "timing": {
+        "casePreparationMs": 0.002,
+        "contextConstructionMs": 0.039,
+        "providerWallMs": 2919.058,
+        "finalValidationAndCompletionMs": 0.06,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2919.185,
+        "metadataCollectionTailMs": 0.019
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 174,
+          "messagesHash": "ca425a506db13bef3b19cc89622f6c7c303651e78a53cfa7673b61abe7229fb8",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "16ffd8f5f895374f84d6a0feef47351282551eafcd3c3ed42563c0b5c73e21fa",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 13.762
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2905.658,
+          "ollama": {
+            "total_duration": 2893608800,
+            "total_duration_ms": 2893.609,
+            "load_duration": 2150500,
+            "load_duration_ms": 2.151,
+            "prompt_eval_count": 1066,
+            "prompt_eval_duration": 22018000,
+            "prompt_eval_duration_ms": 22.018,
+            "eval_count": 212,
+            "eval_duration": 2844001000,
+            "eval_duration_ms": 2844.001,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    },
+    {
+      "id": "M9-085",
+      "phase": "microbenchmark",
+      "ordinal": 10,
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "attempts": 1,
+      "failureCategory": null,
+      "status": "SUCCEEDED",
+      "schemaValid": true,
+      "firstAttemptValid": true,
+      "identity": {
+        "provider": "ollama",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      },
+      "analysis": {
+        "intent": "REQUEST_SERVICE",
+        "category": "SERVICE",
+        "subcategory": "ACTIVATION",
+        "prioritySuggestion": "MEDIUM",
+        "entities": {
+          "customer": null,
+          "location": null,
+          "affectedCount": null,
+          "startedAt": null
+        },
+        "missingFields": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact",
+          "description"
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu hướng dẫn kích hoạt dịch vụ thử nghiệm số 85, không có thông tin về khách hàng, địa điểm, số lượng thiết bị hoặc thời gian bắt đầu. Không có chi tiết về mức độ ảnh hưởng hoặc sự kiện cụ thể. Do đó, đây là một yêu cầu cấu hình dịch vụ đơn lẻ, không ảnh hưởng đến nhiều người hoặc hệ thống."
+      },
+      "actualTeam": "SERVICE_OPERATIONS",
+      "expected": {
+        "category": "SERVICE",
+        "priority": "LOW",
+        "team": "SERVICE_OPERATIONS"
+      },
+      "passed": false,
+      "latencyMs": 2759,
+      "timing": {
+        "casePreparationMs": 0.004,
+        "contextConstructionMs": 0.034,
+        "providerWallMs": 2759.345,
+        "finalValidationAndCompletionMs": 0.048,
+        "retryValidationAndBackoffMs": [],
+        "repairProviderMs": 0,
+        "runnerWallMs": 2759.458,
+        "metadataCollectionTailMs": 0.014
+      },
+      "requests": [
+        {
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "stream": false,
+          "think": false,
+          "options": {
+            "temperature": 0,
+            "num_predict": 1200,
+            "seed": 42,
+            "num_ctx": 16384
+          },
+          "keep_alive": null,
+          "keepAliveExplicit": false,
+          "systemChars": 3862,
+          "userChars": 174,
+          "messagesHash": "52f8454809975c7f2c10c1df32ede57eec5506966e269da267c65541963132b5",
+          "schemaChars": 7797,
+          "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+          "requestHash": "a20e4dfc86fdc1669ffde525a3f5625be93a6bf7740abd104ed56b92ff0d112c",
+          "messageCount": 2,
+          "structuredFormat": true
+        }
+      ],
+      "http": [
+        {
+          "path": "/api/tags",
+          "status": 200,
+          "wallMs": 9.537
+        },
+        {
+          "path": "/api/chat",
+          "status": 200,
+          "wallMs": 2750.219,
+          "ollama": {
+            "total_duration": 2738767100,
+            "total_duration_ms": 2738.767,
+            "load_duration": 2551700,
+            "load_duration_ms": 2.552,
+            "prompt_eval_count": 1066,
+            "prompt_eval_duration": 22762000,
+            "prompt_eval_duration_ms": 22.762,
+            "eval_count": 199,
+            "eval_duration": 2686659000,
+            "eval_duration_ms": 2686.659,
+            "done_reason": "stop"
+          }
+        }
+      ],
+      "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+    }
+  ],
+  "historicalSubset": {
+    "baseline": {
+      "count": 10,
+      "mean": 3075.4,
+      "p50": 2745,
+      "p95": 6304,
+      "max": 6304
+    },
+    "contended": {
+      "count": 10,
+      "mean": 5090.9,
+      "p50": 4663,
+      "p95": 8686,
+      "max": 8686
+    },
+    "isolated": {
+      "count": 10,
+      "mean": 4271,
+      "p50": 4286,
+      "p95": 4814,
+      "max": 4814
+    }
+  },
+  "limitations": "Fixed diagnostic subset, not all-case comparison or a replacement release score. Historical per-call token counts/timings are unavailable."
+}

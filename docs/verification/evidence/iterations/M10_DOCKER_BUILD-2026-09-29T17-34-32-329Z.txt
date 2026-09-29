@@ -1,0 +1,231 @@
+ Image mobiflow-ai-web Building
+ Image mobiflow-ai-api Building
+#1 [internal] load local bake definitions
+#1 reading from stdin 1.05kB done
+#1 DONE 0.0s
+
+#2 [web internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.23kB done
+#2 DONE 0.0s
+
+#3 [api internal] load metadata for docker.io/library/node:24.19.0-bookworm-slim
+#3 DONE 0.1s
+
+#4 [web internal] load .dockerignore
+#4 transferring context: 236B done
+#4 DONE 0.0s
+
+#5 [web deps  1/10] FROM docker.io/library/node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+#5 resolve docker.io/library/node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df 0.0s done
+#5 DONE 0.0s
+
+#6 [web internal] load build context
+#6 transferring context: 3.16MB 0.2s done
+#6 transferring context: 3.16MB 0.2s done
+#6 DONE 0.2s
+
+#7 [api deps  4/10] COPY apps/api/package.json apps/api/package.json
+#7 CACHED
+
+#8 [api deps  8/10] COPY packages/tsconfig/package.json packages/tsconfig/package.json
+#8 CACHED
+
+#9 [api deps  9/10] COPY packages/eslint-config/package.json packages/eslint-config/package.json
+#9 CACHED
+
+#10 [api deps  6/10] COPY packages/config/package.json packages/config/package.json
+#10 CACHED
+
+#11 [api deps  2/10] WORKDIR /app
+#11 CACHED
+
+#12 [api deps  3/10] COPY package.json package-lock.json .npmrc ./
+#12 CACHED
+
+#13 [api deps  5/10] COPY apps/web/package.json apps/web/package.json
+#13 CACHED
+
+#14 [api deps  7/10] COPY packages/contracts/package.json packages/contracts/package.json
+#14 CACHED
+
+#15 [web deps 10/10] RUN --mount=type=cache,target=/root/.npm npm ci --ignore-scripts --no-audit --no-fund --loglevel=http
+#15 CACHED
+
+#16 [api api-build 1/3] RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
+#16 CACHED
+
+#17 [api api-build 2/3] COPY . .
+#17 DONE 0.1s
+
+#18 [web web-build 1/2] COPY . .
+#18 DONE 0.2s
+
+#19 [web web-build 2/2] RUN npm run build:foundation && npm run build -w @mobiflow/web
+#19 0.574
+#19 0.574 > mobiflow-ai@0.1.0 build:foundation
+#19 0.574 > npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+#19 0.574
+#19 0.684
+#19 0.684 > @mobiflow/contracts@0.1.0 build
+#19 0.684 > tsc -p tsconfig.json
+#19 0.684
+#19 2.190
+#19 2.190 > @mobiflow/config@0.1.0 build
+#19 2.190 > tsc -p tsconfig.json
+#19 2.190
+#19 2.816
+#19 2.816 > @mobiflow/web@0.1.0 build
+#19 2.816 > next build
+#19 2.816
+#19 3.214 ▲ Next.js 16.3.6 (Turbopack)
+#19 3.274 ✓ Running next.config.ts took 60ms
+#19 3.285
+#19 3.304   Creating an optimized production build ...
+#19 6.455 ✓ Compiled successfully in 3.0s
+#19 6.463   Running TypeScript ...
+#19 8.838   Finished TypeScript in 2.4s ...
+#19 8.840   Collecting page data using 19 workers ...
+#19 10.00   Generating static pages using 19 workers (0/17) ...
+#19 ...
+
+#20 [api api-build 3/3] RUN npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api
+#20 0.579
+#20 0.579 > mobiflow-ai@0.1.0 build:foundation
+#20 0.579 > npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+#20 0.579
+#20 0.687
+#20 0.687 > @mobiflow/contracts@0.1.0 build
+#20 0.687 > tsc -p tsconfig.json
+#20 0.687
+#20 2.180
+#20 2.180 > @mobiflow/config@0.1.0 build
+#20 2.180 > tsc -p tsconfig.json
+#20 2.180
+#20 2.716 npm notice
+#20 2.716 npm notice New major version of npm available! 11.17.0 -> 12.1.0
+#20 2.716 npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.1.0
+#20 2.716 npm notice To update run: npm install -g npm@12.1.0
+#20 2.716 npm notice
+#20 2.786
+#20 2.786 > mobiflow-ai@0.1.0 prisma:generate
+#20 2.786 > node scripts/dev/prisma.mjs generate
+#20 2.786
+#20 3.781 Loaded Prisma config from prisma.config.ts.
+#20 3.781
+#20 5.526 Prisma schema loaded from apps/api/prisma/schema.prisma.
+#20 6.130
+#20 6.130 ✔ Generated Prisma Client (7.10.0) to ./apps/api/src/generated/prisma in 308ms
+#20 6.130
+#20 6.244
+#20 6.244 > @mobiflow/api@0.1.0 build
+#20 6.244 > tsc -p tsconfig.json
+#20 6.244
+#20 ...
+
+#19 [web web-build 2/2] RUN npm run build:foundation && npm run build -w @mobiflow/web
+#19 10.24   Generating static pages using 19 workers (4/17)
+#19 10.25   Generating static pages using 19 workers (8/17)
+#19 10.35   Generating static pages using 19 workers (12/17)
+#19 10.36 ✓ Generating static pages using 19 workers (17/17) in 359ms
+#19 10.36   Finalizing page optimization ...
+#19 11.04
+#19 ...
+
+#20 [api api-build 3/3] RUN npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api
+#20 DONE 11.2s
+
+#19 [web web-build 2/2] RUN npm run build:foundation && npm run build -w @mobiflow/web
+#19 11.04 Route (app)
+#19 11.04 ┌ ○ /
+#19 11.04 ├ ○ /_not-found
+#19 11.04 ├ ○ /icon.svg
+#19 11.04 ├ ƒ /knowledge/sources/[id]
+#19 11.04 ├ ○ /login
+#19 11.04 ├ ○ /manager/analytics
+#19 11.04 ├ ○ /manager/approvals
+#19 11.04 ├ ƒ /manager/approvals/[id]
+#19 11.04 ├ ○ /manager/dashboard
+#19 11.04 ├ ○ /manager/knowledge
+#19 11.04 ├ ○ /manager/requests
+#19 11.04 ├ ƒ /manager/requests/[id]
+#19 11.04 ├ ○ /notifications
+#19 11.04 ├ ○ /profile
+#19 11.04 ├ ○ /staff/dashboard
+#19 11.04 ├ ƒ /staff/requests/[id]
+#19 11.04 ├ ○ /staff/work-queue
+#19 11.04 ├ ○ /user/dashboard
+#19 11.04 ├ ○ /user/requests
+#19 11.04 ├ ƒ /user/requests/[id]
+#19 11.04 └ ○ /user/requests/new
+#19 11.04
+#19 11.04
+#19 11.04 ○  (Static)   prerendered as static content
+#19 11.04 ƒ  (Dynamic)  server-rendered on demand
+#19 11.04
+#19 DONE 11.2s
+
+#11 [web deps  2/10] WORKDIR /app
+#11 CACHED
+
+#21 [web web 3/4] COPY --from=web-build --chown=node:node /app/apps/web/.next/standalone ./
+#21 DONE 0.7s
+
+#22 [web web 4/4] COPY --from=web-build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static
+#22 DONE 0.1s
+
+#23 [web] exporting to image
+#23 exporting layers
+#23 exporting layers 0.9s done
+#23 exporting manifest sha256:44b0c1f93891ed70e05ffa2ac41dc61f67a4809e7c890f788fa5b4656ea5f519 0.0s done
+#23 exporting config sha256:47b3e31ba8c0325a9634dafebea3178ec7f95464a03e6d492ac05148dffb946b done
+#23 exporting attestation manifest sha256:6b6e53d65924c0b0e52e1b56303e8683f8ccb8065241f76149819206a4adf7f5 0.0s done
+#23 exporting manifest list sha256:1affa8261c71096bc7a1dad9d6e42b64eee916c7668e588b087ef26b117ed3a3 done
+#23 naming to docker.io/library/mobiflow-ai-web:latest done
+#23 unpacking to docker.io/library/mobiflow-ai-web:latest
+#23 ...
+
+#24 [api production-deps 1/1] RUN npm prune --omit=dev --ignore-scripts --no-audit --no-fund
+#24 CACHED
+
+#25 [api api 7/9] COPY --from=api-build /app/packages ./packages
+#25 CACHED
+
+#26 [api api 8/9] COPY --from=api-build --chown=node:node /app/docs/evaluation/results ./docs/evaluation/results
+#26 CACHED
+
+#27 [api api 3/9] COPY --from=production-deps /app/node_modules ./node_modules
+#27 CACHED
+
+#28 [api api 4/9] COPY --from=api-build /app/package.json ./package.json
+#28 CACHED
+
+#29 [api api 5/9] COPY --from=api-build /app/apps/api/package.json ./apps/api/package.json
+#29 CACHED
+
+#30 [api api 6/9] COPY --from=api-build /app/apps/api/dist ./apps/api/dist
+#30 CACHED
+
+#31 [api api 9/9] RUN mkdir -p /app/storage/knowledge && chown -R node:node /app/storage
+#31 CACHED
+
+#32 [api] exporting to image
+#32 exporting layers done
+#32 exporting manifest sha256:dcf596aad654a460272470341d005d003f65c97b95858c6db75bbd3199a9b84f done
+#32 exporting config sha256:5fa8d06a24504717d3ae3bfbac50d9d6e6587ce36fe55299034d9ccbd259c73b done
+#32 exporting attestation manifest sha256:63fdecebaa92009d3c8c52b1446c7095a2e8638da37485d7ae99c6aa0e7296ab 0.0s done
+#32 exporting manifest list sha256:37b8dc4ae662dbe967027a4b48dde3d1b1b1a29146bf7f5759808f4ef7132be2 0.0s done
+#32 naming to docker.io/library/mobiflow-ai-api:latest done
+#32 unpacking to docker.io/library/mobiflow-ai-api:latest 0.0s done
+#32 DONE 0.1s
+
+#23 [web] exporting to image
+#23 unpacking to docker.io/library/mobiflow-ai-web:latest 0.3s done
+#23 DONE 1.4s
+
+#33 [api] resolving provenance for metadata file
+#33 DONE 0.0s
+
+#34 [web] resolving provenance for metadata file
+#34 DONE 0.0s
+ Image mobiflow-ai-web Built
+ Image mobiflow-ai-api Built

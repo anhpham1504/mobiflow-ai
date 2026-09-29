@@ -1,0 +1,111 @@
+
+> mobiflow-ai@0.1.0 demo:ready
+> npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/ready.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+M10 ready: knowledge corpus ingestion
+{"code":"SOP-IOT-04","file":"SOP-IOT-04_Xu-ly-mat-ket-noi-IoT.pdf","title":"SOP-IOT-04 - Mất kết nối SIM IoT","documentId":"4f502857-59fb-45e1-865f-f60f3f0a4256","sha256":"6a89faf144a35633f10a0802d8ca911efc8025bdcdc21372547c51ad8200ecaa","generation":1,"chunks":2,"pages":2,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SOP-NET-02","file":"SOP-NET-02_Xu-ly-su-co-mang.pdf","title":"SOP-NET-02 - Sự cố mạng di động","documentId":"b3023328-4f37-47f5-81d3-254305572654","sha256":"51625cdf8ecd90925081781b98c04033825e818b41e0a44562269876c57050ab","generation":1,"chunks":2,"pages":2,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SLA-Policy","file":"SLA-Policy.pdf","title":"SLA-Policy - Chính sách SLA minh họa","documentId":"d10941b6-e669-4dd5-967f-b70ecb42adf2","sha256":"fc9f20cfce6e97891852a65cab3a8c288c85fb63666b6be64fee7ac3636d4541","generation":1,"chunks":2,"pages":2,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"FAQ-IoT","file":"FAQ-IoT.txt","title":"FAQ-IoT - Câu hỏi cấu hình IoT","documentId":"0790134d-1bd6-4b48-9a8f-45cb840562cb","sha256":"c598c123c416d916a2f86dd5638fbde6773d2e2cd08db6097be850fea8cb7a32","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SOP-BILL-01","file":"SOP-BILL-01.txt","title":"SOP-BILL-01 - Đối soát cước synthetic","documentId":"a03e03e0-0400-475d-91ed-361cdd1b781b","sha256":"a1df8c82b191f3ee378f71bd8c93331ca3e0a18452adfcf09cc14cbe9e34150c","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SOP-ACCOUNT-01","file":"SOP-ACCOUNT-01.txt","title":"SOP-ACCOUNT-01 - Truy cập tài khoản synthetic","documentId":"ad875b12-46a7-4f08-a853-2cfeb679be05","sha256":"7d00d98922d654132a98d0113c28014f6fdd9533a453e0c222cb5a663a1c4286","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SOP-SERVICE-01","file":"SOP-SERVICE-01.txt","title":"SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic","documentId":"f4f8161c-6e11-46df-aead-5d5c69a64805","sha256":"5ecfee451e2d380c8b1502fc50031f4aececd6367539d984c774effdad87f174","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"SOP-FIBER-01","file":"SOP-FIBER-01.txt","title":"SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic","documentId":"d4b861a1-31ec-48e7-8600-8b511f3878f8","sha256":"c37ade7bb7345ba91f222df137a1e1d93f2662a12c3287c4e6f8d0cea8d6f070","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+{"code":"ADVERSARIAL-01","file":"ADVERSARIAL-01.txt","title":"ADVERSARIAL-01 - Tài liệu kiểm thử chỉ thị giả","documentId":"ec6951b5-de03-4650-a7ee-798270f74cfc","sha256":"e1d366dc95cd9d393327485a3488fb0724fd8d0fca9b4d72a517e7d0dc9762b0","generation":1,"chunks":1,"pages":null,"index":{"model":"bge-m3:latest","digest":"7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab","dimension":1024,"chunkerVersion":"codepoint-window.v1","parserVersion":"pdfjs-6.3.289-txt-utf8.v1"}}
+M10 ready: bounded model warmup
+MobiFlow AI M10 warmup
+PASS Environment / DATABASE_URL: configured
+PASS Environment / MIGRATION_DATABASE_URL: configured
+PASS Environment / JWT_SECRET: configured
+PASS Environment / REFRESH_TOKEN_SECRET: configured
+PASS Environment / WEB_ORIGIN: configured
+PASS Environment / NEXT_PUBLIC_API_BASE_URL: configured
+PASS Environment / OLLAMA_BASE_URL: configured
+PASS Environment / OLLAMA_MODEL: configured
+PASS Environment / OLLAMA_EMBEDDING_MODEL: configured
+PASS Environment / DEMO_MODE: explicit demo mode
+PASS Database / DATABASE_URL: allowlisted loopback demo target
+PASS Database / MIGRATION_DATABASE_URL: allowlisted loopback demo target
+PASS Security config / JWT_SECRET: configured and non-placeholder
+PASS Security config / REFRESH_TOKEN_SECRET: configured and non-placeholder
+PASS Security config / distinct auth secrets: secret values are never printed
+PASS Security config / WEB_ORIGIN: single explicit origin
+PASS Security config / auth cookie: secure or explicit loopback HTTP demo
+PASS LLM / configured model: expected M10 tag
+PASS Embedding / configured model: expected M10 tag
+PASS Security config / RAG mode: enabled for grounded demo
+PASS Warmup / LLM structured response: valid response in 4785 ms
+PASS Warmup / embedding response: 1024 dimensions in 2991 ms
+PASS Warmup / bound pgvector retrieval: source KD-4f502857-59fb-45e1-865f-f60f3f0a4256-G1-C0 retrieved
+PASS Warmup / business data immutability: business mutation NONE
+Business mutation: NONE
+FINAL PASS
+M10 ready: release preflight
+MobiFlow AI M10 preflight
+PASS Environment / DATABASE_URL: configured
+PASS Environment / MIGRATION_DATABASE_URL: configured
+PASS Environment / JWT_SECRET: configured
+PASS Environment / REFRESH_TOKEN_SECRET: configured
+PASS Environment / WEB_ORIGIN: configured
+PASS Environment / NEXT_PUBLIC_API_BASE_URL: configured
+PASS Environment / OLLAMA_BASE_URL: configured
+PASS Environment / OLLAMA_MODEL: configured
+PASS Environment / OLLAMA_EMBEDDING_MODEL: configured
+PASS Environment / DEMO_MODE: explicit demo mode
+PASS Database / DATABASE_URL: allowlisted loopback demo target
+PASS Database / MIGRATION_DATABASE_URL: allowlisted loopback demo target
+PASS Security config / JWT_SECRET: configured and non-placeholder
+PASS Security config / REFRESH_TOKEN_SECRET: configured and non-placeholder
+PASS Security config / distinct auth secrets: secret values are never printed
+PASS Security config / WEB_ORIGIN: single explicit origin
+PASS Security config / auth cookie: secure or explicit loopback HTTP demo
+PASS LLM / configured model: expected M10 tag
+PASS Embedding / configured model: expected M10 tag
+PASS Security config / RAG mode: enabled for grounded demo
+PASS Toolchain / Node: v24.19.0
+PASS Toolchain / npm: 11.17.0
+PASS Toolchain / Docker: Docker version 29.6.2, build dfc4efb
+PASS Toolchain / Compose: Docker Compose version v5.3.1
+PASS Generated client / Prisma client: generated client present
+PASS Storage / workspace disk reserve: 96425 MiB available
+PASS Storage / private Docker knowledge volume: read/write access and 64 MiB reserve verified
+PASS Containers / postgres: postgres running and healthy
+PASS Containers / api: api running and healthy
+PASS Containers / web: web running and healthy
+PASS Database / connectivity: connection accepted
+PASS Database / pgvector: extension 0.8.6
+PASS Database / migration history: exactly six completed migrations match disk
+PASS Demo data / synthetic marker: exact reset marker present
+PASS Demo data / accounts and history: 6 accounts, 8 requests, 39 history rows
+PASS Demo data / request similarity index: 8 real request embeddings
+PASS RAG / ready corpus: 9 ready documents, 12 embedded chunks
+PASS Ports / PostgreSQL: 127.0.0.1:5432 reachable
+PASS Ports / API: 127.0.0.1:3001 reachable
+PASS Ports / Web: 127.0.0.1:3000 reachable
+PASS Runtime / API core readiness: database-backed API core ready
+PASS Runtime / AI readiness: LLM and embedding components ready
+PASS RAG / API RAG health: retrieval health ready
+PASS Runtime / web reachability: HTTP 200
+PASS Security headers / web baseline: CSP, frame, and MIME protections present
+PASS LLM / installed exact tag: exact model installed
+PASS Embedding / installed exact tag: exact model installed
+PASS LLM / completion capability: completion capability advertised
+PASS Embedding / embedding capability: embedding capability advertised
+FINAL PASS
+M10 ready: PASS (no reset performed)

@@ -1,0 +1,8 @@
+{
+  "command": "npm run lint",
+  "startedAt": "2026-09-29T17:57:22.511Z",
+  "finishedAt": "2026-09-29T17:57:28.027Z",
+  "exitCode": 1,
+  "status": "FAIL",
+  "log": "iterations/M10_EVAL_DIAG_LINT-2026-09-29T17-57-22-511Z.txt"
+}

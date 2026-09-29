@@ -1,0 +1,569 @@
+{
+  "at": "2026-09-29T17:59:33.177Z",
+  "diagnosticOnly": true,
+  "notOfficialEvaluation": true,
+  "progress": "docs/verification/evidence/iterations/M10_EVAL_DIAGNOSTIC-2026-09-29T17-58-29-697Z.jsonl",
+  "protectedBefore": {
+    "count": 9,
+    "unchanged": true
+  },
+  "protectedAfter": {
+    "count": 9,
+    "unchanged": true
+  },
+  "productionContractChanged": false,
+  "snapshots": [
+    {
+      "label": "before-cold-probe",
+      "at": "2026-09-29T17:58:29.695Z",
+      "node": "v24.19.0",
+      "host": {
+        "at": "2026-09-29T17:58:29.5514838Z",
+        "powerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+        "cpu": {
+          "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+          "NumberOfCores": 14,
+          "NumberOfLogicalProcessors": 20,
+          "LoadPercentage": 14
+        },
+        "memoryKiB": {
+          "TotalVisibleMemorySize": 24952696,
+          "FreePhysicalMemory": 11245308
+        },
+        "nodes": [
+          {
+            "pid": 26496,
+            "parentPid": 28008,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 34328,
+            "parentPid": 27300,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 30736,
+            "parentPid": 17888,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 40448,
+            "parentPid": 26852,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 27584,
+            "parentPid": 30716,
+            "repositoryNamed": false,
+            "evaluation": true,
+            "appWorker": false,
+            "commandLineOmitted": true
+          }
+        ],
+        "containers": [
+          {
+            "service": "api",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (0) 10 seconds ago"
+          },
+          {
+            "service": "postgres",
+            "state": "running",
+            "health": "healthy",
+            "status": "Up 6 hours (healthy)"
+          },
+          {
+            "service": "web",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (143) 11 seconds ago"
+          }
+        ],
+        "gpuColumns": "name,driver_version,totalMiB,usedMiB,utilizationPercent,temperatureC,powerW,powerLimitW,smMHz,memoryMHz,pstate",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 8188, 765, 0, 39, 2.62, [N/A], 210, 405, P8",
+        "gpuExit": 0,
+        "processLimitation": "Classification uses command text patterns, not process working directories. Unrelated application processes are not stopped."
+      },
+      "version": "0.34.4",
+      "config": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "baseUrl": "http://localhost:11434",
+        "temperature": 0,
+        "maxOutputTokens": 1200,
+        "attemptTimeoutMs": 120000,
+        "runTimeoutMs": 300000
+      },
+      "loaded": [],
+      "model": {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "details": {
+          "parent_model": "qwen3:4b-instruct-2507-q4_K_M",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560
+        },
+        "template": {
+          "length": 4040,
+          "sha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541"
+        },
+        "parameters": {
+          "length": 263,
+          "sha256": "c473bc5c447cfb767472db82b1be95c170a64a6d7c3c3c88016aae1e696944b5",
+          "numericDefaults": [
+            "top_k                          20",
+            "top_p                          0.8",
+            "num_ctx                        32768",
+            "repeat_penalty                 1",
+            "temperature                    0.7"
+          ]
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      }
+    },
+    {
+      "label": "after-cold-and-warm-probe",
+      "at": "2026-09-29T17:58:39.936Z",
+      "node": "v24.19.0",
+      "host": {
+        "at": "2026-09-29T17:58:39.8249202Z",
+        "powerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+        "cpu": {
+          "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+          "NumberOfCores": 14,
+          "NumberOfLogicalProcessors": 20,
+          "LoadPercentage": 6
+        },
+        "memoryKiB": {
+          "TotalVisibleMemorySize": 24952696,
+          "FreePhysicalMemory": 10500984
+        },
+        "nodes": [
+          {
+            "pid": 26496,
+            "parentPid": 28008,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 34328,
+            "parentPid": 27300,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 30736,
+            "parentPid": 17888,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 40448,
+            "parentPid": 26852,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 27584,
+            "parentPid": 30716,
+            "repositoryNamed": false,
+            "evaluation": true,
+            "appWorker": false,
+            "commandLineOmitted": true
+          }
+        ],
+        "containers": [
+          {
+            "service": "api",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (0) 21 seconds ago"
+          },
+          {
+            "service": "postgres",
+            "state": "running",
+            "health": "healthy",
+            "status": "Up 6 hours (healthy)"
+          },
+          {
+            "service": "web",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (143) 21 seconds ago"
+          }
+        ],
+        "gpuColumns": "name,driver_version,totalMiB,usedMiB,utilizationPercent,temperatureC,powerW,powerLimitW,smMHz,memoryMHz,pstate",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 8188, 5733, 0, 42, 11.64, [N/A], 495, 8001, P0",
+        "gpuExit": 0,
+        "processLimitation": "Classification uses command text patterns, not process working directories. Unrelated application processes are not stopped."
+      },
+      "version": "0.34.4",
+      "config": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "baseUrl": "http://localhost:11434",
+        "temperature": 0,
+        "maxOutputTokens": 1200,
+        "attemptTimeoutMs": 120000,
+        "runTimeoutMs": 300000
+      },
+      "loaded": [
+        {
+          "name": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+          "size": 5098103111,
+          "size_vram": 5098103111,
+          "context_length": 16384,
+          "expires_at": "2026-09-30T01:03:37.4364073+07:00"
+        }
+      ],
+      "model": {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "details": {
+          "parent_model": "qwen3:4b-instruct-2507-q4_K_M",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560
+        },
+        "template": {
+          "length": 4040,
+          "sha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541"
+        },
+        "parameters": {
+          "length": 263,
+          "sha256": "c473bc5c447cfb767472db82b1be95c170a64a6d7c3c3c88016aae1e696944b5",
+          "numericDefaults": [
+            "top_k                          20",
+            "top_p                          0.8",
+            "num_ctx                        32768",
+            "repeat_penalty                 1",
+            "temperature                    0.7"
+          ]
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      }
+    },
+    {
+      "label": "before-microbenchmark",
+      "at": "2026-09-29T17:59:04.235Z",
+      "node": "v24.19.0",
+      "host": {
+        "at": "2026-09-29T17:59:04.1328510Z",
+        "powerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+        "cpu": {
+          "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+          "NumberOfCores": 14,
+          "NumberOfLogicalProcessors": 20,
+          "LoadPercentage": 6
+        },
+        "memoryKiB": {
+          "TotalVisibleMemorySize": 24952696,
+          "FreePhysicalMemory": 10527316
+        },
+        "nodes": [
+          {
+            "pid": 26496,
+            "parentPid": 28008,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 34328,
+            "parentPid": 27300,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 30736,
+            "parentPid": 17888,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 40448,
+            "parentPid": 26852,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 27584,
+            "parentPid": 30716,
+            "repositoryNamed": false,
+            "evaluation": true,
+            "appWorker": false,
+            "commandLineOmitted": true
+          }
+        ],
+        "containers": [
+          {
+            "service": "api",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (0) 45 seconds ago"
+          },
+          {
+            "service": "postgres",
+            "state": "running",
+            "health": "healthy",
+            "status": "Up 6 hours (healthy)"
+          },
+          {
+            "service": "web",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (143) 45 seconds ago"
+          }
+        ],
+        "gpuColumns": "name,driver_version,totalMiB,usedMiB,utilizationPercent,temperatureC,powerW,powerLimitW,smMHz,memoryMHz,pstate",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 8188, 5747, 0, 46, 15.32, [N/A], 645, 8001, P0",
+        "gpuExit": 0,
+        "processLimitation": "Classification uses command text patterns, not process working directories. Unrelated application processes are not stopped."
+      },
+      "version": "0.34.4",
+      "config": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "baseUrl": "http://localhost:11434",
+        "temperature": 0,
+        "maxOutputTokens": 1200,
+        "attemptTimeoutMs": 120000,
+        "runTimeoutMs": 300000
+      },
+      "loaded": [
+        {
+          "name": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+          "size": 5098103111,
+          "size_vram": 5098103111,
+          "context_length": 16384,
+          "expires_at": "2026-09-30T01:04:01.7146485+07:00"
+        }
+      ],
+      "model": {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "details": {
+          "parent_model": "qwen3:4b-instruct-2507-q4_K_M",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560
+        },
+        "template": {
+          "length": 4040,
+          "sha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541"
+        },
+        "parameters": {
+          "length": 263,
+          "sha256": "c473bc5c447cfb767472db82b1be95c170a64a6d7c3c3c88016aae1e696944b5",
+          "numericDefaults": [
+            "top_k                          20",
+            "top_p                          0.8",
+            "num_ctx                        32768",
+            "repeat_penalty                 1",
+            "temperature                    0.7"
+          ]
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      }
+    },
+    {
+      "label": "after-microbenchmark",
+      "at": "2026-09-29T17:59:33.177Z",
+      "node": "v24.19.0",
+      "host": {
+        "at": "2026-09-29T17:59:33.0738061Z",
+        "powerPlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+        "cpu": {
+          "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+          "NumberOfCores": 14,
+          "NumberOfLogicalProcessors": 20,
+          "LoadPercentage": 7
+        },
+        "memoryKiB": {
+          "TotalVisibleMemorySize": 24952696,
+          "FreePhysicalMemory": 10508132
+        },
+        "nodes": [
+          {
+            "pid": 26496,
+            "parentPid": 28008,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 34328,
+            "parentPid": 27300,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 30736,
+            "parentPid": 17888,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 40448,
+            "parentPid": 26852,
+            "repositoryNamed": false,
+            "evaluation": false,
+            "appWorker": false,
+            "commandLineOmitted": true
+          },
+          {
+            "pid": 27584,
+            "parentPid": 30716,
+            "repositoryNamed": false,
+            "evaluation": true,
+            "appWorker": false,
+            "commandLineOmitted": true
+          }
+        ],
+        "containers": [
+          {
+            "service": "api",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (0) About a minute ago"
+          },
+          {
+            "service": "postgres",
+            "state": "running",
+            "health": "healthy",
+            "status": "Up 6 hours (healthy)"
+          },
+          {
+            "service": "web",
+            "state": "exited",
+            "health": "",
+            "status": "Exited (143) About a minute ago"
+          }
+        ],
+        "gpuColumns": "name,driver_version,totalMiB,usedMiB,utilizationPercent,temperatureC,powerW,powerLimitW,smMHz,memoryMHz,pstate",
+        "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 8188, 5746, 2, 48, 9.10, [N/A], 555, 8001, P0",
+        "gpuExit": 0,
+        "processLimitation": "Classification uses command text patterns, not process working directories. Unrelated application processes are not stopped."
+      },
+      "version": "0.34.4",
+      "config": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "baseUrl": "http://localhost:11434",
+        "temperature": 0,
+        "maxOutputTokens": 1200,
+        "attemptTimeoutMs": 120000,
+        "runTimeoutMs": 300000
+      },
+      "loaded": [
+        {
+          "name": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+          "size": 5098103111,
+          "size_vram": 5098103111,
+          "context_length": 16384,
+          "expires_at": "2026-09-30T01:04:30.6279587+07:00"
+        }
+      ],
+      "model": {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "details": {
+          "parent_model": "qwen3:4b-instruct-2507-q4_K_M",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 262144,
+          "embedding_length": 2560
+        },
+        "template": {
+          "length": 4040,
+          "sha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541"
+        },
+        "parameters": {
+          "length": 263,
+          "sha256": "c473bc5c447cfb767472db82b1be95c170a64a6d7c3c3c88016aae1e696944b5",
+          "numericDefaults": [
+            "top_k                          20",
+            "top_p                          0.8",
+            "num_ctx                        32768",
+            "repeat_penalty                 1",
+            "temperature                    0.7"
+          ]
+        },
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ]
+      }
+    }
+  ],
+  "initialCliObservation": "At 2026-09-29T17:50Z Ollama CLI version reported server unavailable; CLI ps auto-started the Windows app. Only API read diagnostics used subsequently. No evidence ties this later restart to historical M9/M10 results."
+}

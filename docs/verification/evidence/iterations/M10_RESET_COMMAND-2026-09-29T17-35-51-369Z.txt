@@ -1,0 +1,32 @@
+
+> mobiflow-ai@0.1.0 demo:reset
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/reset.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 177ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+{"event":"demo.reset.preview","database":"mobiflow","syntheticMarker":true,"preserveMigrations":6,"storageAction":"NONE","counts":{"RefreshSession":16,"RequestMessage":0,"RequestAttachment":0,"RequestStatusHistory":44,"Assignment":7,"RequestResolution":3,"ChecklistItem":1,"Checklist":1,"Feedback":2,"AiToolCall":6,"AiRecommendation":1,"AiAnalysis":1,"AiRun":2,"RequestEmbedding":11,"KnowledgeChunk":12,"KnowledgeDocument":9,"Notification":10,"SlaInstance":7,"AuditLog":90,"Request":9,"StaffSkill":7,"TeamMember":5,"Skill":5,"Team":4,"SlaPolicy":4,"User":6}}
+{"event":"demo.reset.complete","database":"mobiflow","embeddingIdentity":"4fa65ad39079","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4,"historicalRequests":8,"marker":1,"requestEmbeddings":8,"migrationHistoryPreserved":true,"storageAction":"NONE"}}

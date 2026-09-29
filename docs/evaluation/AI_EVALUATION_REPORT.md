@@ -1,6 +1,6 @@
 # M9 AI Evaluation Report
 
-Generated: 2026-09-29T14:17:47.313Z
+Generated: 2026-09-29T16:42:23.764Z
 
 Dataset: requests.m9.v2 (100 synthetic development cases; SHA-256 `e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44`)
 
@@ -8,12 +8,12 @@ Provider/model: Ollama / `qwen3:4b-instruct-2507-q4_K_M`
 
 ## Metrics
 
-- Passed expected category, priority and deterministic team route: 68/100
+- Passed expected category, priority and deterministic team route: 69/100
 - Schema valid: 100/100
 - First-attempt valid: 99/100
 - Repaired success: 1/100
 - Terminal failures: 0/100
-- Latency mean/p50/p95/max: 2775 / 2704 / 3116 / 6597 ms
+- Latency mean/p50/p95/max: 4442 / 4377 / 5147 / 9386 ms
 - Reference validity: not applicable to intake classification; M5/M8 evidence remains separately reported.
 
 ## Methodology and limitations

@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {saveEvidence} from './evidence.mjs';
 import {dirname,join} from 'node:path';
 const [name,command,...args]=process.argv.slice(2);
-if(!/^M6_[A-Z0-9_]+$/.test(name??'')||!['npm','node','docker','git'].includes(command))throw Error('Expected M6 evidence name and approved local gate command');
+if(!/^M(?:6|10)_[A-Z0-9_]+$/.test(name??'')||!['npm','node','docker','git'].includes(command))throw Error('Expected milestone evidence name and approved local gate command');
 const startedAt=new Date().toISOString(),chunks=[];
 const secrets=['DATABASE_URL','MIGRATION_DATABASE_URL','JWT_SECRET','REFRESH_TOKEN_SECRET','POSTGRES_PASSWORD','POSTGRES_APP_PASSWORD'].flatMap(k=>process.env[k]?[process.env[k]]:[]);
 const sanitize=value=>secrets.reduce((s,v)=>s.replaceAll(v,'[REDACTED]'),value);

@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "m10.warmup.v1",
+  "generatedAt": "2026-09-29T17:37:29.114Z",
+  "status": "PASS",
+  "llmLatencyMs": 4785,
+  "embeddingLatencyMs": 2991,
+  "similarity": {
+    "sourceId": "KD-4f502857-59fb-45e1-865f-f60f3f0a4256-G1-C0",
+    "score": 0.7227537100902346
+  },
+  "before": {
+    "requests": 8,
+    "ai_runs": 0,
+    "audits": 68,
+    "assignments": 6,
+    "documents": 9
+  },
+  "after": {
+    "requests": 8,
+    "ai_runs": 0,
+    "audits": 68,
+    "assignments": 6,
+    "documents": 9
+  },
+  "businessMutation": "NONE",
+  "checks": [
+    {
+      "section": "Environment",
+      "name": "DATABASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "MIGRATION_DATABASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "JWT_SECRET",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "REFRESH_TOKEN_SECRET",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "WEB_ORIGIN",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "NEXT_PUBLIC_API_BASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "OLLAMA_BASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "OLLAMA_MODEL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "OLLAMA_EMBEDDING_MODEL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "DEMO_MODE",
+      "status": "PASS",
+      "message": "explicit demo mode"
+    },
+    {
+      "section": "Database",
+      "name": "DATABASE_URL",
+      "status": "PASS",
+      "message": "allowlisted loopback demo target"
+    },
+    {
+      "section": "Database",
+      "name": "MIGRATION_DATABASE_URL",
+      "status": "PASS",
+      "message": "allowlisted loopback demo target"
+    },
+    {
+      "section": "Security config",
+      "name": "JWT_SECRET",
+      "status": "PASS",
+      "message": "configured and non-placeholder"
+    },
+    {
+      "section": "Security config",
+      "name": "REFRESH_TOKEN_SECRET",
+      "status": "PASS",
+      "message": "configured and non-placeholder"
+    },
+    {
+      "section": "Security config",
+      "name": "distinct auth secrets",
+      "status": "PASS",
+      "message": "secret values are never printed"
+    },
+    {
+      "section": "Security config",
+      "name": "WEB_ORIGIN",
+      "status": "PASS",
+      "message": "single explicit origin"
+    },
+    {
+      "section": "Security config",
+      "name": "auth cookie",
+      "status": "PASS",
+      "message": "secure or explicit loopback HTTP demo"
+    },
+    {
+      "section": "LLM",
+      "name": "configured model",
+      "status": "PASS",
+      "message": "expected M10 tag"
+    },
+    {
+      "section": "Embedding",
+      "name": "configured model",
+      "status": "PASS",
+      "message": "expected M10 tag"
+    },
+    {
+      "section": "Security config",
+      "name": "RAG mode",
+      "status": "PASS",
+      "message": "enabled for grounded demo"
+    },
+    {
+      "section": "Warmup",
+      "name": "LLM structured response",
+      "status": "PASS",
+      "message": "valid response in 4785 ms"
+    },
+    {
+      "section": "Warmup",
+      "name": "embedding response",
+      "status": "PASS",
+      "message": "1024 dimensions in 2991 ms"
+    },
+    {
+      "section": "Warmup",
+      "name": "bound pgvector retrieval",
+      "status": "PASS",
+      "message": "source KD-4f502857-59fb-45e1-865f-f60f3f0a4256-G1-C0 retrieved"
+    },
+    {
+      "section": "Warmup",
+      "name": "business data immutability",
+      "status": "PASS",
+      "message": "business mutation NONE"
+    }
+  ]
+}

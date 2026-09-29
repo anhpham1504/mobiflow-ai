@@ -1,18 +1,18 @@
 {
-  "at": "2026-09-29T14:51:42.476Z",
+  "at": "2026-09-29T17:14:27.978Z",
   "result": "PASS",
   "checks": [
     {
       "name": "LLM outage leaves core, manual workflow, deterministic SLA and resolution intact",
       "result": "PASS",
       "details": {
-        "requestId": "a84bda2a-2fc4-4050-afd3-7d4312f118fe",
-        "copilotRunId": "fa230b5d-4c26-49ec-bf58-104326f1ce7e",
+        "requestId": "a787e994-a3f2-44b4-ad8c-4cc3f5045d6b",
+        "copilotRunId": "3a073626-3048-44de-b3da-20d79eefcb11",
         "copilotErrorCode": "AI_PROVIDER_UNAVAILABLE",
         "manualStatus": "IN_PROGRESS",
         "slaStatus": "AT_RISK_DEDUPED",
         "coreReady": true,
-        "summaryRunId": "ca76d3d8-efd4-4e2d-aa73-b83e76e5a875",
+        "summaryRunId": "83e595b8-5e32-48d0-bc94-7c1e12851cfe",
         "summaryErrorCode": "AI_PROVIDER_UNAVAILABLE",
         "resolvedStatus": "RESOLVED"
       }
@@ -21,8 +21,8 @@
       "name": "embedding outage fails Copilot retrieval closed while core, manual workflow and SLA remain intact",
       "result": "PASS",
       "details": {
-        "requestId": "0f80b43f-05d2-4fb9-bfc6-ae299253f272",
-        "copilotRunId": "505f26de-e030-42c7-b05e-bc2194510f39",
+        "requestId": "60e543d5-57ab-48cc-a494-8d861724f93d",
+        "copilotRunId": "b5ee6f37-a51b-45d0-b718-7e4f09184b57",
         "copilotErrorCode": "EMBEDDING_UNAVAILABLE",
         "manualStatus": "IN_PROGRESS",
         "slaStatus": "AT_RISK_DEDUPED",

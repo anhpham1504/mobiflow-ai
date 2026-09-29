@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:runtime:m8",
+  "startedAt": "2026-09-29T17:14:17.450Z",
+  "finishedAt": "2026-09-29T17:14:32.280Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_RUNTIME_OUTAGE-2026-09-29T17-14-17-450Z.txt"
+}
