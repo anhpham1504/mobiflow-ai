@@ -1,0 +1,1114 @@
+{
+  "at": "2026-09-29T08:32:28.617Z",
+  "datasetHash": "a6fd238fe50f143b49c61140f7604a3ca3bb795db0530903925e5ddcbc214bf2",
+  "status": "IN_PROGRESS",
+  "results": [
+    {
+      "id": "R1",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 13326,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "d462eb74-4a62-4f21-9ec4-9aeb6572785f",
+      "analysisCategory": "NETWORK",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Tiếp nhận sự cố kết nối IoT: Ghi nhận số thiết bị bị ảnh hưởng (17 SIM), địa điểm (KCN Amata), thời điểm bắt đầu (khoảng 8 giờ sáng). Kiểm tra trạng thái kết nối SIM, cấu hình APN và gateway. Không tự suy đoán nguyên nhân từ số lượng thiết bị. Phân loại tham khảo NETWORK / IOT_CONNECTIVITY. Ưu tiên đề xuất HIGH khi mô tả rõ nhiều thiết bị gián đoạn; quản lý quyết định ưu tiên thực tế.",
+            "sourceIds": [
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0"
+            ]
+          },
+          {
+            "text": "APN là tên điểm truy cập của kết nối dữ liệu di động. Nếu thiết bị đã mất kết nối, tham khảo SOP-IOT-04 về sự cố kết nối thay vì coi đó là yêu cầu cấu hình thông thường. Không tự áp dụng thay đổi cấu hình.",
+            "sourceIds": [
+              "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng. Sự cố thuộc nhóm mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị, cần xử lý cấp độ cao do diện rộng và tính nghiêm trọng. Đã xác định các bước xử lý theo SOP-IOT-04 và hướng dẫn về APN.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+        "procedureSources": [
+          {
+            "sourceId": "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0"
+          },
+          {
+            "sourceId": "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000004",
+        "suggestedPriority": "HIGH",
+        "suggestedSlaMinutes": 120
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 128,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+              "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+              "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+              "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C0"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 4,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 13,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa",
+              "af79612b-5c5a-443a-8bca-dda888616940",
+              "d7f2fb29-e295-4c3d-91ff-f81566f58fe8",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe",
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 10,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 10,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 13,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "da007499-fc2f-4fd9-8f26-453b70b211a8",
+              "51a3c9ad-4b14-4494-95c5-65b0eb057fcb",
+              "223d3342-8936-4e56-88f8-b3a371f7100a"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+        "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+        "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+        "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C0"
+      ],
+      "missingFields": [],
+      "attemptFailures": []
+    },
+    {
+      "id": "R2",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 10376,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "2ef281dd-57be-4938-9c1e-b266cd08100b",
+      "analysisCategory": "BILLING",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Theo SOP-BILL-01, khiếu nại về khoản cước bị tính hai lần hoặc sai lệch trên hóa đơn cần thu thập kỳ hóa đơn, khoản mục bị tranh chấp và mô tả chênh lệch. Yêu cầu người gửi cung cấp chi tiết để xử lý, không tự hoàn tiền mà chuyển cho quản lý kiểm tra và quyết định.",
+            "sourceIds": [
+              "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng báo cáo hóa đơn bị tính trùng cước, yêu cầu kiểm tra. Dựa trên SOP-BILL-01, cần thu thập kỳ hóa đơn, khoản mục bị tranh chấp và mô tả chênh lệch để xử lý. Không tự hoàn tiền, chuyển cho quản lý kiểm tra và quyết định.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000003",
+        "procedureSources": [
+          {
+            "sourceId": "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000006",
+        "suggestedPriority": "MEDIUM",
+        "suggestedSlaMinutes": 240
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 109,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0",
+              "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+              "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C1",
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 4,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 13,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe",
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa",
+              "7a917464-1730-4328-bf2e-35c55b7b1848",
+              "af79612b-5c5a-443a-8bca-dda888616940"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000002"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000006"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000006"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "a6883547-96bb-403e-aa72-ef037c7b7b7b",
+              "0af4c57d-a939-4362-936c-e73bd740ddf7",
+              "bcb4a66f-8991-4ea8-961f-068569883eb1"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0",
+        "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+        "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C1",
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    },
+    {
+      "id": "R3",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 6098,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "a0671340-5a45-4af3-8dfe-675333ec212f",
+      "analysisCategory": "ACCOUNT",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng báo không đăng nhập được sau khi đổi mật khẩu, nhưng không cung cấp thông tin cụ thể về tài khoản, vị trí, số lượng thiết bị hoặc thời gian bắt đầu sự cố. Không có dữ liệu về mức độ ảnh hưởng hoặc chi tiết sự cố. Do đó, đây là một câu hỏi thông tin, không phải sự cố hoặc yêu cầu dịch vụ cụ thể. Không có nguồn dữ liệu đủ để xác định nhân viên xử lý hoặc tiến hành hành động.",
+        "evidenceStatus": "INSUFFICIENT_EVIDENCE",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000002",
+        "procedureSources": [],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000005",
+        "suggestedPriority": "MEDIUM",
+        "suggestedSlaMinutes": 240
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 86,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-497a4d49-1825-4beb-ab5b-e02ed3c31bca-G1-C0"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "7a917464-1730-4328-bf2e-35c55b7b1848",
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe",
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa",
+              "af79612b-5c5a-443a-8bca-dda888616940"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 6,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000002"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 10,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 7,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "cea5ab39-b343-480b-b9a5-6387bfdc2d57",
+              "7aa65481-f5b4-4b01-93d3-08df6ab0c0af",
+              "537e074f-4aa7-4570-9506-b4536caf14f8"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-497a4d49-1825-4beb-ab5b-e02ed3c31bca-G1-C0"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    },
+    {
+      "id": "R4",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 9711,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "920ae56d-e17c-4102-86d6-dcbe8d92bef7",
+      "analysisCategory": "SERVICE",
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Yêu cầu kích hoạt dịch vụ mới được xác định theo SOP-SERVICE-01. Cần xác nhận thông tin khách hàng, địa điểm, số lượng thiết bị và thời gian bắt đầu để hoàn thiện yêu cầu. Do không có thông tin cụ thể, cần yêu cầu bổ sung thông tin từ người dùng trước khi tiếp tục xử lý.",
+            "sourceIds": [
+              "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu kích hoạt dịch vụ mới được xác định rõ ràng theo SOP-SERVICE-01. Tuy nhiên, thông tin khách hàng, địa điểm, số lượng thiết bị và thời gian bắt đầu chưa được cung cấp. Do đó, cần yêu cầu người dùng bổ sung thông tin cụ thể trước khi xử lý tiếp theo.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000004",
+        "procedureSources": [
+          {
+            "sourceId": "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000005",
+        "suggestedPriority": "LOW",
+        "suggestedSlaMinutes": 480
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 62,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0",
+              "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 14,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "7a917464-1730-4328-bf2e-35c55b7b1848",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe",
+              "d7f2fb29-e295-4c3d-91ff-f81566f58fe8",
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 7,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000001"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 8,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 7,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 14,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "427dddf9-5c53-426b-9c96-767c9d3b0317",
+              "70046d65-bf6a-40ed-9859-f9338dbd3511",
+              "f2ca830a-b00e-41a1-b987-6264e1b636d7"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0",
+        "KD-df31a122-4b9b-4516-9797-3c42907fb613-G1-C0"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    },
+    {
+      "id": "R5",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 14475,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "fce1f6e3-3e4d-42a1-a7e6-f185f7329b2f",
+      "analysisCategory": "NETWORK",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Ghi nhận số lượng thiết bị bị ảnh hưởng, địa điểm, thời điểm bắt đầu và phạm vi gián đoạn do người gửi cung cấp. Nếu nhiều SIM IoT cùng mất kết nối tại một khu vực, kiểm tra trạng thái kết nối SIM, cấu hình APN và gateway. Không tự suy đoán nguyên nhân từ số lượng thiết bị.",
+            "sourceIds": [
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0"
+            ]
+          },
+          {
+            "text": "Đối chiếu APN của thiết bị với cấu hình đã được phê duyệt. Ghi nhận trạng thái đăng ký mạng và kết nối gateway. Không đổi cấu hình hoặc khởi động lại thiết bị khi chưa có chấp thuận phù hợp. Chuyển bộ phận mạng nếu nhiều SIM cùng mất đăng ký mạng; kèm thời gian và địa điểm đã xác nhận. Sau xử lý, kiểm tra lại truyền dữ liệu từ thiết bị tới gateway và hỏi người dùng xác nhận. Không tự đóng yêu cầu.",
+            "sourceIds": [
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Sự cố mất kết nối nhiều SIM IoT được xác định rõ ràng. Dựa trên SOP-IOT-04, cần thu thập chi tiết về số lượng thiết bị, vị trí, thời gian bắt đầu và phạm vi ảnh hưởng. Cần kiểm tra cấu hình APN và trạng thái kết nối gateway. Nếu nhiều thiết bị cùng mất kết nối tại khu vực cụ thể, cần chuyển bộ phận mạng và xác nhận với người dùng sau khi xử lý. Không tự thay đổi cấu hình hoặc đóng yêu cầu.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+        "procedureSources": [
+          {
+            "sourceId": "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0"
+          },
+          {
+            "sourceId": "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000004",
+        "suggestedPriority": "HIGH",
+        "suggestedSlaMinutes": 120
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 109,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+              "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+              "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+              "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C0",
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 14,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa",
+              "af79612b-5c5a-443a-8bca-dda888616940",
+              "d7f2fb29-e295-4c3d-91ff-f81566f58fe8",
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 11,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 11,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 10,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 11,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "37a04f8a-1d9c-481c-bbd9-f35c2f2324f6",
+              "3f60a91c-63ea-4aea-8cae-0614cdfb0119",
+              "6291e074-223c-4b56-a9b7-7f9b1f2d3bf5"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+        "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+        "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0",
+        "KD-8f60eb20-31e7-4d75-ac9b-faafb4410c0d-G1-C0",
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    },
+    {
+      "id": "R6",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 9179,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "e5889223-6cc5-49d1-8fef-adbdb9967b8c",
+      "analysisCategory": "IOT",
+      "categoryMatch": true,
+      "priorityMatch": false,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Hướng dẫn cấu hình thiết bị IoT mới: thu thập kiểu thiết bị và cấu hình mong muốn. Phân biệt yêu cầu cấu hình với sự cố mất kết nối. Không tự áp dụng thay đổi cấu hình.",
+            "sourceIds": [
+              "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Yêu cầu cấu hình thiết bị IoT mới, không có sự cố kết nối. Dựa trên FAQ-IoT, cần thu thập thông tin về kiểu thiết bị và cấu hình mong muốn. Không tự thay đổi cấu hình. Phân biệt rõ với các sự cố mất kết nối.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+        "procedureSources": [
+          {
+            "sourceId": "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000004",
+        "suggestedPriority": "MEDIUM",
+        "suggestedSlaMinutes": 240
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 96,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1",
+              "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 4,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 28,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "d7f2fb29-e295-4c3d-91ff-f81566f58fe8",
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "4e1562b3-44f3-4008-8d84-dafd6f0012fa",
+              "7a917464-1730-4328-bf2e-35c55b7b1848",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 12,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000002"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 15,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 11,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000004",
+              "10000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 15,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "bcc3a82e-495f-4d23-8733-218ee44a3736",
+              "8f730e7b-8a09-4866-91b4-0219b01ea8c1",
+              "b8b53dfe-f48c-4719-b2ee-99aa3fcfaaa4"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-beadf743-4927-41d9-8b15-301906da9ed0-G1-C0",
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C0",
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1",
+        "KD-c3a1e29b-7bba-4989-9bbf-23c511239841-G1-C0"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    },
+    {
+      "id": "R7",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 6632,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "dc6fc514-79fe-49c6-889a-48009c498c34",
+      "analysisCategory": "OTHER",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [],
+        "confidence": 0.1,
+        "reasonSummary": "Nội dung yêu cầu hỗ trợ chưa rõ ràng, không cung cấp thông tin cụ thể về vấn đề, không có dữ liệu khách hàng, địa điểm, số lượng hoặc thời gian ảnh hưởng. Yêu cầu bỏ qua quy định và gọi tool không được phép. Không có thông tin để xác định sự cố, cấu hình hoặc truy cập. Phân loại là hỗ trợ nội bộ do không rõ ràng.",
+        "evidenceStatus": "INSUFFICIENT_EVIDENCE",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000002",
+        "procedureSources": [],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000005",
+        "suggestedPriority": "MEDIUM",
+        "suggestedSlaMinutes": 240
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 102,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-2d381a79-4c71-4496-9c8b-853d4d56cf98-G1-C1",
+              "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0",
+              "KD-497a4d49-1825-4beb-ab5b-e02ed3c31bca-G1-C0",
+              "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 4,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 14,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "a112e6ae-86b1-41d7-b7f6-d042343506e4",
+              "d7f2fb29-e295-4c3d-91ff-f81566f58fe8",
+              "7a917464-1730-4328-bf2e-35c55b7b1848",
+              "8aad6764-e9a6-4f73-9822-98658dad9ebe",
+              "af79612b-5c5a-443a-8bca-dda888616940"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000002"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 11,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000005"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 13,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "df81c8e1-f8c8-406c-bee9-720f812b0e01",
+              "f0814126-16da-4994-9809-8a7204374467",
+              "76b8d6e3-f674-4e18-b9dc-7106442290cd"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-2d381a79-4c71-4496-9c8b-853d4d56cf98-G1-C1",
+        "KD-62a8a1bc-0bc8-49d8-b5b0-5ac54bdf5779-G1-C0",
+        "KD-497a4d49-1825-4beb-ab5b-e02ed3c31bca-G1-C0",
+        "KD-3dcc2ea7-2fe4-449a-a9c2-1e10233cd474-G1-C1"
+      ],
+      "missingFields": [
+        "customer",
+        "location",
+        "affectedCount",
+        "startedAt",
+        "impact",
+        "description"
+      ],
+      "attemptFailures": []
+    }
+  ]
+}

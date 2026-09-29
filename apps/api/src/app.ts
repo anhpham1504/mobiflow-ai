@@ -72,7 +72,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M6 grounded recommendations').setDescription('Versioned manual workflow, bounded advisory AI analysis, authorized evidence and read-only recommendation tools. No automatic approval or assignment.').setVersion('0.6.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M7 human review').setDescription('Versioned manual workflow and manager-controlled accept, modify or reject decisions over grounded AI recommendations. AI never approves or assigns autonomously.').setVersion('0.7.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

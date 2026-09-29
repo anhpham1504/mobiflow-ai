@@ -7,12 +7,12 @@ test('M6 real grounded proposal, explanatory-only UI, sources, RBAC, responsive 
   try{
     await signIn(user,'user@mobiflow.local');const id=await create(user,'M6 browser '+Date.now(),'Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng. Synthetic demo.');
     await expect(user.getByText('Phân tích AI hoàn tất.',{exact:true})).toBeVisible({timeout:310000});
-    await expect(user.getByRole('region',{name:'Đề xuất có căn cứ'})).toHaveCount(0);
-    await signIn(manager,'manager@mobiflow.local');await manager.goto('/manager/requests/'+id);const panel=manager.getByRole('region',{name:'Đề xuất có căn cứ'});
+    await expect(user.getByRole('region',{name:'Đề xuất AI và quyết định của quản lý'})).toHaveCount(0);
+    await signIn(manager,'manager@mobiflow.local');await manager.goto('/manager/requests/'+id);const panel=manager.getByRole('region',{name:'Đề xuất AI và quyết định của quản lý'});
     await expect(panel).toContainText('Chưa có đề xuất.');await panel.getByRole('button',{name:'Tạo đề xuất AI',exact:true}).focus();await manager.keyboard.press('Enter');
     await expect(panel.getByRole('status')).toContainText('AI đang tổng hợp');await expect(panel.getByRole('button',{name:'Tạo đề xuất AI',exact:true})).toBeDisabled();
     await expect(panel.getByRole('heading',{name:'AI đề xuất — chưa được duyệt'})).toBeVisible({timeout:310000});await expect(panel).toContainText('chưa hiệu chuẩn');await expect(manager.getByText('Phân công: Chưa phân công',{exact:true})).toBeVisible();
-    await expect(manager.getByText('SLA bắt đầu sau lần phân công đầu tiên.',{exact:true})).toBeVisible();await expect(manager.getByRole('button',{name:/Duyệt và phân công/})).toHaveCount(0);
+    await expect(manager.getByText('SLA bắt đầu sau lần phân công đầu tiên.',{exact:true})).toBeVisible();await expect(panel.getByRole('button',{name:'Chấp nhận đề xuất'})).toBeVisible();
     const source=panel.getByRole('link').filter({hasText:/SOP|FAQ/}).first();await expect(source).toBeVisible();const href=await source.getAttribute('href');await source.click();await expect(manager.getByRole('heading',{name:'Nguồn tham chiếu'})).toBeVisible();await manager.goto('/manager/requests/'+id);
     await expect(panel.getByRole('heading',{name:'AI đề xuất — chưa được duyệt'})).toBeVisible();
     for(const width of [360,768,1440]){await manager.setViewportSize({width,height:900});expect(await manager.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);await manager.screenshot({path:'artifacts/m6/recommendation-'+width+'.png',fullPage:true});}

@@ -18,14 +18,16 @@ import { parse } from './validation.js';
 import {VectorRepository} from '../knowledge/vector.repository.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
-import {recommendationEvidenceSchema,type Recommendation} from '@mobiflow/contracts';
+import {recommendationEvidenceSchema,type Recommendation,type RecommendationEvidence} from '@mobiflow/contracts';
 import {parseRecommendation} from '../ai/recommendation-output.js';
 import {revalidateRecommendation} from '../ai/recommendation-validation.js';
+import {ToolFailure} from '../ai/tools/registry.js';
+import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
   expectedVersion: number; reason?: string; body?: string; finalDecision?: FinalDecision;
-  manualDraftRevision?: number; reviewKind?: 'MANUAL'; acknowledgedMissingFields?: string[];
+  manualDraftRevision?: number; reviewKind?: 'AI'|'MANUAL'; recommendationId?:string; acknowledgedMissingFields?: string[];
   teamId?: string; staffId?: string; priority?: 'LOW'|'MEDIUM'|'HIGH'|'URGENT';
   rootCause?: string; resolution?: string; verification?: string;
   itemId?: string; text?: string; required?: boolean; operation?: 'COMPLETE'|'UNCOMPLETE'|'WAIVE'|'UNWAIVE';
@@ -96,26 +98,39 @@ export class RequestStateMachineService {
         notification='APPROVAL_REQUIRED'; recipients=await managers();
       }
       if (action === 'APPROVE_AND_ASSIGN' || action === 'REJECT_APPROVAL') {
-        if (request.reviewKind !== 'MANUAL' || command.reviewKind !== 'MANUAL' || request.pendingDraftRevision !== command.manualDraftRevision || request.manualDraftRevision !== command.manualDraftRevision) throw new ApiError(409,'ALREADY_REVIEWED','The review is no longer current.');
+        const manual=request.reviewKind==='MANUAL'&&command.reviewKind==='MANUAL'&&request.pendingDraftRevision===command.manualDraftRevision&&request.manualDraftRevision===command.manualDraftRevision;
+        const ai=request.reviewKind==='AI'&&command.reviewKind==='AI'&&request.pendingRecommendationId===command.recommendationId;
+        if(!manual&&!ai)throw new ApiError(409,'ALREADY_REVIEWED','The review is no longer current.');
+        const recommendation=ai?await tx.aiRecommendation.findFirst({where:{id:command.recommendationId,requestId:id},include:{aiRun:true}}):null;
+        if(ai&&(!recommendation||recommendation.status!=='PENDING'||recommendation.invalidatedAt||recommendation.aiRun.contextVersion+1!==request.version))throw new ApiError(409,'STALE_RECOMMENDATION','The AI recommendation is no longer current.');
+        const evidence=ai?this.recommendationEvidence(recommendation!.aiRun.retrievalSnapshotJson):null;
         data.reviewKind=null; data.pendingDraftRevision=null; data.pendingRecommendationId=null;
-        if (action === 'REJECT_APPROVAL') { data.triageDraftJson=Prisma.DbNull; }
+        if (action === 'REJECT_APPROVAL') {
+          if(manual)data.triageDraftJson=Prisma.DbNull;
+          if(recommendation)await tx.aiRecommendation.update({where:{id:recommendation.id},data:{status:'REJECTED',reviewedById:actor.id,reviewedAt:now,managerChangesJson:{decision:'REJECT',reason:command.reason!}}});
+        }
         else {
-          const original = parse(finalDecisionSchema,this.draftFields(request.triageDraftJson));
-          const decision = command.finalDecision ?? {...original,acknowledgedMissingFields:command.acknowledgedMissingFields as FinalDecision['acknowledgedMissingFields']};
-          const policy = await this.validateDecision(tx,decision);
+          if(recommendation&&recommendation.evidenceStatus==='INSUFFICIENT_EVIDENCE'&&!command.finalDecision)throw new ApiError(422,'INSUFFICIENT_EVIDENCE','Modify with a human-authored plan or reject this recommendation.');
+          if(evidence)try{await revalidateRecommendation(tx,evidence,true,recommendation!.suggestedPriority);await this.vectors.validateCurrent(tx,evidence.sources,true);await this.vectors.compatible(evidence.embeddingIdentity,tx);}catch(error){if(error instanceof ToolFailure||error instanceof KnowledgeFailure)throw new ApiError(409,'STALE_RECOMMENDATION','Recommendation evidence or eligibility changed. Reload and review again.');throw error;}
+          const original = manual?parse(finalDecisionSchema,this.draftFields(request.triageDraftJson)):this.aiDecision(recommendation!,evidence!,command.acknowledgedMissingFields as FinalDecision['acknowledgedMissingFields']);
+          const selected=command.finalDecision ?? original;
+          const decision={...selected,acknowledgedMissingFields:(command.finalDecision?.acknowledgedMissingFields??command.acknowledgedMissingFields??selected.acknowledgedMissingFields) as FinalDecision['acknowledgedMissingFields']};
+          const policy = await this.validateDecision(tx,decision,evidence??undefined);
           if(request.latestAnalysisId){
             const analysis=await tx.aiAnalysis.findUniqueOrThrow({where:{id:request.latestAnalysisId}});
             const missing=analysis.missingFieldsJson as string[];
             if(missing.some(field=>['location','startedAt'].includes(field)&&!decision.acknowledgedMissingFields.includes(field as 'location'|'startedAt')))throw new ApiError(422,'MISSING_ACKNOWLEDGMENT','Acknowledge missing location/time before approval.');
           }
           const draftSnapshot=request.triageDraftJson as Prisma.JsonObject;
-          if(!command.finalDecision && (draftSnapshot.policyId!==policy.id || draftSnapshot.policyVersion!==policy.version || draftSnapshot.targetSeconds!==policy.targetMinutes*60)) throw new ApiError(422,'STALE_POLICY','The SLA policy changed. Modify or prepare a new draft before approval.');
+          if(manual&&!command.finalDecision && (draftSnapshot.policyId!==policy.id || draftSnapshot.policyVersion!==policy.version || draftSnapshot.targetSeconds!==policy.targetMinutes*60)) throw new ApiError(422,'STALE_POLICY','The SLA policy changed. Modify or prepare a new draft before approval.');
           const snapshot = {...decision,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60};
           Object.assign(data,{category:decision.category,subcategory:decision.subcategory,priority:decision.priority,teamId:decision.teamId,currentAssigneeId:decision.staffId});
-          await tx.assignment.create({data:{requestId:id,staffId:decision.staffId,teamId:decision.teamId,assignedById:actor.id,assignedAt:now,reason:decision.reason,decisionKind:'MANUAL',finalDecisionJson:snapshot,managerChangesJson:command.finalDecision ? {original,final:decision} : Prisma.JsonNull,eventId:event.id}});
+          const decisionKind=recommendation?(command.finalDecision?'AI_MODIFY':'AI_ACCEPT'):'MANUAL';
+          await tx.assignment.create({data:{requestId:id,staffId:decision.staffId,teamId:decision.teamId,assignedById:actor.id,assignedAt:now,reason:decision.reason,recommendationId:recommendation?.id,decisionKind,finalDecisionJson:snapshot,managerChangesJson:command.finalDecision ? {original,final:decision} : Prisma.JsonNull,eventId:event.id}});
           const start=second(now);
           await tx.slaInstance.create({data:{requestId:id,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60,startedAt:start,dueAt:new Date(start.getTime()+policy.targetMinutes*60000),assessedAt:start}});
-          await tx.checklist.create({data:{requestId:id,createdById:actor.id,provenance:'APPROVAL',items:{create:decision.actions.map((item,i)=>({ordinal:i+1,text:item.text,required:item.required,sourceRefsJson:[],createdAt:now,updatedAt:now}))},createdAt:now,updatedAt:now}});
+          await tx.checklist.create({data:{requestId:id,createdById:actor.id,provenance:'APPROVAL',sourceRunId:recommendation?.aiRunId,items:{create:decision.actions.map((item,i)=>({ordinal:i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))},createdAt:now,updatedAt:now}});
+          if(recommendation)await tx.aiRecommendation.update({where:{id:recommendation.id},data:{status:command.finalDecision?'MODIFIED':'ACCEPTED',reviewedById:actor.id,reviewedAt:now,managerChangesJson:command.finalDecision?{original,final:decision}:Prisma.JsonNull,finalDecisionJson:snapshot}});
           notification='REQUEST_ASSIGNED'; recipients=[decision.staffId];
         }
       }
@@ -313,10 +328,17 @@ export class RequestStateMachineService {
     if(!policy) throw new ApiError(422,'MISSING_SLA_POLICY','No active SLA policy matches this decision.');
     return policy;
   }
-  private async validateDecision(tx:Tx,decision:FinalDecision) {
-    if(decision.actions.some(a=>a.provenance!=='HUMAN'||a.sourceIds.length)) throw new ApiError(422,'MANUAL_PLAN_REQUIRED','M3 accepts human-authored unsourced actions only.');
+  private async validateDecision(tx:Tx,decision:FinalDecision,evidence?:RecommendationEvidence) {
+    const sourceIds=new Set(evidence?.sources.map(s=>s.sourceId)??[]);
+    if(decision.actions.some(a=>a.provenance==='HUMAN'?a.sourceIds.length>0:a.sourceIds.length===0||a.sourceIds.some(id=>!sourceIds.has(id)))) throw new ApiError(422,'INVALID_ACTION_PROVENANCE','Human actions must be unsourced and AI actions must cite current review evidence.');
     await this.eligibleStaff(tx,decision.teamId,decision.staffId);
     return this.slaPolicy(tx,decision.category,decision.priority);
+  }
+  private recommendationEvidence(value:Prisma.JsonValue|null){const parsed=recommendationEvidenceSchema.safeParse(value);if(!parsed.success)throw new ApiError(409,'STALE_RECOMMENDATION','Recommendation evidence is unavailable.');return parsed.data;}
+  private aiDecision(rec:{suggestedPriority:'LOW'|'MEDIUM'|'HIGH'|'URGENT';suggestedTeamId:string|null;suggestedStaffId:string|null;actionsJson:Prisma.JsonValue;reasonSummary:string},evidence:RecommendationEvidence,ack:FinalDecision['acknowledgedMissingFields']):FinalDecision{
+    if(!rec.suggestedTeamId||!rec.suggestedStaffId)throw new ApiError(422,'INELIGIBLE_STAFF','The recommendation has no eligible staff assignment.');
+    const actions=(rec.actionsJson as {text:string;sourceIds:string[]}[]).map(a=>({text:a.text,required:true,sourceIds:a.sourceIds,provenance:'AI' as const}));
+    return parse(finalDecisionSchema,{category:evidence.analysis.category,subcategory:evidence.analysis.subcategory,priority:rec.suggestedPriority,teamId:rec.suggestedTeamId,staffId:rec.suggestedStaffId,actions,acknowledgedMissingFields:ack??[],reason:`Accepted AI recommendation: ${rec.reasonSummary}`.slice(0,2000)});
   }
   private async event(tx:Tx,request:DomainRequest,actor:AuthenticatedActor,action:string,correlationId:string,now:Date,reason?:string,after?:Prisma.InputJsonObject,before?:Prisma.InputJsonObject) {
     return tx.auditLog.create({data:{id:randomUUID(),requestId:request.id,actorType:actor.role,actorId:actor.id,action,resourceType:'Request',resourceId:request.id,requestCorrelationId:correlationId,safeBeforeJson:before,safeAfterJson:after,reason,outcome:'SUCCEEDED',createdAt:now}});

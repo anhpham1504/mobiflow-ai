@@ -37,7 +37,7 @@ export class RequestQueryService {
       createdAt:r.createdAt,updatedAt:r.updatedAt,resolvedAt:r.resolvedAt,closedAt:r.closedAt,canceledAt:r.canceledAt,aiAnalysisStatus:r.aiAnalysisStatus,
       sla:sla?{status:sla.status,startedAt:sla.startedAt,dueAt:sla.dueAt,pausedAt:sla.pausedAt,resolvedHoldAt:sla.resolvedHoldAt,stoppedAt:sla.stoppedAt,stopReason:sla.stopReason,remainingSeconds:sla.remainingSeconds,elapsedSeconds:sla.elapsedSeconds,targetSeconds:sla.targetSeconds,breachedAt:sla.breachedAt}:null,
       currentResolution:r.currentResolution,
-      ...(actor.role==='MANAGER'?{manualDraft:r.triageDraftJson,manualDraftRevision:r.manualDraftRevision,reviewKind:r.reviewKind,pendingDraftRevision:r.pendingDraftRevision}:{}),
+      ...(actor.role==='MANAGER'?{manualDraft:r.triageDraftJson,manualDraftRevision:r.manualDraftRevision,reviewKind:r.reviewKind,pendingDraftRevision:r.pendingDraftRevision,pendingRecommendationId:r.pendingRecommendationId}:{}),
     };
   }
   async detail(id:string,actor:AuthenticatedActor) {
@@ -50,7 +50,7 @@ export class RequestQueryService {
   async list(actor:AuthenticatedActor,input:unknown,kind:'mine'|'queue'|'manager'|'approvals') {
     const {query,where,limit}=pagination(input);
     const filters:Prisma.RequestWhereInput={...(query.status?{status:query.status}:{}),...(query.priority?{priority:query.priority}:{}),...(query.category?{category:query.category}:{}),...(query.assigneeId?{currentAssigneeId:query.assigneeId}:{}),...(query.from||query.to?{createdAt:{gte:query.from?new Date(query.from):undefined,lt:query.to?new Date(query.to):undefined}}:{})};
-    const scope:Prisma.RequestWhereInput=kind==='queue'?{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}}:kind==='approvals'?{status:'PENDING_APPROVAL',reviewKind:'MANUAL'}:{};
+    const scope:Prisma.RequestWhereInput=kind==='queue'?{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}}:kind==='approvals'?{status:'PENDING_APPROVAL',reviewKind:{in:['AI','MANUAL']}}:{};
     const rows=await this.prisma.request.findMany({where:{AND:[this.policy.requestScope(actor),filters,scope,where]},orderBy:[{createdAt:'desc'},{id:'desc'}],take:limit+1,include:relations});
     const result=page(rows,limit),now=new Date();
     return {...result,data:result.data.map(r=>this.view(r,actor,now))};
