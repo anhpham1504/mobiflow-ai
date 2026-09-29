@@ -72,6 +72,7 @@ Checklist creation is upsert of the one request checklist; supplied new items ap
 | POST /manager/requests/:id/triage | MANAGER; `{expectedVersion,finalDecision}`; NEW or TRIAGED | 200 TRIAGED/manual draft revision; cancels queued intake; active AI_ANALYZING returns 409 |
 | POST /manager/requests/:id/submit-approval | MANAGER; `{expectedVersion,manualDraftRevision}`; TRIAGED | 200 PENDING_APPROVAL MANUAL; notify managers |
 | POST /manager/requests/:id/ai/recommend | MANAGER; VersionCommand; TRIAGED | 202 Job; fixed pipeline; background SYSTEM publication creates PENDING_APPROVAL |
+| GET /manager/requests/:id/ai/recommendation | MANAGER; implemented M6 read projection | 200 latest recommendation job or null, validated evidence, sanitized tool traces and live stale flags; no approval action |
 | GET /manager/approvals | MANAGER; pagination | 200 current actionable pending reviews only |
 | GET /manager/approvals/:requestId | MANAGER | 200 review kind/reference/version, original AI/draft, evidence and decision form defaults |
 | POST /manager/approvals/:requestId/accept | MANAGER; ReviewCommand + acknowledgedMissingFields | 200 ASSIGNED; atomic decision/assignment/checklist/SLA/notifications/audit |

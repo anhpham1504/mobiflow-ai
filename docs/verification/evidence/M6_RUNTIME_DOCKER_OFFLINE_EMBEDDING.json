@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-29T07:55:44.687Z",
+  "target": "docker",
+  "mode": "offline-embedding",
+  "result": "PASS",
+  "checks": [],
+  "failure": {
+    "runId": "1a52d550-b78c-49f1-8fc5-b36ab76d5ad5",
+    "errorCode": "EMBEDDING_UNAVAILABLE",
+    "manualVersion": 4
+  },
+  "requestId": "620ac4d1-f010-4355-a06a-4941df6d59f3",
+  "noBusinessMutation": {
+    "assignments": 0,
+    "slas": 0,
+    "checklists": 0
+  }
+}

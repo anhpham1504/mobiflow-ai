@@ -1,0 +1,8 @@
+{
+  "status": "INTERRUPTED",
+  "finalExitCode": null,
+  "observedUnitTests": {"passed":35,"failed":0},
+  "observedIntegrationGroups": ["atomic publication and RBAC", "candidate filters and workload", "four late-publication races", "five controlled reference/provider/tool failures"],
+  "observedRecommendations": [{"id":"R1","status":"SUCCEEDED"},{"id":"R2","status":"FAILED","errorCode":"INVALID_REFERENCE"}],
+  "note": "Recovered from observed command output. Not a completed integration/evaluation PASS. Source was subsequently edited; rerun relevant gates. Fixed labels unchanged."
+}

@@ -1,0 +1,83 @@
+{
+  "at": "2026-09-29T08:03:20.491Z",
+  "cases": 7,
+  "rows": [
+    {
+      "name": "multiple valid",
+      "expected": [
+        "10000000-0000-4000-8000-000000000003",
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "actual": [
+        "10000000-0000-4000-8000-000000000003",
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "precision": 1,
+      "recall": 1
+    },
+    {
+      "name": "inactive",
+      "expected": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "actual": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "precision": 1,
+      "recall": 1
+    },
+    {
+      "name": "unavailable",
+      "expected": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "actual": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "precision": 1,
+      "recall": 1
+    },
+    {
+      "name": "wrong role",
+      "expected": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "actual": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "precision": 1,
+      "recall": 1
+    },
+    {
+      "name": "inactive membership",
+      "expected": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "actual": [
+        "10000000-0000-4000-8000-000000000004"
+      ],
+      "precision": 1,
+      "recall": 1
+    },
+    {
+      "name": "missing required skill",
+      "expected": [],
+      "actual": []
+    },
+    {
+      "name": "inactive team / zero",
+      "expected": [],
+      "actual": [],
+      "precision": null,
+      "recall": null
+    }
+  ],
+  "workloadStatesVerified": [
+    "ASSIGNED",
+    "IN_PROGRESS",
+    "WAITING_USER",
+    "RESOLVED"
+  ],
+  "zeroCandidate": true,
+  "multipleCandidate": true
+}

@@ -17,7 +17,7 @@ try {
   const tables = new Set((await pool.query("SELECT tablename AS table_name FROM pg_catalog.pg_tables WHERE schemaname='public'")).rows.map(({ table_name }) => table_name));
   for (const required of ['User', 'RefreshSession', 'Request', 'AuditLog', 'KnowledgeChunk', '_prisma_migrations']) assert.ok(tables.has(required));
   const embeddingColumns = Number((await pool.query("SELECT count(*)::int AS count FROM information_schema.columns WHERE table_schema='public' AND column_name='embedding'")).rows[0].count);
-  assert.equal(embeddingColumns, 1);
+  assert.equal(embeddingColumns, 2);
   record('real PostgreSQL M2 schema, pgvector and M5 verified vector dimension', { ...db.rows[0], requiredTables: 6, embeddingColumns });
 
   for (const path of ['/api/v1/health/live', '/health/live']) assert.equal((await fetch(base + path)).status, 200);

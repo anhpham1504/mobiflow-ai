@@ -1,0 +1,30 @@
+
+> mobiflow-ai@0.1.0 eval:retrieval:m5
+> node --env-file=.env scripts/evaluation/m5-retrieval.mjs
+
+{"id":"R01","rank":1,"count":4}
+{"id":"R02","rank":1,"count":5}
+{"id":"R03","rank":1,"count":1}
+{"id":"R04","rank":2,"count":5}
+{"id":"R05","rank":1,"count":4}
+{"id":"R06","rank":0,"count":0}
+{"id":"R07","rank":1,"count":5}
+{"id":"R08","rank":1,"count":2}
+{"id":"R09","rank":1,"count":2}
+{"id":"R10","rank":1,"count":2}
+{"id":"R11","rank":3,"count":5}
+{"id":"R12","rank":1,"count":2}
+{"id":"R13","rank":0,"count":0}
+{"id":"R14","rank":1,"count":1}
+{"id":"R15","rank":0,"count":0}
+{"id":"R16","rank":1,"count":1}
+{"id":"R17","rank":0,"count":0}
+{"id":"R18","rank":1,"count":2}
+{"id":"R19","rank":1,"count":1}
+{"id":"R20","rank":1,"count":1}
+{"id":"R21","rank":0,"count":0}
+{"id":"R22","rank":0,"count":0}
+{"id":"R23","rank":0,"count":0}
+{"id":"R24","rank":0,"count":0}
+{"id":"R25","rank":0,"count":0}
+{"cases":25,"labeledPositive":20,"negative":5,"hit1":0.7,"hit3":0.8,"hit5":0.8,"recall5":0.8,"mrr":0.7416666666666667,"noAnswer":5,"negativeFalsePositive":0,"embeddingLatency":{"count":25,"p50":126,"p95":158},"retrievalLatency":{"count":25,"p50":141,"p95":169}}

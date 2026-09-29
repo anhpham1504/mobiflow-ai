@@ -1,0 +1,8 @@
+{
+  "command": "node --env-file=.env scripts/verification/m2-integration.mjs --m6-only --pattern M6 (empty|source)",
+  "startedAt": "2026-09-29T04:18:52.959Z",
+  "finishedAt": "2026-09-29T04:19:07.174Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M6_NARROW_INTEGRATION-2026-09-29T04-18-52-959Z.txt"
+}

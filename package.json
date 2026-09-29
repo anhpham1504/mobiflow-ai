@@ -39,7 +39,10 @@
     "eval:retrieval:m5": "node --env-file=.env scripts/evaluation/m5-retrieval.mjs",
     "eval:rag:m5": "node --env-file=.env scripts/evaluation/m5-rag.mjs",
     "verify:runtime:m5": "node --env-file=.env scripts/verification/m5-runtime.mjs",
-    "test:e2e:m5": "playwright test --config playwright.m5.config.mjs"
+    "test:e2e:m5": "playwright test --config playwright.m5.config.mjs",
+    "test:integration:m6": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-integration.mjs --m6-only",
+    "test:e2e:m6": "playwright test --config playwright.m6.config.mjs",
+    "verify:runtime:m6": "node --env-file=.env scripts/verification/m6-runtime.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

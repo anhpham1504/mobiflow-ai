@@ -1,0 +1,8 @@
+{
+  "command": "node --env-file=.env scripts/verification/m2-integration.mjs --m6-only --pattern M6 (real PostgreSQL|source)",
+  "startedAt": "2026-09-29T04:26:59.660Z",
+  "finishedAt": "2026-09-29T04:27:08.189Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M6_EXTRA_INTEGRATION-2026-09-29T04-26-59-660Z.txt"
+}

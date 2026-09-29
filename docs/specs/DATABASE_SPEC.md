@@ -47,6 +47,8 @@ Request ownership never changes. category/subcategory/priority/team/staff in Req
 | KnowledgeChunk | id, sourceId, documentId FK, generation, chunkIndex, content, contentHash, pageNumber?, section?, startOffset, endOffset, modelIdentity, dimension, embedding vector(D), metadataJson, createdAt | Unique sourceId and (documentId,generation,chunkIndex); nonempty content; pageNumber>=1 or null; index documentId/generation; cosine vector index after actual D validated. Immutable chunk identity. |
 | RequestEmbedding | id, requestId FK, contextVersion, modelIdentity, dimension, embedding vector(D), createdAt | Unique (requestId,modelIdentity,contextVersion); compatible latest vector only in similarity queries; cosine index. Supporting entity for M6 real similarity, never fake seed vectors. |
 
+M6 storage refinement: RequestEmbedding also records `inputVersion`, `inputHash` and sanitized `identityJson` (including explicit truncation). Uniqueness includes inputVersion so an explicit embedding-input revision can coexist as immutable history; retrieval selects only its current revision. D=1024 was locally probed. A btree request/version index and HNSW cosine index are provisioned; the small-corpus query remains exact and scope-filtered before ranking. No approximate-index performance claim is made.
+
 AiRun safeResultJson stores typed Copilot/summary outputs where no dedicated business entity is needed. Do not store hidden reasoning, full unsanitized prompts or raw invalid outputs. Optional null model metadata is permitted only before job execution/health discovery; a claimed successful run must record actual provider/model identity. `latencyMs` is measured monotonic elapsed time, never synthesized from a target.
 
 ## SLA, notification and audit

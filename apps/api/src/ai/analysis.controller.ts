@@ -3,7 +3,7 @@ import {ApiBearerAuth,ApiBody,ApiOperation,ApiResponse,ApiTags} from '@nestjs/sw
 import type {ApiBodyOptions} from '@nestjs/swagger';
 import type {Response} from 'express';
 import {z} from 'zod';
-import {versionSchema,aiJobResponseSchema,aiExplanationSchema} from '@mobiflow/contracts';
+import {versionSchema,aiJobResponseSchema,aiExplanationSchema,recommendationResponseSchema} from '@mobiflow/contracts';
 import {AccessGuard,Roles,RolesGuard} from '../auth/auth.guards.js';
 import type {AuthenticatedRequest} from '../auth/auth.types.js';
 import {RequestStateMachineService} from '../requests/request-state-machine.service.js';
@@ -37,7 +37,7 @@ export class AnalysisController {
   @Get('requests/:id/ai/explanation') @ApiResponse({status:200,schema:schema(aiExplanationSchema)})
   @ApiOperation({summary:'Role-projected intake explanation',description:'Owner: progress/missing facts. Current STAFF: extracted facts. MANAGER: advisory analysis and uncalibrated confidence. No raw prompts, reasoning traces or private provider origin.'})
   async explanation(@Param('id') id:string,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response){return {data:await this.queries.explanation(uuid(id),req.auth!),requestId:res.locals.requestId};}
-  @Get('ai/runs/:id') @Roles('USER','MANAGER') @ApiResponse({status:200,schema:schema(aiJobResponseSchema)})
-  @ApiOperation({summary:'Poll ANALYSIS run',description:'Reauthorizes current owner/manager every poll. Terminal FAILED/CANCELED carries a safe code. Only MANAGER receives a successful analysis.'})
+  @Get('ai/runs/:id') @Roles('USER','MANAGER') @ApiResponse({status:200,schema:schema(z.union([aiJobResponseSchema,recommendationResponseSchema]))})
+  @ApiOperation({summary:'Poll ANALYSIS or manager-only RECOMMENDATION run',description:'Reauthorizes current owner/manager every poll. Owner cannot inspect recommendation metadata. Terminal FAILED/CANCELED carries a safe code.'})
   async run(@Param('id') id:string,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response){return {data:await this.queries.run(uuid(id),req.auth!),requestId:res.locals.requestId};}
 }

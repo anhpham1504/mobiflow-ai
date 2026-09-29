@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:e2e:m4",
+  "startedAt": "2026-09-29T07:51:52.676Z",
+  "finishedAt": "2026-09-29T07:52:11.298Z",
+  "exitCode": 1,
+  "status": "FAIL",
+  "log": "iterations/M6_M4_E2E_ONLINE-2026-09-29T07-51-52-676Z.txt"
+}

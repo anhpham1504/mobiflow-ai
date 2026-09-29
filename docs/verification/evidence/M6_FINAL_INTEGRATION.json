@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:integration:m6",
+  "startedAt": "2026-09-29T08:02:59.509Z",
+  "finishedAt": "2026-09-29T08:06:34.072Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M6_FINAL_INTEGRATION-2026-09-29T08-02-59-509Z.txt"
+}

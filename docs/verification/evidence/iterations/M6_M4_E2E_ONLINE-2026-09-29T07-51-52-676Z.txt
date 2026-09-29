@@ -1,0 +1,45 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m4
+> playwright test --config playwright.m4.config.mjs
+
+
+Running 2 tests using 1 worker
+
+(node:23088) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 apps\web\e2e\m4-online.spec.mjs:5:1 › M4 actual Ollama intake, role projection, persisted reload, responsive keyboard UI and protected cache clearing (11.4s)
+  x  2 apps\web\e2e\m4-online.spec.mjs:37:1 › M4 actual provider recovery: explicit retry from failed run succeeds and survives reload (5.7s)
+
+
+  1) apps\web\e2e\m4-online.spec.mjs:37:1 › M4 actual provider recovery: explicit retry from failed run succeeds and survives reload 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('region', { name: 'Phân tích AI hỗ trợ' }).getByRole('button', { name: 'Thử phân tích lại' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('region', { name: 'Phân tích AI hỗ trợ' }).getByRole('button', { name: 'Thử phân tích lại' }) with timeout 5000ms
+      - waiting for getByRole('region', { name: 'Phân tích AI hỗ trợ' }).getByRole('button', { name: 'Thử phân tích lại' })
+
+
+      39 |   await signIn(page,'user@mobiflow.local');await page.goto('/user/requests/'+requestId);
+      40 |   const panel=page.getByRole('region',{name:'Phân tích AI hỗ trợ'});
+    > 41 |   await expect(panel.getByRole('button',{name:'Thử phân tích lại'})).toBeVisible();
+         |                                                                      ^
+      42 |   await panel.getByRole('button',{name:'Thử phân tích lại'}).focus();await page.keyboard.press('Enter');
+      43 |   await expect(panel.getByRole('status')).toContainText(/AI đang chờ xử lý|AI đang phân tích/);
+      44 |   await expect(panel.getByText('Phân tích AI hoàn tất.',{exact:true})).toBeVisible({timeout:310000});
+        at C:\Code\MobiFlow AI\apps\web\e2e\m4-online.spec.mjs:41:70
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    artifacts\m4\browser-online\m4-online-M4-actual-provid-b6c21-ucceeds-and-survives-reload\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: artifacts\m4\browser-online\m4-online-M4-actual-provid-b6c21-ucceeds-and-survives-reload\error-context.md
+
+  1 failed
+    apps\web\e2e\m4-online.spec.mjs:37:1 › M4 actual provider recovery: explicit retry from failed run succeeds and survives reload 
+  1 passed (18.0s)

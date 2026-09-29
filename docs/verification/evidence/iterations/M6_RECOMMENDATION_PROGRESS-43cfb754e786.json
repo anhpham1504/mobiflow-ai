@@ -1,0 +1,180 @@
+{
+  "at": "2026-09-29T04:13:20.605Z",
+  "datasetHash": "a6fd238fe50f143b49c61140f7604a3ca3bb795db0530903925e5ddcbc214bf2",
+  "status": "IN_PROGRESS",
+  "results": [
+    {
+      "id": "R1",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "latencyMs": 18312,
+      "identity": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "requestId": "df99ff06-8e9a-4578-98ad-d43c09c70c0a",
+      "analysisCategory": "NETWORK",
+      "categoryMatch": true,
+      "priorityMatch": true,
+      "candidateMatch": true,
+      "referenceValid": true,
+      "schemaValid": true,
+      "recommendation": {
+        "actions": [
+          {
+            "text": "Tiếp nhận sự cố kết nối IoT. Ghi nhận số thiết bị bị ảnh hưởng (17), địa điểm (KCN Amata), thời điểm bắt đầu (khoảng 8 giờ sáng). Kiểm tra trạng thái kết nối SIM, cấu hình APN và gateway. Không tự suy đoán nguyên nhân từ số lượng thiết bị. Phân loại tham khảo NETWORK / IOT_CONNECTIVITY. Ưu tiên đề xuất HIGH khi mô tả rõ nhiều thiết bị gián đoạn; quản lý quyết định ưu tiên thực tế.",
+            "sourceIds": [
+              "KD-1d16cd68-3192-4f71-9c09-26436130b3cd-G1-C0"
+            ]
+          },
+          {
+            "text": "APN là tên điểm truy cập của kết nối dữ liệu di động. Nếu thiết bị đã mất kết nối, tham khảo SOP-IOT-04 về sự cố kết nối thay vì coi đó là yêu cầu cấu hình thông thường.",
+            "sourceIds": [
+              "KD-2e048a56-613d-473f-8912-a84149e93f42-G1-C0"
+            ]
+          },
+          {
+            "text": "Áp dụng khi điện thoại di động mất sóng, cuộc gọi bị rớt hoặc dữ liệu di động chập chờn. Ghi nhận địa điểm, thời gian, số người bị ảnh hưởng và loại dịch vụ. Phân biệt lỗi gọi thoại trên điện thoại với lỗi kết nối SIM trong thiết bị IoT.",
+            "sourceIds": [
+              "KD-5e6df9c8-e6ff-4f2b-a736-d015568cd57b-G1-C0"
+            ]
+          }
+        ],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng. Sự cố thuộc nhóm mất kết nối mạng IoT, ảnh hưởng đến nhiều thiết bị. Cần xử lý cấp độ cao do diện rộng và tính nghiêm trọng. Đã xác định các bước xử lý dựa trên SOP-IOT-04 và các tài liệu liên quan về cấu hình APN và sự cố mạng di động. Phân biệt rõ giữa sự cố kết nối thiết bị IoT và lỗi gọi thoại trên điện thoại.",
+        "evidenceStatus": "SUFFICIENT",
+        "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+        "procedureSources": [
+          {
+            "sourceId": "KD-1d16cd68-3192-4f71-9c09-26436130b3cd-G1-C0"
+          },
+          {
+            "sourceId": "KD-2e048a56-613d-473f-8912-a84149e93f42-G1-C0"
+          },
+          {
+            "sourceId": "KD-5e6df9c8-e6ff-4f2b-a736-d015568cd57b-G1-C0"
+          }
+        ],
+        "similarCaseAlert": {
+          "count": 5,
+          "detected": true
+        },
+        "suggestedStaffId": "10000000-0000-4000-8000-000000000003",
+        "suggestedPriority": "HIGH",
+        "suggestedSlaMinutes": 120
+      },
+      "toolCalls": [
+        {
+          "toolName": "searchKnowledge",
+          "ordinal": 1,
+          "latencyMs": 75,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "KD-1d16cd68-3192-4f71-9c09-26436130b3cd-G1-C0",
+              "KD-2e048a56-613d-473f-8912-a84149e93f42-G1-C0",
+              "KD-b19fb45f-beb6-4855-a473-4cc36cff5af0-G1-C0",
+              "KD-5e6df9c8-e6ff-4f2b-a736-d015568cd57b-G1-C0"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 4,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "findSimilarRequests",
+          "ordinal": 2,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "88f1bcb8-8974-4786-8230-d292f62a090e",
+              "e63aec4f-afad-40ac-bf19-e948dac7007d",
+              "8dcdbcc5-9cff-4884-8c47-0804f9054478",
+              "954c49c4-5195-4e64-8923-47f4a585b4d7",
+              "a7f9b293-5bcd-44de-86ec-6bef908e0569"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 5,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getSlaPolicy",
+          "ordinal": 3,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "50000000-0000-4000-8000-000000000003"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 1,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getCandidateStaff",
+          "ordinal": 4,
+          "latencyMs": 12,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000003",
+              "10000000-0000-4000-8000-000000000004"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getStaffWorkload",
+          "ordinal": 5,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "10000000-0000-4000-8000-000000000003",
+              "10000000-0000-4000-8000-000000000004"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 2,
+            "toolVersion": "v1"
+          }
+        },
+        {
+          "toolName": "getRequestHistory",
+          "ordinal": 6,
+          "latencyMs": 9,
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "summary": {
+            "resultIds": [
+              "1e37e05d-28c2-4dbc-9eb6-761d5402205e",
+              "9cbaa531-d312-4079-843d-980affa8b815",
+              "391dc2f2-4633-4698-b577-759275dc0725"
+            ],
+            "sideEffect": "READ_ONLY",
+            "resultCount": 3,
+            "toolVersion": "v1"
+          }
+        }
+      ],
+      "sourceIds": [
+        "KD-1d16cd68-3192-4f71-9c09-26436130b3cd-G1-C0",
+        "KD-2e048a56-613d-473f-8912-a84149e93f42-G1-C0",
+        "KD-b19fb45f-beb6-4855-a473-4cc36cff5af0-G1-C0",
+        "KD-5e6df9c8-e6ff-4f2b-a736-d015568cd57b-G1-C0"
+      ],
+      "missingFields": [],
+      "attemptFailures": []
+    }
+  ]
+}

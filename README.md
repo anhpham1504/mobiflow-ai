@@ -16,6 +16,12 @@ Local intake, live model evaluation, offline recovery and browser evidence: [M4 
 
 Synthetic document ingestion, embeddings, pgvector retrieval, validated citations and measured RAG evidence: [M5 verification](docs/verification/MILESTONE_5_VERIFICATION.md).
 
+M6 work adds six read-only tools, real request embeddings/similar cases, deterministic candidate/workload queries and manager-only grounded recommendations. On a TRIAGED request with validated analysis, choose **Tạo đề xuất AI**. A validated result enters PENDING_APPROVAL but never assigns staff, changes operational priority/category, starts SLA or creates a checklist. The explanation shows sources, bounded related cases, candidate/workload snapshots and stale warnings. AI-bound accept/modify/reject is deferred to M7 and is not available here. Failure leaves manual work/retry available in TRIAGED.
+
+M6 commands: `npm run test:integration:m6`, `npm run test:e2e:m6`, and `npm run verify:runtime:m6`. Full integration also includes M6. Live M6 labels are fixed in `datasets/ai-evaluation/m6-cases.json`; generated evidence preserves previous iterations. Set `M6_REGRESSION=true` for M4/M5 evaluation reruns to write separate M6-prefixed evidence without overwriting baseline reports. Never run live inference evaluations concurrently.
+
+Request vector input is NFC-normalized title/newline/description, first 2,000 code points, with hash/revision/truncation metadata, exact current request version and actual embedding identity. Messages are separate bounded recommendation history. Background backfill processes one request per idle worker tick; on failure it pauses until the API is restarted, avoiding an outage retry loop. Restore the provider then restart the local API to resume historical backfill; explicit recommendation retry reattempts its own embedding. Similarity skips missing/stale/incompatible vectors and never substitutes fake counts. The 0.70 mapped-vector cutoff is an engineering default, not calibrated correctness.
+
 Use Node 24.19.x, npm 11.17.x and Docker Desktop (Linux containers). Ollama runs on Windows. From this directory:
 
 ```powershell

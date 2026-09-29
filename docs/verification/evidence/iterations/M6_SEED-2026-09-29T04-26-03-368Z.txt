@@ -1,0 +1,19 @@
+
+> mobiflow-ai@0.1.0 demo:seed
+> npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/dev/seed.mjs
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 269ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+{"event":"demo.seed.complete","database":"mobiflow","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}

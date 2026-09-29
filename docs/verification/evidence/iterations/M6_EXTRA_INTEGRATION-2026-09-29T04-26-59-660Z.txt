@@ -1,0 +1,48 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+Applying migration `20260928145100_m5_knowledge_vectors`
+Applying migration `20260929034000_m6_request_embeddings`
+Applying migration `20260929043000_m6_request_cosine_index`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+  └─ 20260928145100_m5_knowledge_vectors/
+    └─ migration.sql
+  └─ 20260929034000_m6_request_embeddings/
+    └─ migration.sql
+  └─ 20260929043000_m6_request_cosine_index/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":6,"vectorVersion":"0.8.6","embeddingColumns":2,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+✔ M6 real PostgreSQL tools, atomic pending publication, concurrent scheduling, no business mutation and manager-only delivery (1407.3651ms)
+▶ M6 source disable and policy changes invalidate publication and delivery
+  ✔ source (859.0182ms)
+  ✔ policy (1180.917ms)
+  ✔ published source becomes stale at delivery; immutable suggestion retained (1436.0036ms)
+✔ M6 source disable and policy changes invalidate publication and delivery (3477.276ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6026.681

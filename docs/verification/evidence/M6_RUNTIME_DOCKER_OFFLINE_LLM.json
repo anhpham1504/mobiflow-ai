@@ -1,0 +1,18 @@
+{
+  "at": "2026-09-29T07:55:23.762Z",
+  "target": "docker",
+  "mode": "offline-llm",
+  "result": "PASS",
+  "checks": [],
+  "failure": {
+    "runId": "effcb679-d233-4ffa-a384-7776d44ae5d1",
+    "errorCode": "AI_PROVIDER_UNAVAILABLE",
+    "manualVersion": 4
+  },
+  "requestId": "467046c8-498f-4214-a8eb-bf219e1ce19c",
+  "noBusinessMutation": {
+    "assignments": 0,
+    "slas": 0,
+    "checklists": 0
+  }
+}

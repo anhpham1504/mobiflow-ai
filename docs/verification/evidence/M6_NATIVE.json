@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:runtime:m6",
+  "startedAt": "2026-09-29T04:27:09.536Z",
+  "finishedAt": "2026-09-29T04:27:38.347Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M6_NATIVE-2026-09-29T04-27-09-536Z.txt"
+}

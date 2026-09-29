@@ -1,0 +1,54 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+Applying migration `20260928145100_m5_knowledge_vectors`
+Applying migration `20260929034000_m6_request_embeddings`
+Applying migration `20260929043000_m6_request_cosine_index`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+  └─ 20260928145100_m5_knowledge_vectors/
+    └─ migration.sql
+  └─ 20260929034000_m6_request_embeddings/
+    └─ migration.sql
+  └─ 20260929043000_m6_request_cosine_index/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":6,"vectorVersion":"0.8.6","embeddingColumns":2,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+▶ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback
+  ✔ zero candidate is explicit; latest message included; no history match is success (975.6843ms)
+  ✔ self, stale version, incompatible model, canceled and out-of-window vectors excluded (645.0568ms)
+  ✔ actual HTTP adapter llm offline (2352.0854ms)
+  ✔ actual HTTP adapter embedding offline (2040.974ms)
+  ✔ expired durable recommendation lease is failed without state transition (1054.3021ms)
+  ✔ notification database failure rolls back recommendation, history and pending pointer (1192.6492ms)
+✔ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback (8266.2737ms)
+▶ M6 source disable and policy changes invalidate publication and delivery
+  ✔ source (1127.9229ms)
+  ✔ policy (1198.5676ms)
+✔ M6 source disable and policy changes invalidate publication and delivery (2327.1005ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11691.6967

@@ -1,0 +1,5 @@
+
+> mobiflow-ai@0.1.0 verify:runtime:m6
+> node --env-file=.env scripts/verification/m6-runtime.mjs
+
+PASS M6 docker online

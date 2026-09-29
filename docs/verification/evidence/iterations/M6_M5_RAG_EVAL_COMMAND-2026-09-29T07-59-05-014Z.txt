@@ -1,0 +1,29 @@
+
+> mobiflow-ai@0.1.0 eval:rag:m5
+> node --env-file=.env scripts/evaluation/m5-rag.mjs
+
+{"id":"A01","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A01","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A02","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A02","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A03","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A03","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A04","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A04","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A05","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A05","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A06","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A06","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A07","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A07","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A08","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A08","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A09","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A09","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A10","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A10","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A11","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A11","mode":"RAG","status":"SUCCEEDED"}
+{"id":"A12","mode":"NON_RAG","status":"SUCCEEDED"}
+{"id":"A12","mode":"RAG","status":"SUCCEEDED"}
+{"NON_RAG":{"cases":12,"schemaValid":12,"citationValid":null,"citationRelevant":null,"category":12,"priority":11,"p50":3411,"p95":3826},"RAG":{"cases":12,"schemaValid":12,"citationValid":12,"citationRelevant":12,"category":12,"priority":9,"p50":7125,"p95":8535}}

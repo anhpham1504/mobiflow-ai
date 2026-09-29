@@ -1,4 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
+import {eligibleStaffPredicate} from './staff-eligibility.js';
 import type { ApiEnvironment } from '@mobiflow/config';
 import { API_ENV } from '../tokens.js';
 import { analysisSchema, analysisSchemaVersion } from '@mobiflow/contracts';
@@ -17,6 +18,9 @@ import { parse } from './validation.js';
 import {VectorRepository} from '../knowledge/vector.repository.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
+import {recommendationEvidenceSchema,type Recommendation} from '@mobiflow/contracts';
+import {parseRecommendation} from '../ai/recommendation-output.js';
+import {revalidateRecommendation} from '../ai/recommendation-validation.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
@@ -266,6 +270,30 @@ export class RequestStateMachineService {
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }
+  async publishRecommendation(runId:string,result:Recommendation,identity:{provider:string;model:string;digest:string},outputSize:number,latencyMs:number){
+    const initial=await this.prisma.aiRun.findUniqueOrThrow({where:{id:runId}});
+    return this.prisma.$transaction(async tx=>{
+      await tx.$queryRaw(Prisma.sql`SELECT id FROM "Request" WHERE id=${initial.requestId}::uuid FOR UPDATE`);
+      const request=await tx.request.findUniqueOrThrow({where:{id:initial.requestId!}}),run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),now=await this.now(tx);
+      if(run.status!=='RUNNING'||run.purpose!=='RECOMMENDATION'||request.status!=='TRIAGED'||request.version!==run.contextVersion||!run.deadlineAt||run.deadlineAt<=now)throw new ApiError(409,'STALE_CONTEXT','The recommendation context changed.');
+      await tx.$queryRaw(Prisma.sql`SELECT id FROM "User" WHERE id=${run.initiatingActorId}::uuid FOR SHARE`);
+      if(!await tx.user.findFirst({where:{id:run.initiatingActorId!,active:true,role:'MANAGER'}}))throw new ApiError(403,'FORBIDDEN','The initiating manager no longer has access.');
+      const evidence=recommendationEvidenceSchema.parse(run.retrievalSnapshotJson);
+      if(request.latestAnalysisId!==evidence.analysisId||evidence.requestVersion!==request.version)throw new ApiError(409,'STALE_CONTEXT','The analysis changed.');
+      const r=parseRecommendation(JSON.stringify(result),evidence);
+      await revalidateRecommendation(tx,evidence,true,r.suggestedPriority);
+      await this.vectors.validateCurrent(tx,evidence.sources);
+      await this.vectors.compatible(evidence.embeddingIdentity,tx);
+      const rec=await tx.aiRecommendation.create({data:{requestId:request.id,aiRunId:runId,suggestedPriority:r.suggestedPriority,suggestedTeamId:r.suggestedTeamId,suggestedStaffId:r.suggestedStaffId,suggestedSlaMinutes:r.suggestedSlaMinutes,procedureRefsJson:r.procedureSources,actionsJson:r.actions,similarCaseAlertJson:r.similarCaseAlert,evidenceStatus:r.evidenceStatus,confidence:r.confidence,reasonSummary:r.reasonSummary,createdAt:now}});
+      const event=await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'SUBMIT_FOR_APPROVAL',resourceType:'AiRecommendation',resourceId:rec.id,requestCorrelationId:runId,safeBeforeJson:{status:'TRIAGED',version:request.version},safeAfterJson:{status:'PENDING_APPROVAL',version:request.version+1,recommendationId:rec.id},outcome:'SUCCEEDED',createdAt:now}});
+      await tx.request.update({where:{id:request.id,version:run.contextVersion},data:{status:'PENDING_APPROVAL',version:{increment:1},reviewKind:'AI',pendingRecommendationId:rec.id,pendingDraftRevision:null}});
+      await tx.requestStatusHistory.create({data:{requestId:request.id,fromStatus:'TRIAGED',toStatus:'PENDING_APPROVAL',action:'SUBMIT_FOR_APPROVAL',actorType:'SYSTEM',requestVersion:request.version+1,eventId:event.id,createdAt:now}});
+      const managers=await tx.user.findMany({where:{active:true,role:'MANAGER'},select:{id:true}});
+      await tx.notification.createMany({data:managers.map(m=>({recipientId:m.id,requestId:request.id,eventId:event.id,type:'APPROVAL_REQUIRED',safeActorMetadataJson:{actorType:'SYSTEM'},createdAt:now}))});
+      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,modelIdentityJson:identity,safeResultJson:r,outputSize,latencyMs}});
+      return rec.id;
+    },{timeout:15000,isolationLevel:Prisma.TransactionIsolationLevel.Serializable});
+  }
   private draftFields(value: Prisma.JsonValue | null) {
     if(!value||typeof value!=='object'||Array.isArray(value)) return null;
     const {policyId: _id,policyVersion: _version,targetSeconds: _target,...fields}=value;
@@ -275,7 +303,7 @@ export class RequestStateMachineService {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${staffId}::uuid FOR SHARE`);
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Team" WHERE "id"=${teamId}::uuid FOR SHARE`);
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "TeamMember" WHERE "teamId"=${teamId}::uuid AND "userId"=${staffId}::uuid FOR SHARE`);
-    const member=await tx.teamMember.findFirst({where:{teamId,userId:staffId,active:true,team:{active:true},user:{active:true,available:true,role:'STAFF'}}});
+    const [member]=await tx.$queryRaw<{id:string}[]>(Prisma.sql`SELECT m.id FROM "TeamMember" m JOIN "User" u ON u.id=m."userId" JOIN "Team" t ON t.id=m."teamId" WHERE t.id=${teamId}::uuid AND u.id=${staffId}::uuid AND ${eligibleStaffPredicate()}`);
     if(!member) throw new ApiError(422,'INELIGIBLE_STAFF','Choose active available staff in the selected active team.');
   }
   private async slaPolicy(tx:Tx,category:string,priority:'LOW'|'MEDIUM'|'HIGH'|'URGENT') {
