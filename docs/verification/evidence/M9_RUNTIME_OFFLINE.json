@@ -1,0 +1,10 @@
+{
+  "at": "2026-09-29T14:51:42.476Z",
+  "result": "PASS",
+  "sourceCommand": "npm run verify:runtime:m8",
+  "checks": [
+    {"name": "LLM outage leaves core, manual workflow, deterministic SLA and resolution intact", "result": "PASS", "errorCode": "AI_PROVIDER_UNAVAILABLE"},
+    {"name": "Embedding outage fails retrieval-dependent Copilot closed while core/manual/SLA remain intact", "result": "PASS", "errorCode": "EMBEDDING_UNAVAILABLE"}
+  ],
+  "privacy": "Sanitized summary only; request content, prompt text, credentials and model output are not retained."
+}

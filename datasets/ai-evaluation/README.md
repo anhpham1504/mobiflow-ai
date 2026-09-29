@@ -1,7 +1,7 @@
-# M4 synthetic intake dataset v1
+# M9 synthetic intake dataset v2
 
-50 independently specified cases: 30 normal, 10 incomplete, 5 ambiguous, 5 noisy/colloquial. Written before running model predictions. Labels are specification-based annotations authored during implementation, not independent human adjudication or real customer data. Entity labels use explicit strings/null; no production information. ABC and every Demo identity are synthetic.
+The request file contains 100 specification-labeled synthetic cases. Cases 1–50 preserve the M4 v1 distribution (30 normal, 10 incomplete, 5 ambiguous, 5 noisy/colloquial). Cases 51–100 add balanced Network, IoT, Billing, Account, Service and Other examples plus Vietnamese without accents, duplicated incidents, missing/ambiguous evidence, request-content injection, tool/reference-content injection and stale-history language. Labels were authored before M9 predictions and are not AI-generated truth or independent human adjudication. No production information is included.
 
 Category/priority/team expectations follow AI_BEHAVIOR_SPEC A06. Team is an annotation for later routing evaluation, not an M4 model field. `missingFields` lists required detection targets, not an exhaustive array; the report gives recall over labeled targets. Exact entity match uses NFC, trim, collapsed whitespace and lowercase for text, integer/null equality otherwise. Unlabeled entities are excluded with denominators reported. Failed/invalid cases remain incorrect in category/priority denominators.
 
-Do not alter labels based on predictions. Report model limitations/misses and dataset hash. The prompt never receives expected labels, IDs or tags. This small synthetic set does not establish general accuracy. M9 owns broader evaluation and benchmarking.
+Do not alter labels based on predictions. Report model limitations/misses and dataset hash. The prompt never receives expected labels, IDs or tags. The first 50 cases remain the frozen M4 input; M9 evaluates all 100. This development set supports reproducible regression evidence but does not establish generalized accuracy, calibrated confidence or production prevalence.

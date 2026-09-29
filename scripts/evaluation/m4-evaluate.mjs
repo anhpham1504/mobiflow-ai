@@ -10,7 +10,7 @@ import {executeAnalysis} from '../../apps/api/dist/ai/analysis-execution.js';
 import {promptVersion} from '../../apps/api/dist/ai/prompts/request-analysis.js';
 const raw=readFileSync('datasets/ai-evaluation/requests.json','utf8');
 const caseSchema=z.object({id:z.string().min(1),input:z.string().min(10).max(10000),expected:z.object({category:z.enum(categories),priority:z.enum(priorities),team:z.string(),entities:analysisSchema.shape.entities.optional(),missingFields:analysisSchema.shape.missingFields.optional()}).strict(),tags:z.array(z.string())}).strict();
-const cases=z.array(caseSchema).length(50).parse(JSON.parse(raw));
+const dataset=z.array(caseSchema).min(50).parse(JSON.parse(raw)),cases=dataset.slice(0,50);
 if(new Set(cases.map(c=>c.id)).size!==50)throw new Error('Duplicate dataset ID');
 for(const [tag,count] of Object.entries({normal:30,incomplete:10,ambiguous:5,noisy:5}))if(cases.filter(c=>c.tags.includes(tag)).length!==count)throw new Error('Invalid dataset distribution');
 const env=parseApiEnvironment(process.env),provider=new OllamaProvider(env),results=[];

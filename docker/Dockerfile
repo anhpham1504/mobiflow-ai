@@ -32,6 +32,7 @@ COPY --from=api-build /app/package.json ./package.json
 COPY --from=api-build /app/apps/api/package.json ./apps/api/package.json
 COPY --from=api-build /app/apps/api/dist ./apps/api/dist
 COPY --from=api-build /app/packages ./packages
+COPY --from=api-build --chown=node:node /app/docs/evaluation/results ./docs/evaluation/results
 RUN mkdir -p /app/storage/knowledge && chown -R node:node /app/storage
 USER node
 EXPOSE 3001

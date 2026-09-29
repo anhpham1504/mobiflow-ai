@@ -1,0 +1,903 @@
+{
+  "at": "2026-09-29T13:09:56.364Z",
+  "datasetHash": "e083815bc755bb734c60a1574cd506a1f57c045ea5da9dbf2b5061e7f16dfa96",
+  "identity": {
+    "provider": "ollama",
+    "model": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "dimension": 1024,
+    "revision": "m5.v1",
+    "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+  },
+  "metrics": {
+    "cases": 10,
+    "positives": 8,
+    "Hit1": 1,
+    "Hit3": 1,
+    "Hit5": 1,
+    "MRR": 1,
+    "negativeNoMatch": 1,
+    "negatives": 2
+  },
+  "results": [
+    {
+      "id": "S1",
+      "expected": [
+        "57c7a0f2-287c-4185-ba19-58795090b925"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.9820813128166348,
+          "scoreComponents": {
+            "cosineSimilarity": 0.9469545612406347,
+            "vector": 0.9734772806203174,
+            "category": 1,
+            "location": 1,
+            "recency": 0.9799494444444444
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.7798123432244815,
+          "scoreComponents": {
+            "cosineSimilarity": 0.60515595889642,
+            "vector": 0.80257797944821,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9826555555555555
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.5561598049739913,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5223117573207119,
+            "vector": 0.761155878660356,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9946627777777778
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.5477847917031617,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4975944908623908,
+            "vector": 0.7487972454311954,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9850644444444444
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5461144486237363,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4899707546717136,
+            "vector": 0.7449853773358568,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9912322222222222
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 7
+    },
+    {
+      "id": "S2",
+      "expected": [
+        "57c7a0f2-287c-4185-ba19-58795090b925"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.7923032754052719,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6485879550546102,
+            "vector": 0.824293977527305,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9772688888888889
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.7415321615341133,
+          "scoreComponents": {
+            "cosineSimilarity": 0.47844887178037754,
+            "vector": 0.7392244358901887,
+            "category": 1,
+            "location": 0,
+            "recency": 0.979975
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.5307038925902261,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4383522345600128,
+            "vector": 0.7191761172800064,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9919822222222222
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.5202927750278084,
+          "scoreComponents": {
+            "cosineSimilarity": 0.40684795379639827,
+            "vector": 0.7034239768981991,
+            "category": 0,
+            "location": 0,
+            "recency": 0.982383888888889
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 4
+    },
+    {
+      "id": "S3",
+      "expected": [
+        "57c7a0f2-287c-4185-ba19-58795090b925"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.7952372377674435,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6609378295951823,
+            "vector": 0.8304689147975912,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9695588888888889
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.7353343608050781,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4603595360169268,
+            "vector": 0.7301797680084634,
+            "category": 1,
+            "location": 0,
+            "recency": 0.972265
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.559007418568269,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5352673211534894,
+            "vector": 0.7676336605767446,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9842722222222222
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5362592931939866,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4605837550910663,
+            "vector": 0.7302918775455332,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9808416666666666
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.521707836424436,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4141348251184901,
+            "vector": 0.7070674125592451,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9746738888888888
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 3
+    },
+    {
+      "id": "S4",
+      "expected": [
+        "57c7a0f2-287c-4185-ba19-58795090b925"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.8007484318064104,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6802177356509982,
+            "vector": 0.8401088678254991,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9668311111111111
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.7619869373803262,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5501107171936801,
+            "vector": 0.77505535859684,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9695372222222223
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.5794422088320641,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6042925479587321,
+            "vector": 0.8021462739793661,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9815444444444444
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5499575598392947,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5071539031680197,
+            "vector": 0.7535769515840098,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9781138888888888
+          }
+        },
+        {
+          "requestId": "f708abd6-cac0-4500-8cb3-d4a2a5197145",
+          "publicCode": "MF-2026-000058",
+          "title": "Tài khoản cổng dịch vụ không đăng nhập được sau khi đổi mật khẩu.",
+          "status": "TRIAGED",
+          "category": "ACCOUNT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:38.635Z",
+          "contextVersion": 3,
+          "score": 0.5449779577942157,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4916448593140521,
+            "vector": 0.745822429657026,
+            "category": 0,
+            "location": 0,
+            "recency": 0.974845
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 3
+    },
+    {
+      "id": "S5",
+      "expected": [
+        "48fb5023-9233-4633-b77d-f93bd8691233"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.8401097063276571,
+          "scoreComponents": {
+            "cosineSimilarity": 0.8107638359070055,
+            "vector": 0.9053819179535028,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9688055555555556
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5782116989178863,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6023812186151765,
+            "vector": 0.8011906093075882,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9749733333333334
+          }
+        },
+        {
+          "requestId": "f708abd6-cac0-4500-8cb3-d4a2a5197145",
+          "publicCode": "MF-2026-000058",
+          "title": "Tài khoản cổng dịch vụ không đăng nhập được sau khi đổi mật khẩu.",
+          "status": "TRIAGED",
+          "category": "ACCOUNT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:38.635Z",
+          "contextVersion": 3,
+          "score": 0.5325349199275503,
+          "scoreComponents": {
+            "cosineSimilarity": 0.45121491827701954,
+            "vector": 0.7256074591385098,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9717044444444445
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.5320729978691378,
+          "scoreComponents": {
+            "cosineSimilarity": 0.45144443734157025,
+            "vector": 0.7257222186707851,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9663966666666667
+          }
+        },
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.5306672900434592,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4476607816263458,
+            "vector": 0.7238303908131729,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9636905555555556
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 4
+    },
+    {
+      "id": "S6",
+      "expected": [
+        "f708abd6-cac0-4500-8cb3-d4a2a5197145"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "f708abd6-cac0-4500-8cb3-d4a2a5197145",
+          "publicCode": "MF-2026-000058",
+          "title": "Tài khoản cổng dịch vụ không đăng nhập được sau khi đổi mật khẩu.",
+          "status": "TRIAGED",
+          "category": "ACCOUNT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:38.635Z",
+          "contextVersion": 3,
+          "score": 0.8563207291978101,
+          "scoreComponents": {
+            "cosineSimilarity": 0.8648828010297374,
+            "vector": 0.9324414005148687,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9685588888888889
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5645090944280693,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5577543888343048,
+            "vector": 0.7788771944171524,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9718277777777777
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.5545213481870036,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5265178272900123,
+            "vector": 0.7632589136450061,
+            "category": 0,
+            "location": 0,
+            "recency": 0.96566
+          }
+        },
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.5346174554780326,
+          "scoreComponents": {
+            "cosineSimilarity": 0.46187651826010867,
+            "vector": 0.7309382591300544,
+            "category": 0,
+            "location": 0,
+            "recency": 0.960545
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.5300739370398325,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4418270123549972,
+            "vector": 0.7209135061774986,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9752583333333333
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 4
+    },
+    {
+      "id": "S7",
+      "expected": [
+        "59057dfe-a01d-4f73-b6cd-967f47a686a3"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.847252723127385,
+          "scoreComponents": {
+            "cosineSimilarity": 0.8334062993135054,
+            "vector": 0.9167031496567527,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9723083333333333
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5815165019134979,
+          "scoreComponents": {
+            "cosineSimilarity": 0.6154290804524004,
+            "vector": 0.8077145402262003,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9688777777777777
+          }
+        },
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.5665476781473772,
+          "scoreComponents": {
+            "cosineSimilarity": 0.569293927157924,
+            "vector": 0.784646963578962,
+            "category": 0,
+            "location": 0,
+            "recency": 0.957595
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.5434715080936243,
+          "scoreComponents": {
+            "cosineSimilarity": 0.49066836031208094,
+            "vector": 0.7453341801560405,
+            "category": 0,
+            "location": 0,
+            "recency": 0.96271
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.539557274097587,
+          "scoreComponents": {
+            "cosineSimilarity": 0.47842387662158614,
+            "vector": 0.7392119383107931,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9603011111111112
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 4
+    },
+    {
+      "id": "S8",
+      "expected": [
+        "57c7a0f2-287c-4185-ba19-58795090b925"
+      ],
+      "rank": 1,
+      "returned": [
+        {
+          "requestId": "57c7a0f2-287c-4185-ba19-58795090b925",
+          "publicCode": "MF-2026-000055",
+          "title": "Khách hàng ABC có 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "KCN Amata",
+          "createdAt": "2026-09-29T13:08:24.210Z",
+          "contextVersion": 3,
+          "score": 0.9614708067817834,
+          "scoreComponents": {
+            "cosineSimilarity": 0.886578615198537,
+            "vector": 0.9432893075992685,
+            "category": 1,
+            "location": 1,
+            "recency": 0.9549722222222222
+          }
+        },
+        {
+          "requestId": "6155fcb2-794e-477b-8098-a16bede64091",
+          "publicCode": "MF-2026-000056",
+          "title": "Nhiều điện thoại mất sóng di động tại văn phòng Demo từ 9 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "văn phòng Demo",
+          "createdAt": "2026-09-29T13:08:29.081Z",
+          "contextVersion": 3,
+          "score": 0.7681470947869546,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5745975381787377,
+            "vector": 0.7872987690893689,
+            "category": 1,
+            "location": 0,
+            "recency": 0.9576783333333333
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.573180029885962,
+          "scoreComponents": {
+            "cosineSimilarity": 0.5873715811013549,
+            "vector": 0.7936857905506775,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9696855555555556
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.542885943425901,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4895907373455959,
+            "vector": 0.7447953686727979,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9600872222222222
+          }
+        },
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5367092552697422,
+          "scoreComponents": {
+            "cosineSimilarity": 0.46694585089914087,
+            "vector": 0.7334729254495704,
+            "category": 0,
+            "location": 0,
+            "recency": 0.966255
+          }
+        }
+      ],
+      "negative": false,
+      "latencyMs": 4
+    },
+    {
+      "id": "S9",
+      "expected": [],
+      "rank": 0,
+      "returned": [],
+      "negative": true,
+      "latencyMs": 4
+    },
+    {
+      "id": "S10",
+      "expected": [],
+      "rank": 0,
+      "returned": [
+        {
+          "requestId": "d2950a38-45bd-4aee-8874-765e9ae02a30",
+          "publicCode": "MF-2026-000059",
+          "title": "Tôi muốn đăng ký kích hoạt gói dịch vụ mới cho một thuê bao.",
+          "status": "TRIAGED",
+          "category": "SERVICE",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:44.519Z",
+          "contextVersion": 3,
+          "score": 0.5529837192237615,
+          "scoreComponents": {
+            "cosineSimilarity": 0.523241841856983,
+            "vector": 0.7616209209284914,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9601116666666667
+          }
+        },
+        {
+          "requestId": "48fb5023-9233-4633-b77d-f93bd8691233",
+          "publicCode": "MF-2026-000057",
+          "title": "Hóa đơn tháng này ghi sai cước thuê bao, cần kiểm tra khoản tiền bị tính hai lần.",
+          "status": "TRIAGED",
+          "category": "BILLING",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:33.417Z",
+          "contextVersion": 3,
+          "score": 0.5266849768543859,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4376352932183232,
+            "vector": 0.7188176466091616,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9539438888888889
+          }
+        },
+        {
+          "requestId": "f708abd6-cac0-4500-8cb3-d4a2a5197145",
+          "publicCode": "MF-2026-000058",
+          "title": "Tài khoản cổng dịch vụ không đăng nhập được sau khi đổi mật khẩu.",
+          "status": "TRIAGED",
+          "category": "ACCOUNT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:38.635Z",
+          "contextVersion": 3,
+          "score": 0.5231853915647793,
+          "scoreComponents": {
+            "cosineSimilarity": 0.42500371262333847,
+            "vector": 0.7125018563116692,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9568427777777778
+          }
+        },
+        {
+          "requestId": "59057dfe-a01d-4f73-b6cd-967f47a686a3",
+          "publicCode": "MF-2026-000060",
+          "title": "Xin hướng dẫn cấu hình thiết bị IoT mới, thiết bị hiện vẫn kết nối bình thường.",
+          "status": "TRIAGED",
+          "category": "IOT",
+          "location": null,
+          "createdAt": "2026-09-29T13:08:50.694Z",
+          "contextVersion": 3,
+          "score": 0.518550427022432,
+          "scoreComponents": {
+            "cosineSimilarity": 0.4073206826673661,
+            "vector": 0.703660341333683,
+            "category": 0,
+            "location": 0,
+            "recency": 0.9635422222222222
+          }
+        }
+      ],
+      "negative": true,
+      "latencyMs": 4
+    }
+  ]
+}

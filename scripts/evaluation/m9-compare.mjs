@@ -1,0 +1,4 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {basename} from 'node:path';
+import {compareEvaluation} from '../../apps/api/dist/analytics/metrics.js';
+const [baselinePath,currentPath]=process.argv.slice(2);if(!baselinePath||!currentPath)throw new Error('Usage: node m9-compare.mjs <baseline.json> <current.json>');const baseline=JSON.parse(readFileSync(baselinePath,'utf8')),current=JSON.parse(readFileSync(currentPath,'utf8')),comparison=compareEvaluation(current.results??[],baseline.results??[]);const evidence={at:new Date().toISOString(),baseline:basename(baselinePath),current:basename(currentPath),method:'Explicit per-case comparison; no aggregate quality score. A self-baseline verifies the mechanism only and is not a longitudinal quality claim.',...comparison};writeFileSync('docs/verification/evidence/M9_EVAL_REGRESSION.json',JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence,null,2));if(!comparison.passed)process.exitCode=1;

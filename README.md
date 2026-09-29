@@ -1,5 +1,7 @@
 # MobiFlow AI
 
+Milestone 9 adds manager-only measured analytics and a reproducible 100-case synthetic development evaluation. Run `npm run ai:evaluate` with the configured local Ollama models, `npm run eval:compare:m9 -- <baseline.json> <current.json>` for explicit per-case regression checks, and `npm run test:e2e:m9` for the analytics dashboard. Results are development evidence, not generalized AI accuracy.
+
 AI-native enterprise workflow automation platform with local AI.
 
 The repository contains the frozen M0 contract and the completed M1–M8 implementation: local infrastructure, authentication/RBAC/database, manual request workflow, structured intake, local knowledge/RAG, bounded AI tools and recommendations, manager approval, and the staff Copilot/SLA/resolution-summary workflow. USER, STAFF and MANAGER can complete the human workflow when AI or embeddings are unavailable. M9 requires explicit approval.

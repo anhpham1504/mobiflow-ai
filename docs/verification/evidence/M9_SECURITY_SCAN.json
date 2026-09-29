@@ -1,0 +1,21 @@
+{
+  "at": "2026-09-29T15:01:42.314Z",
+  "migrationCount": 6,
+  "migrationHashes": {
+    "202609280001_enable_vector": "c298ba7c691fd9d12e1ecb61c698906bd97ddf1336c0cbb22aed9abebc285d74",
+    "20260928085048_m2_domain_auth": "b68c9b3e9c6fa029384762237f2ac0aba719d9563f1b16da64ffad11e7744aeb",
+    "20260928092000_m2_public_code_sequence": "529bb08bcfc650076f030b16c028d9e6f6a545f4831ee92a458ea32f176b37f8",
+    "20260928145100_m5_knowledge_vectors": "67ee62ccdd88dd9ed56b7cf97ca9a3d2c7d5970a04e010394108336146fc1be8",
+    "20260929034000_m6_request_embeddings": "ec75a0f842d01fed272da6fb68985bf2f60d680f4f7d76d5930202c5f52b053b",
+    "20260929043000_m6_request_cosine_index": "45833282b1a29e1185caedda0c054ca9b01b65c77b1057f9427aab6dede5a174"
+  },
+  "filesScanned": 619,
+  "findings": [],
+  "invariants": {
+    "managerRoleGuard": true,
+    "boundedWindow": true,
+    "noRawPromptFields": true,
+    "noArbitraryExecution": true,
+    "closedCopilotEnum": true
+  }
+}

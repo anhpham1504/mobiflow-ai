@@ -7,5 +7,9 @@
 **/dist
 **/*.tsbuildinfo
 artifacts
-docs
+docs/*
+!docs/evaluation/
+docs/evaluation/*
+!docs/evaluation/results/
+!docs/evaluation/results/**
 *.log
