@@ -16,13 +16,17 @@ export const createRequestSchema = z.object({ description: text(10,10000), title
 export const finalDecisionSchema = z.object({
   category: z.enum(categories), subcategory: text(1,80), priority: z.enum(priorities),
   teamId: z.uuid(), staffId: z.uuid(),
-  actions: z.array(z.object({ text: text(1,500), required: z.boolean(), sourceIds: z.array(z.uuid()).max(5), provenance: z.enum(['HUMAN','AI']) }).strict()).max(30),
+  actions: z.array(z.object({ text: text(1,500), required: z.boolean(), sourceIds: z.array(text(1,120)).max(5), provenance: z.enum(['HUMAN','AI']) }).strict()).max(30),
   acknowledgedMissingFields: z.array(z.enum(['customer','location','affectedCount','startedAt','impact','description'])).max(6),
   reason: text(1,2000),
 }).strict().refine(d => (taxonomy[d.category] as readonly string[]).includes(d.subcategory), { path: ['subcategory'], message: 'Invalid category/subcategory pair' });
 export const triageSchema = versionSchema.extend({ finalDecision: finalDecisionSchema });
 export const submitSchema = versionSchema.extend({ manualDraftRevision: z.number().int().positive() });
-export const reviewSchema = submitSchema.extend({ reviewKind: z.literal('MANUAL') });
+export const reviewSchema = versionSchema.extend({
+  reviewKind: z.enum(['AI','MANUAL']),
+  recommendationId: z.uuid().optional(),
+  manualDraftRevision: z.number().int().positive().optional(),
+}).refine(d => d.reviewKind === 'AI' ? !!d.recommendationId && d.manualDraftRevision === undefined : !!d.manualDraftRevision && d.recommendationId === undefined, {message:'Exactly the current review identity is required'});
 export const acceptSchema = reviewSchema.extend({ acknowledgedMissingFields: finalDecisionSchema.shape.acknowledgedMissingFields });
 export const modifySchema = reviewSchema.extend({ finalDecision: finalDecisionSchema });
 export const rejectSchema = reviewSchema.extend({ reason: text(1,2000) });
@@ -55,7 +59,7 @@ export const requestViewSchema=z.object({
   sla:slaViewSchema.nullable(),
   currentResolution:z.object({id:z.uuid(),cycle:z.number(),rootCause:z.string(),resolution:z.string(),verification:z.string(),resolvedAt:z.iso.datetime()}).nullable(),
   manualDraft:z.object({...finalDecisionSchema.shape,policyId:z.uuid(),policyVersion:z.number(),targetSeconds:z.number()}).nullable().optional(),
-  manualDraftRevision:z.number().optional(),reviewKind:z.enum(['AI','MANUAL']).nullable().optional(),pendingDraftRevision:z.number().nullable().optional(),
+  manualDraftRevision:z.number().optional(),reviewKind:z.enum(['AI','MANUAL']).nullable().optional(),pendingDraftRevision:z.number().nullable().optional(),pendingRecommendationId:z.uuid().nullable().optional(),
   checklist:z.object({id:z.uuid(),version:z.number(),items:z.array(z.object({id:z.uuid(),text:z.string(),required:z.boolean(),completedAt:nullableDate,waivedAt:nullableDate,waiverReason:z.string().nullable()}))}).optional(),
 });
 export const pageSchema=z.object({nextCursor:z.string().nullable(),hasMore:z.boolean()});

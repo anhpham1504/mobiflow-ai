@@ -1,0 +1,8 @@
+{
+  "command": "docker compose -f docker-compose.yml -f scripts/verification/docker-compose.m6-provider-override.yml config --quiet",
+  "startedAt": "2026-09-29T08:08:42.574Z",
+  "finishedAt": "2026-09-29T08:08:42.934Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M6_OFFLINE_COMPOSE_CONFIG-2026-09-29T08-08-42-574Z.txt"
+}

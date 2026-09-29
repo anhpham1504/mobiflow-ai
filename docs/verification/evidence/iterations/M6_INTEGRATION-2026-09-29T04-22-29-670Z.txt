@@ -1,0 +1,161 @@
+
+> mobiflow-ai@0.1.0 test:integration
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-runtime.mjs && node --env-file=.env scripts/verification/m2-integration.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 192ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+PASS real PostgreSQL M2 schema, pgvector and M5 verified vector dimension
+PASS running Docker API preserves M1 health contract
+PASS actual installed host Ollama LLM
+PASS production web container responds
+PASS M2 OpenAPI contains safe auth and RBAC routes
+PASS production container login, protected profile and logout
+PASS Ollama offline leaves API alive and reports degraded readiness
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+Applying migration `20260928145100_m5_knowledge_vectors`
+Applying migration `20260929034000_m6_request_embeddings`
+Applying migration `20260929043000_m6_request_cosine_index`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+  └─ 20260928145100_m5_knowledge_vectors/
+    └─ migration.sql
+  └─ 20260929034000_m6_request_embeddings/
+    └─ migration.sql
+  └─ 20260929043000_m6_request_cosine_index/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":6,"vectorVersion":"0.8.6","embeddingColumns":2,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+✔ M2 auth, RBAC, ownership, refresh lifecycle, seed and audit work against real PostgreSQL (2404.8895ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3584.3095
+✔ M3 manager cancellation covers assigned, working, waiting and reserved analyzing states; new manual draft and current policy are mandatory (2047.3666ms)
+✔ M3 actual HTTP full manual lifecycle, scope, checklist, wait/reply, reopen, SLA, notifications, concurrency and rollback with Ollama offline (2898.1266ms)
+✔ M3 rejection requires a new draft, policy priority changes preserve clock, cancellation and race losers make no duplicate effects (2078.6063ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8233.0277
+✔ M5 PostgreSQL upload/RBAC/duplicate race, immutable reindex, disable and historical source behavior (1023.4946ms)
+✔ M5 partial embeddings fail atomically; disable during embedding and expired lease cannot publish (1014.5893ms)
+✔ M5 model/dimension mismatch, DB error and publication rollback fail closed (1077.8064ms)
+✔ M5 RAG citations persist, owner projection hides evidence, stale corpus/request and fake citations reject (2930.5053ms)
+✔ M5 real clean-DB PDF/TXT corpus embedding + pgvector + Ollama RAG and repeat ingestion (11916.2905ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19094.3057
+✔ M4 automatic queue is atomic, manual triage cancels queued work, full success is advisory with role projections (2336.2774ms)
+✔ M4 concurrent starts dedupe, stale completion preserves messages, explicit retry succeeds, endpoint scope and DTOs enforce authority (807.7524ms)
+✔ M4 cancel beats late publication, revoked initiator cannot publish, expired lease recovers and replay is harmless (1992.2406ms)
+✔ M4 invalid provider output exhausts only two attempts; failed publication rolls back analysis and state with real PostgreSQL trigger (2292.6452ms)
+✔ M4 real unreachable Ollama leaves API ready, records controlled failure, manual approval remains usable and trigger limits hold (1807.8135ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 10348.6509
+✔ M6 real PostgreSQL tools, atomic pending publication, concurrent scheduling, no business mutation and manager-only delivery (1381.8694ms)
+✔ M6 staff hard filters and exact workload states; candidate precision/recall cases are deterministic (730.815ms)
+▶ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work
+  ✔ message (622.4012ms)
+  ✔ cancel (634.663ms)
+  ✔ staff (656.5267ms)
+  ✔ actor (653.1213ms)
+✔ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work (2567.5842ms)
+▶ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing
+  ✔ fake-staff (2046.0152ms)
+  ✔ fake-source (1625.0043ms)
+  ✔ llm (586.1165ms)
+  ✔ embedding (524.769ms)
+  ✔ tool (517.06ms)
+✔ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing (5299.842ms)
+▶ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback
+  ✔ zero candidate is explicit; latest message included; no history match is success (758.9043ms)
+  ✔ self, stale version, incompatible model, canceled and out-of-window vectors excluded (627.9973ms)
+  ✔ actual HTTP adapter llm offline (2068.1027ms)
+  ✔ actual HTTP adapter embedding offline (1627.486ms)
+  ✔ expired durable recommendation lease is failed without state transition (950.2795ms)
+  ✔ notification database failure rolls back recommendation, history and pending pointer (1199.1017ms)
+✔ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback (7233.0368ms)
+▶ M6 source disable and policy changes invalidate publication and delivery
+  ✔ source (1252.5815ms)
+  ✔ policy (1046.8262ms)
+✔ M6 source disable and policy changes invalidate publication and delivery (2300.3375ms)
+{"id":"R1","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R2","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R3","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R4","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R5","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R6","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R7","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R8","status":"SUCCEEDED","errorCode":null,"failures":[]}
+✔ M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline (171255.3461ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 191855.6339

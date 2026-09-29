@@ -1,0 +1,5 @@
+services:
+  api:
+    environment:
+      OLLAMA_BASE_URL: ${M6_OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      EMBEDDING_BASE_URL: ${M6_EMBEDDING_BASE_URL:-http://host.docker.internal:11434}

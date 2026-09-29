@@ -34,12 +34,16 @@ try {
   const embeddingColumns = Number((await verification.query("SELECT count(*)::int AS count FROM information_schema.columns WHERE table_schema='public' AND column_name='embedding'")).rows[0].count);
   const runtimePrivileges = await verification.query("SELECT has_table_privilege('mobiflow_app', '\"User\"', 'SELECT') AS user_select, has_table_privilege('mobiflow_app', '\"AuditLog\"', 'INSERT') AS audit_insert, has_table_privilege('mobiflow_app', '\"AuditLog\"', 'UPDATE') AS audit_update, has_sequence_privilege('mobiflow_app', 'request_public_code_seq', 'USAGE') AS public_code_sequence_usage");
   await verification.end();
-  if (migrationCount !== 4 || !vectorVersion || embeddingColumns !== 1 || !runtimePrivileges.rows[0].user_select || !runtimePrivileges.rows[0].audit_insert || runtimePrivileges.rows[0].audit_update || !runtimePrivileges.rows[0].public_code_sequence_usage) throw new Error('Clean migration privilege/vector verification failed.');
+  if (migrationCount !== 6 || !vectorVersion || embeddingColumns !== 2 || !runtimePrivileges.rows[0].user_select || !runtimePrivileges.rows[0].audit_insert || runtimePrivileges.rows[0].audit_update || !runtimePrivileges.rows[0].public_code_sequence_usage) throw new Error('Clean migration privilege/vector verification failed.');
   console.log(JSON.stringify({ event: 'm2.clean-migration.verified', database: testDatabase, migrationCount, vectorVersion, embeddingColumns, runtimePrivileges: runtimePrivileges.rows[0] }));
+  if (!process.argv.includes('--m6-only')) {
   run(['--test', 'apps/api/test/auth.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
   run(['--test', 'apps/api/test/workflow.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
   run(['--test', 'apps/api/test/knowledge.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
   run(['--test', 'apps/api/test/analysis.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
+  }
+  const pattern=process.argv[process.argv.indexOf('--pattern')+1];
+  run(['--test', ...(process.argv.includes('--pattern')?['--test-name-pattern',pattern]:[]), 'apps/api/test/recommendation.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
 } finally {
   await admin.query(`SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${testDatabase}' AND pid <> pg_backend_pid()`);
   await admin.query(`DROP DATABASE IF EXISTS ${testDatabase}`);

@@ -5,6 +5,8 @@ export class AiFailure extends Error {
 }
 export interface Generation {raw:string;identity:{provider:string;model:string;digest:string};outputSize:number}
 export interface AiProvider {generate(input:AnalysisInput,signal:AbortSignal,repair:boolean|string):Promise<Generation>}
+export interface StructuredProvider {generateStructured(messages:{role:string;content:string}[],format:object,signal:AbortSignal):Promise<Generation>}
+export const RECOMMENDATION_PROVIDER=Symbol('RECOMMENDATION_PROVIDER');
 export const AI_PROVIDER_TOKEN=Symbol('AI_PROVIDER');
 export const AI_LOG=Symbol('AI_LOG');
 export const AI_WORKER_ENABLED=Symbol('AI_WORKER_ENABLED');

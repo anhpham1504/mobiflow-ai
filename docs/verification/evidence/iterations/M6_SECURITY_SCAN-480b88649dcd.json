@@ -1,0 +1,59 @@
+{
+  "at": "2026-09-29T04:23:02.838Z",
+  "filesScanned": 337,
+  "migrationFreeze": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "baseline": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+      "current": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "baseline": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+      "current": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "baseline": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+      "current": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+      "baseline": "3186661f01426396ad27fce70f78a92f681f5d61",
+      "current": "3186661f01426396ad27fce70f78a92f681f5d61"
+    }
+  ],
+  "findings": [
+    {
+      "path": ".env.example",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/analysis.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/health.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/knowledge.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "packages/config/test/environment.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "scripts/dev/prisma.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    }
+  ],
+  "limitations": "Conservative high-confidence pattern scan, not proof that all secrets or vulnerabilities are absent."
+}

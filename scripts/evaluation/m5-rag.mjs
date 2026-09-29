@@ -1,4 +1,5 @@
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
+import {writeEvaluationFile as writeFileSync} from './evidence-output.mjs';
 import {createHash} from 'node:crypto';
 import {parseApiEnvironment} from '@mobiflow/config';
 import {PrismaService} from '../../apps/api/dist/database/prisma.service.js';

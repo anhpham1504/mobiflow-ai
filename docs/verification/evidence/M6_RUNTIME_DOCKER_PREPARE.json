@@ -1,0 +1,11 @@
+{
+  "at": "2026-09-29T07:54:49.222Z",
+  "target": "docker",
+  "mode": "prepare",
+  "result": "PASS",
+  "checks": [],
+  "requests": [
+    "467046c8-498f-4214-a8eb-bf219e1ce19c",
+    "620ac4d1-f010-4355-a06a-4941df6d59f3"
+  ]
+}

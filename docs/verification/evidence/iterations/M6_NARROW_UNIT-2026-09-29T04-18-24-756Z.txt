@@ -1,0 +1,108 @@
+
+> mobiflow-ai@0.1.0 test
+> npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 183ms
+
+
+> @mobiflow/config@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ M5 rejects invalid embedding/retrieval bounds without silently clamping (5.466ms)
+✔ AI settings enable intake by default and enforce bounded inference at startup (0.7422ms)
+✔ validates native and Docker Ollama origins and coerces bounded ports (0.161ms)
+✔ rejects missing config, invalid protocols, bounds and reused secrets without echoing values (0.6253ms)
+✔ malformed URL values produce key-only diagnostics rather than URL parser errors (0.8854ms)
+✔ insecure refresh cookies are accepted only for the explicit loopback HTTP demo (0.2397ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.8327
+
+> @mobiflow/api@0.1.0 test
+> npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/recommendation.test.mjs
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+✔ analysis strict schema rejects malformed data and every critical boundary without coercion (6.9541ms)
+✔ prompt delimits untrusted data, keeps fixed instructions, rejects oversized mandatory input (0.3668ms)
+✔ real HTTP adapter sends JSON schema, exact model, bounds and excludes provider thinking (57.0328ms)
+✔ provider maps missing/offline/disconnect/timeout/overflow/truncation and cancellation safely (158.0551ms)
+✔ bounded execution retries invalid output once, never retries known model absence, retains attempt count (2016.4631ms)
+✔ ownership policy scopes USER to ownership, STAFF to current assignment and MANAGER to all requests (2.1814ms)
+✔ out-of-scope and absent requests have the same 404 policy result (1.3268ms)
+✔ API boots; complete Ollama fixture health gives READY and both route aliases work (134.4555ms)
+✔ Ollama offline is degraded while API liveness/core readiness survive (41.6857ms)
+✔ offline server does not turn an unconfigured embedding into a configured outage (0.4355ms)
+✔ database outage is 503, independent liveness still 200 (38.4879ms)
+✔ missing vector extension is a core readiness failure (26.3832ms)
+✔ missing model is not reported installed; unconfigured embedding is distinct (3.1069ms)
+✔ installed model with wrong capability is not considered ready (5.387ms)
+✔ Ollama timeout is bounded and a malformed response is safely unavailable (215.8402ms)
+✔ request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory (45.1909ms)
+✔ global validation foundation rejects unknown fields and invalid values (2.6479ms)
+✔ malformed and oversized JSON receive safe client errors without exposing the body (35.2489ms)
+✔ M5 deterministic Unicode chunk offsets/overlap, page isolation, headings, NFC and empty bounds (22.4204ms)
+✔ M5 upload types, traversal, MIME/signature, strict UTF-8 and text safety (0.7604ms)
+✔ M5 real PDF parser retains real pages; corrupt/no-text/encrypted rejected in isolated worker (1208.5844ms)
+✔ M5 vector validity, finite norm, exact dimensions and cosine score are independent of AI confidence (0.5221ms)
+✔ M5 context budget/dedup and exact source/quote membership reject fabrication (5.7633ms)
+✔ M5 embedding HTTP adapter validates model identity, batches, retries, malformed response and timeout (2455.0892ms)
+✔ login limits normalized account plus IP to 5 attempts per minute (1.172ms)
+✔ login has an independent 20/minute IP bound and refresh has a 30/minute session plus IP bound (0.3661ms)
+✔ M6 strict schemas reject unknown/oversized args, duplicate IDs, invalid enum/UUID and result shapes (4.7064ms)
+✔ M6 registry enforces closed allowlist, permission, duplicates, eight-call budget, failure audit and output bounds (3.0725ms)
+✔ M6 tool abort returns bounded TIMEOUT even if implementation never resolves (0.3881ms)
+✔ M6 deterministic score/ties, category routing, NFC input and hybrid similarity bounds (1.308ms)
+✔ M6 fake staff/team/source/case fields, wrong count/policy, extra fields and no-evidence procedures rejected (1.3739ms)
+✔ M6 prompt delimits request, historical case, staff metadata and tool injection; oversized context fails (0.4444ms)
+✔ M3 exhaustive state/action/role matrix rejects the complement, including protected future AI transitions (6.0339ms)
+✔ SLA wait, resolve, reopen, exact deadline, hold and sticky breach use an injected deterministic time (0.6732ms)
+✔ SLA repeated exclusion cycles, no-op reassignment and cancellation preserve consumed budget (0.1905ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4330.8631
+
+> @mobiflow/web@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ health client handles a typed 503 and rejects untrusted response shapes (44.2526ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 250.8329

@@ -1,0 +1,57 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m3
+> playwright test --config playwright.m3.config.mjs
+
+
+Running 2 tests using 1 worker
+
+(node:18764) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 apps\web\e2e\m3.spec.mjs:14:1 › M3 real browser: three-role manual workflow, waiting/reopen, stale protection, notification and responsive UI (2.0m)
+(node:36620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 apps\web\e2e\m3.spec.mjs:96:1 › M3 login keyboard focus and API offline error are recoverable (1.1s)
+
+
+  1) apps\web\e2e\m3.spec.mjs:14:1 › M3 real browser: three-role manual workflow, waiting/reopen, stale protection, notification and responsive UI 
+
+    Test timeout of 120000ms exceeded.
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Phân tích AI hoàn tất.', { exact: true })
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Phân tích AI hoàn tất.', { exact: true }) with timeout 300000ms
+      - waiting for getByText('Phân tích AI hoàn tất.', { exact: true })
+      - Test ended.
+
+
+      25 |     await expect(user.getByRole('heading',{name:title,exact:true})).toBeVisible();
+      26 |     // M4 completes automatic intake first; all M3 manual workflow assertions remain.
+    > 27 |     await expect(user.getByText('Phân tích AI hoàn tất.',{exact:true})).toBeVisible({timeout:300000});
+         |                                                                         ^
+      28 |     await refresh(user);
+      29 |     const id=user.url().split('/').at(-1);
+      30 |     await signIn(manager,'manager@mobiflow.local');
+        at C:\Code\MobiFlow AI\apps\web\e2e\m3.spec.mjs:27:73
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    artifacts\m3\browser\m3-M3-real-browser-three-r-7f1d9-ification-and-responsive-UI\test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    artifacts\m3\browser\m3-M3-real-browser-three-r-7f1d9-ification-and-responsive-UI\test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    artifacts\m3\browser\m3-M3-real-browser-three-r-7f1d9-ification-and-responsive-UI\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: artifacts\m3\browser\m3-M3-real-browser-three-r-7f1d9-ification-and-responsive-UI\error-context.md
+
+  1 failed
+    apps\web\e2e\m3.spec.mjs:14:1 › M3 real browser: three-role manual workflow, waiting/reopen, stale protection, notification and responsive UI 
+  1 passed (2.1m)

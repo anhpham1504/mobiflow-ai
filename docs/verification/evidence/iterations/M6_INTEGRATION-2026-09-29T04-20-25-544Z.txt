@@ -1,0 +1,183 @@
+
+> mobiflow-ai@0.1.0 test:integration
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-runtime.mjs && node --env-file=.env scripts/verification/m2-integration.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 186ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+PASS real PostgreSQL M2 schema, pgvector and M5 verified vector dimension
+PASS running Docker API preserves M1 health contract
+PASS actual installed host Ollama LLM
+PASS production web container responds
+PASS M2 OpenAPI contains safe auth and RBAC routes
+PASS production container login, protected profile and logout
+PASS Ollama offline leaves API alive and reports degraded readiness
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+Applying migration `20260928145100_m5_knowledge_vectors`
+Applying migration `20260929034000_m6_request_embeddings`
+Applying migration `20260929043000_m6_request_cosine_index`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+  └─ 20260928145100_m5_knowledge_vectors/
+    └─ migration.sql
+  └─ 20260929034000_m6_request_embeddings/
+    └─ migration.sql
+  └─ 20260929043000_m6_request_cosine_index/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":6,"vectorVersion":"0.8.6","embeddingColumns":2,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+✔ M2 auth, RBAC, ownership, refresh lifecycle, seed and audit work against real PostgreSQL (2280.3416ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3475.693
+✔ M3 manager cancellation covers assigned, working, waiting and reserved analyzing states; new manual draft and current policy are mandatory (2253.6062ms)
+✔ M3 actual HTTP full manual lifecycle, scope, checklist, wait/reply, reopen, SLA, notifications, concurrency and rollback with Ollama offline (3006.5353ms)
+✔ M3 rejection requires a new draft, policy priority changes preserve clock, cancellation and race losers make no duplicate effects (1965.5922ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8451.1911
+✔ M5 PostgreSQL upload/RBAC/duplicate race, immutable reindex, disable and historical source behavior (1056.7518ms)
+✔ M5 partial embeddings fail atomically; disable during embedding and expired lease cannot publish (1591.252ms)
+✔ M5 model/dimension mismatch, DB error and publication rollback fail closed (906.2562ms)
+✔ M5 RAG citations persist, owner projection hides evidence, stale corpus/request and fake citations reject (2742.4022ms)
+✔ M5 real clean-DB PDF/TXT corpus embedding + pgvector + Ollama RAG and repeat ingestion (17231.6265ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25479.7099
+✔ M4 automatic queue is atomic, manual triage cancels queued work, full success is advisory with role projections (2733.8433ms)
+✔ M4 concurrent starts dedupe, stale completion preserves messages, explicit retry succeeds, endpoint scope and DTOs enforce authority (1537.7317ms)
+✔ M4 cancel beats late publication, revoked initiator cannot publish, expired lease recovers and replay is harmless (2252.1274ms)
+✔ M4 invalid provider output exhausts only two attempts; failed publication rolls back analysis and state with real PostgreSQL trigger (2845.1943ms)
+✔ M4 real unreachable Ollama leaves API ready, records controlled failure, manual approval remains usable and trigger limits hold (2288.1917ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13635.0196
+✔ M6 real PostgreSQL tools, atomic pending publication, concurrent scheduling, no business mutation and manager-only delivery (1813.6516ms)
+✔ M6 staff hard filters and exact workload states; candidate precision/recall cases are deterministic (1406.615ms)
+▶ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work
+  ✔ message (1130.7176ms)
+  ✔ cancel (994.2828ms)
+  ✔ staff (1001.7369ms)
+  ✔ actor (965.8142ms)
+✔ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work (4094.3664ms)
+▶ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing
+  ✔ fake-staff (1957.459ms)
+  ✔ fake-source (1972.7664ms)
+  ✔ llm (1066.5097ms)
+  ✔ embedding (919.1878ms)
+  ✔ tool (735.32ms)
+✔ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing (6652.8944ms)
+▶ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback
+  ✔ zero candidate is explicit; latest message included; no history match is success (707.2462ms)
+  ✔ self, stale version, incompatible model, canceled and out-of-window vectors excluded (658.4137ms)
+  ✔ actual HTTP adapter llm offline (1905.8098ms)
+  ✔ actual HTTP adapter embedding offline (1577.8303ms)
+  ✔ expired durable recommendation lease is failed without state transition (549.0785ms)
+  ✔ notification database failure rolls back recommendation, history and pending pointer (719.5954ms)
+✔ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback (6119.0027ms)
+▶ M6 source disable and policy changes invalidate publication and delivery
+  ✔ source (722.4671ms)
+  ✔ policy (893.7046ms)
+✔ M6 source disable and policy changes invalidate publication and delivery (1617.0741ms)
+✖ M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline (725.5703ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 23
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24031.8666
+
+✖ failing tests:
+
+test at apps\api\test\recommendation.integration.test.mjs:149:1
+✖ M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline (725.5703ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'FAILED' !== 'READY'
+  
+      at TestContext.<anonymous> (file:///C:/Code/MobiFlow%20AI/apps/api/test/recommendation.integration.test.mjs:152:515)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'FAILED',
+    expected: 'READY',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+file:///C:/Code/MobiFlow%20AI/scripts/verification/m2-integration.mjs:18
+  if (result.status !== 0) throw new Error(`Command failed with exit code ${result.status}: node ${args.join(' ')}`);
+                                 ^
+
+Error: Command failed with exit code 1: node --test apps/api/test/recommendation.integration.test.mjs
+    at run (file:///C:/Code/MobiFlow%20AI/scripts/verification/m2-integration.mjs:18:34)
+    at file:///C:/Code/MobiFlow%20AI/scripts/verification/m2-integration.mjs:46:3
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+Node.js v24.19.0

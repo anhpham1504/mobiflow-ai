@@ -1,0 +1,71 @@
+
+> mobiflow-ai@0.1.0 eval:ai:m4
+> npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m4-evaluate.mjs
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+{"case":"normal-01","status":"SUCCEEDED","latencyMs":3175}
+{"case":"normal-02","status":"SUCCEEDED","latencyMs":2765}
+{"case":"normal-03","status":"SUCCEEDED","latencyMs":2669}
+{"case":"normal-04","status":"SUCCEEDED","latencyMs":3061}
+{"case":"normal-05","status":"SUCCEEDED","latencyMs":2721}
+{"case":"normal-06","status":"SUCCEEDED","latencyMs":2842}
+{"case":"normal-07","status":"SUCCEEDED","latencyMs":2560}
+{"case":"normal-08","status":"SUCCEEDED","latencyMs":2608}
+{"case":"normal-09","status":"SUCCEEDED","latencyMs":3849}
+{"case":"normal-10","status":"SUCCEEDED","latencyMs":2745}
+{"case":"normal-11","status":"SUCCEEDED","latencyMs":2889}
+{"case":"normal-12","status":"SUCCEEDED","latencyMs":2828}
+{"case":"normal-13","status":"SUCCEEDED","latencyMs":2886}
+{"case":"normal-14","status":"SUCCEEDED","latencyMs":2440}
+{"case":"normal-15","status":"SUCCEEDED","latencyMs":3076}
+{"case":"normal-16","status":"SUCCEEDED","latencyMs":2489}
+{"case":"normal-17","status":"SUCCEEDED","latencyMs":2194}
+{"case":"normal-18","status":"SUCCEEDED","latencyMs":2493}
+{"case":"normal-19","status":"SUCCEEDED","latencyMs":2765}
+{"case":"normal-20","status":"SUCCEEDED","latencyMs":3065}
+{"case":"normal-21","status":"SUCCEEDED","latencyMs":2516}
+{"case":"normal-22","status":"SUCCEEDED","latencyMs":3312}
+{"case":"normal-23","status":"SUCCEEDED","latencyMs":3137}
+{"case":"normal-24","status":"SUCCEEDED","latencyMs":2757}
+{"case":"normal-25","status":"SUCCEEDED","latencyMs":3349}
+{"case":"normal-26","status":"SUCCEEDED","latencyMs":2824}
+{"case":"normal-27","status":"SUCCEEDED","latencyMs":2793}
+{"case":"normal-28","status":"SUCCEEDED","latencyMs":2646}
+{"case":"normal-29","status":"SUCCEEDED","latencyMs":2967}
+{"case":"normal-30","status":"SUCCEEDED","latencyMs":2723}
+{"case":"incomplete-01","status":"SUCCEEDED","latencyMs":2783}
+{"case":"incomplete-02","status":"SUCCEEDED","latencyMs":2864}
+{"case":"incomplete-03","status":"SUCCEEDED","latencyMs":3122}
+{"case":"incomplete-04","status":"SUCCEEDED","latencyMs":2784}
+{"case":"incomplete-05","status":"SUCCEEDED","latencyMs":3312}
+{"case":"incomplete-06","status":"SUCCEEDED","latencyMs":3339}
+{"case":"incomplete-07","status":"SUCCEEDED","latencyMs":2849}
+{"case":"incomplete-08","status":"SUCCEEDED","latencyMs":3309}
+{"case":"incomplete-09","status":"SUCCEEDED","latencyMs":3151}
+{"case":"incomplete-10","status":"SUCCEEDED","latencyMs":3067}
+{"case":"ambiguous-01","status":"SUCCEEDED","latencyMs":2877}
+{"case":"ambiguous-02","status":"SUCCEEDED","latencyMs":3083}
+{"case":"ambiguous-03","status":"SUCCEEDED","latencyMs":3288}
+{"case":"ambiguous-04","status":"SUCCEEDED","latencyMs":3193}
+{"case":"ambiguous-05","status":"SUCCEEDED","latencyMs":3412}
+{"case":"noisy-01","status":"SUCCEEDED","latencyMs":2586}
+{"case":"noisy-02","status":"SUCCEEDED","latencyMs":3221}
+{"case":"noisy-03","status":"SUCCEEDED","latencyMs":7239}
+{"case":"noisy-04","status":"SUCCEEDED","latencyMs":2870}
+{"case":"noisy-05","status":"SUCCEEDED","latencyMs":2809}
+{"cases":50,"completed":50,"schemaValid":50,"firstAttemptValid":49,"categoryAgreement":47,"priorityAgreement":45,"missingInformation":{"found":11,"expected":11},"entities":{"customer":{"matched":7,"total":10},"location":{"matched":10,"total":10},"affectedCount":{"matched":9,"total":10},"startedAt":{"matched":8,"total":10}},"latencyAll":{"count":50,"mean":3006.04,"p50":2864,"p95":3412},"latencySuccessful":{"count":50,"mean":3006.04,"p50":2864,"p95":3412}}

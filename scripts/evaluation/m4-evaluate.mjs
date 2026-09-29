@@ -1,4 +1,5 @@
-import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import {readFileSync,mkdirSync} from 'node:fs';
+import {writeEvaluationFile as writeFileSync} from './evidence-output.mjs';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {z} from 'zod';

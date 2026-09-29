@@ -15,14 +15,17 @@ const chat=z.object({model:z.string(),done:z.literal(true),done_reason:z.string(
 export class OllamaProvider implements AiProvider {
   constructor(private readonly env:ApiEnvironment){}
   async generate(input:AnalysisInput,signal:AbortSignal,repair:boolean|string=false){
+    return this.generateStructured(analysisMessages(input,repair),formatFor(input),signal);
+  }
+  async generateStructured(messages:{role:string;content:string}[],format:object,signal:AbortSignal){
+    if(JSON.stringify(messages).length>24000)throw new AiFailure('CONTEXT_TOO_LARGE');
     const deadline=AbortSignal.timeout(this.env.AI_ATTEMPT_TIMEOUT_MS),combined=AbortSignal.any([signal,deadline]);
     try{
-      const messages=analysisMessages(input,repair);
       const inventory=await fetch(new URL('/api/tags',this.env.OLLAMA_BASE_URL),{signal:combined,redirect:'error'});
       if(!inventory.ok)throw new AiFailure('AI_PROVIDER_UNAVAILABLE',true);
       const installed=tags.parse(await boundedJson(inventory,1048576)).models.find(m=>m.name===this.env.OLLAMA_MODEL);
       if(!installed)throw new AiFailure('AI_MODEL_UNAVAILABLE');
-      const response=await fetch(new URL('/api/chat',this.env.OLLAMA_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:this.env.OLLAMA_MODEL,messages,format:formatFor(input),stream:false,think:false,options:{temperature:this.env.AI_TEMPERATURE,num_predict:this.env.AI_MAX_OUTPUT_TOKENS,seed:42,num_ctx:16384}})});
+      const response=await fetch(new URL('/api/chat',this.env.OLLAMA_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:this.env.OLLAMA_MODEL,messages,format,stream:false,think:false,options:{temperature:this.env.AI_TEMPERATURE,num_predict:this.env.AI_MAX_OUTPUT_TOKENS,seed:42,num_ctx:16384}})});
       if(response.status===404)throw new AiFailure('AI_MODEL_UNAVAILABLE');
       if(!response.ok)throw new AiFailure('AI_PROVIDER_UNAVAILABLE',response.status>=500||response.status===429);
       // Bound the transport envelope too; reasoning fields never leave this adapter.

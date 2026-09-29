@@ -1,0 +1,109 @@
+
+> mobiflow-ai@0.1.0 test:integration:m6
+> npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m2-integration.mjs --m6-only
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 267ms
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+Datasource "db": PostgreSQL database "mobiflow_m2_test", schema "public" at "localhost:5432"
+
+6 migrations found in prisma/migrations
+
+Applying migration `202609280001_enable_vector`
+Applying migration `20260928085048_m2_domain_auth`
+Applying migration `20260928092000_m2_public_code_sequence`
+Applying migration `20260928145100_m5_knowledge_vectors`
+Applying migration `20260929034000_m6_request_embeddings`
+Applying migration `20260929043000_m6_request_cosine_index`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609280001_enable_vector/
+    └─ migration.sql
+  └─ 20260928085048_m2_domain_auth/
+    └─ migration.sql
+  └─ 20260928092000_m2_public_code_sequence/
+    └─ migration.sql
+  └─ 20260928145100_m5_knowledge_vectors/
+    └─ migration.sql
+  └─ 20260929034000_m6_request_embeddings/
+    └─ migration.sql
+  └─ 20260929043000_m6_request_cosine_index/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"demo.seed.complete","database":"mobiflow_m2_test","counts":{"users":6,"teams":4,"skills":5,"memberships":5,"staffSkills":7,"slaPolicies":4}}
+{"event":"m2.clean-migration.verified","database":"mobiflow_m2_test","migrationCount":6,"vectorVersion":"0.8.6","embeddingColumns":2,"runtimePrivileges":{"user_select":true,"audit_insert":true,"audit_update":false,"public_code_sequence_usage":true}}
+✔ M6 real PostgreSQL tools, atomic pending publication, concurrent scheduling, no business mutation and manager-only delivery (1394.3687ms)
+✔ M6 staff hard filters and exact workload states; candidate precision/recall cases are deterministic (898.5799ms)
+▶ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work
+  ✔ message (839.7773ms)
+  ✔ cancel (1150.4066ms)
+  ✔ staff (1023.2253ms)
+  ✔ actor (938.5826ms)
+✔ M6 late publication rejects request, cancel, initiator and candidate races; results do not overwrite human work (3953.7287ms)
+▶ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing
+  ✔ fake-staff (2140.6446ms)
+  ✔ fake-source (1946.9566ms)
+  ✔ llm (1610.2928ms)
+  ✔ embedding (937.9825ms)
+  ✔ tool (887.26ms)
+✔ M6 fake references, LLM offline, embedding offline and tool database errors fail without publishing (7525.3064ms)
+▶ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback
+  ✔ zero candidate is explicit; latest message included; no history match is success (1247.6062ms)
+  ✔ self, stale version, incompatible model, canceled and out-of-window vectors excluded (1095.0129ms)
+  ✔ actual HTTP adapter llm offline (2375.769ms)
+  ✔ actual HTTP adapter embedding offline (1944.6426ms)
+  ✔ expired durable recommendation lease is failed without state transition (850.7723ms)
+  ✔ notification database failure rolls back recommendation, history and pending pointer (1129.4736ms)
+✔ M6 empty candidates, message history, vector binding, real endpoint outages, leases and atomic rollback (8645.1083ms)
+▶ M6 source disable and policy changes invalidate publication and delivery
+  ✔ source (1183.5545ms)
+  ✔ policy (1154.9664ms)
+  ✔ published source becomes stale at delivery; immutable suggestion retained (1244.4268ms)
+✔ M6 source disable and policy changes invalidate publication and delivery (3584.0646ms)
+{"id":"R1","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R2","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R3","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R4","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R5","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R6","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R7","status":"SUCCEEDED","errorCode":null,"failures":[]}
+{"id":"R8","status":"SUCCEEDED","errorCode":null,"failures":[]}
+✔ M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline (169615.3811ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 197157.5574

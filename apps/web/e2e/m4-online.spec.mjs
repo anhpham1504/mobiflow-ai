@@ -1,6 +1,9 @@
 import {test,expect} from '@playwright/test';
 import {readFileSync} from 'node:fs';
 import {signIn,create} from './m4-helpers.mjs';
+const offlineEvidencePath=process.env.M6_REGRESSION==='true'
+  ?'docs/verification/evidence/M6_REGRESSION_M4_BROWSER_OFFLINE.json'
+  :'docs/verification/evidence/M4_BROWSER_OFFLINE.json';
 /* global document, window -- evaluated inside browser */
 test('M4 actual Ollama intake, role projection, persisted reload, responsive keyboard UI and protected cache clearing',async({browser})=>{
   const contexts=await Promise.all([browser.newContext(),browser.newContext(),browser.newContext()]);const [user,manager,staff]=await Promise.all(contexts.map(c=>c.newPage()));const errors=[];
@@ -35,7 +38,7 @@ test('M4 actual Ollama intake, role projection, persisted reload, responsive key
   }finally{await Promise.all(contexts.map(c=>c.close()));}
 });
 test('M4 actual provider recovery: explicit retry from failed run succeeds and survives reload',async({page})=>{
-  const {requestId}=JSON.parse(readFileSync('docs/verification/evidence/M4_BROWSER_OFFLINE.json','utf8'));
+  const {requestId}=JSON.parse(readFileSync(offlineEvidencePath,'utf8'));
   await signIn(page,'user@mobiflow.local');await page.goto('/user/requests/'+requestId);
   const panel=page.getByRole('region',{name:'Phân tích AI hỗ trợ'});
   await expect(panel.getByRole('button',{name:'Thử phân tích lại'})).toBeVisible();

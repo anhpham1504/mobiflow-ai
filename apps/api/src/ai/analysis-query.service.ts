@@ -6,9 +6,10 @@ import {AuthorizationPolicyService} from '../authorization/authorization-policy.
 import type {AuthenticatedActor} from '../auth/auth.types.js';
 import {ApiError} from '../http.js';
 import {SourceService} from '../knowledge/source.service.js';
+import {RecommendationService} from './recommendation.service.js';
 @Injectable()
 export class AnalysisQueryService {
-  constructor(private readonly prisma:PrismaService,private readonly policy:AuthorizationPolicyService,private readonly sources:SourceService){}
+  constructor(private readonly prisma:PrismaService,private readonly policy:AuthorizationPolicyService,private readonly sources:SourceService,private readonly recommendations:RecommendationService){}
   private analysis(a:AiAnalysis){return analysisSchema.parse({intent:a.intent,category:a.category,subcategory:a.subcategory,prioritySuggestion:a.prioritySuggestion,entities:a.entitiesJson,missingFields:a.missingFieldsJson,confidence:Number(a.confidence),reasonSummary:a.reasonSummary});}
   private async job(run:AiRun,analysis:AiAnalysis|undefined,actor:AuthenticatedActor){
     const result=analysis?this.analysis(analysis):undefined;
@@ -16,6 +17,10 @@ export class AnalysisQueryService {
   }
   async run(id:string,actor:AuthenticatedActor){
     if(actor.role==='STAFF')throw new ApiError(403,'FORBIDDEN','Intake runs are for the owner or manager.');
+    if(actor.role==='MANAGER'){
+      const recommendation=await this.prisma.aiRun.findFirst({where:{id,purpose:'RECOMMENDATION'},select:{requestId:true}});
+      if(recommendation?.requestId)return this.recommendations.view(recommendation.requestId,actor,id);
+    }
     const run=await this.prisma.aiRun.findFirst({where:{id,purpose:'ANALYSIS',request:this.policy.requestScope(actor)},include:{analyses:true}});
     if(!run)throw new ApiError(404,'NOT_FOUND','The resource was not found.');
     return this.job(run,run.analyses[0],actor);

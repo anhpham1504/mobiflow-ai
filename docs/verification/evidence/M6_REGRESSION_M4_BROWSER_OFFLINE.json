@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-09-29T07:53:30.810Z",
+  "result": "PASS",
+  "requestId": "68d61e32-16cd-4d5f-8f21-440850a95ee3",
+  "provider": "Actual unreachable Docker Ollama origin",
+  "retry": "FAILED, no synthetic analysis",
+  "pageErrors": []
+}

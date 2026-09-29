@@ -1,0 +1,1 @@
+{"command":"npm run test:integration:m6","exitCode":1,"passedTests":13,"failedTests":1,"failure":"Actual corpus ingestion: FAILED instead of READY","diagnosis":"Direct GET http://localhost:11434/api/tags failed with connection refused. Existing Ollama dependency was not running.","action":"Start existing local Ollama and rerun; no provider substitution or label changes."}

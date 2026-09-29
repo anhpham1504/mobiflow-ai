@@ -1,0 +1,43 @@
+
+> mobiflow-ai@0.1.0 verify:runtime:m6
+> node --env-file=.env scripts/verification/m6-runtime.mjs
+
+{"event":"http.request","requestId":"abc8513d-073c-4b99-b928-c7a8a726a163","method":"POST","route":"/api/v1/auth/login","status":200,"latencyMs":194}
+{"event":"http.request","requestId":"73a99f96-1d35-4823-ba3c-d36b6b25c476","method":"POST","route":"/api/v1/auth/login","status":200,"latencyMs":180}
+{"event":"http.request","requestId":"e0c5e058-2ea3-49c5-a5c3-62694d7bcbb5","method":"POST","route":"/api/v1/auth/login","status":200,"latencyMs":179}
+{"event":"http.request","requestId":"db81e3b9-a151-4f3d-bb1b-f921b4913646","method":"GET","route":"/api/v1/health/ready","status":200,"latencyMs":20}
+{"event":"http.request","requestId":"4cb9fbbc-f34c-45ce-b0cc-b46d4b3ee616","method":"GET","route":"/health/live","status":200,"latencyMs":1}
+{"event":"http.request","requestId":"be5ce9f1-9dec-4028-bce7-30339db1c627","method":"POST","route":"/api/v1/requests","status":201,"latencyMs":47,"actorId":"10000000-0000-4000-8000-000000000001","sessionId":"fd796f91-d99c-4d83-94e2-550806a7ea22"}
+{"event":"http.request","requestId":"b66869f8-6cb8-48df-996a-cd5fd47a7266","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":13,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"ai.run.started","runId":"70105865-632a-45aa-a200-975b26da349e","requestId":"6b7973bc-17fc-4231-9684-9c2f03fe8364","provider":"ollama","model":"qwen3:4b-instruct-2507-q4_K_M"}
+{"event":"ai.run.attempt","runId":"70105865-632a-45aa-a200-975b26da349e","attempt":1}
+{"event":"http.request","requestId":"474a10f9-4c17-418f-91fb-fe9d53ab3536","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":9,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"6f15c55e-030f-4af5-870c-ffcd424b3185","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":17,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"a7b607a7-6cac-4ec4-8341-46dd2703e73d","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":20,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"ai.run.finished","runId":"70105865-632a-45aa-a200-975b26da349e","requestId":"6b7973bc-17fc-4231-9684-9c2f03fe8364","status":"SUCCEEDED","errorCode":null,"latencyMs":5704,"retryCount":0}
+{"event":"http.request","requestId":"4a20cfd8-6f48-4f61-89b1-61016bf0dd60","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":68,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"7ca4d821-d0cf-4558-9e0f-3f498b54af2e","method":"GET","route":"/api/v1/requests/:id","status":200,"latencyMs":13,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"8fca226e-6765-4c81-b03b-bc9708047dd7","method":"POST","route":"/api/v1/requests","status":201,"latencyMs":46,"actorId":"10000000-0000-4000-8000-000000000001","sessionId":"fd796f91-d99c-4d83-94e2-550806a7ea22"}
+{"event":"http.request","requestId":"961177fc-f7b7-4582-9962-9e82bfcf6829","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":16,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"ai.run.started","runId":"60b17109-68cf-4648-a11b-2f35107565b8","requestId":"fcc2c344-76ec-433b-9520-32c265fbfd29","provider":"ollama","model":"qwen3:4b-instruct-2507-q4_K_M"}
+{"event":"ai.run.attempt","runId":"60b17109-68cf-4648-a11b-2f35107565b8","attempt":1}
+{"event":"http.request","requestId":"55c6147b-b7c5-482f-8feb-3af4b642627d","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":17,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"c793e50b-244f-4d52-bd5b-716308411b35","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":10,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"96db53a0-c76a-4bb6-916f-050f9be5d47e","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":14,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"ai.run.finished","runId":"60b17109-68cf-4648-a11b-2f35107565b8","requestId":"fcc2c344-76ec-433b-9520-32c265fbfd29","status":"SUCCEEDED","errorCode":null,"latencyMs":5973,"retryCount":0}
+{"event":"http.request","requestId":"2f41f31b-f5eb-47a0-a9e6-0e8347d04f78","method":"GET","route":"/api/v1/requests/:id/ai/explanation","status":200,"latencyMs":62,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"6bf7b11c-4726-4761-b448-ae644aab037c","method":"GET","route":"/api/v1/requests/:id","status":200,"latencyMs":14,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"1759e894-c2b0-48f7-9602-f685cf59daa1","method":"POST","route":"/api/v1/manager/requests/:id/ai/recommend","status":202,"latencyMs":56,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"788d1a90-ffb4-4391-926d-356012f0799a","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":17,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"6b9aaf72-7849-4084-a5e3-586fe6fba54e","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":17,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"c3f7ac2e-caaa-4eaa-b647-a129aa3553c7","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":39,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"10fb4699-343d-4e4b-8803-8cba95694b28","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":16,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"19e1eab7-c9ba-4800-a4fa-cf368f2f6b86","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":13,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"0fcacc2d-5071-4b1d-8f14-737a2d3306a0","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":200,"latencyMs":36,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.request","requestId":"323fd5f6-6b1f-46a6-98b1-92c50fb2b5ac","method":"GET","route":"/api/v1/requests/:id","status":200,"latencyMs":13,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+{"event":"http.error","requestId":"8f293af5-10e4-47dd-a019-152552d6a590","status":403,"code":"FORBIDDEN"}
+{"event":"http.request","requestId":"8f293af5-10e4-47dd-a019-152552d6a590","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":403,"latencyMs":4,"actorId":"10000000-0000-4000-8000-000000000001","sessionId":"fd796f91-d99c-4d83-94e2-550806a7ea22"}
+{"event":"http.error","requestId":"f995ffe6-4eb5-4bc7-91fe-45207e6b5b62","status":403,"code":"FORBIDDEN"}
+{"event":"http.request","requestId":"f995ffe6-4eb5-4bc7-91fe-45207e6b5b62","method":"GET","route":"/api/v1/manager/requests/:id/ai/recommendation","status":403,"latencyMs":3,"actorId":"10000000-0000-4000-8000-000000000003","sessionId":"92f93dc5-e9cc-45af-96ac-01b7ca7e2fb2"}
+{"event":"http.request","requestId":"48cf5333-291b-42c4-88b1-1e36e44379c1","method":"GET","route":"/api/v1/knowledge/sources/:id","status":200,"latencyMs":14,"actorId":"10000000-0000-4000-8000-000000000002","sessionId":"5c6809aa-8ff9-4334-a2cb-c5f8686fefb4"}
+PASS M6 native online

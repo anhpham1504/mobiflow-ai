@@ -1,0 +1,388 @@
+{
+  "at": "2026-09-29T04:28:53.431Z",
+  "target": "docker",
+  "mode": "online",
+  "result": "PASS",
+  "checks": [],
+  "peerId": "c36eba1d-60b6-48a3-9236-a486519c2c51",
+  "recommendation": {
+    "aiRunId": "ccca6c9f-3b7e-40b8-9258-b656e94fc6b2",
+    "requestId": "9d9617c3-423b-4cb6-b8f9-9c0d4fe2ac86",
+    "purpose": "RECOMMENDATION",
+    "status": "SUCCEEDED",
+    "errorCode": null,
+    "createdAt": "2026-09-29T04:29:10.360Z",
+    "finishedAt": "2026-09-29T04:29:20.709Z",
+    "contextVersion": 3,
+    "recommendationId": "6d82c9c4-d4e0-4570-a21f-2e3c9fa5ae37",
+    "recommendation": {
+      "actions": [
+        {
+          "text": "Ghi nhận sự cố mất kết nối 17 SIM IoT tại KCN Amata từ khoảng 8 giờ sáng. Theo SOP-IOT-04, cần kiểm tra trạng thái kết nối SIM, cấu hình APN và gateway. Không tự suy đoán nguyên nhân từ số lượng thiết bị. Phân loại tham khảo NETWORK/IOT_CONNECTIVITY. Ưu tiên đề xuất HIGH do nhiều thiết bị bị ảnh hưởng cùng khu vực.",
+          "sourceIds": [
+            "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0"
+          ]
+        }
+      ],
+      "confidence": 0.98,
+      "reasonSummary": "Khách hàng ABC báo 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng. Đây là sự cố mất kết nối SIM IoT, phù hợp với phân loại NETWORK/IOT_CONNECTIVITY. Số lượng thiết bị bị ảnh hưởng rõ ràng (17), địa điểm và thời gian bắt đầu được cung cấp đầy đủ. Theo SOP-IOT-04, khi nhiều thiết bị mất kết nối cùng khu vực, ưu tiên đề xuất là HIGH.",
+      "evidenceStatus": "SUFFICIENT",
+      "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+      "procedureSources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0"
+        }
+      ],
+      "similarCaseAlert": {
+        "count": 3,
+        "detected": true
+      },
+      "suggestedStaffId": "10000000-0000-4000-8000-000000000004",
+      "suggestedPriority": "HIGH",
+      "suggestedSlaMinutes": 120
+    },
+    "evidence": {
+      "analysisId": "ab54381f-e440-4049-a8eb-f76acb3f5000",
+      "analysis": {
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entities": {
+          "customer": "ABC",
+          "location": "KCN Amata",
+          "affectedCount": 17,
+          "startedAt": "8 giờ sáng"
+        },
+        "missingFields": [],
+        "confidence": 0.98,
+        "reasonSummary": "Khách hàng ABC báo 17 SIM IoT tại KCN Amata bị mất kết nối từ khoảng 8 giờ sáng. Đây là sự cố mất kết nối SIM IoT, phù hợp với phân loại NETWORK/IOT_CONNECTIVITY. Số lượng thiết bị bị ảnh hưởng rõ ràng (17), địa điểm và thời gian bắt đầu được cung cấp đầy đủ. Theo SOP-IOT-04, khi nhiều thiết bị mất kết nối cùng khu vực, ưu tiên đề xuất là HIGH."
+      },
+      "requestVersion": 3,
+      "retrievedAt": "2026-09-29T04:29:11.186Z",
+      "sources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "score": 0.586369304763344,
+          "distance": 0.41363069523665597
+        },
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "score": 0.5560724866174448,
+          "distance": 0.4439275133825552
+        },
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "score": 0.5254167510320475,
+          "distance": 0.47458324896795245
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "score": 0.5026478448854775,
+          "distance": 0.49735215511452247
+        }
+      ],
+      "similar": {
+        "cases": [
+          {
+            "requestId": "fcc2c344-76ec-433b-9520-32c265fbfd29",
+            "publicCode": "MF-2026-000051",
+            "title": "Synthetic M6 primary 1790656039612",
+            "status": "PENDING_APPROVAL",
+            "category": "NETWORK",
+            "location": "KCN Amata",
+            "createdAt": "2026-09-29T04:27:19.638Z",
+            "contextVersion": 4,
+            "score": 0.9928437107179423,
+            "scoreComponents": {
+              "cosineSimilarity": 0.9967873690598078,
+              "vector": 0.998393684529904,
+              "category": 1,
+              "location": 1,
+              "recency": 0.938075
+            }
+          },
+          {
+            "requestId": "c36eba1d-60b6-48a3-9236-a486519c2c51",
+            "publicCode": "MF-2026-000052",
+            "title": "Synthetic M6 related-case 1790656133932",
+            "status": "TRIAGED",
+            "category": "NETWORK",
+            "location": "KCN Amata",
+            "createdAt": "2026-09-29T04:28:53.950Z",
+            "contextVersion": 3,
+            "score": 0.992835066751577,
+            "scoreComponents": {
+              "cosineSimilarity": 0.9792933706534048,
+              "vector": 0.9896466853267024,
+              "category": 1,
+              "location": 1,
+              "recency": 0.9904705555555555
+            }
+          },
+          {
+            "requestId": "6b7973bc-17fc-4231-9684-9c2f03fe8364",
+            "publicCode": "MF-2026-000050",
+            "title": "Synthetic M6 related-case 1790656031283",
+            "status": "TRIAGED",
+            "category": "NETWORK",
+            "location": "KCN Amata",
+            "createdAt": "2026-09-29T04:27:11.308Z",
+            "contextVersion": 3,
+            "score": 0.9880338015229397,
+            "scoreComponents": {
+              "cosineSimilarity": 0.9822969310023919,
+              "vector": 0.991148465501196,
+              "category": 1,
+              "location": 1,
+              "recency": 0.9334472222222222
+            }
+          }
+        ],
+        "windowMinutes": 30,
+        "returnedCount": 3,
+        "truncated": false
+      },
+      "candidates": {
+        "candidates": [
+          {
+            "staffId": "10000000-0000-4000-8000-000000000004",
+            "displayName": "Network Specialist",
+            "teamId": "20000000-0000-4000-8000-000000000001",
+            "skillCodes": [
+              "IOT",
+              "NETWORK"
+            ],
+            "activeWorkload": 0,
+            "score": 1,
+            "scoreComponents": {
+              "skillMatch": 1,
+              "workloadScore": 1
+            }
+          },
+          {
+            "staffId": "10000000-0000-4000-8000-000000000003",
+            "displayName": "IoT Specialist",
+            "teamId": "20000000-0000-4000-8000-000000000001",
+            "skillCodes": [
+              "IOT",
+              "NETWORK"
+            ],
+            "activeWorkload": 3,
+            "score": 0.7794117647058824,
+            "scoreComponents": {
+              "skillMatch": 1,
+              "workloadScore": 0.25
+            }
+          }
+        ],
+        "scoringVersion": "staff.v1"
+      },
+      "workload": {
+        "workloads": [
+          {
+            "staffId": "10000000-0000-4000-8000-000000000004",
+            "activeCount": 0
+          },
+          {
+            "staffId": "10000000-0000-4000-8000-000000000003",
+            "activeCount": 3
+          }
+        ],
+        "asOf": "2026-09-29T04:29:11.176Z"
+      },
+      "policy": {
+        "id": "50000000-0000-4000-8000-000000000003",
+        "version": 1,
+        "category": null,
+        "priority": "HIGH",
+        "targetMinutes": 120
+      },
+      "history": {
+        "events": [
+          {
+            "id": "ab0f77c3-07a6-4a27-91f1-7f2e1e4a3197",
+            "type": "CREATE",
+            "actorType": "USER",
+            "timestamp": "2026-09-29T04:29:02.184Z",
+            "payload": {
+              "fromStatus": null,
+              "toStatus": "NEW",
+              "requestVersion": 1
+            }
+          },
+          {
+            "id": "155ec29b-b582-41bc-84b0-148e945a211a",
+            "type": "START_AI_ANALYSIS",
+            "actorType": "SYSTEM",
+            "timestamp": "2026-09-29T04:29:03.059Z",
+            "payload": {
+              "fromStatus": "NEW",
+              "toStatus": "AI_ANALYZING",
+              "requestVersion": 2
+            }
+          },
+          {
+            "id": "4edffec3-f887-4e25-afb0-4e1a2b674b84",
+            "type": "COMPLETE_AI_ANALYSIS",
+            "actorType": "SYSTEM",
+            "timestamp": "2026-09-29T04:29:09.206Z",
+            "payload": {
+              "fromStatus": "AI_ANALYZING",
+              "toStatus": "TRIAGED",
+              "requestVersion": 3
+            }
+          }
+        ],
+        "truncated": false
+      },
+      "embeddingIdentity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      }
+    },
+    "stale": false,
+    "staleReasons": [],
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "latencyMs": 9646,
+    "toolCalls": [
+      {
+        "toolName": "searchKnowledge",
+        "ordinal": 1,
+        "latencyMs": 43,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+            "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+            "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+            "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 4,
+          "toolVersion": "v1"
+        }
+      },
+      {
+        "toolName": "findSimilarRequests",
+        "ordinal": 2,
+        "latencyMs": 7,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "fcc2c344-76ec-433b-9520-32c265fbfd29",
+            "c36eba1d-60b6-48a3-9236-a486519c2c51",
+            "6b7973bc-17fc-4231-9684-9c2f03fe8364"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 3,
+          "toolVersion": "v1"
+        }
+      },
+      {
+        "toolName": "getSlaPolicy",
+        "ordinal": 3,
+        "latencyMs": 4,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "50000000-0000-4000-8000-000000000003"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 1,
+          "toolVersion": "v1"
+        }
+      },
+      {
+        "toolName": "getCandidateStaff",
+        "ordinal": 4,
+        "latencyMs": 6,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "10000000-0000-4000-8000-000000000004",
+            "10000000-0000-4000-8000-000000000003"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 2,
+          "toolVersion": "v1"
+        }
+      },
+      {
+        "toolName": "getStaffWorkload",
+        "ordinal": 5,
+        "latencyMs": 5,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "10000000-0000-4000-8000-000000000004",
+            "10000000-0000-4000-8000-000000000003"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 2,
+          "toolVersion": "v1"
+        }
+      },
+      {
+        "toolName": "getRequestHistory",
+        "ordinal": 6,
+        "latencyMs": 5,
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "summary": {
+          "resultIds": [
+            "ab0f77c3-07a6-4a27-91f1-7f2e1e4a3197",
+            "155ec29b-b582-41bc-84b0-148e945a211a",
+            "4edffec3-f887-4e25-afb0-4e1a2b674b84"
+          ],
+          "sideEffect": "READ_ONLY",
+          "resultCount": 3,
+          "toolVersion": "v1"
+        }
+      }
+    ]
+  },
+  "requestId": "9d9617c3-423b-4cb6-b8f9-9c0d4fe2ac86",
+  "noBusinessMutation": {
+    "assignments": 0,
+    "slas": 0,
+    "checklists": 0
+  }
+}

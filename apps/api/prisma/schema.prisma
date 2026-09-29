@@ -263,6 +263,7 @@ model Request {
   notifications           Notification[]
   audits                  AuditLog[]
   feedback                Feedback?
+  embeddings              RequestEmbedding[]
 
   @@index([createdById, createdAt, id])
   @@index([currentAssigneeId, status, createdAt, id])
@@ -501,6 +502,22 @@ model AiRecommendation {
 
   @@index([status, createdAt])
   @@index([requestId, createdAt])
+}
+
+model RequestEmbedding {
+  id             String @id @default(uuid()) @db.Uuid
+  requestId      String @db.Uuid
+  contextVersion Int
+  modelIdentity  String @db.VarChar(64)
+  dimension      Int
+  inputVersion   String @db.VarChar(80)
+  inputHash      String @db.VarChar(64)
+  identityJson   Json
+  embedding      Unsupported("vector(1024)")
+  createdAt      DateTime @default(now()) @db.Timestamptz(6)
+  request        Request @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  @@unique([requestId, modelIdentity, contextVersion, inputVersion])
+  @@index([requestId, contextVersion], map: "RequestEmbedding_request_version")
 }
 
 model AiToolCall {

@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:integration",
+  "startedAt": "2026-09-29T04:20:25.544Z",
+  "finishedAt": "2026-09-29T04:21:52.356Z",
+  "exitCode": 1,
+  "status": "FAIL",
+  "log": "iterations/M6_INTEGRATION-2026-09-29T04-20-25-544Z.txt"
+}
