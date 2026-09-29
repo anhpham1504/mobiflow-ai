@@ -1,0 +1,245 @@
+{
+  "checkedAt": "2026-09-28T15:29:33.383Z",
+  "target": "native",
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "truthful live RAG readiness",
+      "result": "PASS",
+      "details": {
+        "status": "READY",
+        "coreReady": true,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "READY",
+          "embedding": "UP",
+          "knowledge": "READY",
+          "errorCode": null,
+          "documents": 9,
+          "chunks": 12,
+          "checkedAt": "2026-09-28T15:29:10.975Z"
+        },
+        "checkedAt": "2026-09-28T15:29:33.410Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      }
+    },
+    {
+      "name": "active synthetic corpus persisted",
+      "result": "PASS",
+      "details": {
+        "documents": 9,
+        "chunks": 12,
+        "active_versions": 1
+      }
+    },
+    {
+      "name": "knowledge routes published in OpenAPI",
+      "result": "PASS",
+      "details": {
+        "routes": 6,
+        "version": "0.5.0"
+      }
+    },
+    {
+      "name": "knowledge RBAC and bounded metadata projection",
+      "result": "PASS",
+      "details": {
+        "userList": 403,
+        "staffSource": 200,
+        "sourceId": "KD-e41bbc68-2256-4107-996a-a6b87413f571-G1-C0"
+      }
+    },
+    {
+      "name": "real persisted RAG with authorized citations",
+      "result": "PASS",
+      "details": {
+        "requestId": "1ea8bb9f-3253-49d0-bf88-f5caca7c8d4f",
+        "runId": "186eb02e-e070-48d1-b220-9099ed4abbee",
+        "sourceIds": [
+          "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0"
+        ],
+        "citations": [
+          {
+            "quote": "Áp dụng cho SIM dữ liệu trong thiết bị IoT bị mất kết nối. Ghi nhận số thiết bị bị ảnh hưởng,",
+            "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0"
+          }
+        ],
+        "latencyMs": 5198,
+        "promptVersion": "request-analysis-rag.v1"
+      }
+    },
+    {
+      "name": "no-match queries return no invented source",
+      "result": "PASS",
+      "details": {
+        "negativeCases": 5,
+        "noAnswer": 5
+      }
+    },
+    {
+      "name": "M4 non-RAG path remains explicit and successful",
+      "result": "PASS",
+      "details": {
+        "runId": "4035e396-7a6a-43d2-a297-24e077c78ab6",
+        "status": "SUCCEEDED",
+        "grounding": {
+          "mode": "NON_RAG",
+          "evidenceStatus": "NOT_REQUESTED",
+          "citations": []
+        }
+      }
+    },
+    {
+      "name": "embedding outage fails RAG closed while manual workflow and core stay live",
+      "result": "PASS",
+      "details": {
+        "runId": "72c99dc9-fc06-4d58-bb31-49c4b2261aea",
+        "errorCode": "EMBEDDING_UNAVAILABLE",
+        "requestStatus": "NEW",
+        "manualMessageVersion": 4,
+        "readiness": {
+          "status": "DEGRADED",
+          "coreReady": true,
+          "aiReady": false,
+          "rag": {
+            "enabled": true,
+            "status": "NOT_READY",
+            "embedding": "DOWN",
+            "knowledge": "NOT_READY",
+            "errorCode": "EMBEDDING_UNAVAILABLE",
+            "documents": 0,
+            "chunks": 0,
+            "checkedAt": "2026-09-28T15:29:46.998Z"
+          },
+          "checkedAt": "2026-09-28T15:29:48.032Z",
+          "components": {
+            "API": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "DATABASE": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "VECTOR_EXTENSION": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_SERVER": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_LLM_MODEL": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_EMBEDDING_MODEL": {
+              "status": "DOWN",
+              "code": "UNAVAILABLE"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "ragRun": {
+    "requestId": "1ea8bb9f-3253-49d0-bf88-f5caca7c8d4f",
+    "runId": "186eb02e-e070-48d1-b220-9099ed4abbee",
+    "sourceIds": [
+      "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+      "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0"
+    ],
+    "citations": [
+      {
+        "quote": "Áp dụng cho SIM dữ liệu trong thiết bị IoT bị mất kết nối. Ghi nhận số thiết bị bị ảnh hưởng,",
+        "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0"
+      }
+    ],
+    "latencyMs": 5198,
+    "promptVersion": "request-analysis-rag.v1"
+  },
+  "offline": {
+    "runId": "72c99dc9-fc06-4d58-bb31-49c4b2261aea",
+    "errorCode": "EMBEDDING_UNAVAILABLE",
+    "requestStatus": "NEW",
+    "manualMessageVersion": 4,
+    "readiness": {
+      "status": "DEGRADED",
+      "coreReady": true,
+      "aiReady": false,
+      "rag": {
+        "enabled": true,
+        "status": "NOT_READY",
+        "embedding": "DOWN",
+        "knowledge": "NOT_READY",
+        "errorCode": "EMBEDDING_UNAVAILABLE",
+        "documents": 0,
+        "chunks": 0,
+        "checkedAt": "2026-09-28T15:29:46.998Z"
+      },
+      "checkedAt": "2026-09-28T15:29:48.032Z",
+      "components": {
+        "API": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "DATABASE": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "VECTOR_EXTENSION": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_SERVER": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_LLM_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_EMBEDDING_MODEL": {
+          "status": "DOWN",
+          "code": "UNAVAILABLE"
+        }
+      }
+    }
+  },
+  "nonRag": {
+    "runId": "4035e396-7a6a-43d2-a297-24e077c78ab6",
+    "status": "SUCCEEDED",
+    "grounding": {
+      "mode": "NON_RAG",
+      "evidenceStatus": "NOT_REQUESTED",
+      "citations": []
+    }
+  }
+}

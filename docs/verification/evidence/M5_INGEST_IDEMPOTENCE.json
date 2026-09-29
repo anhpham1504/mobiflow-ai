@@ -1,0 +1,167 @@
+{
+  "checkedAt": "2026-09-29T02:10:00.554Z",
+  "result": "PASS",
+  "runs": 2,
+  "documents": 9,
+  "totalChunks": 12,
+  "sameDocumentIds": true,
+  "sameGenerations": true,
+  "details": {
+    "base": "http://localhost:3001",
+    "documents": [
+      {
+        "code": "SOP-IOT-04",
+        "file": "SOP-IOT-04_Xu-ly-mat-ket-noi-IoT.pdf",
+        "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+        "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+        "sha256": "6a89faf144a35633f10a0802d8ca911efc8025bdcdc21372547c51ad8200ecaa",
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SOP-NET-02",
+        "file": "SOP-NET-02_Xu-ly-su-co-mang.pdf",
+        "title": "SOP-NET-02 - Sự cố mạng di động",
+        "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+        "sha256": "51625cdf8ecd90925081781b98c04033825e818b41e0a44562269876c57050ab",
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SLA-Policy",
+        "file": "SLA-Policy.pdf",
+        "title": "SLA-Policy - Chính sách SLA minh họa",
+        "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+        "sha256": "fc9f20cfce6e97891852a65cab3a8c288c85fb63666b6be64fee7ac3636d4541",
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "FAQ-IoT",
+        "file": "FAQ-IoT.txt",
+        "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+        "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+        "sha256": "c598c123c416d916a2f86dd5638fbde6773d2e2cd08db6097be850fea8cb7a32",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SOP-BILL-01",
+        "file": "SOP-BILL-01.txt",
+        "title": "SOP-BILL-01 - Đối soát cước synthetic",
+        "documentId": "ea2412df-341c-4345-99be-1f0c8e699e66",
+        "sha256": "a1df8c82b191f3ee378f71bd8c93331ca3e0a18452adfcf09cc14cbe9e34150c",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SOP-ACCOUNT-01",
+        "file": "SOP-ACCOUNT-01.txt",
+        "title": "SOP-ACCOUNT-01 - Truy cập tài khoản synthetic",
+        "documentId": "68743850-3987-4463-b17d-65b68d302568",
+        "sha256": "7d00d98922d654132a98d0113c28014f6fdd9533a453e0c222cb5a663a1c4286",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SOP-SERVICE-01",
+        "file": "SOP-SERVICE-01.txt",
+        "title": "SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic",
+        "documentId": "53f0bd33-4928-4345-821e-f55809367ad9",
+        "sha256": "5ecfee451e2d380c8b1502fc50031f4aececd6367539d984c774effdad87f174",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "SOP-FIBER-01",
+        "file": "SOP-FIBER-01.txt",
+        "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+        "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+        "sha256": "c37ade7bb7345ba91f222df137a1e1d93f2662a12c3287c4e6f8d0cea8d6f070",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      },
+      {
+        "code": "ADVERSARIAL-01",
+        "file": "ADVERSARIAL-01.txt",
+        "title": "ADVERSARIAL-01 - Tài liệu kiểm thử chỉ thị giả",
+        "documentId": "e41bbc68-2256-4107-996a-a6b87413f571",
+        "sha256": "e1d366dc95cd9d393327485a3488fb0724fd8d0fca9b4d72a517e7d0dc9762b0",
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        }
+      }
+    ]
+  }
+}

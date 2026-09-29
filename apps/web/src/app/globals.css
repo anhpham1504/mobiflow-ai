@@ -31,6 +31,7 @@ input[type="checkbox"] { width:20px; height:20px; flex-shrink:0; padding:0; }
 .ai-analysis dt { color:#536277; font-size:13px; }.ai-analysis dd { margin:4px 0 0; }
 @media(max-width:500px){.ai-analysis dl{grid-template-columns:1fr}}
 textarea { resize:vertical; }
+.source-id { overflow-wrap:anywhere; font-size:12px; color:#536277; }
 button,.action-link { font:inherit; font-size:14px; background:var(--primary); color:white; border:1px solid var(--primary); border-radius:6px; padding:10px 16px; min-height:44px; cursor:pointer; text-decoration:none; }
 button:disabled { opacity:.55; cursor:wait; }
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:3px solid #b0760c; outline-offset:3px; }

@@ -34,6 +34,7 @@ export function HealthPanel() {
       return <li key={key}><span className="service-index">0{index + 1}</span><div className="service-name"><strong>{label}</strong><span>{busy ? 'Đang kiểm tra' : component ? reasons[component.code] : 'Chưa có kết quả'}</span></div><span className={`status-pill ${!busy && component?.status === 'UP' ? 'is-up' : ''}`}>{busy ? '…' : component?.status === 'UP' ? 'Sẵn sàng' : component?.status === 'NOT_CONFIGURED' ? 'Chưa cấu hình' : 'Chưa sẵn sàng'}</span></li>;
     })}</ul>}
     {!busy && result && !result.data.aiReady ? <p className="notice">AI chưa sẵn sàng đầy đủ. Trạng thái này không làm dừng API hoặc giao diện.</p> : null}
+    {!busy&&result?.data.rag?<p className="notice">Tra cứu tài liệu: {result.data.rag.status==='READY'?'Sẵn sàng':result.data.rag.status==='DISABLED'?'Đang tắt':result.data.rag.knowledge==='EMPTY'?'Chưa có tài liệu sẵn sàng':'Chưa sẵn sàng'}. {result.data.rag.documents} tài liệu · {result.data.rag.chunks} đoạn. {result.data.rag.checkedAt?'Xác minh lúc '+new Date(result.data.rag.checkedAt).toLocaleTimeString('vi-VN'):'Chưa xác minh embeddings.'}</p>:null}
     <div className="panel-footer"><span>{result ? `Kiểm tra lúc ${new Date(result.data.checkedAt).toLocaleTimeString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}` : 'Chỉ hiển thị kết quả kiểm tra thực tế'}</span><a href={`${apiBase.replace(/\/api\/v1$/, '')}/api/docs`} target="_blank" rel="noreferrer">Tài liệu API <ArrowUpRight size={14} aria-hidden="true" /></a></div>
   </section>;
 }

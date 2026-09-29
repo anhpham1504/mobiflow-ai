@@ -33,7 +33,13 @@
     "test:e2e:m3": "playwright test --config playwright.m3.config.mjs",
     "eval:ai:m4": "npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m4-evaluate.mjs",
     "test:e2e:m4": "playwright test --config playwright.m4.config.mjs",
-    "verify:runtime:m4": "node --env-file=.env scripts/verification/m4-runtime.mjs"
+    "verify:runtime:m4": "node --env-file=.env scripts/verification/m4-runtime.mjs",
+    "knowledge:ingest": "node scripts/demo/ingest-knowledge.mjs",
+    "verify:embedding:m5": "npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m5-embedding.mjs",
+    "eval:retrieval:m5": "node --env-file=.env scripts/evaluation/m5-retrieval.mjs",
+    "eval:rag:m5": "node --env-file=.env scripts/evaluation/m5-rag.mjs",
+    "verify:runtime:m5": "node --env-file=.env scripts/verification/m5-runtime.mjs",
+    "test:e2e:m5": "playwright test --config playwright.m5.config.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

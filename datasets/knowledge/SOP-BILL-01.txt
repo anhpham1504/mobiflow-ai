@@ -1,0 +1,5 @@
+Synthetic demo document - not an actual enterprise SOP
+# SOP-BILL-01 - Đối soát cước synthetic
+
+## Khiếu nại cước
+Áp dụng cho khiếu nại phí dịch vụ sai, khoản cước bị tính hai lần hoặc số tiền trên hóa đơn không đúng. Phân loại BILLING / BILLING_DISCREPANCY. Thu thập kỳ hóa đơn, khoản mục bị tranh chấp và mô tả chênh lệch do người gửi cung cấp. Không cần mật khẩu, số thẻ thanh toán hay thông tin khách hàng thật trong demo. Không tự hoàn tiền; chuyển quản lý kiểm tra và quyết định.

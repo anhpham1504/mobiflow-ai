@@ -18,11 +18,11 @@ async function call(token,path,body,status=200){
 }
 async function terminal(token,id){
   const end=Date.now()+310000;
-  while(Date.now()<end){const d=await call(token,'/requests/'+id+'/ai/explanation');aiExplanationSchema.shape.data.parse(d);if(d.job&&['SUCCEEDED','FAILED','CANCELED'].includes(d.job.status))return d;await delay(1000);}
+  while(Date.now()<end){const d=await call(token,'/requests/'+id+'/ai/explanation');aiExplanationSchema.shape.data.parse(d);if(d.job&&['FAILED','CANCELED'].includes(d.job.status)||d.job?.status==='SUCCEEDED'&&d.analysis)return d;await delay(1000);}
   throw new Error('Durable AI run exceeded verification deadline');
 }
 try{
-  const ready=await call(null,'/health/ready');assert.equal(ready.coreReady,true);assert.equal(ready.components.OLLAMA_EMBEDDING_MODEL.status,'NOT_CONFIGURED');
+  const ready=await call(null,'/health/ready');assert.equal(ready.coreReady,true);assert.equal(ready.components.OLLAMA_EMBEDDING_MODEL.status,process.env.OLLAMA_EMBEDDING_MODEL==='unconfigured'?'NOT_CONFIGURED':'UP');
   assert.equal(ready.components.OLLAMA_SERVER.status,mode==='online'?'UP':'DOWN');record('truthful core and AI readiness',ready);
   const swagger=await(await fetch(base+'/api/docs-json')).json();
   for(const path of ['/api/v1/requests/{id}/ai/analyze','/api/v1/requests/{id}/ai/retry','/api/v1/requests/{id}/ai/explanation','/api/v1/ai/runs/{id}'])assert.ok(swagger.paths[path]);

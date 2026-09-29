@@ -1,0 +1,5 @@
+Synthetic demo document - not an actual enterprise SOP
+# SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic
+
+## Đường truyền cáp quang
+Tình huống tham khảo khác miền: router Wi-Fi gia đình có đèn LOS đỏ hoặc cáp quang bị đứt. Đây không phải sự cố SIM IoT, APN hay đăng ký mạng di động. Chỉ ghi nhận đèn báo, địa điểm và thời gian; không sử dụng tài liệu này làm bằng chứng cho sự cố SIM dữ liệu trong cảm biến công nghiệp.

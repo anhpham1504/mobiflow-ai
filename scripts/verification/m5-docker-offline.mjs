@@ -1,0 +1,13 @@
+import assert from 'node:assert/strict';
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {setTimeout as delay} from 'node:timers/promises';
+const base=process.env.VERIFY_API_URL??'http://localhost:3001',evidence={checkedAt:new Date().toISOString(),result:'FAIL'};
+async function call(token,path,body,expected=body===undefined?200:201){const response=await fetch(base+'/api/v1'+path,{method:body===undefined?'GET':'POST',headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1','Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:JSON.stringify(body),signal:AbortSignal.timeout(30000)});const result=await response.json();assert.equal(response.status,expected,JSON.stringify(result));return result.data;}
+const login=email=>call(null,'/auth/login',{email,password:'MobiFlowDemo!2026'},200).then(r=>r.accessToken);
+try{
+  let ready;for(let i=0;i<20;i++){ready=(await(await fetch(base+'/api/v1/health/ready',{signal:AbortSignal.timeout(10000)})).json()).data;if(ready.rag.checkedAt)break;await delay(500);}assert.equal(ready.coreReady,true);assert.equal(ready.components.OLLAMA_SERVER.status,'UP');assert.equal(ready.components.OLLAMA_LLM_MODEL.status,'UP');assert.equal(ready.components.OLLAMA_EMBEDDING_MODEL.status,'DOWN');assert.equal(ready.rag.status,'NOT_READY');assert.equal(ready.rag.embedding,'DOWN');assert.equal(ready.rag.errorCode,'EMBEDDING_UNAVAILABLE');
+  const [user,manager]=await Promise.all([login('user@mobiflow.local'),login('manager@mobiflow.local')]);const request=await call(user,'/requests',{title:'M5 Docker embedding offline '+Date.now(),description:'17 SIM IoT tại KCN Amata mất kết nối từ 8 giờ.'});
+  let result;for(let i=0;i<40;i++){result=await call(manager,'/requests/'+request.id+'/ai/explanation');if(result.job&&['SUCCEEDED','FAILED','CANCELED'].includes(result.job.status))break;await delay(500);}
+  assert.equal(result.job.status,'FAILED');assert.equal(result.job.errorCode,'EMBEDDING_UNAVAILABLE');const detail=await call(manager,'/requests/'+request.id);assert.equal(detail.status,'NEW');const messaged=await call(user,'/requests/'+request.id+'/messages',{expectedVersion:detail.version,body:'Xử lý thủ công khi embedding Docker không khả dụng.'});assert.equal(messaged.version,detail.version+1);
+  Object.assign(evidence,{result:'PASS',readiness:ready,requestId:request.id,runId:result.job.aiRunId,errorCode:result.job.errorCode,manualMessageVersion:messaged.version});console.log('PASS Docker embedding outage is isolated from LLM/core/manual workflow');
+}finally{mkdirSync('docs/verification/evidence',{recursive:true});writeFileSync('docs/verification/evidence/M5_DOCKER_OFFLINE.json',JSON.stringify(evidence,null,2)+'\n');}

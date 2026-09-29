@@ -1,0 +1,1002 @@
+{
+  "at": "2026-09-28T15:16:12.659Z",
+  "datasetHash": "74f09455381a3f126453fba5b351a18bff152b8d20ae9dc8fef695c5f3c69855",
+  "metric": "cosine distance; similarity=1-distance; not AI confidence",
+  "strategy": "exact materialized scoped search; HNSW provisioned but not used for candidate truncation",
+  "topK": 5,
+  "maxDistance": 0.5,
+  "warmState": "No explicit prewarm; first case may be cold, subsequent cases warm. Shared Ollama model reload can affect latency.",
+  "mapping": {
+    "SOP-IOT-04": "578c53a3-37d8-465b-bda7-d6c23c749927",
+    "SOP-NET-02": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+    "SLA-Policy": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+    "FAQ-IoT": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+    "SOP-BILL-01": "ea2412df-341c-4345-99be-1f0c8e699e66",
+    "SOP-ACCOUNT-01": "68743850-3987-4463-b17d-65b68d302568",
+    "SOP-SERVICE-01": "53f0bd33-4928-4345-821e-f55809367ad9",
+    "SOP-FIBER-01": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+    "ADVERSARIAL-01": "e41bbc68-2256-4107-996a-a6b87413f571"
+  },
+  "metrics": {
+    "cases": 25,
+    "labeledPositive": 20,
+    "negative": 5,
+    "hit1": 0.7,
+    "hit3": 0.8,
+    "hit5": 0.8,
+    "recall5": 0.8,
+    "mrr": 0.7416666666666667,
+    "noAnswer": 5,
+    "negativeFalsePositive": 0,
+    "embeddingLatency": {
+      "count": 25,
+      "p50": 55,
+      "p95": 2007
+    },
+    "retrievalLatency": {
+      "count": 25,
+      "p50": 62,
+      "p95": 2014
+    }
+  },
+  "results": [
+    {
+      "id": "R01",
+      "expectedDocumentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 163,
+      "retrievalMs": 183,
+      "sources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.39778482913970514,
+          "score": 0.6022151708602949
+        },
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.45590695475977294,
+          "score": 0.5440930452402271
+        },
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.46567967738629457,
+          "score": 0.5343203226137054
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.4999431669948473,
+          "score": 0.5000568330051527
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "expectedDocumentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 164,
+      "retrievalMs": 172,
+      "sources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.3849904262996343,
+          "score": 0.6150095737003657
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.410605609416857,
+          "score": 0.589394390583143
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.44383613279395107,
+          "score": 0.5561638672060489
+        },
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.4483801332199332,
+          "score": 0.5516198667800668
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C1",
+          "chunkId": "369bf4a7-07af-476e-9d1c-c04e286a6122",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916",
+          "distance": 0.48475602178304067,
+          "score": 0.5152439782169593
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "expectedDocumentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 132,
+      "retrievalMs": 138,
+      "sources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.4776986552656489,
+          "score": 0.5223013447343511
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "expectedDocumentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+      "status": "SUCCEEDED",
+      "rank": 2,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 2007,
+      "retrievalMs": 2014,
+      "sources": [
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.314566433429718,
+          "score": 0.685433566570282
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.35703376787699537,
+          "score": 0.6429662321230046
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.41302686541469313,
+          "score": 0.5869731345853069
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.4374040663699148,
+          "score": 0.5625959336300852
+        },
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.45968813184640833,
+          "score": 0.5403118681535917
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "expectedDocumentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 2058,
+      "retrievalMs": 2066,
+      "sources": [
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.39849493602247565,
+          "score": 0.6015050639775243
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.43937398448610276,
+          "score": 0.5606260155138972
+        },
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.4697633773793636,
+          "score": 0.5302366226206364
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C1",
+          "chunkId": "369bf4a7-07af-476e-9d1c-c04e286a6122",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916",
+          "distance": 0.47845027749824776,
+          "score": 0.5215497225017522
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "expectedDocumentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 132,
+      "retrievalMs": 139,
+      "sources": []
+    },
+    {
+      "id": "R07",
+      "expectedDocumentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 40,
+      "retrievalMs": 47,
+      "sources": [
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C0",
+          "chunkId": "1d3913ac-e9c5-4d85-a641-58ab18412d2a",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.3740215114954517,
+          "score": 0.6259784885045483
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C1",
+          "chunkId": "369bf4a7-07af-476e-9d1c-c04e286a6122",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916",
+          "distance": 0.3991614160670981,
+          "score": 0.6008385839329019
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.4295139146657482,
+          "score": 0.5704860853342518
+        },
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.4639517333262312,
+          "score": 0.5360482666737688
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.4663125951344481,
+          "score": 0.5336874048655519
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "expectedDocumentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 40,
+      "retrievalMs": 46,
+      "sources": [
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C0",
+          "chunkId": "620c49d2-dd09-47be-99b0-1603d7e7aea1",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "9e063a6a3a00b800eb4258210f507c7b4af0e31149ab1e164f92ba94b5fb4984",
+          "distance": 0.3858593566249642,
+          "score": 0.6141406433750358
+        },
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C1",
+          "chunkId": "bb1d5444-d83c-4342-b564-813d510148ae",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "d631d876930a43e08e499797729fa7e80b1c2a39b086f06588b023c28dfed3f1",
+          "distance": 0.48648799110030094,
+          "score": 0.5135120088996991
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "expectedDocumentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 56,
+      "retrievalMs": 63,
+      "sources": [
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C1",
+          "chunkId": "bb1d5444-d83c-4342-b564-813d510148ae",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "d631d876930a43e08e499797729fa7e80b1c2a39b086f06588b023c28dfed3f1",
+          "distance": 0.2711217180921597,
+          "score": 0.7288782819078403
+        },
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C0",
+          "chunkId": "620c49d2-dd09-47be-99b0-1603d7e7aea1",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "9e063a6a3a00b800eb4258210f507c7b4af0e31149ab1e164f92ba94b5fb4984",
+          "distance": 0.40825799299041987,
+          "score": 0.5917420070095801
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "expectedDocumentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 39,
+      "retrievalMs": 46,
+      "sources": [
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C1",
+          "chunkId": "bb1d5444-d83c-4342-b564-813d510148ae",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "d631d876930a43e08e499797729fa7e80b1c2a39b086f06588b023c28dfed3f1",
+          "distance": 0.37123741593234627,
+          "score": 0.6287625840676537
+        },
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C0",
+          "chunkId": "620c49d2-dd09-47be-99b0-1603d7e7aea1",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "9e063a6a3a00b800eb4258210f507c7b4af0e31149ab1e164f92ba94b5fb4984",
+          "distance": 0.46653514695667386,
+          "score": 0.5334648530433261
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "expectedDocumentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+      "status": "SUCCEEDED",
+      "rank": 3,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 39,
+      "retrievalMs": 45,
+      "sources": [
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.4463337521750228,
+          "score": 0.5536662478249772
+        },
+        {
+          "sourceId": "KD-75453a31-c4a0-4ef6-8eca-26b4781bb8df-G1-C1",
+          "chunkId": "bb1d5444-d83c-4342-b564-813d510148ae",
+          "documentId": "75453a31-c4a0-4ef6-8eca-26b4781bb8df",
+          "generation": 1,
+          "title": "SLA-Policy - Chính sách SLA minh họa",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "d631d876930a43e08e499797729fa7e80b1c2a39b086f06588b023c28dfed3f1",
+          "distance": 0.44734962677369394,
+          "score": 0.5526503732263061
+        },
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.45962369441986084,
+          "score": 0.5403763055801392
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C0",
+          "chunkId": "dd8600ff-3a00-4e4d-9f6a-b4f8413f56bc",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.4693410712873288,
+          "score": 0.5306589287126712
+        },
+        {
+          "sourceId": "KD-47959d8a-da89-45f9-b8e0-22f24bb7b424-G1-C1",
+          "chunkId": "369bf4a7-07af-476e-9d1c-c04e286a6122",
+          "documentId": "47959d8a-da89-45f9-b8e0-22f24bb7b424",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916",
+          "distance": 0.48420644183003825,
+          "score": 0.5157935581699618
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "expectedDocumentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 54,
+      "retrievalMs": 61,
+      "sources": [
+        {
+          "sourceId": "KD-992e707e-2a9b-4d4e-8727-b4bc4aa76f6f-G1-C0",
+          "chunkId": "b8b168f2-c54f-410f-9ce8-3b84d10aaf14",
+          "documentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.3053412544355555,
+          "score": 0.6946587455644445
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.4422381950090686,
+          "score": 0.5577618049909314
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "expectedDocumentId": "992e707e-2a9b-4d4e-8727-b4bc4aa76f6f",
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 39,
+      "retrievalMs": 46,
+      "sources": []
+    },
+    {
+      "id": "R14",
+      "expectedDocumentId": "ea2412df-341c-4345-99be-1f0c8e699e66",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 1833,
+      "retrievalMs": 1840,
+      "sources": [
+        {
+          "sourceId": "KD-ea2412df-341c-4345-99be-1f0c8e699e66-G1-C0",
+          "chunkId": "524e35d3-cfa3-4291-9515-7c376cd07727",
+          "documentId": "ea2412df-341c-4345-99be-1f0c8e699e66",
+          "generation": 1,
+          "title": "SOP-BILL-01 - Đối soát cước synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "07031b6e053149e8e42476b4e57c28929c2856b7d40df8aaf0ce880f7c431228",
+          "distance": 0.4106305912486221,
+          "score": 0.5893694087513779
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "expectedDocumentId": "ea2412df-341c-4345-99be-1f0c8e699e66",
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 55,
+      "retrievalMs": 61,
+      "sources": []
+    },
+    {
+      "id": "R16",
+      "expectedDocumentId": "68743850-3987-4463-b17d-65b68d302568",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 43,
+      "retrievalMs": 50,
+      "sources": [
+        {
+          "sourceId": "KD-68743850-3987-4463-b17d-65b68d302568-G1-C0",
+          "chunkId": "b0594e42-3dd1-4f04-9942-e9c70d075180",
+          "documentId": "68743850-3987-4463-b17d-65b68d302568",
+          "generation": 1,
+          "title": "SOP-ACCOUNT-01 - Truy cập tài khoản synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "76d9659ea9688ab8bfa84ff4176b6f7b70ea36f87e005d085e3ed68412d15c9f",
+          "distance": 0.33827668163239033,
+          "score": 0.6617233183676097
+        }
+      ]
+    },
+    {
+      "id": "R17",
+      "expectedDocumentId": "68743850-3987-4463-b17d-65b68d302568",
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 51,
+      "retrievalMs": 59,
+      "sources": []
+    },
+    {
+      "id": "R18",
+      "expectedDocumentId": "53f0bd33-4928-4345-821e-f55809367ad9",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 38,
+      "retrievalMs": 45,
+      "sources": [
+        {
+          "sourceId": "KD-53f0bd33-4928-4345-821e-f55809367ad9-G1-C0",
+          "chunkId": "c5832bfb-07bf-48e7-8282-b705cb772ef5",
+          "documentId": "53f0bd33-4928-4345-821e-f55809367ad9",
+          "generation": 1,
+          "title": "SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "dc2f37013593242922400858353dbf7e67ea849a11ec9f1c57b85cd52a06da77",
+          "distance": 0.3015913518654306,
+          "score": 0.6984086481345694
+        },
+        {
+          "sourceId": "KD-578c53a3-37d8-465b-bda7-d6c23c749927-G1-C1",
+          "chunkId": "846cc5aa-a0e4-43d8-817f-913ff28a0cfb",
+          "documentId": "578c53a3-37d8-465b-bda7-d6c23c749927",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.49748507187033,
+          "score": 0.50251492812967
+        }
+      ]
+    },
+    {
+      "id": "R19",
+      "expectedDocumentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 56,
+      "retrievalMs": 62,
+      "sources": [
+        {
+          "sourceId": "KD-1b86ec13-4eb9-4afb-9e70-d819db05efcf-G1-C0",
+          "chunkId": "84ddfd66-4382-42d3-8e41-84fa808509c2",
+          "documentId": "1b86ec13-4eb9-4afb-9e70-d819db05efcf",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.2851157870681654,
+          "score": 0.7148842129318346
+        }
+      ]
+    },
+    {
+      "id": "R20",
+      "expectedDocumentId": "e41bbc68-2256-4107-996a-a6b87413f571",
+      "status": "SUCCEEDED",
+      "rank": 1,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 55,
+      "retrievalMs": 62,
+      "sources": [
+        {
+          "sourceId": "KD-e41bbc68-2256-4107-996a-a6b87413f571-G1-C0",
+          "chunkId": "3cdda189-a153-44ba-84a5-15584b64f95e",
+          "documentId": "e41bbc68-2256-4107-996a-a6b87413f571",
+          "generation": 1,
+          "title": "ADVERSARIAL-01 - Tài liệu kiểm thử chỉ thị giả",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "1bd2ab75e8091f5ca4cc875573aff8a8de602aa2c316c1bfa1ca80d7e1317907",
+          "distance": 0.2577268192441965,
+          "score": 0.7422731807558035
+        }
+      ]
+    },
+    {
+      "id": "R21",
+      "expectedDocumentId": null,
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 55,
+      "retrievalMs": 62,
+      "sources": []
+    },
+    {
+      "id": "R22",
+      "expectedDocumentId": null,
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 55,
+      "retrievalMs": 62,
+      "sources": []
+    },
+    {
+      "id": "R23",
+      "expectedDocumentId": null,
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 55,
+      "retrievalMs": 62,
+      "sources": []
+    },
+    {
+      "id": "R24",
+      "expectedDocumentId": null,
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 56,
+      "retrievalMs": 62,
+      "sources": []
+    },
+    {
+      "id": "R25",
+      "expectedDocumentId": null,
+      "status": "SUCCEEDED",
+      "rank": 0,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "embeddingMs": 54,
+      "retrievalMs": 61,
+      "sources": []
+    }
+  ],
+  "limitations": "Specification-labeled synthetic set, one expected document per positive: Recall@5 equals Hit@5. Negative cases reported separately. No numeric quality threshold is invented."
+}

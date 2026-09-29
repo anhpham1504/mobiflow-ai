@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-09-29T03:07:16.826Z",
+  "result": "PASS",
+  "readiness": {
+    "status": "DEGRADED",
+    "coreReady": true,
+    "aiReady": false,
+    "rag": {
+      "enabled": true,
+      "status": "NOT_READY",
+      "embedding": "DOWN",
+      "knowledge": "NOT_READY",
+      "errorCode": "EMBEDDING_UNAVAILABLE",
+      "documents": 0,
+      "chunks": 0,
+      "checkedAt": "2026-09-29T03:07:15.310Z"
+    },
+    "checkedAt": "2026-09-29T03:07:16.879Z",
+    "components": {
+      "API": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "DATABASE": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "VECTOR_EXTENSION": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_SERVER": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_LLM_MODEL": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_EMBEDDING_MODEL": {
+        "status": "DOWN",
+        "code": "UNAVAILABLE"
+      }
+    }
+  },
+  "requestId": "796115da-f2ab-465c-a1ef-63f49b993604",
+  "runId": "12cc33ac-bbb8-4742-85af-ac731f601509",
+  "errorCode": "EMBEDDING_UNAVAILABLE",
+  "manualMessageVersion": 4
+}

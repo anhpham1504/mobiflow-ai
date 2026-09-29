@@ -1,0 +1,13 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m3
+> playwright test --config playwright.m3.config.mjs
+
+
+Running 2 tests using 1 worker
+
+(node:29548) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 apps\web\e2e\m3.spec.mjs:14:1 › M3 real browser: three-role manual workflow, waiting/reopen, stale protection, notification and responsive UI (13.2s)
+  ok 2 apps\web\e2e\m3.spec.mjs:96:1 › M3 login keyboard focus and API offline error are recoverable (946ms)
+
+  2 passed (15.2s)

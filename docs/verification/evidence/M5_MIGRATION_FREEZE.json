@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-09-29T03:10:10.6538378Z",
+  "result": "PASS",
+  "priorMigrations": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "expected": "C298BA7C691FD9D12E1ECB61C698906BD97DDF1336C0CBB22AED9ABEBC285D74",
+      "actual": "C298BA7C691FD9D12E1ECB61C698906BD97DDF1336C0CBB22AED9ABEBC285D74",
+      "unchanged": true
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "expected": "B68C9B3E9C6FA029384762237F2AC0ABA719D9563F1B16DA64FFAD11E7744AEB",
+      "actual": "B68C9B3E9C6FA029384762237F2AC0ABA719D9563F1B16DA64FFAD11E7744AEB",
+      "unchanged": true
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "expected": "529BB08BCFC650076F030B16C028D9E6F6A545F4831EE92A458EA32F176B37F8",
+      "actual": "529BB08BCFC650076F030B16C028D9E6F6A545F4831EE92A458EA32F176B37F8",
+      "unchanged": true
+    }
+  ],
+  "newMigration": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql"
+}

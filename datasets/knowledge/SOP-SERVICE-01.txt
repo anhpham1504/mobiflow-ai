@@ -1,0 +1,5 @@
+Synthetic demo document - not an actual enterprise SOP
+# SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic
+
+## Yêu cầu kích hoạt
+Áp dụng khi người dùng yêu cầu mở hoặc kích hoạt dịch vụ mới. Phân loại SERVICE / ACTIVATION, intent REQUEST_SERVICE. Xác nhận dịch vụ mong muốn và thông tin còn thiếu. Không tự đăng ký gói cước, ký hợp đồng hoặc kích hoạt thật. Quản lý phải phê duyệt quyết định nghiệp vụ.

@@ -1,0 +1,5 @@
+Synthetic demo document - not an actual enterprise SOP
+# SOP-ACCOUNT-01 - Truy cập tài khoản synthetic
+
+## Không đăng nhập được
+Áp dụng cho tài khoản cổng dịch vụ bị khóa hoặc không đăng nhập được. Phân loại ACCOUNT / ACCESS_ISSUE. Thu thập thông báo lỗi và thời điểm phát sinh. Không yêu cầu hoặc lưu mật khẩu, OTP hay khóa bí mật. Không tự nâng quyền, đổi vai trò hoặc mở khóa; quản lý xem xét theo quy trình được phép.

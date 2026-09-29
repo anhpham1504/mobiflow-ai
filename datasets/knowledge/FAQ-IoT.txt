@@ -1,0 +1,8 @@
+Synthetic demo document - not an actual enterprise SOP
+# FAQ-IoT - Câu hỏi cấu hình IoT
+
+## Cấu hình thiết bị IoT
+Yêu cầu hướng dẫn cấu hình cảm biến, chu kỳ gửi dữ liệu hoặc thông số thiết bị khi không báo mất kết nối thuộc IOT / DEVICE_CONFIGURATION. Thu thập kiểu thiết bị và cấu hình mong muốn. Phân biệt yêu cầu cấu hình với sự cố SIM IoT mất kết nối. Không tự áp dụng thay đổi cấu hình.
+
+## APN là gì
+APN là tên điểm truy cập của kết nối dữ liệu di động. Khi cần cấu hình APN mới, tham chiếu cấu hình được phê duyệt. Nếu thiết bị đã mất kết nối, tham khảo SOP-IOT-04 về sự cố kết nối thay vì coi đó là yêu cầu cấu hình thông thường.

@@ -27,18 +27,30 @@ import { AnalysisWorker } from './ai/analysis-worker.js';
 import { AnalysisQueryService } from './ai/analysis-query.service.js';
 import { OllamaProvider } from './ai/ollama-provider.js';
 import { AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,type AiProvider } from './ai/provider.js';
+import {EMBEDDING_PROVIDER,KNOWLEDGE_WORKER_ENABLED,OllamaEmbeddingProvider,type EmbeddingProvider} from './knowledge/embedding-provider.js';
+import {DocumentService} from './knowledge/document.service.js';
+import {VectorRepository} from './knowledge/vector.repository.js';
+import {IngestionWorker} from './knowledge/ingestion-worker.js';
+import {KnowledgeRetriever} from './knowledge/retriever.js';
+import {SourceService} from './knowledge/source.service.js';
+import {KnowledgeController} from './knowledge/knowledge.controller.js';
+import {KnowledgeGuard} from './knowledge/knowledge.guard.js';
+import {RagHealth} from './knowledge/rag-health.js';
 
-export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; aiWorker?:boolean } = {}) {
-  if(env.NODE_ENV!=='test'&&(options.aiProvider||options.aiWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
+export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean } = {}) {
+  if(env.NODE_ENV!=='test'&&(options.aiProvider||options.aiWorker!==undefined||options.embeddingProvider||options.knowledgeWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
   const database = options.database ?? new PostgresProbe(env.DATABASE_URL, env.HEALTH_TIMEOUT_MS);
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController,KnowledgeController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
       RequestStateMachineService, RequestQueryService, WorkflowGuard,
       AnalysisWorker,AnalysisQueryService,
+      DocumentService,VectorRepository,IngestionWorker,KnowledgeRetriever,SourceService,KnowledgeGuard,RagHealth,
+      {provide:EMBEDDING_PROVIDER,useValue:options.embeddingProvider??new OllamaEmbeddingProvider(env)},
+      {provide:KNOWLEDGE_WORKER_ENABLED,useValue:options.knowledgeWorker??env.NODE_ENV!=='test'},
       {provide:AI_PROVIDER_TOKEN,useValue:options.aiProvider??new OllamaProvider(env)},
       {provide:AI_LOG,useValue:log},{provide:AI_WORKER_ENABLED,useValue:options.aiWorker??env.NODE_ENV!=='test'},
       { provide: API_ENV, useValue: env }, { provide: PrismaService, useValue: prisma },
@@ -53,7 +65,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M4 structured intake').setDescription('Versioned manual workflow and bounded advisory AI analysis. AI failures preserve core readiness; job polling reports normalized failures.').setVersion('0.4.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M5 grounded intake').setDescription('Versioned manual workflow, bounded advisory AI analysis, and authorized synthetic knowledge retrieval with validated citations. AI and RAG failures preserve the manual workflow.').setVersion('0.5.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

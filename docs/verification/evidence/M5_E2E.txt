@@ -1,0 +1,12 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m5
+> playwright test --config playwright.m5.config.mjs
+
+
+Running 1 test using 1 worker
+
+(node:508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 apps\web\e2e\m5.spec.mjs:5:1 › M5 manager knowledge lifecycle, RBAC, source preview, responsive and keyboard behavior (11.6s)
+
+  1 passed (12.6s)

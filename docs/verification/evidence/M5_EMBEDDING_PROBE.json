@@ -1,0 +1,20 @@
+{
+  "at": "2026-09-28T14:50:33.472Z",
+  "provider": "ollama",
+  "model": "bge-m3:latest",
+  "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+  "modelBytes": 1157672605,
+  "capabilities": [
+    "embedding"
+  ],
+  "dimensions": [
+    1024,
+    1024
+  ],
+  "finite": true,
+  "nonzero": true,
+  "latencyMs": 15100,
+  "ollama": {
+    "version": "0.34.4"
+  }
+}

@@ -550,7 +550,7 @@ model KnowledgeDocument {
 
 model KnowledgeChunk {
   id           String            @id @default(uuid()) @db.Uuid
-  sourceId     String            @unique @db.Uuid
+  sourceId     String            @unique @db.VarChar(120)
   documentId   String            @db.Uuid
   generation   Int
   chunkIndex   Int
@@ -561,6 +561,9 @@ model KnowledgeChunk {
   startOffset  Int
   endOffset    Int
   metadataJson Json
+  modelIdentity String?          @db.VarChar(64)
+  dimension    Int?
+  embedding    Unsupported("vector(1024)")?
   createdAt    DateTime          @default(now()) @db.Timestamptz(6)
   document     KnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Restrict)
 

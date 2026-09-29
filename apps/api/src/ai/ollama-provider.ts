@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { ApiEnvironment } from '@mobiflow/config';
 import { AiFailure, type AiProvider } from './provider.js';
-import { analysisMessages,outputFormat,type AnalysisInput } from './prompts/request-analysis.js';
+import { analysisMessages,formatFor,type AnalysisInput } from './prompts/request-analysis.js';
 
 export async function boundedJson(response:Response,maxBytes:number):Promise<unknown>{
   if(!response.body)throw new AiFailure('AI_INVALID_OUTPUT',true);
@@ -22,7 +22,7 @@ export class OllamaProvider implements AiProvider {
       if(!inventory.ok)throw new AiFailure('AI_PROVIDER_UNAVAILABLE',true);
       const installed=tags.parse(await boundedJson(inventory,1048576)).models.find(m=>m.name===this.env.OLLAMA_MODEL);
       if(!installed)throw new AiFailure('AI_MODEL_UNAVAILABLE');
-      const response=await fetch(new URL('/api/chat',this.env.OLLAMA_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:this.env.OLLAMA_MODEL,messages,format:outputFormat,stream:false,think:false,options:{temperature:this.env.AI_TEMPERATURE,num_predict:this.env.AI_MAX_OUTPUT_TOKENS,seed:42,num_ctx:16384}})});
+      const response=await fetch(new URL('/api/chat',this.env.OLLAMA_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:this.env.OLLAMA_MODEL,messages,format:formatFor(input),stream:false,think:false,options:{temperature:this.env.AI_TEMPERATURE,num_predict:this.env.AI_MAX_OUTPUT_TOKENS,seed:42,num_ctx:16384}})});
       if(response.status===404)throw new AiFailure('AI_MODEL_UNAVAILABLE');
       if(!response.ok)throw new AiFailure('AI_PROVIDER_UNAVAILABLE',response.status>=500||response.status===429);
       // Bound the transport envelope too; reasoning fields never leave this adapter.

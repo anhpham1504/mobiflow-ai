@@ -1,0 +1,13 @@
+
+> mobiflow-ai@0.1.0 test:e2e:m4
+> playwright test --config playwright.m4.config.mjs
+
+
+Running 2 tests using 1 worker
+
+(node:22844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 apps\web\e2e\m4-online.spec.mjs:5:1 › M4 actual Ollama intake, role projection, persisted reload, responsive keyboard UI and protected cache clearing (24.3s)
+  ok 2 apps\web\e2e\m4-online.spec.mjs:37:1 › M4 actual provider recovery: explicit retry from failed run succeeds and survives reload (9.3s)
+
+  2 passed (34.4s)

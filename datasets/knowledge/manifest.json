@@ -1,0 +1,47 @@
+[
+  {
+    "code": "SOP-IOT-04",
+    "file": "SOP-IOT-04_Xu-ly-mat-ket-noi-IoT.pdf",
+    "title": "SOP-IOT-04 - Mất kết nối SIM IoT"
+  },
+  {
+    "code": "SOP-NET-02",
+    "file": "SOP-NET-02_Xu-ly-su-co-mang.pdf",
+    "title": "SOP-NET-02 - Sự cố mạng di động"
+  },
+  {
+    "code": "SLA-Policy",
+    "file": "SLA-Policy.pdf",
+    "title": "SLA-Policy - Chính sách SLA minh họa"
+  },
+  {
+    "code": "FAQ-IoT",
+    "file": "FAQ-IoT.txt",
+    "title": "FAQ-IoT - Câu hỏi cấu hình IoT"
+  },
+  {
+    "code": "SOP-BILL-01",
+    "file": "SOP-BILL-01.txt",
+    "title": "SOP-BILL-01 - Đối soát cước synthetic"
+  },
+  {
+    "code": "SOP-ACCOUNT-01",
+    "file": "SOP-ACCOUNT-01.txt",
+    "title": "SOP-ACCOUNT-01 - Truy cập tài khoản synthetic"
+  },
+  {
+    "code": "SOP-SERVICE-01",
+    "file": "SOP-SERVICE-01.txt",
+    "title": "SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic"
+  },
+  {
+    "code": "SOP-FIBER-01",
+    "file": "SOP-FIBER-01.txt",
+    "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic"
+  },
+  {
+    "code": "ADVERSARIAL-01",
+    "file": "ADVERSARIAL-01.txt",
+    "title": "ADVERSARIAL-01 - Tài liệu kiểm thử chỉ thị giả"
+  }
+]

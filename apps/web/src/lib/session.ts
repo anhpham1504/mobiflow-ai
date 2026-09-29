@@ -11,11 +11,11 @@ export const serverProfile=()=>null;
 function publish(user:SafeProfile|null,access:string|null){profile=user;token=access;listeners.forEach(fn=>fn());}
 export class ApiFailure extends Error {
   constructor(readonly status:number,readonly code:string) {
-    super(status===422&&code==='MISSING_ACKNOWLEDGMENT'?'Xác nhận các trường địa điểm hoặc thời điểm còn thiếu trong phần duyệt trước khi tiếp tục.':status===409?'Yêu cầu đã thay đổi hoặc thao tác không còn hợp lệ. Tải lại và xem xét trước khi gửi lại.':status===404?'Không tìm thấy yêu cầu hoặc bạn không có quyền truy cập.':status===403?'Vai trò của bạn không được phép thực hiện thao tác này.':status===401?'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.':status===422?'Thông tin nghiệp vụ chưa hợp lệ. Kiểm tra nhân sự, chính sách SLA và checklist.':status===429?'Bạn thao tác quá nhanh. Vui lòng thử lại sau.':'Không thể thực hiện yêu cầu. Kiểm tra dữ liệu và thử lại.');
+    super(code==='DUPLICATE_DOCUMENT'?'Tài liệu có cùng nội dung đã tồn tại trong kho.':status===422&&code==='MISSING_ACKNOWLEDGMENT'?'Xác nhận các trường địa điểm hoặc thời điểm còn thiếu trong phần duyệt trước khi tiếp tục.':status===409?'Yêu cầu đã thay đổi hoặc thao tác không còn hợp lệ. Tải lại và xem xét trước khi gửi lại.':status===404?'Không tìm thấy yêu cầu hoặc bạn không có quyền truy cập.':status===403?'Vai trò của bạn không được phép thực hiện thao tác này.':status===401?'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.':status===422?'Thông tin nghiệp vụ chưa hợp lệ. Kiểm tra nhân sự, chính sách SLA và checklist.':status===429?'Bạn thao tác quá nhanh. Vui lòng thử lại sau.':'Không thể thực hiện yêu cầu. Kiểm tra dữ liệu và thử lại.');
   }
 }
 async function raw(path:string,init:RequestInit={}) {
-  try{return await fetch(base+path,{...init,credentials:'include',cache:'no-store',headers:{'Content-Type':'application/json','X-CSRF-Protection':'1',...init.headers},signal:init.signal??AbortSignal.timeout(15000)});}
+  try{return await fetch(base+path,{...init,credentials:'include',cache:'no-store',headers:{...(init.body instanceof FormData?{}:{'Content-Type':'application/json'}),'X-CSRF-Protection':'1',...init.headers},signal:init.signal??AbortSignal.timeout(15000)});}
   catch {throw new Error('Không thể kết nối dịch vụ. Vui lòng thử lại.');}
 }
 async function failure(response:Response) {
@@ -47,7 +47,7 @@ export async function logout() {
 export async function api<T>(path:string,schema:{parse:(data:unknown)=>T},body?:unknown,method=body===undefined?'GET':'POST',signal?:AbortSignal):Promise<T> {
   if(!token)await refresh();
   const usedToken=token;
-  const send=()=>raw(path,{method,headers:{Authorization:'Bearer '+token},...(body===undefined?{}:{body:JSON.stringify(body)}),signal});
+  const send=()=>raw(path,{method,headers:{Authorization:'Bearer '+token},...(body===undefined?{}:{body:body instanceof FormData?body:JSON.stringify(body)}),signal});
   let response=await send();
   if(response.status===401) {
     if(token===usedToken)await refresh();

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 export * from './workflow.js';
 export * from './analysis.js';
+export * from './knowledge.js';
 
 export const componentSchema = z.object({
   status: z.enum(['UP', 'DOWN', 'NOT_CONFIGURED']),
@@ -10,6 +11,7 @@ export const componentSchema = z.object({
 export const readinessSchema = z.object({
   status: z.enum(['READY', 'DEGRADED', 'NOT_READY']),
   coreReady: z.boolean(), aiReady: z.boolean(), checkedAt: z.iso.datetime(),
+  rag:z.object({enabled:z.boolean(),status:z.enum(['READY','NOT_READY','DISABLED']),embedding:z.string(),knowledge:z.string(),errorCode:z.string().nullable(),documents:z.number(),chunks:z.number(),checkedAt:z.iso.datetime().nullable()}).optional(),
   components: z.object({
     API: componentSchema, DATABASE: componentSchema, VECTOR_EXTENSION: componentSchema,
     OLLAMA_SERVER: componentSchema, OLLAMA_LLM_MODEL: componentSchema, OLLAMA_EMBEDDING_MODEL: componentSchema,

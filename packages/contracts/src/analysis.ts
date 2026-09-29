@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { categories, priorities, taxonomy } from './workflow.js';
+import {groundingSchema} from './knowledge.js';
 
 export const analysisSchemaVersion = 'analysis.v1';
 export const missingFieldNames = ['customer','location','affectedCount','startedAt','impact','description'] as const;
@@ -23,6 +24,6 @@ export const analysisSchema = z.object({
 });
 export type Analysis = z.infer<typeof analysisSchema>;
 export const aiRunStatusSchema=z.enum(['QUEUED','RUNNING','SUCCEEDED','FAILED','CANCELED']);
-export const aiJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('ANALYSIS'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),provider:z.string().optional(),model:z.string().nullable().optional(),latencyMs:z.number().nullable().optional()});
+export const aiJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('ANALYSIS'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),provider:z.string().optional(),model:z.string().nullable().optional(),latencyMs:z.number().nullable().optional(),grounding:groundingSchema.optional()});
 export const aiJobResponseSchema=z.object({data:aiJobSchema,requestId:z.uuid()});
-export const aiExplanationSchema=z.object({data:z.object({status:z.enum(['NOT_STARTED','RUNNING','SUCCEEDED','FAILED']),job:aiJobSchema.nullable(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),entities:analysisSchema.shape.entities.optional()}),requestId:z.uuid()});
+export const aiExplanationSchema=z.object({data:z.object({status:z.enum(['NOT_STARTED','RUNNING','SUCCEEDED','FAILED']),job:aiJobSchema.nullable(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),entities:analysisSchema.shape.entities.optional(),grounding:groundingSchema.optional()}),requestId:z.uuid()});

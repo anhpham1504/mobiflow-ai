@@ -1,0 +1,10 @@
+M5 dependency audit
+checkedAt=2026-09-29T03:11:12.2399982Z
+npm audit --omit=dev --audit-level=high: PASS; 0 vulnerabilities
+npm ls --depth=0: PASS
+new runtime dependency=pdfjs-dist@6.3.289
+purpose=bounded text-only PDF extraction in an isolated worker
+license=Apache-2.0
+node engine=>=22.13.0 || >=24
+installed Node=v24.19.0
+No LangChain, vector service, OCR, cloud SDK, or archive parser added.

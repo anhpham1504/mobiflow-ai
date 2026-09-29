@@ -1,0 +1,10 @@
+
+> mobiflow-ai@0.1.0 verify:runtime:m4
+> node --env-file=.env scripts/verification/m4-runtime.mjs
+
+PASS truthful core and AI readiness
+PASS four canonical AI routes in OpenAPI
+PASS normal-01 actual persisted inference
+PASS normal-11 actual persisted inference
+PASS incomplete-01 actual persisted inference
+PASS ambiguous-01 actual persisted inference

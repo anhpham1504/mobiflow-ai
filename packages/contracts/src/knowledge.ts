@@ -1,0 +1,12 @@
+import {z} from 'zod';
+import {pageSchema} from './workflow.js';
+export const sourceIdSchema=z.string().regex(/^KD-[0-9a-f-]{36}-G[1-9][0-9]*-C[0-9]+$/);
+export const sourceSchema=z.object({sourceId:sourceIdSchema,chunkId:z.uuid(),documentId:z.uuid(),generation:z.number().int().positive(),title:z.string(),pageNumber:z.number().int().positive().nullable(),section:z.string().nullable(),excerpt:z.string().max(2400),contentHash:z.string().length(64),score:z.number().min(-1).max(1),distance:z.number().min(0).max(2),unavailableForLiveUse:z.boolean().optional()});
+export type Source=z.infer<typeof sourceSchema>;
+export const citationSchema=z.object({sourceId:sourceIdSchema,quote:z.string().min(1).max(500)}).strict();
+export const groundingSchema=z.object({mode:z.enum(['RAG','NON_RAG']),evidenceStatus:z.enum(['SUFFICIENT','INSUFFICIENT_EVIDENCE','NOT_REQUESTED','UNAVAILABLE']),citations:z.array(citationSchema.extend({source:sourceSchema})).max(5)});
+export const knowledgeDocumentSchema=z.object({id:z.uuid(),title:z.string(),originalFileName:z.string(),mimeType:z.enum(['application/pdf','text/plain']),byteSize:z.number().int(),sha256:z.string().length(64),status:z.enum(['UPLOADED','PROCESSING','READY','FAILED','DISABLED']),version:z.number().int(),activeGeneration:z.number().int().nullable(),pageCount:z.number().int().nullable(),chunkCount:z.number().int(),indexedAt:z.iso.datetime().nullable(),createdAt:z.iso.datetime(),errorCode:z.string().nullable(),sources:z.array(sourceSchema).max(5).optional(),index:z.object({model:z.string(),digest:z.string(),dimension:z.number(),chunkerVersion:z.string(),parserVersion:z.string()}).nullable()});
+export const knowledgeDocumentResponseSchema=z.object({data:knowledgeDocumentSchema,requestId:z.uuid()});
+export const knowledgeListSchema=z.object({data:z.array(knowledgeDocumentSchema),page:pageSchema,requestId:z.uuid()});
+export const sourceResponseSchema=z.object({data:sourceSchema,requestId:z.uuid()});
+export type KnowledgeDocumentView=z.infer<typeof knowledgeDocumentSchema>;

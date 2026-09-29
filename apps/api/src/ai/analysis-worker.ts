@@ -4,6 +4,10 @@ import {RequestStateMachineService} from '../requests/request-state-machine.serv
 import {AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,normalizedFailure,type AiProvider} from './provider.js';
 import type {LogSink} from '../http.js';
 import {executeAnalysis} from './analysis-execution.js';
+import type {ApiEnvironment} from '@mobiflow/config';
+import {API_ENV} from '../tokens.js';
+import {KnowledgeRetriever} from '../knowledge/retriever.js';
+import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 
 @Injectable()
 export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
@@ -11,7 +15,7 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
   private running:Promise<void>|null=null;
   private controller?:AbortController;
   private stopped=false;
-  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,@Inject(AI_PROVIDER_TOKEN)private readonly provider:AiProvider,@Inject(AI_LOG)private readonly log:LogSink,@Inject(AI_WORKER_ENABLED)private readonly enabled:boolean){}
+  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,@Inject(AI_PROVIDER_TOKEN)private readonly provider:AiProvider,@Inject(AI_LOG)private readonly log:LogSink,@Inject(AI_WORKER_ENABLED)private readonly enabled:boolean,private readonly retriever:KnowledgeRetriever,@Inject(API_ENV)private readonly env:ApiEnvironment){}
   onModuleInit(){if(this.enabled){this.timer=setInterval(()=>{void this.tick();},1000);this.timer.unref();void this.tick();}}
   async onModuleDestroy(){this.stopped=true;if(this.timer)clearInterval(this.timer);this.controller?.abort();await this.running;}
   tick():Promise<void>{
@@ -35,13 +39,15 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
     this.log({event:'ai.run.started',runId:job.run.id,requestId:job.run.requestId,provider:job.run.provider,model:job.run.model});
     let generated=false;
     try{
+      if(this.env.AI_RAG_ENABLED)job.input.retrieval=await this.retriever.forAnalysis(job.run.id,job.input.description,signal);
       const result=await executeAnalysis(this.provider,job.input,signal,async attempt=>{
         await this.prisma.aiRun.updateMany({where:{id:job.run.id,status:'RUNNING'},data:{retryCount:attempt}});
         this.log({event:'ai.run.attempt',runId:job.run.id,attempt:attempt+1});
       });
+      result.latencyMs=Math.round(performance.now()-start);
       generated=true;await this.machine.finishAnalysis(job.run.id,result);
     }catch(error){
-      const code=generated?'AI_PERSISTENCE_UNAVAILABLE':deadline.aborted?'AI_TIMEOUT':normalizedFailure(error,signal).code;
+      const code=error instanceof KnowledgeFailure?error.code:generated?'AI_PERSISTENCE_UNAVAILABLE':deadline.aborted?'AI_TIMEOUT':normalizedFailure(error,signal).code;
       // If this transaction also fails, the durable lease remains recoverable.
       await this.machine.finishAnalysis(job.run.id,undefined,code,Math.round(performance.now()-start));
     }finally{clearInterval(watcher);this.controller=undefined;}

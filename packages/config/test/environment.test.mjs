@@ -3,6 +3,11 @@ import { test } from 'node:test';
 import { parseApiEnvironment } from '../dist/index.js';
 
 const valid = { DATABASE_URL: 'postgresql://app:local@localhost:5432/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), OLLAMA_BASE_URL: 'http://localhost:11434', OLLAMA_MODEL: 'installed:tag', OLLAMA_EMBEDDING_MODEL: 'unconfigured' };
+test('M5 rejects invalid embedding/retrieval bounds without silently clamping',()=>{
+  assert.equal(parseApiEnvironment(valid).AI_RAG_ENABLED,false);
+  assert.equal(parseApiEnvironment(valid).EMBEDDING_DIMENSION,undefined);
+  for(const change of [{EMBEDDING_PROVIDER:'cloud'},{EMBEDDING_BASE_URL:'file:///private'},{EMBEDDING_BASE_URL:'http://user:secret@localhost:11434'},{EMBEDDING_DIMENSION:0},{EMBEDDING_DIMENSION:2001},{EMBEDDING_BATCH_SIZE:17},{EMBEDDING_TIMEOUT_MS:30001},{RAG_TOP_K:6},{RAG_TOP_K:0},{RAG_MAX_DISTANCE:2.1},{RAG_CONTEXT_CHARS:6001},{KNOWLEDGE_JOB_TIMEOUT_MS:600001},{AI_RAG_ENABLED:'yes'}])assert.throws(()=>parseApiEnvironment({...valid,...change}),/Invalid environment keys:/);
+});
 test('AI settings enable intake by default and enforce bounded inference at startup', () => {
   const env=parseApiEnvironment(valid);
   assert.equal(env.AI_AUTO_ANALYZE,true);

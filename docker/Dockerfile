@@ -32,6 +32,7 @@ COPY --from=api-build /app/package.json ./package.json
 COPY --from=api-build /app/apps/api/package.json ./apps/api/package.json
 COPY --from=api-build /app/apps/api/dist ./apps/api/dist
 COPY --from=api-build /app/packages ./packages
+RUN mkdir -p /app/storage/knowledge && chown -R node:node /app/storage
 USER node
 EXPOSE 3001
 CMD ["node", "apps/api/dist/main.js"]
