@@ -41,6 +41,9 @@ import {RecommendationService} from './ai/recommendation.service.js';
 import {DomainTools} from './ai/tools/domain-tools.js';
 import {RequestVectors} from './ai/tools/request-vectors.js';
 import {RECOMMENDATION_PROVIDER,type StructuredProvider} from './ai/provider.js';
+import {OperationalAiController} from './ai/operational-ai.controller.js';
+import {OperationalAiService} from './ai/operational-ai.service.js';
+import {SlaMonitorService} from './requests/sla-monitor.service.js';
 
 export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; recommendationProvider?:StructuredProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean } = {}) {
   if(env.NODE_ENV!=='test'&&(options.aiProvider||options.recommendationProvider||options.aiWorker!==undefined||options.embeddingProvider||options.knowledgeWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
@@ -48,12 +51,12 @@ export async function createApplication(env: ApiEnvironment, options: { database
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController,KnowledgeController,RecommendationController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
       RequestStateMachineService, RequestQueryService, WorkflowGuard,
       AnalysisWorker,AnalysisQueryService,
-      RecommendationService,DomainTools,RequestVectors,
+      RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,
       {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??new OllamaProvider(env)},
       DocumentService,VectorRepository,IngestionWorker,KnowledgeRetriever,SourceService,KnowledgeGuard,RagHealth,
       {provide:EMBEDDING_PROVIDER,useValue:options.embeddingProvider??new OllamaEmbeddingProvider(env)},
@@ -72,7 +75,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M7 human review').setDescription('Versioned manual workflow and manager-controlled accept, modify or reject decisions over grounded AI recommendations. AI never approves or assigns autonomously.').setVersion('0.7.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M8 operational assistance').setDescription('Request-scoped Copilot, explicit checklist adoption, deterministic SLA monitoring, factual resolution summaries and owner feedback. AI never mutates protected business state.').setVersion('0.8.0').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

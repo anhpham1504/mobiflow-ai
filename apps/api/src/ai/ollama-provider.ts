@@ -30,8 +30,9 @@ export class OllamaProvider implements AiProvider {
       if(!response.ok)throw new AiFailure('AI_PROVIDER_UNAVAILABLE',response.status>=500||response.status===429);
       // Bound the transport envelope too; reasoning fields never leave this adapter.
       const result=chat.safeParse(await boundedJson(response,65536));
-      if(!result.success||result.data.model!==installed.name||result.data.done_reason==='length')throw new AiFailure('AI_INVALID_OUTPUT',true);
+      if(!result.success||result.data.model!==installed.name)throw new AiFailure('AI_INVALID_OUTPUT',true,'INVALID_PROVIDER_ENVELOPE: Return one JSON object matching the supplied schema.');
       const raw=result.data.message.content,outputSize=Buffer.byteLength(raw,'utf8');
+      if(result.data.done_reason==='length')throw new AiFailure('AI_INVALID_OUTPUT',true,'TRUNCATED_GENERATION: Return a shorter JSON object and stay within every array/string bound.',raw.slice(0,6000));
       if(outputSize>32768)throw new AiFailure('AI_OUTPUT_TOO_LARGE');
       return {raw,outputSize,identity:{provider:'ollama',model:installed.name,digest:installed.digest}};
     }catch(error){

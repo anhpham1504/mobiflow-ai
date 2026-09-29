@@ -1,0 +1,80 @@
+{
+  "at": "2026-09-29T13:33:35.431Z",
+  "baseline": "19395c9ff950ec667dabc658292814b3dadadd8c",
+  "migrationFreeze": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "baseline": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+      "current": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "baseline": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+      "current": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "baseline": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+      "current": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+      "baseline": "3186661f01426396ad27fce70f78a92f681f5d61",
+      "current": "3186661f01426396ad27fce70f78a92f681f5d61"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+      "baseline": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+      "current": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+      "baseline": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+      "current": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+    }
+  ],
+  "filesScanned": 511,
+  "findings": [
+    {
+      "path": ".env.example",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/analysis.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/health.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "apps/api/test/knowledge.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "packages/config/test/environment.test.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    },
+    {
+      "path": "scripts/dev/prisma.mjs",
+      "kind": "database-credential",
+      "classification": "REVIEWED_DEMO_OR_TEST_PLACEHOLDER"
+    }
+  ],
+  "invariants": {
+    "noShellOrUnsafeSql": true,
+    "closedActionDto": true,
+    "sourceMembership": true,
+    "eventMembership": true,
+    "caseMembership": true,
+    "currentAssigneePredicate": true,
+    "toolDataMarkedUntrusted": true,
+    "protectedMutationsForbiddenInPrompt": true
+  },
+  "limitations": "Conservative high-confidence secret scan plus static invariant checks; dynamic authorization and injection behavior are covered by unit, integration and live-evaluation gates."
+}

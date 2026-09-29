@@ -161,6 +161,37 @@ test('M6 source disable and policy changes invalidate publication and delivery',
   });
 });
 
+test('M8 Copilot adoption, SLA dedupe, factual summary and immutable feedback use real PostgreSQL',async t=>{
+  const provider={generateStructured:async messages=>{
+    const body=messages[1].content.slice(messages[1].content.indexOf('\n')+1),facts=JSON.parse(body.slice(0,body.indexOf('\nALLOWED_')));
+    if(messages[0].content.includes('Tạo tóm tắt')){
+      const r=facts.resolution,event=facts.events.at(-1)??facts.events[0];
+      void r;return {raw:JSON.stringify({executiveSummary:'Yêu cầu đã được xử lý theo dữ kiện đã lưu.',timeline:[{eventId:event.eventId,summary:'Hoàn tất xử lý'}]}),outputSize:500,identity:{provider:'test',model:'m8-fixture',digest:'test-only'}};
+    }
+    const source=facts.sources[0];return {raw:JSON.stringify({message:'Checklist nháp dựa trên trạng thái hiện tại.',items:source?[{text:'Xác minh kết nối thiết bị tại hiện trường',sourceIds:[source.sourceId]}]:[]}),outputSize:400,identity:{provider:'test',model:'m8-fixture',digest:'test-only'}};
+  }};
+  const s=await setup(t,{provider}),operational=s.app.get((await import('../dist/ai/operational-ai.service.js')).OperationalAiService),monitor=s.app.get((await import('../dist/requests/sla-monitor.service.js')).SlaMonitorService);
+  const completeOperational=async runId=>{for(let i=0;i<100;i++){const run=await s.prisma.aiRun.findUniqueOrThrow({where:{id:runId}});if(['SUCCEEDED','FAILED','CANCELED'].includes(run.status))return run;await operational.cycle(AbortSignal.timeout(30000));}throw new Error('Operational run did not reach a terminal state within the bounded integration drain.');};
+  const sop=Buffer.from('# SOP M8\nXác minh kết nối thiết bị tại hiện trường trước khi hoàn tất xử lý. '+randomUUID());const doc=await s.docs.upload(s.manager.actor,{title:'SOP M8 checklist'},{originalname:'m8.txt',mimetype:'text/plain',buffer:sop,size:sop.length},randomUUID());await s.ingestion.tick();assert.equal((await s.docs.detail(doc.id,s.manager.actor)).status,'READY');
+  let r=await s.create('Thiết bị mất kết nối cần xử lý theo checklist M8.');
+  const team='20000000-0000-4000-8000-000000000001',decision={category:'NETWORK',subcategory:'IOT_CONNECTIVITY',priority:'HIGH',teamId:team,staffId:s.staff.actor.id,actions:[],acknowledgedMissingFields:[],reason:'Phương án M8 tổng hợp'};
+  await s.machine.transition(r.id,'MANUAL_TRIAGE',s.manager.actor,{expectedVersion:r.version,finalDecision:decision},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
+  await s.machine.transition(r.id,'SUBMIT_FOR_APPROVAL',s.manager.actor,{expectedVersion:r.version,manualDraftRevision:r.manualDraftRevision},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
+  await s.machine.transition(r.id,'APPROVE_AND_ASSIGN',s.manager.actor,{expectedVersion:r.version,reviewKind:'MANUAL',manualDraftRevision:r.manualDraftRevision,acknowledgedMissingFields:[]},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
+  await s.machine.transition(r.id,'START_WORK',s.staff.actor,{expectedVersion:r.version},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
+  assert.equal((await s.call(s.user.token,'/requests/'+r.id+'/ai/copilot/action',{expectedVersion:r.version,action:'GENERATE_CHECKLIST'})).status,403);
+  const queued=await s.call(s.staff.token,'/requests/'+r.id+'/ai/copilot/action',{expectedVersion:r.version,action:'GENERATE_CHECKLIST'});assert.equal(queued.status,202,JSON.stringify(queued.body));
+  await completeOperational(queued.body.data.aiRunId);
+  const job=await s.call(s.staff.token,'/ai/operational-runs/'+queued.body.data.aiRunId);assert.equal(job.body.data.status,'SUCCEEDED',JSON.stringify(job.body));assert.equal(job.body.data.result.checklistDraft.length,1);
+  const adopted=await s.call(s.staff.token,'/requests/'+r.id+'/checklist',{expectedVersion:r.version,sourceRunId:queued.body.data.aiRunId,items:job.body.data.result.checklistDraft});assert.equal(adopted.status,200,JSON.stringify(adopted.body));r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});const item=await s.prisma.checklistItem.findFirstOrThrow({where:{checklist:{requestId:r.id}}});
+  assert.equal((await s.call(s.staff.token,'/requests/'+r.id+'/checklist',{expectedVersion:r.version,sourceRunId:queued.body.data.aiRunId,items:job.body.data.result.checklistDraft})).status,409);
+  assert.equal((await s.call(s.staff.token,'/requests/'+r.id+'/checklist/'+item.id,{expectedVersion:r.version,operation:'COMPLETE'})).status,404); // helper is POST-only; PATCH is separately covered by workflow integration.
+  await s.machine.transition(r.id,'CHECKLIST_EDIT',s.staff.actor,{expectedVersion:r.version,itemId:item.id,operation:'COMPLETE'},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
+  const sla=await s.prisma.slaInstance.findUniqueOrThrow({where:{requestId:r.id}});const riskAt=new Date(sla.startedAt.getTime()+sla.targetSeconds*800);await monitor.tick(riskAt);await monitor.tick(riskAt);const managers=await s.prisma.user.count({where:{role:'MANAGER',active:true}});assert.equal(await s.prisma.notification.count({where:{slaInstanceId:sla.id,warningLevel:'AT_RISK'}}),managers+1);
+  await s.machine.transition(r.id,'RESOLVE',s.staff.actor,{expectedVersion:r.version,rootCause:'Mất kết nối tại thiết bị đầu cuối',resolution:'Khôi phục cấu hình kết nối thiết bị',verification:'Thiết bị đã kết nối và truyền dữ liệu'},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id},include:{currentResolution:true}});const queuedSummary=await s.prisma.aiRun.findFirstOrThrow({where:{resolutionId:r.currentResolutionId,purpose:'RESOLUTION_SUMMARY'},orderBy:{createdAt:'desc'}});await completeOperational(queuedSummary.id);const summary=await s.prisma.aiRun.findUniqueOrThrow({where:{id:queuedSummary.id}});assert.equal(summary.status,'SUCCEEDED',summary.errorCode);assert.equal(summary.safeResultJson.rootCause,r.currentResolution.rootCause);
+  await s.machine.transition(r.id,'USER_CONFIRM',s.user.actor,{expectedVersion:r.version},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});assert.equal((await s.call(s.user.token,'/requests/'+r.id+'/feedback',{expectedVersion:r.version,rating:5,comment:'Đã xử lý tốt'})).status,201);r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});assert.equal((await s.call(s.user.token,'/requests/'+r.id+'/feedback',{expectedVersion:r.version,rating:4})).status,409);assert.equal(await s.prisma.feedback.count({where:{requestId:r.id}}),1);
+});
+
 test('M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline',async t=>{
   const s=await setup(t,{real:true}),raw=await readFile('datasets/ai-evaluation/m6-cases.json','utf8'),dataset=JSON.parse(raw),hash=createHash('sha256').update(raw).digest('hex');
   const manifest=JSON.parse(await readFile('datasets/knowledge/manifest.json','utf8'));

@@ -2,7 +2,7 @@
 
 AI-native enterprise workflow automation platform with local AI.
 
-The repository contains the frozen M0 contract, M1 local infrastructure, M2 authentication/RBAC/database foundation, M3 manual request workflow, M4 local structured intake and **M5 local knowledge/RAG**. USER, STAFF and MANAGER can complete the human workflow when AI or embeddings are unavailable. M6 requires explicit approval.
+The repository contains the frozen M0 contract and the completed M1–M8 implementation: local infrastructure, authentication/RBAC/database, manual request workflow, structured intake, local knowledge/RAG, bounded AI tools and recommendations, manager approval, and the staff Copilot/SLA/resolution-summary workflow. USER, STAFF and MANAGER can complete the human workflow when AI or embeddings are unavailable. M9 requires explicit approval.
 
 Start with [AGENTS.md](AGENTS.md), the [project scope and assumption register](docs/specs/PROJECT_SPEC.md), [architecture](docs/architecture/ARCHITECTURE.md), and [M1–M10 implementation/dependency map](docs/IMPLEMENTATION_PLAN.md). The [canonical master plan](docs/reference/MOBIFLOW_AI_ASTRA6_M0_M10_MASTER_PLAN.md) and [M0 execution request](docs/reference/M0_EXECUTION_PROMPT.txt) are preserved for provenance.
 
@@ -21,6 +21,10 @@ M6 adds six read-only tools, real request embeddings/similar cases, deterministi
 M6 commands: `npm run test:integration:m6`, `npm run test:e2e:m6`, and `npm run verify:runtime:m6`. Full integration also includes M6. Live M6 labels are fixed in `datasets/ai-evaluation/m6-cases.json`; generated evidence preserves previous iterations. Set `M6_REGRESSION=true` for M4/M5 evaluation reruns to write separate M6-prefixed evidence without overwriting baseline reports. Never run live inference evaluations concurrently.
 
 M7 commands: `npm run test:integration:m7` and `npm run test:e2e:m7`. M7 reuses the M6 live recommendation pipeline and the M3 state machine; it adds no schema migration and no autonomous AI action.
+
+M8 adds a current-assignee STAFF Copilot with six fixed actions and read-only bounded context, explicit human adoption of AI checklist drafts, deterministic SLA risk/breach notifications, asynchronous factual resolution summaries and immutable owner feedback after closure. Copilot and summary output use action-specific JSON Schemas, at most one repair attempt, and exact source/event/case membership checks. AI never performs a protected business mutation, and provider or embedding outages do not block the manual workflow.
+
+M8 commands: `npm run test:integration:m8`, `npm run test:e2e:m8`, `npm run eval:copilot:m8`, `npm run eval:summary:m8`, `npm run verify:runtime:m8`, and `npm run verify:security:m8`. Results, failure diagnoses and retained sanitized evidence are recorded in [M8 verification](docs/verification/MILESTONE_8_VERIFICATION.md). M8 adds no migration and does not start M9 analytics.
 
 Request vector input is NFC-normalized title/newline/description, first 2,000 code points, with hash/revision/truncation metadata, exact current request version and actual embedding identity. Messages are separate bounded recommendation history. Background backfill processes one request per idle worker tick; on failure it pauses until the API is restarted, avoiding an outage retry loop. Restore the provider then restart the local API to resume historical backfill; explicit recommendation retry reattempts its own embedding. Similarity skips missing/stale/incompatible vectors and never substitutes fake counts. The 0.70 mapped-vector cutoff is an engineering default, not calibrated correctness.
 
@@ -81,6 +85,12 @@ npm run eval:retrieval:m5
 npm run eval:rag:m5
 npm run verify:runtime:m5
 npm run test:e2e:m5
+npm run test:integration:m8
+npm run eval:copilot:m8
+npm run eval:summary:m8
+npm run verify:runtime:m8
+npm run verify:security:m8
+npm run test:e2e:m8
 ```
 
 The integration command requires the running web/API/Postgres/host Ollama. It verifies actual DB/vector/LLM health, creates the dedicated `mobiflow_m2_test` database for clean migration/seed and real auth/workflow transaction tests, then removes that test database. Workflow integration runs with an unavailable Ollama address without stopping the shared host service. Sanitized runtime evidence is written to ignored `artifacts/m2/runtime.json`. Unit health tests use labeled HTTP fixtures; they are not live inference evaluation.

@@ -48,6 +48,7 @@ test('provider maps missing/offline/disconnect/timeout/overflow/truncation and c
   for(const [mode,code] of [['missing','AI_MODEL_UNAVAILABLE'],['offline','AI_PROVIDER_UNAVAILABLE'],['disconnect','AI_PROVIDER_UNAVAILABLE'],['timeout','AI_TIMEOUT'],['oversize','AI_OUTPUT_TOO_LARGE'],['length','AI_INVALID_OUTPUT']]){
     const {provider}=await fixture(t,mode);await assert.rejects(provider.generate(input,new AbortController().signal,false),e=>e.code===code);
   }
+  const {provider:truncated}=await fixture(t,'length');await assert.rejects(truncated.generate(input,new AbortController().signal,false),e=>e.repairFeedback.startsWith('TRUNCATED_GENERATION')&&e.invalidOutput.length>0);
   const {provider}=await fixture(t,'timeout');const controller=new AbortController();controller.abort();await assert.rejects(provider.generate(input,controller.signal,false),e=>e.code==='AI_CANCELED');
 });
 test('bounded execution retries invalid output once, never retries known model absence, retains attempt count',async()=>{

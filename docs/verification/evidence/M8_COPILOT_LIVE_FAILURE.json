@@ -1,0 +1,117 @@
+{
+  "at": "2026-09-29T12:19:47.294Z",
+  "startedAt": "2026-09-29T12:18:55.210Z",
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "promptVersion": "copilot.m8.v1",
+  "schemaVersion": "copilot.m8.v1",
+  "attempt": 1,
+  "provider": {
+    "httpStatus": 200,
+    "done": true,
+    "doneReason": "length",
+    "envelopeShape": {
+      "type": "object",
+      "keys": [
+        "created_at",
+        "done",
+        "done_reason",
+        "eval_count",
+        "eval_duration",
+        "load_duration",
+        "message",
+        "model",
+        "prompt_eval_cached_count",
+        "prompt_eval_count",
+        "prompt_eval_duration",
+        "total_duration"
+      ],
+      "fields": {
+        "model": {
+          "type": "string",
+          "chars": 29
+        },
+        "created_at": {
+          "type": "string",
+          "chars": 28
+        },
+        "message": {
+          "type": "object",
+          "keys": [
+            "content",
+            "role"
+          ],
+          "fields": {
+            "role": {
+              "type": "string",
+              "chars": 9
+            },
+            "content": {
+              "type": "string",
+              "chars": 3780
+            }
+          }
+        },
+        "done": {
+          "type": "boolean"
+        },
+        "done_reason": {
+          "type": "string",
+          "chars": 6
+        },
+        "total_duration": {
+          "type": "number"
+        },
+        "load_duration": {
+          "type": "number"
+        },
+        "prompt_eval_count": {
+          "type": "number"
+        },
+        "prompt_eval_cached_count": {
+          "type": "number"
+        },
+        "prompt_eval_duration": {
+          "type": "number"
+        },
+        "eval_count": {
+          "type": "number"
+        },
+        "eval_duration": {
+          "type": "number"
+        }
+      }
+    }
+  },
+  "request": {
+    "runId": "3c0d73b4-f90c-45d1-ad62-ba0b6440a554",
+    "action": "GENERATE_CHECKLIST",
+    "contextVersion": 6,
+    "requestStatus": "IN_PROGRESS",
+    "sourceCount": 5,
+    "messageCount": 0,
+    "historyCount": 10
+  },
+  "bounds": {
+    "contextChars": 7189,
+    "schemaChars": 1295,
+    "maxContextChars": 24000,
+    "maxOutputTokens": 1200,
+    "maxOutputBytes": 32768
+  },
+  "output": {
+    "rawBytes": 4403,
+    "rawShape": {
+      "type": "unparseable"
+    },
+    "parseStatus": "FAIL",
+    "schemaStatus": "FAIL",
+    "validationIssues": [],
+    "referenceStatus": "FAIL"
+  },
+  "latencyMs": 51729,
+  "classification": "TRUNCATED_GENERATION",
+  "sanitization": "No prompt, raw model text, request body, source excerpt, credential, or hidden reasoning is stored."
+}

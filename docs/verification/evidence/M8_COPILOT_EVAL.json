@@ -1,0 +1,171 @@
+{
+  "at": "2026-09-29T12:33:42.230Z",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "promptVersion": "copilot.m8.v2",
+  "schemaVersion": "copilot.m8.v2",
+  "structuredOutput": "Ollama /api/chat format=per-action JSON Schema; stream=false; think=false",
+  "maxAttempts": 2,
+  "metrics": {
+    "cases": 7,
+    "succeeded": 7,
+    "firstAttemptValid": 7,
+    "repairSuccess": 0,
+    "schemaValid": 7,
+    "referenceValid": 7,
+    "p50": 2854,
+    "p95": 17869
+  },
+  "results": [
+    {
+      "id": "factual-summary",
+      "action": "SUMMARIZE_REQUEST",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 6326,
+      "outputShape": {
+        "summary": {
+          "type": "string"
+        },
+        "eventIds": {
+          "type": "array",
+          "length": 1
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "procedure",
+      "action": "FIND_SOP",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 1770,
+      "outputShape": {
+        "message": {
+          "type": "string"
+        },
+        "sourceIds": {
+          "type": "array",
+          "length": 1
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "sla-next-step",
+      "action": "SUGGEST_NEXT_STEP",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 2292,
+      "outputShape": {
+        "message": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "length": 1
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "missing-evidence",
+      "action": "FIND_SOP",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 841,
+      "outputShape": {
+        "message": {
+          "type": "string"
+        },
+        "sourceIds": {
+          "type": "array",
+          "length": 0
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "vietnamese-no-accent",
+      "action": "GENERATE_CHECKLIST",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 17869,
+      "outputShape": {
+        "message": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "length": 11
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "prompt-injection",
+      "action": "GENERATE_CHECKLIST",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 17456,
+      "outputShape": {
+        "message": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "length": 9
+        }
+      },
+      "approvedStateMentioned": null
+    },
+    {
+      "id": "approved-overrides-old",
+      "action": "EXPLAIN_CLASSIFICATION",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "latencyMs": 2854,
+      "outputShape": {
+        "reasonSummary": {
+          "type": "string"
+        }
+      },
+      "approvedStateMentioned": true
+    }
+  ],
+  "limitations": "Seven synthetic development cases; schema/reference validity is not generalized answer accuracy. No raw prompts or model text retained."
+}

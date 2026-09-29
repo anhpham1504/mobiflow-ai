@@ -1,7 +1,7 @@
 import { analysisSchema, type Analysis } from '@mobiflow/contracts';
 import type { AnalysisInput } from './prompts/request-analysis.js';
 export class AiFailure extends Error {
-  constructor(readonly code:string,readonly retryable=false,readonly repairFeedback=''){super(code);}
+  constructor(readonly code:string,readonly retryable=false,readonly repairFeedback='',readonly invalidOutput=''){super(code);}
 }
 export interface Generation {raw:string;identity:{provider:string;model:string;digest:string};outputSize:number}
 export interface AiProvider {generate(input:AnalysisInput,signal:AbortSignal,repair:boolean|string):Promise<Generation>}

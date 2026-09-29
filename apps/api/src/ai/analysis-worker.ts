@@ -10,6 +10,7 @@ import {KnowledgeRetriever} from '../knowledge/retriever.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {RecommendationService} from './recommendation.service.js';
 import {RequestVectors} from './tools/request-vectors.js';
+import {OperationalAiService} from './operational-ai.service.js';
 
 @Injectable()
 export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
@@ -17,7 +18,7 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
   private running:Promise<void>|null=null;
   private controller?:AbortController;
   private stopped=false;
-  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,@Inject(AI_PROVIDER_TOKEN)private readonly provider:AiProvider,@Inject(AI_LOG)private readonly log:LogSink,@Inject(AI_WORKER_ENABLED)private readonly enabled:boolean,private readonly retriever:KnowledgeRetriever,@Inject(API_ENV)private readonly env:ApiEnvironment,private readonly recommendations:RecommendationService,private readonly requestVectors:RequestVectors){}
+  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,@Inject(AI_PROVIDER_TOKEN)private readonly provider:AiProvider,@Inject(AI_LOG)private readonly log:LogSink,@Inject(AI_WORKER_ENABLED)private readonly enabled:boolean,private readonly retriever:KnowledgeRetriever,@Inject(API_ENV)private readonly env:ApiEnvironment,private readonly recommendations:RecommendationService,private readonly requestVectors:RequestVectors,private readonly operational:OperationalAiService){}
   onModuleInit(){if(this.enabled){this.timer=setInterval(()=>{void this.tick();},1000);this.timer.unref();void this.tick();}}
   async onModuleDestroy(){this.stopped=true;if(this.timer)clearInterval(this.timer);this.controller?.abort();await this.running;}
   tick():Promise<void>{
@@ -31,7 +32,7 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
     const next=await this.prisma.aiRun.findFirst({where:{purpose:'ANALYSIS',status:'QUEUED'},orderBy:[{createdAt:'asc'},{id:'asc'}]});
     if(!next){
       const controller=new AbortController();this.controller=controller;
-      try{if(!await this.recommendations.cycle(controller.signal))await this.requestVectors.next(AbortSignal.any([controller.signal,AbortSignal.timeout(30000)]));}
+      try{if(!await this.recommendations.cycle(controller.signal)&&!await this.operational.cycle(controller.signal))await this.requestVectors.next(AbortSignal.any([controller.signal,AbortSignal.timeout(30000)]));}
       catch{this.log({event:'request.embedding.deferred',errorCode:'REQUEST_EMBEDDING_UNAVAILABLE'});}
       finally{this.controller=undefined;}return;
     }

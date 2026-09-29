@@ -56,4 +56,5 @@ legend { font-size:17px; font-weight:650; padding:0; }
 .timeline small,.timeline strong { display:block; margin-bottom:8px; }
 .timeline small { color:#55667c; }
 .checklist-row { border-top:1px solid var(--border); padding:16px 0; }
+.copilot-actions { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }.copilot-result { border-top:1px solid var(--border); margin-top:16px; padding-top:16px; }
 @media(max-width:800px){.detail-grid,.ai-review-grid{grid-template-columns:1fr;gap:0}.ai-review-grid>form:last-child{grid-column:auto}.workflow-card{padding:18px}.sidebar nav{flex-wrap:wrap}.workflow-heading h1{font-size:24px}}

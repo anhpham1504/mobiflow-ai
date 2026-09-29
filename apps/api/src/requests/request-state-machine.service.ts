@@ -32,6 +32,7 @@ export interface Command {
   rootCause?: string; resolution?: string; verification?: string;
   itemId?: string; text?: string; required?: boolean; operation?: 'COMPLETE'|'UNCOMPLETE'|'WAIVE'|'UNWAIVE';
   items?: { text: string; required: boolean; sourceIds: string[] }[];
+  sourceRunId?:string;rating?:number;comment?:string;
 }
 @Injectable()
 export class RequestStateMachineService {
@@ -145,15 +146,21 @@ export class RequestStateMachineService {
         const latest=await tx.requestResolution.aggregate({where:{requestId:id},_max:{cycle:true}});
         const resolution=await tx.requestResolution.create({data:{requestId:id,cycle:(latest._max.cycle??0)+1,resolvedById:actor.id,rootCause:command.rootCause!,resolution:command.resolution!,verification:command.verification!,resolvedAt:now,eventId:event.id}});
         data.resolvedAt=now;data.currentResolutionId=resolution.id;
+        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:'resolution-summary.m8.v3',schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
         notification='REQUEST_RESOLVED';recipients=[request.createdById];
       }
       if (action==='USER_REOPEN' || action==='USER_CONFIRM') {
         if (!request.currentResolutionId) throw new ApiError(422,'INVALID_RESOLUTION','A current resolution is required.');
         await tx.requestResolution.update({where:{id:request.currentResolutionId},data:action==='USER_REOPEN'?{reopenedAt:now}:{confirmedAt:now}});
         if (action==='USER_REOPEN') {
+          await tx.aiRun.updateMany({where:{resolutionId:request.currentResolutionId,purpose:'RESOLUTION_SUMMARY',status:{in:['QUEUED','RUNNING']}},data:{status:'CANCELED',finishedAt:now,errorCode:'RESOLUTION_REOPENED'}});
           data.resolvedAt=null;data.currentResolutionId=null;
           notification='REQUEST_REOPENED';recipients=[request.currentAssigneeId!,...await managers()];
         } else {data.closedAt=now;}
+      }
+      if(action==='FEEDBACK'){
+        if(await tx.feedback.findUnique({where:{requestId:id},select:{id:true}}))throw new ApiError(409,'FEEDBACK_EXISTS','Feedback is immutable and was already submitted.');
+        await tx.feedback.create({data:{requestId:id,userId:actor.id,rating:command.rating!,comment:command.comment,createdAt:now}});
       }
       if (action==='CANCEL') {
         data.canceledAt=now;data.cancellationReason=command.reason!;
@@ -347,8 +354,23 @@ export class RequestStateMachineService {
     const checklist=await tx.checklist.findUnique({where:{requestId:request.id},include:{items:true}});
     if(!checklist) throw new ApiError(422,'MISSING_CHECKLIST','No approved checklist exists.');
     if(command.items) {
+      let allowedSources=new Set<string>();
+      if(command.sourceRunId){
+        const run=await tx.aiRun.findFirst({where:{id:command.sourceRunId,requestId:request.id,purpose:'COPILOT',action:'GENERATE_CHECKLIST',initiatingActorId:actor.id,status:'SUCCEEDED',contextVersion:request.version}});
+        if(!run)throw new ApiError(409,'STALE_CONTEXT','Checklist draft is not current.');
+        const value=run.safeResultJson as {checklistDraft?:{sourceIds:string[]}[]}|null;
+        allowedSources=new Set(value?.checklistDraft?.flatMap(i=>i.sourceIds)??[]);
+        if(allowedSources.size){
+          const current=await tx.knowledgeChunk.findMany({where:{sourceId:{in:[...allowedSources]}},include:{document:{select:{status:true,activeGeneration:true}}}});
+          if(current.length!==allowedSources.size||current.some(source=>source.document.status!=='READY'||source.document.activeGeneration!==source.generation))throw new ApiError(409,'STALE_SOURCE','Checklist evidence is no longer available.');
+        }
+      }
+      if(command.items.some(item=>item.sourceIds.some(id=>!allowedSources.has(id))))throw new ApiError(422,'INVALID_SOURCE','Checklist source was not produced by the selected draft.');
       if(checklist.items.length+command.items.length>30) throw new ApiError(422,'CHECKLIST_LIMIT','At most 30 checklist items are allowed.');
-      await tx.checklistItem.createMany({data:command.items.map((item,i)=>({checklistId:checklist.id,ordinal:checklist.items.length+i+1,text:item.text,required:item.required,sourceRefsJson:[],createdAt:now,updatedAt:now}))});
+      const existing=new Set(checklist.items.map(i=>i.text.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('vi')));
+      const fresh=command.items.filter(item=>{const key=item.text.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('vi');if(existing.has(key))return false;existing.add(key);return true;});
+      if(!fresh.length)throw new ApiError(409,'DUPLICATE_CHECKLIST','All selected items already exist.');
+      await tx.checklistItem.createMany({data:fresh.map((item,i)=>({checklistId:checklist.id,ordinal:checklist.items.length+i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))});
     } else {
       const item=checklist.items.find(i=>i.id===command.itemId);
       if(!item) throw new ApiError(404,'NOT_FOUND','The checklist item was not found.');

@@ -102,6 +102,10 @@ export class RequestsController {
     await this.machine.transition(uuid(id),'USER_CONFIRM',req.auth!,command,res.locals.requestId);
     return {data:await this.queries.detail(id,req.auth!),requestId:res.locals.requestId};
   }
+  @Post('requests/:id/feedback') @Roles('USER') @HttpCode(201)
+  @ApiOperation({summary:'FEEDBACK',description:'Owner-only immutable feedback after CLOSED; expectedVersion required.'})
+  @ApiBody({schema:schema(contracts.feedbackSchema)}) @ApiResponse({status:201,schema:schema(contracts.requestResponseSchema)})
+  async feedback(@Param('id')id:string,@Body()body:unknown,@Req()req:AuthenticatedRequest,@Res({passthrough:true})res:Response){const command:Command={...parse(contracts.feedbackSchema,body)};await this.machine.transition(uuid(id),'FEEDBACK',req.auth!,command,res.locals.requestId);return {data:await this.queries.detail(id,req.auth!),requestId:res.locals.requestId};}
 
   @Post('requests/:id/reopen') @Roles('USER') @HttpCode(200)
   @ApiOperation({summary:'USER_REOPEN',description:mutationDescription})

@@ -38,7 +38,20 @@ export const checklistItemSchema = versionSchema.extend({
   operation: z.enum(['COMPLETE','UNCOMPLETE','WAIVE','UNWAIVE']).optional(), reason: text(1,2000).optional(),
 }).refine(d => d.text !== undefined || d.required !== undefined || d.operation !== undefined, 'An edit is required')
   .refine(d => d.operation !== 'WAIVE' || !!d.reason, { path: ['reason'], message: 'Waiver reason required' });
-export const checklistSchema = versionSchema.extend({ items: z.array(z.object({ text: text(1,500), required: z.boolean(), sourceIds: z.array(z.uuid()).max(0) }).strict()).min(1).max(30) });
+export const checklistSchema = versionSchema.extend({ sourceRunId:z.uuid().optional(),items: z.array(z.object({ text: text(1,500), required: z.boolean(), sourceIds: z.array(text(1,120)).max(5) }).strict()).min(1).max(30) });
+export const feedbackSchema=versionSchema.extend({rating:z.number().int().min(1).max(5),comment:text(1,2000).optional()});
+export const copilotActions=['SUMMARIZE_REQUEST','FIND_SOP','SUGGEST_NEXT_STEP','GENERATE_CHECKLIST','FIND_SIMILAR_REQUESTS','EXPLAIN_CLASSIFICATION'] as const;
+export const copilotActionSchema=versionSchema.extend({action:z.enum(copilotActions)});
+const sourceId=z.string().regex(/^KD-[0-9a-f-]{36}-G[1-9][0-9]*-C[0-9]+$/);
+export const aiReferenceSchema=z.object({sourceId,title:text(1,200),quote:text(1,1200)}).strict();
+const similarCaseViewSchema=z.object({requestId:z.uuid(),publicCode:text(1,32),title:text(1,160),status:z.enum(statuses),score:z.number().min(0).max(1)}).strict();
+export const copilotResultSchema=z.object({
+  action:z.enum(copilotActions),evidenceStatus:z.enum(['SUFFICIENT','INSUFFICIENT_EVIDENCE']),answer:text(1,4000),sources:z.array(aiReferenceSchema).max(5),warnings:z.array(text(1,500)).max(10),suggestedNextSteps:z.array(text(1,500)).max(10),
+  checklistDraft:z.array(z.object({text:text(1,500),required:z.boolean(),sourceIds:z.array(sourceId).max(5)}).strict()).max(30),eventIds:z.array(z.uuid()).max(50),similarCases:z.array(similarCaseViewSchema).max(5),analysisId:z.uuid().nullable(),
+}).strict();
+export const resolutionSummarySchema=z.object({executiveSummary:text(1,2000),timeline:z.array(z.object({eventId:z.uuid(),at:z.iso.datetime(),summary:text(1,500)}).strict()).max(50),rootCause:text(1,4000),resolution:text(1,4000),verification:text(1,4000),resolutionSeconds:z.number().int().nonnegative(),sourceEventIds:z.array(z.uuid()).min(1).max(50)}).strict();
+export const operationalJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.enum(['COPILOT','RESOLUTION_SUMMARY']),action:z.string().nullable(),status:z.enum(['QUEUED','RUNNING','SUCCEEDED','FAILED','CANCELED']),errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int().positive(),stale:z.boolean(),result:z.union([copilotResultSchema,resolutionSummarySchema]).nullable(),model:z.string().nullable(),latencyMs:z.number().nullable()});
+export const operationalJobResponseSchema=z.object({data:operationalJobSchema,requestId:z.uuid()});
 export const readNotificationSchema = z.object({ read: z.boolean() }).strict();
 export type FinalDecision = z.infer<typeof finalDecisionSchema>;
 export type RequestStatus = typeof statuses[number];
@@ -58,6 +71,7 @@ export const requestViewSchema=z.object({
   createdAt:z.iso.datetime(),updatedAt:z.iso.datetime(),resolvedAt:nullableDate,closedAt:nullableDate,canceledAt:nullableDate,aiAnalysisStatus:z.string(),
   sla:slaViewSchema.nullable(),
   currentResolution:z.object({id:z.uuid(),cycle:z.number(),rootCause:z.string(),resolution:z.string(),verification:z.string(),resolvedAt:z.iso.datetime()}).nullable(),
+  resolutionSummary:operationalJobSchema.nullable().optional(),feedback:z.object({rating:z.number().int(),comment:z.string().nullable(),createdAt:z.iso.datetime()}).nullable().optional(),
   manualDraft:z.object({...finalDecisionSchema.shape,policyId:z.uuid(),policyVersion:z.number(),targetSeconds:z.number()}).nullable().optional(),
   manualDraftRevision:z.number().optional(),reviewKind:z.enum(['AI','MANUAL']).nullable().optional(),pendingDraftRevision:z.number().nullable().optional(),pendingRecommendationId:z.uuid().nullable().optional(),
   checklist:z.object({id:z.uuid(),version:z.number(),items:z.array(z.object({id:z.uuid(),text:z.string(),required:z.boolean(),completedAt:nullableDate,waivedAt:nullableDate,waiverReason:z.string().nullable()}))}).optional(),

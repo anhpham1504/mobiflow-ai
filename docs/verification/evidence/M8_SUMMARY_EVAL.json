@@ -1,0 +1,26 @@
+{
+  "at": "2026-09-29T12:53:01.672Z",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "promptVersion": "resolution-summary.m8.v3",
+  "schemaVersion": "resolution-summary.m8.v3",
+  "structuredOutput": "Ollama /api/chat format=bounded resolution-summary JSON Schema; stream=false; think=false",
+  "status": "SUCCEEDED",
+  "errorCode": null,
+  "validationCategory": null,
+  "attempts": 1,
+  "firstAttemptValid": true,
+  "repairCount": 0,
+  "schemaValid": true,
+  "referenceValid": true,
+  "chronological": true,
+  "latencyMs": 14672,
+  "input": {
+    "eventCount": 26,
+    "checklistItemCount": 7
+  },
+  "output": {
+    "timelineItems": 3,
+    "executiveSummaryChars": 276
+  },
+  "limitations": "One synthetic browser-created resolution using the same provider, prompt, schema and bounded context as the production worker. No raw prompt or model text retained."
+}

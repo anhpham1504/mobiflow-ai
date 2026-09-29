@@ -1,0 +1,26 @@
+{
+  "at": "2026-09-29T12:46:21.459Z",
+  "runId": "34a856d0-4ecd-46df-bd3b-5a3272d1f5ba",
+  "model": "qwen3:4b-instruct-2507-q4_K_M",
+  "promptVersion": "resolution-summary.m8.v2",
+  "schemaVersion": "resolution-summary.m8.v2",
+  "providerStatus": "FAILED",
+  "errorCode": "AI_INVALID_OUTPUT",
+  "attempts": [
+    {
+      "attempt": 1,
+      "validationCategory": "TRUNCATED_GENERATION"
+    },
+    {
+      "attempt": 2,
+      "validationCategory": "TRUNCATED_GENERATION"
+    }
+  ],
+  "inputChars": 10915,
+  "eligibleEventCount": 26,
+  "checklistItemCount": 7,
+  "maxOutputTokens": 1200,
+  "latencyMs": 72361,
+  "rawOutputRetained": false,
+  "diagnosis": "The internal model schema allowed up to 50 timeline items and did not ask the model to select key events. The local model attempted an overly long timeline and hit the bounded output-token limit on both attempts. Public resolution facts and business state were unaffected."
+}

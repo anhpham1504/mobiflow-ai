@@ -139,7 +139,9 @@ test('M3 actual HTTP full manual lifecycle, scope, checklist, wait/reply, reopen
   assert.deepEqual(events.flatMap(e=>e.resolutions.map(resolution=>resolution.cycle)),[1,2]);
   assert.ok(events.every(e=>!['CHECKLIST_CHANGED','MANUAL_DRAFT_SAVED','SLA_POLICY_CHANGED'].includes(e.action)));
   assert.equal((await call(staff,'/requests/'+id+'/history')).status,404);
-  assert.equal(await prisma.aiRun.count({where:{requestId:id}}),0);assert.equal(await prisma.aiRecommendation.count({where:{requestId:id}}),0);
+  assert.equal(await prisma.aiRun.count({where:{requestId:id,purpose:{in:['ANALYSIS','RECOMMENDATION']}}}),0);
+  assert.equal(await prisma.aiRun.count({where:{requestId:id,purpose:'RESOLUTION_SUMMARY'}}),2);
+  assert.equal(await prisma.aiRecommendation.count({where:{requestId:id}}),0);
   const notes=await prisma.notification.findMany({where:{requestId:id}});
   for(const type of ['APPROVAL_REQUIRED','REQUEST_ASSIGNED','USER_INFO_REQUIRED','USER_REPLIED','REQUEST_RESOLVED','REQUEST_REOPENED'])assert.ok(notes.some(n=>n.type===type),type);
   const userNote=notes.find(n=>n.recipientId===existingOwner.id);

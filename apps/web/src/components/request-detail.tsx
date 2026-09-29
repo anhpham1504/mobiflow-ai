@@ -2,6 +2,7 @@
 import {useCallback,useEffect,useState,useSyncExternalStore} from 'react';
 import {AnalysisPanel} from './analysis-panel';
 import {RecommendationPanel} from './recommendation-panel';
+import {CopilotPanel} from './copilot-panel';
 import {requestResponseSchema,historyResponseSchema,staffDirectorySchema,finalDecisionSchema,taxonomy,categories,priorities,type RequestView,type HistoryEvent,type StaffOption,type FinalDecision} from '@mobiflow/contracts';
 import {api,ApiFailure,getProfile,serverProfile,subscribe} from '@/lib/session';
 import {SessionGate} from './session-shell';
@@ -55,7 +56,14 @@ function RequestDetailContent({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'
     if(role==='MANAGER')void api('/users/staff',staffDirectorySchema,undefined,'GET',controller.signal).then(r=>{if(active)setStaff(r.data);}).catch(e=>{if(active)setError(e.message);});
     return()=>{active=false;controller.abort();};
   },[id,user,role,revision]);
-  const reload=useCallback(()=>{setLoading(true);setRevision(v=>v+1);},[]);
+  const refresh=useCallback(()=>{setRevision(v=>v+1);},[]);
+  const reload=useCallback(()=>{setLoading(true);refresh();},[refresh]);
+  const resolutionSummaryStatus=request?.resolutionSummary?.status;
+  useEffect(()=>{
+    if(!resolutionSummaryStatus||!['QUEUED','RUNNING'].includes(resolutionSummaryStatus))return;
+    const timer=setInterval(refresh,2000);
+    return()=>clearInterval(timer);
+  },[refresh,resolutionSummaryStatus]);
   async function mutate(path:string,body:unknown={},method='POST') {
     if(!request||busy||stale)return false;
     setBusy(true);setError('');setNotice('');
@@ -81,7 +89,9 @@ function RequestDetailContent({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'
       <section className="workflow-card"><h2>Thời hạn xử lý</h2>{request.sla?<><p><strong>{request.sla.status}</strong> · {request.sla.stopReason==='CLOSED'?'Đã hoàn tất và xác nhận':request.sla.stopReason==='CANCELED'?'Đã dừng do hủy':request.sla.pausedAt?'Tạm dừng: chờ bạn bổ sung':request.sla.resolvedHoldAt?'Dừng đếm: chờ xác nhận':'Đang tính thời gian xử lý'}</p><p>Hạn dự kiến: {formatTime(request.sla.dueAt)}</p><p>Ngân sách còn lại tại lần tải: {Math.ceil(request.sla.remainingSeconds/60)} phút</p>{request.sla.breachedAt?<p>Đã ghi nhận quá hạn: {formatTime(request.sla.breachedAt)}</p>:null}</>:<p>SLA bắt đầu sau lần phân công đầu tiên.</p>}</section></div>
       <AnalysisPanel key={request.version} request={request} role={role} onFinished={reload} disabled={busy||stale}/>
       {role==='MANAGER'?<RecommendationPanel request={request} onFinished={reload} disabled={busy||stale}/>:null}
+      {role==='STAFF'&&['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED'].includes(request.status)?<CopilotPanel request={request} onReload={reload} onBusyChange={setBusy} disabled={disabled}/>:null}
       {request.currentResolution?<section className="workflow-card"><h2>Kết quả xử lý lần {request.currentResolution.cycle}</h2><h3>Nguyên nhân</h3><p>{request.currentResolution.rootCause}</p><h3>Khắc phục</h3><p>{request.currentResolution.resolution}</p><h3>Kiểm chứng</h3><p>{request.currentResolution.verification}</p></section>:null}
+      {request.resolutionSummary?<section className="workflow-card"><h2>Tóm tắt xử lý do AI tạo</h2>{['QUEUED','RUNNING'].includes(request.resolutionSummary.status)?<p role="status">Đang tạo tóm tắt…</p>:request.resolutionSummary.status==='FAILED'?<p role="alert">Không thể tạo tóm tắt. Các dữ kiện xử lý của nhân viên vẫn được giữ nguyên.</p>:request.resolutionSummary.result&&'executiveSummary' in request.resolutionSummary.result?<><p>{request.resolutionSummary.result.executiveSummary}</p><ol>{request.resolutionSummary.result.timeline.map(item=><li key={item.eventId}>{formatTime(item.at)} · {item.summary}</li>)}</ol></>:null}</section>:null}
       <section className="workflow-card"><h2>Thao tác</h2>{stale?<p>Hãy tải lại dữ liệu trước khi thực hiện thao tác tiếp.</p>:null}
       {role==='MANAGER'&&['NEW','TRIAGED'].includes(request.status)?<ManagerPlan key={id+':'+request.manualDraftRevision} request={request} staff={staff} run={managerAction} disabled={disabled}/>:null}
       {role==='MANAGER'&&request.status==='TRIAGED'&&request.manualDraft?<ActionForm title="Gửi duyệt phương án" disabled={disabled} run={()=>managerAction('submit-approval',{manualDraftRevision:request.manualDraftRevision})}/>:null}
@@ -90,6 +100,8 @@ function RequestDetailContent({id,role}:{id:string;role:'USER'|'STAFF'|'MANAGER'
       {role==='STAFF'&&request.status==='IN_PROGRESS'?<><ActionForm title="Yêu cầu bổ sung thông tin" fields={[{name:'body',label:'Câu hỏi gửi người yêu cầu',max:4000}]} disabled={disabled} run={v=>action('request-info',v)}/><ActionForm title="Hoàn tất xử lý" fields={[{name:'rootCause',label:'Nguyên nhân',min:10,max:4000},{name:'resolution',label:'Cách khắc phục',min:10,max:4000},{name:'verification',label:'Kết quả kiểm chứng',min:10,max:4000}]} disabled={disabled} run={v=>action('resolve',v)}/></>:null}
       {role==='USER'&&request.status==='WAITING_USER'?<ActionForm title="Cung cấp thông tin" fields={[{name:'body',label:'Thông tin bổ sung',max:4000}]} disabled={disabled} run={v=>action('provide-info',v)}/>:null}
       {role==='USER'&&request.status==='RESOLVED'?<><ActionForm title="Xác nhận đã giải quyết" disabled={disabled} run={()=>action('confirm')}/><ActionForm title="Yêu cầu xử lý lại" fields={reason} disabled={disabled} run={v=>action('reopen',v)}/></>:null}
+      {role==='USER'&&request.status==='CLOSED'&&!request.feedback?<form className="action-form" onSubmit={async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await action('feedback',{rating:Number(f.get('rating')),comment:String(f.get('comment')??'')||undefined});}}><fieldset disabled={disabled}><legend>Đánh giá dịch vụ</legend><label>Điểm đánh giá<select name="rating" defaultValue="5">{[1,2,3,4,5].map(v=><option key={v} value={v}>{v}</option>)}</select></label><label>Nhận xét (không bắt buộc)<textarea name="comment" maxLength={2000}/></label><button>Gửi đánh giá</button></fieldset></form>:null}
+      {role==='USER'&&request.feedback?<p>Đã ghi nhận đánh giá {request.feedback.rating}/5.</p>:null}
       {role==='MANAGER'&&['ASSIGNED','IN_PROGRESS','WAITING_USER'].includes(request.status)?<><form className="action-form" onSubmit={async e=>{e.preventDefault();const f=new FormData(e.currentTarget),[teamId,staffId]=String(f.get('assignment')).split('|');await managerAction('reassign',{teamId,staffId,reason:String(f.get('reason'))});}}><fieldset disabled={disabled}><legend>Phân công lại</legend><label>Nhân sự nhận bàn giao<select name="assignment" required><option value="">Chọn nhân sự</option>{staff.filter(s=>s.available).flatMap(s=>s.teams.map(t=><option key={t.id+s.id} value={t.id+'|'+s.id}>{t.name} / {s.displayName}</option>))}</select></label><label>Lý do bàn giao<textarea name="reason" required maxLength={2000}/></label><button>Phân công lại</button></fieldset></form><form className="action-form" onSubmit={async e=>{e.preventDefault();const f=new FormData(e.currentTarget);await managerAction('priority',{priority:f.get('priority'),reason:f.get('reason')});}}><fieldset disabled={disabled}><legend>Đổi ưu tiên</legend><label>Ưu tiên mới<select name="priority">{priorities.map(p=><option key={p}>{p}</option>)}</select></label><label>Lý do đổi ưu tiên<textarea name="reason" required maxLength={2000}/></label><button>Lưu ưu tiên</button></fieldset></form></>:null}
       {((role==='USER'&&['NEW','AI_ANALYZING','TRIAGED','PENDING_APPROVAL'].includes(request.status))||(role==='MANAGER'&&!['RESOLVED','CLOSED','CANCELED'].includes(request.status)))?<ActionForm title="Hủy yêu cầu" fields={reason} disabled={disabled} run={v=>action('cancel',v)}/>:null}
       {['CLOSED','CANCELED'].includes(request.status)?<p>Yêu cầu đã kết thúc. Lịch sử được giữ nguyên.</p>:null}
