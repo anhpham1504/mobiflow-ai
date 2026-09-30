@@ -1,5 +1,33 @@
 # M10 Evaluation Blocker Investigation
 
+## V1 remediation continuation — protocol frozen before measurement
+
+2026-09-30: the finalization request authorizes branch `fix/m10-evaluation-stability` from the clean, verified M10 snapshot `584bd984b1769065479c5904a42bd6cb06411b85`. The earlier sections below remain the historical investigation; their unused-run and Git-boundary statements describe that earlier execution. No historical result is replaced.
+
+[RELEASE_EVALUATION_PROTOCOL](RELEASE_EVALUATION_PROTOCOL.md) was written before this continuation's live calls. Its frozen SHA-256 is `a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51`. It pins the 100-case dataset/order, installed digest, unchanged production contract, exactly one bounded warmup and fixed stabilization, isolation, safe telemetry and an exclusive single-attempt guard.
+
+### Comparator methodology audit
+
+`git log` places the comparator and 1.5 default in M9 commit `c0e7c95`; master-plan sections 20/22/31 and TEST_STRATEGY require honest measured latency but prescribe no 1.5 ratio or confidence interval. The current release request nevertheless requires the existing strict comparison unless a justified correction replaces it. Its code compares one wall-time sample per case, includes retry/load/inference together, does not stratify cold/warm state and has no provider/app timing input. M9 captured only Node/temperature/output limit, and even its source SHA describes the preceding commit without a dirty-worktree fingerprint. It has no per-run digest, Ollama version, host/power state or per-attempt tokens. A causal product slowdown cannot be established from those values alone.
+
+Outcome B is demonstrated for **measurement attribution**, not for automatically waiving flags: retained `M10_EVAL_LATENCY_DIAGNOSTIC.json` contains unchanged normal-01 cold/warm observations 5502/2237 ms (2.46 times) with 2902.083/2.166 ms loading. A single-sample wall-time flag cannot distinguish this runtime difference from a product change. This does not establish the cause of the historical isolated run. The original numeric rule and all quality/repair/failure rules therefore remain unchanged. Provider timings are added as evidence, with no new aggregate pass threshold and no subtraction from wall time. New tests cover the unchanged 1.5 boundary, all quality flags and strict input identity; historical files remain valid without optional timings.
+
+### Determinism and production decision
+
+The actual adapter already sends temperature=0 and seed=42 for every request. [Ollama's Modelfile reference](https://docs.ollama.com/modelfile) documents seed; its [chat API](https://docs.ollama.com/api/chat) documents the returned duration/token fields. Current API 0.34.4 and the approved digest were verified locally. No new seed, prompt, setting, label, route or production rule is introduced. The known historical OTHER routing discrepancy stays explicitly disclosed and unchanged for like-for-like evaluation.
+
+### Final controlled V1 run justification (recorded before the run)
+
+Previous defect/invalid condition: the authoritative evaluator discards the provider identity returned by executeAnalysis and all provider duration/token fields, omits TEST_STRATEGY's required environment/warm-cold evidence and does not enforce or record warmup/isolation. The diagnostic observer had that evidence but the official 100-case artifact could not retain it. The prior cold/warm experiment proves this omission matters to latency attribution. This is a reproducibility/measurement implementation defect; it is not proof that historical RED observations were invalid.
+
+Correction: a controlled canonical equivalent shares the production adapter/executor and historical scorer, promotes the tested passive observer, captures host/contract/content identity before and after, enforces one fixed warmup plus isolation, journals every case and retains safe predicted enums, real per-attempt timings/tokens and failures. Exclusive evidence creation prevents replacement and repeated full attempts. The original comparator is executed unchanged in an isolated output directory.
+
+Expected invariant: identical model/dataset/prompt/schema/settings/order and strict pass/fail comparison; all failures retained; historical evidence byte-identical; zero production changes.
+
+Expected measurable effect: a complete 100-case artifact with model identity and separated load/prompt/generation/application timings, plus explicit runtime/protocol integrity. A lower latency or GREEN result is **not** a prerequisite for retaining the run and is **not** asserted in advance. One final run is justified under the current request's Phase 10 B to correct the official measurement defect, without claiming a production fix or retroactively clearing any historical flag.
+
+The fresh environment inspection records Windows 11 Pro 10.0.26200, i7-13650HX, RTX 4060 Laptop GPU/8188 MiB, Node 24.19.0/npm 11.17.0, Ollama 0.34.4, the approved LLM digest, bge-m3 digest `7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab`, Balanced power plan and AC online. Settings overlay power mode is unavailable, not assumed. Docker/Ollama were initially stopped and started normally; no power or GPU setting was changed. No prior full run was performed in this continuation.
+
 ## Scope
 
 2026-09-30 (Asia/Saigon). **Release decision: BLOCKED.** This continuation investigates only the two priority pass→fail cases and the 83 isolated-run latency flags. No production inference, business, security, database or UI behavior changed. At investigation time no commit, push, merge, tag or M11 work occurred; later Git finalization may only preserve this blocked branch snapshot.

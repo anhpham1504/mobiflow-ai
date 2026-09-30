@@ -1,0 +1,8 @@
+
+> mobiflow-ai@0.1.0 db:validate
+> node scripts/dev/prisma.mjs validate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+The schema at apps\api\prisma\schema.prisma is valid 🚀

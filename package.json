@@ -35,7 +35,7 @@
     "demo:warmup": "npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/warmup.mjs",
     "warmup:m10": "npm run demo:warmup",
     "demo:ready": "npm run build:foundation && npm run build -w @mobiflow/api && node --env-file=.env scripts/demo/ready.mjs",
-    "test:release:m10": "node --test scripts/demo/*.test.mjs scripts/verification/*.test.mjs",
+    "test:release:m10": "node --test scripts/demo/*.test.mjs scripts/verification/*.test.mjs scripts/evaluation/*.test.mjs",
     "test:integration:m10": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m10-integration.mjs",
     "verify:adversarial:m10": "node scripts/verification/m10-adversarial.mjs",
     "test:e2e:m3": "playwright test --config playwright.m3.config.mjs",

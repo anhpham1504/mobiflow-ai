@@ -1,0 +1,148 @@
+
+> mobiflow-ai@0.1.0 test
+> npm run build:foundation && npm run prisma:generate && npm run test -w @mobiflow/config && npm run test -w @mobiflow/api && npm run test -w @mobiflow/web && npm run test:release:m10
+
+
+> mobiflow-ai@0.1.0 build:foundation
+> npm run build -w @mobiflow/contracts && npm run build -w @mobiflow/config
+
+
+> @mobiflow/contracts@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> @mobiflow/config@0.1.0 build
+> tsc -p tsconfig.json
+
+
+> mobiflow-ai@0.1.0 prisma:generate
+> node scripts/dev/prisma.mjs generate
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from apps\api\prisma\schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to .\apps\api\src\generated\prisma in 180ms
+
+
+> @mobiflow/config@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ M5 rejects invalid embedding/retrieval bounds without silently clamping (5.2906ms)
+✔ AI settings enable intake by default and enforce bounded inference at startup (0.7028ms)
+✔ validates native and Docker Ollama origins and coerces bounded ports (0.1572ms)
+✔ rejects missing config, invalid protocols, bounds and reused secrets without echoing values (0.7568ms)
+✔ malformed URL values produce key-only diagnostics rather than URL parser errors (0.954ms)
+✔ insecure refresh cookies are accepted only for the explicit loopback HTTP demo (0.2251ms)
+✔ production rejects low-entropy and placeholder-like auth secrets with key-only diagnostics (0.2451ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 161.6576
+
+> @mobiflow/api@0.1.0 test
+> npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/recommendation.test.mjs test/operational.test.mjs test/analytics.test.mjs
+
+
+> @mobiflow/api@0.1.0 build
+> tsc -p tsconfig.json
+
+✔ analysis strict schema rejects malformed data and every critical boundary without coercion (6.4652ms)
+✔ prompt delimits untrusted data, keeps fixed instructions, rejects oversized mandatory input (0.6705ms)
+✔ real HTTP adapter sends JSON schema, exact model, bounds and excludes provider thinking (53.0215ms)
+✔ provider maps missing/offline/disconnect/timeout/overflow/truncation and cancellation safely (146.1131ms)
+✔ bounded execution retries invalid output once, never retries known model absence, retains attempt count (2013.989ms)
+✔ M9 metric aggregation handles percentiles, grouping and zero cases (1.1468ms)
+✔ M9 regression comparison reports explicit regressions without an opaque score (0.2717ms)
+✔ M9 evidence sanitization excludes prompts, output and source content (0.7772ms)
+✔ M9 dataset is versioned, unique, synthetic and has at least 100 valid labeled cases (0.8841ms)
+✔ ownership policy scopes USER to ownership, STAFF to current assignment and MANAGER to all requests (1.0507ms)
+✔ out-of-scope and absent requests have the same 404 policy result (0.4599ms)
+✔ API boots; complete Ollama fixture health gives READY and both route aliases work (126.5239ms)
+✔ Ollama offline is degraded while API liveness/core readiness survive (38.0024ms)
+✔ offline server does not turn an unconfigured embedding into a configured outage (0.4146ms)
+✔ database outage is 503, independent liveness still 200 (33.4727ms)
+✔ missing vector extension is a core readiness failure (33.8093ms)
+✔ missing model is not reported installed; unconfigured embedding is distinct (2.808ms)
+✔ installed model with wrong capability is not considered ready (4.8678ms)
+✔ Ollama timeout is bounded and a malformed response is safely unavailable (217.5144ms)
+✔ request IDs, sanitized errors, safe logs, CORS and Swagger M2 inventory (50.8709ms)
+✔ global validation foundation rejects unknown fields and invalid values (2.5795ms)
+✔ malformed and oversized JSON receive safe client errors without exposing the body (64.8885ms)
+✔ M5 deterministic Unicode chunk offsets/overlap, page isolation, headings, NFC and empty bounds (18.504ms)
+✔ M5 upload types, traversal, MIME/signature, strict UTF-8 and text safety (0.492ms)
+✔ M5 real PDF parser retains real pages; corrupt/no-text/encrypted rejected in isolated worker (1897.0672ms)
+✔ M5 vector validity, finite norm, exact dimensions and cosine score are independent of AI confidence (0.6974ms)
+✔ M5 context budget/dedup and exact source/quote membership reject fabrication (5.8798ms)
+✔ M5 embedding HTTP adapter validates model identity, batches, retries, malformed response and timeout (2447.5687ms)
+✔ M8 Copilot accepts exactly six fixed actions and rejects prompt/tool fields (2.1609ms)
+✔ M8 Copilot and resolution summary outputs are strict, bounded and reference-shaped (3.0511ms)
+✔ M8 model output accepts only syntactic fence cleanup and keeps strict action schemas (2.7943ms)
+✔ M8 feedback is owner-state constrained and strict (0.7228ms)
+✔ login limits normalized account plus IP to 5 attempts per minute (0.841ms)
+✔ login has an independent 20/minute IP bound and refresh has a 30/minute session plus IP bound (0.2229ms)
+✔ M6 strict schemas reject unknown/oversized args, duplicate IDs, invalid enum/UUID and result shapes (6.9119ms)
+✔ M6 registry enforces closed allowlist, permission, duplicates, eight-call budget, failure audit and output bounds (2.8402ms)
+✔ M6 tool abort returns bounded TIMEOUT even if implementation never resolves (0.3411ms)
+✔ M6 deterministic score/ties, category routing, NFC input and hybrid similarity bounds (1.0446ms)
+✔ M6 fake staff/team/source/case fields, wrong count/policy, extra fields and no-evidence procedures rejected (1.0638ms)
+✔ M6 prompt delimits request, historical case, staff metadata and tool injection; oversized context fails (0.2872ms)
+✔ M3 exhaustive state/action/role matrix rejects the complement, including protected future AI transitions (4.4926ms)
+✔ SLA wait, resolve, reopen, exact deadline, hold and sticky breach use an injected deterministic time (0.6524ms)
+✔ SLA repeated exclusion cycles, no-op reassignment and cancellation preserve consumed budget (0.2077ms)
+ℹ tests 43
+ℹ suites 0
+ℹ pass 43
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5956.381
+
+> @mobiflow/web@0.1.0 test
+> node --test test/*.test.mjs
+
+✔ health client handles a typed 503 and rejects untrusted response shapes (34.4903ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 249.1561
+
+> mobiflow-ai@0.1.0 test:release:m10
+> node --test scripts/demo/*.test.mjs scripts/verification/*.test.mjs scripts/evaluation/*.test.mjs
+
+✔ database target guard accepts only explicit loopback demo targets (1.0029ms)
+✔ preflight diagnostics never contain configured secret values (0.4196ms)
+✔ reset authorization refuses active API, absent marker, and migration drift (0.2083ms)
+✔ warmup count comparison proves no business mutation (0.0946ms)
+✔ bounded JSON request covers success, dependency down, and timeout (45.7916ms)
+✔ historical M9 files remain valid without new timing or identity fields (4.9099ms)
+✔ existing per-case 1.5 boundary is strict and remains unchanged (0.4713ms)
+✔ quality, repair and terminal regressions cannot be offset by improvements (0.334ms)
+✔ comparison refuses missing, duplicated, reordered or contract-incompatible cases (3.7994ms)
+✔ safe case projection excludes generated text and preserves missing metadata (0.7597ms)
+✔ isolation rejects missing services, competing work, other models and drift (0.4537ms)
+✔ idle MCP services and the evaluator itself are not mistaken for competing runs (0.1253ms)
+✔ exclusive attempt and result creation cannot overwrite earlier evidence (1.7954ms)
+✔ observer preserves the exact production request and captures only safe metadata (44.0769ms)
+✔ observer retains a real two-attempt repair and its backoff, without an extra generation (1056.6892ms)
+✔ known missing model is a single safe failure, not silently retried or dropped (4.4254ms)
+✔ metadata projection rejects unknown fields and distinguishes missing durations from zero (0.1871ms)
+✔ safe prompt characteristics have hashes, not raw prompts or arbitrary request options (0.2999ms)
+✔ fixed diagnostic sample and nearest-rank statistics do not select favorable results (0.2093ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1357.3365

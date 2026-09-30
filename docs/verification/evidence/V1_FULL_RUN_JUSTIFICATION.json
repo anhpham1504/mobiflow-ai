@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "release.justification.v1",
+  "date": "2026-09-30",
+  "justified": true,
+  "basis": "PHASE_10_B_MEASUREMENT_IMPLEMENTATION_DEFECT",
+  "protocolSha256": "a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51",
+  "previousDefect": "Official evaluator discards real returned model identity/provider timings and omits the specified runtime/warm-cold evidence; existing cold/warm telemetry proves wall time alone cannot attribute a regression.",
+  "correction": "Evaluation-only observer, controlled warmup/isolation, immutable per-case telemetry and environment/content fingerprints on the full 100-case path.",
+  "expectedInvariant": "Unchanged production inference, labels/order and strict original comparator; historical RED artifacts preserved.",
+  "expectedMeasurableEffect": "Complete run identity and load/prompt/generation/application timing attribution. No promised lower latency or passing comparison.",
+  "historicalRedInvalidated": false,
+  "productionFixClaimed": false,
+  "fullRunBudget": 1,
+  "details": "docs/evaluation/M10_EVALUATION_INVESTIGATION.md"
+}

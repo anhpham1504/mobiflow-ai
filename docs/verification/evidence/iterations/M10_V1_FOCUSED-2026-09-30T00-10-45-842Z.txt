@@ -1,0 +1,21 @@
+✔ historical M9 files remain valid without new timing or identity fields (4.7319ms)
+✔ existing per-case 1.5 boundary is strict and remains unchanged (0.4661ms)
+✔ quality, repair and terminal regressions cannot be offset by improvements (0.3667ms)
+✔ comparison refuses missing, duplicated, reordered or contract-incompatible cases (4.2755ms)
+✔ safe case projection excludes generated text and preserves missing metadata (0.649ms)
+✔ isolation rejects missing services, competing work, other models and drift (0.494ms)
+✔ idle MCP services and the evaluator itself are not mistaken for competing runs (0.1325ms)
+✔ observer preserves the exact production request and captures only safe metadata (44.2021ms)
+✔ observer retains a real two-attempt repair and its backoff, without an extra generation (1054.0658ms)
+✔ known missing model is a single safe failure, not silently retried or dropped (4.3814ms)
+✔ metadata projection rejects unknown fields and distinguishes missing durations from zero (0.1925ms)
+✔ safe prompt characteristics have hashes, not raw prompts or arbitrary request options (0.3986ms)
+✔ fixed diagnostic sample and nearest-rank statistics do not select favorable results (0.1664ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1314.8069
