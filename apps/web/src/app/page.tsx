@@ -1,3 +1,4 @@
 import Link from 'next/link';
 import {HealthPanel} from '@/components/health-panel';
-export default function HomePage(){return <><div className="intro"><p className="eyebrow">MOBIFLOW</p><h1>Theo dõi yêu cầu.<br/><span>Phối hợp xử lý.</span></h1><p>Tiếp nhận, phân công và cập nhật tiến độ trong một không gian chung.</p><Link className="action-link" href="/login">Vào không gian làm việc</Link></div><HealthPanel/></>;}
+import {PageHeader} from '@/components/ui/patterns';
+export default function HomePage(){return <><PageHeader title="Trạng thái hệ thống" description="Theo dõi khả năng sẵn sàng của các thành phần phục vụ MobiFlow AI." actions={<Link className="button button-primary" href="/login">Vào không gian làm việc</Link>}/><HealthPanel/></>;}

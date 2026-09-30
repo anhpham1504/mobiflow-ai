@@ -1,16 +1,16 @@
 'use client';
 import Link from 'next/link';
 import {useEffect,useState,useSyncExternalStore} from 'react';
+import {Bell,CheckCheck,RefreshCw} from 'lucide-react';
 import {notificationListSchema,notificationResponseSchema,type NotificationView} from '@mobiflow/contracts';
 import {api,getProfile,serverProfile,subscribe,requestLink} from '@/lib/session';
 import {SessionGate} from './session-shell';
 import {formatTime} from './request-list';
+import {EmptyState,ErrorState,LoadingState,PageHeader} from './ui/patterns';
+const notificationLabels:Record<string,string>={REQUEST_ASSIGNED:'Yêu cầu được phân công',REQUEST_UPDATED:'Yêu cầu đã cập nhật',APPROVAL_REQUIRED:'Yêu cầu cần phê duyệt',USER_INFO_REQUIRED:'Cần bổ sung thông tin',REQUEST_RESOLVED:'Yêu cầu đã được giải quyết'};
 export function Notifications(){
   const user=useSyncExternalStore(subscribe,getProfile,serverProfile),[rows,setRows]=useState<NotificationView[]>([]),[error,setError]=useState(''),[loading,setLoading]=useState(true),[revision,setRevision]=useState(0),[next,setNext]=useState<string|null>(null),[cursor,setCursor]=useState(''),[busy,setBusy]=useState(false);
-  useEffect(()=>{if(!user)return;let active=true;
-    void api('/notifications?limit=20'+(cursor?'&cursor='+encodeURIComponent(cursor):''),notificationListSchema).then(r=>{if(active){setRows(r.data);setNext(r.page.nextCursor);}}).catch(e=>{if(active)setError(e.message);}).finally(()=>{if(active)setLoading(false);});
-    return()=>{active=false;};
-  },[user,revision,cursor]);
-  return <SessionGate><h1>Thông báo</h1>{loading?<p role="status">Đang tải…</p>:null}{error?<p role="alert">{error}</p>:null}<button onClick={()=>{setLoading(true);setRevision(v=>v+1);}}>Tải lại</button>{!loading&&rows.length===0?<p>Chưa có thông báo.</p>:null}<ul className="request-list">{rows.map(n=><li key={n.id}><p>{n.type} · {n.readAt?'Đã đọc':'Chưa đọc'}</p><small>{formatTime(n.createdAt)}</small>{n.requestId&&user?<p><Link href={requestLink(user.role,n.requestId)}>Mở yêu cầu</Link></p>:null}<button disabled={busy} onClick={async()=>{setBusy(true);try{await api('/notifications/'+n.id+'/read',notificationResponseSchema,{read:!n.readAt},'PATCH');setRevision(v=>v+1);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}}>{n.readAt?'Đánh dấu chưa đọc':'Đánh dấu đã đọc'}</button></li>)}</ul>{next?<button onClick={()=>{setLoading(true);setCursor(next);}}>Trang tiếp theo</button>:null}</SessionGate>;
+  useEffect(()=>{if(!user)return;let active=true;void api('/notifications?limit=20'+(cursor?'&cursor='+encodeURIComponent(cursor):''),notificationListSchema).then(r=>{if(active){setRows(r.data);setNext(r.page.nextCursor);setError('');}}).catch(e=>{if(active)setError((e as Error).message);}).finally(()=>{if(active)setLoading(false);});return()=>{active=false;};},[user,revision,cursor]);
+  const reload=()=>{setLoading(true);setRevision(v=>v+1)};
+  return <SessionGate><PageHeader title="Thông báo" description="Cập nhật dành riêng cho tài khoản và các yêu cầu trong phạm vi của bạn." actions={<button className="button button-secondary" onClick={reload}><RefreshCw size={16}/>Tải lại</button>}/>{error?<ErrorState message={error} onRetry={reload}/>:loading?<LoadingState label="Đang tải thông báo"/>:rows.length===0?<EmptyState title="Bạn đã xem hết thông báo" description="Thông báo mới về yêu cầu và công việc sẽ xuất hiện tại đây."/>:<ul className="notification-list">{rows.map(n=><li className={n.readAt?'':'is-unread'} key={n.id}><span className="notification-icon"><Bell size={18}/></span><div><div className="notification-title"><h2>{notificationLabels[n.type]??'Cập nhật yêu cầu'}</h2>{!n.readAt?<span className="unread-dot"><span className="sr-only">Chưa đọc</span></span>:null}</div><p>{n.type}</p><small>{formatTime(n.createdAt)} · {n.readAt?'Đã đọc':'Chưa đọc'}</small>{n.requestId&&user?<p><Link href={requestLink(user.role,n.requestId)}>Mở yêu cầu liên quan</Link></p>:null}</div><button className="button button-ghost" disabled={busy} onClick={async()=>{setBusy(true);try{await api('/notifications/'+n.id+'/read',notificationResponseSchema,{read:!n.readAt},'PATCH');setRevision(v=>v+1);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}}><CheckCheck size={16}/>{n.readAt?'Đánh dấu chưa đọc':'Đánh dấu đã đọc'}</button></li>)}</ul>}{next?<div className="collection-footer"><button className="button button-secondary" onClick={()=>{setLoading(true);setCursor(next);}}>Trang tiếp theo</button></div>:null}</SessionGate>;
 }
-

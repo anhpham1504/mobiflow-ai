@@ -5,6 +5,7 @@ import type {z} from 'zod';
 import {api,ApiFailure} from '@/lib/session';
 import {SourceLink} from './knowledge';
 import {formatTime} from './request-list';
+import {AiPanelHeader} from './ui/patterns';
 export function RecommendationPanel({request,onFinished,disabled}:{request:RequestView;onFinished:()=>void;disabled:boolean}){
   const [data,setData]=useState<z.infer<typeof recommendationResponseSchema>['data']>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[conflict,setConflict]=useState(false),[revision,setRevision]=useState(0),[loading,setLoading]=useState(true);
   const [staff,setStaff]=useState<StaffOption[]>([]);
@@ -21,14 +22,14 @@ export function RecommendationPanel({request,onFinished,disabled}:{request:Reque
   },[request.id,request.version,revision,onFinished]);
   async function trigger(){setBusy(true);setError('');try{const r=await api('/manager/requests/'+request.id+'/ai/recommend',recommendationResponseSchema,{expectedVersion:request.version});setData(r.data);setRevision(v=>v+1);}catch(e){setError((e as Error).message);if(e instanceof ApiFailure&&e.status===409)setConflict(true);}finally{setBusy(false);}}
   const running=!!data&&['QUEUED','RUNNING'].includes(data.status),r=data?.recommendation,e=data?.evidence;
-  return <section className="workflow-card" aria-labelledby="recommendation-heading">
-    <h2 id="recommendation-heading">Đề xuất AI và quyết định của quản lý</h2><p>Đề xuất chỉ là thông tin hỗ trợ. Chỉ quyết định xác nhận của quản lý mới phân công và bắt đầu SLA.</p>
+  return <section className="workflow-card ai-panel" aria-label="Đề xuất AI và quyết định của quản lý">
+    <AiPanelHeader title="Đề xuất điều phối" description="AI hỗ trợ tổng hợp. Chỉ quyết định của quản lý mới phân công và bắt đầu SLA."/>
     <p role="status" aria-live="polite">{loading?'Đang tải đề xuất…':running?'AI đang tổng hợp nguồn và dữ liệu nghiệp vụ…':data?.status==='FAILED'?'Chưa tạo được đề xuất. Có thể thử lại hoặc tiếp tục phương án thủ công.':data?.status==='CANCELED'?'Lượt đề xuất đã được hủy.':r?'Đề xuất đang chờ quyết định của quản lý.':'Chưa có đề xuất.'}</p>
     {error?<p role="alert">{error}</p>:null}
     {data?.stale||conflict?<p role="alert">Dữ liệu đã thay đổi. Đề xuất này không còn hiện hành; tải lại để kiểm tra. {data?.staleReasons.join(', ')}</p>:null}
     {data?.errorCode?<p>Mã trạng thái: {data.errorCode}</p>:null}
-    {request.status==='TRIAGED'&&request.aiAnalysisStatus==='SUCCEEDED'?<button disabled={disabled||busy||running||conflict} onClick={()=>{void trigger();}}>{busy?'Đang gửi…':'Tạo đề xuất AI'}</button>:null}
-    <button disabled={busy} onClick={()=>{setConflict(false);setRevision(v=>v+1);onFinished();}}>Tải lại đề xuất</button>
+    <div className="recommendation-actions">{request.status==='TRIAGED'&&request.aiAnalysisStatus==='SUCCEEDED'?<button className="button button-primary" disabled={disabled||busy||running||conflict} onClick={()=>{void trigger();}}>{busy?'Đang gửi…':'Tạo đề xuất AI'}</button>:null}
+    <button className="button button-secondary" disabled={busy} onClick={()=>{setConflict(false);setRevision(v=>v+1);onFinished();}}>Tải lại đề xuất</button></div>
     {r&&e?<>
       <h3>AI đề xuất — chưa được duyệt</h3><p>Ưu tiên: {r.suggestedPriority} · SLA đề xuất: {r.suggestedSlaMinutes??'Chưa có chính sách'} phút</p>
       <p>Nhân sự đề xuất: {e.candidates.candidates.find(c=>c.staffId===r.suggestedStaffId)?.displayName??'Chưa có ứng viên'}</p><p>{r.reasonSummary}</p>

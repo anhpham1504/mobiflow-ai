@@ -58,6 +58,7 @@
     "test:e2e:m8": "playwright test --config playwright.m8.config.mjs",
     "test:e2e:m9": "playwright test --config playwright.m9.config.mjs",
     "test:e2e:m10": "playwright test --config playwright.m10.config.mjs",
+    "test:e2e:ui-v1-1": "playwright test --config playwright.ui-v1-1.config.mjs",
     "eval:copilot:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-copilot-evaluate.mjs",
     "eval:summary:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-summary-evaluate.mjs",
     "verify:runtime:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m8-runtime.mjs",

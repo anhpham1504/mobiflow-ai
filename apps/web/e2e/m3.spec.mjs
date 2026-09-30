@@ -49,7 +49,7 @@ test('M3 real browser: three-role manual workflow, waiting/reopen, stale protect
     await user.getByRole('button',{name:'Tải lại dữ liệu'}).click();
     await expect(user.getByText('Đã phân công · HIGH',{exact:true})).toBeVisible();
     await signIn(staff,'staff.iot@mobiflow.local');
-    await staff.getByRole('link').filter({has:staff.getByRole('heading',{name:title,exact:true})}).click();
+    await staff.getByRole('link').filter({hasText:title}).first().click();
     await staff.getByRole('button',{name:'Bắt đầu xử lý',exact:true}).click();
     await expect(staff.getByText('Đang xử lý · HIGH',{exact:true})).toBeVisible();
     await staff.getByLabel('Câu hỏi gửi người yêu cầu').fill('Vui lòng xác nhận vị trí cụ thể của thiết bị');
@@ -106,7 +106,7 @@ test('M3 login keyboard focus and API offline error are recoverable',async({page
   await page.getByRole('button',{name:'Đăng nhập',exact:true}).click();
   await expect(page).toHaveURL('/user/dashboard');
   await page.reload();
-  await expect(page.getByRole('heading',{name:'Yêu cầu của tôi',exact:true})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'Tổng quan',exact:true})).toBeVisible();
   await page.getByRole('button',{name:'Đăng xuất',exact:true}).click();
   await expect(page).toHaveURL('/login');
 });

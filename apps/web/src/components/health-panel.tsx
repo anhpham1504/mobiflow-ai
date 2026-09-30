@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, RefreshCw } from 'lucide-react';
+import { Activity, ArrowUpRight, CheckCircle2, RefreshCw } from 'lucide-react';
 import type { ReadinessResponse } from '@mobiflow/contracts';
 import { Button } from '@/components/ui/button';
 import { fetchReadiness } from '@/lib/api-client';
@@ -26,9 +26,10 @@ export function HealthPanel() {
   }, []);
   useEffect(() => { void refresh(); return () => controller.current?.abort(); }, [refresh]);
 
+  const components=result?Object.values(result.data.components):[],ready=components.filter(component=>component.status==='UP').length;
   return <section aria-labelledby="connection-heading" className="health-panel">
-    <div className="panel-heading"><div><p className="eyebrow">KẾT NỐI CỤC BỘ</p><h2 id="connection-heading">Nền tảng hệ thống</h2></div><Button variant="outline" onClick={() => { setBusy(true); setError(null); void refresh(); }} disabled={busy}><RefreshCw size={15} aria-hidden="true" />{busy ? 'Đang kiểm tra…' : 'Kiểm tra lại'}</Button></div>
-    <div aria-live="polite" className="health-summary">{busy ? 'Đang xác minh các dịch vụ…' : error ? error : result?.data.coreReady ? 'Hạ tầng cốt lõi đã sẵn sàng.' : 'Hạ tầng cốt lõi cần được kiểm tra.'}</div>
+    <div className="panel-heading"><div><h2 id="connection-heading">Nền tảng hệ thống</h2><p className="scope-note">Khả năng sẵn sàng theo lần kiểm tra gần nhất.</p></div><Button variant="outline" onClick={() => { setBusy(true); setError(null); void refresh(); }} disabled={busy}><RefreshCw size={15} aria-hidden="true" />{busy ? 'Đang kiểm tra…' : 'Kiểm tra lại'}</Button></div>
+    <div aria-live="polite" className={`health-summary ${result&&!result.data.coreReady?'health-summary-warning':''}`}>{busy?<Activity size={20} aria-hidden="true"/>:result?.data.coreReady?<CheckCircle2 size={20} aria-hidden="true"/>:<Activity size={20} aria-hidden="true"/>}<span><strong>{busy ? 'Đang xác minh các dịch vụ…' : error ? 'Chưa thể xác minh trạng thái' : result?.data.coreReady ? 'Hạ tầng cốt lõi đã sẵn sàng.' : 'Hạ tầng cốt lõi cần được kiểm tra.'}</strong>{result?<small>{ready}/{components.length} thành phần sẵn sàng</small>:null}</span></div>
     {error ? <div className="notice" role="alert">API chưa phản hồi. Trang vẫn hoạt động; không có dữ liệu nghiệp vụ nào được tạo.</div> : <ul className="service-list" aria-busy={busy}>{Object.entries(labels).map(([key, label], index) => {
       const component = result?.data.components[key as keyof typeof labels];
       return <li key={key}><span className="service-index">0{index + 1}</span><div className="service-name"><strong>{label}</strong><span>{busy ? 'Đang kiểm tra' : component ? reasons[component.code] : 'Chưa có kết quả'}</span></div><span className={`status-pill ${!busy && component?.status === 'UP' ? 'is-up' : ''}`}>{busy ? '…' : component?.status === 'UP' ? 'Sẵn sàng' : component?.status === 'NOT_CONFIGURED' ? 'Chưa cấu hình' : 'Chưa sẵn sàng'}</span></li>;

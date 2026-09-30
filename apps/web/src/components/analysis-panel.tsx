@@ -4,6 +4,7 @@ import {aiExplanationSchema,aiJobResponseSchema,type RequestView} from '@mobiflo
 import type {z} from 'zod';
 import {api,ApiFailure} from '@/lib/session';
 import {SourceLink} from './knowledge';
+import {AiPanelHeader} from './ui/patterns';
 const names:Record<string,string>={customer:'Khách hàng',location:'Địa điểm',affectedCount:'Số lượng ảnh hưởng',startedAt:'Thời điểm bắt đầu',impact:'Mức ảnh hưởng',description:'Mô tả chi tiết'};
 const failureText=(code:string|null|undefined)=>code==='STALE_CONTEXT'?'Phân tích dựa trên phiên bản cũ đã được loại bỏ. Tin nhắn mới vẫn được giữ nguyên.':code==='AI_INVALID_OUTPUT'?'AI chưa tạo được kết quả hợp lệ. Không có quyết định nghiệp vụ nào được áp dụng.':code==='AI_TIMEOUT'?'Phân tích đã hết thời gian chờ. Bạn có thể thử lại hoặc xử lý thủ công.':code==='FORBIDDEN'?'Quyền của người khởi tạo đã thay đổi; kết quả không được công bố.':'AI local hiện không khả dụng. Yêu cầu đã được lưu an toàn. Có thể thử lại hoặc xử lý thủ công.';
 export function AnalysisPanel({request,role,onFinished,disabled}:{request:RequestView;role:'USER'|'STAFF'|'MANAGER';onFinished:()=>void;disabled:boolean}){
@@ -29,8 +30,7 @@ export function AnalysisPanel({request,role,onFinished,disabled}:{request:Reques
     finally{setBusy(false);}
   }
   const running=['QUEUED','RUNNING'].includes(data?.job?.status??'');
-  return <section className="workflow-card ai-analysis" aria-labelledby="ai-intake-heading"><h2 id="ai-intake-heading">Phân tích AI hỗ trợ</h2>
-    <p>Phân tích chỉ là đề xuất. Quản lý quyết định phân loại, ưu tiên và phân công.</p>
+  return <section className="workflow-card ai-analysis" aria-label="Phân tích AI hỗ trợ"><AiPanelHeader title="Phân tích yêu cầu" description="Đề xuất hỗ trợ. Quản lý quyết định phân loại, ưu tiên và phân công."/>
     <div role="status" aria-live="polite">{!data&&!error?'Đang tải trạng thái AI…':running?data?.job?.status==='QUEUED'?'AI đang chờ xử lý.':'AI đang phân tích…':data?.job?.status==='SUCCEEDED'?'Phân tích AI hoàn tất.':data?.job?.status==='FAILED'?failureText(data.job.errorCode):data?.job?.status==='CANCELED'?'Phân tích đã được hủy.':'Chưa có phân tích AI.'}</div>
     {paused?<p>Đã dừng theo dõi tự động sau thời hạn. Tải lại để kiểm tra trạng thái hiện tại.</p>:null}
     {error?<p role="alert">{error}</p>:null}

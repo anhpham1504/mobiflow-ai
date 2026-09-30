@@ -8,7 +8,7 @@ async function noOverflow(page,width){await page.setViewportSize({width,height:9
 
 test('M10 demonstrated manager surface is responsive, keyboard reachable, and axe clean',async({page})=>{
   const errors=watch(page);await signIn(page,'manager@mobiflow.local');await page.goto('/manager/analytics');
-  await expect(page.getByRole('heading',{name:/Chất lượng AI/})).toBeVisible();await expect(page.getByText(/M10 · BẰNG CHỨNG PHÁT HÀNH CỤC BỘ/)).toBeVisible();
+  await expect(page.getByRole('heading',{name:/Chất lượng AI/})).toBeVisible();await expect(page.getByRole('heading',{name:'Đánh giá phát triển gần nhất'})).toBeVisible();
   await expect(page.getByText('Không áp dụng',{exact:true})).toBeVisible();
   await expect(page.getByRole('link',{name:'Chất lượng & analytics'})).toHaveAttribute('aria-current','page');
   for(const width of [360,768,1440])await noOverflow(page,width);

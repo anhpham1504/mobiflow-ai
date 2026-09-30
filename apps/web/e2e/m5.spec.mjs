@@ -7,7 +7,7 @@ test('M5 manager knowledge lifecycle, RBAC, source preview, responsive and keybo
   for(const page of [manager,staff,user])page.on('pageerror',error=>errors.push(error.message));
   const marker='M5-E2E-'+Date.now(),title='Tài liệu '+marker,file={name:marker+'.txt',mimeType:'text/plain',buffer:Buffer.from('# Synthetic E2E\n'+marker+' mô tả kiểm tra kết nối IoT tại KCN Amata. Chỉ dùng cho kiểm thử.')};
   try{
-    await signIn(manager,'manager@mobiflow.local');await manager.getByRole('link',{name:'Kho tài liệu',exact:true}).click();await expect(manager.getByRole('heading',{name:'Kho tài liệu'})).toBeVisible();
+    await signIn(manager,'manager@mobiflow.local');await manager.getByRole('link',{name:'Kho tri thức',exact:true}).click();await expect(manager.getByRole('heading',{name:'Kho tài liệu'})).toBeVisible();
     await manager.getByLabel('Tiêu đề tài liệu').fill(title);await manager.getByLabel('Tệp PDF hoặc TXT').setInputFiles(file);await manager.getByRole('button',{name:'Tải tài liệu lên'}).click();await expect(manager.getByRole('region',{name:'Chi tiết tài liệu'}).getByRole('heading',{name:title})).toBeVisible();
     await expect(manager.getByRole('region',{name:'Danh sách tài liệu'}).getByRole('listitem').filter({hasText:title})).toContainText('Có thể tra cứu',{timeout:60000});await manager.getByRole('button',{name:'Xem '+title}).click();
     const sourceLink=manager.getByRole('link',{name:new RegExp(title)}).first();await expect(sourceLink).toBeVisible();const sourceHref=await sourceLink.getAttribute('href');expect(sourceHref).toMatch(/^\/knowledge\/sources\/KD-/);

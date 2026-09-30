@@ -11,7 +11,7 @@ test('M6 real grounded proposal, explanatory-only UI, sources, RBAC, responsive 
     await signIn(manager,'manager@mobiflow.local');await manager.goto('/manager/requests/'+id);const panel=manager.getByRole('region',{name:'Đề xuất AI và quyết định của quản lý'});
     await expect(panel).toContainText('Chưa có đề xuất.');await panel.getByRole('button',{name:'Tạo đề xuất AI',exact:true}).focus();await manager.keyboard.press('Enter');
     await expect(panel.getByRole('status')).toContainText('AI đang tổng hợp');await expect(panel.getByRole('button',{name:'Tạo đề xuất AI',exact:true})).toBeDisabled();
-    await expect(panel.getByRole('heading',{name:'AI đề xuất — chưa được duyệt'})).toBeVisible({timeout:310000});await expect(panel).toContainText('chưa hiệu chuẩn');await expect(manager.getByText('Phân công: Chưa phân công',{exact:true})).toBeVisible();
+    await expect(panel.getByRole('heading',{name:'AI đề xuất — chưa được duyệt'})).toBeVisible({timeout:310000});await expect(panel).toContainText('chưa hiệu chuẩn');await expect(manager.locator('dd').filter({hasText:'Chưa phân công'})).toBeVisible();
     await expect(manager.getByText('SLA bắt đầu sau lần phân công đầu tiên.',{exact:true})).toBeVisible();await expect(panel.getByRole('button',{name:'Chấp nhận đề xuất'})).toBeVisible();
     const source=panel.getByRole('link').filter({hasText:/SOP|FAQ/}).first();await expect(source).toBeVisible();const href=await source.getAttribute('href');await source.click();await expect(manager.getByRole('heading',{name:'Nguồn tham chiếu'})).toBeVisible();await manager.goto('/manager/requests/'+id);
     await expect(panel.getByRole('heading',{name:'AI đề xuất — chưa được duyệt'})).toBeVisible();
