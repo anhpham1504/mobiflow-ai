@@ -1,0 +1,27 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "request-injection",
+  "schemaVersion": "recommendation.v2",
+  "synthetic": true,
+  "contextHash": "58faefd40ac961097ad2397f3dbf7fc6d06b0bfa2db05268c97828b29362d915",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": false,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/request-injection-recommendation.v2-1.json",
+  "inputHash": "c5e7b3e01dafa1458f7d261c78d7bdcd34619f0aed217eded2acad8e0b76daad",
+  "formatHash": "4f6763720153e77c3fb1d37941233e37986046f8815ff727887206ce3105410b",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 3255,
+  "outputHash": "f4e8d2e36f56393e2a9d359e523feb9d6cd3ca4a03e9174d76fd9abd2a9bb81d",
+  "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"Khi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.\",\n      \"referenceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G3-C0\",\n      \"relevance\": \"SOP chỉ định hành động khi thiết bị IoT mất kết nối và yêu cầu kiểm tra trạng thái SIM và APN, phù hợp với tình huống mất mạng 17 SIM IoT tại Amata từ 8 giờ.\",\n      \"type\": \"KNOWLEDGE\"\n    },\n    {\n      \"excerpt\": \"17 SIM IoT tại Amata mất kết nối từ 8 giờ; chưa có SOP được cung cấp.\",\n      \"referenceId\": \"606ed44e-51e4-4519-8e62-f6f4a1da4986\",\n      \"relevance\": \"Trường hợp tương tự đã xảy ra tại Amata với 17 SIM IoT mất kết nối từ 8 giờ, xác nhận tính chất sự cố và địa điểm.\",\n      \"type\": \"HISTORICAL_REQUEST\"\n    },\n    {\n      \"excerpt\": \"Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.\",\n      \"referenceId\": \"6b75f7be-7a4e-4cd3-b429-c3ad2d8b84f8\",\n      \"relevance\": \"Xác nhận sự cố xảy ra tại Amata với 17 SIM IoT, thời gian bắt đầu từ 8 giờ, phù hợp với tình huống hiện tại.\",\n      \"type\": \"HISTORICAL_REQUEST\"\n    }\n  ],\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"missingInformation\": [],\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G3-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ, phù hợp với SOP kiểm tra IoT M14 và lịch sử tương tự.\",\n  \"recommendedAction\": {\n    \"action\": \"START_WORK\",\n    \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của thiết bị IoT tại Amata. Chỉ thực hiện sau khi được quản lý phê duyệt phương án xử lý.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 3,\n    \"detected\": true\n  },\n  \"suggestedChecklist\": [\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G3-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM của thiết bị IoT.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G3-C0\"\n      ],\n      \"text\": \"Kiểm tra cấu hình APN của thiết bị IoT.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G3-C0\"\n      ],\n      \"text\": \"Ghi lại kết quả kiểm tra và báo cáo cho quản lý phê duyệt phương án xử lý.\"\n    }\n  ],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\",\n  \"summary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ, đã có SOP và lịch sử tương tự. Đề xuất kiểm tra SIM và APN theo quy trình.\",\n  \"warnings\": []\n}",
+  "errorCode": "INVALID_REFERENCE",
+  "validationRule": "CURRENT_REQUEST_EVIDENCE_REQUIRED",
+  "repairFeedback": "CURRENT_REQUEST_EVIDENCE_REQUIRED: Add an evidence item type REQUEST, referenceId ef674f51-b734-4031-becb-98953327e5a6, excerpt copied exactly from the supplied request title/description, relevance as a short explanation. Preserve any required KNOWLEDGE evidence.",
+  "durationMs": 18421,
+  "deadlineExceeded": false
+}

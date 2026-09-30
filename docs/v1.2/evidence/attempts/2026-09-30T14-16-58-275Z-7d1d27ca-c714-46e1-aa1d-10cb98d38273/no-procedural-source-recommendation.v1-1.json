@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "no-procedural-source",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "e120d01547e8bc18f16050a3f7df759ae9c10ae2235d9b0a136d639a87c13aa3",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/no-procedural-source-recommendation.v1-1.json",
+  "inputHash": "e0f23e67c89ca4d17c5ba148151b7dda900b85c5279c21dc1252727c2266fbd3",
+  "formatHash": "3222f73c5256b1bf078fd0faab6c669a8fff63ec958d97582e49d88f64f74eb8",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 514,
+  "outputHash": "999527e5a303d8dfcf13fd5b7b7ad34036d0e71b12bf1d54a6b6d3337cab1547",
+  "structuredOutput": "{\n  \"actions\": [],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"INSUFFICIENT_EVIDENCE\",\n  \"procedureSources\": [],\n  \"reasonSummary\": \"Không có nguồn dữ liệu hỗ trợ để xác minh sự cố. Không có SOP được cung cấp, không có thông tin chi tiết về tình trạng kết nối của 17 SIM IoT tại Amata.\",\n  \"similarCaseAlert\": {\n    \"count\": 2,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": null,\n  \"suggestedTeamId\": null\n}",
+  "durationMs": 3064,
+  "deadlineExceeded": false
+}

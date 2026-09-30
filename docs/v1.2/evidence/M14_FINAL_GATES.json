@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-09-30 15:16:41 UTC",
+  "result": "PASS",
+  "scope": "M14 implementation and targeted development verification; human review, not production deployment",
+  "head": "b35fcffcad6ecba463824e4ad31cfba623f1dc81",
+  "branch": "feat/v1.2-recommendation-v2",
+  "commands": [
+    {
+      "command": "npm run test:unit:m14",
+      "result": "PASS",
+      "tests": 31,
+      "note": "Measured with prompt 2.3; the same units run in the final root suite with prompt 2.4."
+    },
+    {
+      "command": "npm test",
+      "result": "PASS",
+      "tests": 98,
+      "components": {
+        "config": 7,
+        "api": 70,
+        "web": 2,
+        "releaseHelpers": 19
+      }
+    },
+    {
+      "command": "npm run lint",
+      "result": "PASS"
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "PASS"
+    },
+    {
+      "command": "npm run build",
+      "result": "PASS"
+    },
+    {
+      "command": "npm run test:integration:m14",
+      "result": "PASS",
+      "tests": 26,
+      "childChecks": 25,
+      "evidence": "M14_DATABASE.json"
+    },
+    {
+      "command": "npm run test:e2e:m14",
+      "result": "PASS",
+      "tests": 4,
+      "skipped": 0,
+      "flaky": 0,
+      "evidence": "M14_BROWSER.json"
+    },
+    {
+      "command": "npm run eval:recommendation:m14",
+      "result": "PASS",
+      "v1Cases": 6,
+      "v2Cases": 6,
+      "v2Repairs": 0,
+      "evidence": "M14_RECOMMENDATION_EVAL.json"
+    },
+    {
+      "command": "read-only PostgreSQL check for mobiflow_m14_test",
+      "result": "PASS",
+      "isolatedDatabaseRemoved": true
+    }
+  ],
+  "visualReview": {
+    "desktopWidth": 1440,
+    "mobileWidth": 360,
+    "finalRun": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+    "result": "PASS"
+  },
+  "notRun": [
+    "Broad historical M0-M13 integration/browser/live evaluations",
+    "Deployment/migration to the running demo or production database",
+    "Production load or semantic accuracy benchmark"
+  ],
+  "closeout": {
+    "checkedAt": "2026-09-30T15:30:14.284Z",
+    "result": "PASS",
+    "files": 271,
+    "sourceConfigDocsTestFiles": 43,
+    "evidenceFiles": 228,
+    "inventoryMatches": true,
+    "configuredSecretKeysChecked": [
+      "POSTGRES_PASSWORD",
+      "POSTGRES_APP_PASSWORD",
+      "DATABASE_URL",
+      "MIGRATION_DATABASE_URL",
+      "JWT_SECRET",
+      "REFRESH_TOKEN_SECRET"
+    ],
+    "findings": [],
+    "localLinksChecked": 43,
+    "localLinkFailures": [],
+    "jsonEvidenceFailures": [],
+    "whitespaceCheck": {
+      "command": "git diff --check",
+      "result": "PASS",
+      "exitCode": 0,
+      "note": "Only Git CRLF conversion notices; no whitespace errors."
+    },
+    "browserRunnerPortsReleased": true
+  },
+  "humanReviewClosure": {
+    "checkedAt": "2026-09-30 15:50:39 UTC",
+    "result": "PASS",
+    "baselineHead": "b35fcffcad6ecba463824e4ad31cfba623f1dc81",
+    "branch": "feat/v1.2-recommendation-v2",
+    "reviewBasis": "Manual review of retained successful synthetic MANAGER flow assertions/results, PostgreSQL assertions/evidence, 1440/360 screenshots and focused UI/state-machine source inspection. No fresh interactive flow or suite/model evaluation.",
+    "generatedFields": "PASS",
+    "acceptArtifactOnly": "PASS",
+    "modifySeparateHumanProvenance": "PASS",
+    "rejectOriginalAndReasonPreserved": "PASS",
+    "manualBusinessApprovalBoundary": "PASS",
+    "loadingErrorRetryStaleUx": "PASS",
+    "migrationSanity": "PASS: only confidence DROP NOT NULL; no DML/backfill/table/index/vector change; retained V1 values readable and V2 null supported",
+    "runningDemoDatabaseMigration": "NOT RUN",
+    "newIsolatedCloneTest": "NOT RUN",
+    "freshInventory": {
+      "paths": 271,
+      "sourceConfigDocsTest": 43,
+      "evidence": 228,
+      "differences": 0,
+      "duplicates": 0,
+      "jsonFailures": 0,
+      "scopedSecretFindings": 0
+    },
+    "freshCommands": [
+      "git branch --show-current",
+      "git log -3 --oneline",
+      "git rev-parse HEAD",
+      "git status --untracked-files=all",
+      "git diff --stat",
+      "git diff --check",
+      "git -c core.quotepath=false status --porcelain=v1 --untracked-files=all"
+    ],
+    "implementationChangedDuringClosure": false,
+    "stagedWhitespaceCheck": {
+      "command": "git diff --cached --check",
+      "initialResult": "FAIL: one pre-existing trailing-whitespace-only line in previously untracked M14_RECOMMENDATION_V2_VERIFICATION.md",
+      "correction": "Removed that whitespace; documentation only",
+      "finalResult": "PASS",
+      "finalExitCode": 0
+    },
+    "regressionReruns": "NOT RUN, no implementation change",
+    "checkpointAuthorization": "Exactly one feat(v1.2): complete M14 recommendation v2 commit after final inventory and diff check; SHA recorded from Git after commit",
+    "push": false,
+    "tag": false,
+    "merge": false,
+    "deployment": "NOT RUN",
+    "m15Implementation": "NOT STARTED"
+  },
+  "limitations": "Six synthetic cases do not measure production accuracy. AI prose requires human verification; protected business effects remain behind existing explicit approval. Prior failed attempts are retained."
+}

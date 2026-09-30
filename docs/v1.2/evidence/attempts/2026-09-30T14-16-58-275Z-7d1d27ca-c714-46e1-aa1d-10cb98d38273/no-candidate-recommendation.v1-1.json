@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "no-candidate",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "1034e99d81f173590b7aeccb780e3c488c28de17c96a6f063df281ed11bac8b6",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/no-candidate-recommendation.v1-1.json",
+  "inputHash": "00aaf049da71e56de35497ae123c8843b6cd8fb3545e3a5e07b453b7ee242336",
+  "formatHash": "c928bd9b52d42d91c7394638315a8ba410d994872c5a28b78733f4e98a488138",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 491,
+  "outputHash": "630b962f1b8cae3172e5681fca0ff808bf641e4d742eab2db623282d5f136d35",
+  "structuredOutput": "{\n  \"actions\": [],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"INSUFFICIENT_EVIDENCE\",\n  \"procedureSources\": [],\n  \"reasonSummary\": \"Không có nhân viên được phân công và không có nguồn dữ liệu đủ để thực hiện xử lý. SOP có sẵn nhưng chưa có đội xử lý khả dụng.\",\n  \"similarCaseAlert\": {\n    \"count\": 5,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": null,\n  \"suggestedTeamId\": null\n}",
+  "durationMs": 3266,
+  "deadlineExceeded": false
+}

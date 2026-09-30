@@ -18,11 +18,12 @@ import { parse } from './validation.js';
 import {VectorRepository} from '../knowledge/vector.repository.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
-import {recommendationEvidenceSchema,type Recommendation,type RecommendationEvidence} from '@mobiflow/contracts';
-import {parseRecommendation} from '../ai/recommendation-output.js';
+import {recommendationEvidenceSchema,recommendationEvidenceV2Schema,recommendationVersion,recommendationV2Version,isRecommendationV2,recommendationActions,type AnyRecommendation,type RecommendationEvidence} from '@mobiflow/contracts';
+import {parseRecommendation,parseRecommendationV2} from '../ai/recommendation-output.js';
 import {revalidateRecommendation} from '../ai/recommendation-validation.js';
 import {ToolFailure} from '../ai/tools/registry.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
+import {recommendationSnapshot} from '../ai/recommendation-snapshot.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
@@ -38,7 +39,7 @@ export interface Command {
 export class RequestStateMachineService {
   constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:VectorRepository) {}
 
-  private async identity(tx: Tx, actor: AuthenticatedActor) {
+  private async identity(tx: Tx, actor: Pick<AuthenticatedActor,'id'|'role'|'sessionId'>) {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actor.id}::uuid FOR SHARE`);
     const user = await tx.user.findUnique({ where:{id:actor.id} });
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "RefreshSession" WHERE "id"=${actor.sessionId}::uuid FOR SHARE`);
@@ -74,6 +75,12 @@ export class RequestStateMachineService {
       this.policy.assertCanReadRequest(actor,request);
       if (!request) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
       if (request.version !== command.expectedVersion) throw new ApiError(409,'STALE_VERSION','The request changed. Reload and review before retrying.');
+      // Versioned artifact review happens before any business transition/event/write.
+      if ((action==='APPROVE_AND_ASSIGN'||action==='REJECT_APPROVAL')&&command.reviewKind==='AI'&&command.recommendationId) {
+        const artifact=await tx.aiRecommendation.findFirst({where:{id:command.recommendationId,requestId:id},include:{aiRun:true}});
+        if(artifact?.aiRun.schemaVersion===recommendationV2Version) return this.reviewAdvisory(tx,request,artifact,action,actor,command,correlationId);
+        if(artifact&&artifact.aiRun.schemaVersion!==recommendationVersion)throw new ApiError(409,'STALE_RECOMMENDATION','Unsupported recommendation version.');
+      }
       const next = transitionTarget(request.status,action,actor.role);
       const now = await this.now(tx);
       const data: Prisma.RequestUncheckedUpdateInput = {version:{increment:1},updatedAt:now,status:next};
@@ -292,7 +299,7 @@ export class RequestStateMachineService {
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }
-  async publishRecommendation(runId:string,result:Recommendation,identity:{provider:string;model:string;digest:string},outputSize:number,latencyMs:number){
+  async publishRecommendation(runId:string,result:AnyRecommendation,identity:{provider:string;model:string;digest:string},outputSize:number,latencyMs:number){
     const initial=await this.prisma.aiRun.findUniqueOrThrow({where:{id:runId}});
     return this.prisma.$transaction(async tx=>{
       await tx.$queryRaw(Prisma.sql`SELECT id FROM "Request" WHERE id=${initial.requestId}::uuid FOR UPDATE`);
@@ -300,13 +307,27 @@ export class RequestStateMachineService {
       if(run.status!=='RUNNING'||run.purpose!=='RECOMMENDATION'||request.status!=='TRIAGED'||request.version!==run.contextVersion||!run.deadlineAt||run.deadlineAt<=now)throw new ApiError(409,'STALE_CONTEXT','The recommendation context changed.');
       await tx.$queryRaw(Prisma.sql`SELECT id FROM "User" WHERE id=${run.initiatingActorId}::uuid FOR SHARE`);
       if(!await tx.user.findFirst({where:{id:run.initiatingActorId!,active:true,role:'MANAGER'}}))throw new ApiError(403,'FORBIDDEN','The initiating manager no longer has access.');
-      const evidence=recommendationEvidenceSchema.parse(run.retrievalSnapshotJson);
+      const v2=run.schemaVersion===recommendationV2Version;
+      if(!v2&&run.schemaVersion!==recommendationVersion)throw new ApiError(409,'STALE_CONTEXT','Unsupported recommendation version.');
+      if(v2!==isRecommendationV2(result))throw new ApiError(409,'STALE_CONTEXT','Recommendation version mismatch.');
+      const snapshot=recommendationSnapshot(run.retrievalSnapshotJson);
+      if(v2){if(!snapshot.authorization)throw new ApiError(403,'FORBIDDEN','The initiating session is unavailable.');await this.identity(tx,{id:run.initiatingActorId!,role:'MANAGER',sessionId:snapshot.authorization.initiatingSessionId});}
+      const evidenceV2=v2?recommendationEvidenceV2Schema.parse(snapshot.evidence):null;
+      const evidence=evidenceV2??recommendationEvidenceSchema.parse(snapshot.evidence);
       if(request.latestAnalysisId!==evidence.analysisId||evidence.requestVersion!==request.version)throw new ApiError(409,'STALE_CONTEXT','The analysis changed.');
-      const r=parseRecommendation(JSON.stringify(result),evidence);
+      if(evidenceV2&&(evidenceV2.requestContext.id!==request.id||evidenceV2.requestContext.version!==request.version||evidenceV2.requestContext.status!==request.status))throw new ApiError(409,'STALE_CONTEXT','The request snapshot changed.');
+      const r=evidenceV2?parseRecommendationV2(JSON.stringify(result),evidenceV2):parseRecommendation(JSON.stringify(result),evidence);
       await revalidateRecommendation(tx,evidence,true,r.suggestedPriority);
       await this.vectors.validateCurrent(tx,evidence.sources);
       await this.vectors.compatible(evidence.embeddingIdentity,tx);
-      const rec=await tx.aiRecommendation.create({data:{requestId:request.id,aiRunId:runId,suggestedPriority:r.suggestedPriority,suggestedTeamId:r.suggestedTeamId,suggestedStaffId:r.suggestedStaffId,suggestedSlaMinutes:r.suggestedSlaMinutes,procedureRefsJson:r.procedureSources,actionsJson:r.actions,similarCaseAlertJson:r.similarCaseAlert,evidenceStatus:r.evidenceStatus,confidence:r.confidence,reasonSummary:r.reasonSummary,createdAt:now}});
+      // Replacing an advisory artifact cannot invalidate it until its successor is valid.
+      if(v2)await tx.aiRecommendation.updateMany({where:{requestId:request.id,status:'PENDING',invalidatedAt:null,aiRun:{schemaVersion:recommendationV2Version}},data:{invalidatedAt:now,invalidationReason:'SUPERSEDED_BY_RECOMMENDATION_V2'}});
+      const rec=await tx.aiRecommendation.create({data:{requestId:request.id,aiRunId:runId,suggestedPriority:r.suggestedPriority,suggestedTeamId:r.suggestedTeamId,suggestedStaffId:r.suggestedStaffId,suggestedSlaMinutes:r.suggestedSlaMinutes,procedureRefsJson:r.procedureSources,actionsJson:recommendationActions(r),similarCaseAlertJson:r.similarCaseAlert,evidenceStatus:r.evidenceStatus,confidence:isRecommendationV2(r)?null:r.confidence,reasonSummary:r.reasonSummary,createdAt:now}});
+      if(v2){
+        await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'AI_RECOMMENDATION_V2_CREATED',resourceType:'AiRecommendation',resourceId:rec.id,requestCorrelationId:runId,safeAfterJson:{schemaVersion:recommendationV2Version,contextVersion:request.version,recommendationId:rec.id},outcome:'SUCCEEDED',createdAt:now}});
+        await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,modelIdentityJson:identity,safeResultJson:r,outputSize,latencyMs}});
+        return rec.id;
+      }
       const event=await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'SUBMIT_FOR_APPROVAL',resourceType:'AiRecommendation',resourceId:rec.id,requestCorrelationId:runId,safeBeforeJson:{status:'TRIAGED',version:request.version},safeAfterJson:{status:'PENDING_APPROVAL',version:request.version+1,recommendationId:rec.id},outcome:'SUCCEEDED',createdAt:now}});
       await tx.request.update({where:{id:request.id,version:run.contextVersion},data:{status:'PENDING_APPROVAL',version:{increment:1},reviewKind:'AI',pendingRecommendationId:rec.id,pendingDraftRevision:null}});
       await tx.requestStatusHistory.create({data:{requestId:request.id,fromStatus:'TRIAGED',toStatus:'PENDING_APPROVAL',action:'SUBMIT_FOR_APPROVAL',actorType:'SYSTEM',requestVersion:request.version+1,eventId:event.id,createdAt:now}});
@@ -315,6 +336,31 @@ export class RequestStateMachineService {
       await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,modelIdentityJson:identity,safeResultJson:r,outputSize,latencyMs}});
       return rec.id;
     },{timeout:15000,isolationLevel:Prisma.TransactionIsolationLevel.Serializable});
+  }
+  private async reviewAdvisory(tx:Tx,request:DomainRequest,artifact:Prisma.AiRecommendationGetPayload<{include:{aiRun:true}}>,action:Action,actor:AuthenticatedActor,command:Command,correlationId:string){
+    if(actor.role!=='MANAGER')throw new ApiError(403,'FORBIDDEN','Only managers may review recommendations.');
+    const latest=await tx.aiRecommendation.findFirst({where:{requestId:request.id,status:'PENDING',invalidatedAt:null},orderBy:[{createdAt:'desc'},{id:'desc'}],select:{id:true}});
+    const evidenceResult=recommendationEvidenceV2Schema.safeParse(recommendationSnapshot(artifact.aiRun.retrievalSnapshotJson).evidence);
+    if(artifact.status!=='PENDING'||artifact.invalidatedAt||latest?.id!==artifact.id||artifact.aiRun.status!=='SUCCEEDED'||artifact.aiRun.contextVersion!==request.version||!evidenceResult.success)throw new ApiError(409,'STALE_RECOMMENDATION','The advisory recommendation is no longer current.');
+    const evidence=evidenceResult.data;
+    if(request.status!=='TRIAGED'||evidence.requestContext.id!==request.id||evidence.requestContext.status!==request.status||evidence.requestContext.version!==request.version||evidence.requestVersion!==request.version||request.latestAnalysisId!==evidence.analysisId)throw new ApiError(409,'STALE_RECOMMENDATION','The recommendation context changed.');
+    let original:AnyRecommendation;
+    try{original=parseRecommendationV2(JSON.stringify(artifact.aiRun.safeResultJson),evidence);}catch{throw new ApiError(409,'STALE_RECOMMENDATION','The stored recommendation is invalid.');}
+    try{await revalidateRecommendation(tx,evidence,true,original.suggestedPriority);await this.vectors.validateCurrent(tx,evidence.sources,true);await this.vectors.compatible(evidence.embeddingIdentity,tx);}catch(error){if(error instanceof ToolFailure||error instanceof KnowledgeFailure)throw new ApiError(409,'STALE_RECOMMENDATION','Recommendation evidence or eligibility changed.');throw error;}
+    const now=await this.now(tx);
+    const status=action==='REJECT_APPROVAL'?'REJECTED':command.finalDecision?'MODIFIED':'ACCEPTED';
+    const ack=command.finalDecision?.acknowledgedMissingFields??command.acknowledgedMissingFields??[];
+    if(status!=='REJECTED'&&(new Set(ack).size!==ack.length||ack.some(f=>!evidence.analysis.missingFields.includes(f as FinalDecision['acknowledgedMissingFields'][number]))||evidence.analysis.missingFields.some(f=>!ack.includes(f))))throw new ApiError(422,'MISSING_ACKNOWLEDGMENT','Acknowledge every supplied missing fact before recording agreement.');
+    let final:Prisma.InputJsonObject|null=null;
+    if(command.finalDecision){
+      const decision=parse(finalDecisionSchema,command.finalDecision),policy=await this.validateDecision(tx,decision,evidence);
+      final={...decision,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60};
+    }
+    const changes:Prisma.InputJsonValue=status==='REJECTED'?{decision:'REJECT',reason:command.reason!}:status==='MODIFIED'?{original,final}: {decision:'ACCEPT',acknowledgedMissingFields:ack};
+    await tx.aiRecommendation.update({where:{id:artifact.id},data:{status,reviewedById:actor.id,reviewedAt:now,managerChangesJson:changes,finalDecisionJson:final??Prisma.JsonNull}});
+    await tx.auditLog.create({data:{requestId:request.id,actorType:'MANAGER',actorId:actor.id,action:`AI_RECOMMENDATION_V2_${status}`,resourceType:'AiRecommendation',resourceId:artifact.id,requestCorrelationId:correlationId,safeBeforeJson:{status:'PENDING'},safeAfterJson:{status,schemaVersion:recommendationV2Version,contextVersion:request.version},reason:command.reason??command.finalDecision?.reason,outcome:'SUCCEEDED',createdAt:now}});
+    // Agreement stores provenance only. Applying a plan requires the existing manual workflow.
+    return {id:request.id,message:undefined};
   }
   private draftFields(value: Prisma.JsonValue | null) {
     if(!value||typeof value!=='object'||Array.isArray(value)) return null;

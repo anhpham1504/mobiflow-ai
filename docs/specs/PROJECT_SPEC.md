@@ -60,6 +60,10 @@ M1 must verify compatible package/runtime/container versions, actual Ollama conn
 
 ## Acceptance
 
+### Authorized V1.2 amendment — M14 Recommendation V2 (2026-09-30)
+
+The subsequent [user-supplied M14 specification](../v1.2/M14_RECOMMENDATION_V2_SPEC.md) adds structured grounded advisory recommendations, real evidence excerpts, missing questions/impact, one existing workflow next step and a short sourced checklist. It supersedes A13 only for recommendation.v2: ACCEPTED is agreement, including an explicitly acknowledged insufficient artifact, and never executes a business plan. V1 publication/review and its A13 approval guards remain versioned historical behavior. V2 generation and all three reviews leave Request status/version, assignment, SLA, checklist and business notifications unchanged; manager uses the existing explicit manual draft/submit/approval flow to apply a plan. Current MANAGER access remains, STAFF sees approved business results. No confidence/probability/composite score, new role/action, provider/model change or autonomous operation. The [frozen plan](../v1.2/M14_RECOMMENDATION_V2_IMPLEMENTATION_PLAN.md) documents bounds and the one nullable legacy-confidence migration. The [V1.2 index](../v1.2/README.md) records authorization chronology; prior milestone evidence is not rewritten. M14 work remains uncommitted for review; M15–M17 NOT STARTED.
+
 ### Authorized V1.2 amendment — M11/M12 only (2026-09-30)
 
 The M11/M12 request authorized full-scope role-isolated aggregate dashboards and normalization/exposure/testing of the existing deterministic SLA engine. No new role, state, AI capability, infrastructure, or visual design was introduced. Preserve all V1 invariants. At that checkpoint M13 analytics V2 and later milestones were unauthorized. KPI definitions and overlap, half-open Vietnam day boundaries, additive API fields and acceptance evidence are in [the implementation plan](../v1.2/M11_M12_IMPLEMENTATION_PLAN.md) and [verification](../v1.2/M11_M12_VERIFICATION.md). No V1.2 release tag or main merge is authorized.

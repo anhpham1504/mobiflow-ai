@@ -1,0 +1,95 @@
+{
+  "evaluationId": "2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf",
+  "startedAt": "2026-09-30T14:09:55.021Z",
+  "datasetVersion": "m14.recommendation.synthetic.v1",
+  "datasetHash": "4c7b34e8639e2585ade8b4cf70a8aeef9a8bbdc1e2ab5eea64c267112961c8ad",
+  "orderedCaseIds": [
+    "grounded-incident",
+    "missing-information",
+    "no-procedural-source",
+    "request-injection",
+    "untrusted-markup",
+    "no-candidate"
+  ],
+  "orderWithinCase": [
+    "recommendation.v1",
+    "recommendation.v2"
+  ],
+  "synthetic": true,
+  "procedureCorpus": {
+    "sourceHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2",
+    "policy": "One unchanged synthetic SOP document; each harness disables the corpus and knowledge cases reactivate/reindex it through DocumentService and real ingestion."
+  },
+  "provider": "ollama",
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "embeddingModel": {
+    "name": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+  },
+  "ollamaVersion": "0.34.4",
+  "prompts": {
+    "v1": "grounded-recommendation.v3",
+    "v2": "grounded-recommendation.v2.3",
+    "sourceHash": "506cdb1587b714f263f7e4bf49f9922f311022b795abfbf93539545c8df890ee"
+  },
+  "schemaSourceHash": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 20,
+    "totalMemoryBytes": 25551560704,
+    "temperature": 0,
+    "outputTokenBound": 1200,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "attemptBound": 2,
+    "retryDelayMs": 1000,
+    "seed": 42,
+    "contextTokens": 16384
+  },
+  "analysisPolicy": "Hand-authored validated synthetic analysis; no live analysis-accuracy claim. Actual Ollama embeddings and real PostgreSQL tools supply each frozen retrieval context.",
+  "checkedAt": "2026-09-30T14:09:55.049Z",
+  "result": "IN_PROGRESS",
+  "results": [],
+  "metrics": {
+    "recommendation.v1": {
+      "cases": 0,
+      "succeeded": 0,
+      "failed": 0,
+      "schemaValid": 0,
+      "referenceValid": 0,
+      "actionVocabularyValid": null,
+      "expectedMainStep": null,
+      "missingFieldCoverage": null,
+      "firstAttemptValid": 0,
+      "repairCount": 0,
+      "attempts": 0,
+      "schemaValidAttempts": 0,
+      "referenceValidAttempts": 0,
+      "modelP50Ms": null,
+      "modelP95Ms": null
+    },
+    "recommendation.v2": {
+      "cases": 0,
+      "succeeded": 0,
+      "failed": 0,
+      "schemaValid": 0,
+      "referenceValid": 0,
+      "actionVocabularyValid": 0,
+      "expectedMainStep": 0,
+      "missingFieldCoverage": 0,
+      "firstAttemptValid": 0,
+      "repairCount": 0,
+      "attempts": 0,
+      "schemaValidAttempts": 0,
+      "referenceValidAttempts": 0,
+      "modelP50Ms": null,
+      "modelP95Ms": null
+    }
+  },
+  "limitations": "Six ordered synthetic/development cases with one configured local model and one run per version per case. Context IDs/timestamps are run-specific and hashed; each frozen synthetic snapshot is retained. V1 lacks dedicated next-step/missing-question fields; comparison reports this contract difference. Parser membership establishes grounding/reference safety, not semantic correctness or production accuracy. Attempt files retain the provider structured-content field only, including failed/truncated synthetic output; no hidden reasoning field or private prompt is captured. Semantic actionability has not been human-scored. No composite quality/confidence/production effectiveness claim."
+}

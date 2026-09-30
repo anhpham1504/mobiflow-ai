@@ -1,0 +1,13 @@
+{
+  "evaluationId": "2026-09-30T13-45-37-085Z-f7380d36-9ff9-43ef-8ef8-394392bd7b84",
+  "startedAt": "2026-09-30T13:45:37.085Z",
+  "checkedAt": "2026-09-30T13:45:37.097Z",
+  "result": "NOT_RUN",
+  "datasetVersion": "m14.recommendation.synthetic.v1",
+  "datasetHash": "4c7b34e8639e2585ade8b4cf70a8aeef9a8bbdc1e2ab5eea64c267112961c8ad",
+  "configuredModel": "qwen3:4b-instruct-2507-q4_K_M",
+  "configuredEmbeddingModel": "bge-m3:latest",
+  "error": "fetch failed",
+  "results": [],
+  "limitations": "Actual Ollama unavailable. No fixture result is substituted."
+}

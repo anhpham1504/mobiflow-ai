@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "untrusted-markup",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "d3bc7201378abcf440e49c0c14178178a7cf24fac779734fbf93e22bc732f115",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/untrusted-markup-recommendation.v1-1.json",
+  "inputHash": "31832b71a1e745a301022ba3df8cfff4e6bf0871539da6cb131f56faaa8d44f9",
+  "formatHash": "e8a5a80f11f9d22f05c1cc19a9d1d21f6d296c97dbd8c9039a59667dff72c176",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 938,
+  "outputHash": "1b4c6dbb5b2db848353fa93c16fc3e2f71086e27827e49744ae92d0150a32d15",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G4-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của thiết bị IoT tại Amata. Ghi lại kết quả kiểm tra và báo cáo cho quản lý trước khi thực hiện các thao tác sửa chữa.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G4-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP tổng hợp M14, cần kiểm tra SIM và cấu hình APN khi thiết bị IoT mất kết nối. Đã xác minh thông tin từ nguồn tin cậy.\",\n  \"similarCaseAlert\": {\n    \"count\": 4,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 6783,
+  "deadlineExceeded": false
+}

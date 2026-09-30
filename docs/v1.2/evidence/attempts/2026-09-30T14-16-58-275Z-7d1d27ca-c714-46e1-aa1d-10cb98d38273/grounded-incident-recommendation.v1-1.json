@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "grounded-incident",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "b093bf15fa3d71c5a219b43c7c45e702bb90a4f737aeb27fce406d1b576ae33a",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/grounded-incident-recommendation.v1-1.json",
+  "inputHash": "68d8db91379b560b8b823aa15c10e5bf55f29ae5c5e29d50f97ec634567a3b2d",
+  "formatHash": "5c38eae82736e236180d9a4e52082eb48dde1730e96e98a8e06945dde7e59f82",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1033,
+  "outputHash": "9dd0f6f387d52bce416d30e9ee99098ff9579b4510c60b4e6377cd193dd47705",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN cho 17 thiết bị IoT tại Amata từ 8 giờ sáng. Nhân viên được phân công là IoT Specialist và Network Specialist.\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 6851,
+  "deadlineExceeded": false
+}

@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "missing-information",
+  "schemaVersion": "recommendation.v2",
+  "synthetic": true,
+  "contextHash": "ad7aa2e0e4505216abc9b22b25e016629d160b1e38c9f56a46e67d59134e5dbe",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/missing-information-recommendation.v2-1.json",
+  "inputHash": "14e84e69a95c4b340ee60eac51185376d1496bee7f552d1199c9f0fd3f409912",
+  "formatHash": "27186860ad8286f06ec8ca8938a086b143c7fb4d63c431974a1bfeac67d4a68e",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 3290,
+  "outputHash": "9e4d75843b441877ce4db980fe5f5456bd5001c27d8a49e92685a0854193e41a",
+  "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"Nhiều SIM IoT mất kết nối, chưa biết địa điểm và thời gian bắt đầu.\",\n      \"referenceId\": \"9c6fa230-45e1-4e32-bf6d-687d19ad005d\",\n      \"relevance\": \"Dữ kiện chính xác phản ánh nội dung báo cáo sự cố IoT mất kết nối, không có thông tin địa点\",\n      \"type\": \"REQUEST\"\n    },\n    {\n      \"excerpt\": \"# SOP tổng hợp M14\\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện s\", \"referenceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\",\n      \"relevance\": \"SOP chỉ định hành động cần thực hiện khi thiết bị IoT mất kết nối, yêu cầu kiểm tra SIM và\", \"type\": \"KNOWLEDGE\"\n    }\n  ],\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"missingInformation\": [\n    {\n      \"field\": \"location\",\n      \"impact\": \"Không xác định địa điểm sẽ làm khó khăn trong việc xác định phạm vi sự cố và phân công đội\",\n      \"question\": \"Địa điểm cụ thể của các SIM IoT bị mất kết nối là gì?\"\n    },\n    {\n      \"field\": \"startedAt\",\n      \"impact\": \"Thiếu thời gian bắt đầu sẽ ảnh hưởng đến việc đánh giá mức độ nghiêm trọng và lịch sử sự c\",\n      \"question\": \"Thời gian bắt đầu mất kết nối của các SIM IoT là khi nào?\"\n    }\n  ],\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Sự cố mất kết nối SIM IoT được báo cáo, nhưng chưa có thông tin địa điểm và thời gian bắt đầu. Cần hỏi bổ sung để xác định phạm vi và bắt đầu xử lý.\",\n  \"recommendedAction\": {\n    \"action\": \"REQUEST_USER_INFO\",\n    \"text\": \"Yêu cầu nhân viên được phân công cung cấp thông tin địa điểm và thời gian bắt đầu mất kết nối của các SIM IoT.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 1,\n    \"detected\": true\n  },\n  \"suggestedChecklist\": [\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của thiết bị IoT.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\"\n      ],\n      \"text\": \"Ghi lại kết quả kiểm tra và lưu trữ trong hồ sơ sự cố.\"\n    }\n  ],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\",\n  \"summary\": \"Cần hỏi thông tin địa điểm và thời gian bắt đầu để xác định phạm vi sự cố và thực hiện kiểm tra theo SOP.\",\n  \"warnings\": [\n    {\n      \"code\": \"MISSING_INFORMATION\",\n      \"referenceIds\": [\n        \"9c6fa230-45e1-4e32-bf6d-687d19ad005d\"\n      ],\n      \"text\": \"Thiếu thông tin địa điểm và thời gian bắt đầu, cần bổ sung để tiếp tục xử lý.\"\n    }\n  ]\n}",
+  "durationMs": 16397,
+  "deadlineExceeded": false
+}

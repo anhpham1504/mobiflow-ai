@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-09-30T14:23:37.004Z",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "provider": "deterministic test-only structured/embedding providers; no live-model claim",
+  "checks": [
+    {
+      "name": "seven migrations and nullable legacy confidence; V1 history and explicit approval remain intact",
+      "result": "PASS",
+      "durationMs": 568
+    },
+    {
+      "name": "V2 HTTP generation, validated read, no confidence and manager-only RBAC/IDOR",
+      "result": "PASS",
+      "durationMs": 588
+    },
+    {
+      "name": "ACCEPTED records agreement once, preserves original and has no operational effects",
+      "result": "PASS",
+      "durationMs": 477
+    },
+    {
+      "name": "MODIFIED stores separate human plan; explicit manual approval alone applies business changes",
+      "result": "PASS",
+      "durationMs": 491
+    },
+    {
+      "name": "REJECTED preserves original and reason without request/business mutation",
+      "result": "PASS",
+      "durationMs": 408
+    },
+    {
+      "name": "zero SOP and missing facts stay explicit; agreement requires exact missing acknowledgement",
+      "result": "PASS",
+      "durationMs": 365
+    },
+    {
+      "name": "new generation supersedes a pending artifact and request changes make current review stale",
+      "result": "PASS",
+      "durationMs": 717
+    },
+    {
+      "name": "review revalidates source and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 488
+    },
+    {
+      "name": "review revalidates candidate and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 482
+    },
+    {
+      "name": "review revalidates policy and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 399
+    },
+    {
+      "name": "inactive, changed-role and revoked manager sessions cannot read/generate/review",
+      "result": "PASS",
+      "durationMs": 951
+    },
+    {
+      "name": "queued revoked session fails before embedding or inference",
+      "result": "PASS",
+      "durationMs": 118
+    },
+    {
+      "name": "queued expired session fails before embedding or inference",
+      "result": "FAIL",
+      "message": "\nInvalid `prisma.refreshSession.update()` invocation:\n\n\nDatabase error. Code: `23514`. Message: `new row for relation \"RefreshSession\" violates check constraint \"RefreshSession_lifetime_check\"`"
+    },
+    {
+      "name": "concurrent advisory reviews have one winner; audit failure rolls back review",
+      "result": "PASS",
+      "durationMs": 1057
+    },
+    {
+      "name": "late publication rejects message race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 324
+    },
+    {
+      "name": "late publication rejects candidate race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 374
+    },
+    {
+      "name": "late publication rejects manager race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 258
+    },
+    {
+      "name": "late publication rejects revoked-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 321
+    },
+    {
+      "name": "late publication rejects expired-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 235
+    },
+    {
+      "name": "bounded unavailable failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 226
+    },
+    {
+      "name": "bounded timeout failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 227
+    },
+    {
+      "name": "bounded malformed failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1385
+    },
+    {
+      "name": "bounded fabricated-source failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1321
+    },
+    {
+      "name": "bounded embedding failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 163
+    },
+    {
+      "name": "OpenAPI versions/review errors and unknown query/body fields match shared transport",
+      "result": "PASS",
+      "durationMs": 127
+    }
+  ],
+  "limitations": "Targeted M14 and directly affected V1 approval regression only. No historical broad suites or live inference are represented by this report."
+}

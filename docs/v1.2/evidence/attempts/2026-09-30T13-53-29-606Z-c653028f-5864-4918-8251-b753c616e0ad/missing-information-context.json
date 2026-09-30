@@ -1,0 +1,193 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "missing-information",
+  "synthetic": true,
+  "input": {
+    "id": "missing-information",
+    "description": "Nhiều SIM IoT mất kết nối, chưa biết địa điểm và thời gian bắt đầu.",
+    "knowledge": true,
+    "missing": [
+      "location",
+      "startedAt"
+    ],
+    "expectedNextStep": "REQUEST_USER_INFO"
+  },
+  "commonContextHash": "804508f1625b406c2638183bc0a8bfbc1ce67e1833961874bc1d8e0464355c75",
+  "v2RequestContextHash": "e380dc3ed1d8b881547f535e64cb4b8bf5097a2a6500b47c71417cbed46749e1",
+  "evidence": {
+    "policy": {
+      "id": "50000000-0000-4000-8000-000000000003",
+      "version": 1,
+      "category": null,
+      "priority": "HIGH",
+      "targetMinutes": 120
+    },
+    "history": {
+      "events": [
+        {
+          "id": "7fccb0e8-a940-47bf-b2f4-8ffae6280a49",
+          "type": "CREATE",
+          "payload": {
+            "toStatus": "NEW",
+            "fromStatus": null,
+            "requestVersion": 1
+          },
+          "actorType": "USER",
+          "timestamp": "2026-09-30T13:54:12.876Z"
+        },
+        {
+          "id": "bdbd3972-d2bb-4e53-a61a-a748c4d1e8ba",
+          "type": "START_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "AI_ANALYZING",
+            "fromStatus": "NEW",
+            "requestVersion": 2
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T13:54:12.909Z"
+        },
+        {
+          "id": "3a333e4a-79ab-4195-9762-1588c4056e9c",
+          "type": "COMPLETE_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "TRIAGED",
+            "fromStatus": "AI_ANALYZING",
+            "requestVersion": 3
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T13:54:12.928Z"
+        }
+      ],
+      "truncated": false
+    },
+    "similar": {
+      "cases": [
+        {
+          "score": 0.8156572591653241,
+          "title": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "Amata",
+          "createdAt": "2026-09-30T13:53:34.840Z",
+          "requestId": "6b75f7be-7a4e-4cd3-b429-c3ad2d8b84f8",
+          "publicCode": "MF-2026-000001",
+          "contextVersion": 3,
+          "scoreComponents": {
+            "vector": 0.8629675615718364,
+            "recency": 0.9787672222222222,
+            "category": 1,
+            "location": 0,
+            "cosineSimilarity": 0.7259351231436729
+          }
+        }
+      ],
+      "truncated": false,
+      "returnedCount": 1,
+      "windowMinutes": 30
+    },
+    "sources": [
+      {
+        "score": 0.6929278096771918,
+        "title": "SOP kiểm tra IoT — synthetic M14",
+        "chunkId": "8b3f1c5e-504a-4f16-b8ca-a3af42830b50",
+        "excerpt": "# SOP tổng hợp M14\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.",
+        "section": "SOP tổng hợp M14",
+        "distance": 0.3070721903228082,
+        "sourceId": "KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0",
+        "documentId": "3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9",
+        "generation": 2,
+        "pageNumber": null,
+        "contentHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2"
+      }
+    ],
+    "analysis": {
+      "intent": "REPORT_INCIDENT",
+      "category": "NETWORK",
+      "entities": {
+        "customer": null,
+        "location": null,
+        "startedAt": null,
+        "affectedCount": 17
+      },
+      "confidence": 0.8,
+      "subcategory": "IOT_CONNECTIVITY",
+      "missingFields": [
+        "location",
+        "startedAt"
+      ],
+      "reasonSummary": "Synthetic M14 test analysis; no live inference claim.",
+      "prioritySuggestion": "HIGH"
+    },
+    "workload": {
+      "asOf": "2026-09-30T13:54:13.166Z",
+      "workloads": [
+        {
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "activeCount": 1
+        },
+        {
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "activeCount": 1
+        }
+      ]
+    },
+    "analysisId": "a809d1ef-e7a8-46c7-9491-dcb2f9ec52bf",
+    "candidates": {
+      "candidates": [
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "IoT Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        },
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "Network Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        }
+      ],
+      "scoringVersion": "staff.v1"
+    },
+    "retrievedAt": "2026-09-30T13:54:13.185Z",
+    "requestContext": {
+      "id": "f21d0596-0c68-4e43-a9aa-59eaf74cb210",
+      "sla": null,
+      "title": "Nhiều SIM IoT mất kết nối, chưa biết địa điểm và thời gian bắt đầu.",
+      "status": "TRIAGED",
+      "version": 3,
+      "category": null,
+      "location": null,
+      "priority": "MEDIUM",
+      "description": "Nhiều SIM IoT mất kết nối, chưa biết địa điểm và thời gian bắt đầu.",
+      "subcategory": null
+    },
+    "requestVersion": 3,
+    "embeddingIdentity": {
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "provider": "ollama",
+      "revision": "m5.v1",
+      "dimension": 1024
+    }
+  }
+}

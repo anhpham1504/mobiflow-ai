@@ -8,12 +8,12 @@ import {ToolFailure,ToolRegistry} from './registry.js';
 import {candidates,routing} from './staff.js';
 import {RequestVectors} from './request-vectors.js';
 
-export interface ToolContext {runId:string;requestId:string;actorId:string;requestVersion:number;analysis:Analysis;identity:EmbeddingIdentity;asOf:Date}
+export interface ToolContext {runId:string;requestId:string;actorId:string;requestVersion:number;analysis:Analysis;identity:EmbeddingIdentity;asOf:Date;initiatingSessionId?:string}
 @Injectable()
 export class DomainTools {
   constructor(private readonly prisma:PrismaService,private readonly retriever:KnowledgeRetriever,private readonly requests:RequestVectors){}
-  async authorize(context:ToolContext){
-    const run=await this.prisma.aiRun.findFirst({where:{id:context.runId,requestId:context.requestId,contextVersion:context.requestVersion,purpose:'RECOMMENDATION',status:'RUNNING',deadlineAt:{gt:new Date()},initiatingActorId:context.actorId,initiatingActor:{active:true,role:'MANAGER'},request:{version:context.requestVersion,status:'TRIAGED'}}});
+  async authorize(context:Pick<ToolContext,'runId'|'requestId'|'actorId'|'requestVersion'|'initiatingSessionId'>){
+    const run=await this.prisma.aiRun.findFirst({where:{id:context.runId,requestId:context.requestId,contextVersion:context.requestVersion,purpose:'RECOMMENDATION',status:'RUNNING',deadlineAt:{gt:new Date()},initiatingActorId:context.actorId,initiatingActor:{active:true,role:'MANAGER',...(context.initiatingSessionId?{sessions:{some:{id:context.initiatingSessionId,revokedAt:null,consumedAt:null,expiresAt:{gt:new Date()}}}}:{})},request:{version:context.requestVersion,status:'TRIAGED'}}});
     if(!run)throw new ToolFailure('STALE_CONTEXT');
   }
   session(context:ToolContext,signal:AbortSignal){

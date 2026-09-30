@@ -1,7 +1,7 @@
 import {z} from 'zod';
-import {categories,priorities,statuses} from './workflow.js';
+import {categories,priorities,statuses,taxonomy,slaStates,finalDecisionSchema} from './workflow.js';
 import {sourceIdSchema,sourceSchema} from './knowledge.js';
-import {analysisSchema,aiRunStatusSchema} from './analysis.js';
+import {analysisSchema,aiRunStatusSchema,missingFieldNames} from './analysis.js';
 
 export const recommendationVersion='recommendation.v1';
 export const skillCodes=['IOT','NETWORK','BILLING','ACCOUNT','CUSTOMER_SUPPORT'] as const;
@@ -29,6 +29,31 @@ export const recommendationSchema=z.object({
   confidence:z.number().min(0).max(1),reasonSummary:z.string().trim().min(1).max(1000),evidenceStatus:z.enum(['SUFFICIENT','INSUFFICIENT_EVIDENCE']),
 }).strict();
 export type Recommendation=z.infer<typeof recommendationSchema>;
+export const recommendationV2Version='recommendation.v2';
+const boundedText=(max:number)=>z.string().trim().min(1).max(max);
+const classificationSchema=z.object({category:z.enum(categories),subcategory:z.enum(['IOT_CONNECTIVITY','MOBILE_NETWORK','DEVICE_CONFIGURATION','BILLING_DISCREPANCY','ACCESS_ISSUE','ACTIVATION','INTERNAL_SUPPORT','UNSPECIFIED']),priority:z.enum(priorities)}).strict();
+export const recommendationV2Schema=z.object({
+  schemaVersion:z.literal(recommendationV2Version),summary:boundedText(1200),classification:classificationSchema,
+  suggestedPriority:z.enum(priorities),suggestedTeamId:z.uuid().nullable(),suggestedStaffId:z.uuid().nullable(),suggestedSlaMinutes:z.number().int().min(1).max(10080).nullable(),
+  recommendedAction:z.object({action:z.enum(['START_WORK','REQUEST_USER_INFO','RESOLVE']),text:boundedText(500)}).strict(),
+  reasonSummary:boundedText(1000),
+  procedureSources:z.array(z.object({sourceId:sourceIdSchema}).strict()).max(5),
+  evidence:z.array(z.object({type:z.enum(['REQUEST','KNOWLEDGE','HISTORICAL_REQUEST']),referenceId:boundedText(120),excerpt:boundedText(500),relevance:boundedText(300)}).strict()).min(1).max(11),
+  warnings:z.array(z.object({code:z.enum(['MISSING_INFORMATION','INSUFFICIENT_EVIDENCE','SLA_AT_RISK','SLA_BREACHED','CONFLICTING_EVIDENCE','WEAK_EVIDENCE']),text:boundedText(500),referenceIds:unique(boundedText(120),0,11)}).strict()).max(10),
+  missingInformation:z.array(z.object({field:z.enum(missingFieldNames),question:boundedText(300),impact:boundedText(300)}).strict()).max(6),
+  suggestedChecklist:z.array(z.object({text:boundedText(500),sourceIds:unique(sourceIdSchema,1,5)}).strict()).max(10),
+  similarCaseAlert:z.object({detected:z.boolean(),count:z.number().int().min(0).max(5)}).strict(),evidenceStatus:z.enum(['SUFFICIENT','INSUFFICIENT_EVIDENCE']),
+}).strict().superRefine((r,ctx)=>{
+  if(!(taxonomy[r.classification.category] as readonly string[]).includes(r.classification.subcategory))ctx.addIssue({code:'custom',path:['classification','subcategory'],message:'Incompatible taxonomy'});
+  if(r.classification.priority!==r.suggestedPriority)ctx.addIssue({code:'custom',path:['classification','priority'],message:'Priority mismatch'});
+  if(new Set(r.missingInformation.map(m=>m.field)).size!==r.missingInformation.length)ctx.addIssue({code:'custom',path:['missingInformation'],message:'Duplicate missing field'});
+  if(new Set(r.warnings.map(w=>w.code)).size!==r.warnings.length)ctx.addIssue({code:'custom',path:['warnings'],message:'Duplicate warning code'});
+});
+export type RecommendationV2=z.infer<typeof recommendationV2Schema>;
+export const recommendationAnySchema=z.union([recommendationSchema,recommendationV2Schema]);
+export type AnyRecommendation=z.infer<typeof recommendationAnySchema>;
+export const isRecommendationV2=(r:AnyRecommendation):r is RecommendationV2=>'schemaVersion' in r&&r.schemaVersion===recommendationV2Version;
+export const recommendationActions=(r:AnyRecommendation)=>isRecommendationV2(r)?r.suggestedChecklist:r.actions;
 export const recommendationEvidenceSchema=z.object({
   analysisId:z.uuid(),analysis:analysisSchema,requestVersion:z.number().int().positive(),retrievedAt:z.iso.datetime(),
   sources:z.array(sourceSchema).max(5),similar:toolSchemas.findSimilarRequests.output,
@@ -37,5 +62,8 @@ export const recommendationEvidenceSchema=z.object({
   embeddingIdentity:z.object({provider:z.string(),model:z.string(),digest:z.string(),dimension:z.number().int(),revision:z.string(),key:z.string()}).strict(),
 }).strict();
 export type RecommendationEvidence=z.infer<typeof recommendationEvidenceSchema>;
-export const recommendationJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('RECOMMENDATION'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),recommendationId:z.uuid().nullable(),recommendation:recommendationSchema.nullable(),evidence:recommendationEvidenceSchema.nullable(),stale:z.boolean(),staleReasons:z.array(z.string()),model:z.string().nullable(),latencyMs:z.number().nullable(),toolCalls:z.array(z.object({toolName:z.string(),ordinal:z.number(),latencyMs:z.number(),status:z.string(),errorCode:z.string().nullable(),summary:z.unknown()}))});
+export const recommendationEvidenceV2Schema=recommendationEvidenceSchema.extend({requestContext:z.object({id:z.uuid(),version:z.number().int().positive(),status:z.enum(statuses),title:z.string().max(160),description:z.string().max(10000),category:z.enum(categories).nullable(),subcategory:z.string().max(80).nullable(),priority:z.enum(priorities),location:z.string().max(200).nullable(),sla:z.object({state:z.enum(slaStates),dueAt:z.iso.datetime(),remainingSeconds:z.number().int()}).strict().nullable()}).strict()}).strict();
+export type RecommendationEvidenceV2=z.infer<typeof recommendationEvidenceV2Schema>;
+export const recommendationAnyEvidenceSchema=z.union([recommendationEvidenceV2Schema,recommendationEvidenceSchema]);
+export const recommendationJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('RECOMMENDATION'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),schemaVersion:z.enum([recommendationVersion,recommendationV2Version]),recommendationId:z.uuid().nullable(),recommendation:recommendationAnySchema.nullable(),evidence:recommendationAnyEvidenceSchema.nullable(),reviewStatus:z.enum(['PENDING','ACCEPTED','MODIFIED','REJECTED']).nullable(),reviewerId:z.uuid().nullable(),reviewedAt:z.iso.datetime().nullable(),finalDecision:finalDecisionSchema.nullable(),managerChanges:z.unknown().nullable(),stale:z.boolean(),staleReasons:z.array(z.string()),model:z.string().nullable(),latencyMs:z.number().nullable(),toolCalls:z.array(z.object({toolName:z.string(),ordinal:z.number(),latencyMs:z.number(),status:z.string(),errorCode:z.string().nullable(),summary:z.unknown()}))});
 export const recommendationResponseSchema=z.object({data:recommendationJobSchema.nullable(),requestId:z.uuid()});

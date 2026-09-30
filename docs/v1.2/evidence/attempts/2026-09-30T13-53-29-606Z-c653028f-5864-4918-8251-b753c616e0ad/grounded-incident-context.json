@@ -1,0 +1,168 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "grounded-incident",
+  "synthetic": true,
+  "input": {
+    "id": "grounded-incident",
+    "description": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+    "knowledge": true,
+    "missing": [],
+    "expectedNextStep": "START_WORK"
+  },
+  "commonContextHash": "b2a4d8f26a31dfa636336ae2d870014118d6a7827bbcf9c1f500193ad358c11a",
+  "v2RequestContextHash": "7ad967db548159f6ebd2a8fda776e2232e33f99febaff27866339fa39e0574cd",
+  "evidence": {
+    "policy": {
+      "id": "50000000-0000-4000-8000-000000000003",
+      "version": 1,
+      "category": null,
+      "priority": "HIGH",
+      "targetMinutes": 120
+    },
+    "history": {
+      "events": [
+        {
+          "id": "cd9c0988-5535-45e6-a3cf-ef71257570d0",
+          "type": "CREATE",
+          "payload": {
+            "toStatus": "NEW",
+            "fromStatus": null,
+            "requestVersion": 1
+          },
+          "actorType": "USER",
+          "timestamp": "2026-09-30T13:53:34.840Z"
+        },
+        {
+          "id": "2d2e94f5-6686-49ec-9a33-d3114442150c",
+          "type": "START_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "AI_ANALYZING",
+            "fromStatus": "NEW",
+            "requestVersion": 2
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T13:53:34.874Z"
+        },
+        {
+          "id": "fde81c90-63a0-4659-894e-aa582ee71b51",
+          "type": "COMPLETE_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "TRIAGED",
+            "fromStatus": "AI_ANALYZING",
+            "requestVersion": 3
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T13:53:34.893Z"
+        }
+      ],
+      "truncated": false
+    },
+    "similar": {
+      "cases": [],
+      "truncated": false,
+      "returnedCount": 0,
+      "windowMinutes": 30
+    },
+    "sources": [
+      {
+        "score": 0.6331841885777139,
+        "title": "SOP kiểm tra IoT — synthetic M14",
+        "chunkId": "60eda25f-d174-4262-9564-e6eec316cb1b",
+        "excerpt": "# SOP tổng hợp M14\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.",
+        "section": "SOP tổng hợp M14",
+        "distance": 0.36681581142228614,
+        "sourceId": "KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0",
+        "documentId": "3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9",
+        "generation": 1,
+        "pageNumber": null,
+        "contentHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2"
+      }
+    ],
+    "analysis": {
+      "intent": "REPORT_INCIDENT",
+      "category": "NETWORK",
+      "entities": {
+        "customer": null,
+        "location": "Amata",
+        "startedAt": "8 giờ",
+        "affectedCount": 17
+      },
+      "confidence": 0.8,
+      "subcategory": "IOT_CONNECTIVITY",
+      "missingFields": [],
+      "reasonSummary": "Synthetic M14 test analysis; no live inference claim.",
+      "prioritySuggestion": "HIGH"
+    },
+    "workload": {
+      "asOf": "2026-09-30T13:53:35.144Z",
+      "workloads": [
+        {
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "activeCount": 1
+        },
+        {
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "activeCount": 1
+        }
+      ]
+    },
+    "analysisId": "7b7d801e-0dd9-4347-b0d5-a49e1894ccda",
+    "candidates": {
+      "candidates": [
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "IoT Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        },
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "Network Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        }
+      ],
+      "scoringVersion": "staff.v1"
+    },
+    "retrievedAt": "2026-09-30T13:53:35.162Z",
+    "requestContext": {
+      "id": "6b75f7be-7a4e-4cd3-b429-c3ad2d8b84f8",
+      "sla": null,
+      "title": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+      "status": "TRIAGED",
+      "version": 3,
+      "category": null,
+      "location": "Amata",
+      "priority": "MEDIUM",
+      "description": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+      "subcategory": null
+    },
+    "requestVersion": 3,
+    "embeddingIdentity": {
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "provider": "ollama",
+      "revision": "m5.v1",
+      "dimension": 1024
+    }
+  }
+}

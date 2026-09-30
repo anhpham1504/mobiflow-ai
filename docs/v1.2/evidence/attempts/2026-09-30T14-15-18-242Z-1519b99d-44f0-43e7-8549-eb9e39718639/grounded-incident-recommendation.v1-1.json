@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-15-18-242Z-1519b99d-44f0-43e7-8549-eb9e39718639",
+  "caseId": "grounded-incident",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "0e090f108ce2843676d12e0cf61f717afa743acc46f998a85157ec2cb29826e5",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-15-18-242Z-1519b99d-44f0-43e7-8549-eb9e39718639/grounded-incident-recommendation.v1-1.json",
+  "inputHash": "6b1dacad63f3ac0349d492948597b1ed2165995847b63c868dfe688652fd3e5b",
+  "formatHash": "ef6a480a0680360df19ba3669f1756598551e31b2e98c3a1aa62a53d988e0fce",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1020,
+  "outputHash": "d0a88719d883fef71912fd16f10fffa8f596047fe9a9bf7244c2c9750f52105b",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-bf3bd3ce-dbc3-4356-8f58-d50e9d1df63d-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-bf3bd3ce-dbc3-4356-8f58-d50e9d1df63d-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, cần kiểm tra trạng thái SIM và cấu hình APN. Nhân viên IoT Specialist và Network Specialist được đề xuất do kỹ năng phù hợp và tải công việc hợp lý.\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 6568,
+  "deadlineExceeded": false
+}

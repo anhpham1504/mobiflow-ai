@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf",
+  "caseId": "missing-information",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "dfb456ad0e2fae40dd21a0913136067ff1b42b9ec213f8d9871ef448e1dd82fd",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf/missing-information-recommendation.v1-1.json",
+  "inputHash": "cf9561c3c75a7a95a2a30270397c9b79542fa8e1cd43da35d34a91eb89544a9a",
+  "formatHash": "c55c3c2ee6824511a1131ebfe444b99526abfdbd7e33755297401b3fcbe4c204",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1232,
+  "outputHash": "2d48559732a8fc1b2e0ce35425150660d1503488ce40df6f0f61e94fe15935f3",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G2-C0\"\n      ],\n      \"text\": \"Hỏi nhân viên IoT Specialist (staffId: 10000000-0000-4000-8000-000000000003) và Network Specialist (staffId: 10000000-0000-4000-8000-000000000004) về tình trạng mất kết nối của các SIM IoT, đặc biệt là địa điểm và thời gian bắt đầu sự cố. Do chưa rõ thông tin này, cần xác minh trước khi đánh giá phạm vi sự cố theo SOP M14.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G2-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, cần xác minh thông tin địa điểm và thời gian bắt đầu sự cố trước khi đánh giá phạm vi. Các nhân viên được phân công có kỹ năng phù hợp và đang có tải công việc hợp lý.\",\n  \"similarCaseAlert\": {\n    \"count\": 1,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 8080,
+  "deadlineExceeded": false
+}

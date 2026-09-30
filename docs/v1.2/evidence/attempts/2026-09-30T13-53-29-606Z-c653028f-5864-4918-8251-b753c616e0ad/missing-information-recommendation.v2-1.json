@@ -1,0 +1,27 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "missing-information",
+  "schemaVersion": "recommendation.v2",
+  "synthetic": true,
+  "contextHash": "eff5ab690b7d319c51ba5b9c99159f231c57738c86c42e75d929fe9369e9fa93",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": false,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/missing-information-recommendation.v2-1.json",
+  "inputHash": "6f374f45f497daedc2d899b9683e1939df0a3fe0eb7b9b3e70d23427b684a1ab",
+  "formatHash": "f3299ac511eac11bf38ce7c71b1690bee6aa7063d23c6a98a8e2c4cb4b0b5dea",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 3390,
+  "outputHash": "4c3b682acc0b2c589de39beac19ddf36bec790556d5d8102f8a368b558e0491e",
+  "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"Khi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.\",\n      \"referenceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0\",\n      \"relevance\": \"SOP chỉ định hành động khi thiết bị IoT mất kết nối và yêu cầu hỏi bổ sung nếu không rõ địa điểm hoặc thời gian bắt đầu.\",\n      \"type\": \"KNOWLEDGE\"\n    }\n  ],\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"missingInformation\": [\n    {\n      \"field\": \"location\",\n      \"impact\": \"Không biết địa điểm sẽ làm khó khăn trong việc xác định phạm vi sự cố và phân công đội xử lý phù hợp.\",\n      \"question\": \"Địa điểm cụ thể của các SIM IoT bị mất kết nối là gì?\"\n    },\n    {\n      \"field\": \"startedAt\",\n      \"impact\": \"Không biết thời gian bắt đầu sẽ ảnh hưởng đến việc đánh giá mức độ nghiêm trọng và xác định nguyên nhân gốc rễ.\",\n      \"question\": \"Thời gian bắt đầu mất kết nối của các SIM IoT là khi nào?\"\n    }\n  ],\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, cần xác minh địa điểm và thời gian bắt đầu để đánh giá phạm vi sự cố.\",\n  \"recommendedAction\": {\n    \"action\": \"REQUEST_USER_INFO\",\n    \"text\": \"Yêu cầu nhân viên được phân công cung cấp thông tin địa điểm và thời gian bắt đầu mất kết nối của các SIM IoT để tiếp tục phân tích và xử lý sự cố.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 1,\n    \"detected\": true\n  },\n  \"suggestedChecklist\": [\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của thiết bị IoT.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0\"\n      ],\n      \"text\": \"Ghi lại kết quả kiểm tra và lưu trữ trong hồ sơ sự cố.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G2-C0\"\n      ],\n      \"text\": \"Xác minh địa điểm và thời gian bắt đầu mất kết nối từ người dùng hoặc hệ thống.\"\n    }\n  ],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\",\n  \"summary\": \"Cần xác minh địa điểm và thời gian bắt đầu để đánh giá phạm vi sự cố IoT.\",\n  \"warnings\": [\n    {\n      \"code\": \"MISSING_INFORMATION\",\n      \"referenceIds\": [\n        \"f21d0596-0c68-4e43-a9aa-59eaf74cb210\"\n      ],\n      \"text\": \"Thông tin địa điểm và thời gian bắt đầu chưa được cung cấp, cần hỏi bổ sung trước khi tiếp tục xử lý.\"\n    }\n  ]\n}",
+  "errorCode": "INVALID_REFERENCE",
+  "validationRule": "CURRENT_REQUEST_EVIDENCE_REQUIRED",
+  "repairFeedback": "CURRENT_REQUEST_EVIDENCE_REQUIRED: Add an evidence item type REQUEST, referenceId f21d0596-0c68-4e43-a9aa-59eaf74cb210, excerpt copied exactly from the supplied request title/description, relevance as a short explanation. Preserve any required KNOWLEDGE evidence.",
+  "durationMs": 17202,
+  "deadlineExceeded": false
+}

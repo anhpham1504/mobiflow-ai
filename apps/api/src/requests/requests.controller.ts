@@ -12,6 +12,7 @@ import { WorkflowGuard } from './workflow.guard.js';
 import { parse, uuid } from './validation.js';
 const schema=(s:z.ZodType)=>z.toJSONSchema(s,{io:'input'}) as NonNullable<Extract<ApiBodyOptions,{schema:unknown}>['schema']>;
 const mutationDescription='Authenticated role and current ownership required. expectedVersion must match the current request. 409 STALE_VERSION/INVALID_STATE makes no business changes.';
+const recommendationReviewDescription=mutationDescription+' Version dispatch: recommendation.v1/manual reviews execute the existing business approval workflow; recommendation.v2 records advisory agreement/modification/rejection only, preserving request status/version, assignment, SLA and checklist. Every supplied missing fact must be acknowledged for V2 accept/modify. Refetch recommendation for review provenance; this response remains RequestView.';
 @ApiTags('Request workflow')
 @ApiBearerAuth()
 @UseGuards(AccessGuard,RolesGuard,WorkflowGuard)
@@ -185,7 +186,7 @@ export class RequestsController {
   }
 
   @Post('manager/approvals/:id/accept') @Roles('MANAGER') @HttpCode(200)
-  @ApiOperation({summary:'APPROVE_AND_ASSIGN',description:mutationDescription})
+  @ApiOperation({operationId:'acceptManagerRecommendation',summary:'Accept current review',description:recommendationReviewDescription})
   @ApiBody({schema:schema(contracts.acceptSchema)}) @ApiResponse({status:200,schema:schema(contracts.requestResponseSchema)})
   @ApiResponse({status:409,description:'STALE_VERSION or INVALID_STATE; reload and review.'})
   @ApiResponse({status:403,description:'Wrong role'}) @ApiResponse({status:404,description:'Unknown or out-of-scope request'})
@@ -196,7 +197,7 @@ export class RequestsController {
   }
 
   @Post('manager/approvals/:id/modify') @Roles('MANAGER') @HttpCode(200)
-  @ApiOperation({summary:'APPROVE_AND_ASSIGN',description:mutationDescription})
+  @ApiOperation({operationId:'modifyManagerRecommendation',summary:'Record modified current review',description:recommendationReviewDescription})
   @ApiBody({schema:schema(contracts.modifySchema)}) @ApiResponse({status:200,schema:schema(contracts.requestResponseSchema)})
   @ApiResponse({status:409,description:'STALE_VERSION or INVALID_STATE; reload and review.'})
   @ApiResponse({status:403,description:'Wrong role'}) @ApiResponse({status:404,description:'Unknown or out-of-scope request'})
@@ -207,7 +208,7 @@ export class RequestsController {
   }
 
   @Post('manager/approvals/:id/reject') @Roles('MANAGER') @HttpCode(200)
-  @ApiOperation({summary:'REJECT_APPROVAL',description:mutationDescription})
+  @ApiOperation({operationId:'rejectManagerRecommendation',summary:'Reject current review',description:recommendationReviewDescription})
   @ApiBody({schema:schema(contracts.rejectSchema)}) @ApiResponse({status:200,schema:schema(contracts.requestResponseSchema)})
   @ApiResponse({status:409,description:'STALE_VERSION or INVALID_STATE; reload and review.'})
   @ApiResponse({status:403,description:'Wrong role'}) @ApiResponse({status:404,description:'Unknown or out-of-scope request'})

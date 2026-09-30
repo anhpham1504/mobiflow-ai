@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "grounded-incident",
+  "schemaVersion": "recommendation.v2",
+  "synthetic": true,
+  "contextHash": "b093bf15fa3d71c5a219b43c7c45e702bb90a4f737aeb27fce406d1b576ae33a",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/grounded-incident-recommendation.v2-1.json",
+  "inputHash": "c88dfaaf205210e4ecd7d13812bbb92f701e88f1f28a4a4f1efa270663be4b3f",
+  "formatHash": "a2d1fc5855a990d332f96e79d079818ea2eb70471148ea58bbeff1d7b3739b2b",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 2349,
+  "outputHash": "d584372e5c61dcf8dad5bde6415cf7becf261aaec688d3dfd822285bb04670fb",
+  "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.\",\n      \"referenceId\": \"9bb0f855-bfe2-4ec9-b64e-9179fea58bc7\",\n      \"relevance\": \"Ghi nhận sự cố mất kết nối cụ thể về thời gian và số lượng SIM IoT tại vị trí Amata.\",\n      \"type\": \"REQUEST\"\n    },\n    {\n      \"excerpt\": \"# SOP tổng hợp M14\\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện s\", \"referenceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\",\n      \"relevance\": \"Cung cấp quy trình xử lý sự cố IoT mất kết nối, yêu cầu kiểm tra SIM và APN, và chỉ nhân員đ\", \"type\": \"KNOWLEDGE\"\n    }\n  ],\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"missingInformation\": [],\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng, phù hợp với SOP kiểm tra IoT M14.\",\n  \"recommendedAction\": {\n    \"action\": \"START_WORK\",\n    \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, sau khi được quản lý phê duyệt phương án xử lý.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedChecklist\": [\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\"\n      ],\n      \"text\": \"Xác minh trạng thái SIM và cấu hình APN của các thiết bị IoT tại Amata.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G1-C0\"\n      ],\n      \"text\": \"Ghi lại kết quả kiểm tra và báo cáo cho quản lý phê duyệt phương án xử lý.\"\n    }\n  ],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\",\n  \"summary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng, cần kiểm tra SIM và APN theo SOP M14.\",\n  \"warnings\": []\n}",
+  "durationMs": 13119,
+  "deadlineExceeded": false
+}

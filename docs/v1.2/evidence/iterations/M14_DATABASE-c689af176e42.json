@@ -1,0 +1,95 @@
+{
+  "checkedAt": "2026-09-30T14:21:15.830Z",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "provider": "deterministic test-only structured/embedding providers; no live-model claim",
+  "checks": [
+    {
+      "name": "seven migrations and nullable legacy confidence; V1 history and explicit approval remain intact",
+      "result": "PASS",
+      "durationMs": 647
+    },
+    {
+      "name": "V2 HTTP generation, validated read, no confidence and manager-only RBAC/IDOR",
+      "result": "PASS",
+      "durationMs": 599
+    },
+    {
+      "name": "MODIFIED stores separate human plan; explicit manual approval alone applies business changes",
+      "result": "PASS",
+      "durationMs": 556
+    },
+    {
+      "name": "REJECTED preserves original and reason without request/business mutation",
+      "result": "PASS",
+      "durationMs": 443
+    },
+    {
+      "name": "new generation supersedes a pending artifact and request changes make current review stale",
+      "result": "PASS",
+      "durationMs": 957
+    },
+    {
+      "name": "review revalidates source and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 461
+    },
+    {
+      "name": "review revalidates policy and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 442
+    },
+    {
+      "name": "queued revoked session fails before embedding or inference",
+      "result": "PASS",
+      "durationMs": 125
+    },
+    {
+      "name": "concurrent advisory reviews have one winner; audit failure rolls back review",
+      "result": "PASS",
+      "durationMs": 729
+    },
+    {
+      "name": "late publication rejects message race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 311
+    },
+    {
+      "name": "late publication rejects candidate race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 305
+    },
+    {
+      "name": "late publication rejects revoked-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 355
+    },
+    {
+      "name": "late publication rejects expired-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 269
+    },
+    {
+      "name": "bounded unavailable failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 299
+    },
+    {
+      "name": "bounded malformed failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1322
+    },
+    {
+      "name": "bounded fabricated-source failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1312
+    },
+    {
+      "name": "bounded embedding failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 191
+    }
+  ],
+  "limitations": "Targeted M14 and directly affected V1 approval regression only. No historical broad suites or live inference are represented by this report."
+}

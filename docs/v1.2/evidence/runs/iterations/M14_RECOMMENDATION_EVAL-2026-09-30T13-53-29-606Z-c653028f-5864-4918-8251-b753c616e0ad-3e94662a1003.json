@@ -1,0 +1,192 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "startedAt": "2026-09-30T13:53:29.606Z",
+  "datasetVersion": "m14.recommendation.synthetic.v1",
+  "datasetHash": "4c7b34e8639e2585ade8b4cf70a8aeef9a8bbdc1e2ab5eea64c267112961c8ad",
+  "orderedCaseIds": [
+    "grounded-incident",
+    "missing-information",
+    "no-procedural-source",
+    "request-injection",
+    "untrusted-markup",
+    "no-candidate"
+  ],
+  "orderWithinCase": [
+    "recommendation.v1",
+    "recommendation.v2"
+  ],
+  "synthetic": true,
+  "procedureCorpus": {
+    "sourceHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2",
+    "policy": "One unchanged synthetic SOP document; each harness disables the corpus and knowledge cases reactivate/reindex it through DocumentService and real ingestion."
+  },
+  "provider": "ollama",
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "embeddingModel": {
+    "name": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+  },
+  "ollamaVersion": "0.34.4",
+  "prompts": {
+    "v1": "grounded-recommendation.v3",
+    "v2": "grounded-recommendation.v2.2",
+    "sourceHash": "e14c2ebbc381678cb7c7b46ce8f1d66a3b5b430ef17c4c7170c15c1ff13f22bb"
+  },
+  "schemaSourceHash": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 20,
+    "totalMemoryBytes": 25551560704,
+    "temperature": 0,
+    "outputTokenBound": 1200,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "attemptBound": 2,
+    "retryDelayMs": 1000,
+    "seed": 42,
+    "contextTokens": 16384
+  },
+  "analysisPolicy": "Hand-authored validated synthetic analysis; no live analysis-accuracy claim. Actual Ollama embeddings and real PostgreSQL tools supply each frozen retrieval context.",
+  "checkedAt": "2026-09-30T13:53:43.299Z",
+  "result": "IN_PROGRESS",
+  "results": [
+    {
+      "id": "grounded-incident",
+      "inputHash": "661f0be14217adf845dba8923f975eaf7a5090a78b291e4a59dbcdf8aad07da5",
+      "expectedNextStep": "START_WORK",
+      "versions": [
+        {
+          "schemaVersion": "recommendation.v1",
+          "promptVersion": "grounded-recommendation.v3",
+          "status": "SUCCEEDED",
+          "schemaValid": true,
+          "referenceValid": true,
+          "actionVocabularyValid": null,
+          "missingFieldCoverage": null,
+          "expectedMainStep": null,
+          "attempts": [
+            {
+              "ordinal": 1,
+              "schemaValid": true,
+              "referenceValid": true,
+              "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/grounded-incident-recommendation.v1-1.json",
+              "inputHash": "e29be038aa197216500b7982bea4364499af3e95eaa6b74024cfdcc01b21192f",
+              "formatHash": "ec2f4b0437000674f4ad5b7246c7c3e04be34f6fdc4d85ab34bc99b46a57b852",
+              "authorizationMetadataExcluded": true,
+              "modelIdentity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "outputSize": 1000,
+              "outputHash": "d925009c89906312fc7cf9a2c5e406481d98ae3ed00b9c8a6e97acc1a2c7f526",
+              "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN. Nhân viên IoT Specialist và Network Specialist được phân công với độ tin cậy cao.\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+              "durationMs": 8081,
+              "deadlineExceeded": false
+            }
+          ],
+          "deadlineAt": "2026-09-30T13:58:35.217Z",
+          "recommendation": {
+            "suggestedPriority": "HIGH",
+            "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+            "suggestedStaffId": "10000000-0000-4000-8000-000000000003",
+            "suggestedSlaMinutes": 120,
+            "procedureSources": [
+              {
+                "sourceId": "KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0"
+              }
+            ],
+            "actions": [
+              {
+                "text": "Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án.",
+                "sourceIds": [
+                  "KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0"
+                ]
+              }
+            ],
+            "similarCaseAlert": {
+              "detected": false,
+              "count": 0
+            },
+            "confidence": 0.8,
+            "reasonSummary": "Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN. Nhân viên IoT Specialist và Network Specialist được phân công với độ tin cậy cao.",
+            "evidenceStatus": "SUFFICIENT"
+          },
+          "modelTotalMs": 8082,
+          "generationStatus": "SUCCEEDED"
+        }
+      ],
+      "procedureCorpus": {
+        "documentId": "3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9",
+        "sourceHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2",
+        "activeGeneration": 1
+      },
+      "contextCapture": {
+        "runId": "ed1788e2-37a0-4aee-bf03-577542a064b5",
+        "testOnlyStructuredOutput": true,
+        "authorizationMetadataExcluded": true,
+        "durationMs": 295,
+        "embeddingIdentity": {
+          "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "provider": "ollama",
+          "revision": "m5.v1",
+          "dimension": 1024
+        },
+        "sourceIds": [
+          "KD-3fe91ff8-b0bb-488f-9b0a-3252a3de2bf9-G1-C0"
+        ],
+        "sourceCount": 1,
+        "candidateCount": 2,
+        "contextHash": "524a2b5691ffeb9d37501cb88ecafb056999d4c9007a9b23cf92c8699d950c9e",
+        "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/grounded-incident-context.json"
+      },
+      "requestId": "6b75f7be-7a4e-4cd3-b429-c3ad2d8b84f8",
+      "commonContextHash": "b2a4d8f26a31dfa636336ae2d870014118d6a7827bbcf9c1f500193ad358c11a",
+      "v2RequestContextHash": "7ad967db548159f6ebd2a8fda776e2232e33f99febaff27866339fa39e0574cd"
+    }
+  ],
+  "metrics": {
+    "recommendation.v1": {
+      "cases": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "schemaValid": 1,
+      "referenceValid": 1,
+      "actionVocabularyValid": null,
+      "expectedMainStep": null,
+      "missingFieldCoverage": null,
+      "firstAttemptValid": 1,
+      "repairCount": 0,
+      "attempts": 1,
+      "schemaValidAttempts": 1,
+      "referenceValidAttempts": 1,
+      "modelP50Ms": 8082,
+      "modelP95Ms": 8082
+    },
+    "recommendation.v2": {
+      "cases": 0,
+      "succeeded": 0,
+      "failed": 0,
+      "schemaValid": 0,
+      "referenceValid": 0,
+      "actionVocabularyValid": 0,
+      "expectedMainStep": 0,
+      "missingFieldCoverage": 0,
+      "firstAttemptValid": 0,
+      "repairCount": 0,
+      "attempts": 0,
+      "schemaValidAttempts": 0,
+      "referenceValidAttempts": 0,
+      "modelP50Ms": null,
+      "modelP95Ms": null
+    }
+  },
+  "limitations": "Six ordered synthetic/development cases with one configured local model and one run per version per case. Context IDs/timestamps are run-specific and hashed; each frozen synthetic snapshot is retained. V1 lacks dedicated next-step/missing-question fields; comparison reports this contract difference. Parser membership establishes grounding/reference safety, not semantic correctness or production accuracy. Attempt files retain the provider structured-content field only, including failed/truncated synthetic output; no hidden reasoning field or private prompt is captured. Semantic actionability has not been human-scored. No composite quality/confidence/production effectiveness claim."
+}

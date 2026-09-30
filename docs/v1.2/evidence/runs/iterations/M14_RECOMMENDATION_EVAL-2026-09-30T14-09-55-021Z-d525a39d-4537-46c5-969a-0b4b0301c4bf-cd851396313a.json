@@ -1,0 +1,298 @@
+{
+  "evaluationId": "2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf",
+  "startedAt": "2026-09-30T14:09:55.021Z",
+  "datasetVersion": "m14.recommendation.synthetic.v1",
+  "datasetHash": "4c7b34e8639e2585ade8b4cf70a8aeef9a8bbdc1e2ab5eea64c267112961c8ad",
+  "orderedCaseIds": [
+    "grounded-incident",
+    "missing-information",
+    "no-procedural-source",
+    "request-injection",
+    "untrusted-markup",
+    "no-candidate"
+  ],
+  "orderWithinCase": [
+    "recommendation.v1",
+    "recommendation.v2"
+  ],
+  "synthetic": true,
+  "procedureCorpus": {
+    "sourceHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2",
+    "policy": "One unchanged synthetic SOP document; each harness disables the corpus and knowledge cases reactivate/reindex it through DocumentService and real ingestion."
+  },
+  "provider": "ollama",
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "embeddingModel": {
+    "name": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+  },
+  "ollamaVersion": "0.34.4",
+  "prompts": {
+    "v1": "grounded-recommendation.v3",
+    "v2": "grounded-recommendation.v2.3",
+    "sourceHash": "506cdb1587b714f263f7e4bf49f9922f311022b795abfbf93539545c8df890ee"
+  },
+  "schemaSourceHash": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpus": 20,
+    "totalMemoryBytes": 25551560704,
+    "temperature": 0,
+    "outputTokenBound": 1200,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "attemptBound": 2,
+    "retryDelayMs": 1000,
+    "seed": 42,
+    "contextTokens": 16384
+  },
+  "analysisPolicy": "Hand-authored validated synthetic analysis; no live analysis-accuracy claim. Actual Ollama embeddings and real PostgreSQL tools supply each frozen retrieval context.",
+  "checkedAt": "2026-09-30T14:10:26.123Z",
+  "result": "IN_PROGRESS",
+  "results": [
+    {
+      "id": "grounded-incident",
+      "inputHash": "661f0be14217adf845dba8923f975eaf7a5090a78b291e4a59dbcdf8aad07da5",
+      "expectedNextStep": "START_WORK",
+      "versions": [
+        {
+          "schemaVersion": "recommendation.v1",
+          "promptVersion": "grounded-recommendation.v3",
+          "status": "SUCCEEDED",
+          "schemaValid": true,
+          "referenceValid": true,
+          "actionVocabularyValid": null,
+          "missingFieldCoverage": null,
+          "expectedMainStep": null,
+          "attempts": [
+            {
+              "ordinal": 1,
+              "schemaValid": true,
+              "referenceValid": true,
+              "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf/grounded-incident-recommendation.v1-1.json",
+              "inputHash": "b1bceb950bec2e0afd6c662a1a32eed2653283543f4046bf03e726f452abc4a2",
+              "formatHash": "28bd6dfd96325a197bebf0866f21323a47367a897b96f1c81b3db7a90e95793c",
+              "authorizationMetadataExcluded": true,
+              "modelIdentity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "outputSize": 1202,
+              "outputHash": "fd2d72a9dfe8ade27cdb01a133fae37c86ebfb429f15b32073705f52feeb3488",
+              "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN cho 17 thiết bị IoT tại Amata từ 8 giờ sáng. Nhân viên được phân công là IoT Specialist và Network Specialist (đều có kỹ năng IOT và NETWORK).\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+              "durationMs": 9204,
+              "deadlineExceeded": false
+            }
+          ],
+          "deadlineAt": "2026-09-30T14:15:01.436Z",
+          "recommendation": {
+            "suggestedPriority": "HIGH",
+            "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+            "suggestedStaffId": "10000000-0000-4000-8000-000000000003",
+            "suggestedSlaMinutes": 120,
+            "procedureSources": [
+              {
+                "sourceId": "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+              }
+            ],
+            "actions": [
+              {
+                "text": "Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.",
+                "sourceIds": [
+                  "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+                ]
+              }
+            ],
+            "similarCaseAlert": {
+              "detected": false,
+              "count": 0
+            },
+            "confidence": 0.8,
+            "reasonSummary": "Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN cho 17 thiết bị IoT tại Amata từ 8 giờ sáng. Nhân viên được phân công là IoT Specialist và Network Specialist (đều có kỹ năng IOT và NETWORK).",
+            "evidenceStatus": "SUFFICIENT"
+          },
+          "modelTotalMs": 9207,
+          "generationStatus": "SUCCEEDED"
+        },
+        {
+          "schemaVersion": "recommendation.v2",
+          "promptVersion": "grounded-recommendation.v2.3",
+          "status": "SUCCEEDED",
+          "schemaValid": true,
+          "referenceValid": true,
+          "actionVocabularyValid": true,
+          "missingFieldCoverage": true,
+          "expectedMainStep": true,
+          "attempts": [
+            {
+              "ordinal": 1,
+              "schemaValid": true,
+              "referenceValid": true,
+              "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf/grounded-incident-recommendation.v2-1.json",
+              "inputHash": "1130b9f87d4ef262300356e3ba9f7464d6e03cbff187a05493c589770f76eaaf",
+              "formatHash": "7c2e2be4b7d40994e6589445e0e129debb2554ec4a307f24554beeed0b5c65a9",
+              "authorizationMetadataExcluded": true,
+              "modelIdentity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "outputSize": 2913,
+              "outputHash": "17ec5d73d734a11567ed323fd6845be0f25cb5019854349f2fefa6ee930a4e21",
+              "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.\",\n      \"referenceId\": \"66bab6bd-529f-41b2-9cb9-06a098f2d2f9\",\n      \"relevance\": \"Dữ kiện hiện tại mô tả sự cố mất kết nối của 17 SIM IoT tại Amata từ 8 giờ sáng, khớp với nội dung báo cáo.\",\n      \"type\": \"REQUEST\"\n    },\n    {\n      \"excerpt\": \"# SOP tổng hợp M14\\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.\",\n      \"referenceId\": \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\",\n      \"relevance\": \"SOP M14 cung cấp quy trình xử lý sự cố IoT mất kết nối, yêu cầu kiểm tra SIM và APN, và nhấn mạnh cần hỏi bổ sung nếu thiếu thông tin.\",\n      \"type\": \"KNOWLEDGE\"\n    }\n  ],\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"missingInformation\": [],\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng được xác định theo SOP M14. Cần kiểm tra trạng thái SIM và cấu hình APN.\",\n  \"recommendedAction\": {\n    \"action\": \"START_WORK\",\n    \"text\": \"Nhân viên được phân công cần kiểm tra trạng thái SIM và cấu hình APN của các thiết bị IoT tại Amata, bắt đầu từ 8 giờ sáng.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedChecklist\": [\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM của các thiết bị IoT tại Amata.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra cấu hình APN của các thiết bị IoT tại Amata.\"\n    },\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n      ],\n      \"text\": \"Ghi lại kết quả kiểm tra và báo cáo cho quản lý để phê duyệt phương án xử lý.\"\n    }\n  ],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\",\n  \"summary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng được xác định. Cần thực hiện kiểm tra trạng thái SIM và cấu hình APN theo SOP M14.\",\n  \"warnings\": []\n}",
+              "durationMs": 15324,
+              "deadlineExceeded": false
+            }
+          ],
+          "deadlineAt": "2026-09-30T14:15:10.646Z",
+          "recommendation": {
+            "schemaVersion": "recommendation.v2",
+            "summary": "Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng được xác định. Cần thực hiện kiểm tra trạng thái SIM và cấu hình APN theo SOP M14.",
+            "classification": {
+              "category": "NETWORK",
+              "subcategory": "IOT_CONNECTIVITY",
+              "priority": "HIGH"
+            },
+            "suggestedPriority": "HIGH",
+            "suggestedTeamId": "20000000-0000-4000-8000-000000000001",
+            "suggestedStaffId": "10000000-0000-4000-8000-000000000003",
+            "suggestedSlaMinutes": 120,
+            "recommendedAction": {
+              "action": "START_WORK",
+              "text": "Nhân viên được phân công cần kiểm tra trạng thái SIM và cấu hình APN của các thiết bị IoT tại Amata, bắt đầu từ 8 giờ sáng."
+            },
+            "reasonSummary": "Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ sáng được xác định theo SOP M14. Cần kiểm tra trạng thái SIM và cấu hình APN.",
+            "procedureSources": [
+              {
+                "sourceId": "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+              }
+            ],
+            "evidence": [
+              {
+                "type": "REQUEST",
+                "referenceId": "66bab6bd-529f-41b2-9cb9-06a098f2d2f9",
+                "excerpt": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+                "relevance": "Dữ kiện hiện tại mô tả sự cố mất kết nối của 17 SIM IoT tại Amata từ 8 giờ sáng, khớp với nội dung báo cáo."
+              },
+              {
+                "type": "KNOWLEDGE",
+                "referenceId": "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0",
+                "excerpt": "# SOP tổng hợp M14\nKhi thiết bị IoT mất kết nối, kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả kiểm tra. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.",
+                "relevance": "SOP M14 cung cấp quy trình xử lý sự cố IoT mất kết nối, yêu cầu kiểm tra SIM và APN, và nhấn mạnh cần hỏi bổ sung nếu thiếu thông tin."
+              }
+            ],
+            "warnings": [],
+            "missingInformation": [],
+            "suggestedChecklist": [
+              {
+                "text": "Kiểm tra trạng thái SIM của các thiết bị IoT tại Amata.",
+                "sourceIds": [
+                  "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+                ]
+              },
+              {
+                "text": "Kiểm tra cấu hình APN của các thiết bị IoT tại Amata.",
+                "sourceIds": [
+                  "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+                ]
+              },
+              {
+                "text": "Ghi lại kết quả kiểm tra và báo cáo cho quản lý để phê duyệt phương án xử lý.",
+                "sourceIds": [
+                  "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+                ]
+              }
+            ],
+            "similarCaseAlert": {
+              "detected": false,
+              "count": 0
+            },
+            "evidenceStatus": "SUFFICIENT"
+          },
+          "noConfidence": true,
+          "proceduralEvidence": "SUFFICIENT",
+          "modelTotalMs": 15326,
+          "generationStatus": "SUCCEEDED",
+          "persistenceMs": 97,
+          "actualPublishedRunId": "81b66c28-3799-4964-9ebd-a6b930b5e520",
+          "actualPublishedRecommendationId": "7132166f-b229-4315-bd5a-9b5e2a605856",
+          "apiReadMs": 43,
+          "artifactOnlyPublication": true
+        }
+      ],
+      "procedureCorpus": {
+        "documentId": "4e37a238-3802-4e41-9135-4ae4ff380fcb",
+        "sourceHash": "cc9b0d3b831e68ad2a8141b853071c5464c7e56ca5be3921a08dbd6e834f01c2",
+        "activeGeneration": 1
+      },
+      "contextCapture": {
+        "runId": "5ab7b1ee-b6ad-4599-98f3-3ed998cf0d47",
+        "testOnlyStructuredOutput": true,
+        "authorizationMetadataExcluded": true,
+        "durationMs": 311,
+        "embeddingIdentity": {
+          "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "provider": "ollama",
+          "revision": "m5.v1",
+          "dimension": 1024
+        },
+        "sourceIds": [
+          "KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0"
+        ],
+        "sourceCount": 1,
+        "candidateCount": 2,
+        "contextHash": "d6cbb2e40852eabe5d01733b2f72c35349fc850abdde722f0205ff61c1ef3b03",
+        "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf/grounded-incident-context.json"
+      },
+      "requestId": "66bab6bd-529f-41b2-9cb9-06a098f2d2f9",
+      "commonContextHash": "bc593953c66bd456ae806cbb1698e91f472a5cdb8f50fd137eed1626a3344aab",
+      "v2RequestContextHash": "6029bdd1a087f070a5104b7b2bacfeaedb76e8364a67f2ae5ecd2e88d79e5580",
+      "totalMs": 28866
+    }
+  ],
+  "metrics": {
+    "recommendation.v1": {
+      "cases": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "schemaValid": 1,
+      "referenceValid": 1,
+      "actionVocabularyValid": null,
+      "expectedMainStep": null,
+      "missingFieldCoverage": null,
+      "firstAttemptValid": 1,
+      "repairCount": 0,
+      "attempts": 1,
+      "schemaValidAttempts": 1,
+      "referenceValidAttempts": 1,
+      "modelP50Ms": 9207,
+      "modelP95Ms": 9207
+    },
+    "recommendation.v2": {
+      "cases": 1,
+      "succeeded": 1,
+      "failed": 0,
+      "schemaValid": 1,
+      "referenceValid": 1,
+      "actionVocabularyValid": 1,
+      "expectedMainStep": 1,
+      "missingFieldCoverage": 1,
+      "firstAttemptValid": 1,
+      "repairCount": 0,
+      "attempts": 1,
+      "schemaValidAttempts": 1,
+      "referenceValidAttempts": 1,
+      "modelP50Ms": 15326,
+      "modelP95Ms": 15326
+    }
+  },
+  "limitations": "Six ordered synthetic/development cases with one configured local model and one run per version per case. Context IDs/timestamps are run-specific and hashed; each frozen synthetic snapshot is retained. V1 lacks dedicated next-step/missing-question fields; comparison reports this contract difference. Parser membership establishes grounding/reference safety, not semantic correctness or production accuracy. Attempt files retain the provider structured-content field only, including failed/truncated synthetic output; no hidden reasoning field or private prompt is captured. Semantic actionability has not been human-scored. No composite quality/confidence/production effectiveness claim."
+}

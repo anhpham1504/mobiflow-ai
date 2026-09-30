@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T13-46-45-989Z-89032bd9-36d1-4f9f-bab1-53bbd58ad28a",
+  "caseId": "grounded-incident",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "8bc62e2151993f38e8900f5578165061283ea30c794e94b80b99a8d5a299e0f4",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-46-45-989Z-89032bd9-36d1-4f9f-bab1-53bbd58ad28a/grounded-incident-recommendation.v1-1.json",
+  "inputHash": "2fdeb85475407a78d37367b0f724d6114403abe0edf57d9cc4dd104896357d20",
+  "formatHash": "243bc0ece11ca8a575b87859a6330da12fa9e7095c33fdbb3fb3dbc7d01bf7de",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1023,
+  "outputHash": "52f79295e2d2111c0c0e9c1281074531af3d3fa2955150b251a760b320a0e9fe",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-61d7c770-9298-4e22-a1f7-ce54dad72044-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-61d7c770-9298-4e22-a1f7-ce54dad72044-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN. Không có báo cáo trực tiếp về sự cố kết nối, nhưng có chỉ dẫn hành động rõ ràng trong SOP.\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 9254,
+  "deadlineExceeded": false
+}

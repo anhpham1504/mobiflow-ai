@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "missing-information",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "ad7aa2e0e4505216abc9b22b25e016629d160b1e38c9f56a46e67d59134e5dbe",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273/missing-information-recommendation.v1-1.json",
+  "inputHash": "9f654d5215a72bb25f692896bf9927a8dde37616a5b07e6c58df89e2afc162bf",
+  "formatHash": "fc5ae7511d60f54b108a29bace26d1d00c5c4863284e959e6a071857e16f4919",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1018,
+  "outputHash": "cdf3cf431d7cc47bd36b6e9072fba9c2bd6e6f125375eae389cec4c5a4ee4622",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của các thiết bị IoT. Ghi lại kết quả kiểm tra để xác định nguyên nhân mất kết nối.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-ad02ccde-3402-4fbf-8f33-c373139d544e-G2-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, cần kiểm tra trạng thái SIM và cấu hình APN để xác định nguyên nhân mất kết nối. Địa điểm và thời gian bắt đầu chưa rõ, nên cần hỏi bổ sung trước khi đánh giá phạm vi sự cố.\",\n  \"similarCaseAlert\": {\n    \"count\": 1,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 6356,
+  "deadlineExceeded": false
+}

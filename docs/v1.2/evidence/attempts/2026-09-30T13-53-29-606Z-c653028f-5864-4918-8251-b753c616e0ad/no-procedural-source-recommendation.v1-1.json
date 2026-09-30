@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "no-procedural-source",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "79e500a3fdbd16349e5ef8874da52208a56f13fb79222af359a233a3b8a92a16",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/no-procedural-source-recommendation.v1-1.json",
+  "inputHash": "c3415d30e4d19a9ba15d8d1968dc4695d254a13a0809440bfe0219f9a82b76cf",
+  "formatHash": "3222f73c5256b1bf078fd0faab6c669a8fff63ec958d97582e49d88f64f74eb8",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 556,
+  "outputHash": "1e84559321e8e1ae1f5caca4006713cedb0b389c456461cca88b5a42a398c4ba",
+  "structuredOutput": "{\n  \"actions\": [],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"INSUFFICIENT_EVIDENCE\",\n  \"procedureSources\": [],\n  \"reasonSummary\": \"Không có nguồn dữ liệu hỗ trợ để xác minh sự cố. Không có SOP được cung cấp, thời gian mất kết nối chưa rõ ràng, và không có thông tin chi tiết về khách hàng hoặc địa điểm cụ thể.\",\n  \"similarCaseAlert\": {\n    \"count\": 2,\n    \"detected\": true\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": null,\n  \"suggestedTeamId\": null\n}",
+  "durationMs": 3183,
+  "deadlineExceeded": false
+}

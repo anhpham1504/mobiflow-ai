@@ -1,0 +1,27 @@
+{
+  "evaluationId": "2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad",
+  "caseId": "no-procedural-source",
+  "schemaVersion": "recommendation.v2",
+  "synthetic": true,
+  "contextHash": "79e500a3fdbd16349e5ef8874da52208a56f13fb79222af359a233a3b8a92a16",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": false,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T13-53-29-606Z-c653028f-5864-4918-8251-b753c616e0ad/no-procedural-source-recommendation.v2-1.json",
+  "inputHash": "147e9574549e2f8c1a79cd525f22b6a66d44fe334a7344c7979db9791da37ea1",
+  "formatHash": "130b6251e9cef57b7e1203e9b511004325af1b14874a76e2623f1866d30336c3",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1791,
+  "outputHash": "f3cfd0f319f79da40549a463376a2ebffe9c6ca56252390c322e5f8fdc643b8b",
+  "structuredOutput": "{\n  \"classification\": {\n    \"category\": \"NETWORK\",\n    \"priority\": \"HIGH\",\n    \"subcategory\": \"IOT_CONNECTIVITY\"\n  },\n  \"evidence\": [\n    {\n      \"excerpt\": \"17 SIM IoT tại Amata mất kết nối từ 8 giờ; chưa có SOP được cung cấp.\",\n      \"referenceId\": \"606ed44e-51e4-4519-8e62-f6f4a1da4986\",\n      \"relevance\": \"Dữ kiện chính xác mô tả sự cố và thời gian xảy ra tại Amata.\",\n      \"type\": \"REQUEST\"\n    },\n    {\n      \"excerpt\": \"Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.\",\n      \"referenceId\": \"6b75f7be-7a4e-4cd3-b429-c3ad2d8b84f8\",\n      \"relevance\": \"Xác nhận sự cố tương tự đã xảy ra trước đó tại cùng địa điểm và số lượng SIM.\",\n      \"type\": \"HISTORICAL_REQUEST\"\n    }\n  ],\n  \"evidenceStatus\": \"INSUFFICIENT_EVIDENCE\",\n  \"missingInformation\": [],\n  \"procedureSources\": [],\n  \"reasonSummary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ, không có SOP hiện hành. Dữ liệu lịch sử cho thấy trường hợp tương tự trước đó.\",\n  \"recommendedAction\": {\n    \"action\": \"START_WORK\",\n    \"text\": \"Phân công nhân viên chuyên IoT hoặc mạng để kiểm tra kết nối và xác minh tình trạng thiết bị tại Amata. Cần xác nhận thời gian bắt đầu và số lượng thiết bị thực tế.\"\n  },\n  \"schemaVersion\": \"recommendation.v2\",\n  \"similarCaseAlert\": {\n    \"count\": 2,\n    \"detected\": true\n  },\n  \"suggestedChecklist\": [],\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": null,\n  \"suggestedTeamId\": null,\n  \"summary\": \"Sự cố mất kết nối 17 SIM IoT tại Amata từ 8 giờ, không có SOP. Có lịch sử tương tự trước đó.\",\n  \"warnings\": []\n}",
+  "errorCode": "INVALID_REFERENCE",
+  "validationRule": "INSUFFICIENT_WARNING_REQUIRED",
+  "repairFeedback": "INSUFFICIENT_WARNING_REQUIRED: Use only the supplied facts, candidate/source IDs, exact policy and similar count.",
+  "durationMs": 9893,
+  "deadlineExceeded": false
+}

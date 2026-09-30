@@ -1,0 +1,137 @@
+{
+  "checkedAt": "2026-09-30T14:31:12.842Z",
+  "runId": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-09-30T14:30:01.557Z",
+    "duration": 71250.909,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+      "provider": "deterministic test-only",
+      "decisions": [
+        {
+          "decision": "ACCEPTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "MODIFIED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "REJECTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        }
+      ],
+      "manualBoundary": {
+        "draftNoAssignment": true,
+        "submittedNoAssignment": true,
+        "explicitApprovalAssigned": true,
+        "originalV2Preserved": true,
+        "staffSeesApprovedHumanChecklistOnly": true
+      },
+      "historicalV1Readable": true,
+      "sourceUiReadable": true,
+      "keyboardGenerate": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+      "escapedHtmlLiteral": true,
+      "noInjectedElementOrExecution": true,
+      "sizes": [
+        {
+          "width": 360,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1920,
+          "overflow": false,
+          "violations": 0
+        }
+      ],
+      "keyboardSkipLink": true,
+      "keyboardReview": true,
+      "missingQuestionsAndImpact": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+      "actualQueuedJobFailure": true,
+      "invalidResultNotPublished": true,
+      "explicitRetrySucceeded": true,
+      "coreUnchanged": true,
+      "userPanelAbsent": true,
+      "unassignedStaffDenied": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "fd8e86e7-b551-45b8-bcd7-708a89bcb517",
+      "uiTransportProjections": [
+        "held loading",
+        "503 sanitized failure + retry",
+        "invalid 200 rejected",
+        "403 clears payload and hides generate",
+        "real superseded artifact response",
+        "delayed generation/poll after navigation"
+      ],
+      "realSupersession": true,
+      "realRequestChangeStale": true,
+      "staleReviewDisabled": true,
+      "sessionRotationCancelsUnfinishedJob": true,
+      "explicitRetryAfterRotationSucceeded": true,
+      "canceledGenerationDoesNotPopulateNewRequest": true,
+      "canceledPollDoesNotPopulateNewRequest": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+      ],
+      "externalCspBlocks": 0
+    }
+  ],
+  "workerErrors": [],
+  "limitations": "Deterministic synthetic structured/embedding providers against real PostgreSQL and production Next build. UI-only transport failures/races are explicitly labeled. Separate live Ollama evaluation is required; no model effectiveness claim."
+}

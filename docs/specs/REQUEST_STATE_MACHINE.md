@@ -78,4 +78,6 @@ USER_REOPEN clears currentResolutionId/resolvedAt and cancels QUEUED/RUNNING sum
 
 ## Acceptance and dependencies
 
+M14 version dispatch is deliberately before transitionTarget/event creation: a manager AI review identifying a `recommendation.v2` artifact takes a transactional advisory path. It updates artifact review metadata and audit only, never Request status/version, history, assignment, SLA, checklist or notifications. Publication also stays TRIAGED at the captured version. ACCEPTED means agreement; MODIFIED stores a separate validated human plan; REJECTED retains the original and reason. Stale/replay/source/eligibility/session negatives change nothing. V1/manual APPROVE_AND_ASSIGN and REJECT_APPROVAL retain the transitions described above. Applying any V2 plan requires the existing manual triage → submit → explicit approval; no transition/action enum was added.
+
 M3 implements/test every edge using manual facts; M4 implements AI completion/failure; M6 recommendation publication; M7 human review; M8 full Copilot/summary. Unit coverage enumerates all states/actions/roles and denies the complement. Real-DB tests prove rollback, concurrent approval, cancellation races, reopen, timestamp integrity, assignment access changes and SLA effects. See [TEST_STRATEGY](TEST_STRATEGY.md).

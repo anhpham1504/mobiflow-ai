@@ -1,0 +1,191 @@
+{
+  "evaluationId": "2026-09-30T14-16-58-275Z-7d1d27ca-c714-46e1-aa1d-10cb98d38273",
+  "caseId": "no-procedural-source",
+  "synthetic": true,
+  "input": {
+    "id": "no-procedural-source",
+    "description": "17 SIM IoT tại Amata mất kết nối từ 8 giờ; chưa có SOP được cung cấp.",
+    "knowledge": false,
+    "missing": [],
+    "expectedNextStep": "START_WORK"
+  },
+  "commonContextHash": "52aed6ae8c84288fb26ab65872614b2624893ef6dbd02c0d3bcfa4e3054711ac",
+  "v2RequestContextHash": "1f21fe9ff1ca52d8aa3c6048a4839e3cc4a03e55342eb99461ff574ce3e03dae",
+  "evidence": {
+    "policy": {
+      "id": "50000000-0000-4000-8000-000000000003",
+      "version": 1,
+      "category": null,
+      "priority": "HIGH",
+      "targetMinutes": 120
+    },
+    "history": {
+      "events": [
+        {
+          "id": "0ec09645-f690-41f9-ba30-4216e152b0c5",
+          "type": "CREATE",
+          "payload": {
+            "toStatus": "NEW",
+            "fromStatus": null,
+            "requestVersion": 1
+          },
+          "actorType": "USER",
+          "timestamp": "2026-09-30T14:17:46.659Z"
+        },
+        {
+          "id": "473eb4fa-3d48-455d-909e-f768e4efee18",
+          "type": "START_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "AI_ANALYZING",
+            "fromStatus": "NEW",
+            "requestVersion": 2
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T14:17:46.693Z"
+        },
+        {
+          "id": "d855006a-e97b-4901-980e-cc27e78eacc1",
+          "type": "COMPLETE_AI_ANALYSIS",
+          "payload": {
+            "toStatus": "TRIAGED",
+            "fromStatus": "AI_ANALYZING",
+            "requestVersion": 3
+          },
+          "actorType": "SYSTEM",
+          "timestamp": "2026-09-30T14:17:46.713Z"
+        }
+      ],
+      "truncated": false
+    },
+    "similar": {
+      "cases": [
+        {
+          "score": 0.9636290116539779,
+          "title": "Khách hàng DEMO có 17 SIM IoT tại Amata mất kết nối từ 8 giờ sáng.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": "Amata",
+          "createdAt": "2026-09-30T14:17:01.582Z",
+          "requestId": "9bb0f855-bfe2-4ec9-b64e-9179fea58bc7",
+          "publicCode": "MF-2026-000001",
+          "contextVersion": 3,
+          "scoreComponents": {
+            "vector": 0.9435712231270004,
+            "recency": 0.9748627777777777,
+            "category": 1,
+            "location": 1,
+            "cosineSimilarity": 0.8871424462540006
+          }
+        },
+        {
+          "score": 0.8147845201264969,
+          "title": "Nhiều SIM IoT mất kết nối, chưa biết địa điểm và thời gian bắt đầu.",
+          "status": "TRIAGED",
+          "category": "NETWORK",
+          "location": null,
+          "createdAt": "2026-09-30T14:17:22.850Z",
+          "requestId": "9c6fa230-45e1-4e32-bf6d-687d19ad005d",
+          "publicCode": "MF-2026-000002",
+          "contextVersion": 3,
+          "scoreComponents": {
+            "vector": 0.8601944779886059,
+            "recency": 0.9866783333333333,
+            "category": 1,
+            "location": 0,
+            "cosineSimilarity": 0.720388955977212
+          }
+        }
+      ],
+      "truncated": false,
+      "returnedCount": 2,
+      "windowMinutes": 30
+    },
+    "sources": [],
+    "analysis": {
+      "intent": "REPORT_INCIDENT",
+      "category": "NETWORK",
+      "entities": {
+        "customer": null,
+        "location": "Amata",
+        "startedAt": "8 giờ",
+        "affectedCount": 17
+      },
+      "confidence": 0.8,
+      "subcategory": "IOT_CONNECTIVITY",
+      "missingFields": [],
+      "reasonSummary": "Synthetic M14 test analysis; no live inference claim.",
+      "prioritySuggestion": "HIGH"
+    },
+    "workload": {
+      "asOf": "2026-09-30T14:17:46.940Z",
+      "workloads": [
+        {
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "activeCount": 1
+        },
+        {
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "activeCount": 1
+        }
+      ]
+    },
+    "analysisId": "bafbde9e-7ca2-4b43-bde2-c134be18dafe",
+    "candidates": {
+      "candidates": [
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000003",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "IoT Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        },
+        {
+          "score": 0.8529411764705882,
+          "teamId": "20000000-0000-4000-8000-000000000001",
+          "staffId": "10000000-0000-4000-8000-000000000004",
+          "skillCodes": [
+            "IOT",
+            "NETWORK"
+          ],
+          "displayName": "Network Specialist",
+          "activeWorkload": 1,
+          "scoreComponents": {
+            "skillMatch": 1,
+            "workloadScore": 0.5
+          }
+        }
+      ],
+      "scoringVersion": "staff.v1"
+    },
+    "retrievedAt": "2026-09-30T14:17:46.957Z",
+    "requestContext": {
+      "id": "30357d2b-463f-49a2-9300-58864fcf5ab2",
+      "sla": null,
+      "title": "17 SIM IoT tại Amata mất kết nối từ 8 giờ; chưa có SOP được cung cấp.",
+      "status": "TRIAGED",
+      "version": 3,
+      "category": null,
+      "location": "Amata",
+      "priority": "MEDIUM",
+      "description": "17 SIM IoT tại Amata mất kết nối từ 8 giờ; chưa có SOP được cung cấp.",
+      "subcategory": null
+    },
+    "requestVersion": 3,
+    "embeddingIdentity": {
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "provider": "ollama",
+      "revision": "m5.v1",
+      "dimension": 1024
+    }
+  }
+}

@@ -485,7 +485,7 @@ model AiRecommendation {
   similarCaseAlertJson Json
   evidenceStatus       EvidenceStatus
   reasonSummary        String               @db.VarChar(1000)
-  confidence           Decimal              @db.Decimal(4, 3)
+  confidence           Decimal?             @db.Decimal(4, 3)
   status               RecommendationStatus @default(PENDING)
   reviewedById         String?              @db.Uuid
   reviewedAt           DateTime?            @db.Timestamptz(6)

@@ -1,0 +1,24 @@
+{
+  "evaluationId": "2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf",
+  "caseId": "grounded-incident",
+  "schemaVersion": "recommendation.v1",
+  "synthetic": true,
+  "contextHash": "d6cbb2e40852eabe5d01733b2f72c35349fc850abdde722f0205ff61c1ef3b03",
+  "ordinal": 1,
+  "schemaValid": true,
+  "referenceValid": true,
+  "artifactPath": "docs/v1.2/evidence/attempts/2026-09-30T14-09-55-021Z-d525a39d-4537-46c5-969a-0b4b0301c4bf/grounded-incident-recommendation.v1-1.json",
+  "inputHash": "b1bceb950bec2e0afd6c662a1a32eed2653283543f4046bf03e726f452abc4a2",
+  "formatHash": "28bd6dfd96325a197bebf0866f21323a47367a897b96f1c81b3db7a90e95793c",
+  "authorizationMetadataExcluded": true,
+  "modelIdentity": {
+    "provider": "ollama",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "outputSize": 1202,
+  "outputHash": "fd2d72a9dfe8ade27cdb01a133fae37c86ebfb429f15b32073705f52feeb3488",
+  "structuredOutput": "{\n  \"actions\": [\n    {\n      \"sourceIds\": [\n        \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n      ],\n      \"text\": \"Kiểm tra trạng thái SIM và cấu hình APN của 17 SIM IoT tại Amata, bắt đầu từ 8 giờ sáng. Chỉ nhân viên được phân công mới thực hiện sau khi quản lý duyệt phương án. Nếu chưa rõ địa điểm hoặc thời điểm bắt đầu, hỏi bổ sung trước khi đánh giá phạm vi sự cố.\"\n    }\n  ],\n  \"confidence\": 0.8,\n  \"evidenceStatus\": \"SUFFICIENT\",\n  \"procedureSources\": [\n    {\n      \"sourceId\": \"KD-4e37a238-3802-4e41-9135-4ae4ff380fcb-G1-C0\"\n    }\n  ],\n  \"reasonSummary\": \"Dựa trên SOP kiểm tra IoT — synthetic M14, xác định cần kiểm tra trạng thái SIM và cấu hình APN cho 17 thiết bị IoT tại Amata từ 8 giờ sáng. Nhân viên được phân công là IoT Specialist và Network Specialist (đều có kỹ năng IOT và NETWORK).\",\n  \"similarCaseAlert\": {\n    \"count\": 0,\n    \"detected\": false\n  },\n  \"suggestedPriority\": \"HIGH\",\n  \"suggestedSlaMinutes\": 120,\n  \"suggestedStaffId\": \"10000000-0000-4000-8000-000000000003\",\n  \"suggestedTeamId\": \"20000000-0000-4000-8000-000000000001\"\n}",
+  "durationMs": 9204,
+  "deadlineExceeded": false
+}
