@@ -19,8 +19,8 @@ test('M3 real browser: three-role manual workflow, waiting/reopen, stale protect
     await signIn(user,'user@mobiflow.local');
     await user.getByRole('link',{name:'Tạo yêu cầu',exact:true}).click();
     const title='Kiểm thử trình duyệt M3 '+Date.now();
-    await user.getByLabel('Tiêu đề (không bắt buộc)').fill(title);
-    await user.getByLabel('Mô tả yêu cầu',{exact:true}).fill('Thiết bị IoT tại văn phòng demo mất kết nối từ sáng nay.');
+    await user.getByLabel('Tiêu đề Không bắt buộc',{exact:true}).fill(title);
+    await user.getByRole('textbox',{name:/^Mô tả yêu cầu/}).fill('Thiết bị IoT tại văn phòng demo mất kết nối từ sáng nay.');
     await user.getByRole('button',{name:'Gửi yêu cầu',exact:true}).click();
     await expect(user.getByRole('heading',{name:title,exact:true})).toBeVisible();
     // M4 completes automatic intake first; all M3 manual workflow assertions remain.

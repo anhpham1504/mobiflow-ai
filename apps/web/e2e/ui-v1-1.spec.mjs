@@ -4,7 +4,7 @@ import {signIn} from './m4-helpers.mjs';
 /* global document,window */
 
 const shots='artifacts/ui-v1-1/screenshots';
-async function capture(page,name){for(const width of [1440,390]){await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);await page.screenshot({path:`${shots}/${name}-${width}.png`,fullPage:true});}}
+async function capture(page,name){for(const width of [1440,390]){await page.setViewportSize({width,height:1000});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);await axeMajor(page);await page.screenshot({path:`${shots}/${name}-${width}.png`,fullPage:true});}}
 async function axeMajor(page){const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();expect(result.violations.filter(v=>['critical','serious'].includes(v.impact))).toEqual([]);}
 
 test('V1.1 login is public, responsive, keyboard reachable and accessible',async({page})=>{
@@ -22,6 +22,7 @@ for(const role of [
   if(role.name!=='manager')await expect(page.getByRole('link',{name:'Kho tri thức'})).toHaveCount(0);else await expect(page.getByRole('link',{name:'Kho tri thức'})).toBeVisible();
   await capture(page,`${role.name}-dashboard`);await axeMajor(page);
   if(role.name==='user'){await page.goto('/user/requests/new');await expect(page.getByRole('heading',{name:'Tạo yêu cầu mới'})).toBeVisible();await expect(page.getByRole('complementary',{name:'Hướng dẫn tạo yêu cầu'})).toBeVisible();await capture(page,'request-create');await axeMajor(page);}
+  if(role.name==='staff'){await page.setViewportSize({width:1440,height:1000});await page.goto('/staff/work-queue');await expect(page.locator('tbody .request-title').first()).toBeVisible();await page.locator('tbody .request-title').first().click();await expect(page.getByRole('heading',{name:'Nội dung yêu cầu'})).toBeVisible();await expect(page.locator('.copilot-actions button')).toHaveCount(6);await capture(page,'staff-request-detail');}
 });
 
 test('V1.1 mobile drawer traps, closes with Escape, and restores focus',async({page})=>{

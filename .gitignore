@@ -143,3 +143,7 @@ models/
 **/.env.*
 !**/.env.example
 apps/api/src/generated/prisma/
+
+# Local UI review and browser-tool state (design contract remains trackable)
+.impeccable/review/
+.playwright-cli/

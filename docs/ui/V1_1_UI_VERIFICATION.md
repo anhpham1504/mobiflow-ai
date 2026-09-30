@@ -114,3 +114,57 @@ No API controller, domain service, Prisma schema, migration, AI prompt, AI schem
 All automated V1.1 UI, regression, accessibility, responsive, unit, integration, and build gates are green. The repository is intentionally left uncommitted for human visual review.
 
 **V1.1 UI gate: PASS**
+
+## Release closure — 2026-09-30 (Asia/Saigon)
+
+The sections above describe the earlier implementation handoff at `e7e3c28319820fa7125872263e2d30eb9a7f7ddb`. Their pending-human-review/uncommitted statements are historical. The explicit release-closure request subsequently authorized commit, annotated tag, and safe push without asserting independent human visual acceptance.
+
+- Release commit: the immutable commit resolved by `git rev-parse 'v1.1.0^{}'`; its exact SHA is reported in the release handoff. A document cannot contain its own commit hash without changing that hash.
+- Final branch: `feat/v1.1-mobifone-ui-refresh`.
+- V1.0 baseline commit: `cf59b68852aa69bd54d8b478c1dd0a595b3220fe`; annotated tag object: `ad2844cfbfb91e0c8b10d2dfd07898e963052628`.
+- Release authorization: **RECEIVED**. Agent visual regression review: **PASS**. Human visual acceptance: **NOT INDEPENDENTLY VERIFIED**.
+
+### Fresh automated gates
+
+All commands below were executed during this closure, rather than inferred from historical results. Browser jobs used `$env:MOBIFLOW_WEB_BASE_URL='http://localhost:2500'` and ran separately with one worker and no retries.
+
+| Command | Actual closure result |
+|---|---|
+| `npm run lint` | PASS; zero warnings |
+| `npm run typecheck` | PASS; foundation, Prisma generation, API and web |
+| `npm test` | PASS; 70 tests (7 config, 43 API, 1 web, 19 release); zero skipped |
+| `npm run build` | PASS; API and Next production build; 17 generated static pages plus the listed dynamic routes |
+| `npm run test:integration:m10` | PASS; fresh PostgreSQL test database, six migrations, twice-idempotent seed, coherence invariants, append-only audit denial and 5 release-core tests |
+| `npm run test:e2e:m3` | PASS; 2/2; affected workflow rerun after closure CSS fixes |
+| `$env:M4_E2E_MODE='offline'; npm run test:e2e:m4` | PASS; 1/1 with host Ollama actually stopped and endpoint unreachable |
+| `$env:M4_E2E_MODE='online'; npm run test:e2e:m4` | PASS; 2/2 after restoring Ollama; persisted failed request recovered |
+| `npm run test:e2e:m5` | PASS; 1/1 |
+| `npm run test:e2e:m6` | PASS; 1/1 on the first closure live run; real grounded proposal and sources |
+| `npm run test:e2e:m7` | PASS; 1/1 |
+| `npm run test:e2e:m8` | PASS; 1/1; affected Copilot flow rerun after closure CSS fixes |
+| `npm run test:e2e:m9` | PASS; 1/1 |
+| `npm run test:e2e:m10` | PASS; 3/3 |
+| `npm run test:e2e:ui-v1-1` | PASS; 8/8 with desktop/mobile Axe and STAFF detail coverage |
+| Docker Compose `build web` and `up -d --no-deps --wait --wait-timeout 45 web`, using the existing local-port override | PASS; final CSS served from the rebuilt production image |
+
+Two M3 attempts first exposed outdated title/description accessible-name locators. Only those locators were corrected in M3 and the shared M4 helper; no business assertion was removed. An interrupted UI attempt was not counted as PASS. A resumed attempt found Docker/Ollama stopped and failed with connection refusal; the existing services were restored and the complete suite passed. Extended Axe review found and fixed desktop login wordmark contrast (1.42:1) and Copilot description contrast (1.35:1), as recorded in the audit addendum. No test, login limiter, CSP or accessibility rule was disabled.
+
+### Final browser and visual review
+
+The local closure review visited 21 route/role contexts: `/login`; USER dashboard, requests, detail and creation; STAFF dashboard, work queue and detail; MANAGER dashboard, requests, detail, approvals, knowledge and analytics; notifications and profile for each role; and `/` system health. Real synthetic accounts and authorized UI links selected request IDs. Login/logout passed for all roles. Agent inspection of fresh screenshots confirmed the documented palette, border hierarchy, restrained radius/shadow, role navigation, desktop detail columns and mobile cards.
+
+Every visited context passed overflow checks at **360, 768, 1440 and 1920 px**. Desktop Axe measured **zero critical and zero serious violations** across the 21 contexts; the persistent major-route suite also passed Axe at 1440 and 390 px. Primary actions measured at least 44 px high. The mobile drawer passed forward/backward focus containment, Escape close, navigation close and focus return with reduced motion enabled. Existing skip link, landmarks, labels, `aria-current`, focus styles, live states and text-backed statuses were checked through the persistent suite and source review.
+
+There were zero application page errors, application console errors or HTTP error responses during the final extended review. The host's Kaspersky software injected scripts that the existing application CSP correctly blocked (8 external CSP messages); these were recorded separately as host interference, not suppressed by changing product security.
+
+Runtime rechecked READY: PostgreSQL/API/web containers healthy, web HTTP 200, Ollama 0.34.4 reachable, core and AI READY, RAG READY with 9 available documents and 12 chunks. The existing loopback 2500/2501 override remains local; tracked defaults were not changed.
+
+### Scope, artifacts and decision
+
+The diff against V1.0 is empty for `apps/api`, `packages/contracts` and `docker-compose.yml`; Prisma schema/migration contents are unchanged and migration count remains **6**. RBAC, state machine, expectedVersion, advisory AI/human decision separation, six Copilot actions and source grounding passed their owning regression suites.
+
+The inspected schema-v2 `.impeccable/design.json` is retained as a design-system contract. Only `.impeccable/review/` and `.playwright-cli/` were newly ignored. Screenshots, traces, local port configuration and the extended review script/results stay under existing ignored runtime directories. No unknown data was deleted. The existing tracked M4 offline evidence was refreshed by its authoritative suite and reviewed for safe content.
+
+Known limitations remain: current-page dashboard KPI scope; variable live Ollama wording/source selection; intentionally absent dark mode; local Windows 2500/2501 ports; local synthetic/Edge verification rather than broad production certification; and independent human visual acceptance not established by this task. M11/V1.2 implementation remains unstarted.
+
+Release decision: **all required gates PASS; authorized for the `v1.1.0` annotated release tag**. Commit/tag/push identities and final repository state are verified in the release handoff. See [V1.1 release notes](V1_1_RELEASE.md).

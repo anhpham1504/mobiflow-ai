@@ -48,3 +48,13 @@ Audit method: route/component inventory, source inspection, existing Playwright 
 - Keep `/` public and truthful; authenticated role navigation may link to it as system status.
 - Do not expose manager-only AI evidence to USER or STAFF.
 - Do not add a dark theme because V1 has none and this refresh must not expand behavior.
+
+## Release closure review — 2026-09-30
+
+This addendum records the later release-closure review; the implementation audit above retains its original findings and disposition.
+
+- Desktop login Axe found the blue `AI` wordmark on the blue brand panel at 1.42:1. It now inherits the panel's white text. The persistent UI suite checks both desktop and mobile capture widths.
+- STAFF request-detail Axe found six Copilot descriptions at 1.35:1 because the generic button selector overrode the intended neutral Copilot backgrounds. The component selectors now preserve the existing white/slate design and its cobalt hover state. STAFF detail and all six fixed controls are included in the persistent UI gate.
+- Primary action controls now have a 44 px minimum height, reflected in both design-system artifacts. Final browser geometry measured a minimum of 44 px among the tested explicit primary actions.
+
+The final review covers all required routes, including request detail for all three roles, approvals, knowledge, notifications, profile, and system health. No redesign or business/API/database change was introduced.

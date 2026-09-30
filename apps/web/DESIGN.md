@@ -231,7 +231,7 @@ Components are compact, explicit, and operational. All interactive states retain
 
 ### Buttons
 
-- **Shape:** Compact rounded rectangle with a 9 px radius and a minimum height of 42 px; small buttons use 36 px and login buttons use 48 px.
+- **Shape:** Compact rounded rectangle with a 9 px radius; primary actions have a minimum height of 44 px, other default buttons use 42 px, small buttons use 36 px, and login buttons use 48 px.
 - **Primary:** Cobalt fill, white text, 9 px by 16 px padding, and 600 weight.
 - **Hover / Focus:** Deep cobalt on hover, a one-pixel downward press on active, and a three-pixel focus outline offset by three pixels.
 - **Secondary / Ghost:** Secondary buttons use a white surface and strong border; ghost buttons remove the border and use muted text.

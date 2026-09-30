@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T03:09:16.1446263Z",
+  "title": "Design System: MobiFlow AI V1.1",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#f4f7fb",
+        "tonalRamp": ["oklch(15% 0.018 255)", "oklch(27% 0.018 255)", "oklch(39% 0.018 255)", "oklch(51% 0.018 255)", "oklch(63% 0.018 255)", "oklch(75% 0.018 255)", "oklch(87% 0.018 255)", "oklch(95% 0.018 255)"]
+      },
+      "foreground": {
+        "role": "neutral",
+        "displayName": "Slate Ink",
+        "canonical": "#14243a",
+        "tonalRamp": ["oklch(15% 0.04 255)", "oklch(27% 0.04 255)", "oklch(39% 0.04 255)", "oklch(51% 0.04 255)", "oklch(63% 0.04 255)", "oklch(75% 0.04 255)", "oklch(87% 0.04 255)", "oklch(95% 0.04 255)"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White Work Surface",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
+      },
+      "surface-subtle": {
+        "role": "neutral",
+        "displayName": "Quiet Surface",
+        "canonical": "#f8fafd",
+        "tonalRamp": ["oklch(15% 0.012 255)", "oklch(27% 0.012 255)", "oklch(39% 0.012 255)", "oklch(51% 0.012 255)", "oklch(63% 0.012 255)", "oklch(75% 0.012 255)", "oklch(87% 0.012 255)", "oklch(95% 0.012 255)"]
+      },
+      "surface-raised": {
+        "role": "neutral",
+        "displayName": "Raised White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
+      },
+      "border": {
+        "role": "neutral",
+        "displayName": "Hairline Blue-Gray",
+        "canonical": "#dce4ee",
+        "tonalRamp": ["oklch(15% 0.025 255)", "oklch(27% 0.025 255)", "oklch(39% 0.025 255)", "oklch(51% 0.025 255)", "oklch(63% 0.025 255)", "oklch(75% 0.025 255)", "oklch(87% 0.025 255)", "oklch(95% 0.025 255)"]
+      },
+      "border-strong": {
+        "role": "neutral",
+        "displayName": "Control Blue-Gray",
+        "canonical": "#b9c6d6",
+        "tonalRamp": ["oklch(15% 0.032 255)", "oklch(27% 0.032 255)", "oklch(39% 0.032 255)", "oklch(51% 0.032 255)", "oklch(63% 0.032 255)", "oklch(75% 0.032 255)", "oklch(87% 0.032 255)", "oklch(95% 0.032 255)"]
+      },
+      "primary": {
+        "role": "primary",
+        "displayName": "MobiFlow Cobalt",
+        "canonical": "#1e47d2",
+        "tonalRamp": ["oklch(15% 0.18 265)", "oklch(27% 0.18 265)", "oklch(39% 0.18 265)", "oklch(51% 0.18 265)", "oklch(63% 0.18 265)", "oklch(75% 0.18 265)", "oklch(87% 0.18 265)", "oklch(95% 0.18 265)"]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#183bae",
+        "tonalRamp": ["oklch(15% 0.16 265)", "oklch(27% 0.16 265)", "oklch(39% 0.16 265)", "oklch(51% 0.16 265)", "oklch(63% 0.16 265)", "oklch(75% 0.16 265)", "oklch(87% 0.16 265)", "oklch(95% 0.16 265)"]
+      },
+      "primary-foreground": {
+        "role": "neutral",
+        "displayName": "Cobalt Contrast White",
+        "canonical": "#ffffff",
+        "tonalRamp": ["oklch(15% 0 0)", "oklch(27% 0 0)", "oklch(39% 0 0)", "oklch(51% 0 0)", "oklch(63% 0 0)", "oklch(75% 0 0)", "oklch(87% 0 0)", "oklch(95% 0 0)"]
+      },
+      "primary-subtle": {
+        "role": "primary",
+        "displayName": "Cobalt Wash",
+        "canonical": "#eaf0ff",
+        "tonalRamp": ["oklch(15% 0.04 265)", "oklch(27% 0.04 265)", "oklch(39% 0.04 265)", "oklch(51% 0.04 265)", "oklch(63% 0.04 265)", "oklch(75% 0.04 265)", "oklch(87% 0.04 265)", "oklch(95% 0.04 265)"]
+      },
+      "brand-accent": {
+        "role": "tertiary",
+        "displayName": "Sparse Telecom Red",
+        "canonical": "#c7353f",
+        "tonalRamp": ["oklch(15% 0.16 25)", "oklch(27% 0.16 25)", "oklch(39% 0.16 25)", "oklch(51% 0.16 25)", "oklch(63% 0.16 25)", "oklch(75% 0.16 25)", "oklch(87% 0.16 25)", "oklch(95% 0.16 25)"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Slate Wash",
+        "canonical": "#eef2f7",
+        "tonalRamp": ["oklch(15% 0.016 255)", "oklch(27% 0.016 255)", "oklch(39% 0.016 255)", "oklch(51% 0.016 255)", "oklch(63% 0.016 255)", "oklch(75% 0.016 255)", "oklch(87% 0.016 255)", "oklch(95% 0.016 255)"]
+      },
+      "muted-foreground": {
+        "role": "neutral",
+        "displayName": "Operational Slate",
+        "canonical": "#5d6c80",
+        "tonalRamp": ["oklch(15% 0.035 255)", "oklch(27% 0.035 255)", "oklch(39% 0.035 255)", "oklch(51% 0.035 255)", "oklch(63% 0.035 255)", "oklch(75% 0.035 255)", "oklch(87% 0.035 255)", "oklch(95% 0.035 255)"]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "Resolution Green",
+        "canonical": "#247a52",
+        "tonalRamp": ["oklch(15% 0.11 160)", "oklch(27% 0.11 160)", "oklch(39% 0.11 160)", "oklch(51% 0.11 160)", "oklch(63% 0.11 160)", "oklch(75% 0.11 160)", "oklch(87% 0.11 160)", "oklch(95% 0.11 160)"]
+      },
+      "success-subtle": {
+        "role": "secondary",
+        "displayName": "Resolution Green Wash",
+        "canonical": "#e8f6ef",
+        "tonalRamp": ["oklch(15% 0.035 160)", "oklch(27% 0.035 160)", "oklch(39% 0.035 160)", "oklch(51% 0.035 160)", "oklch(63% 0.035 160)", "oklch(75% 0.035 160)", "oklch(87% 0.035 160)", "oklch(95% 0.035 160)"]
+      },
+      "warning": {
+        "role": "secondary",
+        "displayName": "Attention Amber",
+        "canonical": "#9a6500",
+        "tonalRamp": ["oklch(15% 0.13 75)", "oklch(27% 0.13 75)", "oklch(39% 0.13 75)", "oklch(51% 0.13 75)", "oklch(63% 0.13 75)", "oklch(75% 0.13 75)", "oklch(87% 0.13 75)", "oklch(95% 0.13 75)"]
+      },
+      "warning-subtle": {
+        "role": "secondary",
+        "displayName": "Attention Amber Wash",
+        "canonical": "#fff5da",
+        "tonalRamp": ["oklch(15% 0.045 75)", "oklch(27% 0.045 75)", "oklch(39% 0.045 75)", "oklch(51% 0.045 75)", "oklch(63% 0.045 75)", "oklch(75% 0.045 75)", "oklch(87% 0.045 75)", "oklch(95% 0.045 75)"]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "Consequence Red",
+        "canonical": "#b4232d",
+        "tonalRamp": ["oklch(15% 0.16 25)", "oklch(27% 0.16 25)", "oklch(39% 0.16 25)", "oklch(51% 0.16 25)", "oklch(63% 0.16 25)", "oklch(75% 0.16 25)", "oklch(87% 0.16 25)", "oklch(95% 0.16 25)"]
+      },
+      "danger-subtle": {
+        "role": "secondary",
+        "displayName": "Consequence Red Wash",
+        "canonical": "#fdecee",
+        "tonalRamp": ["oklch(15% 0.04 25)", "oklch(27% 0.04 25)", "oklch(39% 0.04 25)", "oklch(51% 0.04 25)", "oklch(63% 0.04 25)", "oklch(75% 0.04 25)", "oklch(87% 0.04 25)", "oklch(95% 0.04 25)"]
+      },
+      "info": {
+        "role": "secondary",
+        "displayName": "Operational Information Blue",
+        "canonical": "#245fc7",
+        "tonalRamp": ["oklch(15% 0.15 260)", "oklch(27% 0.15 260)", "oklch(39% 0.15 260)", "oklch(51% 0.15 260)", "oklch(63% 0.15 260)", "oklch(75% 0.15 260)", "oklch(87% 0.15 260)", "oklch(95% 0.15 260)"]
+      },
+      "info-subtle": {
+        "role": "secondary",
+        "displayName": "Information Blue Wash",
+        "canonical": "#eaf2ff",
+        "tonalRamp": ["oklch(15% 0.04 260)", "oklch(27% 0.04 260)", "oklch(39% 0.04 260)", "oklch(51% 0.04 260)", "oklch(63% 0.04 260)", "oklch(75% 0.04 260)", "oklch(87% 0.04 260)", "oklch(95% 0.04 260)"]
+      },
+      "focus-ring": {
+        "role": "primary",
+        "displayName": "Accessible Focus Blue",
+        "canonical": "#0b63ce",
+        "tonalRamp": ["oklch(15% 0.17 255)", "oklch(27% 0.17 255)", "oklch(39% 0.17 255)", "oklch(51% 0.17 255)", "oklch(63% 0.17 255)", "oklch(75% 0.17 255)", "oklch(87% 0.17 255)", "oklch(95% 0.17 255)"]
+      }
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Login Display", "purpose": "The restrained login proposition only."},
+      "headline": {"displayName": "Page Headline", "purpose": "Authenticated page titles and primary task context."},
+      "title": {"displayName": "Section Title", "purpose": "Workflow panels, sections, and grouped operational content."},
+      "body": {"displayName": "Operational Body", "purpose": "Forms, tables, explanations, and Vietnamese workflow content."},
+      "label": {"displayName": "Compact Label", "purpose": "Eyebrows, navigation groups, metadata, and provenance."}
+    },
+    "shadows": [
+      {"name": "surface-hairline", "value": "0 1px 2px rgba(20,36,58,.025)", "purpose": "Barely visible separation on workflow cards."},
+      {"name": "raised-overlay", "value": "0 10px 30px rgba(20,36,58,.08)", "purpose": "Mobile drawers and genuinely elevated menus only."},
+      {"name": "local-status-halo", "value": "0 0 0 3px var(--success-subtle)", "purpose": "A semantic halo around the local-environment status dot."}
+    ],
+    "motion": [
+      {"name": "state-fast", "value": "150ms", "purpose": "Background and color transitions for navigation and controls."},
+      {"name": "press-fast", "value": "100ms", "purpose": "The one-pixel pressed translation on actionable controls."},
+      {"name": "drawer-enter", "value": "160ms ease-out", "purpose": "The mobile navigation drawer entrance."},
+      {"name": "loading-shimmer", "value": "1.4s linear infinite", "purpose": "Layout-shaped loading skeletons."},
+      {"name": "loading-spin", "value": "800ms linear infinite", "purpose": "Compact indeterminate progress indicators."},
+      {"name": "reduced-motion", "value": "0.01ms", "purpose": "Near-zero motion under prefers-reduced-motion."}
+    ],
+    "breakpoints": [
+      {"name": "wide-grid", "value": "1100px"},
+      {"name": "shell-drawer", "value": "900px"},
+      {"name": "compact", "value": "600px"},
+      {"name": "narrow", "value": "380px"}
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one clear role-valid action for the current workflow state.",
+      "html": "<button class=\"ds-btn-primary\">Tạo yêu cầu</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 16px;border:1px solid var(--primary);border-radius:9px;background:var(--primary);color:var(--primary-foreground);font:600 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif;transition:background .15s,border-color .15s,transform .1s;cursor:pointer}.ds-btn-primary:hover{background:var(--primary-hover);border-color:var(--primary-hover)}.ds-btn-primary:active{transform:translateY(1px)}.ds-btn-primary:focus-visible{outline:3px solid color-mix(in srgb,var(--focus-ring) 55%,transparent);outline-offset:3px}.ds-btn-primary:disabled{cursor:not-allowed;opacity:.58}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A reversible or supporting action that must not compete with the primary route.",
+      "html": "<button class=\"ds-btn-secondary\">Đặt lại</button>",
+      "css": ".ds-btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;border:1px solid var(--border-strong);border-radius:9px;background:var(--surface);color:var(--foreground);font:600 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif;transition:background .15s,border-color .15s,transform .1s;cursor:pointer}.ds-btn-secondary:hover{background:var(--surface-subtle)}.ds-btn-secondary:active{transform:translateY(1px)}.ds-btn-secondary:focus-visible{outline:3px solid color-mix(in srgb,var(--focus-ring) 55%,transparent);outline-offset:3px}.ds-btn-secondary:disabled{cursor:not-allowed;opacity:.58}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "A protected destructive or consequence-bearing action.",
+      "html": "<button class=\"ds-btn-danger\">Hủy yêu cầu</button>",
+      "css": ".ds-btn-danger{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:9px 16px;border:1px solid var(--danger);border-radius:9px;background:var(--danger);color:var(--primary-foreground);font:600 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif;transition:transform .1s;cursor:pointer}.ds-btn-danger:hover{background:var(--danger);border-color:var(--danger)}.ds-btn-danger:active{transform:translateY(1px)}.ds-btn-danger:focus-visible{outline:3px solid color-mix(in srgb,var(--focus-ring) 55%,transparent);outline-offset:3px}.ds-btn-danger:disabled{cursor:not-allowed;opacity:.58}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "A labeled operational field with a strong boundary and visible keyboard focus.",
+      "html": "<label class=\"ds-field\"><span>Tiêu đề yêu cầu</span><input type=\"text\" placeholder=\"Nhập tiêu đề\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:7px;color:#344258;font:600 14px/1.55 \"Segoe UI\",Inter,Arial,sans-serif}.ds-field input{width:100%;min-height:43px;padding:10px 12px;border:1px solid var(--border-strong);border-radius:9px;background:var(--surface);color:var(--foreground);font:400 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif}.ds-field input:focus-visible{outline:3px solid color-mix(in srgb,var(--focus-ring) 55%,transparent);outline-offset:3px}"
+    },
+    {
+      "name": "Active Navigation Item",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "The current role-scoped route, marked by fill, text, icon, and a narrow routing line.",
+      "html": "<a class=\"ds-nav-item\" href=\"#\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"7\" height=\"9\" x=\"3\" y=\"3\" rx=\"1\"></rect><rect width=\"7\" height=\"5\" x=\"14\" y=\"3\" rx=\"1\"></rect><rect width=\"7\" height=\"9\" x=\"14\" y=\"12\" rx=\"1\"></rect><rect width=\"7\" height=\"5\" x=\"3\" y=\"16\" rx=\"1\"></rect></svg><span>Tổng quan</span></a>",
+      "css": ".ds-nav-item{position:relative;display:flex;align-items:center;gap:11px;min-height:42px;padding:9px 11px;border-radius:9px;color:#526177;font:600 14px/1.55 \"Segoe UI\",Inter,Arial,sans-serif;text-decoration:none;transition:background .15s,color .15s}.ds-nav-item svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}.ds-nav-item:hover{background:var(--surface-subtle);color:var(--foreground)}.ds-nav-item[aria-current=\"page\"]{background:var(--primary-subtle);color:var(--primary)}.ds-nav-item[aria-current=\"page\"]:before{content:\"\";position:absolute;left:-16px;width:3px;height:24px;border-radius:0 3px 3px 0;background:var(--primary)}.ds-nav-item:focus-visible{outline:3px solid color-mix(in srgb,var(--focus-ring) 55%,transparent);outline-offset:3px}"
+    },
+    {
+      "name": "Primary Status Badge",
+      "kind": "chip",
+      "refersTo": "status-badge-primary",
+      "description": "A text-first in-progress state using the quiet cobalt family.",
+      "html": "<span class=\"ds-status-badge\">Đang xử lý</span>",
+      "css": ".ds-status-badge{display:inline-flex;align-items:center;width:max-content;min-height:26px;padding:3px 9px;border-radius:999px;background:var(--primary-subtle);color:var(--primary);font:700 12px/1.55 \"Segoe UI\",Inter,Arial,sans-serif;white-space:nowrap}"
+    },
+    {
+      "name": "Workflow Card",
+      "kind": "card",
+      "refersTo": "workflow-card",
+      "description": "The default bounded work surface for forms, details, evidence, and state transitions.",
+      "html": "<section class=\"ds-workflow-card\"><h2>Thông tin yêu cầu</h2><p>Nội dung và hành động hợp lệ được giữ trong cùng một vùng làm việc.</p></section>",
+      "css": ".ds-workflow-card{padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:12px;box-shadow:0 1px 2px rgba(20,36,58,.025);color:var(--foreground);font:400 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif}.ds-workflow-card h2{margin:0 0 14px;font-size:20px;line-height:1.55;letter-spacing:-.3px}.ds-workflow-card p{margin:0;color:var(--muted-foreground)}"
+    },
+    {
+      "name": "Request Data Table",
+      "kind": "custom",
+      "refersTo": "data-table",
+      "description": "The desktop scan surface for request identity, status, ownership, SLA, and recency.",
+      "html": "<div class=\"ds-table-wrap\"><table class=\"ds-table\"><thead><tr><th>Mã / Yêu cầu</th><th>Trạng thái</th><th>SLA</th></tr></thead><tbody><tr><td><strong>Mất kết nối khu vực</strong><small>MF-1042</small></td><td><span class=\"ds-table-badge\">Đang xử lý</span></td><td>Còn 28 phút</td></tr></tbody></table></div>",
+      "css": ".ds-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface)}.ds-table{width:100%;border-collapse:collapse;color:var(--foreground);font:400 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif}.ds-table th{padding:11px 14px;background:var(--surface-subtle);color:var(--muted-foreground);font-size:12px;font-weight:700;text-align:left}.ds-table td{padding:14px;border-top:1px solid var(--border);vertical-align:middle}.ds-table tbody tr:hover{background:#fbfcfe}.ds-table strong,.ds-table small{display:block}.ds-table small{color:var(--muted-foreground);font-size:12px;font-weight:500}.ds-table-badge{display:inline-flex;min-height:26px;align-items:center;padding:3px 9px;border-radius:999px;background:var(--primary-subtle);color:var(--primary);font-size:12px;font-weight:700;white-space:nowrap}"
+    },
+    {
+      "name": "AI Advisory Panel",
+      "kind": "custom",
+      "refersTo": "ai-advisory-panel",
+      "description": "A bounded AI region that keeps advisory provenance separate from human authority.",
+      "html": "<section class=\"ds-ai-panel\"><header class=\"ds-ai-header\"><span class=\"ds-ai-mark\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 8V4H8\"></path><rect width=\"16\" height=\"12\" x=\"4\" y=\"8\" rx=\"2\"></rect><path d=\"M2 14h2M20 14h2M9 13v2M15 13v2\"></path></svg><b>AI</b></span><div><h2>Đề xuất điều phối</h2><p>AI hỗ trợ tổng hợp. Quản lý sở hữu quyết định.</p></div></header><p>Đề xuất đang chờ kiểm tra nguồn và quyết định của người có thẩm quyền.</p></section>",
+      "css": ".ds-ai-panel{padding:22px;background:var(--surface);border:1px solid var(--border);border-top-color:var(--primary);border-radius:12px;color:var(--foreground);font:400 15px/1.55 \"Segoe UI\",Inter,Arial,sans-serif}.ds-ai-header{display:flex;align-items:flex-start;gap:13px;margin-bottom:16px}.ds-ai-header h2{margin:0 0 3px;font-size:20px;letter-spacing:-.3px}.ds-ai-header p,.ds-ai-panel>p{margin:0;color:var(--muted-foreground)}.ds-ai-mark{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:8px;background:var(--primary-subtle);color:var(--primary);font-size:12px}.ds-ai-mark svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Accountable Operations Relay",
+    "overview": "MobiFlow AI is a restrained internal operations workspace in which every request, signal, and decision moves visibly to the next accountable human. Cool paper surrounds white, bordered work surfaces; cobalt marks routes, selection, and primary action; compact typography keeps live operational data readable without making the interface feel cramped.\n\nThe visual system is calm, reliable, and deliberately human-controlled. Rules and tonal layering carry most of the structure, while shadow is reserved for overlays. AI is presented as bounded advice with sources and status, never as spectacle or as the owner of a protected business decision.",
+    "keyCharacteristics": [
+      "Cool paper canvas with white bordered work surfaces",
+      "Restrained cobalt routing cues and sparse semantic color",
+      "Dense, scan-first data presentation with readable hierarchy",
+      "Flat-by-default depth and compact 9–12 px corners",
+      "Role-aware navigation and explicit AI/human decision boundaries"
+    ],
+    "rules": [
+      {"name": "The Cobalt Routes Rule", "body": "Use cobalt to show where work moves or what is selected; do not flood whole operational regions with it.", "section": "colors"},
+      {"name": "The Red Is Earned Rule", "body": "Red is reserved for consequence, failure, overdue state, destructive action, or a truly sparse brand accent.", "section": "colors"},
+      {"name": "The Text Travels With Color Rule", "body": "Every status, priority, health, and SLA color appears with a readable label or value.", "section": "colors"},
+      {"name": "The Operational Minimum Rule", "body": "Never set operational text below 12 px; uppercase is limited to short group labels and technical provenance.", "section": "typography"},
+      {"name": "The Continuous Workfield Rule", "body": "Keep current truth, next action, and relevant context in one connected scan path; never break an authenticated workflow into a marketing hero followed by unrelated cards.", "section": "layout"},
+      {"name": "The Flat-by-Default Rule", "body": "Borders and tonal surfaces establish hierarchy at rest; shadow signals a real change in elevation, never decoration.", "section": "elevation"},
+      {"name": "The Authority Boundary Rule", "body": "AI styling marks advice, never approval; protected business actions retain explicit human labels and controls.", "section": "components"}
+    ],
+    "dos": [
+      "Do show attention, scope, SLA, and the one valid next action near the top of each operational surface.",
+      "Do preserve role-aware navigation, explicit status text, source evidence, and human decision ownership.",
+      "Do use borders, spacing, and quiet tonal shifts before introducing shadow.",
+      "Do keep desktop density high while preserving complete 360 px workflows through stacking and table-to-card conversion.",
+      "Do keep motion within the implemented 100–180 ms interaction range and honor prefers-reduced-motion."
+    ],
+    "donts": [
+      "Don't introduce decorative AI spectacle, free-form chatbot chrome, hidden reasoning, or visuals that imply autonomous authority.",
+      "Don't use red as a routine action color or cobalt as a full-screen wash on authenticated surfaces.",
+      "Don't add glassmorphism, neon, giant authenticated heroes, external fonts, or dark mode.",
+      "Don't invent progress percentages, remove status labels, or communicate SLA and risk through color alone.",
+      "Don't trade mobile completeness for a clipped table, hidden control, or page-wide horizontal scroll."
+    ]
+  }
+}

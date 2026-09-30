@@ -36,3 +36,7 @@ form label{display:flex;flex-direction:column;gap:7px;margin:14px 0;color:#34425
 @media(max-width:380px){.analytics-kpi-grid,.analytics-stat-grid,.evaluation-stat-grid{grid-template-columns:1fr}.analytics-kpi-wide,.analytics-evaluation .analytics-stat:last-child:nth-child(odd){grid-column:auto}.request-form-actions{grid-template-columns:1fr}}
 .analytics-ai-activity .analytics-stat:last-child:nth-child(odd){grid-column:span 2}
 @media(max-width:380px){.analytics-ai-activity .analytics-stat:last-child:nth-child(odd){grid-column:auto}}
+.login-brand-panel .brand b{color:inherit}
+.button.button-primary,button.button-primary:not(.icon-button):not(.drawer-backdrop){min-height:44px}
+.copilot-actions button:not(.icon-button):not(.drawer-backdrop){background:var(--surface);color:var(--foreground);border-color:var(--border)}
+.copilot-actions button:not(.icon-button):not(.drawer-backdrop):hover{background:var(--primary-subtle);color:var(--primary);border-color:var(--primary)}
