@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "release.environment.v1",
+  "at": "2026-09-30T00:15:14.401Z",
+  "label": "diagnostics-after-warmup",
+  "node": "v24.19.0",
+  "npm": "11.17.0",
+  "host": {
+    "at": "2026-09-30T00:15:13.9361953Z",
+    "os": {
+      "name": "Microsoft Windows 11 Pro",
+      "version": "10.0.26200",
+      "build": "26200",
+      "architecture": "64-bit"
+    },
+    "cpu": [
+      {
+        "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+        "NumberOfCores": 14,
+        "NumberOfLogicalProcessors": 20,
+        "LoadPercentage": 0
+      }
+    ],
+    "memoryKiB": {
+      "total": 24952696,
+      "available": 8963360
+    },
+    "power": {
+      "activePlan": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+      "exitCode": 0,
+      "overlayPowerMode": "UNAVAILABLE: active scheme does not expose the Windows Settings overlay",
+      "batteryStatus": "AVAILABLE",
+      "battery": [
+        {
+          "PowerOnline": true,
+          "Charging": true,
+          "Discharging": false,
+          "RemainingCapacity": 54030
+        }
+      ]
+    },
+    "gpu": {
+      "status": "AVAILABLE",
+      "devices": {
+        "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+        "driverVersion": "616.92",
+        "totalMiB": "8188",
+        "usedMiB": "6184",
+        "utilizationPercent": "0",
+        "temperatureC": "40",
+        "powerW": "7.05",
+        "powerLimitW": "[N/A]",
+        "smMHz": "495",
+        "memoryMHz": "8001",
+        "pstate": "P0"
+      }
+    },
+    "docker": {
+      "status": "AVAILABLE",
+      "services": [
+        {
+          "Service": "api",
+          "State": "exited",
+          "Health": ""
+        },
+        {
+          "Service": "postgres",
+          "State": "running",
+          "Health": "healthy"
+        },
+        {
+          "Service": "web",
+          "State": "exited",
+          "Health": ""
+        }
+      ]
+    },
+    "processes": [
+      {
+        "pid": 23212,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": false,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 2528,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 6720,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 29324,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": false,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 33392,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 37204,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 35548,
+        "executable": "ollama.exe",
+        "self": false,
+        "mcpServer": false,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 38408,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": false,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 6768,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 33208,
+        "executable": "node.exe",
+        "self": false,
+        "mcpServer": true,
+        "commandUnavailable": false,
+        "evaluation": false,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      },
+      {
+        "pid": 21632,
+        "executable": "node.exe",
+        "self": true,
+        "mcpServer": false,
+        "commandUnavailable": false,
+        "evaluation": true,
+        "appWorker": false,
+        "browserTest": false,
+        "integration": false,
+        "ingestion": false,
+        "build": false
+      }
+    ],
+    "processLimitation": "Command-pattern snapshot only; idle MCP servers are separate. No usernames, paths or raw command lines retained. Does not prove host-wide exclusivity or during-call GPU utilization."
+  },
+  "git": {
+    "commit": "8c66cc48be78fe40e31362637e9e43ebb6515a2d",
+    "branch": "fix/m10-evaluation-stability",
+    "dirty": true,
+    "sourceHashes": {
+      "apps/api/src/ai/analysis-execution.ts": "f416ea46eb254526ad52617d918424a652e181ff60beee9107b7781e49480454",
+      "apps/api/src/ai/analysis-query.service.ts": "e9c7361e9ac60de05ff8bf80eb1258408eb9daba82e031e5cbb0b17aa3049954",
+      "apps/api/src/ai/analysis-worker.ts": "172d91818aaac1f60c982e9fc6aace55511d67b790a127034cd5a1ffd0a16c78",
+      "apps/api/src/ai/analysis.controller.ts": "eb07a03a185f0bab370c2b4cd1774dd86aea4fbf1c518d752fb3bcb410d57598",
+      "apps/api/src/ai/ollama-provider.ts": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+      "apps/api/src/ai/operational-ai.controller.ts": "dee9dd92dcb47cbacf5a7c73f4260a7756108d59cc24f0f250fc84414c88299d",
+      "apps/api/src/ai/operational-ai.service.ts": "62d9e32668329d925ff6911e1a5fe0507fb3d94d19b0e8dd37a41cc1a5f7ecb9",
+      "apps/api/src/ai/operational-output.ts": "9808a5c857515adc462f315ab26b2b1c96848754be78e6c1c634962c589d6c1c",
+      "apps/api/src/ai/prompts/copilot.ts": "3c91b30c2f9d82db8b2029eecb2f6c26530bf64636515447076e2f6c3b77fbba",
+      "apps/api/src/ai/prompts/recommendation.ts": "704725af104f7f4b92ccffea042174a45647f5421a123a474464a3aa381a7005",
+      "apps/api/src/ai/prompts/request-analysis.ts": "10bb1ae6fc1af17515ddb218cbabf7b84bc17b750491df41954608559fb0fed3",
+      "apps/api/src/ai/provider.ts": "9d9179194dd28f855dbcb40ea7e89d774c8ed669978b6dc55168d06963f7040e",
+      "apps/api/src/ai/recommendation-output.ts": "6509793778a8f78372be8af29f9eacafbccdc7d3a6dcd1f753a881766284d573",
+      "apps/api/src/ai/recommendation-validation.ts": "4bae5ea6429d3918ceae6cb80481c20cba89adee4282f20fd72617d2bd88954f",
+      "apps/api/src/ai/recommendation.controller.ts": "18b9f8c9d19e2ff40b15bc99e337b0bb19b47cb6fc701e6be071459866d9d239",
+      "apps/api/src/ai/recommendation.service.ts": "7622a816d428bd162c375560b979b82a7a444bd6ccb8e1cfe29a59309ea8a313",
+      "apps/api/src/ai/tools/domain-tools.ts": "32927d55bab9ba55699238ccd941f7d73a65a742f7facf80b53fd77378be3502",
+      "apps/api/src/ai/tools/registry.ts": "7579a0b5623b6e79931bf805c8d02848ae2a5d0d4b677ea62c3f8a1e95e97f1c",
+      "apps/api/src/ai/tools/request-vectors.ts": "4f4835fddbf4963795b340de09455345eba8a70d57e86a8ae0146b7a1ad8b423",
+      "apps/api/src/ai/tools/staff.ts": "20dad62d9328e73c3639b725c1a7bedd1276a526911a8b309ffd9ab4e5d616eb",
+      "apps/api/src/analytics/analytics.controller.ts": "e2438f9e30b6b22fa1b0754584ab96bc4bd5c4dc8bd017d9c987aa0fbf5fbf03",
+      "apps/api/src/analytics/analytics.service.ts": "0c7a6f6b5ba4c99fc69c9c49c10aa146ae7015246750d2c07dd96fb59f3aea16",
+      "apps/api/src/analytics/metrics.ts": "817ad664f2688b50188bdcd46965bfc13032c41a6b2729199bd0d442525f4d93",
+      "apps/api/src/knowledge/chunker.ts": "3dbc80ffb8431876942946020f6a8dd767a3da15d61ea91c55ba7fbc1223321f",
+      "apps/api/src/knowledge/document.service.ts": "5f43eda68738e1b02f3d0fbc0efcf57773bd83adf5af7f2e345ed65943447536",
+      "apps/api/src/knowledge/embedding-provider.ts": "3b008c483a73f980ec59f557e345fcdbe59f0687f3658371dd17075137a22c45",
+      "apps/api/src/knowledge/file-store.ts": "acf22a9cefc8765f912198c52f3c81fc081286884147992696714c7de598dc81",
+      "apps/api/src/knowledge/ingestion-worker.ts": "946b1f6208224dcd11cca4e0c2b3fe455bae2986411d2e731c4d52ccee700fa8",
+      "apps/api/src/knowledge/knowledge-access.ts": "9ac2846ccb804e7d252ed15c0107e67e9ba748308d59f183da53427106af9710",
+      "apps/api/src/knowledge/knowledge.controller.ts": "e746e5348444422fda3b4048e4c8297b07930b25c30502d32221bb830a485c2f",
+      "apps/api/src/knowledge/knowledge.guard.ts": "2f44041f21f259639254e5d57b079ae24d7c76d71488e4b7addbeb49234e813c",
+      "apps/api/src/knowledge/parser.ts": "8e44a5c12f5a75588a34fc27bcd4ae25582ef4a38fce28ed783e3fd059afe577",
+      "apps/api/src/knowledge/pdf-worker.ts": "98287bcf58de20df1da9aaff13b5852ab0b58cb87449f40ea5f0edc9bceb343c",
+      "apps/api/src/knowledge/rag-health.ts": "bf455c9de5e4210f0d2547cfa8c93218b4a6f2a5fff5864a03b75291ef41f512",
+      "apps/api/src/knowledge/rag-output.ts": "1ef3a23583b943a2c7663fbdbe6a08a164c508b95e5202815083f7701412dc87",
+      "apps/api/src/knowledge/retriever.ts": "d3f3d00e86828833a10dc4e15d7d99b0cec6cf2477bd125177beee4afa3e173c",
+      "apps/api/src/knowledge/source.service.ts": "cea2e335ce443ca4fde2899a524b655a7e3025103dd61d973715538e24162449",
+      "apps/api/src/knowledge/vector.repository.ts": "c0556f646b2320743ea0047001d912ac2623eed5d008cbd30f383f0b56cc06fb",
+      "datasets/ai-evaluation/requests.json": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+      "packages/config/src/index.ts": "9d8073a8974d66bbc322e08db4a8d951051e3fdb179cd1681ec1a1dcc107c4fe",
+      "packages/contracts/src/analysis.ts": "c07360e5d4d0442200e21114bdc9c25afd7d9fa19cd0d729e19c1bac0507b4e4",
+      "packages/contracts/src/analytics.ts": "82c6050f786b3ba3ecc811b6fb49d40515bab66c32d6892632181ceb5693908e",
+      "packages/contracts/src/index.ts": "108c11cb6dddf618128a59aa312efc83a43d455464a416066e681ee5814b7d0f",
+      "packages/contracts/src/knowledge.ts": "1958a3c901cf05ede63b1f4769950ab7c7ea3800d529c24b1c72395177258f26",
+      "packages/contracts/src/recommendation.ts": "55909b1dff8a3d214ce5e323863986b43fb89501776415bf2e125b7536fdf6de",
+      "packages/contracts/src/workflow.ts": "0bdf96927c2baf7ec93c5770455027c17da0c1d5884e3ba98a4ae3523799c8ed",
+      "scripts/evaluation/analysis-observer.mjs": "7cad2da71a56f0601812f54b9a5d415fcab06772421690f4eaaafe71ee70bbd5",
+      "scripts/evaluation/capture-release-environment.mjs": "2a38a7ebd186aef7d9e13dcda833fa3e8357e455a227319f4c9ee4a9837c0930",
+      "scripts/evaluation/capture-release-host.ps1": "039f81a0f3c3b033243fd032ef3fe13644e2c697f75a8ccc6fc2348998bf9600",
+      "scripts/evaluation/evidence-output.mjs": "9a6c096918f6e40fc937f7de22ee12b82e049bf8b52cbf420bb5abeb75574397",
+      "scripts/evaluation/m4-evaluate.mjs": "483f2dff14da6ec04475e7b234441662724b23f62cfc9c90d5232b30eb71aa4a",
+      "scripts/evaluation/m5-rag.mjs": "eafa09dcd1964f30dfbbaf87cc286bce883262e2f53b9b09b88a26dfd12da6d8",
+      "scripts/evaluation/m5-retrieval.mjs": "c1298d0b4a7395bfe1045b6abdd82693778513df60823cacc7106d410ed99c95",
+      "scripts/evaluation/m8-copilot-evaluate.mjs": "a0f0a6fb98d92c23ce784d22265ff4f433ce379e9c5bcde802e9c7f2026350a4",
+      "scripts/evaluation/m8-summary-evaluate.mjs": "ff2bb1458a0e3d1b43bdf3d1f7d62316c54b402d077f807a4c28baa3520b6dfc",
+      "scripts/evaluation/m9-compare.mjs": "48f97bf1fdce399a789d29675c94f60f3c4e142451c229aa226ceff3d4f119d2",
+      "scripts/evaluation/m9-evaluate.mjs": "2a68e8a0e7078f27944dac63f1e371aee99b7cd14300f8f6ebc68ff290516ab8",
+      "scripts/evaluation/m9-expand-dataset.mjs": "5bb5bfa565419620c20b2d1fc4079cc7529ee46c3f06f4640bbd91c2d134dfe0",
+      "scripts/evaluation/release-evaluate.mjs": "69b3906cb6530541977be575ee50ba9a957feb72d6c8a67df797455a993d7c09",
+      "scripts/evaluation/release-evaluation.test.mjs": "dbd4814358c5368e01bafe23a41d96d2f3661e3c7f494566e97cda75bd961140",
+      "scripts/evaluation/release-results.mjs": "722f7950a275753c35781b4ea5cfe45c2ecd4b00c2c77e6684bd57af05c92974",
+      "scripts/verification/m10-eval-observer.mjs": "434b2820c6c37836d0d6708a956b001b70924934513b1b78c6c64e668430d01a"
+    }
+  },
+  "protocol": {
+    "version": "release-evaluation.v1",
+    "sha256": "a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51"
+  },
+  "dataset": {
+    "version": "requests.m9.v2",
+    "sha256": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+    "count": 100,
+    "orderedIdsSha256": "0c8912485bdad7cce3e64964bb5ffe977516fbed45056c49980061d5aa6c1821"
+  },
+  "contract": {
+    "promptVersion": "request-analysis.v4",
+    "schemaVersion": "analysis.v1",
+    "schemaSha256": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+    "structuredOutput": true,
+    "stream": false,
+    "think": false,
+    "temperature": 0,
+    "seed": 42,
+    "maxOutputTokens": 1200,
+    "contextTokens": 16384,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "maxAttempts": 2,
+    "retryBackoffMs": 1000,
+    "keepAliveExplicit": false,
+    "topPExplicit": false,
+    "topKExplicit": false
+  },
+  "ollama": {
+    "version": "0.34.4",
+    "model": {
+      "name": "qwen3:4b-instruct-2507-q4_K_M",
+      "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+      "sizeBytes": 2497293447,
+      "details": {
+        "family": "qwen3",
+        "parameterSize": "4.0B",
+        "quantization": "Q4_K_M"
+      }
+    },
+    "embedding": {
+      "name": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "sizeBytes": 1157672605,
+      "details": {
+        "family": "bert",
+        "parameterSize": "566.70M",
+        "quantization": "F16"
+      }
+    },
+    "loaded": [
+      {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "sizeBytes": 5098103111,
+        "vramBytes": 5098103111,
+        "contextLength": 16384
+      }
+    ],
+    "templateSha256": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541",
+    "parametersSha256": "494413c2917bbf3446a03367bf122c18421a31857968384c5b49e47cd20ad144",
+    "numericDefaults": [
+      "temperature                    0.7",
+      "top_k                          20",
+      "top_p                          0.8",
+      "num_ctx                        32768",
+      "repeat_penalty                 1"
+    ]
+  },
+  "limitations": [
+    "Between-call host snapshots do not measure utilization during inference.",
+    "Historical M9 per-call runtime/digest and provider timings are unavailable.",
+    "Windows active power scheme does not establish the Settings power-mode overlay."
+  ]
+}

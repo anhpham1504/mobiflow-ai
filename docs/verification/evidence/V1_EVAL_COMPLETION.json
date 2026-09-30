@@ -1,0 +1,11 @@
+{
+  "at": "2026-09-30T00:21:23.233Z",
+  "runId": "6d080973-d92f-4ed2-9e7d-d5e071e609a4",
+  "mode": "final",
+  "cases": 100,
+  "integrityProblems": [],
+  "protectedEvidenceUnchanged": true,
+  "productionChangedFiles": [],
+  "status": "COMPLETED",
+  "releaseApproval": false
+}

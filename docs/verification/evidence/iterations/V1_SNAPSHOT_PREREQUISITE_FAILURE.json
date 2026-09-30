@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-30",
+  "command": "node --env-file=.env scripts/verification/v1-final-snapshot.mjs final",
+  "exitCode": 1,
+  "phase": "Invoked prematurely while demo:ready knowledge ingestion was still running",
+  "assertion": "assert.ok(counts.ready_documents>=9)",
+  "result": "FAIL: corpus was not yet READY; no successful snapshot was written",
+  "correction": "Waited for demo:ready to exit 0, then repeated the dependent read-only snapshot check",
+  "laterEvidence": "docs/verification/evidence/V1_DOCKER.json",
+  "liveEvaluationRepeated": false
+}

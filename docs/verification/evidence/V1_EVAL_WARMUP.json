@@ -1,0 +1,86 @@
+{
+  "protocolSha256": "a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51",
+  "notScored": true,
+  "result": {
+    "id": "protocol-warmup",
+    "tags": [],
+    "status": "SUCCEEDED",
+    "passed": true,
+    "attempts": 1,
+    "firstAttemptValid": true,
+    "repairedSuccess": false,
+    "schemaValid": true,
+    "referenceValid": true,
+    "referenceApplicable": false,
+    "categoryMatch": true,
+    "priorityMatch": true,
+    "teamMatch": true,
+    "latencyMs": 3453,
+    "failureCategory": null,
+    "actual": {
+      "category": "NETWORK",
+      "priority": "HIGH",
+      "team": "NETWORK_OPERATIONS"
+    },
+    "expected": {
+      "category": "NETWORK",
+      "priority": "HIGH",
+      "team": "NETWORK_OPERATIONS"
+    },
+    "identity": {
+      "provider": "ollama",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+    },
+    "timing": {
+      "prepareMs": 0.017,
+      "contextMs": 0.208,
+      "providerWallMs": 3451.864,
+      "validationMs": 0.669,
+      "retryValidationAndBackoffMs": [],
+      "repairProviderMs": 0,
+      "runnerWallMs": 3452.917,
+      "metadataCollectionTailMs": 0.074
+    },
+    "providerAttempts": [
+      {
+        "httpStatus": 200,
+        "httpWallMs": 3429.102,
+        "metadataUnavailable": false,
+        "ollama": {
+          "totalDurationMs": 3417.848,
+          "loadDurationMs": 3.718,
+          "promptEvalCount": 1080,
+          "promptEvalDurationMs": 322.292,
+          "evalCount": 224,
+          "evalDurationMs": 3063.398,
+          "doneReason": "stop"
+        }
+      }
+    ],
+    "requests": [
+      {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "stream": false,
+        "think": false,
+        "options": {
+          "temperature": 0,
+          "num_predict": 1200,
+          "seed": 42,
+          "num_ctx": 16384
+        },
+        "keep_alive": null,
+        "keepAliveExplicit": false,
+        "systemChars": 3862,
+        "userChars": 222,
+        "messagesHash": "2c034d4667adf648e5ee6f654a33762e4bbe5fcc7da63ebebb8c9ed706e449d1",
+        "schemaChars": 7797,
+        "schemaHash": "66f9859219b71ac9fe0af556b2eb98edbb493e206eb69302b8ac7e9e64321009",
+        "requestHash": "b38899b80a40123305ab7382d1c5aa00818349e76b3f1b2ca30642913a93f079",
+        "messageCount": 2,
+        "structuredFormat": true
+      }
+    ],
+    "timingLimitation": "Final validation includes promise completion. Retry intervals include failed validation and the unchanged 1000ms backoff; those two components cannot be separated by passive observation. Provider wall includes inventory/envelope parsing. Metadata clone adds small uncorrected observer overhead."
+  }
+}

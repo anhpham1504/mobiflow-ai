@@ -1,0 +1,295 @@
+{
+  "at": "2026-09-30T00:15:04.465Z",
+  "mode": "diagnostics",
+  "runId": "ee5a02fd-cc91-49e4-a093-089da893084f",
+  "protocolSha256": "a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51",
+  "commit": "8c66cc48be78fe40e31362637e9e43ebb6515a2d",
+  "status": "RESERVED",
+  "rule": "No second attempt after this reservation, including interrupted or undesirable results.",
+  "protectedEvidence": [
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T14-17-47-313Z.json",
+      "sha256": "2067dc7357ba4dad63a70d9f0a53cc5b58e171e59fd004fc6438d8e6c4c01f00"
+    },
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T16-34-01-887Z.json",
+      "sha256": "1179ebb315f7a4e654e73601ea2499c13d34621752d434f53f5a89bdd90af50d"
+    },
+    {
+      "path": "docs/evaluation/results/m9-2026-09-29T16-42-23-764Z.json",
+      "sha256": "91ae88c1c197fe507602cd5d527753dff0b2222876b5a54feab9fce784b1d077"
+    },
+    {
+      "path": "docs/verification/evidence/M10_ADVERSARIAL.json",
+      "sha256": "2e8a0be624a058e556630104b80d383e3c1ef73248f51530d9dc764a97f2d8fd"
+    },
+    {
+      "path": "docs/verification/evidence/M10_BUILD.json",
+      "sha256": "5f7b9178e1a18f586320a4ecdbef6b2d8ff5dec5f59338c8a40dd2fc676222a5"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DB_MIGRATE.json",
+      "sha256": "742b7907b3b494609ee5e8ffca936cf4f07a1097bb5d9634a503e6124b40e16c"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DB_VALIDATE.json",
+      "sha256": "d53c08b96820c5d418d6dc3eebc3b29afaa53f5dcfc6883d3a649c25c6750234"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DEMO_READY.json",
+      "sha256": "363dff4ad1b4016dfd8ae71770a6b028fff7d405e9501a5178f0cf9637718fae"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DEPENDENCY_AUDIT.json",
+      "sha256": "7ccb2593a4b1a967baf9638a61b7af048244ca6bca02230918e7238a0caf296e"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DOCKER.json",
+      "sha256": "917822f160542e91d9fc10098b04d5a0e9f24492b92a8d104fb905a92717167b"
+    },
+    {
+      "path": "docs/verification/evidence/M10_DOCKER_BUILD.json",
+      "sha256": "5dd297b5dd0a1dd29d8bf3c6b8ccd6c177cb52da12e45752d7f05bea5a5c9c1e"
+    },
+    {
+      "path": "docs/verification/evidence/M10_E2E.json",
+      "sha256": "bada3c6b97c6d7526ec6eccb974cef965925147cdb63f7de098b440a74f049bc"
+    },
+    {
+      "path": "docs/verification/evidence/M10_E2E_M7.json",
+      "sha256": "b026068b78c71d6d553d2d7a13cd563acad3a0d209abd6f25f32f1ac0f5bda2f"
+    },
+    {
+      "path": "docs/verification/evidence/M10_E2E_M9.json",
+      "sha256": "7aea549b96d95879625c4d350e37082c0456d7cc1c737ecc4bee5792154b79dd"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_COMPARATOR_RECHECK.json",
+      "sha256": "cf5b77c25fba8b53d7f3aef89b2aa971c3e8c49b4635aa491957401b2dd69171"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_CONTRACT_DIFF.json",
+      "sha256": "005ecf6e9aad348ad6f3f315289b8f9399d0870e1d38297744a00f96bf869007"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_DIAG_BUILD.json",
+      "sha256": "6ad9821754d67f228e2532b185f08179e0c66998ada82f8af4b97ec27f577015"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_DIAG_LINT.json",
+      "sha256": "ee65af057dd702d32019317b14bca84b683a03fe40b5c861dbc3d4296f08fbad"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_DIAG_TYPECHECK.json",
+      "sha256": "4683f6d367d8cff72408300861263935ba569c7c1c3f3da52787daa01658a7b8"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_DIAG_UNIT.json",
+      "sha256": "fb0a9e55240366a21bec8351d222d97e024ec697e00f381f5693a8b847a234fe"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_DIFF_CHECK.json",
+      "sha256": "a5d1d8f58bea2c40c6d8bdf2ca84c058285ad53345db6c260ddefc7e7a413651"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_LATENCY_DIAGNOSTIC.json",
+      "sha256": "4b0312630c36e0c902c67abaf59ee90674e3b666260cac0e971fe50173b7d302"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_MICROBENCHMARK.json",
+      "sha256": "271784cf9b8c2930c4b4506053dd78f8950e4276d658bcd2c934776f005ed111"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_PRIORITY_REPLAY.json",
+      "sha256": "e2e9ebde098bb2a70b8a3c7371f2e3b2046ff62cbaf42bfdd9dc2e5874db2176"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_PROTECTED.json",
+      "sha256": "936d6cc13e4a335154322184a461ca0ad81e69504ee9d568ad781b2b9214edaf"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_REGRESSION.json",
+      "sha256": "5cf0342b418997b4966077746b9cff00c9ec39d71fa13a2a2d457d0295bc2510"
+    },
+    {
+      "path": "docs/verification/evidence/M10_EVAL_RESULT.json",
+      "sha256": "30948372e84b5fcaeb188dc866ff19cbbcd1916d4e628f52232e5772f8625285"
+    },
+    {
+      "path": "docs/verification/evidence/M10_FINAL_VERIFICATION.json",
+      "sha256": "93422237ebd03bfe4059eb8d9f354cd2943fcee56f1c8943933886f134eab917"
+    },
+    {
+      "path": "docs/verification/evidence/M10_GRACEFUL_SHUTDOWN.json",
+      "sha256": "bc1408143078b334a7f24b8dd28ccc8211d35e667bab44b755d8c89d5bb0abaa"
+    },
+    {
+      "path": "docs/verification/evidence/M10_INTEGRATION_FINAL.json",
+      "sha256": "d332e68b56ec40748b330a896c4d7ec9ef2cda5d1816ecce899652f56518a255"
+    },
+    {
+      "path": "docs/verification/evidence/M10_INTEGRATION_SEED.json",
+      "sha256": "3cc5bc635a83e5e16a8d066482029e343c1090efe3900580892474ddabc8f3a1"
+    },
+    {
+      "path": "docs/verification/evidence/M10_LINT.json",
+      "sha256": "ea8b03c1d3b711b722dea2693f667334423d00f021fe38d478604bd31c2ab0a6"
+    },
+    {
+      "path": "docs/verification/evidence/M10_OLLAMA_RUNTIME.json",
+      "sha256": "83c2db45234a44a4fa3ba148b74509280481ae81d185401a87909f66e38860da"
+    },
+    {
+      "path": "docs/verification/evidence/M10_PREFLIGHT.json",
+      "sha256": "3edfb90679bc9ba57d74f4f3efa7d5875d44230c4405890af40736a31853786e"
+    },
+    {
+      "path": "docs/verification/evidence/M10_RESET.json",
+      "sha256": "bc3b78d4773920e20f1dfa814644a703dfaf355b345fa29c9dbaa7dfa98aeac8"
+    },
+    {
+      "path": "docs/verification/evidence/M10_RESET_COMMAND.json",
+      "sha256": "5a19fbf8702d4f3ea649cde70c652a882a05792fe74f60492f71b660ff52ea9b"
+    },
+    {
+      "path": "docs/verification/evidence/M10_RUNTIME_OUTAGE.json",
+      "sha256": "65dbdb347f4fdcd077a49eede1090dd409b0211d9fa3accb567bf922ebd78d5e"
+    },
+    {
+      "path": "docs/verification/evidence/M10_SECURITY_SCAN.json",
+      "sha256": "7576faefbadd0c5d9f163f19b0cc3dcb35dbe51f2159e339c37cd423b5060769"
+    },
+    {
+      "path": "docs/verification/evidence/M10_TYPECHECK.json",
+      "sha256": "abf5df72a63eb0f8dd6f0c8a99c2a57d42b6e3a377f8d6096c45a3980e54d373"
+    },
+    {
+      "path": "docs/verification/evidence/M10_UNIT.json",
+      "sha256": "934d44ff9fa91b21820f697fd10d57c0d69e15d7eb7e6ced441ca9c2c7a1e6d9"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_BUILD.json",
+      "sha256": "75efd6334b173f36bd77203f1afd2db6847ec8240ec7e893d128cda327e64246"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_DB_MIGRATE.json",
+      "sha256": "f2aed3bf9e28933e6101c9f6c49e0f18f0d97d91a0c39e3e4b4680d7602d4103"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_DB_VALIDATE.json",
+      "sha256": "401c7dfe6c149d8f4f800870b393f6135cf52d648a178406bf8c35d44f0a008f"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_DEPENDENCY_AUDIT.json",
+      "sha256": "4aaac3991dae3ad615af3c96a326737c2fdaf21215e267aedbbfdf3f824ef585"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_FOCUSED.json",
+      "sha256": "d6e3f959a1f47f4aee8b29e0ee362a410d8fd773abafd6c328cbe83bd9f2639e"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_LINT.json",
+      "sha256": "8580e32a2068a555bbb0ab565dabdf955af8bfde9fe6a2d6848a880bf031acba"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_TYPECHECK.json",
+      "sha256": "067171fe596df6fe47416e1ddf153f858821a34080b1e0b87c6c09f0abd0739f"
+    },
+    {
+      "path": "docs/verification/evidence/M10_V1_UNIT.json",
+      "sha256": "219790fb3f61c430a6371b358b647a4630388559216a1eb8f95876e65467ff0b"
+    },
+    {
+      "path": "docs/verification/evidence/M10_WARMUP.json",
+      "sha256": "3a8e1bd9bcd667a2beefae676a850ffdd85959e63df7f3132a5bc01489e394f1"
+    },
+    {
+      "path": "docs/verification/evidence/M9_EVAL_REGRESSION.json",
+      "sha256": "9d578712cc2e9e48f4edde964ef62aa7ee50023e2ab607f970da90f0768e8d74"
+    },
+    {
+      "path": "docs/verification/evidence/M9_EVAL_RESULT.json",
+      "sha256": "91ae88c1c197fe507602cd5d527753dff0b2222876b5a54feab9fce784b1d077"
+    },
+    {
+      "path": "docs/verification/evidence/M9_RUNTIME_OFFLINE.json",
+      "sha256": "47dccfe0987f1428dd26fb7c13dc30cd287d1719e93a72af9f87a7bbd32aa072"
+    },
+    {
+      "path": "docs/verification/evidence/M9_SECURITY_SCAN.json",
+      "sha256": "ac7b7e9c22195198fb8fedb0925f686861e13f8cbd64d813ff66fa586770eeee"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_BUILD-0023905215f7.json",
+      "sha256": "0023905215f7a8dedd36aef9dc356ef3adc7a41a798d5b97755089ca25b8cf23"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_BUILD-8dedc2ed7cce.json",
+      "sha256": "8dedc2ed7cce54dec4025042dfcf9e625b12956322f08b4a9ddc6068c11b8897"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_DEMO_READY-b00607be3b2b.json",
+      "sha256": "b00607be3b2bb10b1947bfc2b92706253f3876da999a133d82330655b0c3a5ee"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_DOCKER_BUILD-85dcb8fd2a2c.json",
+      "sha256": "85dcb8fd2a2c41098088680c342904268d73e39fa67d39e643660e3278356fc7"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_E2E-303067fc1557.json",
+      "sha256": "303067fc155717e63bd4f48e77e362cc5f601e6fc48d8ffae34a38d49d71aed6"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_EVAL_DIAG_LINT-2f06da6fac6f.json",
+      "sha256": "2f06da6fac6f0ad28cd6debe638f8c9f38740ab6860fe29546a0fd222d0391cc"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_EVAL_DIAG_LINT-73039b849536.json",
+      "sha256": "73039b8495365f18c1adfca4fdabe95b7d5e1daedc83b6cfda49e51da0ea26ba"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_EVAL_DIAG_LINT-f741b1e4ef28.json",
+      "sha256": "f741b1e4ef28a5ab323e41d31660c78fd0678af6e1ca78c7ee949ce7bc713281"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_INTEGRATION_SEED-3bde2e133744.json",
+      "sha256": "3bde2e133744eaf29d21884fc0296309ff6456d0c3b428df9672101a64ab0875"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_LINT-54edc373300d.json",
+      "sha256": "54edc373300d7aabf5558be7aac15d84f78fe5d6ff94803ca74b9c5d05de3c34"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_LINT-cb812b635cdd.json",
+      "sha256": "cb812b635cdd7e6d4ec6b062d6bccebd81ef66f1cc06168fae2a98de48bc9e45"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_RESET-7917d5badd0c.json",
+      "sha256": "7917d5badd0c9dbffda24fc08bab2b9eda82a376158e8ab213f9cbc2e35f7095"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_RESET_COMMAND-0ceb895df339.json",
+      "sha256": "0ceb895df3394fb7be8bb8c62b894483d7a0bf979e08d3edabad7dd064e59e3c"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_SECURITY_SCAN-f4764ba41cb1.json",
+      "sha256": "f4764ba41cb148daa58e5198f763fe9d915eb5c70f8d0bb149f36b2a913cbdfe"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_TYPECHECK-1dc1124a1b1d.json",
+      "sha256": "1dc1124a1b1d7aba83d2795c6f2dc60e473a5f78177a8817b351aba11671c654"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_V1_BUILD-f8089e227ae4.json",
+      "sha256": "f8089e227ae427ceffb3b7ce7b6d61451d5f5ae00c40b7f1ad6c1cbf11e5e1a2"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_V1_LINT-1e538fef7712.json",
+      "sha256": "1e538fef7712d5e66f3204113c2829e33fe7e7a617b3e00dbf71b359a8a4959f"
+    },
+    {
+      "path": "docs/verification/evidence/iterations/M10_V1_LINT-c952a5336094.json",
+      "sha256": "c952a53360943168edaa432f930a8c166293ea689c410a266e3155147c6de306"
+    }
+  ]
+}

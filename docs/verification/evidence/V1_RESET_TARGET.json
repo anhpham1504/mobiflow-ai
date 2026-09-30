@@ -1,0 +1,36 @@
+{
+  "at": "2026-09-30T00:24:34.523Z",
+  "target": {
+    "host": "localhost",
+    "port": 5432,
+    "database": "mobiflow"
+  },
+  "explicitDemoMode": true,
+  "knownSyntheticUsersOnly": true,
+  "knownSyntheticRequestsOnly": true,
+  "markerVerified": true,
+  "apiStopped": true,
+  "counts": {
+    "users": 6,
+    "requests": 8,
+    "histories": 39,
+    "assignments": 6,
+    "resolutions": 3,
+    "feedback": 2,
+    "notifications": 8,
+    "ai_runs": 0,
+    "request_embeddings": 8,
+    "ready_documents": 9,
+    "non_ready_documents": 0,
+    "embedded_chunks": 12
+  },
+  "migrations": [
+    "202609280001_enable_vector",
+    "20260928085048_m2_domain_auth",
+    "20260928092000_m2_public_code_sequence",
+    "20260928145100_m5_knowledge_vectors",
+    "20260929034000_m6_request_embeddings",
+    "20260929043000_m6_request_cosine_index"
+  ],
+  "storageDeletion": false
+}

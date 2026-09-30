@@ -1,6 +1,6 @@
 # Local M10 demo runbook
 
-Release gate: **BLOCKED** by [the live-evaluation comparison](../evaluation/M10_EVALUATION_INVESTIGATION.md). Runtime readiness is a separate operational check and does not override that decision.
+Release gate: **PASS** after the single controlled V1 run passed the unchanged live-evaluation comparator. Historical RED runs remain in [the investigation](../evaluation/M10_EVALUATION_INVESTIGATION.md). Runtime readiness is still a separate operational check and must pass before a demonstration.
 
 ## Prerequisites and first setup
 

@@ -1,6 +1,6 @@
 # Five-minute demonstration script
 
-This is a planned presentation budget, not a measured completion-time benchmark. Complete [the runbook](DEMO_RUNBOOK.md) first. M10 release is currently blocked; disclose that status during any review demonstration. Do not edit out failures and describe them as live success.
+This is a planned presentation budget, not a measured completion-time benchmark. Complete [the runbook](DEMO_RUNBOOK.md) first. The V1 gate passes for the documented local synthetic scope; disclose both the historical RED runs and the final controlled PASS. Do not edit out failures and describe them as live success.
 
 | Time budget | Screen and action | What to establish |
 |---|---|---|

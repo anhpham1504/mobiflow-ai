@@ -1,0 +1,427 @@
+{
+  "at": "2026-09-30T00:43:01.835Z",
+  "finalGate": "PASS",
+  "releaseBlockers": [],
+  "sourceCommit": "8c66cc48be78fe40e31362637e9e43ebb6515a2d",
+  "branch": "fix/m10-evaluation-stability",
+  "productionChanged": false,
+  "commands": {
+    "LINT": {
+      "command": "npm run lint",
+      "startedAt": "2026-09-30T00:13:48.725Z",
+      "finishedAt": "2026-09-30T00:13:54.060Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_LINT-2026-09-30T00-13-48-725Z.txt"
+    },
+    "RELEASE_LINT": {
+      "command": "npm run lint",
+      "startedAt": "2026-09-30T00:24:34.590Z",
+      "finishedAt": "2026-09-30T00:24:41.499Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_RELEASE_LINT-2026-09-30T00-24-34-590Z.txt"
+    },
+    "TYPECHECK": {
+      "command": "npm run typecheck",
+      "startedAt": "2026-09-30T00:11:53.682Z",
+      "finishedAt": "2026-09-30T00:12:02.682Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_TYPECHECK-2026-09-30T00-11-53-682Z.txt"
+    },
+    "UNIT": {
+      "command": "npm test",
+      "startedAt": "2026-09-30T00:13:16.468Z",
+      "finishedAt": "2026-09-30T00:13:33.662Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_UNIT-2026-09-30T00-13-16-468Z.txt"
+    },
+    "BUILD": {
+      "command": "npm run build",
+      "startedAt": "2026-09-30T00:11:13.922Z",
+      "finishedAt": "2026-09-30T00:11:28.564Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_BUILD-2026-09-30T00-11-13-922Z.txt"
+    },
+    "DB_VALIDATE": {
+      "command": "npm run db:validate",
+      "startedAt": "2026-09-30T00:11:54.894Z",
+      "finishedAt": "2026-09-30T00:11:56.102Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DB_VALIDATE-2026-09-30T00-11-54-894Z.txt"
+    },
+    "DB_MIGRATE": {
+      "command": "npm run db:migrate",
+      "startedAt": "2026-09-30T00:11:56.172Z",
+      "finishedAt": "2026-09-30T00:11:57.640Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DB_MIGRATE-2026-09-30T00-11-56-172Z.txt"
+    },
+    "DEPENDENCY_AUDIT": {
+      "command": "npm audit --omit=dev --audit-level=high",
+      "startedAt": "2026-09-30T00:11:53.700Z",
+      "finishedAt": "2026-09-30T00:11:54.810Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DEPENDENCY_AUDIT-2026-09-30T00-11-53-700Z.txt"
+    },
+    "SECURITY_M8": {
+      "command": "npm run verify:security:m8 -- --v1",
+      "startedAt": "2026-09-30T00:24:34.298Z",
+      "finishedAt": "2026-09-30T00:24:35.866Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_SECURITY_M8-2026-09-30T00-24-34-298Z.txt"
+    },
+    "SECURITY_M9": {
+      "command": "npm run verify:security:m9 -- --v1",
+      "startedAt": "2026-09-30T00:24:35.960Z",
+      "finishedAt": "2026-09-30T00:24:36.398Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_SECURITY_M9-2026-09-30T00-24-35-960Z.txt"
+    },
+    "SECURITY_M10": {
+      "command": "npm run verify:adversarial:m10 -- --v1",
+      "startedAt": "2026-09-30T00:24:36.476Z",
+      "finishedAt": "2026-09-30T00:24:36.859Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_SECURITY_M10-2026-09-30T00-24-36-476Z.txt"
+    },
+    "RESET": {
+      "command": "npm run demo:reset",
+      "startedAt": "2026-09-30T00:24:59.171Z",
+      "finishedAt": "2026-09-30T00:25:11.553Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_RESET-2026-09-30T00-24-59-171Z.txt"
+    },
+    "DOCKER_BUILD": {
+      "command": "docker compose build",
+      "startedAt": "2026-09-30T00:25:36.526Z",
+      "finishedAt": "2026-09-30T00:26:22.476Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DOCKER_BUILD-2026-09-30T00-25-36-526Z.txt"
+    },
+    "DOCKER_START": {
+      "command": "docker compose up -d --wait --wait-timeout 120",
+      "startedAt": "2026-09-30T00:26:48.283Z",
+      "finishedAt": "2026-09-30T00:26:55.500Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DOCKER_START-2026-09-30T00-26-48-283Z.txt"
+    },
+    "DEMO_READY": {
+      "command": "npm run demo:ready",
+      "startedAt": "2026-09-30T00:27:08.385Z",
+      "finishedAt": "2026-09-30T00:28:39.890Z",
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "iterations/M10_V1_DEMO_READY-2026-09-30T00-27-08-385Z.txt"
+    }
+  },
+  "inherited": {
+    "commands": {
+      "M10_INTEGRATION_FINAL": {
+        "command": "node --env-file=.env scripts/verification/m2-integration.mjs",
+        "startedAt": "2026-09-29T17:20:00.941Z",
+        "finishedAt": "2026-09-29T17:23:42.472Z",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "iterations/M10_INTEGRATION_FINAL-2026-09-29T17-20-00-941Z.txt",
+        "reexecuted": false,
+        "provenance": "Approved M10 evidence; owning production/config/test files unchanged from snapshot."
+      },
+      "M10_INTEGRATION_SEED": {
+        "command": "npm run test:integration:m10",
+        "startedAt": "2026-09-29T17:26:42.649Z",
+        "finishedAt": "2026-09-29T17:26:59.521Z",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "iterations/M10_INTEGRATION_SEED-2026-09-29T17-26-42-649Z.txt",
+        "reexecuted": false,
+        "provenance": "Approved M10 evidence; owning production/config/test files unchanged from snapshot."
+      },
+      "M10_RUNTIME_OUTAGE": {
+        "command": "npm run verify:runtime:m8",
+        "startedAt": "2026-09-29T17:14:17.450Z",
+        "finishedAt": "2026-09-29T17:14:32.280Z",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "iterations/M10_RUNTIME_OUTAGE-2026-09-29T17-14-17-450Z.txt",
+        "reexecuted": false,
+        "provenance": "Approved M10 evidence; owning production/config/test files unchanged from snapshot."
+      },
+      "M10_E2E": {
+        "command": "npm run test:e2e:m10",
+        "startedAt": "2026-09-29T17:34:53.310Z",
+        "finishedAt": "2026-09-29T17:34:58.278Z",
+        "exitCode": 0,
+        "status": "PASS",
+        "log": "iterations/M10_E2E-2026-09-29T17-34-53-310Z.txt",
+        "reexecuted": false,
+        "provenance": "Approved M10 evidence; owning production/config/test files unchanged from snapshot."
+      }
+    },
+    "browser": {
+      "M3": {
+        "path": "artifacts/m3/browser-results.json",
+        "startTime": "2026-09-29T16:13:04.680Z",
+        "duration": 19500.035,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M4_OFFLINE": {
+        "path": "artifacts/m4/browser-offline.json",
+        "startTime": "2026-09-29T16:14:10.590Z",
+        "duration": 7225.887000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M4_ONLINE_RECOVERY": {
+        "path": "artifacts/m4/browser-online.json",
+        "startTime": "2026-09-29T16:14:29.535Z",
+        "duration": 71131.187,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M5": {
+        "path": "artifacts/m5/browser-results.json",
+        "startTime": "2026-09-29T16:15:46.798Z",
+        "duration": 12128.715,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M6": {
+        "path": "artifacts/m6/browser-results.json",
+        "startTime": "2026-09-29T16:16:04.424Z",
+        "duration": 59250.468,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M7": {
+        "path": "artifacts/m7/browser-results.json",
+        "startTime": "2026-09-29T17:29:45.491Z",
+        "duration": 29317.674000000003,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M8": {
+        "path": "artifacts/m8/browser-results.json",
+        "startTime": "2026-09-29T16:20:43.408Z",
+        "duration": 174862.344,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M9": {
+        "path": "artifacts/m9/browser-results.json",
+        "startTime": "2026-09-29T17:34:51.058Z",
+        "duration": 2143.6330000000003,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      },
+      "M10": {
+        "path": "artifacts/m10/browser-results.json",
+        "startTime": "2026-09-29T17:34:53.884Z",
+        "duration": 4365.394,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "status": "PASS",
+        "provenance": "Actual retained Playwright report; dates distinguish earlier M10 checks from continuation reruns."
+      }
+    },
+    "reason": "Phase 16 permits focused verification for evaluation/tooling/docs-only changes. Integration, actual outages and M3-M10 browser flows retain their original dates; they were not rerun or relabeled."
+  },
+  "evaluation": {
+    "runId": "6d080973-d92f-4ed2-9e7d-d5e071e609a4",
+    "protocolSha256": "a2358fbddea4cf10e692e1a694929304d3deb90ea2cff85b71ceefddc554da51",
+    "comparatorExit": 0,
+    "flags": 0,
+    "fullRunAttempts": 1,
+    "historicalEvidenceUnchangedSinceRemediationBaseline": [
+      "docs/evaluation/results/m9-2026-09-29T16-34-01-887Z.json",
+      "docs/evaluation/results/m9-2026-09-29T16-42-23-764Z.json",
+      "docs/verification/evidence/M10_EVAL_REGRESSION.json",
+      "docs/verification/evidence/M10_EVAL_RESULT.json",
+      "docs/evaluation/results/m9-2026-09-29T14-17-47-313Z.json",
+      "docs/verification/evidence/M9_EVAL_REGRESSION.json",
+      "docs/verification/evidence/M9_EVAL_RESULT.json",
+      "docs/verification/evidence/M9_RUNTIME_OFFLINE.json",
+      "docs/verification/evidence/M9_SECURITY_SCAN.json"
+    ],
+    "preexistingEvidenceDifferences": [
+      {
+        "path": "docs/verification/evidence/M9_SECURITY_SCAN.json",
+        "recordedBeforeM10Sha256": "456b90cdff533ce3369687da3f2ac20200aa934b82e0f8c22fa748279535d96c",
+        "remediationBaselineSha256": "ac7b7e9c22195198fb8fedb0925f686861e13f8cbd64d813ff66fa586770eeee"
+      }
+    ],
+    "snapshot": {
+      "runId": "6d080973-d92f-4ed2-9e7d-d5e071e609a4",
+      "datasetVersion": "requests.m9.v2",
+      "datasetHash": "e462988851955ed05edbb8c6b05dd5b73b4bc9c975bb60be42b3f2999ac6bc44",
+      "mode": "LIVE_OLLAMA",
+      "startedAt": "2026-09-30T00:16:46.660Z",
+      "finishedAt": "2026-09-30T00:21:19.553Z",
+      "provider": "ollama",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "promptVersion": "request-analysis.v4",
+      "schemaVersion": "analysis.v1",
+      "totalCases": 100,
+      "passed": {
+        "count": 68,
+        "rate": 0.68
+      },
+      "firstAttemptValid": {
+        "count": 99,
+        "rate": 0.99
+      },
+      "repairedSuccess": {
+        "count": 1,
+        "rate": 0.01
+      },
+      "terminalFailure": {
+        "count": 0,
+        "rate": 0
+      },
+      "schemaValid": {
+        "count": 100,
+        "rate": 1
+      },
+      "referenceValid": {
+        "count": 0,
+        "rate": null
+      },
+      "latency": {
+        "mean": 2728.38,
+        "p50": 2653,
+        "p95": 3085,
+        "max": 6681
+      },
+      "averageAttempts": 1.01,
+      "failureCounts": {},
+      "limitations": "100 synthetic development cases with specification-authored labels; not real customer data, prevalence, calibrated confidence, or generalized accuracy. Reference validity is not applicable to intake classification. Historical evaluator route is unchanged for comparison."
+    }
+  },
+  "runtime": {
+    "at": "2026-09-30T00:29:03.477Z",
+    "runtimeStatus": "PASS",
+    "releaseGate": "AWAITING_FINAL_REVIEW",
+    "services": {
+      "postgres": {
+        "state": "running",
+        "health": "healthy",
+        "image": "pgvector/pgvector:0.8.6-pg17"
+      },
+      "api": {
+        "state": "running",
+        "health": "healthy",
+        "image": "mobiflow-ai-api"
+      },
+      "web": {
+        "state": "running",
+        "health": "healthy",
+        "image": "mobiflow-ai-web"
+      }
+    },
+    "apiHttp": 200,
+    "webHttp": 200,
+    "coreReady": true,
+    "aiReady": true,
+    "ragStatus": "READY",
+    "counts": {
+      "users": 6,
+      "requests": 8,
+      "histories": 39,
+      "assignments": 6,
+      "resolutions": 3,
+      "feedback": 2,
+      "notifications": 8,
+      "ai_runs": 0,
+      "request_embeddings": 8,
+      "ready_documents": 9,
+      "non_ready_documents": 0,
+      "embedded_chunks": 12
+    },
+    "migrations": [
+      "202609280001_enable_vector",
+      "20260928085048_m2_domain_auth",
+      "20260928092000_m2_public_code_sequence",
+      "20260928145100_m5_knowledge_vectors",
+      "20260929034000_m6_request_embeddings",
+      "20260929043000_m6_request_cosine_index"
+    ],
+    "dashboardSnapshot": {
+      "runId": "6d080973-d92f-4ed2-9e7d-d5e071e609a4",
+      "finishedAt": "2026-09-30T00:21:19.553Z",
+      "passed": 68
+    },
+    "git": {
+      "head": "8c66cc48be78fe40e31362637e9e43ebb6515a2d",
+      "branch": "fix/m10-evaluation-stability"
+    }
+  },
+  "security": {
+    "freshStaticChecks": [
+      "V1_SECURITY_M8",
+      "V1_SECURITY_M9",
+      "V1_SECURITY_M10"
+    ],
+    "newFilesScanned": 96,
+    "secretFindings": [],
+    "dynamicAuthorizationAndInjectionEvidence": "Inherited unchanged M10 integration plus fresh 43 API unit tests."
+  },
+  "migrations": {
+    "count": 6,
+    "newMigration": false,
+    "historicalChanged": false
+  },
+  "gitDiffCheck": "PASS",
+  "m11Started": false,
+  "limitations": [
+    "Historical slowdown mechanism remains unknown; current controlled release passes the original gate.",
+    "Synthetic label agreement is not generalized accuracy.",
+    "No new manual productivity benchmark, external penetration test or distributed scheduler guarantee."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:security:m8 -- --v1",
+  "startedAt": "2026-09-30T00:24:34.298Z",
+  "finishedAt": "2026-09-30T00:24:35.866Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_V1_SECURITY_M8-2026-09-30T00-24-34-298Z.txt"
+}

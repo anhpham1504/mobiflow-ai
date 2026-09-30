@@ -1,0 +1,8 @@
+{
+  "command": "npm run demo:reset",
+  "startedAt": "2026-09-30T00:24:59.171Z",
+  "finishedAt": "2026-09-30T00:25:11.553Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_V1_RESET-2026-09-30T00-24-59-171Z.txt"
+}

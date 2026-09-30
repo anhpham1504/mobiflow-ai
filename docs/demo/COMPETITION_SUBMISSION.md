@@ -1,6 +1,6 @@
 # MobiFlow AI — competition submission package
 
-Prepared 2026-09-30 for a local synthetic demonstration. Release status: **BLOCKED** at the M10 verification gate; the longitudinal live-evaluation comparison is still red. This package describes implemented behavior, not an approved production release.
+Prepared 2026-09-30 for a local synthetic demonstration. Release status: **PASS** for the documented V1 scope after one controlled final evaluation passed the unchanged comparator. Historical RED runs remain disclosed; this is not an enterprise-production certification.
 
 MobiFlow AI connects Vietnamese service intake to sourced guidance, a proposed work plan, human approval, staff execution, resolution and measured outcomes. The three login roles are USER, STAFF and MANAGER. AI and SYSTEM are internal audit actors.
 
@@ -19,4 +19,4 @@ Submission contents:
 
 Operator preparation is in [DEMO_RUNBOOK](DEMO_RUNBOOK.md). The authoritative result is [FINAL_VERIFICATION](../verification/FINAL_VERIFICATION.md), with [security](../verification/SECURITY_AUDIT.md), [AI safety](../verification/AI_SAFETY_AUDIT.md) and the [release checklist](../release/M10_RELEASE_CHECKLIST.md).
 
-Measured development evidence: the approved M9 run matched 68/100 exact labels; M10 runs matched 68/100 and 69/100. Each produced 100/100 final schema-valid results and no terminal failures. The isolated M10 run still has two lost matches and 83 per-case latency regressions above the existing 1.5× comparison boundary. No productivity, customer adoption, ROI, uptime or production-scale claim is made.
+Measured development evidence: the approved M9 run matched 68/100 exact labels; historical M10 runs matched 68/100 and 69/100 and included RED comparisons. The single final controlled V1 run matched 68/100 exact labels, with 100/100 schema-valid, 99/100 first-attempt-valid, one repair, zero terminal failures and no comparator flags. These synthetic exact-label results are not generalized accuracy. No productivity, customer adoption, ROI, uptime or production-scale claim is made.

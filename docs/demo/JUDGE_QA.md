@@ -26,4 +26,4 @@
 
 **Why is this more than ticket management?** It adds measured local AI intake, sourced assistance and bounded recommendations to the workflow. Their quality and limitations are visible rather than assumed.
 
-**Is it ready to release?** The implementation and demonstration package are available for review, but M10 is BLOCKED by the unresolved longitudinal live-evaluation result. No release tag or production-readiness claim has been made.
+**Is it ready to release?** The M0–M10 implementation and V1 release gate pass for the documented local synthetic scope. The final controlled run passed the unchanged comparator; earlier RED runs remain disclosed. This is not an enterprise-HA, generalized-accuracy, ROI or external-security-certification claim.

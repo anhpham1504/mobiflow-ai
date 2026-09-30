@@ -22,4 +22,4 @@ All demo inputs are synthetic. Backend role/ownership checks protect requests, f
 
 ## Scale and limits
 
-The provider abstraction could support a separately authorized adapter later; no cloud adapter/dependency is part of this release. Scheduling remains process-local. Distributed workers, multi-tenant operation, high availability and enterprise scale are unverified and out of V1 scope. M10 release remains blocked by the unresolved live comparison described in [M10 evaluation investigation](../evaluation/M10_EVALUATION_INVESTIGATION.md).
+The provider abstraction could support a separately authorized adapter later; no cloud adapter/dependency is part of this release. Scheduling remains process-local. Distributed workers, multi-tenant operation, high availability and enterprise scale are unverified and out of V1 scope. The V1 gate passes after the controlled run described in [M10 evaluation investigation](../evaluation/M10_EVALUATION_INVESTIGATION.md); that result does not remove these limitations.

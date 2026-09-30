@@ -1,9 +1,8 @@
 # Milestone 10 Verification
 
 Verification date: 2026-09-30 (Asia/Saigon; evidence timestamps use UTC).
-Branch: `feat/m10-release-hardening`.
-Baseline/HEAD: `c0e7c9520ae4172b28415b609f8e66191d906803`, tagged `v0.9.0-m9`.
-M10 was intentionally uncommitted while this evidence was produced. Git finalization may preserve it as a branch snapshot, but the live-evaluation release decision remains BLOCKED.
+Current continuation branch: `fix/m10-evaluation-stability`, based on completed M10 snapshot `584bd984b1769065479c5904a42bd6cb06411b85`.
+The original M10 report and its BLOCKED decision are retained below as historical evidence. The authorized V1 release continuation at the end of this document is the current gate decision.
 
 ## Scope implemented
 
@@ -98,6 +97,20 @@ Third M10 full confirmation run remains NOT RUN after the bounded diagnostics: n
 
 Unresolved longitudinal live-evaluation result: two priority pass→fail cases and 83 severe per-case latency flags in isolation. The new warm diagnostics did not reproduce the two priority failures or the broad slowdown, but historical actual predictions and provider/host telemetry are missing. An unexplained improvement is not a verified fix or a waiver. The canonical stable-demo/no-blocker gate remains unsatisfied.
 
-## Gate
+## Historical M10 gate
 
 **FAIL — BLOCKED for release.** M10 implementation, documentation and runnable demo are available for review. A subsequent branch commit/push preserves this blocked snapshot; it is not a release approval. No release tag or merge is authorized. Stop after M10 verification.
+
+## V1 release continuation
+
+The previous blocker was the isolated run's two priority pass-to-fail cases and 83 latency flags. Investigation found no production-contract change and did not waive or relax the comparator. The official evaluation harness lacked provider identity/timing data and an enforceable warmup/isolation/order/attempt protocol, so evaluation-only tooling was corrected and frozen before any new live call. Historical RED evidence remains unchanged.
+
+The priority study returned MEDIUM 5/5 for both `normal-06` and `incomplete-06`. The one authorized full run (`6d080973-d92f-4ed2-9e7d-d5e071e609a4`) then produced 68 exact matches, 100 schema-valid results, 99 first-attempt-valid results, one repair, zero terminal failures, and 2728.38/2653/3085/6681 ms mean/p50/p95/max. The unchanged comparator returned exit 0 with zero pass-to-fail, zero fail-to-pass and zero latency regressions. All protected files are unchanged from remediation baseline `584bd984`; the final gate separately records that M10 had already regenerated `M9_SECURITY_SCAN.json` relative to the M9 tag before this continuation.
+
+Fresh focused gates pass: lint, typecheck, all unit suites, production build, database validate/migrate, dependency audit, M8/M9/M10 security scans, guarded synthetic reset, Docker build/start, demo-ready, final runtime snapshot and diff/secret checks. There are still six migrations and no historical migration change. Because production/config/lockfile behavior is byte-identical to snapshot `584bd984`, the approved M10 PostgreSQL integration, actual outage/recovery and M3–M10 browser evidence was retained with original timestamps rather than misrepresented as rerun.
+
+Final demo state is six synthetic users, eight intended requests, 39 histories, six assignments, three resolutions, two feedback rows, eight notifications, zero AI runs, eight real request embeddings, nine READY knowledge documents and 12 embedded chunks. PostgreSQL/API/web are healthy and the dashboard serves the final run ID.
+
+## Current gate
+
+**PASS — M10/V1 release requirements are satisfied.** The historical slowdown mechanism remains unknown and local inference latency remains hardware-sensitive, but no mandatory blocker remains under the unchanged release comparator. No M11 work was started.

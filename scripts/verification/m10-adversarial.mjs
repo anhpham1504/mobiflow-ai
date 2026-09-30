@@ -23,5 +23,5 @@ const invariants={
   nonRootImages:(read('docker/Dockerfile').match(/USER node/g)?.length??0)===2,
 };
 const evidence={schemaVersion:'m10.adversarial.v1',generatedAt:new Date().toISOString(),filesScanned:files.length,findings,invariants,migrationHashes:Object.fromEntries(migrations.map(name=>[name,createHash('sha256').update(read(`apps/api/prisma/migrations/${name}/migration.sql`)).digest('hex')]))};
-mkdirSync(join(root,'docs/verification/evidence'),{recursive:true});writeFileSync(join(root,'docs/verification/evidence/M10_ADVERSARIAL.json'),JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence));
+mkdirSync(join(root,'docs/verification/evidence'),{recursive:true});writeFileSync(join(root,process.argv.includes('--v1')?'docs/verification/evidence/V1_SECURITY_M10.json':'docs/verification/evidence/M10_ADVERSARIAL.json'),JSON.stringify(evidence,null,2)+'\n');console.log(JSON.stringify(evidence));
 if(findings.length||Object.values(invariants).some(value=>!value))process.exitCode=1;

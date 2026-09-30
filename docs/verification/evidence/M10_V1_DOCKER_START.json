@@ -1,0 +1,8 @@
+{
+  "command": "docker compose up -d --wait --wait-timeout 120",
+  "startedAt": "2026-09-30T00:26:48.283Z",
+  "finishedAt": "2026-09-30T00:26:55.500Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_V1_DOCKER_START-2026-09-30T00-26-48-283Z.txt"
+}

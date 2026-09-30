@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:adversarial:m10 -- --v1",
+  "startedAt": "2026-09-30T00:24:36.476Z",
+  "finishedAt": "2026-09-30T00:24:36.859Z",
+  "exitCode": 0,
+  "status": "PASS",
+  "log": "iterations/M10_V1_SECURITY_M10-2026-09-30T00-24-36-476Z.txt"
+}

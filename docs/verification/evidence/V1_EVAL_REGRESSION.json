@@ -1,0 +1,14 @@
+{
+  "at": "2026-09-30T00:21:19.553Z",
+  "baseline": "docs/evaluation/results/m9-2026-09-29T14-17-47-313Z.json",
+  "current": "docs/evaluation/results/m9-2026-09-30T00-21-19-553Z.json",
+  "comparator": "scripts/evaluation/m9-compare.mjs",
+  "comparatorSha256": "48f97bf1fdce399a789d29675c94f60f3c4e142451c229aa226ceff3d4f119d2",
+  "scratch": "artifacts/v1-comparator-XmsOdo",
+  "exitCode": 0,
+  "comparedCases": 100,
+  "regressions": [],
+  "passed": true,
+  "latencyRatio": 1.5,
+  "failToPass": []
+}

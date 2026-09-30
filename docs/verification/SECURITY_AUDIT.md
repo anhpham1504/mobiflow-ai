@@ -1,6 +1,6 @@
 # Final security audit — M10
 
-Scope: local synthetic V1 on `feat/m10-release-hardening`, based on `c0e7c9520ae4172b28415b609f8e66191d906803`. This audit was completed before Git finalization of the branch snapshot. It is a repository review plus automated negative-path evidence, not an external penetration test or enterprise certification. Release remains BLOCKED for the separate live-evaluation issue.
+Scope: local synthetic V1, with final release continuation on `fix/m10-evaluation-stability` based on M10 snapshot `584bd984b1769065479c5904a42bd6cb06411b85`. This is a repository review plus automated negative-path evidence, not an external penetration test or enterprise certification. The separate live-evaluation issue is resolved by the unchanged comparator's final PASS; no security rule or production behavior was changed to achieve it.
 
 | Boundary | Evidence and actual behavior |
 |---|---|
@@ -21,5 +21,7 @@ Scope: local synthetic V1 on `feat/m10-release-hardening`, based on `c0e7c9520ae
 The M10 static adversarial script verifies repository invariants; it does not independently prove every dynamic attack route. Dynamic coverage is supplied by the unit and real PostgreSQL tests, not by relabeling the static scan as a penetration test. Existing demo-only credentials/placeholders are reviewed fixtures; they are never production advice.
 
 Migration history remains six before/six after. `git diff --exit-code v0.9.0-m9 -- apps/api/prisma/migrations` and M10 hashes protect all historical SQL. No migration was introduced.
+
+Fresh V1 M8/M9/M10 scans pass with no unreviewed finding. Dynamic authorization/injection coverage is inherited from the unchanged M10 production/test surface and the fresh API unit suite; it is not relabeled as a new penetration test. Final diff/secret checks cover the new release files, and the dependency audit reports zero vulnerabilities.
 
 Limitations: no real customer data, external network exposure, multi-tenant deployment, distributed scheduling, broad browser matrix or independent security assessment was tested. Reset assumes exclusive control of the dedicated synthetic DB; its stopped-port check is not a distributed writer lock. Security-sensitive invariants have no known failing test. Exact final command results are recorded in [FINAL_VERIFICATION](FINAL_VERIFICATION.md) and [the checklist](../release/M10_RELEASE_CHECKLIST.md).
