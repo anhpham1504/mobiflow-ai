@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-09-30T12:10:45.027Z",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m13_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-09-30T12:10:25.675Z",
+    "duration": 19319.131,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "smoke": {
+    "sizes": [
+      {
+        "width": 360,
+        "overflow": false,
+        "violations": 0,
+        "seriousCritical": 0
+      },
+      {
+        "width": 768,
+        "overflow": false,
+        "violations": 0,
+        "seriousCritical": 0
+      },
+      {
+        "width": 1440,
+        "overflow": false,
+        "violations": 0,
+        "seriousCritical": 0
+      },
+      {
+        "width": 1920,
+        "overflow": false,
+        "violations": 0,
+        "seriousCritical": 0
+      }
+    ],
+    "presetCounts": [
+      6,
+      10,
+      11
+    ],
+    "customFixture": {
+      "created": 7,
+      "resolved": 6,
+      "compliance": 0.3333333333333333
+    },
+    "keyboard": true,
+    "consoleErrors": [],
+    "failedRequests": [],
+    "externalCspBlocks": 0
+  },
+  "limitations": "Targeted M13 smoke; no historical browser or live-model evaluation run."
+}

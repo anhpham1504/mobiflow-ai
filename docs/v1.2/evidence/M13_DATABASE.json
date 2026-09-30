@@ -1,0 +1,201 @@
+{
+  "checkedAt": "2026-09-30T12:07:37.669Z",
+  "result": "PASS",
+  "database": "mobiflow_m13_test",
+  "migrations": 6,
+  "checks": [
+    {
+      "name": "MANAGER 200, USER/STAFF 403 and unauthenticated 401 over direct HTTP",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid, duplicate, unexpected and conflicting filters are HTTP 400 with safe error",
+      "result": "PASS"
+    },
+    {
+      "name": "calendar period, created/status/priority distributions, distinct historical resolutions, closure and zero-filled trends",
+      "result": "PASS"
+    },
+    {
+      "name": "resolution midnight boundaries, same-day cycles and older-cycle reopen attribution are isolated and correct",
+      "result": "PASS"
+    },
+    {
+      "name": "M12 completion denominator, deadline equality, pause/hold exclusions, sticky breach and malformed/canceled/reopened exclusion",
+      "result": "PASS"
+    },
+    {
+      "name": "immutable feedback scores, real manager decisions and all six Copilot actions with pending/canceled/unclassified totals",
+      "result": "PASS"
+    },
+    {
+      "name": "server filter intersection, single row and zero denominator samples",
+      "result": "PASS"
+    },
+    {
+      "name": "empty period has zeros and null rates/averages; missing days are zero-filled",
+      "result": "PASS"
+    },
+    {
+      "name": "7/30/90 presets resolve in SQL; legacy alias and host/session timezone independence",
+      "result": "PASS"
+    },
+    {
+      "name": "no PII, prompts, raw records or results and no analytics-induced writes",
+      "result": "PASS"
+    },
+    {
+      "name": "OpenAPI operation, security, all query/response schemas and internal references are valid",
+      "result": "PASS"
+    },
+    {
+      "name": "5,101-row metrics remain uncapped and one aggregate query handles the entire range",
+      "result": "PASS"
+    }
+  ],
+  "synthetic": true,
+  "requestRows": 5122,
+  "runRows": 5119,
+  "bulkCohort": 5101,
+  "aggregateStatements": 1,
+  "managerIdentityReads": 1,
+  "authQueriesIncluded": false,
+  "responseMs": [
+    110.563,
+    109.294,
+    103.368,
+    95.62,
+    103.573,
+    93.558,
+    96.558,
+    93.896,
+    93.965,
+    110.253,
+    88.428
+  ],
+  "medianResponseMs": 96.558,
+  "sql": {
+    "planningMs": 3.232,
+    "executionMs": 94.967,
+    "sharedHitBlocks": 16088
+  },
+  "customMetrics": {
+    "operations": {
+      "requestVolume": 7,
+      "createdCount": 7,
+      "resolvedCount": 6,
+      "closedCount": 3,
+      "statusDistribution": {
+        "NEW": 1,
+        "AI_ANALYZING": 0,
+        "TRIAGED": 0,
+        "PENDING_APPROVAL": 0,
+        "ASSIGNED": 0,
+        "IN_PROGRESS": 1,
+        "WAITING_USER": 0,
+        "RESOLVED": 2,
+        "CLOSED": 2,
+        "CANCELED": 1
+      },
+      "priorityDistribution": {
+        "LOW": 3,
+        "MEDIUM": 1,
+        "HIGH": 2,
+        "URGENT": 1
+      }
+    },
+    "sla": {
+      "slaEligibleCount": 3,
+      "slaMetCount": 1,
+      "slaBreachedCount": 2,
+      "slaComplianceRate": 0.3333333333333333,
+      "averageResolutionSeconds": 30173.666666666668,
+      "averageWallClockResolutionSeconds": 145800
+    },
+    "reopen": {
+      "reopenedRequestCount": 2,
+      "resolvedRequestCount": 6,
+      "reopenRate": 0.3333333333333333
+    },
+    "feedback": {
+      "feedbackCount": 2,
+      "averageFeedbackScore": 4,
+      "feedbackDistribution": {
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 0,
+        "5": 1
+      }
+    },
+    "decisions": {
+      "generated": 4,
+      "accepted": 1,
+      "modified": 1,
+      "rejected": 1,
+      "denominator": 3,
+      "acceptanceRate": 0.3333333333333333,
+      "modificationRate": 0.3333333333333333,
+      "rejectionRate": 0.3333333333333333
+    },
+    "copilot": {
+      "copilotRuns": 10,
+      "successfulCopilotRuns": 7,
+      "failedCopilotRuns": 1,
+      "canceledCopilotRuns": 1,
+      "pendingCopilotRuns": 1,
+      "unclassifiedRuns": 1,
+      "copilotRunsByAction": [
+        {
+          "action": "SUMMARIZE_REQUEST",
+          "runs": 2,
+          "succeeded": 1,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 1
+        },
+        {
+          "action": "FIND_SOP",
+          "runs": 3,
+          "succeeded": 1,
+          "failed": 1,
+          "canceled": 1,
+          "pending": 0
+        },
+        {
+          "action": "SUGGEST_NEXT_STEP",
+          "runs": 1,
+          "succeeded": 1,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "action": "GENERATE_CHECKLIST",
+          "runs": 1,
+          "succeeded": 1,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "action": "FIND_SIMILAR_REQUESTS",
+          "runs": 1,
+          "succeeded": 1,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "action": "EXPLAIN_CLASSIFICATION",
+          "runs": 1,
+          "succeeded": 1,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        }
+      ]
+    }
+  },
+  "limitations": "Local single-client synthetic sample; not load/enterprise/model-quality evidence."
+}

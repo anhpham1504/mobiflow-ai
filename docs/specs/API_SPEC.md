@@ -110,11 +110,15 @@ Automatic intake/recommendation/summary uses the same internal services and curr
 | POST /knowledge/documents/:id/disable | MANAGER; `{expectedVersion,reason}` | 200 DISABLED; invalidate live source use |
 | GET /notifications | Any authenticated role; own recipient only, unreadOnly?, pagination | 200 own safe notification records |
 | PATCH /notifications/:id/read | Recipient; `{read:boolean}` | 200 readAt updated/null, idempotent; no request version needed |
-| GET /analytics/overview | MANAGER; bounded date window | 200 real operational counts/average resolution with denominator/window/asOf |
-| GET /analytics/ai | MANAGER; bounded date window | 200 real run/review/latency aggregates + latest measured evaluation metadata or unavailable |
-| GET /analytics/sla | MANAGER; bounded date window | 200 persisted/recomputed risk and fulfilled/breached counts, excludes canceled |
+| GET /analytics | MANAGER; strict calendar range/current priority/status/category/teamId filters | 200 typed PostgreSQL operations/SLA/reopen/feedback/AI/Copilot/trends and separate synthetic evaluations; combines the original planned overview/AI/SLA subresources |
 
 ## Abuse controls, audit and contracts
+
+### M13 Analytics V2 amendment (2026-09-30)
+
+GET `/analytics` operationId `getManagerAnalytics`; active MANAGER only, no-store, existing 120/minute authenticated read guard; no body/pagination/scope override. Query is `preset=7d|30d|90d` (default 30d) **or** `from`/`to` ISO calendar dates (both required, from inclusive/to exclusive, 1–365 days). Optional controlled `priority`, `status`, `category`, UUID `teamId` use current approved Request fields, including for older event activity. Dates resolve in PostgreSQL using Asia/Ho_Chi_Minh and one statement timestamp; preset ends tomorrow at local midnight. Response period echoes exact UTC boundaries, date labels/day count/timezone/asOf and daily granularity. Future empty ranges are valid. Unknown/duplicate fields, unsupported preset/range, malformed date/enum/UUID or mixed range modes return shared 400 INVALID_INPUT; missing auth 401, USER/STAFF 403, read limit 429, unexpected dependency failures sanitized 500.
+
+`packages/contracts/src/analytics.ts` owns strict input/output Zod; response OpenAPI is generated from this schema. Data includes period/filters/filterOptions (safe normalized teams), operations/sla/reopen/feedback/ai/copilot/trends/evaluations and legacy overview fields. Exact event/completion populations and rate denominators are [defined here](../v1.2/M13_ANALYTICS_V2_IMPLEMENTATION_PLAN.md). No request IDs/text, personal data, feedback comments, prompts, tool results or raw AI output. Empty denominators/averages are null. Legacy `windowDays` string 1–365 remains mutually exclusive with the new range inputs and now follows Vietnam calendar boundaries. Legacy overview retains snapshot semantics for compatibility fields but is absent from the new page. Strict V1.1 Zod clients reject additive keys: this is a paired API/web update with a browser reload after both are deployed, not a claim of old-client compatibility.
 
 ### M11/M12 additive amendment (2026-09-30)
 
