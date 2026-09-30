@@ -1,0 +1,82 @@
+{
+  "stats": {
+    "startTime": "2026-09-30T08:16:17.701Z",
+    "duration": 25393.335,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "widths": [
+    360,
+    768,
+    1440,
+    1920
+  ],
+  "axeScans": 24,
+  "criticalSeriousViolations": 0,
+  "results": [
+    {
+      "title": "M11/M12 USER real KPI/DTO agreement, canonical detail, responsive/axe and keyboard",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 7475,
+          "attachments": [
+            {
+              "name": "external-csp-blocks",
+              "contentType": "application/json",
+              "body": "eyJjb3VudCI6MH0="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "M11/M12 STAFF real KPI/DTO agreement, canonical detail, responsive/axe and keyboard",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 7589,
+          "attachments": [
+            {
+              "name": "external-csp-blocks",
+              "contentType": "application/json",
+              "body": "eyJjb3VudCI6MH0="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "M11/M12 MANAGER real KPI/DTO agreement, canonical detail, responsive/axe and keyboard",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 7611,
+          "attachments": [
+            {
+              "name": "external-csp-blocks",
+              "contentType": "application/json",
+              "body": "eyJjb3VudCI6MH0="
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "M11 aggregate loading/error/retry is truthful and never displays invented zero metrics",
+      "status": "expected",
+      "results": [
+        {
+          "status": "passed",
+          "duration": 1298,
+          "attachments": []
+        }
+      ]
+    }
+  ]
+}

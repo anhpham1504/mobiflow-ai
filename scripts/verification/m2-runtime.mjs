@@ -8,6 +8,7 @@ import { createApplication } from '../../apps/api/dist/app.js';
 const env = parseApiEnvironment(process.env);
 const base = process.env.VERIFY_API_URL ?? 'http://localhost:3001';
 const web = process.env.VERIFY_WEB_URL ?? 'http://localhost:3000';
+const browserOrigin = new URL(web).origin;
 const evidence = { checkedAt: new Date().toISOString(), result: 'FAIL', checks: [] };
 const record = (name, details) => { evidence.checks.push({ name, result: 'PASS', details }); console.log(`PASS ${name}`); };
 const pool = new Pool({ connectionString: env.DATABASE_URL, connectionTimeoutMillis: 2000, query_timeout: 2000 });
@@ -35,14 +36,14 @@ try {
   for (const path of ['/api/v1/auth/login', '/api/v1/auth/refresh', '/api/v1/auth/logout', '/api/v1/auth/me', '/api/v1/users/staff']) assert.ok(openapi.paths[path]);
   assert.ok(!JSON.stringify(openapi).includes('passwordHash')); record('M2 OpenAPI contains safe auth and RBAC routes', Object.keys(openapi.paths));
 
-  const headers = { Origin: env.WEB_ORIGIN, 'X-CSRF-Protection': '1', 'Content-Type': 'application/json' };
+  const headers = { Origin: browserOrigin, 'X-CSRF-Protection': '1', 'Content-Type': 'application/json' };
   const login = await fetch(base + '/api/v1/auth/login', { method: 'POST', headers, body: JSON.stringify({ email: 'manager@mobiflow.local', password: 'MobiFlowDemo!2026' }) });
   assert.equal(login.status, 200); const loginBody = await login.json(); const setCookie = login.headers.get('set-cookie');
   assert.equal(loginBody.data.user.role, 'MANAGER'); assert.ok(setCookie?.includes('HttpOnly'));
   assert.ok(!JSON.stringify(loginBody).includes('passwordHash')); assert.ok(!Object.hasOwn(loginBody.data, 'refreshToken'));
   const me = await fetch(base + '/api/v1/auth/me', { headers: { Authorization: `Bearer ${loginBody.data.accessToken}` } });
   assert.equal(me.status, 200);
-  const logout = await fetch(base + '/api/v1/auth/logout', { method: 'POST', headers: { Origin: env.WEB_ORIGIN, 'X-CSRF-Protection': '1', Cookie: setCookie.split(';')[0] } });
+  const logout = await fetch(base + '/api/v1/auth/logout', { method: 'POST', headers: { Origin: browserOrigin, 'X-CSRF-Protection': '1', Cookie: setCookie.split(';')[0] } });
   assert.equal(logout.status, 204); record('production container login, protected profile and logout', { login: 200, me: 200, logout: 204 });
 
   const offline = await createApplication({ ...env, OLLAMA_BASE_URL: 'http://127.0.0.1:1', HEALTH_TIMEOUT_MS: 250 }, { quiet: true, log: () => {} });

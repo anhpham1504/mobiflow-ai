@@ -58,10 +58,13 @@ export type RequestStatus = typeof statuses[number];
 export type Priority = typeof priorities[number];
 
 const nullableDate = z.iso.datetime().nullable();
+export const slaStates=['SAFE','AT_RISK','BREACHED','PAUSED','MET'] as const;
 export const slaViewSchema=z.object({
-  status:z.enum(['SAFE','AT_RISK','BREACHED','PAUSED','MET']),startedAt:z.iso.datetime(),dueAt:z.iso.datetime(),
+  status:z.enum(slaStates),state:z.enum(slaStates),startedAt:z.iso.datetime(),dueAt:z.iso.datetime(),deadlineAt:z.iso.datetime(),
   pausedAt:nullableDate,resolvedHoldAt:nullableDate,stoppedAt:nullableDate,stopReason:z.string().nullable(),
   remainingSeconds:z.number(),elapsedSeconds:z.number(),targetSeconds:z.number(),breachedAt:nullableDate,
+  breachedBySeconds:z.number().int().nonnegative(),completedAt:nullableDate,
+  riskThresholdSeconds:z.number().positive(),totalPausedSeconds:z.number().int().nonnegative(),
 });
 export const requestViewSchema=z.object({
   message:z.object({id:z.uuid(),body:z.string(),kind:z.string(),createdAt:z.iso.datetime()}).optional(),

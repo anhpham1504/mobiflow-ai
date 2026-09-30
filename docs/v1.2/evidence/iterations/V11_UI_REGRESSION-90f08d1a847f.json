@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "startTime": "2026-09-30T07:41:51.230Z",
+    "duration": 32822.763999999996,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "results": [
+    {
+      "title": "V1.1 login is public, responsive, keyboard reachable and accessible",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1710
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 user dashboard and role navigation",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 6695
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 staff dashboard and role navigation",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 5454
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 manager dashboard and role navigation",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4021
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 mobile drawer traps, closes with Escape, and restores focus",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 934
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 manager request list and detail remain operational",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 6937
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 analytics and system status preserve truthful presentation",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 4619
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "V1.1 shell has no page-wide overflow at required widths",
+      "tests": [
+        {
+          "status": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "duration": 1064
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

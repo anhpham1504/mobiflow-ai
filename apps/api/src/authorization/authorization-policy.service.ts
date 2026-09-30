@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import type { Prisma } from '../generated/prisma/client.js';
+import { Prisma } from '../generated/prisma/client.js';
 import { ApiError } from '../http.js';
 import type { AuthenticatedActor } from '../auth/auth.types.js';
 
@@ -11,6 +11,13 @@ export class AuthorizationPolicyService {
     if (actor.role === 'USER') return { createdById: actor.id };
     if (actor.role === 'STAFF') return { currentAssigneeId: actor.id };
     return {};
+  }
+  requestScopeSql(actor:AuthenticatedActor):Prisma.Sql {
+    const scope=this.requestScope(actor);
+    if(scope.createdById)return Prisma.sql`r."createdById"=${actor.id}::uuid`;
+    if(scope.currentAssigneeId)return Prisma.sql`r."currentAssigneeId"=${actor.id}::uuid`;
+    if(actor.role==='MANAGER'&&Object.keys(scope).length===0)return Prisma.sql`TRUE`;
+    throw new ApiError(403,'FORBIDDEN','Unsupported request scope.');
   }
 
   canReadRequest(actor: AuthenticatedActor, request: RequestOwnership): boolean {

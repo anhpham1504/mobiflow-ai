@@ -60,4 +60,10 @@ M1 must verify compatible package/runtime/container versions, actual Ollama conn
 
 ## Acceptance
 
+### Authorized V1.2 amendment — M11/M12 only (2026-09-30)
+
+The current request authorizes full-scope role-isolated aggregate dashboards and normalization/exposure/testing of the existing deterministic SLA engine. No new role, state, AI capability, infrastructure, or visual design is introduced. Preserve all V1 invariants. M13 analytics V2 and later milestones remain unauthorized. KPI definitions and overlap, half-open Vietnam day boundaries, additive API fields and acceptance evidence are in [the implementation plan](../v1.2/M11_M12_IMPLEMENTATION_PLAN.md) and [verification](../v1.2/M11_M12_VERIFICATION.md). No V1.2 release tag or main merge is authorized.
+
+Existing analytics' SLA counters use the same canonical SQL clock and exclude canceled instances as a compatibility correction to A05, not an analytics V2 implementation. Other analytics behavior is unchanged.
+
 M0 passes only with all required documents and no unresolved cross-document business/security conflict. M1 is ready to be authorized once that gate passes. Competition readiness requires every M1–M10 gate, including actual runtime, security, AI, RAG, browser and demo evidence; see [IMPLEMENTATION_PLAN](../IMPLEMENTATION_PLAN.md) and [TEST_STRATEGY](TEST_STRATEGY.md).

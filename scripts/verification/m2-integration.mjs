@@ -36,14 +36,20 @@ try {
   await verification.end();
   if (migrationCount !== 6 || !vectorVersion || embeddingColumns !== 2 || !runtimePrivileges.rows[0].user_select || !runtimePrivileges.rows[0].audit_insert || runtimePrivileges.rows[0].audit_update || !runtimePrivileges.rows[0].public_code_sequence_usage) throw new Error('Clean migration privilege/vector verification failed.');
   console.log(JSON.stringify({ event: 'm2.clean-migration.verified', database: testDatabase, migrationCount, vectorVersion, embeddingColumns, runtimePrivileges: runtimePrivileges.rows[0] }));
-  if (!process.argv.includes('--m6-only')) {
+  if (!process.argv.includes('--m6-only')&&!process.argv.includes('--m11-m12-only')) {
   run(['--test', 'apps/api/test/auth.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
   run(['--test', 'apps/api/test/workflow.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString() });
   run(['--test', 'apps/api/test/knowledge.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
   run(['--test', 'apps/api/test/analysis.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
   }
+  if(process.argv.includes('--m11-m12-only')){
+    run(['--test','apps/api/test/workflow.integration.test.mjs'],{M2_INTEGRATION_DATABASE_URL:appTestUrl.toString()});
+  }
+  if(!process.argv.includes('--m11-m12-only')){
   const pattern=process.argv[process.argv.indexOf('--pattern')+1];
   run(['--test', ...(process.argv.includes('--pattern')?['--test-name-pattern',pattern]:[]), 'apps/api/test/recommendation.integration.test.mjs'], { M2_INTEGRATION_DATABASE_URL: appTestUrl.toString(), M4_INTEGRATION_OWNER_URL: ownerTestUrl.toString() });
+  }
+  if(!process.argv.includes('--m6-only'))run(['--test','apps/api/test/dashboard-sla.integration.test.mjs'],{M2_INTEGRATION_DATABASE_URL:appTestUrl.toString()});
 } finally {
   await admin.query(`SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '${testDatabase}' AND pid <> pg_backend_pid()`);
   await admin.query(`DROP DATABASE IF EXISTS ${testDatabase}`);

@@ -69,3 +69,11 @@ The DB time is authoritative; inject a test clock for unit tests. A missed poll 
 - Cancel during a pause stops processing, preserves exclusions/history and is absent from MET/BREACHED rate denominators.
 
 Dependencies: state machine, transactional assignment, policies, notifications and audit (M3 initial clock; M8 monitoring). Test boundaries, multiple waits/reopens, scheduler delay, sticky breach, reassignment, policy edits, cancel, retry/dedupe and concurrent state changes with real DB integration.
+
+## M12 canonical read contract (2026-09-30)
+
+`sla-clock.ts` supplies shared elapsed-budget math, ordered state rules and `SLA_RISK_RATIO=0.2`; `sla-sql.ts` compiles those rules for DB aggregates. Scalar views, dashboard SQL, scheduler and the existing analytics SLA counters use this same engine; reads do not mutate status, audit or notification data. Runtime reads/monitoring use DB time; tests inject UTC instants without sleeps. Persisted timestamps/exclusions still belong to state-machine transactions.
+
+The additive DTO uses state/deadlineAt aliases alongside status/dueAt, and exposes completedAt=resolvedHoldAt, breachedBySeconds=max(0,-remainingSeconds), riskThresholdSeconds=targetSeconds*0.2, totalPausedSeconds. A sticky breach with a later increased target remains BREACHED even with zero current overrun. PAUSED visibly retains any historical breach. Closed/canceled clocks never age; cancellation is displayed as stopped and does not enter dashboard risk or analytics fulfillment denominators.
+
+Repeated pause does not replace the original pausedAt; repeated resume/reopen does not accumulate exclusions again. Lifecycle mutations reject backwards boundary time; negative/noninteger exclusions, invalid target/date/risk configuration fail rather than reset. The existing state machine still rejects invalid state/actions and stale expectedVersion before any transactional side effect. UI formats durations/text/colors only and never applies the removed 30-minute risk rule. No AI override, new state, business-calendar policy or M13 feature is introduced.

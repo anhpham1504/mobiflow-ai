@@ -70,4 +70,6 @@ Login generic 401 does not disclose inactive/unknown account versus incorrect pa
 
 ## Acceptance
 
+M11 amendment: `/dashboard/user`, `/dashboard/staff`, `/dashboard/manager` are non-cumulative, role-guarded reads. USER counts owned records only; STAFF counts current assignments only, including readable terminal history; MANAGER retains A01 single-organization scope. The shared authorization policy emits both Prisma and bound SQL predicates. No query parameter may select role, owner, assignee or broaden scope; unknown fields return 400, wrong-role route 403, missing identity 401. Responses contain aggregate numbers for that role only, no request IDs, hidden totals, approval/directory/team workload fields for USER/STAFF. Authenticated read limits and no-store caching apply.
+
 M2 tests three-role login, inactive users, expiry, revoke/rotation/replay, wrong role, owner A versus B, unassigned staff and pagination totals. M3/M7 tests transactional authorization and reassignment races. M5/M8 tests source access, tool-purpose restrictions, scope-filtered AI context and access revocation during model calls. M10 verifies direct URLs/API calls, CORS/CSRF, no frontend secrets and no trust in forged actor/role fields.

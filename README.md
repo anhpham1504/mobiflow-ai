@@ -1,5 +1,7 @@
 # MobiFlow AI
 
+V1.2 M11/M12 work is reviewable on `feat/v1.2-operational-dashboard-sla-v2` from `v1.1.0`: role-scoped database aggregate dashboards and canonical backend SLA. See [implementation plan](docs/v1.2/M11_M12_IMPLEMENTATION_PLAN.md), [verification](docs/v1.2/M11_M12_VERIFICATION.md), and [checkpoint closure review](docs/v1.2/M11_M12_CHECKPOINT_CLOSURE.md). The current request authorizes one checkpoint commit and feature-branch push, not a V1.2 tag/main merge; M13 is not started. New checks: `npm run test:integration:m11-m12`, `npm run test:e2e:v1-2` (use the existing local web URL override if needed).
+
 > Nền tảng điều phối yêu cầu vận hành nội bộ bằng AI cục bộ, biến mô tả tự nhiên thành quy trình có cấu trúc, có bằng chứng, có phân quyền và luôn giữ con người ở vị trí quyết định cuối cùng.
 
 MobiFlow AI được xây dựng cho các tình huống vận hành doanh nghiệp mà một yêu cầu ban đầu thường rất ngắn, thiếu dữ kiện và phải đi qua nhiều bước phối hợp: tiếp nhận, phân loại, tra cứu quy trình, đề xuất người xử lý, phê duyệt, thực thi, theo dõi SLA, tổng kết và xác nhận kết quả.

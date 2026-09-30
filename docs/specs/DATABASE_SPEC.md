@@ -82,4 +82,6 @@ App DB principal has required CRUD on business tables but no general DDL; migrat
 
 ## Acceptance
 
+M11/M12 amendment: no persisted field, enum, index or migration changes. Six existing migrations remain immutable. Dashboard counts use one parameterized, role-scoped conditional aggregate over Request and the unique SlaInstance join, evaluated at one DB snapshot instant. state/deadlineAt/completedAt/breachedBySeconds/riskThresholdSeconds/totalPausedSeconds are DTO projections of the existing clock, not new columns. Existing analytics SLA counts also reuse this canonical expression with canceled instances excluded. Query plan and timings are measured locally in [M11/M12 verification](../v1.2/M11_M12_VERIFICATION.md); no scale/SLO claim or index is invented.
+
 M2 empty-DB migration/seed, constraints, role/session boundaries; M3 lifecycle/clock/concurrency; M5 real vector search and incompatible-model rejection; M7 all-or-nothing approval; M8 resolution history, summary provenance, notification dedupe; M9 real aggregate reconciliation. Test unique active assignment/review/run, FK cross-request misuse, negative timestamps/counts, rollback on audit failure, auth replay, canceled jobs and source-generation races using real PostgreSQL.

@@ -4,6 +4,7 @@ export * from './analysis.js';
 export * from './knowledge.js';
 export * from './recommendation.js';
 export * from './analytics.js';
+export * from './dashboard.js';
 
 export const componentSchema = z.object({
   status: z.enum(['UP', 'DOWN', 'NOT_CONFIGURED']),

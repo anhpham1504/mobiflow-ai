@@ -1,0 +1,79 @@
+{
+  "at": "2026-09-29T17:20:36.434Z",
+  "corpus": [
+    {
+      "code": "SOP-IOT-04",
+      "id": "9b89be2b-67d6-478b-bebd-6e84e44563db",
+      "generation": 1,
+      "chunks": 2
+    },
+    {
+      "code": "SOP-NET-02",
+      "id": "c0702d36-480f-4963-8971-6b5945787708",
+      "generation": 1,
+      "chunks": 2
+    },
+    {
+      "code": "SLA-Policy",
+      "id": "b00cb915-f9c6-444b-81c5-e9358427b13b",
+      "generation": 1,
+      "chunks": 2
+    },
+    {
+      "code": "FAQ-IoT",
+      "id": "00aafc1d-b91b-451a-805a-15440e6ef1c2",
+      "generation": 1,
+      "chunks": 1
+    },
+    {
+      "code": "SOP-BILL-01",
+      "id": "103265f2-f204-4fd2-b418-e93b7b96819c",
+      "generation": 1,
+      "chunks": 1
+    },
+    {
+      "code": "SOP-ACCOUNT-01",
+      "id": "512e9e8a-60d4-463a-ba8d-db9b81e8fc8f",
+      "generation": 1,
+      "chunks": 1
+    },
+    {
+      "code": "SOP-SERVICE-01",
+      "id": "992f2ac1-af39-4c56-b1dc-cf9c6ae8b18d",
+      "generation": 1,
+      "chunks": 1
+    },
+    {
+      "code": "SOP-FIBER-01",
+      "id": "b7fa211b-3370-4ee0-9129-223afebd5bf4",
+      "generation": 1,
+      "chunks": 1
+    },
+    {
+      "code": "ADVERSARIAL-01",
+      "id": "a7c3cb9c-640f-4628-8ecf-55adb9f93be4",
+      "generation": 1,
+      "chunks": 1
+    }
+  ],
+  "identity": {
+    "provider": "ollama",
+    "model": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "dimension": 1024,
+    "revision": "m5.v1",
+    "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+  },
+  "sourceIds": [
+    "KD-9b89be2b-67d6-478b-bebd-6e84e44563db-G1-C0"
+  ],
+  "runId": "1578b5d9-808e-46ec-80c5-1cd532233738",
+  "status": "SUCCEEDED",
+  "citations": [
+    {
+      "quote": "Áp dụng cho SIM dữ liệu trong thiết bị IoT bị mất kết nối. Ghi nhận số thiết bị bị ảnh hưởng,",
+      "sourceId": "KD-9b89be2b-67d6-478b-bebd-6e84e44563db-G1-C0"
+    }
+  ],
+  "latencyMs": 8954
+}

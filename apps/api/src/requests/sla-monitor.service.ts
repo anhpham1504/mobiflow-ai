@@ -4,6 +4,7 @@ import type {ApiEnvironment} from '@mobiflow/config';
 import {Prisma} from '../generated/prisma/client.js';
 import {PrismaService} from '../database/prisma.service.js';
 import {assessSla} from './sla-clock.js';
+import {databaseNow} from './sla-sql.js';
 import {API_ENV} from '../tokens.js';
 
 @Injectable()
@@ -14,7 +15,7 @@ export class SlaMonitorService implements OnModuleInit,OnModuleDestroy{
   async onModuleDestroy(){if(this.timer)clearInterval(this.timer);await this.running;}
   tick(at?:Date){if(this.running)return this.running;this.running=this.sweep(at).finally(()=>{this.running=null;});return this.running;}
   private async sweep(at?:Date){
-    const now=at??new Date();const rows=await this.prisma.slaInstance.findMany({where:{stoppedAt:null,request:{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}},OR:[{status:{in:['SAFE','AT_RISK']}},{breachedAt:null}]},orderBy:[{dueAt:'asc'},{id:'asc'}],take:200,select:{id:true,requestId:true,version:true,request:{select:{status:true,currentAssigneeId:true}},startedAt:true,dueAt:true,targetSeconds:true,pausedAt:true,totalPausedSeconds:true,resolvedHoldAt:true,totalResolvedHoldSeconds:true,stoppedAt:true,stopReason:true,status:true,breachedAt:true,assessedAt:true}});let events=0;
+    const now=at??await databaseNow(this.prisma);const rows=await this.prisma.slaInstance.findMany({where:{stoppedAt:null,request:{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}},OR:[{status:{in:['SAFE','AT_RISK']}},{breachedAt:null}]},orderBy:[{dueAt:'asc'},{id:'asc'}],take:200,select:{id:true,requestId:true,version:true,request:{select:{status:true,currentAssigneeId:true}},startedAt:true,dueAt:true,targetSeconds:true,pausedAt:true,totalPausedSeconds:true,resolvedHoldAt:true,totalResolvedHoldSeconds:true,stoppedAt:true,stopReason:true,status:true,breachedAt:true,assessedAt:true}});let events=0;
     for(const row of rows){const assessment=assessSla(row,now);if(assessment.status===row.status&&assessment.breachedAt?.getTime()===row.breachedAt?.getTime()&&!['AT_RISK','BREACHED'].includes(assessment.status)){await this.prisma.slaInstance.updateMany({where:{id:row.id,version:row.version},data:{assessedAt:assessment.assessedAt,version:{increment:1}}});continue;}
       if(!['AT_RISK','BREACHED'].includes(assessment.status)){await this.prisma.slaInstance.updateMany({where:{id:row.id,version:row.version},data:{status:assessment.status,breachedAt:assessment.breachedAt,assessedAt:assessment.assessedAt,dueAt:assessment.dueAt,version:{increment:1}}});continue;}
       const recipients=[...(row.request.currentAssigneeId?[row.request.currentAssigneeId]:[]),...(await this.prisma.user.findMany({where:{role:'MANAGER',active:true},select:{id:true}})).map(u=>u.id)];

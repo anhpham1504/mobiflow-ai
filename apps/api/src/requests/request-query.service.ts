@@ -6,7 +6,8 @@ import { PrismaService } from '../database/prisma.service.js';
 import { AuthorizationPolicyService } from '../authorization/authorization-policy.service.js';
 import type { AuthenticatedActor } from '../auth/auth.types.js';
 import { ApiError } from '../http.js';
-import { assessSla } from './sla-clock.js';
+import { slaView } from './sla-clock.js';
+import { databaseNow } from './sla-sql.js';
 import { parse } from './validation.js';
 
 const querySchema=z.object({
@@ -32,10 +33,10 @@ type Row=Prisma.RequestGetPayload<{include:typeof relations}>;
 export class RequestQueryService {
   constructor(private readonly prisma:PrismaService,private readonly policy:AuthorizationPolicyService) {}
   private view(r:Row,actor:AuthenticatedActor,now:Date) {
-    const sla=r.slaInstance?assessSla(r.slaInstance,now):null;
+    const sla=r.slaInstance?slaView(r.slaInstance,now):null;
     return {id:r.id,publicCode:r.publicCode,title:r.title,description:r.description,status:r.status,version:r.version,category:r.category,subcategory:r.subcategory,priority:r.priority,teamId:r.teamId,currentAssignee:r.currentAssignee,
       createdAt:r.createdAt,updatedAt:r.updatedAt,resolvedAt:r.resolvedAt,closedAt:r.closedAt,canceledAt:r.canceledAt,aiAnalysisStatus:r.aiAnalysisStatus,
-      sla:sla?{status:sla.status,startedAt:sla.startedAt,dueAt:sla.dueAt,pausedAt:sla.pausedAt,resolvedHoldAt:sla.resolvedHoldAt,stoppedAt:sla.stoppedAt,stopReason:sla.stopReason,remainingSeconds:sla.remainingSeconds,elapsedSeconds:sla.elapsedSeconds,targetSeconds:sla.targetSeconds,breachedAt:sla.breachedAt}:null,
+      sla,
       currentResolution:r.currentResolution,feedback:r.feedback,resolutionSummary:r.aiRuns[0]?{aiRunId:r.aiRuns[0].id,requestId:r.id,purpose:'RESOLUTION_SUMMARY' as const,action:null,status:r.aiRuns[0].status,errorCode:r.aiRuns[0].errorCode,createdAt:r.aiRuns[0].createdAt,finishedAt:r.aiRuns[0].finishedAt,contextVersion:r.aiRuns[0].contextVersion,stale:r.currentResolution?.id!==r.aiRuns[0].resolutionId,result:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].safeResultJson:null,model:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].model:null,latencyMs:r.aiRuns[0].latencyMs}:null,
       ...(actor.role==='MANAGER'?{manualDraft:r.triageDraftJson,manualDraftRevision:r.manualDraftRevision,reviewKind:r.reviewKind,pendingDraftRevision:r.pendingDraftRevision,pendingRecommendationId:r.pendingRecommendationId}:{}),
     };
@@ -45,14 +46,14 @@ export class RequestQueryService {
     this.policy.assertCanReadRequest(actor,r);
     if(!r) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
     const checklist=actor.role==='USER'?null:r.checklist;
-    return {...this.view(r,actor,new Date()),...(checklist?{checklist}: {})};
+    return {...this.view(r,actor,await databaseNow(this.prisma)),...(checklist?{checklist}: {})};
   }
   async list(actor:AuthenticatedActor,input:unknown,kind:'mine'|'queue'|'manager'|'approvals') {
     const {query,where,limit}=pagination(input);
     const filters:Prisma.RequestWhereInput={...(query.status?{status:query.status}:{}),...(query.priority?{priority:query.priority}:{}),...(query.category?{category:query.category}:{}),...(query.assigneeId?{currentAssigneeId:query.assigneeId}:{}),...(query.from||query.to?{createdAt:{gte:query.from?new Date(query.from):undefined,lt:query.to?new Date(query.to):undefined}}:{})};
     const scope:Prisma.RequestWhereInput=kind==='queue'?{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}}:kind==='approvals'?{status:'PENDING_APPROVAL',reviewKind:{in:['AI','MANUAL']}}:{};
     const rows=await this.prisma.request.findMany({where:{AND:[this.policy.requestScope(actor),filters,scope,where]},orderBy:[{createdAt:'desc'},{id:'desc'}],take:limit+1,include:relations});
-    const result=page(rows,limit),now=new Date();
+    const result=page(rows,limit),now=await databaseNow(this.prisma);
     return {...result,data:result.data.map(r=>this.view(r,actor,now))};
   }
   async history(id:string,actor:AuthenticatedActor,input:unknown) {
