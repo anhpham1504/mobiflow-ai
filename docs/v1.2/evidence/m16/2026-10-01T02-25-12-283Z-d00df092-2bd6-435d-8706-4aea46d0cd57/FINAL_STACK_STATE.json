@@ -1,0 +1,91 @@
+{
+  "checkedAt": "2026-10-01T03:29:59.7888609Z",
+  "result": "PASS",
+  "isolatedProject": "mobiflow-m16-46d0cd57",
+  "isolatedRunnerStatus": "STOPPED",
+  "isolatedContainers": [
+    {
+      "service": "api",
+      "project": "mobiflow-m16-46d0cd57",
+      "status": "exited"
+    },
+    {
+      "service": "web",
+      "project": "mobiflow-m16-46d0cd57",
+      "status": "exited"
+    },
+    {
+      "service": "postgres",
+      "project": "mobiflow-m16-46d0cd57",
+      "status": "exited"
+    }
+  ],
+  "volumesDeleted": false,
+  "originalProject": "mobiflow-ai",
+  "originalContainers": [
+    {
+      "service": "web",
+      "project": "mobiflow-ai",
+      "status": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "api",
+      "project": "mobiflow-ai",
+      "status": "running",
+      "health": "healthy"
+    },
+    {
+      "service": "postgres",
+      "project": "mobiflow-ai",
+      "status": "running",
+      "health": "healthy"
+    }
+  ],
+  "originalWebStatus": 200,
+  "originalLivenessStatus": 200,
+  "originalReadinessStatus": 200,
+  "originalReadiness": {
+    "status": "READY",
+    "coreReady": true,
+    "aiReady": true,
+    "rag": {
+      "enabled": true,
+      "status": "READY",
+      "embedding": "UP",
+      "knowledge": "READY",
+      "errorCode": null,
+      "documents": 9,
+      "chunks": 12,
+      "checkedAt": "2026-10-01T03:29:49.972Z"
+    },
+    "checkedAt": "2026-10-01T03:29:59.771Z",
+    "components": {
+      "API": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "DATABASE": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "VECTOR_EXTENSION": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_SERVER": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_LLM_MODEL": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_EMBEDDING_MODEL": {
+        "status": "UP",
+        "code": "OK"
+      }
+    }
+  },
+  "originalDatabaseMutatedByM16": false
+}

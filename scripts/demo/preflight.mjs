@@ -1,8 +1,12 @@
 import {existsSync,statfsSync} from 'node:fs';
 import {Client} from 'pg';
-import {check,command,evidencePath,finalStatus,jsonRequest,ollamaCapability,ollamaInventory,portOpen,printChecks,validateReleaseConfig,writeEvidence,DEMO_MARKER_ACTION,DEMO_MARKER_ID,REQUIRED_EMBEDDING,REQUIRED_LLM} from './release-core.mjs';
+import {check,command,evidencePath,expectedMigrationNames,finalStatus,jsonRequest,ollamaCapability,ollamaInventory,portOpen,printChecks,validateReleaseConfig,writeEvidence,DEMO_MARKER_ACTION,DEMO_MARKER_ID,REQUIRED_EMBEDDING,REQUIRED_LLM} from './release-core.mjs';
 
 const checks=validateReleaseConfig(process.env),versions={};
+if(finalStatus(checks)!=='PASS'){
+  writeEvidence(evidencePath('M10_PREFLIGHT.json'),{schemaVersion:'m10.preflight.v1',generatedAt:new Date().toISOString(),status:'BLOCKED',versions,checks});
+  printChecks('MobiFlow local configuration preflight',checks);process.exit(1);
+}
 const add=(section,name,ok,pass,fail)=>checks.push(check(section,name,ok?'PASS':'FAIL',ok?pass:fail));
 const runVersion=(name,file,args,pattern)=>{
   const result=command(file,args,{timeout:10000}),version=(result.stdout||result.stderr).split(/\r?\n/)[0];versions[name]=version;
@@ -37,19 +41,20 @@ if(databaseUrl){
     const vector=(await database.query("SELECT extversion FROM pg_extension WHERE extname='vector'"));
     add('Database','pgvector',vector.rowCount===1,`extension ${vector.rows[0]?.extversion??'present'}`,'extension absent');
     const migrations=await database.query('SELECT migration_name,finished_at,rolled_back_at FROM "_prisma_migrations" ORDER BY migration_name');
-    const disk=command('powershell',['-NoProfile','-Command','Get-ChildItem apps/api/prisma/migrations -Directory | Sort-Object Name | Select-Object -ExpandProperty Name'],{timeout:5000}).stdout.split(/\r?\n/).filter(Boolean);
+    const disk=expectedMigrationNames();
     const completed=migrations.rows.filter(row=>row.finished_at&&!row.rolled_back_at).map(row=>row.migration_name);
-    add('Database','migration history',completed.length===6&&JSON.stringify(completed)===JSON.stringify(disk)&&migrations.rows.length===completed.length,'exactly six completed migrations match disk','missing, failed, rolled back, or unexpected migrations');
+    add('Database','migration history',disk.length>0&&JSON.stringify(completed)===JSON.stringify(disk)&&migrations.rows.length===completed.length,`${disk.length} completed migrations match disk`,'missing, failed, rolled back, or unexpected migrations');
     const marker=await database.query('SELECT 1 FROM "AuditLog" WHERE id=$1::uuid AND action=$2 LIMIT 1',[DEMO_MARKER_ID,DEMO_MARKER_ACTION]);
     add('Demo data','synthetic marker',marker.rowCount===1,'exact reset marker present','marker absent; reset is not authorized');
-    const counts=(await database.query('SELECT (SELECT count(*)::int FROM "User") users,(SELECT count(*)::int FROM "Request") requests,(SELECT count(*)::int FROM "RequestStatusHistory") histories,(SELECT count(*)::int FROM "RequestEmbedding") request_embeddings,(SELECT count(*)::int FROM "KnowledgeDocument" WHERE status=\'READY\') ready_documents,(SELECT count(*)::int FROM "KnowledgeChunk" kc JOIN "KnowledgeDocument" kd ON kd.id=kc."documentId" WHERE kd.status=\'READY\' AND kc.embedding IS NOT NULL) embedded_chunks')).rows[0];
+    const counts=(await database.query('SELECT (SELECT count(*)::int FROM "User") users,(SELECT count(*)::int FROM "Request") requests,(SELECT count(*)::int FROM "RequestStatusHistory") histories,(SELECT count(*)::int FROM "Request" WHERE status<>\'CANCELED\') eligible_requests,(SELECT count(*)::int FROM "Request" r WHERE r.status<>\'CANCELED\' AND EXISTS(SELECT 1 FROM "RequestEmbedding" e WHERE e."requestId"=r.id AND e."contextVersion"=r.version)) indexed_requests,(SELECT count(*)::int FROM "KnowledgeDocument" WHERE status=\'READY\') ready_documents,(SELECT count(*)::int FROM "KnowledgeChunk" kc JOIN "KnowledgeDocument" kd ON kd.id=kc."documentId" WHERE kd.status=\'READY\' AND kc.embedding IS NOT NULL) embedded_chunks')).rows[0];
     add('Demo data','accounts and history',counts.users>=6&&counts.requests>=8&&counts.histories>=8,`${counts.users} accounts, ${counts.requests} requests, ${counts.histories} history rows`,'seeded accounts or workflow history incomplete');
-    add('Demo data','request similarity index',counts.request_embeddings>=8,`${counts.request_embeddings} real request embeddings`,'historical request embeddings incomplete');
+    add('Demo data','request similarity index',counts.eligible_requests>0&&counts.indexed_requests===counts.eligible_requests,`${counts.indexed_requests}/${counts.eligible_requests} eligible requests have current real embeddings; canceled requests excluded`,'eligible request embeddings incomplete or stale');
     add('RAG','ready corpus',counts.ready_documents>0&&counts.embedded_chunks>0,`${counts.ready_documents} ready documents, ${counts.embedded_chunks} embedded chunks`,'run npm run knowledge:ingest');
   }catch{add('Database','connectivity',false,'','connection or verification failed');}finally{await database.end().catch(()=>{});}
 }else add('Database','connectivity',false,'','database URL not configured');
 
-for(const [name,host,port] of [['PostgreSQL','127.0.0.1',5432],['API','127.0.0.1',Number(process.env.API_PORT??3001)],['Web','127.0.0.1',3000]])add('Ports',name,await portOpen(host,port),`${host}:${port} reachable`,`${host}:${port} unavailable`);
+const databaseOrigin=new URL(process.env.DATABASE_URL),webOrigin=new URL(process.env.WEB_ORIGIN??'http://localhost:3000');
+for(const [name,host,port] of [['PostgreSQL',databaseOrigin.hostname,Number(databaseOrigin.port||5432)],['API','127.0.0.1',Number(process.env.API_PORT??3001)],['Web',webOrigin.hostname,Number(webOrigin.port||(webOrigin.protocol==='https:'?443:80))]])add('Ports',name,await portOpen(host,port),`${host}:${port} reachable`,`${host}:${port} unavailable`);
 try{
   const {response,body}=await jsonRequest(`http://127.0.0.1:${process.env.API_PORT??3001}/health/ready`,{timeout:10000});
   add('Runtime','API core readiness',body.data?.coreReady===true&&response.status===200,'database-backed API core ready','API core not ready');
@@ -57,7 +62,7 @@ try{
   add('RAG','API RAG health',body.data?.rag?.status==='READY','retrieval health ready',`retrieval health ${body.data?.rag?.status??'unknown'}`);
 }catch{add('Runtime','API health contract',false,'','health endpoint unavailable or invalid');}
 try{
-  const web=await fetch('http://127.0.0.1:3000',{redirect:'error',signal:AbortSignal.timeout(5000)}),csp=web.headers.get('content-security-policy'),frame=web.headers.get('x-frame-options');
+  const web=await fetch(webOrigin,{redirect:'error',signal:AbortSignal.timeout(5000)}),csp=web.headers.get('content-security-policy'),frame=web.headers.get('x-frame-options');
   add('Runtime','web reachability',web.ok,`HTTP ${web.status}`,`HTTP ${web.status}`);
   add('Security headers','web baseline',Boolean(csp)&&frame==='DENY'&&web.headers.get('x-content-type-options')==='nosniff','CSP, frame, and MIME protections present','required browser headers missing');
 }catch{add('Runtime','web reachability',false,'','web endpoint unavailable');}

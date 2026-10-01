@@ -134,7 +134,9 @@ export async function seedDemo(prisma,{databaseUrl=process.env.DATABASE_URL,now=
     await tx.requestResolution.createMany({data:history.resolutions,skipDuplicates:true});
     await tx.feedback.createMany({data:history.feedback,skipDuplicates:true});
     await tx.notification.createMany({data:history.notifications,skipDuplicates:true});
-    for(const request of history.requests)if(request.currentResolutionId)await tx.request.update({where:{id:request.id},data:{currentResolutionId:request.currentResolutionId}});
+    // Link newly seeded resolutions once. Re-seeding must not overwrite a later
+    // resolution cycle or touch an existing request's updatedAt timestamp.
+    for(const request of history.requests)if(request.currentResolutionId)await tx.request.updateMany({where:{id:request.id,currentResolutionId:null},data:{currentResolutionId:request.currentResolutionId}});
   },{timeout:30000});
   const counts={
     users:await prisma.user.count({where:{id:{in:users.map(([id])=>id)}}}),teams:await prisma.team.count({where:{id:{in:teams.map(([id])=>id)}}}),

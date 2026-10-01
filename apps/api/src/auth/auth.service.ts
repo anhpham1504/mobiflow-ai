@@ -137,18 +137,21 @@ export class AuthService {
 
   async authenticateAccessToken(header: string | undefined): Promise<AuthenticatedActor> {
     if (!header?.startsWith('Bearer ') || header.length < 20) throw new ApiError(401, 'UNAUTHORIZED', 'Authentication is required.');
+    let identity: { userId: string; sessionId: string };
     try {
       const { payload, protectedHeader } = await jwtVerify(header.slice(7), this.jwtKey, { issuer: this.env.JWT_ISSUER, audience: this.env.JWT_AUDIENCE, algorithms: ['HS256'] });
       if (protectedHeader.alg !== 'HS256' || typeof payload.sub !== 'string' || typeof payload.sid !== 'string' || !uuidPattern.test(payload.sub) || !uuidPattern.test(payload.sid)) throw new Error('claims');
-      const session = await this.prisma.refreshSession.findFirst({
-        where: { id: payload.sid, userId: payload.sub, revokedAt: null, consumedAt: null, expiresAt: { gt: new Date() }, user: { active: true } },
-        include: { user: { select: safeUserSelect } },
-      });
-      if (!session) throw new Error('session');
-      return { ...session.user, sessionId: session.id };
+      identity = { userId: payload.sub, sessionId: payload.sid };
     } catch {
       throw new ApiError(401, 'UNAUTHORIZED', 'Authentication is required.');
     }
+    // Dependency failures must reach the sanitized 503 path, not invalidate a JWT.
+    const session = await this.prisma.refreshSession.findFirst({
+      where: { id: identity.sessionId, userId: identity.userId, revokedAt: null, consumedAt: null, expiresAt: { gt: new Date() }, user: { active: true } },
+      include: { user: { select: safeUserSelect } },
+    });
+    if (!session) throw new ApiError(401, 'UNAUTHORIZED', 'Authentication is required.');
+    return { ...session.user, sessionId: session.id };
   }
 
   async hashPassword(password: string): Promise<string> { return hash(password, passwordOptions); }

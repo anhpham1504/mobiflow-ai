@@ -1,0 +1,54 @@
+{
+  "checkedAt": "2026-10-01T03:10:14.238Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migrationCount": 7,
+  "schemaChanged": false,
+  "migrationAdded": false,
+  "checks": [
+    {
+      "name": "pgvector available",
+      "status": "PASS",
+      "version": "0.8.6"
+    },
+    {
+      "name": "empty database migrated 1 through 7",
+      "status": "PASS",
+      "migrations": [
+        "202609280001_enable_vector",
+        "20260928085048_m2_domain_auth",
+        "20260928092000_m2_public_code_sequence",
+        "20260928145100_m5_knowledge_vectors",
+        "20260929034000_m6_request_embeddings",
+        "20260929043000_m6_request_cosine_index",
+        "20260930010000_m14_advisory_confidence"
+      ]
+    },
+    {
+      "name": "repeat seed preserves requests histories feedback and password hashes",
+      "status": "PASS"
+    },
+    {
+      "name": "repeated migration startup preserves business rows",
+      "status": "PASS"
+    },
+    {
+      "name": "runtime role reads business data without database CREATE",
+      "status": "PASS"
+    },
+    {
+      "name": "M14 upgrade preserves V1 confidence and permits V2 null",
+      "status": "PASS",
+      "scope": "real PostgreSQL record/schema compatibility; no new V1 AI-quality evaluation"
+    },
+    {
+      "name": "Prisma migration failure exits nonzero and later migration does not execute",
+      "status": "PASS",
+      "exitCode": 1
+    },
+    {
+      "name": "migration fault cannot affect the isolated demo business DB",
+      "status": "PASS"
+    }
+  ]
+}

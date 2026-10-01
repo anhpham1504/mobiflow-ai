@@ -1,0 +1,140 @@
+{
+  "checkedAt": "2026-10-01T03:21:48.889Z",
+  "synthetic": true,
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "actual API and web container restart preserves business state",
+      "status": "PASS"
+    },
+    {
+      "name": "provider network outage is optional degradation; core stays ready",
+      "status": "PASS",
+      "readiness": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "rag": {
+          "enabled": true,
+          "status": "NOT_READY",
+          "embedding": "DOWN",
+          "knowledge": "NOT_READY",
+          "errorCode": "EMBEDDING_UNAVAILABLE",
+          "documents": 0,
+          "chunks": 0,
+          "checkedAt": "2026-10-01T03:21:03.723Z"
+        },
+        "checkedAt": "2026-10-01T03:21:08.541Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          }
+        }
+      },
+      "method": "Only isolated API provider origin is unreachable. Host Ollama is preserved."
+    },
+    {
+      "name": "offline AI fails safely while request is saved and core reads work",
+      "status": "NEW",
+      "requestId": "a8d17107-52af-4870-a080-cdf0ce30de0d"
+    },
+    {
+      "name": "recommendation generation failure publishes no unchecked result or business action",
+      "status": "PASS",
+      "errorCode": "EMBEDDING_UNAVAILABLE"
+    },
+    {
+      "name": "restored Ollama supports explicit retry through existing worker and state machine",
+      "status": "PASS"
+    },
+    {
+      "name": "database outage is NOT_READY 503 while process liveness remains 200",
+      "status": "PASS",
+      "readiness": {
+        "status": "NOT_READY",
+        "coreReady": false,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "READY",
+          "embedding": "UP",
+          "knowledge": "READY",
+          "errorCode": null,
+          "documents": 9,
+          "chunks": 12,
+          "checkedAt": "2026-10-01T03:21:15.387Z"
+        },
+        "checkedAt": "2026-10-01T03:21:32.257Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      }
+    },
+    {
+      "name": "database outage API error is bounded and sanitized in production",
+      "status": "PASS",
+      "protectedRead": "503 DATABASE_UNAVAILABLE; no authentication granted",
+      "login": "503 DATABASE_UNAVAILABLE; no database details or secrets"
+    },
+    {
+      "name": "database reconnect recovers without API restart or destructive state repair",
+      "status": "PASS"
+    },
+    {
+      "name": "operator logs contain safe failure categories without secrets or prompts",
+      "status": "PASS",
+      "categories": {
+        "httpErrors": true,
+        "aiFailures": true,
+        "readinessReported": true
+      }
+    }
+  ],
+  "scope": "actual isolated containers/services and production worker; no global Ollama stop, no DB reset, no deployment",
+  "restartSnapshotExcludesClockAssessmentMetadata": true,
+  "transientHealthErrors": 1
+}

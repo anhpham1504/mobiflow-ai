@@ -13,9 +13,17 @@ async function main() {
     catch{clearTimeout(deadline);console.error(JSON.stringify({event:'shutdown.failed'}));process.exit(1);}
   };
   for (const signal of ['SIGINT', 'SIGTERM'] as const) process.on(signal,()=>{void shutdown(signal);});
-  await app.listen(env.API_PORT, env.API_HOST);
+  try {
+    await app.listen(env.API_PORT, env.API_HOST);
+  } catch (error) {
+    // A failed listen still owns worker timers and database pools.
+    try { await app.close(); }
+    finally { await Promise.allSettled([database.close(), prisma.$disconnect()]); }
+    throw error;
+  }
 }
 main().catch((error: unknown) => {
-  console.error(JSON.stringify({ event: 'startup.failed', message: error instanceof Error && error.message.startsWith('Invalid environment keys:') ? error.message : 'API startup failed; check local configuration.' }));
+  const portOccupied = error instanceof Error && 'code' in error && error.code === 'EADDRINUSE';
+  console.error(JSON.stringify({ event: 'startup.failed', code: portOccupied ? 'PORT_OCCUPIED' : 'STARTUP_FAILED', message: error instanceof Error && error.message.startsWith('Invalid environment keys:') ? error.message : portOccupied ? 'API port is occupied; choose a free API_PORT or stop the owning local process.' : 'API startup failed; check local configuration.' }));
   process.exitCode = 1;
 });

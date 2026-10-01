@@ -1,4 +1,4 @@
-import {mkdirSync,writeFileSync} from 'node:fs';
+import {mkdirSync,readdirSync,writeFileSync} from 'node:fs';
 import {connect} from 'node:net';
 import {spawnSync} from 'node:child_process';
 import {dirname,join} from 'node:path';
@@ -81,7 +81,8 @@ export async function ollamaCapability(origin,model,capability,{timeout=5000}={}
   return Array.isArray(body.capabilities)&&body.capabilities.includes(capability);
 }
 
-export function evidencePath(name){return join(process.cwd(),'docs','verification','evidence',name);}
+export function evidencePath(name){return join(process.cwd(),process.env.DEMO_EVIDENCE_ROOT??'docs/verification/evidence',name);}
+export function expectedMigrationNames(){return readdirSync(new URL('../../apps/api/prisma/migrations/',import.meta.url),{withFileTypes:true}).filter(entry=>entry.isDirectory()).map(entry=>entry.name).sort();}
 export function writeEvidence(path,data){mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(data,null,2)+'\n','utf8');}
 
 export function printChecks(title,checks){
@@ -103,8 +104,9 @@ export async function businessCounts(pool){
 
 export function countsEqual(before,after){return JSON.stringify(before)===JSON.stringify(after);}
 
-export function assertResetAuthorization({apiActive,markerCount,completedMigrations,totalMigrations}){
+export function assertResetAuthorization({apiActive,markerCount,completedMigrationNames,totalMigrations}){
   if(apiActive)throw new Error('Refusing reset while the API port is active. Stop API and web services first.');
   if(markerCount!==1)throw new Error('Refusing reset: the exact synthetic demo marker is absent.');
-  if(completedMigrations!==6||totalMigrations!==6)throw new Error('Refusing reset: expected exactly six completed migrations and no failed migration.');
+  const expected=expectedMigrationNames();
+  if(expected.length===0||!Array.isArray(completedMigrationNames)||totalMigrations!==expected.length||JSON.stringify(completedMigrationNames)!==JSON.stringify(expected))throw new Error('Refusing reset: completed migration names must exactly match repository migrations with no failed or unexpected migration.');
 }

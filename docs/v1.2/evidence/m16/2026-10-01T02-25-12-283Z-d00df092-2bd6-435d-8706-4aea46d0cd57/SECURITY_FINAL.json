@@ -1,0 +1,111 @@
+{
+  "checkedAt": "2026-10-01T03:20:22.435Z",
+  "synthetic": true,
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "normal startup core and optional AI ready",
+      "status": "PASS",
+      "readiness": {
+        "status": "READY",
+        "coreReady": true,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "READY",
+          "embedding": "UP",
+          "knowledge": "READY",
+          "errorCode": null,
+          "documents": 9,
+          "chunks": 12,
+          "checkedAt": "2026-10-01T03:20:07.247Z"
+        },
+        "checkedAt": "2026-10-01T03:20:15.900Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      }
+    },
+    {
+      "name": "web CSP framing MIME protections",
+      "status": "PASS",
+      "csp": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' http://localhost:31601"
+    },
+    {
+      "name": "USER and STAFF denied MANAGER list recommendation read and generation",
+      "status": "PASS",
+      "negativeRequests": 6
+    },
+    {
+      "name": "unassigned STAFF IDOR denied",
+      "status": "PASS"
+    },
+    {
+      "name": "USER cross-owner IDOR matches unknown-resource response",
+      "status": "PASS"
+    },
+    {
+      "name": "revoked session denies existing access token",
+      "status": "PASS"
+    },
+    {
+      "name": "expired access token denied",
+      "status": "PASS"
+    },
+    {
+      "name": "expired persisted session denied",
+      "status": "PASS"
+    },
+    {
+      "name": "stale expectedVersion rejects without business mutation",
+      "status": "PASS"
+    },
+    {
+      "name": "authenticated responses are no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "real API startup rejects invalid critical config with key-only diagnostics",
+      "status": "PASS",
+      "keys": [
+        "DATABASE_URL",
+        "JWT_SECRET",
+        "REFRESH_TOKEN_SECRET"
+      ]
+    },
+    {
+      "name": "occupied API port fails startup clearly without secrets",
+      "status": "PASS",
+      "exitCode": 1,
+      "code": "PORT_OCCUPIED"
+    },
+    {
+      "name": "raw model output and client schema selection cannot bypass endpoint",
+      "status": "PASS"
+    }
+  ],
+  "scope": "final backend authentication and dependency-error regression; no extra live generation"
+}

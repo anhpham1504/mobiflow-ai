@@ -1,0 +1,119 @@
+{
+  "checkedAt": "2026-10-01T03:00:04.876Z",
+  "synthetic": true,
+  "result": "FAIL",
+  "failure": "Expected values to be strictly equal:\n\n401 !== 500\n",
+  "checks": [
+    {
+      "name": "actual API and web container restart preserves business state",
+      "status": "PASS"
+    },
+    {
+      "name": "provider network outage is optional degradation; core stays ready",
+      "status": "PASS",
+      "readiness": {
+        "status": "DEGRADED",
+        "coreReady": true,
+        "aiReady": false,
+        "rag": {
+          "enabled": true,
+          "status": "NOT_READY",
+          "embedding": "DOWN",
+          "knowledge": "NOT_READY",
+          "errorCode": "EMBEDDING_UNAVAILABLE",
+          "documents": 0,
+          "chunks": 0,
+          "checkedAt": "2026-10-01T02:59:28.451Z"
+        },
+        "checkedAt": "2026-10-01T02:59:33.264Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          }
+        }
+      },
+      "method": "Only isolated API provider origin is unreachable. Host Ollama is preserved."
+    },
+    {
+      "name": "offline AI fails safely while request is saved and core reads work",
+      "status": "NEW",
+      "requestId": "4ddc0fee-44ea-4a51-8c7a-6c70a7f51f00"
+    },
+    {
+      "name": "recommendation generation failure publishes no unchecked result or business action",
+      "status": "PASS",
+      "errorCode": "EMBEDDING_UNAVAILABLE"
+    },
+    {
+      "name": "restored Ollama supports explicit retry through existing worker and state machine",
+      "status": "PASS"
+    },
+    {
+      "name": "database outage is NOT_READY 503 while process liveness remains 200",
+      "status": "PASS",
+      "readiness": {
+        "status": "NOT_READY",
+        "coreReady": false,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "READY",
+          "embedding": "UP",
+          "knowledge": "READY",
+          "errorCode": null,
+          "documents": 9,
+          "chunks": 12,
+          "checkedAt": "2026-10-01T02:59:40.138Z"
+        },
+        "checkedAt": "2026-10-01T02:59:54.870Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "DOWN",
+            "code": "UNAVAILABLE"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      }
+    }
+  ]
+}

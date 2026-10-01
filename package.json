@@ -74,8 +74,9 @@
     "eval:copilot:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-copilot-evaluate.mjs",
     "eval:summary:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/evaluation/m8-summary-evaluate.mjs",
     "verify:runtime:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m8-runtime.mjs",
-    "verify:security:m8": "node scripts/verification/m8-security.mjs"
-    ,"verify:security:m9": "node scripts/verification/m9-security.mjs"
+    "verify:security:m8": "node scripts/verification/m8-security.mjs",
+    "verify:security:m9": "node scripts/verification/m9-security.mjs",
+    "verify:release:m16": "node scripts/verification/m16-release.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

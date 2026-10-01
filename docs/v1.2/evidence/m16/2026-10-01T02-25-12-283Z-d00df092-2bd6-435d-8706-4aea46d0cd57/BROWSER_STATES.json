@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-01T03:20:42.520Z",
+  "synthetic": true,
+  "result": "PASS",
+  "missingInformationVisible": true,
+  "recoverableTransportError": "explicit UI-only route abort; restored real API",
+  "actualEmptyRange": {
+    "from": "2001-01-01",
+    "to": "2001-01-02",
+    "requestVolume": 0
+  },
+  "mobileKeyboardDialogFocusReturn": true,
+  "untrustedHtmlRenderedAsText": true
+}

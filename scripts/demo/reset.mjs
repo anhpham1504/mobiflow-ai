@@ -4,7 +4,7 @@ import {Client} from 'pg';
 import {PrismaClient} from '../../apps/api/dist/generated/prisma/client.js';
 import {identityKey} from '../../apps/api/dist/knowledge/embedding-provider.js';
 import {requestEmbeddingInput} from '../../apps/api/dist/ai/tools/request-vectors.js';
-import {assertResetAuthorization,DEMO_DATABASES,DEMO_MARKER_ACTION,DEMO_MARKER_ID,ollamaInventory,portOpen,safeDatabaseTarget,jsonRequest} from './release-core.mjs';
+import {assertResetAuthorization,DEMO_DATABASES,DEMO_MARKER_ACTION,DEMO_MARKER_ID,evidencePath,ollamaInventory,portOpen,safeDatabaseTarget,jsonRequest} from './release-core.mjs';
 import {demoRequestIds,seedDemo} from './seed-data.mjs';
 import {saveEvidence} from '../verification/evidence.mjs';
 
@@ -40,7 +40,7 @@ try{
   const marker=await owner.query('SELECT 1 FROM "AuditLog" WHERE id=$1::uuid AND action=$2 LIMIT 1',[DEMO_MARKER_ID,DEMO_MARKER_ACTION]);
   const migrationRows=await owner.query('SELECT migration_name,finished_at,rolled_back_at FROM "_prisma_migrations" ORDER BY migration_name');
   const completed=migrationRows.rows.filter(row=>row.finished_at&&!row.rolled_back_at);
-  assertResetAuthorization({apiActive,markerCount:marker.rowCount,completedMigrations:completed.length,totalMigrations:migrationRows.rows.length});
+  assertResetAuthorization({apiActive,markerCount:marker.rowCount,completedMigrationNames:completed.map(row=>row.migration_name),totalMigrations:migrationRows.rows.length});
   migrationsBefore=completed.map(row=>row.migration_name);
   preview={};
   for(const table of applicationTables)preview[table]=Number((await owner.query(`SELECT count(*)::int AS count FROM "${table}"`)).rows[0].count);
@@ -67,6 +67,6 @@ try{
   if(verification.requestEmbeddings!==ids.length)throw new Error('Reset verification failed: historical request embeddings are incomplete.');
   const migrationsAfter=await prisma.$queryRaw`SELECT migration_name FROM "_prisma_migrations" WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL ORDER BY migration_name`;
   if(JSON.stringify(migrationsBefore)!==JSON.stringify(migrationsAfter.map(row=>row.migration_name)))throw new Error('Reset verification failed: migration history changed.');
-  await saveEvidence('docs/verification/evidence/M10_RESET.json',{at:new Date().toISOString(),status:'PASS',database:ownerTarget.database,apiActive,syntheticMarker:true,preview,counts:verification,migrationsBefore,migrationsAfter:migrationsAfter.map(row=>row.migration_name),storageAction:'NONE',embeddingModel:process.env.OLLAMA_EMBEDDING_MODEL,embeddingDimension:batch.identity.dimension});
+  await saveEvidence(evidencePath('M10_RESET.json'),{at:new Date().toISOString(),status:'PASS',database:ownerTarget.database,apiActive,syntheticMarker:true,preview,counts:verification,migrationsBefore,migrationsAfter:migrationsAfter.map(row=>row.migration_name),storageAction:'NONE',embeddingModel:process.env.OLLAMA_EMBEDDING_MODEL,embeddingDimension:batch.identity.dimension});
   console.log(JSON.stringify({event:'demo.reset.complete',database:ownerTarget.database,embeddingIdentity:createHash('sha256').update(batch.identity.key).digest('hex').slice(0,12),counts:verification}));
 }finally{await prisma.$disconnect();}

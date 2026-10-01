@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import test from 'node:test';
-import {assertResetAuthorization,countsEqual,finalStatus,jsonRequest,safeDatabaseTarget,validateReleaseConfig} from './release-core.mjs';
+import {assertResetAuthorization,countsEqual,expectedMigrationNames,finalStatus,jsonRequest,safeDatabaseTarget,validateReleaseConfig} from './release-core.mjs';
 
 const postgresProtocol='postgres'+'ql://';
 const validEnv={DATABASE_URL:postgresProtocol+'app:secret@127.0.0.1:5432/mobiflow',MIGRATION_DATABASE_URL:postgresProtocol+'owner:secret@localhost:5432/mobiflow',JWT_SECRET:'aB3!long-secret-with-entropy-123456789',REFRESH_TOKEN_SECRET:'zY7!another-secret-with-entropy-987654',WEB_ORIGIN:'http://localhost:3000',NEXT_PUBLIC_API_BASE_URL:'http://localhost:3001/api/v1',OLLAMA_BASE_URL:'http://localhost:11434',OLLAMA_MODEL:'qwen3:4b-instruct-2507-q4_K_M',OLLAMA_EMBEDDING_MODEL:'bge-m3:latest',AUTH_COOKIE_SECURE:'false',AI_RAG_ENABLED:'true',DEMO_MODE:'true'};
@@ -18,10 +18,11 @@ test('preflight diagnostics never contain configured secret values',()=>{
 });
 
 test('reset authorization refuses active API, absent marker, and migration drift',()=>{
-  assert.doesNotThrow(()=>assertResetAuthorization({apiActive:false,markerCount:1,completedMigrations:6,totalMigrations:6}));
-  assert.throws(()=>assertResetAuthorization({apiActive:true,markerCount:1,completedMigrations:6,totalMigrations:6}),/API port/);
-  assert.throws(()=>assertResetAuthorization({apiActive:false,markerCount:0,completedMigrations:6,totalMigrations:6}),/marker/);
-  assert.throws(()=>assertResetAuthorization({apiActive:false,markerCount:1,completedMigrations:5,totalMigrations:6}),/six completed/);
+  const completedMigrationNames=expectedMigrationNames(),valid={apiActive:false,markerCount:1,completedMigrationNames,totalMigrations:completedMigrationNames.length};
+  assert.doesNotThrow(()=>assertResetAuthorization(valid));
+  assert.throws(()=>assertResetAuthorization({...valid,apiActive:true}),/API port/);
+  assert.throws(()=>assertResetAuthorization({...valid,markerCount:0}),/marker/);
+  for(const change of [{completedMigrationNames:completedMigrationNames.slice(0,-1)},{completedMigrationNames:[...completedMigrationNames.slice(0,-1),'unexpected_migration']},{totalMigrations:completedMigrationNames.length+1},{completedMigrationNames:undefined}])assert.throws(()=>assertResetAuthorization({...valid,...change}),/completed migration names/);
 });
 
 test('warmup count comparison proves no business mutation',()=>{

@@ -8,6 +8,8 @@ import { createApplication } from '../dist/app.js';
 import { validationPipe } from '../dist/http.js';
 import { OllamaHealthClient } from '../dist/health/ollama.js';
 import { PostgresProbe } from '../dist/health/database.js';
+import { SignJWT } from 'jose';
+import { TextEncoder } from 'node:util';
 
 const up = { status: 'UP', code: 'OK' };
 const down = { status: 'DOWN', code: 'UNAVAILABLE' };
@@ -118,4 +120,19 @@ test('malformed and oversized JSON receive safe client errors without exposing t
     assert.equal((await response.json()).error.code, code);
   }
   assert.ok(!JSON.stringify(app.logs).includes('do-not-log'));
+});
+
+test('unavailable real database gives sanitized bounded login dependency errors', async (t) => {
+  const app=await api(t),started=Date.now();
+  const response=await fetch(app.url+'/api/v1/auth/login',{method:'POST',headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1','Content-Type':'application/json'},body:JSON.stringify({email:'synthetic@example.test',password:'do-not-log-password'})});
+  assert.equal(response.status,503);assert.ok(Date.now()-started<10000);
+  const body=await response.json();assert.deepEqual(body.error,{code:'DATABASE_UNAVAILABLE',message:'The database is temporarily unavailable.'});
+  assert.equal(/postgresql:|stack|Prisma|do-not-log-password/.test(JSON.stringify(body)+JSON.stringify(app.logs)),false);
+});
+
+test('valid JWT plus unavailable session store is 503; invalid or expired JWT stays 401', async (t) => {
+  const app=await api(t),env=parseApiEnvironment({...base,OLLAMA_BASE_URL:'http://127.0.0.1:1'}),key=new TextEncoder().encode(env.JWT_SECRET);
+  const token=expiration=>new SignJWT({sid:'22222222-2222-4222-8222-222222222222',role:'MANAGER'}).setProtectedHeader({alg:'HS256'}).setSubject('11111111-1111-4111-8111-111111111111').setIssuer(env.JWT_ISSUER).setAudience(env.JWT_AUDIENCE).setExpirationTime(expiration).sign(key);
+  const valid=await fetch(app.url+'/api/v1/auth/me',{headers:{Authorization:'Bearer '+await token('1m')}});assert.equal(valid.status,503);assert.equal((await valid.json()).error.code,'DATABASE_UNAVAILABLE');
+  for(const credential of ['invalid-synthetic-token',await token(Math.floor(Date.now()/1000)-60)]){const rejected=await fetch(app.url+'/api/v1/auth/me',{headers:{Authorization:'Bearer '+credential}});assert.equal(rejected.status,401);assert.equal((await rejected.json()).error.code,'UNAUTHORIZED');}
 });

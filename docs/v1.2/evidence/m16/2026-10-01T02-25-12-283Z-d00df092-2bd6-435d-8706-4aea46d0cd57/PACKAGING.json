@@ -1,0 +1,187 @@
+{
+  "checkedAt": "2026-10-01T03:29:12.772Z",
+  "synthetic": true,
+  "scope": "targeted local packaging/identity review; no penetration-test or production-accuracy claim",
+  "checks": [
+    {
+      "name": "authorized M15 HEAD and M16 branch retained; nothing staged",
+      "status": "PASS"
+    },
+    {
+      "name": "prompt parser schema dataset migrations dependencies and historical evidence preserved",
+      "status": "PASS",
+      "identities": {
+        "apps/api/src/ai/prompts/recommendation.ts": "71d7bbd664a232f31c7ef637601bbb812695e27a9a3acf7b6c76586cc34661de",
+        "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+        "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+        "datasets/ai-evaluation/m15-recommendation-v2.json": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290"
+      },
+      "migrations": [
+        "202609280001_enable_vector",
+        "20260928085048_m2_domain_auth",
+        "20260928092000_m2_public_code_sequence",
+        "20260928145100_m5_knowledge_vectors",
+        "20260929034000_m6_request_embeddings",
+        "20260929043000_m6_request_cosine_index",
+        "20260930010000_m14_advisory_confidence"
+      ],
+      "schemaChanged": false,
+      "migrationAdded": false
+    },
+    {
+      "name": "all required real runtime database browser recovery reports and root gates completed",
+      "status": "PASS",
+      "unitGroups": [
+        7,
+        96,
+        2,
+        65
+      ],
+      "unitTotal": 170,
+      "httpChecks": 17,
+      "finalSecurityChecks": 13,
+      "databaseChecks": 8,
+      "recoveryChecks": 9,
+      "widthScans": 20,
+      "smokeCases": 3,
+      "canonicalLiveCase": true
+    },
+    {
+      "name": "actual installed Ollama tags digests and smoke embedding identity verified",
+      "status": "PASS",
+      "ollamaVersion": "0.34.4",
+      "models": [
+        {
+          "name": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+        },
+        {
+          "name": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+        }
+      ],
+      "embeddingDimension": 1024
+    },
+    {
+      "name": "actual containers use isolated volumes loopback ports and retained security limits",
+      "status": "PASS",
+      "containers": [
+        {
+          "service": "api",
+          "project": "mobiflow-m16-46d0cd57",
+          "user": "node",
+          "readOnly": true,
+          "capDrop": [
+            "ALL"
+          ],
+          "securityOptions": [
+            "no-new-privileges:true"
+          ],
+          "memoryBytes": 536870912,
+          "nanoCpus": 1000000000,
+          "ports": [
+            {
+              "host": "127.0.0.1",
+              "port": "31601"
+            }
+          ],
+          "volumes": [
+            "mobiflow-m16-46d0cd57_knowledge_data"
+          ]
+        },
+        {
+          "service": "web",
+          "project": "mobiflow-m16-46d0cd57",
+          "user": "node",
+          "readOnly": true,
+          "capDrop": [
+            "ALL"
+          ],
+          "securityOptions": [
+            "no-new-privileges:true"
+          ],
+          "memoryBytes": 536870912,
+          "nanoCpus": 1000000000,
+          "ports": [
+            {
+              "host": "127.0.0.1",
+              "port": "31600"
+            }
+          ],
+          "volumes": []
+        },
+        {
+          "service": "postgres",
+          "project": "mobiflow-m16-46d0cd57",
+          "user": "",
+          "readOnly": false,
+          "capDrop": null,
+          "securityOptions": null,
+          "memoryBytes": 1073741824,
+          "nanoCpus": 1000000000,
+          "ports": [
+            {
+              "host": "127.0.0.1",
+              "port": "54616"
+            }
+          ],
+          "volumes": [
+            "mobiflow-m16-46d0cd57_postgres_data"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "required current documentation runbook configuration and inventory exist",
+      "status": "PASS",
+      "files": [
+        "docs/v1.2/M16_RELEASE_HARDENING_DEMO_READINESS_SPEC.md",
+        "docs/v1.2/M16_RELEASE_HARDENING_DEMO_READINESS_IMPLEMENTATION_PLAN.md",
+        "docs/v1.2/M16_RELEASE_HARDENING_DEMO_READINESS_VERIFICATION.md",
+        "docs/verification/MILESTONE_16_VERIFICATION.md",
+        "docs/v1.2/M16_DEMO_RUNBOOK.md",
+        "docs/v1.2/M16_CONFIGURATION_REFERENCE.md",
+        "docs/v1.2/M16_RELEASE_INVENTORY.md"
+      ]
+    },
+    {
+      "name": "reviewable source and new evidence exclude private configured secrets raw prompts and runtime artifacts",
+      "status": "PASS",
+      "sourceFiles": 1256,
+      "evidenceFiles": 12,
+      "ignoredChecks": [
+        ".env",
+        "apps/api/.env",
+        "artifacts/m16/current.json",
+        "apps/api/src/generated/prisma/client.ts",
+        "apps/web/.next/BUILD_ID"
+      ]
+    },
+    {
+      "name": "git diff --check",
+      "status": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "baseline": "310b6db40e8b42189baa665eb04958e999eec0dc",
+  "branch": "feat/v1.2-release-hardening-demo-readiness",
+  "v11Commit": "2604590a0ff07bee8b994cc337d8f7e42da61e70",
+  "changedTracked": [
+    ".env.example",
+    "apps/api/src/auth/auth.service.ts",
+    "apps/api/src/database/prisma.service.ts",
+    "apps/api/src/http.ts",
+    "apps/api/src/main.ts",
+    "apps/api/test/health.test.mjs",
+    "docker-compose.yml",
+    "docs/demo/DEMO_RUNBOOK.md",
+    "docs/v1.2/README.md",
+    "package.json",
+    "scripts/demo/preflight.mjs",
+    "scripts/demo/release-core.mjs",
+    "scripts/demo/release-core.test.mjs",
+    "scripts/demo/reset.mjs",
+    "scripts/demo/seed-data.mjs",
+    "scripts/verification/m5-client.mjs"
+  ]
+}

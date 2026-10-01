@@ -1,6 +1,8 @@
-# Local M10 demo runbook
+# Local demo runbook — V1.2 operator update
 
-Release gate: **PASS** after the single controlled V1 run passed the unchanged live-evaluation comparator. Historical RED runs remain in [the investigation](../evaluation/M10_EVALUATION_INVESTIGATION.md). Runtime readiness is still a separate operational check and must pass before a demonstration.
+Current V1.2 operators should follow [the M16 canonical runbook](../v1.2/M16_DEMO_RUNBOOK.md), which preserves Recommendation V2 advisory review separately from explicit business approval. The V1 release evidence below remains historical.
+
+Historical V1 release gate: **PASS** after the single controlled V1 run passed the unchanged live-evaluation comparator. Historical RED runs remain in [the investigation](../evaluation/M10_EVALUATION_INVESTIGATION.md). Runtime readiness is still a separate operational check and must pass before a demonstration.
 
 ## Prerequisites and first setup
 
@@ -31,11 +33,11 @@ docker compose up -d --build
 npm run demo:ready
 ```
 
-`demo:ready` is non-destructive: idempotent real knowledge ingestion, warmup, then preflight. A newly seeded DB needs `demo:reset` once, with writers stopped, to synchronously populate the eight real request embeddings; otherwise background indexing may still be incomplete. Follow the reset sequence below. Build normally with `npm run build`; do not force `NODE_ENV=development` into a production build.
+`demo:ready` is non-destructive: idempotent real knowledge ingestion, warmup, then preflight. A newly seeded V1.2 DB uses the existing bounded background indexer for eligible non-canceled requests. Wait for current eligible request embeddings before preflight; reset is an optional deliberate destructive demo operation, not a fresh-setup requirement. Build normally with `npm run build`; do not force `NODE_ENV=development` into a production build.
 
 ## Reset and presentation preparation
 
-Use only the disposable, synthetic demo database. Reset previews and truncates the explicitly enumerated application tables, preserves six migration records and does **not** delete storage. It requires loopback/allowlisted matching runtime-owner targets, explicit demo mode, the exact seed marker, six completed migrations, a stopped API port and a successful real embedding probe. It refuses an unknown/production target. The marker design assumes this dedicated database contains only synthetic data; do not load real or unrelated data into it.
+Use only the disposable, synthetic demo database. Reset previews and truncates the explicitly enumerated application tables, preserves seven migration records and does **not** delete storage. It requires loopback/allowlisted matching runtime-owner targets, explicit demo mode, the exact seed marker, seven completed migrations, a stopped API port and a successful real embedding probe. It refuses an unknown/production target. The marker design assumes this dedicated database contains only synthetic data; do not load real or unrelated data into it.
 
 Stop native API processes too if using native mode. For Compose:
 
@@ -82,7 +84,7 @@ Restore the original Ollama service/models and normal Compose configuration. Res
 | Symptom | Check/action |
 |---|---|
 | API port active during reset | Stop Compose/native writers; do not disable the guard |
-| Migration mismatch | Run `db:validate`/`db:migrate`; inspect the six frozen migrations; do not edit old SQL |
+| Migration mismatch | Run `db:validate`/`db:migrate`; inspect the seven repository migrations; do not edit old SQL |
 | RAG not ready | Verify exact bge model/dimension and ingest synthetic corpus; never insert fake READY rows |
 | Unknown/slow model | Inspect `ollama.exe ps`, exact installed tags and host load; separate model evaluation from active demo workers |
 | Docker analytics shows old evaluation | Results are copied into API image at build time; `docker compose up -d --build` and verify latest run ID |
