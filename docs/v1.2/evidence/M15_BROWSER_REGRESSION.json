@@ -1,0 +1,157 @@
+{
+  "checkedAt": "2026-09-30T17:52:04.315Z",
+  "runId": "5d53233f-8ceb-4892-afa6-37efd87d9031",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-09-30T17:51:06.133Z",
+    "duration": 58158.536,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "5d53233f-8ceb-4892-afa6-37efd87d9031",
+      "provider": "deterministic test-only",
+      "decisions": [
+        {
+          "decision": "ACCEPTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "MODIFIED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "REJECTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        }
+      ],
+      "manualBoundary": {
+        "draftNoAssignment": true,
+        "submittedNoAssignment": true,
+        "explicitApprovalAssigned": true,
+        "originalV2Preserved": true,
+        "staffSeesApprovedHumanChecklistOnly": true
+      },
+      "historicalV1Readable": true,
+      "sourceUiReadable": true,
+      "keyboardGenerate": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "5d53233f-8ceb-4892-afa6-37efd87d9031",
+      "escapedHtmlLiteral": true,
+      "noInjectedElementOrExecution": true,
+      "sizes": [
+        {
+          "width": 360,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1920,
+          "overflow": false,
+          "violations": 0
+        }
+      ],
+      "keyboardSkipLink": true,
+      "keyboardReview": true,
+      "missingQuestionsAndImpact": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "5d53233f-8ceb-4892-afa6-37efd87d9031",
+      "actualQueuedJobFailure": true,
+      "invalidResultNotPublished": true,
+      "explicitRetrySucceeded": true,
+      "coreUnchanged": true,
+      "userPanelAbsent": true,
+      "unassignedStaffDenied": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "5d53233f-8ceb-4892-afa6-37efd87d9031",
+      "uiTransportProjections": [
+        "held loading",
+        "503 sanitized failure + retry",
+        "invalid 200 rejected",
+        "403 clears payload and hides generate",
+        "real superseded artifact response",
+        "delayed generation/poll after navigation"
+      ],
+      "realSupersession": true,
+      "realRequestChangeStale": true,
+      "staleReviewDisabled": true,
+      "sessionRotationCancelsUnfinishedJob": true,
+      "explicitRetryAfterRotationSucceeded": true,
+      "canceledGenerationDoesNotPopulateNewRequest": true,
+      "canceledPollDoesNotPopulateNewRequest": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [
+        "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+        "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+      ],
+      "externalCspBlocks": 0
+    }
+  ],
+  "workerErrors": [],
+  "limitations": "Deterministic synthetic structured/embedding providers against real PostgreSQL and production Next build. UI-only transport failures/races are explicitly labeled. Separate live Ollama evaluation is required; no model effectiveness claim.",
+  "m15Regression": {
+    "startedAt": "2026-09-30T17:50:55.447Z",
+    "finishedAt": "2026-09-30T17:52:04.381Z",
+    "kind": "development/synthetic evidence",
+    "purpose": "Affected Recommendation V2 prompt/native-format regression after the M15 documented contract defect fix.",
+    "reusesEstablishedGate": "4 production-build browser scenarios",
+    "promptVersion": "grounded-recommendation.v2.10",
+    "sourceHashes": {
+      "apps/api/src/ai/prompts/recommendation.ts": "71d7bbd664a232f31c7ef637601bbb812695e27a9a3acf7b6c76586cc34661de",
+      "apps/api/dist/ai/prompts/recommendation.js": "1fb9dceffea1e96d24571d00d3843f2a4f68cd4036e9ce77a214188ebdd750da",
+      "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+      "apps/api/src/ai/recommendation.service.ts": "d054795edc7dad99ffb20f01b8cccf8503213c89a5df43584f088a6f5694b851",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "scripts/verification/m14-browser.mjs": "cd994f4d2113524f086d9f23c16e6e0f9606b65f0e541af6b5b9fb6f65fcb3da",
+      "apps/web/e2e/recommendation-v2.spec.mjs": "e0968ba2665386a92b60aa1feff9d33e2906e98eb0648e9d119359f49a2a4a30"
+    },
+    "historicalEvidencePreserved": true,
+    "fixtureDatabase": "mobiflow_m14_test",
+    "limitations": "Reuses the guarded deterministic M14 fixtures only. No live model effectiveness measurement; no broader historical milestone gates are represented."
+  }
+}

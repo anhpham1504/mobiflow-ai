@@ -1,0 +1,132 @@
+{
+  "checkedAt": "2026-09-30T16:54:30.886Z",
+  "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-09-30T16:53:33.585Z",
+    "duration": 57272.871999999996,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "provider": "deterministic test-only",
+      "decisions": [
+        {
+          "decision": "ACCEPTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "MODIFIED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "REJECTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        }
+      ],
+      "manualBoundary": {
+        "draftNoAssignment": true,
+        "submittedNoAssignment": true,
+        "explicitApprovalAssigned": true,
+        "originalV2Preserved": true,
+        "staffSeesApprovedHumanChecklistOnly": true
+      },
+      "historicalV1Readable": true,
+      "sourceUiReadable": true,
+      "keyboardGenerate": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "escapedHtmlLiteral": true,
+      "noInjectedElementOrExecution": true,
+      "sizes": [
+        {
+          "width": 360,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1920,
+          "overflow": false,
+          "violations": 0
+        }
+      ],
+      "keyboardSkipLink": true,
+      "keyboardReview": true,
+      "missingQuestionsAndImpact": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "actualQueuedJobFailure": true,
+      "invalidResultNotPublished": true,
+      "explicitRetrySucceeded": true,
+      "coreUnchanged": true,
+      "userPanelAbsent": true,
+      "unassignedStaffDenied": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    }
+  ],
+  "workerErrors": [],
+  "limitations": "Deterministic synthetic structured/embedding providers against real PostgreSQL and production Next build. UI-only transport failures/races are explicitly labeled. Separate live Ollama evaluation is required; no model effectiveness claim.",
+  "m15Regression": {
+    "startedAt": "2026-09-30T16:53:26.542Z",
+    "finishedAt": "2026-09-30T16:54:30.954Z",
+    "kind": "development/synthetic evidence",
+    "purpose": "Affected Recommendation V2 prompt/native-format regression after the M15 documented contract defect fix.",
+    "reusesEstablishedGate": "4 production-build browser scenarios",
+    "promptVersion": "grounded-recommendation.v2.6",
+    "sourceHashes": {
+      "apps/api/src/ai/prompts/recommendation.ts": "fb98f410e12a64a6256ce6344d8da50b4baebb116c9b55e0725b7e5c769530c7",
+      "apps/api/dist/ai/prompts/recommendation.js": "1a48ad8b6ca38b6ff3c9c63ff6d0c1546db856db41c05bf21d107dafb2e9d297",
+      "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+      "apps/api/src/ai/recommendation.service.ts": "d054795edc7dad99ffb20f01b8cccf8503213c89a5df43584f088a6f5694b851",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "scripts/verification/m14-browser.mjs": "cd994f4d2113524f086d9f23c16e6e0f9606b65f0e541af6b5b9fb6f65fcb3da",
+      "apps/web/e2e/recommendation-v2.spec.mjs": "e0968ba2665386a92b60aa1feff9d33e2906e98eb0648e9d119359f49a2a4a30"
+    },
+    "historicalEvidencePreserved": true,
+    "fixtureDatabase": "mobiflow_m14_test",
+    "limitations": "Reuses the guarded deterministic M14 fixtures only. No live model effectiveness measurement; no broader historical milestone gates are represented."
+  }
+}

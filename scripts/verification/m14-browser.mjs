@@ -73,7 +73,7 @@ await withM14Database(async({databaseUrl,database})=>{
       const row=JSON.parse(readFileSync(path,'utf8'));return row.runId===runId?[row]:[];
     });
     const evidence={checkedAt:new Date().toISOString(),runId,result:code===0&&workerErrors.length===0?'PASS':'FAIL',synthetic:true,database,browser:'Microsoft Edge / Playwright',productionBuild:true,stats:report.stats,checks,workerErrors,limitations:'Deterministic synthetic structured/embedding providers against real PostgreSQL and production Next build. UI-only transport failures/races are explicitly labeled. Separate live Ollama evaluation is required; no model effectiveness claim.'};
-    mkdirSync('docs/v1.2/evidence',{recursive:true});writeFileSync('docs/v1.2/evidence/M14_BROWSER.json',JSON.stringify(evidence,null,2)+'\n');
+    mkdirSync('docs/v1.2/evidence',{recursive:true});writeFileSync(process.env.M14_BROWSER_EVIDENCE_PATH??'docs/v1.2/evidence/M14_BROWSER.json',JSON.stringify(evidence,null,2)+'\n');
     writeFileSync('artifacts/m14/browser-runs/'+runId+'/evidence.json',JSON.stringify(evidence,null,2)+'\n');
     if(code!==0||workerErrors.length)throw new Error('M14 browser tests failed');
   }finally{

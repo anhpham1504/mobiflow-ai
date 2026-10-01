@@ -1,0 +1,251 @@
+{
+  "runId": "2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f",
+  "startedAt": "2026-09-30T17:33:06.041Z",
+  "finishedAt": "2026-09-30T17:33:06.078Z",
+  "result": "NOT_RUN",
+  "fullRun": false,
+  "kind": "development/synthetic evidence",
+  "datasetVersion": "m15.recommendation.synthetic.v2",
+  "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+  "datasetCaseCount": 100,
+  "executedCases": 0,
+  "consistencyRuns": 0,
+  "metrics": {
+    "caseRuns": 0,
+    "uniqueCases": 0,
+    "succeeded": 0,
+    "failed": 0,
+    "structuredValidity": {
+      "firstAttempt": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "repairedRetry": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "finalSchema": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "finalContract": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "acceptedFinal": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "attempts": 0,
+      "retriedCases": 0,
+      "repairedSuccesses": 0,
+      "firstAttemptContract": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      }
+    },
+    "references": {
+      "acceptedHallucinated": 0,
+      "attemptedHallucinated": 0,
+      "rejectedAttemptsWithInvalidReference": 0
+    },
+    "protectedFacts": {
+      "acceptedFabricated": 0,
+      "attemptedFabricated": 0,
+      "knownProbeCount": 0,
+      "forbiddenProbeCount": 0,
+      "coverage": "LABELED_LITERALS_AND_BOUNDED_SUMMARY_ASSERTIONS"
+    },
+    "unverifiedDiagnosis": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "EXPLICITLY_LABELED_UNVERIFIED_CAUSE_CASES"
+    },
+    "slaClockAssertions": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "CANONICAL_AT_RISK_OR_BREACHED_REMAINING_CLAIMS"
+    },
+    "conflictAdjudication": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "DECLARED_UNRESOLVED_APPROVED_ANALYSIS_CONFLICTS"
+    },
+    "crossFieldRoleSubstitution": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "LABELED_CUSTOMER_LOCATION_AS_MISSING_DEVICE"
+    },
+    "noSourceCause": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "NO_SOURCE_ABSENCE_ASSERTED_AS_INCIDENT_CAUSE"
+    },
+    "missingInformation": {
+      "cases": 0,
+      "exact": 0,
+      "partial": 0,
+      "missed": 0,
+      "fabricated": 0,
+      "terminalCasesUnmeasured": 0
+    },
+    "actionValidity": {
+      "vocabulary": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "canonicalWorkflow": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "expectedMainAction": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      }
+    },
+    "businessExecution": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "promptInjection": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "evidenceIntegrity": {
+      "items": 0,
+      "validItems": 0,
+      "allFinalRuns": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      }
+    },
+    "outputBounds": {
+      "count": 0,
+      "total": 0,
+      "rate": null
+    },
+    "retrieval": {
+      "sourcesReturned": 0,
+      "sourcesUsed": 0,
+      "invalidSourcesUsed": 0,
+      "noSourceCases": 0,
+      "noSourceBehaviorValid": 0,
+      "liveRetrievalRanking": "NOT_MEASURED_BY_SYNTHETIC_FROZEN_CONTEXT"
+    },
+    "semanticFindings": [],
+    "gateViolations": [],
+    "performance": {
+      "modelRun": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "limitations": [
+      "Development/synthetic evidence only. Exact source membership and excerpts are checked against the frozen supplied snapshot, not live source availability.",
+      "Protected-fact checks cover labeled forbidden literals, bounded count/time/location assertions, and supplied aliases. They cannot recognize every paraphrase, invented fact, implied fact or language.",
+      "Unverified-cause assertions are checked only in explicitly labeled cases and summary/reason prose. The bounded English/Vietnamese oracle distinguishes common diagnosis assertions from hypotheses, questions and quoted data; it cannot prove complete causal grounding.",
+      "SLA clock probes compare explicit remaining/deadline-duration claims with supplied canonical AT_RISK/BREACHED remainingSeconds. Conflict probes detect common assertions that current approved metadata is wrong in the declared unresolved-conflict scenarios. These lexical probes do not establish general temporal or contradiction reasoning accuracy.",
+      "Cross-field role checks detect a labeled customer/location literal asserted as the missing device in description-omission cases. No-source cause checks distinguish procedural planning limitations from common assertions that missing SOP evidence caused the incident. These remain bounded lexical checks.",
+      "Known facts need not be repeated in prose. Absence of a forbidden probe is not a factual-accuracy measurement. No blanket fact accuracy or composite quality score is reported.",
+      "Execution/authority checks are conservative English/Vietnamese lexical oracles with negation, quotation and prerequisite handling; novel wording still requires human review.",
+      "Markup is recorded as text. This evaluator does not execute HTML or establish browser rendering safety; the owning product rendering tests provide that evidence.",
+      "Consistency checks invariants across repeated calls; they do not require identical prose or measure production reliability."
+    ]
+  },
+  "consistency": {
+    "caseCount": 0,
+    "runCount": 0,
+    "cases": [],
+    "allInvariantsHold": false,
+    "measurement": "INVARIANTS_AND_OBSERVED_VARIABILITY_NO_SCORE"
+  },
+  "totalDurationMs": 32,
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/summary.json"
+  },
+  "setupError": {
+    "code": "SETUP_UNAVAILABLE",
+    "message": "fetch failed"
+  },
+  "limitations": [
+    "No fixture substitutes for unavailable live services."
+  ]
+}

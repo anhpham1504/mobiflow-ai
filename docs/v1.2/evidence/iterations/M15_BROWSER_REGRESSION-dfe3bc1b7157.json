@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-09-30T16:54:30.886Z",
+  "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-09-30T16:53:33.585Z",
+    "duration": 57272.871999999996,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "provider": "deterministic test-only",
+      "decisions": [
+        {
+          "decision": "ACCEPTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "MODIFIED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        },
+        {
+          "decision": "REJECTED",
+          "requestStatus": "TRIAGED",
+          "requestVersion": 3,
+          "noOperationalMutation": true,
+          "originalPreserved": true,
+          "humanProvenance": true
+        }
+      ],
+      "manualBoundary": {
+        "draftNoAssignment": true,
+        "submittedNoAssignment": true,
+        "explicitApprovalAssigned": true,
+        "originalV2Preserved": true,
+        "staffSeesApprovedHumanChecklistOnly": true
+      },
+      "historicalV1Readable": true,
+      "sourceUiReadable": true,
+      "keyboardGenerate": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "escapedHtmlLiteral": true,
+      "noInjectedElementOrExecution": true,
+      "sizes": [
+        {
+          "width": 360,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 768,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1440,
+          "overflow": false,
+          "violations": 0
+        },
+        {
+          "width": 1920,
+          "overflow": false,
+          "violations": 0
+        }
+      ],
+      "keyboardSkipLink": true,
+      "keyboardReview": true,
+      "missingQuestionsAndImpact": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    },
+    {
+      "runId": "822d70e4-a881-43eb-b8ed-e62267560731",
+      "actualQueuedJobFailure": true,
+      "invalidResultNotPublished": true,
+      "explicitRetrySucceeded": true,
+      "coreUnchanged": true,
+      "userPanelAbsent": true,
+      "unassignedStaffDenied": true,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "expectedTransportConsoleErrors": [],
+      "externalCspBlocks": 0
+    }
+  ],
+  "workerErrors": [],
+  "limitations": "Deterministic synthetic structured/embedding providers against real PostgreSQL and production Next build. UI-only transport failures/races are explicitly labeled. Separate live Ollama evaluation is required; no model effectiveness claim."
+}

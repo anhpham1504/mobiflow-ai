@@ -1,0 +1,228 @@
+{
+  "startedAt": "2026-09-30T16:16:40.013Z",
+  "kind": "development/synthetic evidence",
+  "method": "Existing KnowledgeRetriever + configured live Ollama embedding + existing PostgreSQL/pgvector, read-only current corpus. Membership/currentness, not calibrated retrieval recall.",
+  "queries": [
+    {
+      "id": "M15-RAG-001",
+      "queryHash": "c385210f153d76ed389ddd1895ba13917d9600288695710d130e100e301a4377",
+      "queryChars": 51,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "sourceCount": 5,
+      "sourceIds": [
+        "KD-4e285e74-74b4-40ef-abe7-28843a01043d-G1-C0",
+        "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C0",
+        "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C1",
+        "KD-d8da062c-534c-4cac-b4e9-96c2b7eb53f9-G1-C0",
+        "KD-ece73840-cd92-474d-b672-6d880a45d2c9-G1-C0"
+      ],
+      "sources": [
+        {
+          "sourceId": "KD-4e285e74-74b4-40ef-abe7-28843a01043d-G1-C0",
+          "chunkId": "51a19c7f-1c9b-4451-a16d-408fdb77342c",
+          "documentId": "4e285e74-74b4-40ef-abe7-28843a01043d",
+          "generation": 1,
+          "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2",
+          "distance": 0.288451867607346,
+          "score": 0.711548132392654,
+          "excerptHash": "34c99895710f3461ec026a145200c29700c8e32a52fd23802100032ba8ca14f2"
+        },
+        {
+          "sourceId": "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C0",
+          "chunkId": "3564c59b-c2c0-4779-b65d-9711f0dc4ed0",
+          "documentId": "50458370-b6f8-424e-bf4d-9fd25dc9e226",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4",
+          "distance": 0.2979126572608898,
+          "score": 0.7020873427391102,
+          "excerptHash": "75ded1e077185eb0c770b55747a7e4b50a76af99af24db2bdd34903076200ab4"
+        },
+        {
+          "sourceId": "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C1",
+          "chunkId": "5fa589b1-e614-482b-a296-8959c7603f31",
+          "documentId": "50458370-b6f8-424e-bf4d-9fd25dc9e226",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.3757049141633316,
+          "score": 0.6242950858366684,
+          "excerptHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e"
+        },
+        {
+          "sourceId": "KD-d8da062c-534c-4cac-b4e9-96c2b7eb53f9-G1-C0",
+          "chunkId": "6f280fe4-53e6-4a35-b919-cfafafda67c0",
+          "documentId": "d8da062c-534c-4cac-b4e9-96c2b7eb53f9",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 1,
+          "section": null,
+          "contentHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695",
+          "distance": 0.3915448939314051,
+          "score": 0.6084551060685949,
+          "excerptHash": "f9ff96b4316005b87bb92d209a55cc67e6142aa622565996315323e728938695"
+        },
+        {
+          "sourceId": "KD-ece73840-cd92-474d-b672-6d880a45d2c9-G1-C0",
+          "chunkId": "c20e7da8-ecfc-4451-b2ac-e2e83b3c0d68",
+          "documentId": "ece73840-cd92-474d-b672-6d880a45d2c9",
+          "generation": 1,
+          "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d",
+          "distance": 0.4009188770700075,
+          "score": 0.5990811229299925,
+          "excerptHash": "0d4b7534eaf13a44707653edd6d5796e3929bc207b8841c93ebe378392342b9d"
+        }
+      ],
+      "embeddingMs": 3070,
+      "retrievalMs": 3110,
+      "sourceMembership": "PASS"
+    },
+    {
+      "id": "M15-RAG-002",
+      "queryHash": "fe3ac1be6e4e5947760569ad07e1069d6a835c68c7998ccc812bdde0f5e4a64d",
+      "queryChars": 37,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "sourceCount": 1,
+      "sourceIds": [
+        "KD-1c013965-90d1-4346-9084-4aaa4f62d35d-G1-C0"
+      ],
+      "sources": [
+        {
+          "sourceId": "KD-1c013965-90d1-4346-9084-4aaa4f62d35d-G1-C0",
+          "chunkId": "7f917c0e-803e-4d14-87d0-1d0edd1832bd",
+          "documentId": "1c013965-90d1-4346-9084-4aaa4f62d35d",
+          "generation": 1,
+          "title": "SOP-BILL-01 - Đối soát cước synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "07031b6e053149e8e42476b4e57c28929c2856b7d40df8aaf0ce880f7c431228",
+          "distance": 0.3441754931671338,
+          "score": 0.6558245068328662,
+          "excerptHash": "07031b6e053149e8e42476b4e57c28929c2856b7d40df8aaf0ce880f7c431228"
+        }
+      ],
+      "embeddingMs": 84,
+      "retrievalMs": 96,
+      "sourceMembership": "PASS"
+    },
+    {
+      "id": "M15-RAG-003",
+      "queryHash": "ab079cf9411bcdae2562496950db137f66ee66fc8e7edc868e6ad132e24ad6a1",
+      "queryChars": 59,
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "sourceCount": 5,
+      "sourceIds": [
+        "KD-4fa10f2e-0781-45fb-8071-341ad93c1a3a-G1-C0",
+        "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C1",
+        "KD-5272fe5a-fbd0-4813-b517-6155579c1ca9-G1-C0",
+        "KD-d8da062c-534c-4cac-b4e9-96c2b7eb53f9-G1-C1",
+        "KD-1c013965-90d1-4346-9084-4aaa4f62d35d-G1-C0"
+      ],
+      "sources": [
+        {
+          "sourceId": "KD-4fa10f2e-0781-45fb-8071-341ad93c1a3a-G1-C0",
+          "chunkId": "025e1b86-a718-44bd-8fc6-08a9383c9eb3",
+          "documentId": "4fa10f2e-0781-45fb-8071-341ad93c1a3a",
+          "generation": 1,
+          "title": "SOP-ACCOUNT-01 - Truy cập tài khoản synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "76d9659ea9688ab8bfa84ff4176b6f7b70ea36f87e005d085e3ed68412d15c9f",
+          "distance": 0.3315165648669539,
+          "score": 0.6684834351330461,
+          "excerptHash": "76d9659ea9688ab8bfa84ff4176b6f7b70ea36f87e005d085e3ed68412d15c9f"
+        },
+        {
+          "sourceId": "KD-50458370-b6f8-424e-bf4d-9fd25dc9e226-G1-C1",
+          "chunkId": "5fa589b1-e614-482b-a296-8959c7603f31",
+          "documentId": "50458370-b6f8-424e-bf4d-9fd25dc9e226",
+          "generation": 1,
+          "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e",
+          "distance": 0.45045524513141977,
+          "score": 0.5495447548685802,
+          "excerptHash": "fe897356d382702964d4ba9655d1a93865dfb54664ae5cb0869e173808c0536e"
+        },
+        {
+          "sourceId": "KD-5272fe5a-fbd0-4813-b517-6155579c1ca9-G1-C0",
+          "chunkId": "1bf97a3b-fa7e-4d31-a622-20bd3b5d191c",
+          "documentId": "5272fe5a-fbd0-4813-b517-6155579c1ca9",
+          "generation": 1,
+          "title": "SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "dc2f37013593242922400858353dbf7e67ea849a11ec9f1c57b85cd52a06da77",
+          "distance": 0.4596273238244081,
+          "score": 0.5403726761755919,
+          "excerptHash": "dc2f37013593242922400858353dbf7e67ea849a11ec9f1c57b85cd52a06da77"
+        },
+        {
+          "sourceId": "KD-d8da062c-534c-4cac-b4e9-96c2b7eb53f9-G1-C1",
+          "chunkId": "4600780b-b6e9-4119-863d-2c8d443f794a",
+          "documentId": "d8da062c-534c-4cac-b4e9-96c2b7eb53f9",
+          "generation": 1,
+          "title": "SOP-NET-02 - Sự cố mạng di động",
+          "pageNumber": 2,
+          "section": null,
+          "contentHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916",
+          "distance": 0.48124981820592017,
+          "score": 0.5187501817940798,
+          "excerptHash": "8c89f9ae43def96c79b751caae85566d1eedbd11424343a691d90f7c7e772916"
+        },
+        {
+          "sourceId": "KD-1c013965-90d1-4346-9084-4aaa4f62d35d-G1-C0",
+          "chunkId": "7f917c0e-803e-4d14-87d0-1d0edd1832bd",
+          "documentId": "1c013965-90d1-4346-9084-4aaa4f62d35d",
+          "generation": 1,
+          "title": "SOP-BILL-01 - Đối soát cước synthetic",
+          "pageNumber": null,
+          "section": null,
+          "contentHash": "07031b6e053149e8e42476b4e57c28929c2856b7d40df8aaf0ce880f7c431228",
+          "distance": 0.4929877250841802,
+          "score": 0.5070122749158198,
+          "excerptHash": "07031b6e053149e8e42476b4e57c28929c2856b7d40df8aaf0ce880f7c431228"
+        }
+      ],
+      "embeddingMs": 59,
+      "retrievalMs": 68,
+      "sourceMembership": "PASS"
+    }
+  ],
+  "result": "PASS",
+  "readyDocuments": 9,
+  "finishedAt": "2026-09-30T16:16:43.432Z",
+  "limitations": "Three unlabeled current-corpus smoke queries do not establish recall/Hit@k or procedural entailment. The 100-case model benchmark uses committed supplied snapshots; live persisted source counts are reported separately. No product regression suite is substituted."
+}

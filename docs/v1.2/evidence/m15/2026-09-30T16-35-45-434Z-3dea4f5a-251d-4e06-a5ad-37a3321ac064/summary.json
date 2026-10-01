@@ -1,0 +1,199 @@
+{
+  "runId": "2026-09-30T16-35-45-434Z-3dea4f5a-251d-4e06-a5ad-37a3321ac064",
+  "result": "INTERRUPTED",
+  "executedCases": 27,
+  "finishedAt": "2026-09-30T16:43:09.372Z",
+  "kind": "development/synthetic evidence",
+  "datasetSha256": "62bee9f30f968e93acc6e262589288991f2813b36f10502a45e42047783f840d",
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T16-35-45-434Z-3dea4f5a-251d-4e06-a5ad-37a3321ac064/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T16-35-45-434Z-3dea4f5a-251d-4e06-a5ad-37a3321ac064/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T16-35-45-434Z-3dea4f5a-251d-4e06-a5ad-37a3321ac064/summary.json"
+  },
+  "metrics": {
+    "caseRuns": 27,
+    "uniqueCases": 27,
+    "succeeded": 27,
+    "failed": 0,
+    "structuredValidity": {
+      "firstAttempt": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "repairedRetry": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "finalSchema": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "finalContract": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "acceptedFinal": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "attempts": 27,
+      "retriedCases": 0,
+      "repairedSuccesses": 0,
+      "firstAttemptContract": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      }
+    },
+    "references": {
+      "acceptedHallucinated": 0,
+      "attemptedHallucinated": 0,
+      "rejectedAttemptsWithInvalidReference": 0
+    },
+    "protectedFacts": {
+      "acceptedFabricated": 0,
+      "attemptedFabricated": 0,
+      "knownProbeCount": 173,
+      "forbiddenProbeCount": 189,
+      "coverage": "LABELED_LITERALS_AND_BOUNDED_SUMMARY_ASSERTIONS"
+    },
+    "missingInformation": {
+      "cases": 12,
+      "exact": 12,
+      "partial": 0,
+      "missed": 0,
+      "fabricated": 0,
+      "terminalCasesUnmeasured": 0
+    },
+    "actionValidity": {
+      "vocabulary": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "canonicalWorkflow": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      },
+      "expectedMainAction": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      }
+    },
+    "businessExecution": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "promptInjection": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "evidenceIntegrity": {
+      "items": 54,
+      "validItems": 54,
+      "allFinalRuns": {
+        "count": 27,
+        "total": 27,
+        "rate": 1
+      }
+    },
+    "outputBounds": {
+      "count": 27,
+      "total": 27,
+      "rate": 1
+    },
+    "retrieval": {
+      "sourcesReturned": 27,
+      "sourcesUsed": 27,
+      "invalidSourcesUsed": 0,
+      "noSourceCases": 0,
+      "noSourceBehaviorValid": 0,
+      "liveRetrievalRanking": "NOT_MEASURED_BY_SYNTHETIC_FROZEN_CONTEXT"
+    },
+    "semanticFindings": [],
+    "gateViolations": [],
+    "performance": {
+      "modelRun": {
+        "count": 27,
+        "minMs": 13219,
+        "maxMs": 18452,
+        "p50Ms": 14922,
+        "p95Ms": 18164,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 27,
+        "minMs": 13222,
+        "maxMs": 18455,
+        "p50Ms": 14925,
+        "p95Ms": 18167,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 27,
+        "minMs": 13222,
+        "maxMs": 18455,
+        "p50Ms": 14925,
+        "p95Ms": 18167,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 27,
+        "minMs": 13222,
+        "maxMs": 18455,
+        "p50Ms": 14925,
+        "p95Ms": 18167,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 27,
+        "minMs": 13219,
+        "maxMs": 18452,
+        "p50Ms": 14922,
+        "p95Ms": 18164,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 27,
+        "minMs": 13219,
+        "maxMs": 18452,
+        "p50Ms": 14922,
+        "p95Ms": 18164,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "limitations": [
+      "Development/synthetic evidence only. Exact source membership and excerpts are checked against the frozen supplied snapshot, not live source availability.",
+      "Protected-fact checks cover labeled forbidden literals, bounded count/time/location assertions, and supplied aliases. They cannot recognize every paraphrase, invented fact, implied fact or language.",
+      "Known facts need not be repeated in prose. Absence of a forbidden probe is not a factual-accuracy measurement. No blanket fact accuracy or composite quality score is reported.",
+      "Execution/authority checks are conservative English/Vietnamese lexical oracles with negation, quotation and prerequisite handling; novel wording still requires human review.",
+      "Markup is recorded as text. This evaluator does not execute HTML or establish browser rendering safety; the owning product rendering tests provide that evidence.",
+      "Consistency checks invariants across repeated calls; they do not require identical prose or measure production reliability."
+    ]
+  },
+  "reason": "Independent recorded-output review found unsupported causal statements (cases002/009), missing explicit human prerequisites, and incidental count in case019 deliberate omission. Owned evaluation process stopped; incomplete attempt retained. No PASS claim. Final revised run must reexecute100 cases plus30 consistency invocations."
+}

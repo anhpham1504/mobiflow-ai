@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-09-30T17:37:47.566Z",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m14_test",
+  "provider": "deterministic test-only structured/embedding providers; no live-model claim",
+  "checks": [
+    {
+      "name": "seven migrations and nullable legacy confidence; V1 history and explicit approval remain intact",
+      "result": "PASS",
+      "durationMs": 1058
+    },
+    {
+      "name": "V2 HTTP generation, validated read, no confidence and manager-only RBAC/IDOR",
+      "result": "PASS",
+      "durationMs": 843
+    },
+    {
+      "name": "ACCEPTED records agreement once, preserves original and has no operational effects",
+      "result": "PASS",
+      "durationMs": 491
+    },
+    {
+      "name": "MODIFIED stores separate human plan; explicit manual approval alone applies business changes",
+      "result": "PASS",
+      "durationMs": 548
+    },
+    {
+      "name": "REJECTED preserves original and reason without request/business mutation",
+      "result": "PASS",
+      "durationMs": 464
+    },
+    {
+      "name": "zero SOP and missing facts stay explicit; agreement requires exact missing acknowledgement",
+      "result": "PASS",
+      "durationMs": 671
+    },
+    {
+      "name": "new generation supersedes a pending artifact and request changes make current review stale",
+      "result": "PASS",
+      "durationMs": 1131
+    },
+    {
+      "name": "review revalidates source and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 1049
+    },
+    {
+      "name": "review revalidates candidate and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 922
+    },
+    {
+      "name": "review revalidates policy and leaves artifact untouched",
+      "result": "PASS",
+      "durationMs": 1126
+    },
+    {
+      "name": "inactive, changed-role and revoked manager sessions cannot read/generate/review",
+      "result": "PASS",
+      "durationMs": 807
+    },
+    {
+      "name": "queued revoked session fails before embedding or inference",
+      "result": "PASS",
+      "durationMs": 304
+    },
+    {
+      "name": "queued expired session fails before embedding or inference",
+      "result": "PASS",
+      "durationMs": 117
+    },
+    {
+      "name": "concurrent advisory reviews have one winner; audit failure rolls back review",
+      "result": "PASS",
+      "durationMs": 1125
+    },
+    {
+      "name": "late publication rejects message race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 680
+    },
+    {
+      "name": "late publication rejects candidate race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 580
+    },
+    {
+      "name": "late publication rejects manager race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 579
+    },
+    {
+      "name": "late publication rejects revoked-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 700
+    },
+    {
+      "name": "late publication rejects expired-session race without publishing or erasing human work",
+      "result": "PASS",
+      "durationMs": 776
+    },
+    {
+      "name": "bounded unavailable failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 505
+    },
+    {
+      "name": "bounded timeout failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 615
+    },
+    {
+      "name": "bounded malformed failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1362
+    },
+    {
+      "name": "bounded fabricated-source failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 1420
+    },
+    {
+      "name": "bounded embedding failure leaves core workflow available",
+      "result": "PASS",
+      "durationMs": 478
+    },
+    {
+      "name": "OpenAPI versions/review errors and unknown query/body fields match shared transport",
+      "result": "PASS",
+      "durationMs": 263
+    }
+  ],
+  "limitations": "Targeted M14 and directly affected V1 approval regression only. No historical broad suites or live inference are represented by this report.",
+  "m15Regression": {
+    "startedAt": "2026-09-30T17:37:14.314Z",
+    "finishedAt": "2026-09-30T17:37:47.674Z",
+    "kind": "development/synthetic evidence",
+    "purpose": "Affected Recommendation V2 prompt/native-format regression after the M15 documented contract defect fix.",
+    "reusesEstablishedGate": "26 isolated PostgreSQL assertions",
+    "promptVersion": "grounded-recommendation.v2.9",
+    "sourceHashes": {
+      "apps/api/src/ai/prompts/recommendation.ts": "1a8a02c643b335093bb24cf6211b2a529631c3c5f0495b7c09156505a7953ac2",
+      "apps/api/dist/ai/prompts/recommendation.js": "a79181cb1e4e19ed535afe6c7714a3e155d56be7c73b4c324036cca018d567f4",
+      "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+      "apps/api/src/ai/recommendation.service.ts": "d054795edc7dad99ffb20f01b8cccf8503213c89a5df43584f088a6f5694b851",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "apps/api/test/recommendation-v2.integration.test.mjs": "714e4679d5a02986f5bdbc35568e9a6164dd9f9b3af4ae3b2903d45f4353522b"
+    },
+    "historicalEvidencePreserved": true,
+    "fixtureDatabase": "mobiflow_m14_test",
+    "limitations": "Reuses the guarded deterministic M14 fixtures only. No live model effectiveness measurement; no broader historical milestone gates are represented."
+  }
+}

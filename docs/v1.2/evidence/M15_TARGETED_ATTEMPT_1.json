@@ -1,0 +1,9 @@
+{
+  "command": "node --test apps/api/test/m15-reliability.test.mjs apps/api/test/recommendation-v2.test.mjs apps/api/test/recommendation.test.mjs apps/api/test/analysis.test.mjs apps/api/test/knowledge.test.mjs apps/api/test/authorization.test.mjs",
+  "cwd": "repository root",
+  "result": "FAIL",
+  "tests": 52,
+  "passed": 51,
+  "failed": 1,
+  "cause": "Existing knowledge PDF test resolves ../../datasets from apps/api working directory. Invoking it from root resolved C:/datasets and failed ENOENT. Correct M15 package script runs owning API tests in their workspace; no product/test assertion weakened."
+}

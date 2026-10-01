@@ -1,0 +1,377 @@
+{
+  "runId": "2026-09-30T17-06-08-145Z-c2a07f29-56f8-46ad-8fbc-14817d1de03a",
+  "result": "INTERRUPTED",
+  "executedCases": 39,
+  "finishedAt": "2026-09-30T17:16:43.362Z",
+  "kind": "development/synthetic evidence",
+  "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T17-06-08-145Z-c2a07f29-56f8-46ad-8fbc-14817d1de03a/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T17-06-08-145Z-c2a07f29-56f8-46ad-8fbc-14817d1de03a/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T17-06-08-145Z-c2a07f29-56f8-46ad-8fbc-14817d1de03a/summary.json"
+  },
+  "metrics": {
+    "caseRuns": 39,
+    "uniqueCases": 39,
+    "succeeded": 36,
+    "failed": 3,
+    "structuredValidity": {
+      "firstAttempt": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "repairedRetry": {
+        "count": 0,
+        "total": 3,
+        "rate": 0
+      },
+      "finalSchema": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "finalContract": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "acceptedFinal": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "attempts": 42,
+      "retriedCases": 3,
+      "repairedSuccesses": 0,
+      "firstAttemptContract": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      }
+    },
+    "references": {
+      "acceptedHallucinated": 0,
+      "attemptedHallucinated": 0,
+      "rejectedAttemptsWithInvalidReference": 0
+    },
+    "protectedFacts": {
+      "acceptedFabricated": 0,
+      "attemptedFabricated": 0,
+      "knownProbeCount": 234,
+      "forbiddenProbeCount": 252,
+      "coverage": "LABELED_LITERALS_AND_BOUNDED_SUMMARY_ASSERTIONS"
+    },
+    "unverifiedDiagnosis": {
+      "applicableAcceptedCases": 2,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "EXPLICITLY_LABELED_UNVERIFIED_CAUSE_CASES"
+    },
+    "slaClockAssertions": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "CANONICAL_AT_RISK_OR_BREACHED_REMAINING_CLAIMS"
+    },
+    "conflictAdjudication": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "DECLARED_UNRESOLVED_APPROVED_ANALYSIS_CONFLICTS"
+    },
+    "missingInformation": {
+      "cases": 13,
+      "exact": 13,
+      "partial": 0,
+      "missed": 0,
+      "fabricated": 0,
+      "terminalCasesUnmeasured": 0
+    },
+    "actionValidity": {
+      "vocabulary": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "canonicalWorkflow": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      },
+      "expectedMainAction": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      }
+    },
+    "businessExecution": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "promptInjection": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "evidenceIntegrity": {
+      "items": 64,
+      "validItems": 64,
+      "allFinalRuns": {
+        "count": 36,
+        "total": 39,
+        "rate": 0.9230769230769231
+      }
+    },
+    "outputBounds": {
+      "count": 36,
+      "total": 39,
+      "rate": 0.9230769230769231
+    },
+    "retrieval": {
+      "sourcesReturned": 28,
+      "sourcesUsed": 28,
+      "invalidSourcesUsed": 0,
+      "noSourceCases": 8,
+      "noSourceBehaviorValid": 8,
+      "liveRetrievalRanking": "NOT_MEASURED_BY_SYNTHETIC_FROZEN_CONTEXT"
+    },
+    "semanticFindings": [
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "finding": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "finding": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "finding": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "finding": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "finding": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "finding": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "finding": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "finding": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "finding": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      }
+    ],
+    "gateViolations": [
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "STRUCTURED_SCHEMA_INVALID"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "PRODUCTION_CONTRACT_INVALID"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "EVIDENCE_INTEGRITY_INVALID"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "MISSING_INFORMATION_MISMATCH"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "ACTION_VOCABULARY_INVALID"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "WORKFLOW_ACTION_INCOMPATIBLE"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "OUTPUT_BOUNDS_INVALID"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-025-count-impact-omitted",
+        "violation": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "STRUCTURED_SCHEMA_INVALID"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "PRODUCTION_CONTRACT_INVALID"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "EVIDENCE_INTEGRITY_INVALID"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "MISSING_INFORMATION_MISMATCH"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "ACTION_VOCABULARY_INVALID"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "WORKFLOW_ACTION_INCOMPATIBLE"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "OUTPUT_BOUNDS_INVALID"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-030-mobile-time-impact-omitted",
+        "violation": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "STRUCTURED_SCHEMA_INVALID"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "PRODUCTION_CONTRACT_INVALID"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "EVIDENCE_INTEGRITY_INVALID"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "MISSING_INFORMATION_MISMATCH"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "ACTION_VOCABULARY_INVALID"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "WORKFLOW_ACTION_INCOMPATIBLE"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "OUTPUT_BOUNDS_INVALID"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "EXPECTED_MAIN_ACTION_MISMATCH"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "EXPECTED_WARNING_MISSING"
+      },
+      {
+        "caseId": "M15-031-all-required-facts-omitted",
+        "violation": "EXPECTED_EVIDENCE_STATUS_MISMATCH"
+      }
+    ],
+    "performance": {
+      "modelRun": {
+        "count": 39,
+        "minMs": 8744,
+        "maxMs": 37485,
+        "p50Ms": 14732,
+        "p95Ms": 37331,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 39,
+        "minMs": 8745,
+        "maxMs": 38503,
+        "p50Ms": 14735,
+        "p95Ms": 38339,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 39,
+        "minMs": 8745,
+        "maxMs": 18719,
+        "p50Ms": 14735,
+        "p95Ms": 18667,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 3,
+        "minMs": 18632,
+        "maxMs": 18770,
+        "p50Ms": 18751,
+        "p95Ms": 18770,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 42,
+        "minMs": 8745,
+        "maxMs": 18770,
+        "p50Ms": 14860,
+        "p95Ms": 18719,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 42,
+        "minMs": 8744,
+        "maxMs": 18768,
+        "p50Ms": 14857,
+        "p95Ms": 18717,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 39,
+        "minMs": 8744,
+        "maxMs": 18717,
+        "p50Ms": 14732,
+        "p95Ms": 18664,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 3,
+        "minMs": 18628,
+        "maxMs": 18768,
+        "p50Ms": 18749,
+        "p95Ms": 18768,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "limitations": [
+      "Development/synthetic evidence only. Exact source membership and excerpts are checked against the frozen supplied snapshot, not live source availability.",
+      "Protected-fact checks cover labeled forbidden literals, bounded count/time/location assertions, and supplied aliases. They cannot recognize every paraphrase, invented fact, implied fact or language.",
+      "Unverified-cause assertions are checked only in explicitly labeled cases and summary/reason prose. The bounded English/Vietnamese oracle distinguishes common diagnosis assertions from hypotheses, questions and quoted data; it cannot prove complete causal grounding.",
+      "SLA clock probes compare explicit remaining/deadline-duration claims with supplied canonical AT_RISK/BREACHED remainingSeconds. Conflict probes detect common assertions that current approved metadata is wrong in the declared unresolved-conflict scenarios. These lexical probes do not establish general temporal or contradiction reasoning accuracy.",
+      "Known facts need not be repeated in prose. Absence of a forbidden probe is not a factual-accuracy measurement. No blanket fact accuracy or composite quality score is reported.",
+      "Execution/authority checks are conservative English/Vietnamese lexical oracles with negation, quotation and prerequisite handling; novel wording still requires human review.",
+      "Markup is recorded as text. This evaluator does not execute HTML or establish browser rendering safety; the owning product rendering tests provide that evidence.",
+      "Consistency checks invariants across repeated calls; they do not require identical prose or measure production reliability."
+    ]
+  },
+  "reason": "Actual case025 failed both attempts TRUNCATED_GENERATION at unchanged1200 tokens; independent review case026 found missingdevice filled with suppliedcustomerID in checklist. Stop, retain and fix owning presentation/field-role constraints before final full rerun. No PASS claimed; in-flight output is not counted."
+}

@@ -1,0 +1,224 @@
+{
+  "runId": "2026-09-30T16-52-20-236Z-2086acd7-eceb-430a-a04e-f8491410870a",
+  "startedAt": "2026-09-30T16:52:20.236Z",
+  "finishedAt": "2026-09-30T16:53:46.803Z",
+  "result": "PARTIAL",
+  "fullRun": false,
+  "kind": "development/synthetic evidence",
+  "datasetVersion": "m15.recommendation.synthetic.v2",
+  "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+  "datasetCaseCount": 100,
+  "executedCases": 5,
+  "consistencyRuns": 0,
+  "metrics": {
+    "caseRuns": 5,
+    "uniqueCases": 5,
+    "succeeded": 5,
+    "failed": 0,
+    "structuredValidity": {
+      "firstAttempt": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "repairedRetry": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "finalSchema": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "finalContract": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "acceptedFinal": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "attempts": 5,
+      "retriedCases": 0,
+      "repairedSuccesses": 0,
+      "firstAttemptContract": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      }
+    },
+    "references": {
+      "acceptedHallucinated": 0,
+      "attemptedHallucinated": 0,
+      "rejectedAttemptsWithInvalidReference": 0
+    },
+    "protectedFacts": {
+      "acceptedFabricated": 0,
+      "attemptedFabricated": 0,
+      "knownProbeCount": 34,
+      "forbiddenProbeCount": 35,
+      "coverage": "LABELED_LITERALS_AND_BOUNDED_SUMMARY_ASSERTIONS"
+    },
+    "unverifiedDiagnosis": {
+      "applicableAcceptedCases": 2,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "EXPLICITLY_LABELED_UNVERIFIED_CAUSE_CASES"
+    },
+    "missingInformation": {
+      "cases": 1,
+      "exact": 1,
+      "partial": 0,
+      "missed": 0,
+      "fabricated": 0,
+      "terminalCasesUnmeasured": 0
+    },
+    "actionValidity": {
+      "vocabulary": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "canonicalWorkflow": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "expectedMainAction": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      }
+    },
+    "businessExecution": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "promptInjection": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "evidenceIntegrity": {
+      "items": 10,
+      "validItems": 10,
+      "allFinalRuns": {
+        "count": 5,
+        "total": 5,
+        "rate": 1
+      }
+    },
+    "outputBounds": {
+      "count": 5,
+      "total": 5,
+      "rate": 1
+    },
+    "retrieval": {
+      "sourcesReturned": 5,
+      "sourcesUsed": 5,
+      "invalidSourcesUsed": 0,
+      "noSourceCases": 0,
+      "noSourceBehaviorValid": 0,
+      "liveRetrievalRanking": "NOT_MEASURED_BY_SYNTHETIC_FROZEN_CONTEXT"
+    },
+    "semanticFindings": [],
+    "gateViolations": [],
+    "performance": {
+      "modelRun": {
+        "count": 5,
+        "minMs": 13249,
+        "maxMs": 18342,
+        "p50Ms": 17444,
+        "p95Ms": 18342,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 5,
+        "minMs": 13253,
+        "maxMs": 18346,
+        "p50Ms": 17449,
+        "p95Ms": 18346,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 5,
+        "minMs": 13253,
+        "maxMs": 18346,
+        "p50Ms": 17449,
+        "p95Ms": 18346,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 5,
+        "minMs": 13253,
+        "maxMs": 18346,
+        "p50Ms": 17449,
+        "p95Ms": 18346,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 5,
+        "minMs": 13249,
+        "maxMs": 18342,
+        "p50Ms": 17444,
+        "p95Ms": 18342,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 5,
+        "minMs": 13249,
+        "maxMs": 18342,
+        "p50Ms": 17444,
+        "p95Ms": 18342,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "limitations": [
+      "Development/synthetic evidence only. Exact source membership and excerpts are checked against the frozen supplied snapshot, not live source availability.",
+      "Protected-fact checks cover labeled forbidden literals, bounded count/time/location assertions, and supplied aliases. They cannot recognize every paraphrase, invented fact, implied fact or language.",
+      "Unverified-cause assertions are checked only in explicitly labeled cases and summary/reason prose. The bounded English/Vietnamese oracle distinguishes common diagnosis assertions from hypotheses, questions and quoted data; it cannot prove complete causal grounding.",
+      "Known facts need not be repeated in prose. Absence of a forbidden probe is not a factual-accuracy measurement. No blanket fact accuracy or composite quality score is reported.",
+      "Execution/authority checks are conservative English/Vietnamese lexical oracles with negation, quotation and prerequisite handling; novel wording still requires human review.",
+      "Markup is recorded as text. This evaluator does not execute HTML or establish browser rendering safety; the owning product rendering tests provide that evidence.",
+      "Consistency checks invariants across repeated calls; they do not require identical prose or measure production reliability."
+    ]
+  },
+  "consistency": {
+    "caseCount": 0,
+    "runCount": 0,
+    "cases": [],
+    "allInvariantsHold": false,
+    "measurement": "INVARIANTS_AND_OBSERVED_VARIABILITY_NO_SCORE"
+  },
+  "totalDurationMs": 86561,
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T16-52-20-236Z-2086acd7-eceb-430a-a04e-f8491410870a/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T16-52-20-236Z-2086acd7-eceb-430a-a04e-f8491410870a/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T16-52-20-236Z-2086acd7-eceb-430a-a04e-f8491410870a/summary.json"
+  },
+  "limitations": [
+    "Supplied deterministic synthetic snapshots isolate recommendation from upstream analysis/retrieval. Dataset embedding identities are fixtures; actual live embedding probe is recorded separately.",
+    "No benchmark publication or human decisions are fabricated. Failure/currentness/manual-workflow checks are separate owning-implementation tests.",
+    "Static protected-fact and authority oracles are bounded detectors, not exhaustive semantic review or production accuracy. No composite score.",
+    "V1 comparator NOT RUN; V2 contract determines this gate."
+  ]
+}

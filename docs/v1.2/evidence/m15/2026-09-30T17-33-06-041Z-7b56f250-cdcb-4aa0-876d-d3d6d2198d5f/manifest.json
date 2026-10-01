@@ -1,0 +1,27 @@
+{
+  "runId": "2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f",
+  "startedAt": "2026-09-30T17:33:06.041Z",
+  "datasetVersion": "m15.recommendation.synthetic.v2",
+  "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+  "sourceHashes": {
+    "apps/api/src/ai/prompts/recommendation.ts": "1a8a02c643b335093bb24cf6211b2a529631c3c5f0495b7c09156505a7953ac2",
+    "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+    "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+    "apps/api/src/ai/ollama-provider.ts": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+    "packages/config/src/index.ts": "6edbebd5e6b7d3acbabaf60e6f0ed71463c0b4c7dd7933afa0a1d4e3a0af4130",
+    "scripts/evaluation/m15-recommendation-evaluate.mjs": "4806db71c8ad6a346f61583f343533be31ea36e9cde000588fba7b5996d00dc0",
+    "scripts/evaluation/m15-metrics.mjs": "d77e64edf26fd166a7c39a8339880eac408c3475e7a9994cff75ab76bc205bc6",
+    "scripts/evaluation/m15-dataset.mjs": "a090bccd953a99faf19845a938b7c0e8e6e890798219c7cdb7e82e145a620351"
+  },
+  "configuredModel": "qwen3:4b-instruct-2507-q4_K_M",
+  "configuredEmbedding": "bge-m3:latest",
+  "setupError": {
+    "code": "SETUP_UNAVAILABLE",
+    "message": "fetch failed"
+  },
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T17-33-06-041Z-7b56f250-cdcb-4aa0-876d-d3d6d2198d5f/summary.json"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "runId": "2026-09-30T17-38-05-510Z-9a021b2c-21ca-418c-aad0-f7da719b48db",
+  "result": "INTERRUPTED",
+  "executedCases": 20,
+  "finishedAt": "2026-09-30T17:42:48.453Z",
+  "kind": "development/synthetic evidence",
+  "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+  "paths": {
+    "manifest": "docs/v1.2/evidence/m15/2026-09-30T17-38-05-510Z-9a021b2c-21ca-418c-aad0-f7da719b48db/manifest.json",
+    "details": "docs/v1.2/evidence/m15/2026-09-30T17-38-05-510Z-9a021b2c-21ca-418c-aad0-f7da719b48db/details.jsonl",
+    "summary": "docs/v1.2/evidence/m15/2026-09-30T17-38-05-510Z-9a021b2c-21ca-418c-aad0-f7da719b48db/summary.json"
+  },
+  "metrics": {
+    "caseRuns": 20,
+    "uniqueCases": 20,
+    "succeeded": 20,
+    "failed": 0,
+    "structuredValidity": {
+      "firstAttempt": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "repairedRetry": {
+        "count": 0,
+        "total": 0,
+        "rate": null
+      },
+      "finalSchema": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "finalContract": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "acceptedFinal": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "attempts": 20,
+      "retriedCases": 0,
+      "repairedSuccesses": 0,
+      "firstAttemptContract": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      }
+    },
+    "references": {
+      "acceptedHallucinated": 0,
+      "attemptedHallucinated": 0,
+      "rejectedAttemptsWithInvalidReference": 0
+    },
+    "protectedFacts": {
+      "acceptedFabricated": 0,
+      "attemptedFabricated": 0,
+      "knownProbeCount": 135,
+      "forbiddenProbeCount": 140,
+      "coverage": "LABELED_LITERALS_AND_BOUNDED_SUMMARY_ASSERTIONS"
+    },
+    "unverifiedDiagnosis": {
+      "applicableAcceptedCases": 2,
+      "acceptedViolations": 1,
+      "attemptedViolations": 1,
+      "coverage": "EXPLICITLY_LABELED_UNVERIFIED_CAUSE_CASES"
+    },
+    "slaClockAssertions": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "CANONICAL_AT_RISK_OR_BREACHED_REMAINING_CLAIMS"
+    },
+    "conflictAdjudication": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "DECLARED_UNRESOLVED_APPROVED_ANALYSIS_CONFLICTS"
+    },
+    "crossFieldRoleSubstitution": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "LABELED_CUSTOMER_LOCATION_AS_MISSING_DEVICE"
+    },
+    "noSourceCause": {
+      "applicableAcceptedCases": 0,
+      "acceptedViolations": 0,
+      "attemptedViolations": 0,
+      "coverage": "NO_SOURCE_ABSENCE_ASSERTED_AS_INCIDENT_CAUSE"
+    },
+    "missingInformation": {
+      "cases": 5,
+      "exact": 5,
+      "partial": 0,
+      "missed": 0,
+      "fabricated": 0,
+      "terminalCasesUnmeasured": 0
+    },
+    "actionValidity": {
+      "vocabulary": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "canonicalWorkflow": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "expectedMainAction": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      }
+    },
+    "businessExecution": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "promptInjection": {
+      "acceptedViolations": 0,
+      "attemptedViolations": 0
+    },
+    "evidenceIntegrity": {
+      "items": 40,
+      "validItems": 40,
+      "allFinalRuns": {
+        "count": 20,
+        "total": 20,
+        "rate": 1
+      }
+    },
+    "outputBounds": {
+      "count": 20,
+      "total": 20,
+      "rate": 1
+    },
+    "retrieval": {
+      "sourcesReturned": 20,
+      "sourcesUsed": 20,
+      "invalidSourcesUsed": 0,
+      "noSourceCases": 0,
+      "noSourceBehaviorValid": 0,
+      "liveRetrievalRanking": "NOT_MEASURED_BY_SYNTHETIC_FROZEN_CONTEXT"
+    },
+    "semanticFindings": [],
+    "gateViolations": [
+      {
+        "caseId": "M15-009-account-access-denied",
+        "violation": "UNVERIFIED_CAUSAL_DIAGNOSIS"
+      }
+    ],
+    "performance": {
+      "modelRun": {
+        "count": 20,
+        "minMs": 12415,
+        "maxMs": 15159,
+        "p50Ms": 14285,
+        "p95Ms": 15127,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 20,
+        "minMs": 12418,
+        "maxMs": 15163,
+        "p50Ms": 14288,
+        "p95Ms": 15131,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 20,
+        "minMs": 12418,
+        "maxMs": 15163,
+        "p50Ms": 14288,
+        "p95Ms": 15131,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 20,
+        "minMs": 12418,
+        "maxMs": 15163,
+        "p50Ms": 14288,
+        "p95Ms": 15131,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 20,
+        "minMs": 12415,
+        "maxMs": 15159,
+        "p50Ms": 14285,
+        "p95Ms": 15127,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 20,
+        "minMs": 12415,
+        "maxMs": 15159,
+        "p50Ms": 14285,
+        "p95Ms": 15127,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "limitations": [
+      "Development/synthetic evidence only. Exact source membership and excerpts are checked against the frozen supplied snapshot, not live source availability.",
+      "Protected-fact checks cover labeled forbidden literals, bounded count/time/location assertions, and supplied aliases. They cannot recognize every paraphrase, invented fact, implied fact or language.",
+      "Unverified-cause assertions are checked only in explicitly labeled cases and summary/reason prose. The bounded English/Vietnamese oracle distinguishes common diagnosis assertions from hypotheses, questions and quoted data; it cannot prove complete causal grounding.",
+      "SLA clock probes compare explicit remaining/deadline-duration claims with supplied canonical AT_RISK/BREACHED remainingSeconds. Conflict probes detect common assertions that current approved metadata is wrong in the declared unresolved-conflict scenarios. These lexical probes do not establish general temporal or contradiction reasoning accuracy.",
+      "Cross-field role checks detect a labeled customer/location literal asserted as the missing device in description-omission cases. No-source cause checks distinguish procedural planning limitations from common assertions that missing SOP evidence caused the incident. These remain bounded lexical checks.",
+      "Known facts need not be repeated in prose. Absence of a forbidden probe is not a factual-accuracy measurement. No blanket fact accuracy or composite quality score is reported.",
+      "Execution/authority checks are conservative English/Vietnamese lexical oracles with negation, quotation and prerequisite handling; novel wording still requires human review.",
+      "Markup is recorded as text. This evaluator does not execute HTML or establish browser rendering safety; the owning product rendering tests provide that evidence.",
+      "Consistency checks invariants across repeated calls; they do not require identical prose or measure production reliability."
+    ]
+  },
+  "reason": "Actual case009 again asserted a system-error cause not supplied in request. Frozen v2.9 run fails semantic gate despite valid JSON. Stop and bind summary/reason to safe supplied request data before full rerun. In-flight output not counted; no PASS claimed."
+}
