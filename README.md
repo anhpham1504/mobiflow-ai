@@ -1,6 +1,6 @@
 # MobiFlow AI
 
-V1.2 M11/M12 are checkpointed at `a03cebc581a05639ad2df3801fb565bed92800bf`; [M13 Analytics V2](docs/v1.2/M13_ANALYTICS_V2_VERIFICATION.md) was subsequently checkpointed with the single authorized commit `b35fcffcad6ecba463824e4ad31cfba623f1dc81`. [M14 Recommendation V2](docs/v1.2/M14_RECOMMENDATION_V2_VERIFICATION.md) passed implementation verification and focused human-review closure on `feat/v1.2-recommendation-v2`: grounded advisory suggestions, separate human review and explicit manual business approval. The subsequent user request authorizes one M14 checkpoint, then authoritative M15 discovery only; M15–M17 implementation is not started. Targeted M14 commands appear below and in the report. Isolated runners require configured local credentials and DEMO_MODE=true; browser tests require free localhost 3000/3001 and a production build. Strict API/web contracts require a paired update. Historical [M11/M12 evidence](docs/v1.2/M11_M12_VERIFICATION.md) and M13 reports remain unchanged.
+MobiFlow AI V1.2.0 bao gồm M11 dashboard, M12 SLA V2, M13 Analytics V2, M14 Recommendation V2, M15 evaluation/reliability và M16 hardening. [M17](docs/verification/MILESTONE_17_VERIFICATION.md) đóng release Git tại annotated tag `v1.2.0`; [release record](docs/release/V1_2_RELEASE.md) xác định nội dung, evidence và giới hạn. Sanity ngày 2026-10-01 trên stack `mobiflow-ai` PASS sau khi người dùng cho phép áp dụng migration M14 đã có và rebuild image M16: DB current với 7 migration, USER/MANAGER/dashboard/detail/analytics hoạt động; core ready, AI/RAG hiện DEGRADED/NOT_READY vì Ollama chưa chạy. [V1.2 index](docs/v1.2/README.md) và [runbook M16](docs/v1.2/M16_DEMO_RUNBOOK.md) giữ chronology và hướng dẫn vận hành. Deployment NOT RUN; evidence lịch sử không được replay.
 
 > Nền tảng điều phối yêu cầu vận hành nội bộ bằng AI cục bộ, biến mô tả tự nhiên thành quy trình có cấu trúc, có bằng chứng, có phân quyền và luôn giữ con người ở vị trí quyết định cuối cùng.
 
@@ -961,6 +961,8 @@ Các giới hạn này là ranh giới an toàn và phạm vi sản phẩm, khô
 
 ### Phát hành và evidence
 
+- [V1_2_RELEASE.md](docs/release/V1_2_RELEASE.md) — nội dung phát hành V1.2.0, ranh giới Git và giới hạn.
+- [MILESTONE_17_VERIFICATION.md](docs/verification/MILESTONE_17_VERIFICATION.md) — sanity hiện tại và điều kiện đóng release.
 - [V1_RELEASE.md](docs/release/V1_RELEASE.md) — release record V1.
 - [FINAL_VERIFICATION.md](docs/verification/FINAL_VERIFICATION.md) — gate tổng hợp.
 - [MILESTONE_10_VERIFICATION.md](docs/verification/MILESTONE_10_VERIFICATION.md) — evidence M10.
@@ -972,14 +974,16 @@ Khi tài liệu có khác biệt, ưu tiên tài liệu sở hữu đúng domain
 
 ## Trạng thái phát hành
 
-M14 Recommendation V2 đã hoàn tất theo [scope mới được người dùng xác nhận](docs/v1.2/M14_RECOMMENDATION_V2_SPEC.md) và [kế hoạch đã chốt](docs/v1.2/M14_RECOMMENDATION_V2_IMPLEMENTATION_PLAN.md): [implementation gate và review closure PASS](docs/v1.2/M14_RECOMMENDATION_V2_VERIFICATION.md). V2 là đề xuất advisory; chấp nhận/chỉnh sửa/từ chối không tự phân công hay đổi trạng thái. Các lệnh targeted: `npm run test:unit:m14`, `npm run test:integration:m14`, `npm run test:e2e:m14`, `npm run eval:recommendation:m14`. Browser cần production build trước; các runner database yêu cầu DEMO_MODE=true và credentials local đã cấu hình, dùng database synthetic riêng. [V1.2 index](docs/v1.2/README.md) giữ chronology checkpoint; yêu cầu closure mới cho phép đúng một commit M14 rồi chỉ tìm scope có thẩm quyền của M15. Không push/tag/merge hay triển khai lên demo/production; M15 chưa implementation.
+M11–M16 đã hoàn tất theo [V1.2 index](docs/v1.2/README.md). Recommendation V2 vẫn advisory: chấp nhận/chỉnh sửa/từ chối đề xuất không tự phân công hay đổi trạng thái; phê duyệt nghiệp vụ là bước riêng của con người. M17 đóng release bằng fast-forward main và annotated tag `v1.2.0`, với kiểm tra SHA local/remote ở handoff sau commit. Blocker ban đầu ở DB/image developer đã được xử lý theo phép bổ sung của người dùng, giữ nguyên dữ liệu và dùng đúng migration M14 hiện có. Sanity current stack PASS; Ollama chưa chạy nên AI/RAG không được báo READY. Deployment NOT RUN.
 
 | Mốc | Trạng thái |
 | --- | --- |
 | M0–M10 | Hoàn thành và có verification theo từng milestone |
 | V1.0.0 | Baseline phát hành đã được gắn tag |
 | Evaluation stability | Comparator PASS với evidence định danh/môi trường/thời gian đầy đủ |
-| UI V1.1 refresh | Gate tự động PASS; đang ở nhánh phát triển frontend và chờ xác nhận trực quan cuối của con người trước khi phát hành riêng |
+| UI V1.1 refresh | Đã phát hành tại tag `v1.1.0`, commit `2604590a0ff07bee8b994cc337d8f7e42da61e70` |
+| V1.2 M11–M16 | Hoàn tất; M16 checkpoint đã commit/push, evidence local/synthetic được giữ nguyên |
+| V1.2 M17 | Final Release Closure; sanity và chuẩn bị release PASS; ranh giới Git `v1.2.0` được xác nhận trong handoff sau commit |
 
 Package gốc được đánh dấu `private: true` và repository hiện không có tệp giấy phép công khai ở thư mục gốc. Không nên mặc định rằng mã nguồn được phép phân phối hoặc sử dụng lại khi chưa có xác nhận của chủ sở hữu dự án.
 
