@@ -1,0 +1,8 @@
+{
+  "command": "node --test apps/api/test/mentions-watchers.test.mjs apps/api/test/internal-notes.test.mjs apps/api/test/authorization.test.mjs",
+  "startedAt": "2026-10-02T04:20:15.568Z",
+  "finishedAt": "2026-10-02T04:20:16.273Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m19/gates/M19_TARGETED_UNIT-2026-10-02T04-20-15-568Z.txt"
+}

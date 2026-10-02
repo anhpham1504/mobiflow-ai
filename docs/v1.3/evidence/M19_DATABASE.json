@@ -1,0 +1,116 @@
+{
+  "checkedAt": "2026-10-02T03:50:15.277Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migration": "20261002020000_m19_mentions_watchers",
+  "migrationCount": 9,
+  "checks": [
+    {
+      "baseline": 9,
+      "path": "fresh1→9",
+      "result": "PASS",
+      "migrations": 9,
+      "oldChecksums": "unchanged",
+      "tablesPreserved": null,
+      "rowsPreserved": null,
+      "m18NotesPreserved": false,
+      "seedIdempotent": true,
+      "constraints": "FK/unique PASS",
+      "privileges": {
+        "RequestInternalNote": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestInternalNoteMention": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestWatcher": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": true,
+          "truncate": false
+        }
+      }
+    },
+    {
+      "baseline": 7,
+      "path": "v1.2 7→8→9",
+      "result": "PASS",
+      "migrations": 9,
+      "oldChecksums": "unchanged",
+      "tablesPreserved": 27,
+      "rowsPreserved": 153,
+      "m18NotesPreserved": true,
+      "seedIdempotent": true,
+      "constraints": "FK/unique PASS",
+      "privileges": {
+        "RequestInternalNote": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestInternalNoteMention": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestWatcher": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": true,
+          "truncate": false
+        }
+      }
+    },
+    {
+      "baseline": 8,
+      "path": "M18 8→9",
+      "result": "PASS",
+      "migrations": 9,
+      "oldChecksums": "unchanged",
+      "tablesPreserved": 27,
+      "rowsPreserved": 153,
+      "m18NotesPreserved": true,
+      "seedIdempotent": true,
+      "constraints": "FK/unique PASS",
+      "privileges": {
+        "RequestInternalNote": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestInternalNoteMention": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RequestWatcher": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": true,
+          "truncate": false
+        }
+      }
+    }
+  ],
+  "developerMigrations": 7,
+  "developerDatabaseModified": false
+}

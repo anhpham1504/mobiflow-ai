@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:e2e:m19",
+  "startedAt": "2026-10-02T04:16:02.011Z",
+  "finishedAt": "2026-10-02T04:17:13.221Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m19/gates/M19_E2E-2026-10-02T04-16-02-011Z.txt"
+}

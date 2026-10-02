@@ -7,6 +7,19 @@ interface RequestOwnership { createdById: string; currentAssigneeId: string | nu
 
 @Injectable()
 export class AuthorizationPolicyService {
+  internalCollaborators(request: RequestOwnership): Prisma.UserWhereInput {
+    // Same A01/current-assignment predicates as requestScope, never relation-derived access.
+    return { active: true, OR: [{ role: 'MANAGER' }, { role: 'STAFF', id: request.currentAssigneeId ?? '00000000-0000-4000-8000-000000000000' }] };
+  }
+
+  notificationScope(actor: AuthenticatedActor): Prisma.NotificationWhereInput {
+    const internal = ['INTERNAL_NOTE_MENTION', 'REQUEST_WATCH_ACTIVITY'];
+    return { recipientId: actor.id, recipient: { active: true, role: actor.role }, OR: [
+      { type: { notIn: internal } },
+      ...(actor.role === 'USER' ? [] : [{ type: { in: internal }, request: { is: this.internalNoteScope(actor) } }]),
+    ] };
+  }
+
   internalNoteScope(actor: AuthenticatedActor): Prisma.RequestWhereInput {
     if (actor.role !== 'STAFF' && actor.role !== 'MANAGER') throw new ApiError(403, 'FORBIDDEN', 'This role cannot access the resource.');
     return this.requestScope(actor);

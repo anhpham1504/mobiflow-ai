@@ -45,7 +45,7 @@ test('M18 service denies forbidden role before opening transaction or querying n
 });
 
 test('M18 service checks scoped parent before notes, applies keyset and emits safe child audit atomically', async () => {
-  const calls = [], note = { id, requestId: id, body: 'Ghi chú riêng', createdAt: new Date(), author: { id, displayName: 'Synthetic' } };
+  const calls = [], note = { id, requestId: id, body: 'Ghi chú riêng', createdAt: new Date(), author: { id, displayName: 'Synthetic' }, mentions: [] };
   const tx = {
     $queryRaw: async sql => {
       calls.push(sql.sql);
@@ -58,10 +58,11 @@ test('M18 service checks scoped parent before notes, applies keyset and emits sa
     requestInternalNote: {
       create: async input => { calls.push(input); return note; },
       findMany: async input => { calls.push(input); return [note]; },
-    }, auditLog: { create: async input => { calls.push(input); return {}; } },
+    }, auditLog: { create: async input => { calls.push(input); return { id }; } },
+    requestWatcher: { findMany: async () => [] },
   };
   const service = new InternalNoteService({ $transaction: work => work(tx) }, new AuthorizationPolicyService());
-  assert.equal(await service.create(id, actor('STAFF'), { body: note.body }, id), note);
+  assert.deepEqual(await service.create(id, actor('STAFF'), { body: note.body }, id), note);
   const audit = calls.find(value => value.data?.action === 'INTERNAL_NOTE_CREATED').data;
   assert.equal(audit.requestId, undefined);
   assert.deepEqual(audit.safeAfterJson, { noteId: id, requestId: id, authorId: id });

@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { RefreshCw, StickyNote } from 'lucide-react';
-import { createInternalNoteSchema, INTERNAL_NOTE_MAX_LENGTH, internalNoteListSchema, internalNoteResponseSchema, type InternalNote, type RequestStatus } from '@mobiflow/contracts';
+import { createInternalNoteSchema, INTERNAL_NOTE_MAX_LENGTH, internalNoteListSchema, internalNoteResponseSchema, type InternalNote, type RequestStatus, type MentionCandidate } from '@mobiflow/contracts';
 import { api, ApiFailure } from '@/lib/session';
 import { formatTime } from './request-list';
 import { LoadingState } from './ui/patterns';
+import { MentionSelector } from './mention-selector';
+import { RequestWatch } from './request-watch';
 
 export function InternalNotes({ requestId, status }: { requestId: string; status: RequestStatus }) {
   const labelId = useId();
@@ -19,6 +21,7 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
   const [notice, setNotice] = useState('');
   const [posting, setPosting] = useState(false);
   const [denied, setDenied] = useState(false);
+  const [selected, setSelected] = useState<MentionCandidate[]>([]);
   const submitting = useRef(false);
   const lastCursor = useRef<string | undefined>(undefined);
   const path = '/requests/' + requestId + '/internal-notes';
@@ -37,7 +40,7 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
       if (signal?.aborted) return;
       setListError('Không thể tải ghi chú nội bộ. Vui lòng thử lại.');
       if (error instanceof ApiFailure && [401, 403, 404].includes(error.status)) {
-        setNotes([]); setNext(null); setLoaded(false); setDenied(true);
+        setNotes([]); setNext(null); setLoaded(false); setDenied(true); setSelected([]);
       }
     }).finally(() => {
       if (!signal?.aborted) setLoading(false);
@@ -59,7 +62,7 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (submitting.current || loading || readOnly || denied) return;
-    const input = createInternalNoteSchema.safeParse({ body });
+    const input = createInternalNoteSchema.safeParse({ body, mentionedUserIds: selected.map(user => user.id) });
     if (!input.success) { setCreateError('Nhập nội dung ghi chú từ 1 đến 4.000 ký tự.'); return; }
     submitting.current = true;
     setPosting(true); setCreateError(''); setNotice('');
@@ -69,13 +72,16 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt) || b.id.localeCompare(a.id)));
       setLoaded(true);
       setBody('');
+      setSelected([]);
       setNotice('Đã thêm ghi chú nội bộ.');
     } catch (error) {
-      setCreateError(error instanceof ApiFailure && error.code === 'INVALID_STATE'
+      setCreateError(error instanceof ApiFailure && error.code === 'INVALID_MENTION_TARGET'
+        ? 'Người được nhắc đến không còn hợp lệ. Hãy kiểm tra lựa chọn; nội dung vẫn được giữ lại.'
+        : error instanceof ApiFailure && error.code === 'INVALID_STATE'
         ? 'Yêu cầu đã đóng hoặc hủy. Hãy tải lại chi tiết để xem trạng thái mới.'
         : 'Không thể thêm ghi chú. Nội dung được giữ lại để bạn thử lại.');
       if (error instanceof ApiFailure && [401, 403, 404].includes(error.status)) {
-        setNotes([]); setNext(null); setLoaded(false); setDenied(true);
+        setNotes([]); setNext(null); setLoaded(false); setDenied(true); setSelected([]);
       }
     } finally { submitting.current = false; setPosting(false); }
   }
@@ -86,6 +92,7 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
         <p id={labelId + '-helper'}>Chỉ nhân sự được phân quyền mới có thể xem các ghi chú này.</p></div>
       <button className="button button-secondary" type="button" onClick={() => startLoad()} disabled={loading || posting} aria-label="Tải lại ghi chú nội bộ"><RefreshCw size={16} aria-hidden="true" />Tải lại</button>
     </div>
+    <RequestWatch key={requestId} requestId={requestId} />
     {loading ? <LoadingState label="Đang tải ghi chú nội bộ" /> : null}
     {listError ? <div className="form-error internal-notes-error" role="alert"><p>{listError}</p><button className="button button-secondary" type="button" disabled={loading || posting} onClick={() => startLoad(lastCursor.current)}>Thử lại</button></div> : null}
     {loaded && !denied ? notes.length === 0 && !loading
@@ -93,11 +100,13 @@ export function InternalNotes({ requestId, status }: { requestId: string; status
       : <ol className="internal-notes-list" aria-label="Ghi chú mới nhất trước">{notes.map(note => <li key={note.id}>
         <div className="internal-note-meta"><strong>{note.author.displayName}</strong><time dateTime={note.createdAt}>{formatTime(note.createdAt)}</time></div>
         <p className="preserve-text internal-note-body">{note.body}</p>
+        {note.mentions?.length ? <p className="internal-note-mentions">Đã nhắc: {note.mentions.map(user => user.displayName).join(', ')}</p> : null}
       </li>)}</ol> : null}
     {next && !denied ? <button className="button button-secondary" type="button" disabled={loading || posting} onClick={() => startLoad(next)}>Xem ghi chú trước đó</button> : null}
     {notice ? <p className="success-notice" role="status">{notice}</p> : null}
     {readOnly ? <p className="internal-notes-readonly">Yêu cầu đã đóng hoặc hủy. Ghi chú nội bộ chỉ có thể xem.</p>
       : <form className="internal-notes-composer" onSubmit={submit}>
+        <MentionSelector requestId={requestId} selected={selected} onChange={setSelected} disabled={posting || denied} onDenied={() => { setNotes([]); setNext(null); setLoaded(false); setDenied(true); setSelected([]); }} />
         <label htmlFor={labelId + '-body'}>Nội dung ghi chú</label>
         <textarea id={labelId + '-body'} name="body" rows={4} required maxLength={INTERNAL_NOTE_MAX_LENGTH * 2}
           placeholder="Thêm ghi chú nội bộ..." value={body} onChange={event => { setBody(event.target.value); setCreateError(Array.from(event.target.value).length > INTERNAL_NOTE_MAX_LENGTH ? 'Giới hạn 4.000 ký tự. Vui lòng rút gọn ghi chú.' : ''); }}

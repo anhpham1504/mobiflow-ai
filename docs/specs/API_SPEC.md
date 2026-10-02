@@ -138,6 +138,8 @@ Existing `/manager/approvals/:id/accept|modify|reject` retain strict expectedVer
 
 ## M18 Internal Notes amendment (2026-10-02)
 
+This section records the M18 contract. M19 below adds optional structured mentions/body-free operational notifications while retaining body-only requests and all M18 privacy/lifecycle/version rules.
+
 | Method and path (relative to /api/v1) | OperationId / contract | Scope and effects |
 |---|---|---|
 | GET /requests/:id/internal-notes | listRequestInternalNotes; strict limit/cursor query only; default 20/max 100; existing opaque (createdAt,id) cursor; `{data:InternalNote[],page,requestId}` | STAFF current assignment or MANAGER existing A01 scope; newest first (createdAt DESC/id DESC), including terminal history. No count. |
@@ -146,3 +148,38 @@ Existing `/manager/approvals/:id/accept|modify|reject` retain strict expectedVer
 InternalNote is strict `{id,requestId,body,createdAt,author:{id,displayName}}`; no email/session/password/role. Shared `createInternalNoteSchema`, `internalNoteQuerySchema`, `internalNoteResponseSchema`, `internalNoteListSchema` own validation. Body trims surrounding whitespace, rejects blanks, bounds at 4,000 Unicode code points under installed Zod 4.6.5; HTML/@name/Markdown syntax stays plain text. Server derives IDs/author/time. This newly authorized child insert is an explicit exception to the blanket Request-mutation expectedVersion wording above; all existing versioned commands are unchanged.
 
 Authentication required; 401 invalid identity/session, USER 403 even on owned/unknown request, STAFF/MANAGER unknown/out-of-scope 404 same safe shape. Strict input/query/UUID/cursor 400; write origin 403, size 413 (64 KiB JSON), media 415, existing 120 reads/60 writes per minute with 429/Retry-After, sanitized database 503/internal 500. Both no-store through existing authenticated middleware/client; no public or service-worker cache. No read-by-note-ID, PATCH, DELETE or note-count API. Generated `/api/docs-json` documents schemas/params/security/statuses; no second static OpenAPI source is introduced. Request detail/list/history/explanation/dashboard/analytics/notifications keep their current projections and never include internal-note content or activity.
+
+## M19 Mentions + Watchers amendment (2026-10-02)
+
+All paths remain relative to `/api/v1`. STAFF/MANAGER only, current Request scope and active live identity/session; USER 403, foreign/unknown Request 404, strict query/body/UUID 400, existing authentication/origin/rate/no-store/error rules apply.
+
+| Method and path | OperationId / input | Response / effects |
+|---|---|---|
+| GET /requests/:id/mention-candidates | listRequestMentionCandidates; strict optional q<=80 code points and limit string1..20, default20 | 200 `{data:[{id,displayName,role}],requestId}`; active already-authorized STAFF/MANAGER, excludes self, deterministic displayName/id order; no directory/email/watcher fields |
+| POST /requests/:id/internal-notes | createRequestInternalNote; strict `{body,mentionedUserIds?:UUID[]}` | Existing201 envelope; optional IDs normalize lowercase/dedup, max10 unique (raw cap100), self invalid. Any invalid target400 INVALID_MENTION_TARGET; all-or-nothing note/mentions/audit/notifications. Body-only still valid; literal @ text does nothing |
+| GET /requests/:id/watch | getRequestWatchState; strict empty query | 200 `{data:{watching:boolean},requestId}`; own state only, including terminal |
+| PUT /requests/:id/watch | watchRequest; strict empty query/body (body optional) | Same200; idempotent manual own start; 409 WATCH_LIMIT at100 stored subscriptions/request |
+| DELETE /requests/:id/watch | unwatchRequest; strict empty query/body (body optional) | Same200; idempotent own stop |
+
+InternalNote response adds optional `mentions:[{userId,displayName}]` (max10), rendered as plain text; server currently returns an empty array for old/body-only notes. Author/mention/candidate names respect the existing160-character user field. No new Request DTO, directory or other-watcher projection. Child note/watch commands need no expectedVersion and write no Request fields. CLOSED/CANCELED notes stay read-only; candidates/watch remain allowed on readable terminal requests. No note edit/delete route or mutable mention API.
+
+### Persisted internal notification events
+
+| Source action | Meaning |
+|---|---|
+| INTERNAL_NOTE_CREATED | A private note was successfully persisted; explicit mention recipients and eligible watchers |
+| SUBMIT_FOR_APPROVAL | Human draft submitted for approval |
+| APPROVE_AND_ASSIGN | Human approval and assignment persisted |
+| REJECT_APPROVAL | Human approval rejection persisted |
+| REASSIGN | Human reassignment persisted; resulting assignment determines eligibility |
+| START_WORK | Staff started work |
+| REQUEST_USER_INFO | Staff requested requester information |
+| USER_PROVIDE_INFO | Requester supplied the requested information |
+| RESOLVE | Staff persisted a resolution |
+| USER_REOPEN | Owner reopened a resolved request |
+| USER_CONFIRM | Owner confirmed and closed a resolved request |
+| CANCEL | Authorized human canceled the request |
+
+Excluded: reads/polling/health, AI generation/advisory review, provider/RAG/embedding actions, SLA/background ticks, manual triage/priority/message/checklist/feedback changes and watch/unwatch changes. No arbitrary event publishes internal fan-out. Notification type is INTERNAL_NOTE_MENTION for mention or REQUEST_WATCH_ACTIVITY for watch. Use the owning persisted AuditLog event ID; union by recipient, mention precedence, suppress actor, insert in the owning transaction. Partial unique(recipientId,eventId) for these internal types plus conflict-safe insertion prevents duplicate retry/cross-type delivery; legacy/SLA keys are retained.
+
+Notification safe metadata contains only reason/sourceAction/noteId where applicable; no note body/excerpt/display-name copy. Existing GET `/notifications` and PATCH `/notifications/:id/read` retain safe DTO/transport; current active recipient role and Request scope filter internal types before pagination/unreadOnly. Read/unread mutations lock/recheck parent scope. Stale rows yield no metadata/count/read-state change; stale/foreign IDs404. There is no separate detail/unread-count endpoint, so filtered unreadOnly data is the applicable unread surface. Browser navigation uses the existing scoped Request detail; it can be denied if access changes after listing. USER never sees internal types/activity. All private endpoints and frontend fetches remain no-store; no public cache/export/AI/analytics inclusion.

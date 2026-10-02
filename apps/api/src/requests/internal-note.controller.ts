@@ -36,7 +36,7 @@ export class InternalNoteController {
   }
 
   @Post() @HttpCode(201)
-  @ApiOperation({ operationId: 'createRequestInternalNote', summary: 'Append a private plain-text note', description: 'Same STAFF/MANAGER scope as list. Server derives author and timestamp. Trimmed body 1–4000 Unicode code points, using the installed shared Zod text policy. Allowed through RESOLVED; CLOSED/CANCELED read-only. Child insertion plus safe audit only: no expectedVersion or workflow changes, notifications or AI input. No edit/delete routes.' })
+  @ApiOperation({ operationId: 'createRequestInternalNote', summary: 'Append a private plain-text note', description: 'Same STAFF/MANAGER scope as list. Server derives author/timestamp. Trimmed body1–4000 Unicode code points; through RESOLVED, CLOSED/CANCELED read-only. Optional mentionedUserIds deduplicated to max10 active currently authorized operational targets; self/invalid target400, all-or-nothing. Text @name has no effect. Safe internal mention/watch notifications contain no body; no expectedVersion/workflow/AI changes or edit/delete.' })
   @ApiBody({ schema: schema(createInternalNoteSchema) })
   @ApiResponse({ status: 201, schema: schema(internalNoteResponseSchema) })
   @ApiResponse({ status: 409, description: 'INVALID_STATE: CLOSED/CANCELED; no writes' })

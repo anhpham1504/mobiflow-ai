@@ -1,0 +1,968 @@
+{
+  "checkedAt": "2026-10-02T06:09:09.662Z",
+  "result": "PASS",
+  "phase": "Immutable closure preparation/file review; commit and push not yet performed",
+  "authority": "Direct user M19 CHECKPOINT CLOSURE request: one reviewed feature-branch commit and ordinary push, verify SHA/clean tree, STOP",
+  "independentExternalReview": "NOT RUN",
+  "baseline": {
+    "branch": "feat/v1.3-mentions-watchers",
+    "startingHead": "1f54dce3c8427976763b19ef33f181b4ef9a3337",
+    "previousCheckpoint": "M18 Internal Notes",
+    "mainAndV120": "31b445caf07dad606601a1e38e8ed39836d9f825",
+    "staged": 0,
+    "remoteM19Absent": true
+  },
+  "inventory": {
+    "initial": {
+      "changedNew": 75,
+      "modified": 23,
+      "new": 52,
+      "categories": {
+        "A Database": 2,
+        "B Backend": 10,
+        "C Contracts": 1,
+        "D Frontend": 6,
+        "E Tests": 6,
+        "F Verification": 10,
+        "G Documentation": 11,
+        "H Evidence": 29
+      }
+    },
+    "intendedCheckpoint": {
+      "changedNew": 77,
+      "modified": 23,
+      "new": 54,
+      "categories": {
+        "A Database": 2,
+        "B Backend": 10,
+        "C Contracts": 1,
+        "D Frontend": 6,
+        "E Tests": 6,
+        "F Verification": 10,
+        "G Documentation": 12,
+        "H Evidence": 30
+      }
+    },
+    "originalKeep": 75,
+    "originalIgnore": 0,
+    "originalExclude": 0,
+    "removeFromStaging": 0,
+    "runtimePrivateCandidates": 0,
+    "unrelated": 0,
+    "files": [
+      {
+        "path": "apps/api/package.json",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "3028af34becbf1d7e59ff598999df3fd52ca4f0183b7f227be5928a62b59c2ce",
+        "reviewedSha256": "3028af34becbf1d7e59ff598999df3fd52ca4f0183b7f227be5928a62b59c2ce"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+        "category": "A Database",
+        "disposition": "KEEP",
+        "initialSha256": "639da8c58fea2ba7b37b2e626d321dd9d9a414d84818c64fa4483b098185744e",
+        "reviewedSha256": "639da8c58fea2ba7b37b2e626d321dd9d9a414d84818c64fa4483b098185744e"
+      },
+      {
+        "path": "apps/api/prisma/schema.prisma",
+        "category": "A Database",
+        "disposition": "KEEP",
+        "initialSha256": "a46811511fe088d3122e76992ceb7275a01d744cbffad8247b2b028a76a02d2e",
+        "reviewedSha256": "a46811511fe088d3122e76992ceb7275a01d744cbffad8247b2b028a76a02d2e"
+      },
+      {
+        "path": "apps/api/src/app.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "7f1ede247ca5cc54df01f1d6bc99a0b78c6db994f12a650985c6ada8ddc815cf",
+        "reviewedSha256": "7f1ede247ca5cc54df01f1d6bc99a0b78c6db994f12a650985c6ada8ddc815cf"
+      },
+      {
+        "path": "apps/api/src/authorization/authorization-policy.service.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "43e7056af821450d9662a2aa7d7b70c7dc0f5f7a62dfd4192437143be5f28270",
+        "reviewedSha256": "43e7056af821450d9662a2aa7d7b70c7dc0f5f7a62dfd4192437143be5f28270"
+      },
+      {
+        "path": "apps/api/src/requests/collaboration-access.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "d31ba10717cbd7e8d7f50ade48e2cd2eab026bb6f107f21723c7945ab7f0b079",
+        "reviewedSha256": "d31ba10717cbd7e8d7f50ade48e2cd2eab026bb6f107f21723c7945ab7f0b079"
+      },
+      {
+        "path": "apps/api/src/requests/collaboration-notifications.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "371d0d896aacb37e4366f0ecb55b155b62ee983c57ef7176daf3381e58e2f7cc",
+        "reviewedSha256": "371d0d896aacb37e4366f0ecb55b155b62ee983c57ef7176daf3381e58e2f7cc"
+      },
+      {
+        "path": "apps/api/src/requests/internal-note.controller.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "b5442c5485182a97057e5119e4255b1d65976e6d2b87caccfaf09c0fcc59ae27",
+        "reviewedSha256": "b5442c5485182a97057e5119e4255b1d65976e6d2b87caccfaf09c0fcc59ae27"
+      },
+      {
+        "path": "apps/api/src/requests/internal-note.service.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "6b831acd6e02a8f6478afbd007641de9304508b3bf913443f7a6cf54de0773d1",
+        "reviewedSha256": "6b831acd6e02a8f6478afbd007641de9304508b3bf913443f7a6cf54de0773d1"
+      },
+      {
+        "path": "apps/api/src/requests/request-collaboration.controller.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "72a3c9f45ec100a8970e2ad476c7ac90b4f3656194e4592f5c76397c68cf617e",
+        "reviewedSha256": "72a3c9f45ec100a8970e2ad476c7ac90b4f3656194e4592f5c76397c68cf617e"
+      },
+      {
+        "path": "apps/api/src/requests/request-collaboration.service.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "fe4a495627e83ed173d5f0847bb93719bc2aa48f7cf27b107e93d6aaa3ae8edc",
+        "reviewedSha256": "fe4a495627e83ed173d5f0847bb93719bc2aa48f7cf27b107e93d6aaa3ae8edc"
+      },
+      {
+        "path": "apps/api/src/requests/request-query.service.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "d3f339509e3b371aa02ef0bfd2caba227b91bc1c3e178c4f08410bcb6657bf37",
+        "reviewedSha256": "d3f339509e3b371aa02ef0bfd2caba227b91bc1c3e178c4f08410bcb6657bf37"
+      },
+      {
+        "path": "apps/api/src/requests/request-state-machine.service.ts",
+        "category": "B Backend",
+        "disposition": "KEEP",
+        "initialSha256": "a4ab18c624ca15749d0bd66f4aae84b2e9e034927178dda0deceac0e972c9f4e",
+        "reviewedSha256": "a4ab18c624ca15749d0bd66f4aae84b2e9e034927178dda0deceac0e972c9f4e"
+      },
+      {
+        "path": "apps/api/test/helpers/m15-reliability-fixture.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "30aed60613797678d9e046ebe7eb411a55e4477c4235db225dc3e7fbda93e22c",
+        "reviewedSha256": "30aed60613797678d9e046ebe7eb411a55e4477c4235db225dc3e7fbda93e22c"
+      },
+      {
+        "path": "apps/api/test/helpers/mentions-watchers-fixture.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "5ed01d96d620da88e6da57371a901a7b8760df0d1ee5a42563cb09738f92306a",
+        "reviewedSha256": "5ed01d96d620da88e6da57371a901a7b8760df0d1ee5a42563cb09738f92306a"
+      },
+      {
+        "path": "apps/api/test/internal-notes.test.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "90b2adb419decc8d3abe6ed94f1b47af93708e1e6fd11b5de7c0e1a66fde1f6a",
+        "reviewedSha256": "90b2adb419decc8d3abe6ed94f1b47af93708e1e6fd11b5de7c0e1a66fde1f6a"
+      },
+      {
+        "path": "apps/api/test/mentions-watchers.integration.test.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "b5ed1c03cd70368932cd1f52ed8f60f5f4a484501bbf8963aff9b28e4ee354d8",
+        "reviewedSha256": "b5ed1c03cd70368932cd1f52ed8f60f5f4a484501bbf8963aff9b28e4ee354d8"
+      },
+      {
+        "path": "apps/api/test/mentions-watchers.test.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "e16c4c25da798fbe690f095db588400060a74445853cc2ce223e52bec40c33ee",
+        "reviewedSha256": "e16c4c25da798fbe690f095db588400060a74445853cc2ce223e52bec40c33ee"
+      },
+      {
+        "path": "apps/web/e2e/mentions-watchers.spec.mjs",
+        "category": "E Tests",
+        "disposition": "KEEP",
+        "initialSha256": "960445ca82228e54cdc78196c6f50f62345ea54608bfa72e1ab4b26ff4bc836d",
+        "reviewedSha256": "960445ca82228e54cdc78196c6f50f62345ea54608bfa72e1ab4b26ff4bc836d"
+      },
+      {
+        "path": "apps/web/src/app/globals.css",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "1a42ea963266ab6dfcbcdbff20ed555f6b3a4b6485460bc4387765a620f504ad",
+        "reviewedSha256": "1a42ea963266ab6dfcbcdbff20ed555f6b3a4b6485460bc4387765a620f504ad"
+      },
+      {
+        "path": "apps/web/src/components/internal-notes.tsx",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "b3da5c9585ba9e94f4f699b3676eb50b6e828bfb35b62ffc524345618e0823d8",
+        "reviewedSha256": "b3da5c9585ba9e94f4f699b3676eb50b6e828bfb35b62ffc524345618e0823d8"
+      },
+      {
+        "path": "apps/web/src/components/mention-selector.tsx",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "f586d7c3daf63479828a5dda15ad7e51afa14113c31cc2bef4f334eb82c6a98e",
+        "reviewedSha256": "f586d7c3daf63479828a5dda15ad7e51afa14113c31cc2bef4f334eb82c6a98e"
+      },
+      {
+        "path": "apps/web/src/components/notifications.tsx",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "0da834a469f0041433a9a9fd03f1334fbec0c809b216b0fdb4499f43dcf138a4",
+        "reviewedSha256": "0da834a469f0041433a9a9fd03f1334fbec0c809b216b0fdb4499f43dcf138a4"
+      },
+      {
+        "path": "apps/web/src/components/request-detail.tsx",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "dde9ed90fb8b752f0fe9a4c3cbb7f2117e324fef0c4a4dd61dc8b579232effe5",
+        "reviewedSha256": "dde9ed90fb8b752f0fe9a4c3cbb7f2117e324fef0c4a4dd61dc8b579232effe5"
+      },
+      {
+        "path": "apps/web/src/components/request-watch.tsx",
+        "category": "D Frontend",
+        "disposition": "KEEP",
+        "initialSha256": "34a39b420a4ef6449cd0753000f0b163533303a5ee8f8ee15da81962dc843fc1",
+        "reviewedSha256": "34a39b420a4ef6449cd0753000f0b163533303a5ee8f8ee15da81962dc843fc1"
+      },
+      {
+        "path": "docs/IMPLEMENTATION_PLAN.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "d84344aa1f6925f7892f041ae8fca9cf6c507c19d9f42ba2fe3a6b814deabc21",
+        "reviewedSha256": "bc295d32d654f6058943f9b1e3831cdd66694b78ee07ce64919bc55575043cf0"
+      },
+      {
+        "path": "docs/specs/API_SPEC.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "d819cbdc26e92fde866e370e92802b5210f15e93448ff8b1b1928031f41c9a98",
+        "reviewedSha256": "d819cbdc26e92fde866e370e92802b5210f15e93448ff8b1b1928031f41c9a98"
+      },
+      {
+        "path": "docs/specs/AUTHORIZATION_SPEC.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "dcac2be55c40e12c2a567a4ca3ed5f47fa635531f88c21d215045a9eee102c88",
+        "reviewedSha256": "dcac2be55c40e12c2a567a4ca3ed5f47fa635531f88c21d215045a9eee102c88"
+      },
+      {
+        "path": "docs/specs/DATABASE_SPEC.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "dc8d38dbdec9a9d31fd6d49b192490620bd0daea62cd98997b9209d8906fd0c3",
+        "reviewedSha256": "dc8d38dbdec9a9d31fd6d49b192490620bd0daea62cd98997b9209d8906fd0c3"
+      },
+      {
+        "path": "docs/specs/PROJECT_SPEC.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "77247e21b8957493e90913a8b1f5ded7fd3a4b27d1648487d4cd4c0d909ba799",
+        "reviewedSha256": "784c6991ce8e24398301bbdf41348e171f9926dcf8025cf0dbdecd808f4b25e3"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_BUILD-49f2f7837b5e.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "49f2f7837b5e3d180fab6b572a0f90de3ccab15c94a43ae0ef083f72d75f58dc",
+        "reviewedSha256": "49f2f7837b5e3d180fab6b572a0f90de3ccab15c94a43ae0ef083f72d75f58dc"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_BUILD-8d340e5c5d52.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "8d340e5c5d52b563e8b7c1a8d5bd75c71753359217fdb74597bc5502323632cd",
+        "reviewedSha256": "8d340e5c5d52b563e8b7c1a8d5bd75c71753359217fdb74597bc5502323632cd"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_E2E-5c98fb368d20.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "5c98fb368d20fec15dd8912770501aceb6a3bd31af772122a96f1790f51523dd",
+        "reviewedSha256": "5c98fb368d20fec15dd8912770501aceb6a3bd31af772122a96f1790f51523dd"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_E2E-a93e4ec18fa4.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "a93e4ec18fa40f953e7fb66ec4fe2370af6693cf21f8057a76845fc726a8d5fe",
+        "reviewedSha256": "a93e4ec18fa40f953e7fb66ec4fe2370af6693cf21f8057a76845fc726a8d5fe"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_INTEGRATION-723d4edde736.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "723d4edde7364d52f9cfa053461b2580c3f7c42e9124d87e92d24d002a76c2ac",
+        "reviewedSha256": "723d4edde7364d52f9cfa053461b2580c3f7c42e9124d87e92d24d002a76c2ac"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-6c2254ca9718.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "6c2254ca9718fad5f39b4e832e5b99a0875010d7361c5799fbace66a509b80a2",
+        "reviewedSha256": "6c2254ca9718fad5f39b4e832e5b99a0875010d7361c5799fbace66a509b80a2"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-b23b3b87ef93.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "b23b3b87ef931f4fd4b677f9cb8ce83f78ecb8fb9a52811c5f0c6ae9a9d594ba",
+        "reviewedSha256": "b23b3b87ef931f4fd4b677f9cb8ce83f78ecb8fb9a52811c5f0c6ae9a9d594ba"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-cf295d1e09e9.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "cf295d1e09e94cae2ad3302c2dea54f7e6e5e7259901d68ea0e194977c7a77e0",
+        "reviewedSha256": "cf295d1e09e94cae2ad3302c2dea54f7e6e5e7259901d68ea0e194977c7a77e0"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_SECURITY-79f9843fd934.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "79f9843fd934b9ee30c3e0ffa3cbd5fc4154cbb941e1b98b9de0bc4ca2848b93",
+        "reviewedSha256": "79f9843fd934b9ee30c3e0ffa3cbd5fc4154cbb941e1b98b9de0bc4ca2848b93"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_UNIT-c8c787c0d92a.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "c8c787c0d92ab1047716d60001ab15d2057a4eeb518b76c4da01773e0d333a7d",
+        "reviewedSha256": "c8c787c0d92ab1047716d60001ab15d2057a4eeb518b76c4da01773e0d333a7d"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_BUILD.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "7401a22466cbb99ac6067faa16b95ac393dfbcf156aff6e9c71f3f6f0f7664a7",
+        "reviewedSha256": "7401a22466cbb99ac6067faa16b95ac393dfbcf156aff6e9c71f3f6f0f7664a7"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_DATABASE.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "a3e055479c2266f24fbcfcf3ec217f98dacef64a24a577adcb1ebc8d9fd6c012",
+        "reviewedSha256": "a3e055479c2266f24fbcfcf3ec217f98dacef64a24a577adcb1ebc8d9fd6c012"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_E2E.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "364697b8dd6322fa240bad09e33063fb1c02a9a13f1cba9f169247f7e2fc9663",
+        "reviewedSha256": "364697b8dd6322fa240bad09e33063fb1c02a9a13f1cba9f169247f7e2fc9663"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_FINAL.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "e719c687f356ceda91a82eef3555e9fbdd9d768bcd24e22c8116a40d76992d08",
+        "reviewedSha256": "e719c687f356ceda91a82eef3555e9fbdd9d768bcd24e22c8116a40d76992d08"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_INTEGRATION.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "58156e01fd719389bc56a294fe56c28d605b2c03da52b9d34ff3f5c53c01f7b0",
+        "reviewedSha256": "58156e01fd719389bc56a294fe56c28d605b2c03da52b9d34ff3f5c53c01f7b0"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_LINT.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "b46b54cff3954fcf04cb0c67de395e632e83071dcffacabdcbbc1d8e6542f9f0",
+        "reviewedSha256": "b46b54cff3954fcf04cb0c67de395e632e83071dcffacabdcbbc1d8e6542f9f0"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_SECURITY.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "1d7f03d0ca2ce7b009c51210b8c2a991bf80d29e258e59bca0efa4d1fa7c088c",
+        "reviewedSha256": "1d7f03d0ca2ce7b009c51210b8c2a991bf80d29e258e59bca0efa4d1fa7c088c"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_TARGETED_UNIT.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "7f03740a22fb212479e7fb6619d8a6ea0d483170341d0f6f3277df1b5ad1f2a9",
+        "reviewedSha256": "7f03740a22fb212479e7fb6619d8a6ea0d483170341d0f6f3277df1b5ad1f2a9"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_TYPECHECK.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "fe434db427188f89c810f4b484119f8d1f3fbd7618f1c136e1d275296f8609ee",
+        "reviewedSha256": "fe434db427188f89c810f4b484119f8d1f3fbd7618f1c136e1d275296f8609ee"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_UNIT.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "b3a56eeb1edbd6ebb9d8eaf992c3db8f3bb4b02a5f594e03325d0b4ab1aba3f2",
+        "reviewedSha256": "b3a56eeb1edbd6ebb9d8eaf992c3db8f3bb4b02a5f594e03325d0b4ab1aba3f2"
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_API-11436261b6f0.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "11436261b6f0b6133abf577c20480119a5f93194560cf626d91724919764c89a",
+        "reviewedSha256": "11436261b6f0b6133abf577c20480119a5f93194560cf626d91724919764c89a"
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_BROWSER-03216598c166.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "03216598c166fcaf043e9784104a73b2d96600e16ebd2d2fd3e2deba0972b954",
+        "reviewedSha256": "03216598c166fcaf043e9784104a73b2d96600e16ebd2d2fd3e2deba0972b954"
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_BROWSER-4b0443e1a373.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "4b0443e1a373fa4b59366b27c109834c8b74f88e684aa2c65428ff534c386a8c",
+        "reviewedSha256": "4b0443e1a373fa4b59366b27c109834c8b74f88e684aa2c65428ff534c386a8c"
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_SECURITY-46cdc186d67c.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "46cdc186d67c0427163ea16fc179c136e3a0c2992a43a250f56301e2cdbdf11f",
+        "reviewedSha256": "46cdc186d67c0427163ea16fc179c136e3a0c2992a43a250f56301e2cdbdf11f"
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_API.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "51749fbf00adba136b7180d9ce7334b312734466f46805099b160b77aca307a4",
+        "reviewedSha256": "51749fbf00adba136b7180d9ce7334b312734466f46805099b160b77aca307a4"
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_BROWSER.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "df06f4f4d101678eb1ca7b625849004a9592b1535c12f7ecd9453e76ebd2d375",
+        "reviewedSha256": "df06f4f4d101678eb1ca7b625849004a9592b1535c12f7ecd9453e76ebd2d375"
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_CHECKPOINT_AUDIT.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": null,
+        "reviewedSha256": null,
+        "hashNote": "Containing audit omits its own hash to avoid self-reference; its Git blob is verified at staging/publication."
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_DATABASE.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "4ee8fa91aba7771990afde5b13d566c880cf3717ad11883b31dfe6ca9c031bfb",
+        "reviewedSha256": "4ee8fa91aba7771990afde5b13d566c880cf3717ad11883b31dfe6ca9c031bfb"
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_FINAL.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "5b484044aab6097c3dd406b59fa78811e8f5d9aced45edf5deb9c7d63992ba39",
+        "reviewedSha256": "5b484044aab6097c3dd406b59fa78811e8f5d9aced45edf5deb9c7d63992ba39"
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_SECURITY.json",
+        "category": "H Evidence",
+        "disposition": "KEEP",
+        "initialSha256": "3651c96db2c1c56ac6300b17f608839ca31df4528b96fe8cb9e91fc8f1bb8dc4",
+        "reviewedSha256": "3651c96db2c1c56ac6300b17f608839ca31df4528b96fe8cb9e91fc8f1bb8dc4"
+      },
+      {
+        "path": "docs/v1.3/M19_CHECKPOINT_CLOSURE.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": null,
+        "reviewedSha256": "0dee1d171988650baaa1261dea738568f426d62f532175bb0b6c8f1500206fb6"
+      },
+      {
+        "path": "docs/v1.3/M19_MENTIONS_WATCHERS_IMPLEMENTATION_PLAN.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "58886accc616b57df07bfb48bff705a4a1d40778ec6671c239a1f4da75ee807e",
+        "reviewedSha256": "58886accc616b57df07bfb48bff705a4a1d40778ec6671c239a1f4da75ee807e"
+      },
+      {
+        "path": "docs/v1.3/M19_MENTIONS_WATCHERS_SPEC.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "5e9e8de83d89b9d2da2e54b5474ac4f636704e5b436e362b7c8c3de3f5638f17",
+        "reviewedSha256": "5e9e8de83d89b9d2da2e54b5474ac4f636704e5b436e362b7c8c3de3f5638f17"
+      },
+      {
+        "path": "docs/v1.3/M19_MENTIONS_WATCHERS_VERIFICATION.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "474f2a95bed85df44f62ccfd676154010ac3c656beb977bc27512a6461124010",
+        "reviewedSha256": "474f2a95bed85df44f62ccfd676154010ac3c656beb977bc27512a6461124010"
+      },
+      {
+        "path": "docs/v1.3/README.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "60362eca2b4a473d4ed2f51e793558dcae575452fef4d0281692141c277ea8d2",
+        "reviewedSha256": "c2f132ac9f5b472800666dc227aad59a02c3acc9b50f49b743e6030bf97397ce"
+      },
+      {
+        "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "b2e9c6bca13402ab009c73955634a53d08e3edb660ff9cc4faff7a3021a6611d",
+        "reviewedSha256": "a350dcf46cae796a7919cad074c6b08c6882c0ee3e78feb7010d807e5a90210d"
+      },
+      {
+        "path": "docs/verification/MILESTONE_19_VERIFICATION.md",
+        "category": "G Documentation",
+        "disposition": "KEEP",
+        "initialSha256": "2034fe0e732c38ba31d5824dd45a2ac1c6160dfa8db9d16fac43e3aae2944daf",
+        "reviewedSha256": "2034fe0e732c38ba31d5824dd45a2ac1c6160dfa8db9d16fac43e3aae2944daf"
+      },
+      {
+        "path": "package.json",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "f09ebe8f16f90f6435097efa84d17ca69f15d76feca6aa5c20ab07dafb84302e",
+        "reviewedSha256": "f09ebe8f16f90f6435097efa84d17ca69f15d76feca6aa5c20ab07dafb84302e"
+      },
+      {
+        "path": "packages/contracts/src/internal-notes.ts",
+        "category": "C Contracts",
+        "disposition": "KEEP",
+        "initialSha256": "c0e6adec10f2f7b6d3d3c25dc4d6d726684f22de2b9074173fa624629585a62c",
+        "reviewedSha256": "c0e6adec10f2f7b6d3d3c25dc4d6d726684f22de2b9074173fa624629585a62c"
+      },
+      {
+        "path": "playwright.m19.config.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "ec4947d76ddf10971e0f920e052ca4ed6b6c201664034123a6ac4deeaaeeee13",
+        "reviewedSha256": "ec4947d76ddf10971e0f920e052ca4ed6b6c201664034123a6ac4deeaaeeee13"
+      },
+      {
+        "path": "scripts/verification/m19-browser.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "4612fb70424e551d7d70ea981f38acb9f205e60b49e1f41299aa7d15a9724893",
+        "reviewedSha256": "4612fb70424e551d7d70ea981f38acb9f205e60b49e1f41299aa7d15a9724893"
+      },
+      {
+        "path": "scripts/verification/m19-capture.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "b7f93797e607e7f0fa2f0104cff05e87164a5ed392ca929a14a6c3ed22c13882",
+        "reviewedSha256": "b7f93797e607e7f0fa2f0104cff05e87164a5ed392ca929a14a6c3ed22c13882"
+      },
+      {
+        "path": "scripts/verification/m19-database.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "e57ecb25a4cb36a46ced3c38abeebf0806ca374f976dc103bf7c49d8083d2f66",
+        "reviewedSha256": "e57ecb25a4cb36a46ced3c38abeebf0806ca374f976dc103bf7c49d8083d2f66"
+      },
+      {
+        "path": "scripts/verification/m19-final-sanity.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "dadae7d7d0df62fb126e0f6b287a9712b4a5c748c2031e735720968442c2bb71",
+        "reviewedSha256": "dadae7d7d0df62fb126e0f6b287a9712b4a5c748c2031e735720968442c2bb71"
+      },
+      {
+        "path": "scripts/verification/m19-integration.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "d194ec790910a975e29074795f3435ab9185e8a04e488f5dcc12ea0cc5b4bd28",
+        "reviewedSha256": "d194ec790910a975e29074795f3435ab9185e8a04e488f5dcc12ea0cc5b4bd28"
+      },
+      {
+        "path": "scripts/verification/m19-migrations.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "d39895d052e1c613cc2bba9fc1c92f6cd70322780fb390cf3fc82fdb6196abe2",
+        "reviewedSha256": "d39895d052e1c613cc2bba9fc1c92f6cd70322780fb390cf3fc82fdb6196abe2"
+      },
+      {
+        "path": "scripts/verification/m19-security.mjs",
+        "category": "F Verification",
+        "disposition": "KEEP",
+        "initialSha256": "1752cdb1b8611760c0c502e77407d16b12f58684d344dbe309e286961220b32c",
+        "reviewedSha256": "1752cdb1b8611760c0c502e77407d16b12f58684d344dbe309e286961220b32c"
+      }
+    ]
+  },
+  "closureEdits": {
+    "productOrTestEdits": [],
+    "documentationAuthorityEdits": [
+      "docs/IMPLEMENTATION_PLAN.md",
+      "docs/specs/PROJECT_SPEC.md",
+      "docs/v1.3/README.md",
+      "docs/v1.3/V1_3_MASTER_PLAN.md"
+    ],
+    "added": [
+      "docs/v1.3/M19_CHECKPOINT_CLOSURE.md",
+      "docs/v1.3/evidence/M19_CHECKPOINT_AUDIT.json"
+    ]
+  },
+  "evidence": {
+    "originalFilesRead": 29,
+    "passRecords": 23,
+    "failRecords": 6,
+    "latestGateRecords": 10,
+    "retainedIterations": 14,
+    "allOriginalBytesPreserved": true,
+    "originalRecords": [
+      {
+        "path": "docs/v1.3/evidence/M19_API.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "51749fbf00adba136b7180d9ce7334b312734466f46805099b160b77aca307a4",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_BROWSER.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "df06f4f4d101678eb1ca7b625849004a9592b1535c12f7ecd9453e76ebd2d375",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_DATABASE.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "4ee8fa91aba7771990afde5b13d566c880cf3717ad11883b31dfe6ca9c031bfb",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_FINAL.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "5b484044aab6097c3dd406b59fa78811e8f5d9aced45edf5deb9c7d63992ba39",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/M19_SECURITY.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "3651c96db2c1c56ac6300b17f608839ca31df4528b96fe8cb9e91fc8f1bb8dc4",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_BUILD.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "7401a22466cbb99ac6067faa16b95ac393dfbcf156aff6e9c71f3f6f0f7664a7",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_DATABASE.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "a3e055479c2266f24fbcfcf3ec217f98dacef64a24a577adcb1ebc8d9fd6c012",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_E2E.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "364697b8dd6322fa240bad09e33063fb1c02a9a13f1cba9f169247f7e2fc9663",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_FINAL.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "e719c687f356ceda91a82eef3555e9fbdd9d768bcd24e22c8116a40d76992d08",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_INTEGRATION.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "58156e01fd719389bc56a294fe56c28d605b2c03da52b9d34ff3f5c53c01f7b0",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_LINT.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "b46b54cff3954fcf04cb0c67de395e632e83071dcffacabdcbbc1d8e6542f9f0",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_SECURITY.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "1d7f03d0ca2ce7b009c51210b8c2a991bf80d29e258e59bca0efa4d1fa7c088c",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_TARGETED_UNIT.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "7f03740a22fb212479e7fb6619d8a6ea0d483170341d0f6f3277df1b5ad1f2a9",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_TYPECHECK.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "fe434db427188f89c810f4b484119f8d1f3fbd7618f1c136e1d275296f8609ee",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M19_UNIT.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "b3a56eeb1edbd6ebb9d8eaf992c3db8f3bb4b02a5f594e03325d0b4ab1aba3f2",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_BUILD-49f2f7837b5e.json",
+        "result": "FAIL",
+        "exitCode": 1,
+        "failedIteration": true,
+        "sha256": "49f2f7837b5e3d180fab6b572a0f90de3ccab15c94a43ae0ef083f72d75f58dc",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_BUILD-8d340e5c5d52.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "8d340e5c5d52b563e8b7c1a8d5bd75c71753359217fdb74597bc5502323632cd",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_E2E-5c98fb368d20.json",
+        "result": "FAIL",
+        "exitCode": 1,
+        "failedIteration": true,
+        "sha256": "5c98fb368d20fec15dd8912770501aceb6a3bd31af772122a96f1790f51523dd",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_E2E-a93e4ec18fa4.json",
+        "result": "FAIL",
+        "exitCode": 1,
+        "failedIteration": true,
+        "sha256": "a93e4ec18fa40f953e7fb66ec4fe2370af6693cf21f8057a76845fc726a8d5fe",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_INTEGRATION-723d4edde736.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "723d4edde7364d52f9cfa053461b2580c3f7c42e9124d87e92d24d002a76c2ac",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-6c2254ca9718.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "6c2254ca9718fad5f39b4e832e5b99a0875010d7361c5799fbace66a509b80a2",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-b23b3b87ef93.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "b23b3b87ef931f4fd4b677f9cb8ce83f78ecb8fb9a52811c5f0c6ae9a9d594ba",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_LINT-cf295d1e09e9.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "cf295d1e09e94cae2ad3302c2dea54f7e6e5e7259901d68ea0e194977c7a77e0",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_SECURITY-79f9843fd934.json",
+        "result": "PASS",
+        "exitCode": 0,
+        "failedIteration": false,
+        "sha256": "79f9843fd934b9ee30c3e0ffa3cbd5fc4154cbb941e1b98b9de0bc4ca2848b93",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/iterations/M19_UNIT-c8c787c0d92a.json",
+        "result": "FAIL",
+        "exitCode": 1,
+        "failedIteration": true,
+        "sha256": "c8c787c0d92ab1047716d60001ab15d2057a4eeb518b76c4da01773e0d333a7d",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_API-11436261b6f0.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "11436261b6f0b6133abf577c20480119a5f93194560cf626d91724919764c89a",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_BROWSER-03216598c166.json",
+        "result": "FAIL",
+        "failedIteration": true,
+        "sha256": "03216598c166fcaf043e9784104a73b2d96600e16ebd2d2fd3e2deba0972b954",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_BROWSER-4b0443e1a373.json",
+        "result": "FAIL",
+        "failedIteration": true,
+        "sha256": "4b0443e1a373fa4b59366b27c109834c8b74f88e684aa2c65428ff534c386a8c",
+        "preserved": true
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M19_SECURITY-46cdc186d67c.json",
+        "result": "PASS",
+        "failedIteration": false,
+        "sha256": "46cdc186d67c0427163ea16fc179c136e3a0c2992a43a250f56301e2cdbdf11f",
+        "preserved": true
+      }
+    ],
+    "historicalSnapshotNote": "M19_FINAL inventory70 and M19_SECURITY scanned73 are snapshots at their execution time, not final closure counts."
+  },
+  "secretScan": {
+    "scannedFilesBeforeAuditSelf": 76,
+    "liveSecrets": 0,
+    "findings": [],
+    "reviewedMatches": [
+      {
+        "path": "apps/api/test/helpers/m15-reliability-fixture.mjs",
+        "rule": "url-credentials",
+        "resolution": "Fixed synthetic M15 test environment URL, identical to published M18 baseline; not a configured live-secret value."
+      }
+    ],
+    "method": "Read-only configured live-secret/decoded DB password and JWT/provider/GitHub/AWS/private-key/credential-URL shapes, then contextual manual review. Values never printed."
+  },
+  "ignoredArtifacts": {
+    "disposition": "IGNORE; kept local, not deleted or staged",
+    "groups": [
+      "artifacts/m19 raw logs/browser screenshots/traces/results/profiles/auth state/synthetic fixtures/storage/temporary migration views/closure utilities and snapshots",
+      ".env",
+      "node_modules",
+      ".next",
+      "generated Prisma",
+      "storage"
+    ],
+    "policy": "Existing repository .gitignore; evidence artifact pointers remain local-only"
+  },
+  "database": {
+    "migration": "20261002020000_m19_mentions_watchers",
+    "repositoryMigrations": 9,
+    "developerMigrationsFromAcceptedEvidence": 7,
+    "developerDatabaseAccessDuringClosure": "NONE",
+    "historicalMigrations": [
+      {
+        "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+        "unchanged": true
+      },
+      {
+        "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+        "unchanged": true
+      }
+    ],
+    "migration9Review": "Two child tables/composite keys/RESTRICT FKs/indexes/narrow runtime grants; partial internal Notification dedup key; no destructive/backfill/seed changes"
+  },
+  "preserved": {
+    "owners": [
+      "apps/api/src/ai",
+      "apps/api/src/knowledge",
+      "apps/api/src/analytics",
+      "apps/api/src/dashboard",
+      "apps/api/src/requests/sla-clock.ts",
+      "apps/api/src/requests/sla-sql.ts",
+      "scripts/demo",
+      "packages/config",
+      "package-lock.json",
+      "docker-compose.yml",
+      ".env.example",
+      "docs/v1.2",
+      "docs/reference"
+    ],
+    "oldM18AndHistoricalVerificationEvidence": "Unchanged Git blobs",
+    "productAndTestFilesDuringClosure": "Unchanged bytes",
+    "stateMachineReview": "Import plus one transactional fan-out hook only; no transitions/version/business contract edits",
+    "isolatedPortsInProductOrDefaultConfig": 0,
+    "m20ThroughM24ProductWork": "NONE"
+  },
+  "scopedInvariants": {
+    "mentionNeverGrantsAccess": true,
+    "watchNeverGrantsAccess": true,
+    "targetRevalidationAndAtomicWrites": true,
+    "ownManualIdempotentWatch": true,
+    "currentScopeFanoutAndDelivery": true,
+    "beforePagingAndUnreadFilter": true,
+    "staleReadMutation404NoWrite": true,
+    "notificationBodyFree": true,
+    "mentionWinsWatch": true,
+    "selfSuppressed": true,
+    "persistedCrossTypeDedup": true,
+    "userAiAnalyticsSlaIsolated": true
+  },
+  "verification": {
+    "diffCheck": "PASS",
+    "additionalTestsRerun": "NONE",
+    "reason": "Closure changes documentation only; no actual product defect found. Accepted gates are preserved, not replayed.",
+    "stagedReview": "Required immediately before commit; actual result in final closure handoff",
+    "developerDatabaseProbe": "NOT RUN",
+    "ollamaProbe": "NOT RUN during closure; accepted evidence unavailable/no M19 impact"
+  },
+  "publication": {
+    "commitMessage": "feat(v1.3): complete M19 mentions and watchers",
+    "branch": "feat/v1.3-mentions-watchers",
+    "commitPushAtSnapshot": "NOT YET PERFORMED",
+    "ownFutureSha": "Omitted to avoid self-reference",
+    "required": "Exactly one descendant commit/parent M18/77 files; normal branch push; local SHA equals remote; clean worktree; existing local/remote tags/main/M18 unchanged",
+    "finalOutcome": "Reported in final closure handoff"
+  },
+  "releaseBoundary": {
+    "mainMerge": "NOT RUN",
+    "tagsCreated": false,
+    "deployment": "NOT RUN",
+    "v13": "IN DEVELOPMENT",
+    "m20": "NOT STARTED",
+    "m21ThroughM24": "NOT STARTED"
+  }
+}

@@ -80,7 +80,11 @@
     "verify:runtime:m8": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m8-runtime.mjs",
     "verify:security:m8": "node scripts/verification/m8-security.mjs",
     "verify:security:m9": "node scripts/verification/m9-security.mjs",
-    "verify:release:m16": "node scripts/verification/m16-release.mjs"
+    "verify:release:m16": "node scripts/verification/m16-release.mjs",
+    "test:database:m19": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m19-migrations.mjs",
+    "test:integration:m19": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m19-integration.mjs",
+    "test:e2e:m19": "node --env-file=.env scripts/verification/m19-browser.mjs",
+    "verify:security:m19": "node --env-file=.env scripts/verification/m19-security.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

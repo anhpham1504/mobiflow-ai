@@ -1,0 +1,8 @@
+{
+  "command": "node --env-file=.env scripts/verification/m19-final-sanity.mjs",
+  "startedAt": "2026-10-02T04:51:46.864Z",
+  "finishedAt": "2026-10-02T04:51:47.795Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m19/gates/M19_FINAL-2026-10-02T04-51-46-864Z.txt"
+}

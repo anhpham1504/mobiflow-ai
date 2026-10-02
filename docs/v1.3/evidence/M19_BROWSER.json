@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-02T04:46:01.356Z",
+  "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m19_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33100,
+    33101
+  ],
+  "stats": {
+    "startTime": "2026-10-02T04:45:01.667Z",
+    "duration": 59652.99,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+      "result": "PASS",
+      "mentionWatchUnion": 1,
+      "mentionPrecedence": true,
+      "bodyFreeNotification": true,
+      "literalTextWatchOnly": true,
+      "selfSuppression": true,
+      "readAndNavigation": true,
+      "userUiAbsent": true,
+      "userPrivateApiRequests": 0,
+      "userPayloadCanaryAbsent": true,
+      "consolePageErrors": []
+    },
+    {
+      "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+      "result": "PASS",
+      "loading": true,
+      "safeCandidateWatchErrors": true,
+      "candidateWatchRetry": true,
+      "emptySearch": true,
+      "keyboardSelectionRemovalEscape": true,
+      "draftAndSelectionRetained": true,
+      "duplicateSubmitRequests": 1,
+      "successfulSubmitClearsSelection": true,
+      "keyboardWatchUnwatch": true,
+      "transportFixtures": "Explicit delay/503/400; restored actual API for successful writes."
+    },
+    {
+      "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+      "result": "PASS",
+      "checks": [
+        {
+          "role": "STAFF",
+          "width": 360,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 360,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 768,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 768,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1440,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1440,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1920,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1920,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 360,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 360,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 768,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 768,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1440,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1440,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1920,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1920,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        }
+      ],
+      "literalNoteAndLongName": true,
+      "xssImageRequests": 0,
+      "xssDialogs": 0,
+      "consolePageErrors": [],
+      "wcagCertification": false
+    },
+    {
+      "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+      "result": "PASS",
+      "actualReassignment": true,
+      "staleNotificationHiddenAfterRefresh": true,
+      "staleDeepLinkDenied": true,
+      "watcherNeverGrantsAccess": true
+    },
+    {
+      "runId": "e95f8108-e733-472b-aa6a-3f89cc735b44",
+      "result": "PASS",
+      "closedAndCanceled": true,
+      "notesReadOnly": true,
+      "watchUnwatchAllowed": true,
+      "authRateWaitsSeconds": [
+        15
+      ],
+      "realRateLimitsEnabled": true
+    }
+  ],
+  "artifactDirectory": "artifacts/m19/browser-runs/e95f8108-e733-472b-aa6a-3f89cc735b44",
+  "limitations": "Actual PostgreSQL/API and production Next build. Delays/503/400 are explicit browser-only transport fixtures; successful writes, scope loss and delivery use real API. No live AI or WCAG certification claim."
+}

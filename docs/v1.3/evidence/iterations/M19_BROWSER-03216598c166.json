@@ -1,0 +1,217 @@
+{
+  "checkedAt": "2026-10-02T04:17:13.125Z",
+  "runId": "13c11cd2-db08-4d2b-b5dc-56958d9f958b",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m19_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33100,
+    33101
+  ],
+  "stats": {
+    "startTime": "2026-10-02T04:16:14.218Z",
+    "duration": 58857.969,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "13c11cd2-db08-4d2b-b5dc-56958d9f958b",
+      "result": "PASS",
+      "mentionWatchUnion": 1,
+      "mentionPrecedence": true,
+      "bodyFreeNotification": true,
+      "literalTextWatchOnly": true,
+      "selfSuppression": true,
+      "readAndNavigation": true,
+      "userUiAbsent": true,
+      "userPrivateApiRequests": 0,
+      "userPayloadCanaryAbsent": true,
+      "consolePageErrors": []
+    },
+    {
+      "runId": "13c11cd2-db08-4d2b-b5dc-56958d9f958b",
+      "result": "PASS",
+      "checks": [
+        {
+          "role": "STAFF",
+          "width": 360,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 360,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 768,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 768,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1440,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1440,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1920,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "STAFF",
+          "width": 1920,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 360,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 360,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 768,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 768,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1440,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1440,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1920,
+          "surface": "notes/selector/watch",
+          "overflow": false,
+          "controls44px": true,
+          "visibleFocus": true,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 1920,
+          "surface": "notifications",
+          "overflow": false,
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        }
+      ],
+      "literalNoteAndLongName": true,
+      "xssImageRequests": 0,
+      "xssDialogs": 0,
+      "consolePageErrors": [],
+      "wcagCertification": false
+    },
+    {
+      "runId": "13c11cd2-db08-4d2b-b5dc-56958d9f958b",
+      "result": "PASS",
+      "closedAndCanceled": true,
+      "notesReadOnly": true,
+      "watchUnwatchAllowed": true
+    }
+  ],
+  "artifactDirectory": "artifacts/m19/browser-runs/13c11cd2-db08-4d2b-b5dc-56958d9f958b",
+  "limitations": "Actual PostgreSQL/API and production Next build. Delays/503/400 are explicit browser-only transport fixtures; successful writes, scope loss and delivery use real API. No live AI or WCAG certification claim."
+}

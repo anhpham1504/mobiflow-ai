@@ -33,7 +33,7 @@ function repository(mode){
   const doc={id:uuid(10),status:'READY',activeGeneration:1,title:'Synthetic M15 SOP'};
   const content='Kiểm tra SIM và APN trước khi xử lý kết nối.';
   const source={sourceId:`KD-${doc.id}-G1-C0`,chunkId:uuid(11),documentId:doc.id,generation:1,title:doc.title,pageNumber:1,section:null,excerpt:content,contentHash:createHash('sha256').update(content).digest('hex'),distance:.2,score:.8};
-  let tables={user:[manager,staff],refreshSession:sessions,request:[request,prior],team:[team],aiAnalysis:[analysis],slaPolicy:['HIGH','MEDIUM'].map((priority,i)=>({id:uuid(12+i),priority,category:'NETWORK',active:true,version:1,targetMinutes:120})),knowledgeDocument:[doc],knowledgeChunk:[{id:source.chunkId,sourceId:source.sourceId,documentId:doc.id,generation:1,content,contentHash:source.contentHash}],aiRun:[],aiRecommendation:[],auditLog:[],aiToolCall:[],assignment:[],slaInstance:[],checklist:[],requestStatusHistory:[],notification:[]};
+  let tables={user:[manager,staff],refreshSession:sessions,request:[request,prior],team:[team],aiAnalysis:[analysis],slaPolicy:['HIGH','MEDIUM'].map((priority,i)=>({id:uuid(12+i),priority,category:'NETWORK',active:true,version:1,targetMinutes:120})),knowledgeDocument:[doc],knowledgeChunk:[{id:source.chunkId,sourceId:source.sourceId,documentId:doc.id,generation:1,content,contentHash:source.contentHash}],aiRun:[],aiRecommendation:[],auditLog:[],aiToolCall:[],assignment:[],slaInstance:[],checklist:[],requestStatusHistory:[],notification:[],requestWatcher:[]};
   let persistenceFault=false;
   const writes=[],external=[];
   const relation=(table,row,key)=>{

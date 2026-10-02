@@ -1,0 +1,47 @@
+{
+  "checkedAt": "2026-10-02T04:23:58.150Z",
+  "synthetic": true,
+  "database": "mobiflow_m19_test",
+  "checks": {
+    "candidatesAuthorization": "PASS",
+    "m18TargetedRegression": "PASS",
+    "targetValidationAtomicity": "PASS",
+    "watchSemantics": "PASS",
+    "dedupRetry": "PASS",
+    "accessLoss": "PASS",
+    "accountLoss": "PASS",
+    "assignmentRace": "PASS",
+    "rollback": "PASS",
+    "workflowAllowlist": "PASS",
+    "userAnalyticsLogsIsolation": "PASS",
+    "notificationRegression": "PASS",
+    "aiContextIsolation": "PASS",
+    "performance": "PASS",
+    "openapi": "PASS"
+  },
+  "performance": {
+    "fixture": {
+      "notes": 50,
+      "mentionsPerBulkNote": 2,
+      "watchers": 10
+    },
+    "noteListSql": {
+      "one": 12,
+      "fifty": 12
+    },
+    "fanoutSql": {
+      "one": 22,
+      "ten": 22
+    },
+    "visibleNotificationsForMeasuredEvent": 10,
+    "apiSamplesMs": [
+      24.30539999999928,
+      23.52980000000025,
+      22.943999999999505
+    ],
+    "nPlusOne": false,
+    "limitations": "Local synthetic single-server samples; no enterprise SLO claim"
+  },
+  "result": "PASS",
+  "testCommand": "node --test apps/api/test/mentions-watchers.integration.test.mjs"
+}

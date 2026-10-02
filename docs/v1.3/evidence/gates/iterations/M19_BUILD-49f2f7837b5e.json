@@ -1,0 +1,8 @@
+{
+  "command": "npm run build",
+  "startedAt": "2026-10-02T04:10:17.800Z",
+  "finishedAt": "2026-10-02T04:10:38.403Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m19/gates/M19_BUILD-2026-10-02T04-10-17-800Z.txt"
+}

@@ -24,6 +24,7 @@ import {revalidateRecommendation} from '../ai/recommendation-validation.js';
 import {ToolFailure} from '../ai/tools/registry.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {recommendationSnapshot} from '../ai/recommendation-snapshot.js';
+import { notifyCollaboration } from './collaboration-notifications.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
@@ -204,6 +205,7 @@ export class RequestStateMachineService {
       await tx.request.update({where:{id,version:command.expectedVersion},data});
       if(next!==request.status) await tx.requestStatusHistory.create({data:{requestId:id,fromStatus:request.status,toStatus:next,action,actorType:actor.role,actorId:actor.id,requestVersion:request.version+1,eventId:event.id,createdAt:now}});
       if(notification) await tx.notification.createMany({data:[...new Set(recipients)].map(recipientId=>({recipientId,requestId:id,eventId:event.id,type:notification!,safeActorMetadataJson:{actorType:actor.role},createdAt:now})),skipDuplicates:true});
+      await notifyCollaboration(tx,this.policy,{...request,status:next,currentAssigneeId:typeof data.currentAssigneeId==='string'?data.currentAssigneeId:request.currentAssigneeId},{id:event.id,action,actorId:actor.id,createdAt:now});
       return {id,message};
     },{isolationLevel:Prisma.TransactionIsolationLevel.ReadCommitted,timeout:15000});
   }

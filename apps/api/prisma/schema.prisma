@@ -143,6 +143,8 @@ model User {
   assignedRequests        Request[]           @relation("RequestAssignee")
   messages                RequestMessage[]
   internalNotes           RequestInternalNote[]
+  receivedNoteMentions     RequestInternalNoteMention[]
+  requestWatches          RequestWatcher[]
   attachments             RequestAttachment[]
   assignments             Assignment[]        @relation("AssignedStaff")
   assignmentsMade         Assignment[]        @relation("AssignmentManager")
@@ -253,6 +255,7 @@ model Request {
   currentResolution       RequestResolution?     @relation("CurrentResolution", fields: [currentResolutionId], references: [id], onDelete: Restrict)
   messages                RequestMessage[]
   internalNotes           RequestInternalNote[]
+  watchers                RequestWatcher[]
   attachments             RequestAttachment[]
   history                 RequestStatusHistory[]
   assignments             Assignment[]
@@ -297,8 +300,31 @@ model RequestInternalNote {
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
   author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  mentions  RequestInternalNoteMention[]
 
   @@index([requestId, createdAt, id])
+}
+
+model RequestInternalNoteMention {
+  noteId          String              @db.Uuid
+  mentionedUserId String              @db.Uuid
+  createdAt       DateTime            @default(now()) @db.Timestamptz(6)
+  note            RequestInternalNote @relation(fields: [noteId], references: [id], onDelete: Restrict)
+  mentionedUser   User                @relation(fields: [mentionedUserId], references: [id], onDelete: Restrict)
+
+  @@id([noteId, mentionedUserId])
+  @@index([mentionedUserId])
+}
+
+model RequestWatcher {
+  requestId String   @db.Uuid
+  userId    String   @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@id([requestId, userId])
+  @@index([userId])
 }
 
 model RequestAttachment {

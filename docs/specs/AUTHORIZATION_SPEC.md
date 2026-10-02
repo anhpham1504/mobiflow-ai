@@ -20,6 +20,8 @@ All accounts must be active. Roles are not cumulative: MANAGER does not imperson
 | Read request/list/timeline/messages | Own, requester projection | Current assigned only | All V1 |
 | Post plain message | Own nonterminal | Assigned nonterminal | Nonterminal V1 |
 | Internal notes read / append (M18) | No, including owned requests; no content/count/activity | Current assigned only; append through RESOLVED, CLOSED/CANCELED read-only | Existing A01 organization scope; same lifecycle policy |
+| Mention candidates / note mentions (M19) | No | Current assigned request; active authorized operational targets excluding self | A01 request scope; same target policy |
+| Own watch state/start/stop (M19) | No | Current assigned readable request, including terminal | A01 readable requests, including terminal; no other-watcher list/count |
 | Trigger intake/retry | Own NEW only | No | Any NEW |
 | Manual triage/submit/recommendation generation | No | No | NEW/TRIAGED as state rules allow |
 | Read pending approval/staff workload/AI tool trace | No | No | Yes |
@@ -35,7 +37,7 @@ All accounts must be active. Roles are not cumulative: MANAGER does not imperson
 | Similar-request detail | No peer records | Only currently assigned records | All V1 authorized results |
 | Operational SLA | Own simplified progress | Assigned | All V1 |
 | Audit/analytics/evaluation reports | No | Request-safe timeline only | Yes |
-| Notifications/read-state | Own recipient only | Own recipient only | Own recipient only |
+| Notifications/read-state | Own legacy notifications; no M19 internal types | Own recipient; M19 internal types also require current assignment | Own recipient; M19 internal types also require current A01 scope |
 | Feedback | Own CLOSED, once | No | No |
 | Cancel | Own four preassignment states | No | Seven states in state matrix |
 
@@ -70,6 +72,10 @@ Refresh cookie: HttpOnly, SameSite=Lax, Path=/api/v1/auth, no Domain, Secure und
 Login generic 401 does not disclose inactive/unknown account versus incorrect password. Rate limits and payload limits are in [API_SPEC](API_SPEC.md). Auth success/failure/revocation events are audited with safe actor/session IDs, never token/password contents. Failed login audit must not invent an authenticated actor.
 
 ## Acceptance
+
+M19 amendment (2026-10-02): structured mention and manual watch never grant access. Candidates first require current route Request scope and active identity/session; return only active STAFF/MANAGER already permitted under current A01/current-assignee rules, excluding caller, with safe id/displayName/role fields and a 20-row cap. No global directory, email, availability, other-watcher count or override. At note submit, lock live actor/session, scoped parent, and candidate users; revalidate every selected UUID. Invalid/inactive/USER/foreign/self targets produce the same generic 400 INVALID_MENTION_TARGET with no writes. Reassignment while waiting for the parent lock rejects stale STAFF operations with 404.
+
+Own watch mutations serialize on the same scoped parent; no Request business/version write. Historical watch rows confer no access after reassignment/deactivation/role change. Fan-out uses batched current eligible recipients, excludes actor and USER, and validates resulting assignment after workflow writes. Internal notification list/unreadOnly predicates include current recipient role/active account and current Request scope before pagination; read/unread mutations additionally lock the scoped parent. Foreign/stale IDs produce the same 404 as unknown IDs without changing readAt. There is no separate notification detail/count endpoint. Private DTOs and child-resource audits never enter requester history, AI/RAG/recommendation/Copilot, analytics or public caches. M19 supersedes only M18's no-note-notification rule for safe internal notifications; note bodies remain excluded from Notification and all public contexts. [M19 plan](../v1.3/M19_MENTIONS_WATCHERS_IMPLEMENTATION_PLAN.md).
 
 M18 amendment (2026-10-02): separate GET/POST `/requests/:id/internal-notes`, role guard STAFF/MANAGER, shared existing request predicate, scoped parent lock and live identity/session recheck. USER always 403; operational roles receive indistinguishable 404 for foreign/unknown resources; no role/team/owner override or count. Notes are private child records: no requester DTO/history, note notifications, analytics or AI context. INTERNAL_NOTE_CREATED audit is child-resource-only (optional request FK null, safe request/note/author IDs in metadata), never copied into public Request timeline. Runtime notes allow only SELECT/INSERT, no edit/delete. Current-assignment loss or terminal closure is rechecked after parent lock. No existing business permission is enlarged.
 

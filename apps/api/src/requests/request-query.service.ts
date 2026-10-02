@@ -9,6 +9,7 @@ import { ApiError } from '../http.js';
 import { slaView } from './sla-clock.js';
 import { databaseNow } from './sla-sql.js';
 import { parse } from './validation.js';
+import { lockCollaborationIdentity, lockCollaborationRequest } from './collaboration-access.js';
 
 const querySchema=z.object({
   limit:z.string().regex(/^[0-9]+$/).transform(Number).pipe(z.number().int().min(1).max(100)).optional(),
@@ -66,15 +67,26 @@ export class RequestQueryService {
   }
   async notifications(actor:AuthenticatedActor,input:unknown) {
     const {query,where,limit}=pagination(input);
-    const rows=await this.prisma.notification.findMany({where:{AND:[{recipientId:actor.id,...(query.unreadOnly==='true'?{readAt:null}:{})},where]},orderBy:[{createdAt:'desc'},{id:'desc'}],take:limit+1,
+    return this.prisma.$transaction(async tx=>{
+    await lockCollaborationIdentity(tx,actor);
+    const rows=await tx.notification.findMany({where:{AND:[this.policy.notificationScope(actor),...(query.unreadOnly==='true'?[{readAt:null}]:[]),where]},orderBy:[{createdAt:'desc'},{id:'desc'}],take:limit+1,
       select:{id:true,requestId:true,type:true,createdAt:true,readAt:true}});
     return page(rows,limit);
+    });
   }
   async readNotification(id:string,actor:AuthenticatedActor,read:boolean) {
-    const existing=await this.prisma.notification.findFirst({where:{id,recipientId:actor.id},select:{id:true}});
+    return this.prisma.$transaction(async tx=>{
+    await lockCollaborationIdentity(tx,actor);
+    const scope=this.policy.notificationScope(actor);
+    const existing=await tx.notification.findFirst({where:{AND:[{id},scope]},select:{id:true,type:true,requestId:true}});
     if(!existing) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
-    await this.prisma.notification.updateMany({where:{id,recipientId:actor.id,...(read?{readAt:null}:{})},data:{readAt:read?new Date():null}});
-    return this.prisma.notification.findUnique({where:{id},select:{id:true,requestId:true,type:true,readAt:true,createdAt:true}});
+    if(['INTERNAL_NOTE_MENTION','REQUEST_WATCH_ACTIVITY'].includes(existing.type)) {
+      if(!existing.requestId) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
+      await lockCollaborationRequest(tx,this.policy,existing.requestId,actor,false);
+    }
+    await tx.notification.updateMany({where:{AND:[{id,...(read?{readAt:null}:{})},scope]},data:{readAt:read?new Date():null}});
+    return tx.notification.findFirst({where:{AND:[{id},scope]},select:{id:true,requestId:true,type:true,readAt:true,createdAt:true}});
+    });
   }
 }
 
