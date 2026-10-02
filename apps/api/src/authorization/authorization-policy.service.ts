@@ -7,6 +7,11 @@ interface RequestOwnership { createdById: string; currentAssigneeId: string | nu
 
 @Injectable()
 export class AuthorizationPolicyService {
+  internalNoteScope(actor: AuthenticatedActor): Prisma.RequestWhereInput {
+    if (actor.role !== 'STAFF' && actor.role !== 'MANAGER') throw new ApiError(403, 'FORBIDDEN', 'This role cannot access the resource.');
+    return this.requestScope(actor);
+  }
+
   requestScope(actor: AuthenticatedActor): Prisma.RequestWhereInput {
     if (actor.role === 'USER') return { createdById: actor.id };
     if (actor.role === 'STAFF') return { currentAssigneeId: actor.id };

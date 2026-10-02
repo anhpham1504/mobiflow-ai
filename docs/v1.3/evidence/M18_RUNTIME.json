@@ -1,0 +1,71 @@
+{
+  "checkedAt": "2026-10-02T02:38:14.463Z",
+  "developerDatabase": {
+    "checkMode": "read-only; no migrate/reset/reseed",
+    "migrations": 7,
+    "vector": "0.8.6",
+    "isolatedTargetCleaned": true
+  },
+  "ollama": {
+    "status": "UNAVAILABLE",
+    "cause": "ECONNREFUSED"
+  },
+  "stack": [
+    {
+      "name": "existingWeb",
+      "http": 200
+    },
+    {
+      "name": "existingApi",
+      "http": 200,
+      "readiness": {
+        "data": {
+          "status": "DEGRADED",
+          "coreReady": true,
+          "aiReady": false,
+          "rag": {
+            "enabled": true,
+            "status": "NOT_READY",
+            "embedding": "DOWN",
+            "knowledge": "NOT_READY",
+            "errorCode": "EMBEDDING_UNAVAILABLE",
+            "documents": 0,
+            "chunks": 0,
+            "checkedAt": "2026-10-02T02:38:11.597Z"
+          },
+          "checkedAt": "2026-10-02T02:38:14.462Z",
+          "components": {
+            "API": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "DATABASE": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "VECTOR_EXTENSION": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_SERVER": {
+              "status": "DOWN",
+              "code": "UNAVAILABLE"
+            },
+            "OLLAMA_LLM_MODEL": {
+              "status": "DOWN",
+              "code": "UNAVAILABLE"
+            },
+            "OLLAMA_EMBEDDING_MODEL": {
+              "status": "DOWN",
+              "code": "UNAVAILABLE"
+            }
+          }
+        },
+        "requestId": "0f6e8709-488e-4f96-a539-6c514f6b8247"
+      }
+    }
+  ],
+  "m18DeployedToDeveloperStack": false,
+  "liveAiGeneration": "NOT RUN",
+  "modelsStartedOrDownloaded": false
+}

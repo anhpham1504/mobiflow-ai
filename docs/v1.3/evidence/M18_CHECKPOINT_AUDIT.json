@@ -1,0 +1,1653 @@
+{
+  "checkedAt": "2026-10-02T03:09:49.237Z",
+  "timezone": "Asia/Saigon",
+  "hashPolicy": "SHA256 fields record raw local worktree bytes at each snapshot, before Git line-ending normalization. Staged Git blobs are checked separately against git hash-object --path; no content drift is allowed. The audit's own future content hash is deliberately omitted.",
+  "scope": "M18 checkpoint closure preparation; read-only source/evidence/credential audit and intended staging manifest",
+  "reviewResult": "PASS",
+  "baseline": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "branch": "feat/v1.3-internal-notes",
+  "refsBefore": {
+    "HEAD": "31b445caf07dad606601a1e38e8ed39836d9f825",
+    "main": "31b445caf07dad606601a1e38e8ed39836d9f825",
+    "origin/main": "31b445caf07dad606601a1e38e8ed39836d9f825",
+    "v1.2.0^{commit}": "31b445caf07dad606601a1e38e8ed39836d9f825"
+  },
+  "releaseTagsBefore": {
+    "v1.0.0": {
+      "object": "ad2844cfbfb91e0c8b10d2dfd07898e963052628",
+      "commit": "cf59b68852aa69bd54d8b478c1dd0a595b3220fe"
+    },
+    "v1.1.0": {
+      "object": "73b1a45eca2a9cab946a909c0bd565f14f752622",
+      "commit": "2604590a0ff07bee8b994cc337d8f7e42da61e70"
+    },
+    "v1.2.0": {
+      "object": "cd8dec95a99b46c3c25f33c11091cf4f3e476b1f",
+      "commit": "31b445caf07dad606601a1e38e8ed39836d9f825"
+    }
+  },
+  "remoteBaselineBefore": [
+    "31b445caf07dad606601a1e38e8ed39836d9f825\trefs/heads/main",
+    "ad2844cfbfb91e0c8b10d2dfd07898e963052628\trefs/tags/v1.0.0",
+    "cf59b68852aa69bd54d8b478c1dd0a595b3220fe\trefs/tags/v1.0.0^{}",
+    "73b1a45eca2a9cab946a909c0bd565f14f752622\trefs/tags/v1.1.0",
+    "2604590a0ff07bee8b994cc337d8f7e42da61e70\trefs/tags/v1.1.0^{}",
+    "cd8dec95a99b46c3c25f33c11091cf4f3e476b1f\trefs/tags/v1.2.0",
+    "31b445caf07dad606601a1e38e8ed39836d9f825\trefs/tags/v1.2.0^{}"
+  ],
+  "authorization": "Direct human M18 CHECKPOINT CLOSURE request: one reviewed checkpoint commit/push; no M19, main merge, tags, deploy or developer DB operation",
+  "independentExternalReview": "NOT RUN",
+  "internalParallelReviews": [
+    "Source/migration/privacy: CLEAR",
+    "54 evidence files individually reviewed: CLEAR",
+    "Documentation/authority chronology: CLEAR"
+  ],
+  "initial": {
+    "total": 88,
+    "modified": 13,
+    "new": 75,
+    "sourceDocumentation": 34,
+    "evidence": 54,
+    "categories": {
+      "F. Verification scripts": 8,
+      "A. Database/schema/migration": 2,
+      "B. Backend": 4,
+      "D. Frontend": 3,
+      "G. Product/spec documentation": 10,
+      "C. Shared contracts": 2,
+      "E. Unit/integration/E2E tests": 5,
+      "H. Sanitized evidence": 54
+    }
+  },
+  "disposition": {
+    "originalKeep": 67,
+    "originalIgnore": 21,
+    "removeFromStaging": 0,
+    "originalJsonKeep": 33,
+    "keptJsonPass": 23,
+    "keptJsonFail": 9,
+    "keptObservationalRuntime": 1,
+    "addedClosureFiles": 2,
+    "unrelated": 0,
+    "runtimePrivateStaged": 0
+  },
+  "intendedCheckpoint": {
+    "total": 69,
+    "modified": 13,
+    "new": 56,
+    "sourceDocumentation": 35,
+    "sanitizedJsonEvidence": 34,
+    "categories": {
+      "F. Verification scripts": 8,
+      "A. Database/schema/migration": 2,
+      "B. Backend": 4,
+      "E. Unit/integration/E2E tests": 5,
+      "D. Frontend": 3,
+      "G. Product/spec documentation": 11,
+      "H. Sanitized evidence": 34,
+      "C. Shared contracts": 2
+    }
+  },
+  "initialInventory": [
+    {
+      "path": "apps/api/package.json",
+      "change": "MODIFIED",
+      "category": "F. Verification scripts",
+      "bytes": 1799,
+      "sha256": "e99f5a37d70e033dcded073f6db9c03f5727ff6dd074d24fa2aa3f0389a37a45",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "change": "MODIFIED",
+      "category": "A. Database/schema/migration",
+      "bytes": 28054,
+      "sha256": "b748c635639e1c21495b2b7f0e88f39c5026237f6c8ba595a85ded1b185eed2b",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "change": "MODIFIED",
+      "category": "B. Backend",
+      "bytes": 7750,
+      "sha256": "7eb0144706668f2b63674f2f1def3dc5d6107099abba3efb8e937e70ae04b11e",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/src/authorization/authorization-policy.service.ts",
+      "change": "MODIFIED",
+      "category": "B. Backend",
+      "bytes": 1808,
+      "sha256": "24f99c5c530b9ec8870a1adaaf4cbd2e011ccd4812b67c1909e19a4fa2eb106c",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "change": "MODIFIED",
+      "category": "D. Frontend",
+      "bytes": 40110,
+      "sha256": "e65d13fd3f54461fa928761828829a43f011ecc8ee2bf5cdb4473fe913ebcea7",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/web/src/components/request-detail.tsx",
+      "change": "MODIFIED",
+      "category": "D. Frontend",
+      "bytes": 21851,
+      "sha256": "6ac89687754d2c45b928a8ed507d288acbfc1e18b271662b6c2e15b2fe702608",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "bytes": 12839,
+      "sha256": "ba65aa4620331507f10c013dc5be5fa77a1a96b932a3d78e228639e46737f0aa",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "bytes": 22860,
+      "sha256": "ceda90e0046dc715444dd6fe23cd4666b0766010040132e5e8d981806d7a9a8d",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "bytes": 11373,
+      "sha256": "8f3d605b59f33727a76e79e7666324a2e1d1b3822c92d15bdca0c0293a158143",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "bytes": 20144,
+      "sha256": "0b0085ed6d49355eea89cb7fb8f39c54b8c60a81e4b29551e9ed28f136ff12c9",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "bytes": 14723,
+      "sha256": "1c46119b304891ce7c01b3d9ee3bf63983004698dcec9d257e27079f30ef7839",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "package.json",
+      "change": "MODIFIED",
+      "category": "F. Verification scripts",
+      "bytes": 9038,
+      "sha256": "c8dafe619e7891bcf26c2a69d2cc5bd799ce44b407570900c8a64e672dc70b07",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "change": "MODIFIED",
+      "category": "C. Shared contracts",
+      "bytes": 1520,
+      "sha256": "d9aa8968f41627cda8d3c90558146e74ca9fe4c1e85545396fed6f8789414b3a",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+      "change": "NEW",
+      "category": "A. Database/schema/migration",
+      "bytes": 1199,
+      "sha256": "4f5b21e1db2f89bd58570e2fb7f8c8729c5b5c414f2b6fc9ea36ceda8b792391",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/src/requests/internal-note.controller.ts",
+      "change": "NEW",
+      "category": "B. Backend",
+      "bytes": 3844,
+      "sha256": "83036ef5f7e400c3d255a7202d6a5a0dc26173e88ac3f3ead9c57650eb704e40",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/src/requests/internal-note.service.ts",
+      "change": "NEW",
+      "category": "B. Backend",
+      "bytes": 4335,
+      "sha256": "813da5a62b2434a1ddedbd66d523066921fdaee0e6333211866310a427075f98",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/test/helpers/internal-notes-fixture.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "bytes": 6306,
+      "sha256": "e0ac6a4c76dc795d0d6fe04c591e52c0d3778db9f078b09f750da16c928ecc09",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/test/internal-notes.integration.test.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "bytes": 23290,
+      "sha256": "a6399ede7612a7c14877d7b02da4667c4b600625e2dc8e69652234083f78419a",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/api/test/internal-notes.test.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "bytes": 6579,
+      "sha256": "fb98ce78d29f6c183fc0bf9effcd89813ebd201906d81480d7791ddcf2129226",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/web/e2e/internal-notes.spec.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "bytes": 13410,
+      "sha256": "78484551c31202a3be378ab2338d22dd43e28747b6c151231efb27a5e5f15eb3",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "apps/web/src/components/internal-notes.tsx",
+      "change": "NEW",
+      "category": "D. Frontend",
+      "bytes": 6966,
+      "sha256": "fd108d49e77a18c31b12c9820dc267265af252b989e98439cc693fe88680b7bf",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/v1.3/M18_INTERNAL_NOTES_IMPLEMENTATION_PLAN.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "bytes": 10216,
+      "sha256": "5df24dd89d680d58684a05b0c34b83d232bfcc59572834b3adb88d942e16cc2a",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/v1.3/M18_INTERNAL_NOTES_VERIFICATION.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "bytes": 18645,
+      "sha256": "4b17eacff6af5d463ac59b5c46e696cd1200a7d44df67df90aa3ca039c7bd093",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "bytes": 1745,
+      "sha256": "29bac0c383e589bf93a1e31eee8d0bf4a11be18ad628bbc565bebbb2742a2c9b",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "bytes": 6187,
+      "sha256": "f809bfc5869031ffdb9950a080f6d3c20b7fffb6b24ca05618f62f78bad06e8d",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_API.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1745,
+      "sha256": "578d09c4ff8a35d805ea52b81444574c155c59944ef1b707ce6ecfc57243fa69",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_BROWSER.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 4253,
+      "sha256": "f80e07d2aad13598ea4be88d8d77c7a816190006676ef4f23299ad9f05fc6b83",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_DATABASE.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1752,
+      "sha256": "438f00323521e5b570de76dd815fa5a77fa1faa4aeb9832c82b469e094bd12a8",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_FINAL_REVIEW.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 11165,
+      "sha256": "53d5e5684ab0b28ddf98961d1530e9d535703dce90a8f5928aedd36f4193d7af",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_RUNTIME.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1802,
+      "sha256": "5d825063a6dc6fce02fa850bad8923f7d9383e3cc8d97eba509017dd6abf5533",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_SECURITY.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 2903,
+      "sha256": "665450cb6d50f6e986e3541fdb2b458a38f8f2bea8599bc4d62afae731445506",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_BUILD.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 219,
+      "sha256": "81d52c2f1762c820152faa5d2c4720310a53cdcae9735557f2e1e4af3073af53",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_DATABASE.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 234,
+      "sha256": "ed0053669947e0fd109bea3573a2fe66755390f84e8636f6680c4acec815588a",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_E2E.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 224,
+      "sha256": "013fa3e01904dc7bcd3aa80f57e67f48f76890582af186b1620e70e09bbfd742",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_INTEGRATION.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 240,
+      "sha256": "30975b55aecdde91ce8d1e060de7059a844de6e0286ce4fdfdcc1c9e19fa5e85",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_LINT.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 217,
+      "sha256": "cccc8528f19e74335b67c534a89f72f802f3086269915d9733897f36ad834a0b",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_SECURITY.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 236,
+      "sha256": "ecf048c4e236b6dd75f5da4f71c963d200038b58786f600e630dcd6eab20dbc7",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_TARGETED_REGRESSION.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 268,
+      "sha256": "cbabd77db5ebf3ed9dc79f481dcd758709acdaa4d8221b973a0c86964f796a18",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_TYPECHECK.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 227,
+      "sha256": "90fa573d026ea66b75591369acd24c5a8952628be187fd218fefbbac2911ca5b",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_UNIT.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 213,
+      "sha256": "acf8696a5cbae106ac29cf35e118c30b9379101478397f1e69b9e2f26ec734ad",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-113e49ab3303.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 219,
+      "sha256": "113e49ab3303859356de3ec5dd043ef6a1a0d8a5d1519f1388ec7108ee78e020",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-2026-10-02T02-29-33-779Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 5601,
+      "sha256": "6aaf54290fb748f5fd0a0aa9ebaa591f8f78f4de6b255fb8d7fe29017f35a896",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-2026-10-02T02-30-10-788Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1913,
+      "sha256": "25fb5c383e01cc6057963cf338800ea5a1fd9a32dde773878dcb4aabd8b83684",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-2026-10-02T02-32-48-288Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1913,
+      "sha256": "fd4bfb89aeda7c33901f2500dda93185aee537b5b7496032d851738c8bdcd384",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-218882cb464e.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 219,
+      "sha256": "218882cb464efa617d923f8153dc0254cc5c9448843265fc545f5d5bed89e1d3",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_DATABASE-2026-10-02T02-15-52-459Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 3048,
+      "sha256": "c47ab0993dd12d2d7ca77a916a08602b506ed18bd54dd2d2dfc89ff9f40d13cd",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_DATABASE-2026-10-02T02-17-34-780Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 4935,
+      "sha256": "764d0370b35c9eb42d0ec6a4f4e65464e7a1d3f2b65f03d004863654e1a69cea",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_DATABASE-f39fca39c053.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 234,
+      "sha256": "f39fca39c05362d80e30cd24ddf29c692415a60298cfa9cfe29b7b2e9c2e11ac",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-0a5356d2a5a0.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 224,
+      "sha256": "0a5356d2a5a0036b323cf0ceb3f41a49c1e39d2e69b3e14a9205eef38426e8b1",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-2026-10-02T02-31-32-838Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 9921,
+      "sha256": "6a71892d7e8c127490664e5bfad0ee02b392979b46f4afd8ecf8ca3ccf4313cc",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-2026-10-02T02-33-32-502Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 10594,
+      "sha256": "7157f1216ab4745cd03c0b068e95c917ea8219bea8553ea2764e89900782aec6",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-2026-10-02T02-34-20-482Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 2253,
+      "sha256": "7cd40c0a2ce4578ee829c5599356b53b632040ed82a850a9df814f3803172742",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-d8ddd0a49460.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 224,
+      "sha256": "d8ddd0a49460a4fceb764e452be8ff2ce679f2234f7d4c26ee4346f380038946",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_INTEGRATION-2026-10-02T02-13-53-347Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 2876,
+      "sha256": "919aea79d4fa789fe1558d1fafe5f8289cdfa1de657e98333eec3f7355b772e7",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_INTEGRATION-2026-10-02T02-30-51-826Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 3616,
+      "sha256": "76577611023545fdbcc6a14886cfe35451c33c8e1b937b7b4464c553e2e0b702",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_INTEGRATION-61deb3524ffa.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 273,
+      "sha256": "61deb3524ffa86d41f50d882e7370fcc47bb6bc230cd9d598ea1d69f6f164eaf",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-1841ba683eec.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 217,
+      "sha256": "1841ba683eecb82208a02bf6d9343e3d074c7e8d983c7597e33dc4ad186b39a9",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-19f4f9bd58bc.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 217,
+      "sha256": "19f4f9bd58bcc2a6619eb94c800aa28a07e27883159ceb19d012096760b03b50",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2026-10-02T02-22-09-606Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1374,
+      "sha256": "4e091954c2766fc88e0509260b8d08fa038e5c423f4255497cef40d7d23ab977",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2026-10-02T02-27-43-451Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1242,
+      "sha256": "caf95fc8cae09ea9e1abfebd69fe1b9dcb97105a6571ff31cd2b697ef77176a5",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2026-10-02T02-28-49-640Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 55,
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2026-10-02T02-34-30-698Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 55,
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2026-10-02T02-43-23-266Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 55,
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2a6160b8e8de.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 217,
+      "sha256": "2a6160b8e8de4dc4bfd6a4342620f46af61a5a9a3e1352ddcb2f98d87d364105",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-73fdf7c569ef.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 217,
+      "sha256": "73fdf7c569ef781d884835b842fc97695cc2ab970cae167d3a4d202968cd394d",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_SECURITY-1613aa035936.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 236,
+      "sha256": "1613aa03593627239224093ff49bf04e5af4a82d29510bdfeafdfb12cf203e36",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_SECURITY-2026-10-02T02-38-11-962Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 469,
+      "sha256": "fe29e7549545b5ff9788990ec03f289b74963487150217a8f3b6dc5f638c6f2f",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_SECURITY-2026-10-02T02-45-45-052Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 469,
+      "sha256": "fbe8fd6044b7e523d8b9ff52fc12050a14867ca14235667783985c3955dbe702",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_TARGETED_REGRESSION-2026-10-02T02-39-08-039Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 306,
+      "sha256": "d0775500e9a1e8dc100cd6036883bb37a6633490d91749207cd7d49ca950e764",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_TYPECHECK-2026-10-02T02-28-11-759Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 844,
+      "sha256": "3cdfc8c9c773bf35f0aef066be97fbbd9f8600aad4b2c8d2b27e0d271cccb8c4",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_TYPECHECK-2026-10-02T02-35-38-138Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 844,
+      "sha256": "4ae28c513fc697d76b1b8c5f34fb424839859a1589d0ce5bd2043582f1d42675",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_TYPECHECK-4d6e9f2794ad.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 227,
+      "sha256": "4d6e9f2794adf9729ca776baa7cff3efc21c32cea5dcbc03af6940eaef27d392",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_UNIT-2026-10-02T02-29-07-221Z.txt",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 19968,
+      "sha256": "dcf06d12d2726ee1542bbdebd244f728ecf5194cd24900f6bd1a3dfeb4f50f19",
+      "disposition": "IGNORE",
+      "reason": "Raw local console iteration: preserve locally; compact sanitized JSON retains gate/result and failed history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_API-d04737a4a24a.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1745,
+      "sha256": "d04737a4a24a33a5cd6ed0c431a6a6d717cc779b50bc954705281a49596434d1",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_API-f75a93da7c73.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1759,
+      "sha256": "0c3411e9bc57ff344e262f72da804010bf602629dd1bd675a585a2238732d3cb",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_BROWSER-6ded3356f32e.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1750,
+      "sha256": "6ded3356f32e460d23f74595469cf922be27f2dbdb9dc528b8004f9d16466e86",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_BROWSER-8aa83dc91c76.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 1487,
+      "sha256": "8aa83dc91c76dbf4b3a41e2b7ba34753aeb796c82992854b69ffaf4a1a022d31",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_FINAL_REVIEW-53ef59d5655a.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 11093,
+      "sha256": "53ef59d5655ac994c77054c92a007e2aef7cbc113fc8b2ba84fc5faf34545aa0",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_SECURITY-fb16cabd607b.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "bytes": 2903,
+      "sha256": "fb16cabd607bfc631fde4b1eb0456c705f40bcb1a17aa01e2619f260d7fb4616",
+      "disposition": "KEEP",
+      "reason": "Reviewed compact sanitized JSON result, provenance or retained failure history"
+    },
+    {
+      "path": "docs/verification/MILESTONE_18_VERIFICATION.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "bytes": 7245,
+      "sha256": "08c0949439ecb3cf9d04e42830edb3671b859ec25a105711eba65f8795ed1c57",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "packages/contracts/src/internal-notes.ts",
+      "change": "NEW",
+      "category": "C. Shared contracts",
+      "bytes": 1171,
+      "sha256": "1730142321650d464d10f252760952191ad5ebaf678f54a91e818d6081ce07e1",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "playwright.m18.config.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "bytes": 702,
+      "sha256": "857a90cc3b64043e606acde102ad644319ba7528dcc3f7ea3e0486dc60c7f5cf",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-browser.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 5961,
+      "sha256": "c8284abb534219af6591b953adfd11a5aa634c8e99fdfa16d40004fe0df5a04e",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-capture.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 1855,
+      "sha256": "23aeed66728a01848617fe699bc080eb7c11603f087a30528ca6c5208a543305",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-database.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 5620,
+      "sha256": "0e1d28121713a48146133b8b9c4677f9482245ab766f9bd8a17925188a7b624b",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-integration.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 1047,
+      "sha256": "eca6d8deb60164af44fe3a3f4f235623904dd8d99c69d07d0ce4851045f54e88",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-migrations.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 4467,
+      "sha256": "e4cdea621ccfcf0d9714c1ff87e1e515bb356b94ef3e81799796dc68cf319e2e",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    },
+    {
+      "path": "scripts/verification/m18-security.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "bytes": 6943,
+      "sha256": "e085e5095ab735b98842dbc7a983ee1ec2784783ba57fef80f2869841a834c4f",
+      "disposition": "KEEP",
+      "reason": "Intended M18 source, tests, verification or owning documentation"
+    }
+  ],
+  "checkpointFileManifest": [
+    {
+      "path": "apps/api/package.json",
+      "change": "MODIFIED",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "e99f5a37d70e033dcded073f6db9c03f5727ff6dd074d24fa2aa3f0389a37a45"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+      "change": "NEW",
+      "category": "A. Database/schema/migration",
+      "disposition": "KEEP",
+      "sha256": "4f5b21e1db2f89bd58570e2fb7f8c8729c5b5c414f2b6fc9ea36ceda8b792391"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "change": "MODIFIED",
+      "category": "A. Database/schema/migration",
+      "disposition": "KEEP",
+      "sha256": "b748c635639e1c21495b2b7f0e88f39c5026237f6c8ba595a85ded1b185eed2b"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "change": "MODIFIED",
+      "category": "B. Backend",
+      "disposition": "KEEP",
+      "sha256": "7eb0144706668f2b63674f2f1def3dc5d6107099abba3efb8e937e70ae04b11e"
+    },
+    {
+      "path": "apps/api/src/authorization/authorization-policy.service.ts",
+      "change": "MODIFIED",
+      "category": "B. Backend",
+      "disposition": "KEEP",
+      "sha256": "24f99c5c530b9ec8870a1adaaf4cbd2e011ccd4812b67c1909e19a4fa2eb106c"
+    },
+    {
+      "path": "apps/api/src/requests/internal-note.controller.ts",
+      "change": "NEW",
+      "category": "B. Backend",
+      "disposition": "KEEP",
+      "sha256": "83036ef5f7e400c3d255a7202d6a5a0dc26173e88ac3f3ead9c57650eb704e40"
+    },
+    {
+      "path": "apps/api/src/requests/internal-note.service.ts",
+      "change": "NEW",
+      "category": "B. Backend",
+      "disposition": "KEEP",
+      "sha256": "813da5a62b2434a1ddedbd66d523066921fdaee0e6333211866310a427075f98"
+    },
+    {
+      "path": "apps/api/test/helpers/internal-notes-fixture.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "disposition": "KEEP",
+      "sha256": "e0ac6a4c76dc795d0d6fe04c591e52c0d3778db9f078b09f750da16c928ecc09"
+    },
+    {
+      "path": "apps/api/test/internal-notes.integration.test.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "disposition": "KEEP",
+      "sha256": "a6399ede7612a7c14877d7b02da4667c4b600625e2dc8e69652234083f78419a"
+    },
+    {
+      "path": "apps/api/test/internal-notes.test.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "disposition": "KEEP",
+      "sha256": "fb98ce78d29f6c183fc0bf9effcd89813ebd201906d81480d7791ddcf2129226"
+    },
+    {
+      "path": "apps/web/e2e/internal-notes.spec.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "disposition": "KEEP",
+      "sha256": "78484551c31202a3be378ab2338d22dd43e28747b6c151231efb27a5e5f15eb3"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "change": "MODIFIED",
+      "category": "D. Frontend",
+      "disposition": "KEEP",
+      "sha256": "e65d13fd3f54461fa928761828829a43f011ecc8ee2bf5cdb4473fe913ebcea7"
+    },
+    {
+      "path": "apps/web/src/components/internal-notes.tsx",
+      "change": "NEW",
+      "category": "D. Frontend",
+      "disposition": "KEEP",
+      "sha256": "fd108d49e77a18c31b12c9820dc267265af252b989e98439cc693fe88680b7bf"
+    },
+    {
+      "path": "apps/web/src/components/request-detail.tsx",
+      "change": "MODIFIED",
+      "category": "D. Frontend",
+      "disposition": "KEEP",
+      "sha256": "6ac89687754d2c45b928a8ed507d288acbfc1e18b271662b6c2e15b2fe702608"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "33332854fc440b72b97980fc238d94c27643ababeeb6ea5891697010d1381cc1"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "ceda90e0046dc715444dd6fe23cd4666b0766010040132e5e8d981806d7a9a8d"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "8f3d605b59f33727a76e79e7666324a2e1d1b3822c92d15bdca0c0293a158143"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "0b0085ed6d49355eea89cb7fb8f39c54b8c60a81e4b29551e9ed28f136ff12c9"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "change": "MODIFIED",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "bcf8c1d51a077e10d177139c3bcee2f634139f66ea671de30aedf1e22cc87a73"
+    },
+    {
+      "path": "docs/v1.3/M18_CHECKPOINT_CLOSURE.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "43a6cb5ae602a1bf66bd1714c9ae1d693083d2ba0f1d84fdf19143bd5bf5b42c"
+    },
+    {
+      "path": "docs/v1.3/M18_INTERNAL_NOTES_IMPLEMENTATION_PLAN.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "d34358e759364624bc79d9be6090db51c191aa2358b7dbb0be2d5b8293b876d6"
+    },
+    {
+      "path": "docs/v1.3/M18_INTERNAL_NOTES_VERIFICATION.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "6eb94eb8dac52d920120face1c086756b857c5c6d3630cac4e6b292e5c364b3f"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "e9df8bd1ab358f156a835b0c4f81219ace557ca377d5b071f432cf5c8d0eb992"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "cf69d2fdfaaf8bc5df5aeacef88f4738b0d3380143da5089250380aa3142c6f4"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_API.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "578d09c4ff8a35d805ea52b81444574c155c59944ef1b707ce6ecfc57243fa69"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_BROWSER.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "f80e07d2aad13598ea4be88d8d77c7a816190006676ef4f23299ad9f05fc6b83"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_CHECKPOINT_AUDIT.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": null,
+      "hashPolicy": "No self-referential content hash; Git blob identity is captured by staged and final publication checks"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_DATABASE.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "438f00323521e5b570de76dd815fa5a77fa1faa4aeb9832c82b469e094bd12a8"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_FINAL_REVIEW.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "53d5e5684ab0b28ddf98961d1530e9d535703dce90a8f5928aedd36f4193d7af"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_RUNTIME.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "5d825063a6dc6fce02fa850bad8923f7d9383e3cc8d97eba509017dd6abf5533"
+    },
+    {
+      "path": "docs/v1.3/evidence/M18_SECURITY.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "665450cb6d50f6e986e3541fdb2b458a38f8f2bea8599bc4d62afae731445506"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_BUILD.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "81d52c2f1762c820152faa5d2c4720310a53cdcae9735557f2e1e4af3073af53"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_DATABASE.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "ed0053669947e0fd109bea3573a2fe66755390f84e8636f6680c4acec815588a"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_E2E.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "013fa3e01904dc7bcd3aa80f57e67f48f76890582af186b1620e70e09bbfd742"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_INTEGRATION.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "30975b55aecdde91ce8d1e060de7059a844de6e0286ce4fdfdcc1c9e19fa5e85"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_LINT.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "cccc8528f19e74335b67c534a89f72f802f3086269915d9733897f36ad834a0b"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_SECURITY.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "ecf048c4e236b6dd75f5da4f71c963d200038b58786f600e630dcd6eab20dbc7"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_TARGETED_REGRESSION.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "cbabd77db5ebf3ed9dc79f481dcd758709acdaa4d8221b973a0c86964f796a18"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_TYPECHECK.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "90fa573d026ea66b75591369acd24c5a8952628be187fd218fefbbac2911ca5b"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M18_UNIT.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "acf8696a5cbae106ac29cf35e118c30b9379101478397f1e69b9e2f26ec734ad"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-113e49ab3303.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "113e49ab3303859356de3ec5dd043ef6a1a0d8a5d1519f1388ec7108ee78e020"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_BUILD-218882cb464e.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "218882cb464efa617d923f8153dc0254cc5c9448843265fc545f5d5bed89e1d3"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_DATABASE-f39fca39c053.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "f39fca39c05362d80e30cd24ddf29c692415a60298cfa9cfe29b7b2e9c2e11ac"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-0a5356d2a5a0.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "0a5356d2a5a0036b323cf0ceb3f41a49c1e39d2e69b3e14a9205eef38426e8b1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_E2E-d8ddd0a49460.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "d8ddd0a49460a4fceb764e452be8ff2ce679f2234f7d4c26ee4346f380038946"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_INTEGRATION-61deb3524ffa.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "61deb3524ffa86d41f50d882e7370fcc47bb6bc230cd9d598ea1d69f6f164eaf"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-1841ba683eec.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "1841ba683eecb82208a02bf6d9343e3d074c7e8d983c7597e33dc4ad186b39a9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-19f4f9bd58bc.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "19f4f9bd58bcc2a6619eb94c800aa28a07e27883159ceb19d012096760b03b50"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-2a6160b8e8de.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "2a6160b8e8de4dc4bfd6a4342620f46af61a5a9a3e1352ddcb2f98d87d364105"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_LINT-73fdf7c569ef.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "73fdf7c569ef781d884835b842fc97695cc2ab970cae167d3a4d202968cd394d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_SECURITY-1613aa035936.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "1613aa03593627239224093ff49bf04e5af4a82d29510bdfeafdfb12cf203e36"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M18_TYPECHECK-4d6e9f2794ad.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "4d6e9f2794adf9729ca776baa7cff3efc21c32cea5dcbc03af6940eaef27d392"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_API-d04737a4a24a.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "d04737a4a24a33a5cd6ed0c431a6a6d717cc779b50bc954705281a49596434d1"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_API-f75a93da7c73.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "0c3411e9bc57ff344e262f72da804010bf602629dd1bd675a585a2238732d3cb"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_BROWSER-6ded3356f32e.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "6ded3356f32e460d23f74595469cf922be27f2dbdb9dc528b8004f9d16466e86"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_BROWSER-8aa83dc91c76.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "8aa83dc91c76dbf4b3a41e2b7ba34753aeb796c82992854b69ffaf4a1a022d31"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_FINAL_REVIEW-53ef59d5655a.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "53ef59d5655ac994c77054c92a007e2aef7cbc113fc8b2ba84fc5faf34545aa0"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M18_SECURITY-fb16cabd607b.json",
+      "change": "NEW",
+      "category": "H. Sanitized evidence",
+      "disposition": "KEEP",
+      "sha256": "fb16cabd607bfc631fde4b1eb0456c705f40bcb1a17aa01e2619f260d7fb4616"
+    },
+    {
+      "path": "docs/verification/MILESTONE_18_VERIFICATION.md",
+      "change": "NEW",
+      "category": "G. Product/spec documentation",
+      "disposition": "KEEP",
+      "sha256": "373e168588f0588165f774a4996d03131ae93ca8959747faf9220ba09bc18c90"
+    },
+    {
+      "path": "package.json",
+      "change": "MODIFIED",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "c8dafe619e7891bcf26c2a69d2cc5bd799ce44b407570900c8a64e672dc70b07"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "change": "MODIFIED",
+      "category": "C. Shared contracts",
+      "disposition": "KEEP",
+      "sha256": "d9aa8968f41627cda8d3c90558146e74ca9fe4c1e85545396fed6f8789414b3a"
+    },
+    {
+      "path": "packages/contracts/src/internal-notes.ts",
+      "change": "NEW",
+      "category": "C. Shared contracts",
+      "disposition": "KEEP",
+      "sha256": "1730142321650d464d10f252760952191ad5ebaf678f54a91e818d6081ce07e1"
+    },
+    {
+      "path": "playwright.m18.config.mjs",
+      "change": "NEW",
+      "category": "E. Unit/integration/E2E tests",
+      "disposition": "KEEP",
+      "sha256": "857a90cc3b64043e606acde102ad644319ba7528dcc3f7ea3e0486dc60c7f5cf"
+    },
+    {
+      "path": "scripts/verification/m18-browser.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "c8284abb534219af6591b953adfd11a5aa634c8e99fdfa16d40004fe0df5a04e"
+    },
+    {
+      "path": "scripts/verification/m18-capture.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "23aeed66728a01848617fe699bc080eb7c11603f087a30528ca6c5208a543305"
+    },
+    {
+      "path": "scripts/verification/m18-database.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "0e1d28121713a48146133b8b9c4677f9482245ab766f9bd8a17925188a7b624b"
+    },
+    {
+      "path": "scripts/verification/m18-integration.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "eca6d8deb60164af44fe3a3f4f235623904dd8d99c69d07d0ce4851045f54e88"
+    },
+    {
+      "path": "scripts/verification/m18-migrations.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "e4cdea621ccfcf0d9714c1ff87e1e515bb356b94ef3e81799796dc68cf319e2e"
+    },
+    {
+      "path": "scripts/verification/m18-security.mjs",
+      "change": "NEW",
+      "category": "F. Verification scripts",
+      "disposition": "KEEP",
+      "sha256": "e085e5095ab735b98842dbc7a983ee1ec2784783ba57fef80f2869841a834c4f"
+    }
+  ],
+  "excludedArtifactPolicy": "All 21 exact console-log paths preserved byte-for-byte and excluded via local .git/info/exclude. Existing artifacts/build/env/generated ignores preserved. Raw gate.log and browser artifactDirectory/screenshot links are local-only provenance pointers.",
+  "secretScan": {
+    "result": "PASS",
+    "initialFilesScanned": 88,
+    "finalNonSelfFilesScanned": 68,
+    "liveSecrets": 0,
+    "findings": [],
+    "keywordMatches": [
+      {
+        "path": "apps/api/package.json",
+        "matches": 5,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/src/app.ts",
+        "matches": 11,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/src/authorization/authorization-policy.service.ts",
+        "matches": 1,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/src/requests/internal-note.controller.ts",
+        "matches": 2,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/src/requests/internal-note.service.ts",
+        "matches": 4,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/test/helpers/internal-notes-fixture.mjs",
+        "matches": 7,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/test/internal-notes.integration.test.mjs",
+        "matches": 5,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "apps/api/test/internal-notes.test.mjs",
+        "matches": 6,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/IMPLEMENTATION_PLAN.md",
+        "matches": 7,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/specs/API_SPEC.md",
+        "matches": 11,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/specs/AUTHORIZATION_SPEC.md",
+        "matches": 9,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/specs/PROJECT_SPEC.md",
+        "matches": 7,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/M18_CHECKPOINT_CLOSURE.md",
+        "matches": 5,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/M18_INTERNAL_NOTES_IMPLEMENTATION_PLAN.md",
+        "matches": 6,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/M18_INTERNAL_NOTES_VERIFICATION.md",
+        "matches": 8,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/README.md",
+        "matches": 3,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+        "matches": 9,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/evidence/M18_FINAL_REVIEW.json",
+        "matches": 7,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/evidence/gates/M18_TARGETED_REGRESSION.json",
+        "matches": 1,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/v1.3/evidence/iterations/M18_FINAL_REVIEW-53ef59d5655a.json",
+        "matches": 7,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "docs/verification/MILESTONE_18_VERIFICATION.md",
+        "matches": 5,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "scripts/verification/m18-capture.mjs",
+        "matches": 4,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "scripts/verification/m18-database.mjs",
+        "matches": 6,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "scripts/verification/m18-integration.mjs",
+        "matches": 2,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      },
+      {
+        "path": "scripts/verification/m18-security.mjs",
+        "matches": 6,
+        "interpretation": "Reviewed as code/documentation/config key references or synthetic test usage; no live value"
+      }
+    ],
+    "limitations": "Targeted configured-value and high-confidence shape scan with manual interpretation; no penetration-testing claim"
+  },
+  "migration": {
+    "repositoryBefore": 7,
+    "repositoryAfter": 8,
+    "name": "20261002010000_m18_internal_notes",
+    "oldMigrationsModified": 0,
+    "historicalGitBlobChecks": [
+      {
+        "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+        "baseline": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+        "current": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+        "baseline": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+        "current": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+        "baseline": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+        "current": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+        "baseline": "3186661f01426396ad27fce70f78a92f681f5d61",
+        "current": "3186661f01426396ad27fce70f78a92f681f5d61"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+        "baseline": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+        "current": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+        "baseline": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+        "current": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+        "baseline": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4",
+        "current": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4"
+      }
+    ],
+    "developerDb": "7 applied per accepted M18 runtime evidence; no DB operations performed during closure"
+  },
+  "acceptedGateSummaries": {
+    "LINT": {
+      "command": "npm run lint",
+      "startedAt": "2026-10-02T02:43:23.266Z",
+      "finishedAt": "2026-10-02T02:43:30.116Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_LINT-2026-10-02T02-43-23-266Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "TYPECHECK": {
+      "command": "npm run typecheck",
+      "startedAt": "2026-10-02T02:35:38.138Z",
+      "finishedAt": "2026-10-02T02:35:47.963Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_TYPECHECK-2026-10-02T02-35-38-138Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "UNIT": {
+      "command": "npm test",
+      "startedAt": "2026-10-02T02:29:07.221Z",
+      "finishedAt": "2026-10-02T02:29:29.147Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_UNIT-2026-10-02T02-29-07-221Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "BUILD": {
+      "command": "npm run build",
+      "startedAt": "2026-10-02T02:32:48.288Z",
+      "finishedAt": "2026-10-02T02:33:04.509Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_BUILD-2026-10-02T02-32-48-288Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "DATABASE": {
+      "command": "npm run test:database:m18",
+      "startedAt": "2026-10-02T02:17:34.780Z",
+      "finishedAt": "2026-10-02T02:17:49.863Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_DATABASE-2026-10-02T02-17-34-780Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "INTEGRATION": {
+      "command": "npm run test:integration:m18",
+      "startedAt": "2026-10-02T02:30:51.826Z",
+      "finishedAt": "2026-10-02T02:31:08.261Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_INTEGRATION-2026-10-02T02-30-51-826Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "E2E": {
+      "command": "npm run test:e2e:m18",
+      "startedAt": "2026-10-02T02:34:20.482Z",
+      "finishedAt": "2026-10-02T02:34:46.701Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_E2E-2026-10-02T02-34-20-482Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "SECURITY": {
+      "command": "npm run verify:security:m18",
+      "startedAt": "2026-10-02T02:45:45.052Z",
+      "finishedAt": "2026-10-02T02:45:46.752Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_SECURITY-2026-10-02T02-45-45-052Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    },
+    "TARGETED_REGRESSION": {
+      "command": "node --test apps/api/test/authorization.test.mjs",
+      "startedAt": "2026-10-02T02:39:08.039Z",
+      "finishedAt": "2026-10-02T02:39:08.410Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "iterations/M18_TARGETED_REGRESSION-2026-10-02T02-39-08-039Z.txt",
+      "logDisposition": "Local raw console pointer; excluded from checkpoint"
+    }
+  },
+  "additionalTestsRerun": "NONE — accepted results reused; no product/test changes or defects",
+  "protectedOwnersUnchanged": [
+    "apps/api/src/ai",
+    "apps/api/src/knowledge",
+    "apps/api/src/analytics",
+    "apps/api/src/dashboard",
+    "apps/api/src/requests/request-query.service.ts",
+    "apps/api/src/requests/request-state-machine.service.ts",
+    "apps/api/src/requests/sla-clock.ts",
+    "scripts/demo",
+    "package-lock.json",
+    "packages/config",
+    "docker-compose.yml"
+  ],
+  "finalDiffCheck": "PASS",
+  "stagedAudit": "Performed after this preparation snapshot; verify exact manifest, Git blobs and cached diff before the one commit",
+  "publication": "NOT RUN at snapshot creation; actual commit/push/SHA/clean outcome belongs to post-commit final handoff",
+  "next": "M19 NOT STARTED; M20–M24 NOT STARTED; V1.3 IN DEVELOPMENT",
+  "limitations": "Synthetic/local evidence; no deployment/penetration test/WCAG certification/live AI accuracy; Ollama unavailable, no impact; developer DB remains V1.2; screenshots/traces/raw logs local"
+}

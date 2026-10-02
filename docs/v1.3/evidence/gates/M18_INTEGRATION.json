@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:integration:m18",
+  "startedAt": "2026-10-02T02:30:51.826Z",
+  "finishedAt": "2026-10-02T02:31:08.261Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "iterations/M18_INTEGRATION-2026-10-02T02-30-51-826Z.txt"
+}

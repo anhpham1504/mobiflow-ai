@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-10-02T02:31:04.205Z",
+  "synthetic": true,
+  "database": "mobiflow_m18_test",
+  "checks": {
+    "creationAuditWorkflow": "PASS",
+    "directHttpSecurity": "PASS",
+    "userHistoryNotificationsAnalyticsLogs": "PASS",
+    "orderPaginationPerformance": "PASS",
+    "constraintsImmutabilityAuditRollback": "PASS",
+    "terminalReassignmentVersion": "PASS",
+    "raceAndLiveIdentity": "PASS",
+    "intakeRagRecommendationCopilotIsolation": "PASS",
+    "openApiContracts": "PASS",
+    "apiRestartPersistence": "PASS"
+  },
+  "performance": {
+    "fixtureNotes": 50,
+    "authors": 2,
+    "pageDefault": 20,
+    "pageMaximum": 100,
+    "pagesOfSeven": 8,
+    "sqlStatementsOneNote": 10,
+    "sqlStatementsFiftyNotes": 10,
+    "userSelectStatements": 5,
+    "latencySamplesMs": [
+      11.28,
+      13.58,
+      15.34,
+      11.09,
+      16.17,
+      14.79,
+      11.34,
+      12.55,
+      11.31,
+      11.58
+    ],
+    "responseBytesFiftyNotes": 13001,
+    "noteQuery": [
+      "SELECT \"public\".\"RequestInternalNote\".\"id\", \"public\".\"RequestInternalNote\".\"requestId\", \"public\".\"RequestInternalNote\".\"body\", \"public\".\"RequestInternalNote\".\"createdAt\", \"public\".\"RequestInternalNote\".\"authorId\" FROM \"public\".\"RequestInternalNote\" WHERE \"public\".\"RequestInternalNote\".\"requestId\" = $1 ORDER BY \"public\".\"RequestInternalNote\".\"createdAt\" DESC, \"public\".\"RequestInternalNote\".\"id\" DESC LIMIT $2 OFFSET $3"
+    ],
+    "scaleClaim": false
+  },
+  "noteIds": [
+    "76cf1e31-6b8e-4615-b173-f894eec169a2",
+    "437e036d-c823-4e62-89dc-6e7c73f4a37e"
+  ],
+  "result": "PASS",
+  "testCommand": "node --test apps/api/test/internal-notes.integration.test.mjs",
+  "tests": 11,
+  "skipped": 0
+}

@@ -1,0 +1,154 @@
+{
+  "checkedAt": "2026-10-02T02:34:46.609Z",
+  "runId": "8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m18_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-10-02T02:34:27.120Z",
+    "duration": 19461.375,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+      "result": "PASS",
+      "staffCreate": true,
+      "managerReadCreate": true,
+      "authorTimestamp": true,
+      "unicodeNewlines": true,
+      "userUiAbsent": true,
+      "userNoteApiRequests": 0,
+      "userPayloadCanaryAbsent": true,
+      "consolePageErrors": []
+    },
+    {
+      "runId": "8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+      "result": "PASS",
+      "loading": true,
+      "empty": true,
+      "listRetry": true,
+      "safeErrors": true,
+      "draftRetained": true,
+      "duplicateSubmitRequests": 1,
+      "successClearsDraft": true,
+      "unicodeLimit": "4000 code points including 4000 emoji",
+      "transportFixtures": "explicit UI-only GET/POST 503 and delay; restored actual API"
+    },
+    {
+      "runId": "8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+      "result": "PASS",
+      "checks": [
+        {
+          "role": "STAFF",
+          "width": 360,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "STAFF",
+          "width": 768,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "STAFF",
+          "width": 1440,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "STAFF",
+          "width": 1920,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "STAFF",
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        },
+        {
+          "role": "MANAGER",
+          "width": 360,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "MANAGER",
+          "width": 768,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "MANAGER",
+          "width": 1440,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "MANAGER",
+          "width": 1920,
+          "overflow": false,
+          "textareaUsable": true,
+          "timestampReadable": true,
+          "controls44px": true,
+          "keyboardTabFocus": true
+        },
+        {
+          "role": "MANAGER",
+          "axeSerious": 0,
+          "axeCritical": 0,
+          "otherAxeViolations": []
+        }
+      ],
+      "literalHtmlScript": true,
+      "xssImageRequests": 0,
+      "xssDialogs": 0,
+      "keyboardSubmission": true,
+      "consolePageErrors": [],
+      "wcagCertification": false
+    },
+    {
+      "runId": "8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+      "result": "PASS",
+      "pages": [
+        20,
+        25
+      ],
+      "ordering": "newest first",
+      "closedReadOnly": true,
+      "canceledReadOnly": true,
+      "foreignStaffUiAbsent": true
+    }
+  ],
+  "artifactDirectory": "artifacts/m18/browser-runs/8f5c15b4-1acb-4de5-abf4-0709f94b7329",
+  "limitations": "Real PostgreSQL/API and production Next build. Transport delays/errors are explicit browser-only fixtures. No live model generation or WCAG certification claim."
+}

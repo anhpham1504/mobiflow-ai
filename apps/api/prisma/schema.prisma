@@ -142,6 +142,7 @@ model User {
   createdRequests         Request[]           @relation("RequestCreator")
   assignedRequests        Request[]           @relation("RequestAssignee")
   messages                RequestMessage[]
+  internalNotes           RequestInternalNote[]
   attachments             RequestAttachment[]
   assignments             Assignment[]        @relation("AssignedStaff")
   assignmentsMade         Assignment[]        @relation("AssignmentManager")
@@ -251,6 +252,7 @@ model Request {
   pendingRecommendation   AiRecommendation?      @relation("PendingRecommendation", fields: [pendingRecommendationId], references: [id], onDelete: Restrict)
   currentResolution       RequestResolution?     @relation("CurrentResolution", fields: [currentResolutionId], references: [id], onDelete: Restrict)
   messages                RequestMessage[]
+  internalNotes           RequestInternalNote[]
   attachments             RequestAttachment[]
   history                 RequestStatusHistory[]
   assignments             Assignment[]
@@ -283,6 +285,18 @@ model RequestMessage {
   request   Request            @relation(fields: [requestId], references: [id], onDelete: Restrict)
   author    User               @relation(fields: [authorId], references: [id], onDelete: Restrict)
   event     AuditLog           @relation(fields: [eventId], references: [id], onDelete: Restrict)
+
+  @@index([requestId, createdAt, id])
+}
+
+model RequestInternalNote {
+  id        String   @id @default(uuid()) @db.Uuid
+  requestId String   @db.Uuid
+  authorId  String   @db.Uuid
+  body      String   @db.VarChar(4000)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  request   Request  @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Restrict)
 
   @@index([requestId, createdAt, id])
 }

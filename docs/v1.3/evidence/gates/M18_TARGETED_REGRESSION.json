@@ -1,0 +1,8 @@
+{
+  "command": "node --test apps/api/test/authorization.test.mjs",
+  "startedAt": "2026-10-02T02:39:08.039Z",
+  "finishedAt": "2026-10-02T02:39:08.410Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "iterations/M18_TARGETED_REGRESSION-2026-10-02T02-39-08-039Z.txt"
+}

@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-02T02:17:49.834Z",
+  "result": "PASS",
+  "synthetic": true,
+  "checks": [
+    {
+      "kind": "fresh",
+      "database": "mobiflow_m18_test",
+      "result": "PASS",
+      "migrations": 8,
+      "seed": "PASS — idempotent counts; no fake notes",
+      "seededCounts": {
+        "AiAnalysis": 0,
+        "AiRecommendation": 0,
+        "AiRun": 0,
+        "AiToolCall": 0,
+        "Assignment": 6,
+        "AuditLog": 49,
+        "Checklist": 0,
+        "ChecklistItem": 0,
+        "Feedback": 2,
+        "KnowledgeChunk": 0,
+        "KnowledgeDocument": 0,
+        "Notification": 8,
+        "RefreshSession": 0,
+        "Request": 8,
+        "RequestAttachment": 0,
+        "RequestEmbedding": 0,
+        "RequestInternalNote": 0,
+        "RequestMessage": 0,
+        "RequestResolution": 3,
+        "RequestStatusHistory": 39,
+        "Skill": 5,
+        "SlaInstance": 6,
+        "SlaPolicy": 4,
+        "StaffSkill": 7,
+        "Team": 4,
+        "TeamMember": 5,
+        "User": 6
+      },
+      "runtimePrivileges": {
+        "read": true,
+        "append": true,
+        "edit": false,
+        "remove": false,
+        "truncate": false
+      }
+    },
+    {
+      "kind": "v1.2-upgrade",
+      "database": "mobiflow_m18_test",
+      "result": "PASS",
+      "migrationsBefore": 7,
+      "migrationsAfter": 8,
+      "newMigration": "20261002010000_m18_internal_notes",
+      "existingTablesPreserved": 26,
+      "existingRowsPreserved": 152,
+      "oldMigrationChecksums": "unchanged",
+      "developerDatabaseReset": false,
+      "seedAfterUpgrade": "PASS — idempotent counts; no fake notes"
+    }
+  ],
+  "migration": "20261002010000_m18_internal_notes",
+  "migrationCount": 8,
+  "developerDatabaseModified": false
+}

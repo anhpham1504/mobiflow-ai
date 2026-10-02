@@ -19,6 +19,8 @@ import { AuthorizationPolicyService } from './authorization/authorization-policy
 import { UsersController } from './users/users.controller.js';
 import { API_ENV } from './tokens.js';
 import { RequestsController } from './requests/requests.controller.js';
+import { InternalNoteController } from './requests/internal-note.controller.js';
+import { InternalNoteService } from './requests/internal-note.service.js';
 import { RequestStateMachineService } from './requests/request-state-machine.service.js';
 import { RequestQueryService } from './requests/request-query.service.js';
 import { WorkflowGuard } from './requests/workflow.guard.js';
@@ -55,10 +57,10 @@ export async function createApplication(env: ApiEnvironment, options: { database
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
-      RequestStateMachineService, RequestQueryService, WorkflowGuard, DashboardService,
+      RequestStateMachineService, RequestQueryService, InternalNoteService, WorkflowGuard, DashboardService,
       AnalysisWorker,AnalysisQueryService,
       RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,AnalyticsService,
       {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??new OllamaProvider(env)},

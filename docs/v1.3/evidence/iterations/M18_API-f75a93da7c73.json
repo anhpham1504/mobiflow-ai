@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-02T02:06:24.548Z",
+  "synthetic": true,
+  "database": "mobiflow_m18_test",
+  "checks": {
+    "creationAuditWorkflow": "PASS",
+    "directHttpSecurity": "PASS",
+    "orderPaginationPerformance": "PASS",
+    "constraintsImmutabilityAuditRollback": "PASS",
+    "terminalReassignmentVersion": "PASS",
+    "raceAndLiveIdentity": "PASS",
+    "intakeRagRecommendationCopilotIsolation": "PASS",
+    "openApiContracts": "PASS"
+  },
+  "performance": {
+    "fixtureNotes": 50,
+    "authors": 2,
+    "pageDefault": 20,
+    "pageMaximum": 100,
+    "pagesOfSeven": 8,
+    "sqlStatementsOneNote": 10,
+    "sqlStatementsFiftyNotes": 10,
+    "userSelectStatements": 5,
+    "latencySamplesMs": [
+      18.31,
+      19.19,
+      17.04,
+      16.73,
+      16.37,
+      17.11,
+      17.74,
+      19.73,
+      18.57,
+      22.11
+    ],
+    "responseBytesFiftyNotes": 13001,
+    "noteQuery": [
+      "SELECT \"public\".\"RequestInternalNote\".\"id\", \"public\".\"RequestInternalNote\".\"requestId\", \"public\".\"RequestInternalNote\".\"body\", \"public\".\"RequestInternalNote\".\"createdAt\", \"public\".\"RequestInternalNote\".\"authorId\" FROM \"public\".\"RequestInternalNote\" WHERE \"public\".\"RequestInternalNote\".\"requestId\" = $1 ORDER BY \"public\".\"RequestInternalNote\".\"createdAt\" DESC, \"public\".\"RequestInternalNote\".\"id\" DESC LIMIT $2 OFFSET $3"
+    ],
+    "scaleClaim": false
+  },
+  "noteIds": [
+    "66306d37-27bb-4c01-9818-00d7f079709e",
+    "8658c09d-38a5-4f80-8d19-e8aa5617fd98"
+  ],
+  "result": "FAIL",
+  "exitCode": 1,
+  "failure": "Initial analytics assertion compared changing asOf metadata; the parent node --test failed. This premature child report is corrected; later runner promotes evidence only after exit 0."
+}

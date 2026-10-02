@@ -19,6 +19,7 @@ All accounts must be active. Roles are not cumulative: MANAGER does not imperson
 | Create request | Yes, own identity only | No | No |
 | Read request/list/timeline/messages | Own, requester projection | Current assigned only | All V1 |
 | Post plain message | Own nonterminal | Assigned nonterminal | Nonterminal V1 |
+| Internal notes read / append (M18) | No, including owned requests; no content/count/activity | Current assigned only; append through RESOLVED, CLOSED/CANCELED read-only | Existing A01 organization scope; same lifecycle policy |
 | Trigger intake/retry | Own NEW only | No | Any NEW |
 | Manual triage/submit/recommendation generation | No | No | NEW/TRIAGED as state rules allow |
 | Read pending approval/staff workload/AI tool trace | No | No | Yes |
@@ -69,6 +70,8 @@ Refresh cookie: HttpOnly, SameSite=Lax, Path=/api/v1/auth, no Domain, Secure und
 Login generic 401 does not disclose inactive/unknown account versus incorrect password. Rate limits and payload limits are in [API_SPEC](API_SPEC.md). Auth success/failure/revocation events are audited with safe actor/session IDs, never token/password contents. Failed login audit must not invent an authenticated actor.
 
 ## Acceptance
+
+M18 amendment (2026-10-02): separate GET/POST `/requests/:id/internal-notes`, role guard STAFF/MANAGER, shared existing request predicate, scoped parent lock and live identity/session recheck. USER always 403; operational roles receive indistinguishable 404 for foreign/unknown resources; no role/team/owner override or count. Notes are private child records: no requester DTO/history, note notifications, analytics or AI context. INTERNAL_NOTE_CREATED audit is child-resource-only (optional request FK null, safe request/note/author IDs in metadata), never copied into public Request timeline. Runtime notes allow only SELECT/INSERT, no edit/delete. Current-assignment loss or terminal closure is rechecked after parent lock. No existing business permission is enlarged.
 
 M14 amendment: recommendation generate/read/review remains MANAGER only within existing A01 organization scope, including historical `aiRunId` reads scoped to the route request. USER/STAFF cannot access manager evidence or decisions; no role/action is added. Generation/read check active identity and unconsumed/unrevoked/unexpired session; review locks and rechecks identity inside the transaction. V2 queue binds its initiating SID as backend-only metadata, checked before request embedding, each tool/model attempt and under publication locks. Refresh rotation consuming that SID cancels unfinished work; fresh explicit generation uses the new SID. Strip metadata before strict public evidence/model/API input. Historical V1 snapshots without metadata remain compatible. V2 artifact review never grants assignment permission or executes its next step. STAFF continues to read only approved work via existing projections. Forged role/version/schema/source/context fields cannot widen scope. Exact missing fields are acknowledged for V2 accept/modify; stale/replayed/out-of-request reviews fail without writes.
 

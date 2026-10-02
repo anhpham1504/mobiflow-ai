@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-02T02:33:57.979Z",
+  "runId": "3517caeb-81fa-48aa-9b0e-fb687a83008f",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m18_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "stats": {
+    "startTime": "2026-10-02T02:33:43.049Z",
+    "duration": 14899.983,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "3517caeb-81fa-48aa-9b0e-fb687a83008f",
+      "result": "PASS",
+      "staffCreate": true,
+      "managerReadCreate": true,
+      "authorTimestamp": true,
+      "unicodeNewlines": true,
+      "userUiAbsent": true,
+      "userNoteApiRequests": 0,
+      "userPayloadCanaryAbsent": true,
+      "consolePageErrors": []
+    },
+    {
+      "runId": "3517caeb-81fa-48aa-9b0e-fb687a83008f",
+      "result": "PASS",
+      "loading": true,
+      "empty": true,
+      "listRetry": true,
+      "safeErrors": true,
+      "draftRetained": true,
+      "duplicateSubmitRequests": 1,
+      "successClearsDraft": true,
+      "unicodeLimit": "4000 code points including 4000 emoji",
+      "transportFixtures": "explicit UI-only GET/POST 503 and delay; restored actual API"
+    },
+    {
+      "runId": "3517caeb-81fa-48aa-9b0e-fb687a83008f",
+      "result": "PASS",
+      "pages": [
+        20,
+        25
+      ],
+      "ordering": "newest first",
+      "closedReadOnly": true,
+      "canceledReadOnly": true,
+      "foreignStaffUiAbsent": true
+    }
+  ],
+  "artifactDirectory": "artifacts/m18/browser-runs/3517caeb-81fa-48aa-9b0e-fb687a83008f",
+  "limitations": "Real PostgreSQL/API and production Next build. Transport delays/errors are explicit browser-only fixtures. No live model generation or WCAG certification claim."
+}
