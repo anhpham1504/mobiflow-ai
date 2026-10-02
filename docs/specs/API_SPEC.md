@@ -24,6 +24,21 @@ All request mutations after creation carry `expectedVersion:positive integer`, i
 
 ## Endpoint inventory
 
+### M20 operational templates (2026-10-02)
+
+M20 adds these strict shared-contract routes and generated OpenAPI operations. All require live authentication, no-store, existing origin/JSON64KiB/read120-write60 per minute guards and safe errors. USER403 everywhere; STAFF list/detail only ACTIVE RESPONSE (prohibited filters/history/management403, guessed archived/checklist/detail IDs404); MANAGER both types/history/management in A01. No delete/unarchive or request-scope override.
+
+| Method / relative path | Input | Result |
+|---|---|---|
+| GET /templates | type?,status?,q? trimmed name/description query<=120,limit1–50 default20,cursor? | Summary list, PostgreSQL filter/keyset createdAt DESC/id DESC, no full content |
+| GET /templates/:id | UUID | Current revision/content and safe metadata, preview only |
+| POST /templates | strict discriminated type,name1–120 Unicode points,description?1–500,content RESPONSE{body1–4000} or CHECKLIST{items:[{text1–500,required:boolean}]1–30} | 201 revision1, safe audit, no business action |
+| GET /templates/:id/revisions | MANAGER; limit/cursor only | Immutable paginated snapshots, including archived history |
+| POST /templates/:id/revisions | same strict create shape plus expectedRevision positive | 201 new N+1 snapshot, same type; stale/archived409 STALE_TEMPLATE_REVISION |
+| POST /templates/:id/archive | MANAGER; expectedRevision positive only | 200 one-way archive, historical references preserved; repeat/stale409 |
+
+New content reuses actual shared Unicode code-point message/checklist bounds. Unknown/server-owned fields are rejected400. Existing message and STAFF request-info inputs add optional sourceTemplateRevisionId UUID; USER cannot supply it403. USER provide-info retains its original strict message shape without provenance. Manager triage input adds the same optional CHECKLIST source reference outside FinalDecision. Current Request ownership/state/expectedVersion and final human submitted text/actions remain authoritative. Wrong/missing type/revision references422 INVALID_TEMPLATE_SOURCE; archived/non-current409 TEMPLATE_UNAVAILABLE and no writes. Client retains draft and offers explicit unreferenced manual retry, without auto retry or Request version refresh. Draft provenance validated at save remains historical through later submit/approval even after archive/revision. MANAGER RequestView adds manualDraftSourceTemplateRevisionId and checklist.sourceTemplateRevisionId; USER/STAFF message/history and USER request projections expose neither. See [M20 plan](../v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_IMPLEMENTATION_PLAN.md).
+
 Paths in tables are relative to `/api/v1`. Role/state abbreviations refer to exact rules in [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md) and [REQUEST_STATE_MACHINE](REQUEST_STATE_MACHINE.md).
 
 ### Auth, user directory and health

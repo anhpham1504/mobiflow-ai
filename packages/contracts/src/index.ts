@@ -25,3 +25,4 @@ export type ComponentHealth = z.infer<typeof componentSchema>;
 export type Readiness = z.infer<typeof readinessSchema>;
 export type ReadinessResponse = z.infer<typeof readinessResponseSchema>;
 export * from './internal-notes.js';
+export * from './templates.js';

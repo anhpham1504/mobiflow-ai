@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:integration:m20",
+  "startedAt": "2026-10-02T07:02:41.033Z",
+  "finishedAt": "2026-10-02T07:03:58.350Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m20/gates/M20_INTEGRATION-2026-10-02T07-02-41-033Z.txt"
+}

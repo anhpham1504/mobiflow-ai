@@ -1,0 +1,173 @@
+{
+  "checkedAt": "2026-10-02T07:32:02.532Z",
+  "runId": "9bfc5880-4c36-44da-a58b-19fa84ce353a",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m20_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33200,
+    33201
+  ],
+  "stats": {
+    "startTime": "2026-10-02T07:31:41.435Z",
+    "duration": 21068.234999999997,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "9bfc5880-4c36-44da-a58b-19fa84ce353a",
+      "result": "PASS",
+      "createResponse": true,
+      "createChecklist": true,
+      "revise": true,
+      "archive": true,
+      "archiveCancelFocus": true,
+      "historyPreserved": true,
+      "xssEscaped": true,
+      "xssNetworkRequests": 0
+    },
+    {
+      "runId": "9bfc5880-4c36-44da-a58b-19fa84ce353a",
+      "result": "PASS",
+      "noAutoSend": true,
+      "editable": true,
+      "overwriteCancelAndConfirm": true,
+      "pendingApplyLocksDraft": true,
+      "confirmationKeyboardFocus": true,
+      "explicitHumanSend": true,
+      "archiveRaceManualFallback": true,
+      "userNoMetadataOrLibraryRequests": true,
+      "directUser403": true
+    },
+    {
+      "runId": "9bfc5880-4c36-44da-a58b-19fa84ce353a",
+      "result": "PASS",
+      "noAutoActivateOrAssign": true,
+      "editable": true,
+      "requiredAndOrdering": true,
+      "explicitSaveSubmitApproval": true,
+      "finalHumanChecklist": true,
+      "provenance": true,
+      "staleVersionAfterSelection": true,
+      "literalItemEscaped": true
+    },
+    {
+      "runId": "9bfc5880-4c36-44da-a58b-19fa84ce353a",
+      "result": "PASS",
+      "loading": true,
+      "empty": true,
+      "errorRetry": true,
+      "manualDraftPreserved": true,
+      "safeErrors": true,
+      "scans": [
+        {
+          "surface": "response-composer",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        }
+      ],
+      "keyboardNativeSelector": true,
+      "consoleErrors": [],
+      "xss": true,
+      "authRateWaitsSeconds": []
+    }
+  ],
+  "artifactDirectory": "artifacts/m20/browser-runs/9bfc5880-4c36-44da-a58b-19fa84ce353a",
+  "limitations": "Real PostgreSQL/API and production Next. 503/delay/empty are explicit transport fixtures only; successful business actions use real API. No live AI or full WCAG certification."
+}

@@ -11,7 +11,8 @@ export const categories = ['NETWORK','IOT','BILLING','ACCOUNT','SERVICE','OTHER'
 export const text = (min: number, max: number) => z.string().trim().min(min).max(max);
 export const versionSchema = z.object({ expectedVersion: z.number().int().positive() }).strict();
 export const reasonSchema = versionSchema.extend({ reason: text(1,2000) });
-export const messageSchema = versionSchema.extend({ body: text(1,4000) });
+export const messageSchema = versionSchema.extend({ body: text(1,4000), sourceTemplateRevisionId: z.uuid().optional() });
+export const provideInfoSchema = versionSchema.extend({ body: text(1,4000) });
 export const createRequestSchema = z.object({ description: text(10,10000), title: text(1,160).optional() }).strict();
 export const finalDecisionSchema = z.object({
   category: z.enum(categories), subcategory: text(1,80), priority: z.enum(priorities),
@@ -20,7 +21,7 @@ export const finalDecisionSchema = z.object({
   acknowledgedMissingFields: z.array(z.enum(['customer','location','affectedCount','startedAt','impact','description'])).max(6),
   reason: text(1,2000),
 }).strict().refine(d => (taxonomy[d.category] as readonly string[]).includes(d.subcategory), { path: ['subcategory'], message: 'Invalid category/subcategory pair' });
-export const triageSchema = versionSchema.extend({ finalDecision: finalDecisionSchema });
+export const triageSchema = versionSchema.extend({ finalDecision: finalDecisionSchema, sourceTemplateRevisionId: z.uuid().optional() });
 export const submitSchema = versionSchema.extend({ manualDraftRevision: z.number().int().positive() });
 export const reviewSchema = versionSchema.extend({
   reviewKind: z.enum(['AI','MANUAL']),
@@ -77,7 +78,8 @@ export const requestViewSchema=z.object({
   resolutionSummary:operationalJobSchema.nullable().optional(),feedback:z.object({rating:z.number().int(),comment:z.string().nullable(),createdAt:z.iso.datetime()}).nullable().optional(),
   manualDraft:z.object({...finalDecisionSchema.shape,policyId:z.uuid(),policyVersion:z.number(),targetSeconds:z.number()}).nullable().optional(),
   manualDraftRevision:z.number().optional(),reviewKind:z.enum(['AI','MANUAL']).nullable().optional(),pendingDraftRevision:z.number().nullable().optional(),pendingRecommendationId:z.uuid().nullable().optional(),
-  checklist:z.object({id:z.uuid(),version:z.number(),items:z.array(z.object({id:z.uuid(),text:z.string(),required:z.boolean(),completedAt:nullableDate,waivedAt:nullableDate,waiverReason:z.string().nullable()}))}).optional(),
+  manualDraftSourceTemplateRevisionId:z.uuid().nullable().optional(),
+  checklist:z.object({id:z.uuid(),version:z.number(),sourceTemplateRevisionId:z.uuid().nullable().optional(),items:z.array(z.object({id:z.uuid(),text:z.string(),required:z.boolean(),completedAt:nullableDate,waivedAt:nullableDate,waiverReason:z.string().nullable()}))}).optional(),
 });
 export const pageSchema=z.object({nextCursor:z.string().nullable(),hasMore:z.boolean()});
 export const requestResponseSchema=z.object({data:requestViewSchema,requestId:z.uuid()});

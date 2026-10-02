@@ -1,0 +1,164 @@
+{
+  "checkedAt": "2026-10-02T07:58:51.192Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migration": "20261002030000_m20_response_checklist_templates",
+  "migrationCount": 10,
+  "checks": [
+    {
+      "baseline": 10,
+      "path": "fresh1→10",
+      "result": "PASS",
+      "migrationCount": 10,
+      "historicalHashes": "unchanged",
+      "tablesPreserved": 32,
+      "rowsPreserved": 157,
+      "m18M19Preserved": true,
+      "privileges": {
+        "OperationalTemplate": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateChecklistItemRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "runtimeDdlDenied": true,
+      "contiguousRevisionSequence": true,
+      "immutableIncludingHistoricalAppend": true,
+      "FKUniquePointerShape": "PASS",
+      "archivedHistory": "PASS"
+    },
+    {
+      "baseline": 9,
+      "path": "M19 9→10",
+      "result": "PASS",
+      "migrationCount": 10,
+      "historicalHashes": "unchanged",
+      "tablesPreserved": 29,
+      "rowsPreserved": 157,
+      "m18M19Preserved": true,
+      "privileges": {
+        "OperationalTemplate": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateChecklistItemRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "runtimeDdlDenied": true,
+      "contiguousRevisionSequence": true,
+      "immutableIncludingHistoricalAppend": true,
+      "FKUniquePointerShape": "PASS",
+      "archivedHistory": "PASS"
+    },
+    {
+      "baseline": 8,
+      "path": "M18 8→9→10",
+      "result": "PASS",
+      "migrationCount": 10,
+      "historicalHashes": "unchanged",
+      "tablesPreserved": 29,
+      "rowsPreserved": 157,
+      "m18M19Preserved": true,
+      "privileges": {
+        "OperationalTemplate": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateChecklistItemRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "runtimeDdlDenied": true,
+      "contiguousRevisionSequence": true,
+      "immutableIncludingHistoricalAppend": true,
+      "FKUniquePointerShape": "PASS",
+      "archivedHistory": "PASS"
+    },
+    {
+      "baseline": 7,
+      "path": "V1.2 7→8→9→10",
+      "result": "PASS",
+      "migrationCount": 10,
+      "historicalHashes": "unchanged",
+      "tablesPreserved": 29,
+      "rowsPreserved": 157,
+      "m18M19Preserved": true,
+      "privileges": {
+        "OperationalTemplate": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "OperationalTemplateChecklistItemRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "runtimeDdlDenied": true,
+      "contiguousRevisionSequence": true,
+      "immutableIncludingHistoricalAppend": true,
+      "FKUniquePointerShape": "PASS",
+      "archivedHistory": "PASS"
+    }
+  ],
+  "developerMigrations": 7,
+  "developerMetadataReadOnly": true,
+  "developerDatabaseModified": false
+}

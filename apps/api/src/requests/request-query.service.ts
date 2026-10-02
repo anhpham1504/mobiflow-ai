@@ -39,11 +39,11 @@ export class RequestQueryService {
       createdAt:r.createdAt,updatedAt:r.updatedAt,resolvedAt:r.resolvedAt,closedAt:r.closedAt,canceledAt:r.canceledAt,aiAnalysisStatus:r.aiAnalysisStatus,
       sla,
       currentResolution:r.currentResolution,feedback:r.feedback,resolutionSummary:r.aiRuns[0]?{aiRunId:r.aiRuns[0].id,requestId:r.id,purpose:'RESOLUTION_SUMMARY' as const,action:null,status:r.aiRuns[0].status,errorCode:r.aiRuns[0].errorCode,createdAt:r.aiRuns[0].createdAt,finishedAt:r.aiRuns[0].finishedAt,contextVersion:r.aiRuns[0].contextVersion,stale:r.currentResolution?.id!==r.aiRuns[0].resolutionId,result:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].safeResultJson:null,model:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].model:null,latencyMs:r.aiRuns[0].latencyMs}:null,
-      ...(actor.role==='MANAGER'?{manualDraft:r.triageDraftJson,manualDraftRevision:r.manualDraftRevision,reviewKind:r.reviewKind,pendingDraftRevision:r.pendingDraftRevision,pendingRecommendationId:r.pendingRecommendationId}:{}),
+      ...(actor.role==='MANAGER'?{manualDraft:r.triageDraftJson,manualDraftSourceTemplateRevisionId:r.manualDraftSourceTemplateRevisionId,manualDraftRevision:r.manualDraftRevision,reviewKind:r.reviewKind,pendingDraftRevision:r.pendingDraftRevision,pendingRecommendationId:r.pendingRecommendationId}:{}),
     };
   }
   async detail(id:string,actor:AuthenticatedActor) {
-    const r=await this.prisma.request.findFirst({where:{id,...this.policy.requestScope(actor)},include:{...relations,checklist:{select:{id:true,version:true,items:{orderBy:{ordinal:'asc'},take:30,select:{id:true,text:true,required:true,completedAt:true,waivedAt:true,waiverReason:true}}}}}});
+    const r=await this.prisma.request.findFirst({where:{id,...this.policy.requestScope(actor)},include:{...relations,checklist:{select:{id:true,version:true,...(actor.role==='MANAGER'?{sourceTemplateRevisionId:true}:{}),items:{orderBy:{ordinal:'asc'},take:30,select:{id:true,text:true,required:true,completedAt:true,waivedAt:true,waiverReason:true}}}}}});
     this.policy.assertCanReadRequest(actor,r);
     if(!r) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
     const checklist=actor.role==='USER'?null:r.checklist;

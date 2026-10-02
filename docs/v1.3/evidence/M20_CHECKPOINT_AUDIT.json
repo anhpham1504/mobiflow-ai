@@ -1,0 +1,860 @@
+{
+  "checkedAt": "2026-10-02T08:40:11.700Z",
+  "result": "PASS",
+  "phase": "Immutable closure preparation audit; commit/publication verified in final handoff",
+  "baseline": "35e4b1c41165fa04348871dee31bd20c28386b47",
+  "branch": "feat/v1.3-response-checklist-templates",
+  "startingHead": "35e4b1c41165fa04348871dee31bd20c28386b47",
+  "authorization": "Direct user request authorizes exactly one M20 checkpoint commit and ordinary branch push, then SHA/clean-tree verification and STOP.",
+  "independentExternalReview": "NOT RUN",
+  "initial": {
+    "files": 96,
+    "modified": 22,
+    "new": 74,
+    "counts": {
+      "Tests": 6,
+      "Database": 2,
+      "Backend": 8,
+      "Frontend": 8,
+      "Documentation": 12,
+      "Evidence": 49,
+      "Verification": 8,
+      "Contracts": 3
+    }
+  },
+  "intended": {
+    "files": 98,
+    "modified": 22,
+    "new": 76,
+    "counts": {
+      "Tests": 6,
+      "Database": 2,
+      "Backend": 8,
+      "Frontend": 8,
+      "Documentation": 13,
+      "Evidence": 50,
+      "Verification": 8,
+      "Contracts": 3
+    }
+  },
+  "files": [
+    {
+      "path": "apps/api/package.json",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "2e28fbd7eb35dc92ed1298be819734eb68184b9a14042bc6fa30a4bf49dca647"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+      "category": "Database",
+      "disposition": "KEEP",
+      "sha256": "17ec1f4b2bc922df486ecef127828e6f3cb3812cffa206d2fcb15aa4d3bb080f"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "category": "Database",
+      "disposition": "KEEP",
+      "sha256": "28e343a2c168f9605c53d2db2a46ca13a60f9746e198732ec75403faa6d0c509"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "5d3d2f739317a9c69104c6d95a96cb26d47624a78b23a6df3f55727a9bbc9127"
+    },
+    {
+      "path": "apps/api/src/authorization/authorization-policy.service.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "01fcf79b21802f4dd45795fbd6fe13f7e6d2984360fba39113bac7a36498604c"
+    },
+    {
+      "path": "apps/api/src/requests/request-query.service.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "2a7f83c651a8fa626da2473077ad96e0090b493fe0e602d2f0ec9dd00e7506fc"
+    },
+    {
+      "path": "apps/api/src/requests/request-state-machine.service.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "c30567fecca55c4c6a040266f5ea273c1a769298937d51bb2242a82c06578d29"
+    },
+    {
+      "path": "apps/api/src/requests/requests.controller.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "77ef6d5b272b94f1a630a0a82876fec4d7fae1317b3aaac63377bf645e86d011"
+    },
+    {
+      "path": "apps/api/src/templates/template-provenance.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "0d36e0cbb634b6b85a268e81b22ad11f9ea8b73618c9f40a29a9b74b9dcd7948"
+    },
+    {
+      "path": "apps/api/src/templates/template.controller.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "83c6907ab890871417809aebc5482a778001e6cee42dd9d25d35b5cc4596b7ee"
+    },
+    {
+      "path": "apps/api/src/templates/template.service.ts",
+      "category": "Backend",
+      "disposition": "KEEP",
+      "sha256": "e8f31e183c1c0f3839bfd29a47ee7cd42b9ce6c21edc4a53aeb97f42b82e3b30"
+    },
+    {
+      "path": "apps/api/test/helpers/templates-fixture.mjs",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "fef9b0780d31f2dbd86704986b45a6e584132db224fca3b104e9ddf348b1e490"
+    },
+    {
+      "path": "apps/api/test/templates.integration.test.mjs",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "a04824b4ee936a937fadb92e80ea37343b7c3b714db8f1a9e80b957bc430913b"
+    },
+    {
+      "path": "apps/api/test/templates.test.mjs",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "da1fc234c28030a26064749c25e4c4d067bcf58dee76bb2019d3665b120cafde"
+    },
+    {
+      "path": "apps/web/e2e/templates.spec.mjs",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "d708b5028e3cb6c8ef383cb76e1933755afb05944eb3df0c3e9c78d365091ddb"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "780a6345f57bf841c197fe787026d03c081ba9550e5c4a8387e264bbc56c4204"
+    },
+    {
+      "path": "apps/web/src/app/manager/templates/page.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "07e57f607e4680ff18f7653b9cabcd42eb8fedf1f8b90a5c861793c8317204dc"
+    },
+    {
+      "path": "apps/web/src/components/checklist-draft-editor.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "ce557e6e8a43a46dbcae63bd862a6e0db9c796e49e0e05a0d6801cb9f6542766"
+    },
+    {
+      "path": "apps/web/src/components/request-detail.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "fbdeb5d411983df9d8d2f7197c094603ea13c636392bd720a2d00ace1f1e520c"
+    },
+    {
+      "path": "apps/web/src/components/response-composer.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "aa0ac5568cc8d2cb3521ac65cba40f86537be4f469b3917347b953d40a3a31bd"
+    },
+    {
+      "path": "apps/web/src/components/session-shell.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "e4ab5e6f80b58cc2d787267812f251a73ed18c015d6c9cf3907cf6cdc19028a1"
+    },
+    {
+      "path": "apps/web/src/components/template-management.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "8087916ed357d0fb27407fe1082a9d2b0352dea87a8afe71924501232314fb54"
+    },
+    {
+      "path": "apps/web/src/components/template-selector.tsx",
+      "category": "Frontend",
+      "disposition": "KEEP",
+      "sha256": "eabe80b35b9733e68699db825d93e6b68625af5db1a9de253bcea14611a8dbf3"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "43129944bb4894c8242a7c00eccac7b9e458c736c6c11cf24d8c681480708a82"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "2a1d7f69372d148f1eabbec7306789642b70a3cb969c6862f8dfdfc3f20c3cb1"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "069f5300e54b7573eecf300aba7a79e329e789a7753c48515b337652c0c7476b"
+    },
+    {
+      "path": "docs/specs/BUSINESS_WORKFLOW.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "6848d995fb2da594309d323607f1462dc3ebb6974564950b56f9e1ac98229251"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "7ed7a5076d4b7c289af9983742f1dc4351acbb9a7c7d2737246ffa8b03ca3429"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "800e49a0e8a9efb9a71f20b543df1f9d4d956ce616c126c5a4d9102c01f71c8f"
+    },
+    {
+      "path": "docs/specs/UI_SPEC.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "e1cb5b1774c191f8f81f4528f9eb076d18d612f48f28bc2bb0fe52c78f0fb9d9"
+    },
+    {
+      "path": "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "e7b150d1999463fb1e5c899683f5f83d376a87fe85943bc838054ea1ac67d778"
+    },
+    {
+      "path": "docs/v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_IMPLEMENTATION_PLAN.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "4c5406eaecbba3c1318f41c1a09338311af9c7226a419c522650ccc790fdbf1d"
+    },
+    {
+      "path": "docs/v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_VERIFICATION.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "6e6968eb86f3a434919c0aee3b6103c99a9f12d6d30098bdcad6404617593341"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "4ebfb56ff998d915d1ab437a42b5cbc477d16b0deda08392bb38b953417dd6dd"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "1a15e906700e4f9292afb5926ed5caf14b4e0aedd7efd9e34e77f5c10c7d2584"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_API.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "e4d0f14aa237d2e72c71c75bffd1ed7ca58d51483eb885b7b1aa97ce61b0f5dc"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_BROWSER.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "75eb1979ccc99b1ff1fb0c034250311188f3e9e32a9460ea512562791dd86aaa"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_CHECKPOINT_AUDIT.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": null,
+      "hashNote": "Self hash omitted to avoid circular content"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_DATABASE.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "9cd8c1c3452f9a5dbe2ddd1947cfd586912bb73a8e7e2655703ad78ba7f9c65f"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_FINAL.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "d841280ed1f52ffd97aab483774d0180eab20f79e028722fddfd40abbc0ad6c3"
+    },
+    {
+      "path": "docs/v1.3/evidence/M20_SECURITY.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "b0c838bef3626492939e0bab114f1c1194cb9a4d022ba43f20d40253dcdeceb5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_BUILD.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "55c60c8fa7e7a953d8e61f501b0d056e1d8c3856b9372c6d19f59c86f1592eb5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_DATABASE.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "78b57a74b8f3e306b6e7a1410ffe79ffe9c3b54d0aff9261206ea96289d67ef3"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_E2E.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "65022b5c3516e016123feacb5995205b0a0e3f92e4cfdf707f39874fc8a26884"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_FINAL_SANITY.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "53ed57149929e78de8146ab0fbf3700010747cad647a348695bf4208e7b4c4d5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_INTEGRATION.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "1e5e5c6c95f5bd61e458203866fc3b4abdc4a53ab024a2c74c787318e5255650"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_LINT.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "7318bc6ea9974a7722e2da3cad89c47c35a1e79af788cae6563b5ff57fc97d53"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_SECURITY.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "290d2e0b44b80d62aee7731ded8aaba60138c59102abc10aaa95e3322dc3e6be"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_TARGETED_UNIT.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "735d529d95bed3e8d601d46bf0e6f3e202d873ef915282de8b4545281e98d9b9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_TYPECHECK.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "0519d42bdf31605c4d58a0770a376c3c0b5c6d7f5998393cb8755004474a5dc2"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M20_UNIT.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "3808b42b94bf8ec9677167d80e9ae2c1f3d008e2593c0cc9c544806e1c788105"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_BUILD-32a704c46ff3.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "32a704c46ff34d0805edc7f3463efe6b39094c9f6a251700414c15d2a28aca09"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_BUILD-4cc734d09ef6.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "4cc734d09ef66476c59b688857e9d437560518f55bc67d1361a7fba78732b3ea"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_DATABASE-20bbf0940c96.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "20bbf0940c96c04281fd01f44c5d4b24864fc23d3bb45b0a853907a288ef33e4"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_DATABASE-d218e7581bc2.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "d218e7581bc2413ea1dfd823376a1d3d70ed7c684f7f4e2d4789f7e100e04fd7"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_E2E-04fe9abb2e65.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "04fe9abb2e651b0a869c6584959438f7feea8e2cdefd5bcc2b6dca72753630bb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_E2E-64fa63d89d35.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "64fa63d89d35baa3d818d6d46ee595b829bc334acfca8e8d5a10d30736aa3e6d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_E2E-ad13eef12725.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "ad13eef1272574e889cc145638de12cabda8f7470387ff59db433ced04c2a496"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_FINAL_SANITY-8725c531197b.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "8725c531197b691652bb7504f7194689bf86ede1d69433c91cc2dcde9b3ddf46"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_FINAL_SANITY-dd18626fb05b.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "dd18626fb05bf9c0262044e0c916af067c501c6529e335437287cb3567a09b10"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_INTEGRATION-4f996229a491.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "4f996229a491a12c0ba3fca248e4faed214fa19d500affdd871f514d240dcb0d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_INTEGRATION-747e40e2a592.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "747e40e2a592ebbdda04314cd4769826b9e9cb5ad8e13d4963893ff42f09c8b0"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_INTEGRATION-7d7876584cd6.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "7d7876584cd6ee127cecc1bfc4169c382b54c6c4bd6266baeba8fefc411b1748"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_LINT-0ccaa13accee.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "0ccaa13acceeeba5c69e8aaf2b10dbf3814f53511feff05ca1d15c65df240a24"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_LINT-22b3abcbad2a.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "22b3abcbad2a302dcb3ca3a02e798b99c0703b6c907f9d9b52d74f45acee99ab"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_LINT-2874d12606c0.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "2874d12606c0c986f5f914f1a7338e20144c9012d81ec3b5f5a5681903de2d52"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_LINT-54185f60e8f7.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "54185f60e8f7ddbd9ef9b99707c49d5bd24301505016e2e0515425b578bbf8c5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_LINT-e5745f2f30c7.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "e5745f2f30c7303496ead3b4a5d9793a6d9fa7d5b8f05057a4fd0c44720999a1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_SECURITY-597414d1b62a.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "597414d1b62a4d94c68333843fcb5443998faeac73025839d7a4abe03fbb81ef"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_SECURITY-d27bedfb3939.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "d27bedfb39398887739caf399a0369f88c9a10f115757a7d73d3a6968d93c2e3"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_SECURITY-f52efa61fb76.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "f52efa61fb76519b6943cdbea9b089b8d7579a66c675e61458244342103dc779"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_TYPECHECK-e89e9927ced4.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "e89e9927ced48c1c9f881a75a00065494002662f0377764990bce3ce64ca1d8e"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_UNIT-dc2d0ff1d635.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "dc2d0ff1d6356acdd3965fcf1f4314dd6f0a96277e9eac8c495d7970d80ea971"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M20_UNIT-fbedfc663882.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "fbedfc66388257bd8e1cface1bfc8d2d9b482ee6a4d5c0ba4d2754541ef22b1c"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_API-d6fd9f665883.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "d6fd9f66588328e2539e22cabece40302434fa8caf5bb4c937b7c0b97d1bf240"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_BROWSER-830e1357ffcf.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "830e1357ffcff8d0b511a0eebac794ca91c896ed13f1420754aadc58e5accb58"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_BROWSER-ae048a8354ed.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "ae048a8354eddab1cda8118c251148d4fb471dc6fd85dea1fe0c87e65d9109af"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_BROWSER-f2fad8f3c733.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "f2fad8f3c733a1fb097ca13cd67a5f907c947ee70c990d94013e7d0236138d62"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_DATABASE-48635a1d6270.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "48635a1d6270ab17466ee52c419618bd01d82bef60b076ceede4313fcd583cd3"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_DATABASE-4a10a67a986d.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "4a10a67a986de39dc36e50e54a3ad6cc42b93c27001ebcb3e9460a7d6c800ddf"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_FINAL-b8f23297293f.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "b8f23297293fac3d3f8cf22282f6b973f15be088d8ff8c4859935794472487c3"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_FINAL-d5e07cb7f652.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "d5e07cb7f65290cf472ce2218f896b323847c16e58de97630a3fe5bcaf8122d0"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_SECURITY-22c375ed543e.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "22c375ed543e44a363f18b8abd761cea7a9136951341521a56ed67ccb4dcb112"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_SECURITY-a12bada7102b.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "a12bada7102b246b04003aaddf82186ddce1cb7c7053bd499f8e9baa264d31e9"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M20_SECURITY-b45e12444e32.json",
+      "category": "Evidence",
+      "disposition": "KEEP",
+      "sha256": "b45e12444e32ca6b03580e3edc92262003bd03f3b373302428dbf355d93575b9"
+    },
+    {
+      "path": "docs/verification/MILESTONE_20_VERIFICATION.md",
+      "category": "Documentation",
+      "disposition": "KEEP",
+      "sha256": "d87d19742d54695fb0eef050b03ac8f3deb15eb6b822478a53e21bf93f7298f1"
+    },
+    {
+      "path": "package.json",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "fc5da6ff0c0c4b815fc54f5ca93efe61bf5f29048b76a0e36b54fcc4858e6e77"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "category": "Contracts",
+      "disposition": "KEEP",
+      "sha256": "1ca1bf708ed1cd49192ea8e32e3d9eca7980b14ed44d4e684f2cdbe0fffeaab2"
+    },
+    {
+      "path": "packages/contracts/src/templates.ts",
+      "category": "Contracts",
+      "disposition": "KEEP",
+      "sha256": "9e9ca26f291fdd633b00a107db04a78a4acc7dbbe823834ba350c568655036fe"
+    },
+    {
+      "path": "packages/contracts/src/workflow.ts",
+      "category": "Contracts",
+      "disposition": "KEEP",
+      "sha256": "d58fba0ee02cc7939de2e025163eb5cb5bc08fc2878126dae7a10f3bb87e8242"
+    },
+    {
+      "path": "playwright.m20.config.mjs",
+      "category": "Tests",
+      "disposition": "KEEP",
+      "sha256": "1b647315eb94030f627fd0b0eeb02fd3904ff3b359066be956a5ff88691d9444"
+    },
+    {
+      "path": "scripts/verification/m20-browser.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "77670f300f8a3c2af521efd8f717f90a13bf5385d4694f9f7cdc11ad352fe681"
+    },
+    {
+      "path": "scripts/verification/m20-capture.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "434014d29a33e194dd50f8deb9f5f5559171f0b1017d8d6cd2a484f963672d79"
+    },
+    {
+      "path": "scripts/verification/m20-database.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "2b7cd2c115b40563de0706d94bd0c6f85389d1774fe41d30aa5df4a119520c5d"
+    },
+    {
+      "path": "scripts/verification/m20-final-sanity.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "ae3f231b3fdfb76d0eabc80d684f78aabe03f14a647c9ffc6805dded4a390b3c"
+    },
+    {
+      "path": "scripts/verification/m20-integration.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "534c6167ec75e5c79656998f767a3e07fc09ac77215df4d996a657b8e94c1226"
+    },
+    {
+      "path": "scripts/verification/m20-migrations.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "e4fc35f4ecde8603821dc594c722fa2188df7f2205872444738eddb2e42187d6"
+    },
+    {
+      "path": "scripts/verification/m20-security.mjs",
+      "category": "Verification",
+      "disposition": "KEEP",
+      "sha256": "961d5bc6b2e0373916937056d5900276f7fdc004be17c417863d268d51a5f9bc"
+    }
+  ],
+  "closureOnlyChangedExistingFiles": [
+    "docs/IMPLEMENTATION_PLAN.md",
+    "docs/specs/PROJECT_SPEC.md",
+    "docs/v1.3/README.md",
+    "docs/v1.3/V1_3_MASTER_PLAN.md"
+  ],
+  "productCodeChangedDuringClosure": false,
+  "preservation": {
+    "preservedOwners": [
+      "apps/api/src/ai",
+      "apps/api/src/knowledge",
+      "apps/api/src/analytics",
+      "apps/api/src/dashboard",
+      "apps/api/src/requests/sla-clock.ts",
+      "apps/api/src/requests/sla-monitor.service.ts",
+      "apps/api/src/requests/transition-rules.ts",
+      "apps/api/src/requests/internal-note.service.ts",
+      "apps/api/src/requests/request-collaboration.service.ts",
+      "apps/api/src/requests/collaboration-notifications.ts",
+      "packages/contracts/src/internal-notes.ts",
+      "scripts/demo",
+      "packages/config",
+      "package-lock.json",
+      "docker-compose.yml"
+    ],
+    "historicalFiles": 960,
+    "migrationHashes": [
+      {
+        "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+        "baselineBlob": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+        "currentBlob": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+        "baselineBlob": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+        "currentBlob": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+        "baselineBlob": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+        "currentBlob": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+        "baselineBlob": "3186661f01426396ad27fce70f78a92f681f5d61",
+        "currentBlob": "3186661f01426396ad27fce70f78a92f681f5d61"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+        "baselineBlob": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+        "currentBlob": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+        "baselineBlob": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+        "currentBlob": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+        "baselineBlob": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4",
+        "currentBlob": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+        "baselineBlob": "374e668627b39b27deb9d95e2e10ca201fcdd40b",
+        "currentBlob": "374e668627b39b27deb9d95e2e10ca201fcdd40b"
+      },
+      {
+        "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+        "baselineBlob": "c06546a4a93eae1dc69066a90cb7d104d514780b",
+        "currentBlob": "c06546a4a93eae1dc69066a90cb7d104d514780b"
+      }
+    ]
+  },
+  "evidenceAudit": {
+    "originalFiles": 49,
+    "results": {
+      "PASS": 41,
+      "FAIL": 8
+    },
+    "latestRequiredGates": "PASS",
+    "priorFailuresRetained": true,
+    "policy": "Compact sanitized JSON counts, hashes, timings, safe commands and synthetic IDs only. Raw local artifact pointers do not imply committed logs/screenshots/traces/auth state."
+  },
+  "security": {
+    "filesScanned": 98,
+    "keywordFiles": {
+      "Bearer": [
+        "apps/api/src/app.ts",
+        "apps/api/src/requests/requests.controller.ts",
+        "apps/api/src/templates/template.controller.ts",
+        "apps/api/test/helpers/templates-fixture.mjs",
+        "apps/web/e2e/templates.spec.mjs",
+        "docs/specs/AUTHORIZATION_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md"
+      ],
+      "Authorization": [
+        "apps/api/package.json",
+        "apps/api/src/app.ts",
+        "apps/api/src/authorization/authorization-policy.service.ts",
+        "apps/api/src/requests/request-query.service.ts",
+        "apps/api/src/requests/request-state-machine.service.ts",
+        "apps/api/src/templates/template.service.ts",
+        "apps/api/test/helpers/templates-fixture.mjs",
+        "apps/api/test/templates.test.mjs",
+        "apps/web/e2e/templates.spec.mjs",
+        "docs/IMPLEMENTATION_PLAN.md",
+        "docs/specs/API_SPEC.md",
+        "docs/specs/AUTHORIZATION_SPEC.md",
+        "docs/specs/BUSINESS_WORKFLOW.md",
+        "docs/specs/DATABASE_SPEC.md",
+        "docs/specs/PROJECT_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "docs/v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_IMPLEMENTATION_PLAN.md",
+        "docs/v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_VERIFICATION.md",
+        "docs/v1.3/README.md",
+        "docs/v1.3/V1_3_MASTER_PLAN.md",
+        "docs/v1.3/evidence/M20_FINAL.json",
+        "docs/v1.3/evidence/gates/M20_TARGETED_UNIT.json",
+        "docs/v1.3/evidence/iterations/M20_FINAL-b8f23297293f.json",
+        "docs/v1.3/evidence/iterations/M20_FINAL-d5e07cb7f652.json",
+        "docs/verification/MILESTONE_20_VERIFICATION.md",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "JWT": [
+        "apps/api/src/app.ts",
+        "apps/api/test/templates.integration.test.mjs",
+        "docs/specs/AUTHORIZATION_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "scripts/verification/m20-capture.mjs",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "accessToken": [
+        "apps/api/test/helpers/templates-fixture.mjs",
+        "docs/specs/API_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "packages/contracts/src/workflow.ts"
+      ],
+      "refreshToken": [
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md"
+      ],
+      "cookie": [
+        "apps/api/package.json",
+        "apps/api/src/app.ts",
+        "docs/specs/API_SPEC.md",
+        "docs/specs/AUTHORIZATION_SPEC.md",
+        "docs/specs/PROJECT_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md"
+      ],
+      "DATABASE_URL": [
+        "apps/api/src/app.ts",
+        "apps/api/test/helpers/templates-fixture.mjs",
+        "apps/api/test/templates.integration.test.mjs",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "scripts/verification/m20-capture.mjs",
+        "scripts/verification/m20-database.mjs",
+        "scripts/verification/m20-final-sanity.mjs",
+        "scripts/verification/m20-integration.mjs",
+        "scripts/verification/m20-migrations.mjs",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "password": [
+        "apps/api/prisma/schema.prisma",
+        "apps/api/test/helpers/templates-fixture.mjs",
+        "apps/web/src/app/globals.css",
+        "docs/specs/API_SPEC.md",
+        "docs/specs/AUTHORIZATION_SPEC.md",
+        "docs/specs/DATABASE_SPEC.md",
+        "docs/specs/UI_SPEC.md",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "scripts/verification/m20-capture.mjs",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "POSTGRES_PASSWORD": [
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "scripts/verification/m20-capture.mjs",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "JWT_SECRET": [
+        "apps/api/test/templates.integration.test.mjs",
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md",
+        "scripts/verification/m20-capture.mjs",
+        "scripts/verification/m20-security.mjs"
+      ],
+      "API_KEY": [
+        "docs/v1.3/M20_CHECKPOINT_CLOSURE.md"
+      ],
+      "private key": [
+        "scripts/verification/m20-security.mjs"
+      ]
+    },
+    "findings": [],
+    "liveSecrets": 0,
+    "reviewMarkers": [
+      {
+        "path": "apps/api/src/app.ts",
+        "kind": "unchanged-baseline-startup-output"
+      },
+      {
+        "path": "apps/api/test/helpers/templates-fixture.mjs",
+        "kind": "intentional-verification-summary-output"
+      },
+      {
+        "path": "scripts/verification/m20-final-sanity.mjs",
+        "kind": "intentional-verification-summary-output"
+      },
+      {
+        "path": "scripts/verification/m20-migrations.mjs",
+        "kind": "intentional-verification-summary-output"
+      },
+      {
+        "path": "scripts/verification/m20-security.mjs",
+        "kind": "intentional-verification-summary-output"
+      }
+    ],
+    "interpretation": "Auth/environment/token words are code, schemas, safety checks or documented references. Demo passwords and fixture canaries are synthetic. CLI JSON summary output is intentional. No matched configured credential, encoded JWT, literal bearer token, provider key, private key or private user path. Values are never emitted."
+  },
+  "runtimePrivate": {
+    "candidates": 0,
+    "staged": 0,
+    "excluded": "Ignored artifacts/m20, artifacts/m20-closure, .env, node_modules, .next, generated Prisma, storage; no forced additions"
+  },
+  "unrelated": 0,
+  "repositoryMigrations": 10,
+  "developerMigrations": 7,
+  "developerDatabase": "Accepted read-only M20 final evidence; no closure DB access/migration/reset/reseed",
+  "additionalTestsRerun": "NONE — closure changes documentation/audit only",
+  "gitDiffCheck": "PASS",
+  "releaseBoundary": "No main merge/push, tags, deployment, M21 or normal-stack/Ollama actions. Captured historical local/remote refs unchanged."
+}

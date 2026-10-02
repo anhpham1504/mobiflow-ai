@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-02T07:05:24.166Z",
+  "synthetic": true,
+  "database": "mobiflow_m20_test",
+  "checks": {
+    "RBAC/IDOR/active filtering/no-store": "PASS",
+    "validation/safe errors/media/origin/payload": "PASS",
+    "immutable revisions/archive/history/stale atomicity": "PASS",
+    "management concurrent revision/archive": "PASS",
+    "response read-only/human content/provenance/USER isolation/generic message no fanout": "PASS",
+    "checklist draft/no activation/protected human snapshot/archive history": "PASS",
+    "stale expectedVersion triage and approval rollback": "PASS",
+    "archive/revision race policy/type/permission/manual fallback": "PASS",
+    "existing request-info human send and SLA/notification semantics": "PASS",
+    "affected M18/M19 scoped privacy/mentions/watch no template fanout": "PASS",
+    "performance/keyset/search/no N+1": "PASS",
+    "OpenAPI/safe audit/logs/no AI or new notification": "PASS"
+  },
+  "performance": {
+    "fixture": {
+      "templates": 50,
+      "revisionsPerTemplate": 2,
+      "checklistItems": 30
+    },
+    "list": {
+      "totalSql": 8,
+      "templateSql": 1,
+      "latencyMs": 30.237600000000384
+    },
+    "detail": {
+      "totalSql": 10,
+      "templateSql": 3,
+      "latencyMs": 21.188799999996263
+    },
+    "history": {
+      "totalSql": 10,
+      "templateSql": 3,
+      "latencyMs": 24.921699999998964
+    },
+    "apiSamplesMs": [
+      20.573700000000827,
+      13.601899999994203,
+      12.430999999996857
+    ],
+    "NPlusOne": false,
+    "limitations": "Modest loopback synthetic fixture, no enterprise SLO claim."
+  },
+  "rateWaitsSeconds": [
+    57
+  ],
+  "result": "PASS",
+  "testCommand": "node --test apps/api/test/templates.integration.test.mjs"
+}

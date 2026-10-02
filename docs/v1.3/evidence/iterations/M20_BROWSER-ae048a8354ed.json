@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-10-02T07:25:37.453Z",
+  "runId": "58446341-de7b-425e-a569-9ce30d69521a",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m20_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33200,
+    33201
+  ],
+  "stats": {
+    "startTime": "2026-10-02T07:25:02.578Z",
+    "duration": 34827.151,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "58446341-de7b-425e-a569-9ce30d69521a",
+      "result": "PASS",
+      "loading": true,
+      "empty": true,
+      "errorRetry": true,
+      "manualDraftPreserved": true,
+      "safeErrors": true,
+      "scans": [
+        {
+          "surface": "response-composer",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "response-composer",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "management",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "checklist-draft",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        }
+      ],
+      "keyboardNativeSelector": true,
+      "consoleErrors": [],
+      "xss": true,
+      "authRateWaitsSeconds": []
+    }
+  ],
+  "artifactDirectory": "artifacts/m20/browser-runs/58446341-de7b-425e-a569-9ce30d69521a",
+  "limitations": "Real PostgreSQL/API and production Next. 503/delay/empty are explicit transport fixtures only; successful business actions use real API. No live AI or full WCAG certification."
+}

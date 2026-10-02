@@ -52,6 +52,8 @@ import {AnalyticsController} from './analytics/analytics.controller.js';
 import {AnalyticsService} from './analytics/analytics.service.js';
 import {DashboardController} from './dashboard/dashboard.controller.js';
 import {DashboardService} from './dashboard/dashboard.service.js';
+import { TemplateController } from './templates/template.controller.js';
+import { TemplateService } from './templates/template.service.js';
 
 export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; recommendationProvider?:StructuredProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean } = {}) {
   if(env.NODE_ENV!=='test'&&(options.aiProvider||options.recommendationProvider||options.aiWorker!==undefined||options.embeddingProvider||options.knowledgeWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
@@ -59,10 +61,10 @@ export async function createApplication(env: ApiEnvironment, options: { database
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController, RequestCollaborationController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController, RequestCollaborationController,TemplateController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
-      RequestStateMachineService, RequestQueryService, InternalNoteService, RequestCollaborationService, WorkflowGuard, DashboardService,
+      RequestStateMachineService, RequestQueryService, InternalNoteService, RequestCollaborationService, TemplateService, WorkflowGuard, DashboardService,
       AnalysisWorker,AnalysisQueryService,
       RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,AnalyticsService,
       {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??new OllamaProvider(env)},

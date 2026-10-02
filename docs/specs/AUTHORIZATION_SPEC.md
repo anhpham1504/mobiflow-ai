@@ -16,6 +16,10 @@ All accounts must be active. Roles are not cumulative: MANAGER does not imperson
 
 | Capability | USER | STAFF | MANAGER |
 |---|---|---|---|
+| Template list/detail (M20) | No | ACTIVE current RESPONSE only, including direct IDs | Both types, ACTIVE and historical ARCHIVED within A01 |
+| Create/revise/archive/template history (M20) | No | No | Yes; expectedRevision and live session/account required |
+| Response template source in existing messages/request-info (M20) | No provenance input/library | Current assigned request; existing action/state/version predicates | Existing message scope; no staff-only request-info authority |
+| Checklist template source in manager manual draft (M20) | No | No | NEW/TRIAGED draft only; separate existing submit/approval required |
 | Create request | Yes, own identity only | No | No |
 | Read request/list/timeline/messages | Own, requester projection | Current assigned only | All V1 |
 | Post plain message | Own nonterminal | Assigned nonterminal | Nonterminal V1 |

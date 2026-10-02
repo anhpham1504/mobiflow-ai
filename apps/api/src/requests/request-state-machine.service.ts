@@ -25,6 +25,7 @@ import {ToolFailure} from '../ai/tools/registry.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {recommendationSnapshot} from '../ai/recommendation-snapshot.js';
 import { notifyCollaboration } from './collaboration-notifications.js';
+import { validateTemplateSource, recordTemplateUsage } from '../templates/template-provenance.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
@@ -35,6 +36,7 @@ export interface Command {
   itemId?: string; text?: string; required?: boolean; operation?: 'COMPLETE'|'UNCOMPLETE'|'WAIVE'|'UNWAIVE';
   items?: { text: string; required: boolean; sourceIds: string[] }[];
   sourceRunId?:string;rating?:number;comment?:string;
+  sourceTemplateRevisionId?:string;
 }
 @Injectable()
 export class RequestStateMachineService {
@@ -83,6 +85,10 @@ export class RequestStateMachineService {
         if(artifact&&artifact.aiRun.schemaVersion!==recommendationVersion)throw new ApiError(409,'STALE_RECOMMENDATION','Unsupported recommendation version.');
       }
       const next = transitionTarget(request.status,action,actor.role);
+      if(command.sourceTemplateRevisionId) {
+        if(!['MANUAL_TRIAGE','MESSAGE','REQUEST_USER_INFO'].includes(action))throw new ApiError(422,'INVALID_TEMPLATE_SOURCE','This command cannot use templates.');
+        await validateTemplateSource(tx,actor,command.sourceTemplateRevisionId,action==='MANUAL_TRIAGE'?'CHECKLIST':'RESPONSE');
+      }
       const now = await this.now(tx);
       const data: Prisma.RequestUncheckedUpdateInput = {version:{increment:1},updatedAt:now,status:next};
       const before = {status:request.status,version:request.version,priority:request.priority,teamId:request.teamId,currentAssigneeId:request.currentAssigneeId};
@@ -97,6 +103,8 @@ export class RequestStateMachineService {
         const policy = await this.validateDecision(tx,decision);
         data.triageDraftJson = {...decision,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60};
         data.manualDraftRevision = {increment:1};
+        data.manualDraftSourceTemplateRevisionId = command.sourceTemplateRevisionId ?? null;
+        if(command.sourceTemplateRevisionId)await recordTemplateUsage(tx,actor,command.sourceTemplateRevisionId,id,'RequestManualDraft',id,correlationId,now,request.manualDraftRevision+1);
         // Keep all draft revisions in immutable manager-only audit, never publish draft fields to USER.
         await tx.auditLog.create({data:{requestId:id,actorType:actor.role,actorId:actor.id,action:'MANUAL_DRAFT_SAVED',resourceType:'Request',resourceId:id,requestCorrelationId:correlationId,safeBeforeJson:request.triageDraftJson ?? Prisma.JsonNull,safeAfterJson:data.triageDraftJson,reason:decision.reason,outcome:'SUCCEEDED',createdAt:now}});
       }
@@ -115,7 +123,7 @@ export class RequestStateMachineService {
         const evidence=ai?this.recommendationEvidence(recommendation!.aiRun.retrievalSnapshotJson):null;
         data.reviewKind=null; data.pendingDraftRevision=null; data.pendingRecommendationId=null;
         if (action === 'REJECT_APPROVAL') {
-          if(manual)data.triageDraftJson=Prisma.DbNull;
+          if(manual){data.triageDraftJson=Prisma.DbNull;data.manualDraftSourceTemplateRevisionId=null;}
           if(recommendation)await tx.aiRecommendation.update({where:{id:recommendation.id},data:{status:'REJECTED',reviewedById:actor.id,reviewedAt:now,managerChangesJson:{decision:'REJECT',reason:command.reason!}}});
         }
         else {
@@ -138,13 +146,14 @@ export class RequestStateMachineService {
           await tx.assignment.create({data:{requestId:id,staffId:decision.staffId,teamId:decision.teamId,assignedById:actor.id,assignedAt:now,reason:decision.reason,recommendationId:recommendation?.id,decisionKind,finalDecisionJson:snapshot,managerChangesJson:command.finalDecision ? {original,final:decision} : Prisma.JsonNull,eventId:event.id}});
           const start=second(now);
           await tx.slaInstance.create({data:{requestId:id,policyId:policy.id,policyVersion:policy.version,targetSeconds:policy.targetMinutes*60,startedAt:start,dueAt:new Date(start.getTime()+policy.targetMinutes*60000),assessedAt:start}});
-          await tx.checklist.create({data:{requestId:id,createdById:actor.id,provenance:'APPROVAL',sourceRunId:recommendation?.aiRunId,items:{create:decision.actions.map((item,i)=>({ordinal:i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))},createdAt:now,updatedAt:now}});
+          await tx.checklist.create({data:{requestId:id,createdById:actor.id,provenance:'APPROVAL',sourceRunId:recommendation?.aiRunId,sourceTemplateRevisionId:manual?request.manualDraftSourceTemplateRevisionId:null,items:{create:decision.actions.map((item,i)=>({ordinal:i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))},createdAt:now,updatedAt:now}});
           if(recommendation)await tx.aiRecommendation.update({where:{id:recommendation.id},data:{status:command.finalDecision?'MODIFIED':'ACCEPTED',reviewedById:actor.id,reviewedAt:now,managerChangesJson:command.finalDecision?{original,final:decision}:Prisma.JsonNull,finalDecisionJson:snapshot}});
           notification='REQUEST_ASSIGNED'; recipients=[decision.staffId];
         }
       }
       if (['MESSAGE','REQUEST_USER_INFO','USER_PROVIDE_INFO'].includes(action)) {
-        message=await tx.requestMessage.create({data:{requestId:id,authorId:actor.id,kind:action==='MESSAGE'?'COMMENT':action==='REQUEST_USER_INFO'?'INFO_REQUEST':'INFO_REPLY',body:command.body!,eventId:event.id,createdAt:now},select:{id:true,body:true,kind:true,createdAt:true}});
+        message=await tx.requestMessage.create({data:{requestId:id,authorId:actor.id,kind:action==='MESSAGE'?'COMMENT':action==='REQUEST_USER_INFO'?'INFO_REQUEST':'INFO_REPLY',body:command.body!,sourceTemplateRevisionId:command.sourceTemplateRevisionId,eventId:event.id,createdAt:now},select:{id:true,body:true,kind:true,createdAt:true}});
+        if(command.sourceTemplateRevisionId)await recordTemplateUsage(tx,actor,command.sourceTemplateRevisionId,id,'RequestMessage',message.id,correlationId,now);
         if (action==='REQUEST_USER_INFO') {notification='USER_INFO_REQUIRED';recipients=[request.createdById];}
         if (action==='USER_PROVIDE_INFO') {notification='USER_REPLIED';recipients=[request.currentAssigneeId!];}
       }

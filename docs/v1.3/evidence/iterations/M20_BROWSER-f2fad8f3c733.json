@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-10-02T07:19:58.706Z",
+  "runId": "674a27cf-0b15-47a8-8b53-514c42389535",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m20_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33200,
+    33201
+  ],
+  "stats": {
+    "startTime": "2026-10-02T07:18:54.250Z",
+    "duration": 64417.562000000005,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  },
+  "checks": [],
+  "artifactDirectory": "artifacts/m20/browser-runs/674a27cf-0b15-47a8-8b53-514c42389535",
+  "limitations": "Real PostgreSQL/API and production Next. 503/delay/empty are explicit transport fixtures only; successful business actions use real API. No live AI or full WCAG certification."
+}

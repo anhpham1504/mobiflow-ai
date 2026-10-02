@@ -7,6 +7,16 @@ interface RequestOwnership { createdById: string; currentAssigneeId: string | nu
 
 @Injectable()
 export class AuthorizationPolicyService {
+  templateScope(actor: AuthenticatedActor): Prisma.OperationalTemplateWhereInput {
+    if (actor.role === 'STAFF') return { type: 'RESPONSE', status: 'ACTIVE' };
+    if (actor.role === 'MANAGER') return {};
+    throw new ApiError(403, 'FORBIDDEN', 'This role cannot access templates.');
+  }
+
+  assertCanManageTemplates(actor: AuthenticatedActor) {
+    if (actor.role !== 'MANAGER') throw new ApiError(403, 'FORBIDDEN', 'Only managers may manage templates.');
+  }
+
   internalCollaborators(request: RequestOwnership): Prisma.UserWhereInput {
     // Same A01/current-assignment predicates as requestScope, never relation-derived access.
     return { active: true, OR: [{ role: 'MANAGER' }, { role: 'STAFF', id: request.currentAssigneeId ?? '00000000-0000-4000-8000-000000000000' }] };

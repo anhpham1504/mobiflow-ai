@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:security:m20",
+  "startedAt": "2026-10-02T07:36:05.765Z",
+  "finishedAt": "2026-10-02T07:36:09.381Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m20/gates/M20_SECURITY-2026-10-02T07-36-05-765Z.txt"
+}

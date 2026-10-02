@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:database:m20",
+  "startedAt": "2026-10-02T06:52:15.772Z",
+  "finishedAt": "2026-10-02T06:52:57.311Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m20/gates/M20_DATABASE-2026-10-02T06-52-15-772Z.txt"
+}

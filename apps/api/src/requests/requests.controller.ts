@@ -84,11 +84,11 @@ export class RequestsController {
 
   @Post('requests/:id/provide-info') @Roles('USER') @HttpCode(200)
   @ApiOperation({summary:'USER_PROVIDE_INFO',description:mutationDescription})
-  @ApiBody({schema:schema(contracts.messageSchema)}) @ApiResponse({status:200,schema:schema(contracts.requestResponseSchema)})
+  @ApiBody({schema:schema(contracts.provideInfoSchema)}) @ApiResponse({status:200,schema:schema(contracts.requestResponseSchema)})
   @ApiResponse({status:409,description:'STALE_VERSION or INVALID_STATE; reload and review.'})
   @ApiResponse({status:403,description:'Wrong role'}) @ApiResponse({status:404,description:'Unknown or out-of-scope request'})
   async provideInfo(@Param('id') id:string,@Body() body:unknown,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response) {
-    const command:Command={...parse(contracts.messageSchema,body)};
+    const command:Command={...parse(contracts.provideInfoSchema,body)};
     await this.machine.transition(uuid(id),'USER_PROVIDE_INFO',req.auth!,command,res.locals.requestId);
     return {data:await this.queries.detail(id,req.auth!),requestId:res.locals.requestId};
   }

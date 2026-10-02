@@ -1,0 +1,94 @@
+{
+  "checkedAt": "2026-10-02T08:14:57.914Z",
+  "result": "PASS",
+  "baseline": "35e4b1c41165fa04348871dee31bd20c28386b47",
+  "scope": "Focused source/credential review and real PostgreSQL/HTTP/race/rollback/XSS/Axe evidence",
+  "sourceReview": {
+    "existingGuardsAndRoleScope": true,
+    "strictSharedAndCompatibleContent": true,
+    "identityRecheckAndTransactionalConcurrency": true,
+    "boundedSqlPaging": true,
+    "immutableAndHistoricalConstraints": true,
+    "leastPrivilegeAndNoDelete": true,
+    "sourceLockedValidatedAndHumanContentOwned": true,
+    "expectedVersionPrecedesSourceAdoption": true,
+    "resourceOnlyBodyFreeAudits": true,
+    "managerOnlyProjectionsAndExplicitMessageProjection": true,
+    "noBusinessMutationFromManagement": true,
+    "noUnsafeSqlShellOrRawLogging": true,
+    "escapedTextAndNoStore": true,
+    "explicitApplyConfirmAndNoAutoCommand": true
+  },
+  "migrationFreeze": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "baseline": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+      "current": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "baseline": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+      "current": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "baseline": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+      "current": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+      "baseline": "3186661f01426396ad27fce70f78a92f681f5d61",
+      "current": "3186661f01426396ad27fce70f78a92f681f5d61"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+      "baseline": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+      "current": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+      "baseline": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+      "current": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+      "baseline": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4",
+      "current": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+      "baseline": "374e668627b39b27deb9d95e2e10ca201fcdd40b",
+      "current": "374e668627b39b27deb9d95e2e10ca201fcdd40b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+      "baseline": "c06546a4a93eae1dc69066a90cb7d104d514780b",
+      "current": "c06546a4a93eae1dc69066a90cb7d104d514780b"
+    }
+  ],
+  "preservedOwners": [
+    "apps/api/src/ai",
+    "apps/api/src/knowledge",
+    "apps/api/src/analytics",
+    "apps/api/src/dashboard",
+    "apps/api/src/requests/sla-clock.ts",
+    "apps/api/src/requests/sla-monitor.service.ts",
+    "apps/api/src/requests/transition-rules.ts",
+    "apps/api/src/requests/internal-note.service.ts",
+    "apps/api/src/requests/request-collaboration.service.ts",
+    "apps/api/src/requests/collaboration-notifications.ts",
+    "packages/contracts/src/internal-notes.ts",
+    "scripts/demo",
+    "packages/config",
+    "package-lock.json"
+  ],
+  "apiCheckedAt": "2026-10-02T08:01:43.779Z",
+  "browserRunId": "f09857f7-4a3e-474a-810e-c449466f34aa",
+  "filesScanned": 92,
+  "bundleFilesScanned": 23,
+  "findings": [],
+  "developerMigrations": 7,
+  "developerDatabaseModified": false,
+  "ollama": "UNAVAILABLE — read-only tags connection/timeout",
+  "limitations": "Targeted review, not penetration testing/WCAG certification/live AI evaluation/load SLO."
+}

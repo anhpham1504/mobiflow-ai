@@ -126,6 +126,16 @@ enum AuditOutcome {
   FAILED
 }
 
+enum OperationalTemplateType {
+  RESPONSE
+  CHECKLIST
+}
+
+enum OperationalTemplateStatus {
+  ACTIVE
+  ARCHIVED
+}
+
 model User {
   id                      String              @id @db.Uuid
   email                   String              @unique @db.VarChar(254)
@@ -157,6 +167,8 @@ model User {
   uploadedDocuments       KnowledgeDocument[]
   notifications           Notification[]
   feedback                Feedback[]
+  operationalTemplates    OperationalTemplate[]
+  templateRevisions       OperationalTemplateRevision[]
 
   @@index([role, active])
 }
@@ -235,6 +247,8 @@ model Request {
   activeAnalysisRunId     String?                @unique @db.Uuid
   latestAnalysisId        String?                @unique @db.Uuid
   triageDraftJson         Json?
+  manualDraftSourceTemplateRevisionId String? @db.Uuid
+  manualDraftSourceTemplateRevision OperationalTemplateRevision? @relation("TemplateDrafts", fields: [manualDraftSourceTemplateRevisionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
   manualDraftRevision     Int                    @default(0)
   reviewKind              ReviewKind?
   pendingRecommendationId String?                @unique @db.Uuid
@@ -283,6 +297,8 @@ model RequestMessage {
   authorId  String             @db.Uuid
   kind      RequestMessageKind
   body      String             @db.VarChar(4000)
+  sourceTemplateRevisionId String? @db.Uuid
+  sourceTemplateRevision OperationalTemplateRevision? @relation("TemplateMessages", fields: [sourceTemplateRevisionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
   eventId   String             @unique @db.Uuid
   createdAt DateTime           @default(now()) @db.Timestamptz(6)
   request   Request            @relation(fields: [requestId], references: [id], onDelete: Restrict)
@@ -410,6 +426,8 @@ model Checklist {
   createdById String?             @db.Uuid
   provenance  ChecklistProvenance
   sourceRunId String?             @db.Uuid
+  sourceTemplateRevisionId String? @db.Uuid
+  sourceTemplateRevision OperationalTemplateRevision? @relation("TemplateChecklists", fields: [sourceTemplateRevisionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
   version     Int                 @default(1)
   createdAt   DateTime            @default(now()) @db.Timestamptz(6)
   updatedAt   DateTime            @updatedAt @db.Timestamptz(6)
@@ -417,6 +435,56 @@ model Checklist {
   createdBy   User?               @relation(fields: [createdById], references: [id], onDelete: Restrict)
   sourceRun   AiRun?              @relation(fields: [sourceRunId], references: [id], onDelete: Restrict)
   items       ChecklistItem[]
+}
+
+model OperationalTemplate {
+  id String @id @default(uuid()) @db.Uuid
+  type OperationalTemplateType
+  status OperationalTemplateStatus @default(ACTIVE)
+  name String @db.VarChar(120)
+  description String? @db.VarChar(500)
+  currentRevision Int @default(1)
+  createdById String @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @db.Timestamptz(6)
+  archivedAt DateTime? @db.Timestamptz(6)
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  current OperationalTemplateRevision @relation("TemplateCurrent", fields: [id, currentRevision], references: [templateId, revision], onDelete: Restrict, onUpdate: NoAction)
+  revisions OperationalTemplateRevision[] @relation("TemplateRevisions")
+
+  @@index([status, type, createdAt, id])
+}
+
+model OperationalTemplateRevision {
+  id String @id @default(uuid()) @db.Uuid
+  templateId String @db.Uuid
+  revision Int
+  name String @db.VarChar(120)
+  description String? @db.VarChar(500)
+  body String? @db.VarChar(4000)
+  itemCount Int
+  createdById String @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  template OperationalTemplate @relation("TemplateRevisions", fields: [templateId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  currentFor OperationalTemplate[] @relation("TemplateCurrent")
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  items OperationalTemplateChecklistItemRevision[]
+  drafts Request[] @relation("TemplateDrafts")
+  messages RequestMessage[] @relation("TemplateMessages")
+  checklists Checklist[] @relation("TemplateChecklists")
+
+  @@unique([templateId, revision])
+  @@index([templateId, createdAt, id])
+}
+
+model OperationalTemplateChecklistItemRevision {
+  revisionId String @db.Uuid
+  position Int
+  text String @db.VarChar(500)
+  required Boolean
+  revision OperationalTemplateRevision @relation(fields: [revisionId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+
+  @@id([revisionId, position])
 }
 
 model ChecklistItem {
