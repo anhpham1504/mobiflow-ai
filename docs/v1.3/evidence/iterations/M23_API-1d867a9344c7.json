@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-03T18:17:23.473Z",
+  "checks": {
+    "crudAtomicPreference": "PASS",
+    "ownershipGuardsOpenApi": "PASS",
+    "authorizedCanonicalQueries": "PASS",
+    "corruptAndLiveRole": "PASS",
+    "capConcurrency": "PASS",
+    "nameAndVersionConcurrency": "PASS",
+    "auditRollback": "PASS",
+    "performance": "PASS"
+  },
+  "metrics": {
+    "cap": {
+      "startingViews": 49,
+      "concurrentCreates": 2,
+      "blockedWaitersObserved": 2,
+      "successes": 1,
+      "finalViews": 50,
+      "independentOwnerProgress": true
+    },
+    "performance": {
+      "savedViews": 50,
+      "addedSyntheticRequests": 100,
+      "totalRequests": 112,
+      "samples": [
+        {
+          "listMs": 8.660979999999654,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 9.914451999999983,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 7.09179899999981,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.401537999999164,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 6.369517000000087,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.0235890000003565,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 6.460801999999603,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.248921000000337,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 5.615587000000232,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 4.773554000000331,
+          "applySql": 10,
+          "resultRows": 20
+        }
+      ],
+      "claim": "Local synthetic samples only; no enterprise SLO"
+    }
+  },
+  "aiCalls": 0,
+  "synthetic": true,
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/saved-views.integration.test.mjs"
+}

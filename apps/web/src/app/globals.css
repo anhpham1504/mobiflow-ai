@@ -63,3 +63,19 @@ form label{display:flex;flex-direction:column;gap:7px;margin:14px 0;color:#34425
 .routing-confirm { max-width: min(32rem, calc(100vw - 2rem)); padding: 1.5rem; border: 1px solid var(--border); border-radius: .75rem; color: var(--foreground); background: var(--surface); overflow-wrap: anywhere; }
 .page-header>div{min-width:0}.page-header h1{overflow-wrap:anywhere}.notification-list button[aria-disabled=true]{opacity:.55;cursor:wait}
 .routing-confirm::backdrop { background: rgb(15 23 42 / 55%); }
+/* Private saved preferences reuse the Request-list form and native modal patterns. */
+.saved-views { margin-block: 1rem; padding: 1rem; border: 1px solid var(--border, #d4dce7); border-radius: .75rem; background: var(--card, #fff); min-width: 0; }
+.saved-views-controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+.saved-views-controls > label { flex: 1 1 16rem; min-width: 0; }
+.saved-views select { width: 100%; min-width: 0; max-width: 100%; text-overflow: ellipsis; }
+.saved-views p, .saved-view-dialog p { overflow-wrap: anywhere; }
+.saved-view-help { font-size: .875rem; margin-top: .75rem; }
+.saved-view-dialog { width: min(32rem, calc(100vw - 2rem)); max-height: calc(100dvh - 2rem); padding: 1.5rem; border: 1px solid #cbd5e1; border-radius: .75rem; }
+.saved-view-dialog::backdrop { background: rgb(15 23 42 / 45%); }
+.saved-view-dialog form { display: grid; gap: 1rem; min-width: 0; }
+.saved-view-dialog input { width: 100%; min-width: 0; }
+.saved-view-dialog .filter-actions, .saved-views .filter-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.request-filter-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); align-items: end; }
+.request-filter-form > label { min-width: 0; }
+.request-filter-form > .filter-actions { grid-column: 1 / -1; justify-content: end; }
+@media (max-width: 600px) { .saved-views-controls { display: grid; grid-template-columns: minmax(0, 1fr); } .saved-views .filter-actions > button { flex: 1 1 45%; white-space: normal; } }

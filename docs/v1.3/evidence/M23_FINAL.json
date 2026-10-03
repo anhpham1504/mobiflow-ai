@@ -1,0 +1,631 @@
+{
+  "checkedAt": "2026-10-03T18:57:11.758Z",
+  "result": "PASS",
+  "previousCheckpointSha": "58aae141ee2a4e8d9af341fd88dce370106a8c16",
+  "branch": "feat/v1.3-saved-views-filters",
+  "closureAuthorization": "RECEIVED — explicit user execution prompt",
+  "technicalSelfReview": "PASS",
+  "independentExternalHumanReview": "NOT RUN",
+  "sourceFingerprint": "3a7801032eb872d36805264396da90f811d16cf070b50553e041ebe51d6e8fda",
+  "productFingerprint": "9fc765419f6a8118fdbb62218b0884656cfc4dc6c0125a750cc9dfef733f815c",
+  "reviewedFiles": [
+    {
+      "path": "README.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "be4098cdf16c5dec43f676712392c3e00f82cbad"
+    },
+    {
+      "path": "apps/api/package.json",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "2aac36e28c94f3b670470ad93eae94439b6a7bfc"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261004010000_m23_saved_request_views/migration.sql",
+      "category": "database",
+      "disposition": "INCLUDE",
+      "gitBlob": "3b5a06586832ccd7e4d7b79b0d0d1deb345d96ed"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "category": "database",
+      "disposition": "INCLUDE",
+      "gitBlob": "6916e565a7f6ba66c9fb1065566639d45da4a3b5"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "09159922f28969ca7e94b7d88af1f0b52a0e90e1"
+    },
+    {
+      "path": "apps/api/src/requests/request-filter-policy.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "2d0abb3c1638177691717e3bb0414def06afbbba"
+    },
+    {
+      "path": "apps/api/src/requests/request-query.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "88151f7327a1b9354ce48cf8a4101d93d32f2b68"
+    },
+    {
+      "path": "apps/api/src/requests/requests.controller.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "37058f1e36efdc4a598b3136d682a7d51fddfbbe"
+    },
+    {
+      "path": "apps/api/src/saved-views/saved-view.controller.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "bb2fec42d164e9744f63dc5a120f842da5c804af"
+    },
+    {
+      "path": "apps/api/src/saved-views/saved-view.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "5f75cad7b308a8a40a162f11ae183645632e6779"
+    },
+    {
+      "path": "apps/api/test/helpers/saved-views-fixture.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "4a6744bd5188caff364a49f282835d109558adf4"
+    },
+    {
+      "path": "apps/api/test/saved-views.integration.test.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "031ce0be4eef25815a9cf850456bd6d524b43852"
+    },
+    {
+      "path": "apps/api/test/saved-views.test.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "6dda3ef4e561cc545814dbcdd0aaf92ded3dd8dc"
+    },
+    {
+      "path": "apps/web/e2e/saved-views.spec.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "23e3ec63c7daf64be4b7e7a98439cea7412450d2"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "a521e582d9f3079a18fce61f10ba11113ced4407"
+    },
+    {
+      "path": "apps/web/src/components/request-list-content.tsx",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "afbfb28e69e600f1c23f69195e1d2774d017633a"
+    },
+    {
+      "path": "apps/web/src/components/request-list.tsx",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "3959886464c595a03ea926c843a6d5d529fd6621"
+    },
+    {
+      "path": "apps/web/src/components/saved-views.tsx",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "4012c51da57ae891950e3590fe9415c529d291dd"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "d1d34b4592e99ca9a3cf4bfab2039caa13371c9f"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "ac143ec461abbf2a8d5dc55ec6c7767275e5b4a4"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "db5f6d21908a569a1edd072db3a97b0ca434777f"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "97a7ce8dddeb5d6f42100105b9749f5d0058a0b1"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "29dbcb52c343080c28c717dff80f265929f1277e"
+    },
+    {
+      "path": "docs/specs/REQUEST_FILTER_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "604b6463fd3f87ed2f9593b095358f7773c83894"
+    },
+    {
+      "path": "docs/specs/UI_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "e95bdf5f8977c1c0ff7eb76a547e5b81013bdc50"
+    },
+    {
+      "path": "docs/v1.3/M23_CHECKPOINT_CLOSURE.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "030a7d17a9e02e31e1eeb545b34aa738aca3dbbd"
+    },
+    {
+      "path": "docs/v1.3/M23_SAVED_VIEWS_FILTERS_IMPLEMENTATION_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "858da5b07735cf90f7ea21220b8ed7185eb0a265"
+    },
+    {
+      "path": "docs/v1.3/M23_SAVED_VIEWS_FILTERS_VERIFICATION.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "0c4ffcf181d1fc4980339f68c177f173e711615a"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "5d563dcc802c7523717f66fb53742e33fcc42aec"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "4ce7382bc3c568a26e29b8b18cb26f4fa29d0a33"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_API.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "4e86e4fe09418d034629ed36c8b37d4d96b6e5cb"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_BROWSER.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "95297ea67b5d4ffbe5c638e6063924328ca2f5b6"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_DATABASE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "ff802ebeeb9a693e29b836c413207e216aa9aab8"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_PREFLIGHT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "d030a98be3d2d17f0c574afa2c59ae902f5afc90"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_SECURITY.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "590a615b3803906ce53455fefbadcf28a0624213"
+    },
+    {
+      "path": "docs/v1.3/evidence/M23_SOURCE_COVERAGE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "a0e252e6553e22c88cca67b1543b04f386d781a9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_API.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "4c3a68749892cb7fcbc5cc3228346989cd2542eb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_BUILD.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "72ecd60ea5947c34c53d175923004d27851e24b4"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_DATABASE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "7facd21267102f045f8b8984134e618497e52628"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_E2E.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "61f1ff43118f6a565d0e3eb6312a34d49ca979c2"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_LINT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "6ea0043670b55bb50831f8aba7f225f208727252"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_SECURITY.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "ff2328a976e43c876000dd1e5d975f4c5622b098"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_TYPECHECK.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "7ac3734038264707146676cd88e081d302895e17"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M23_UNIT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "5aaa84be95d22211636960b56984ec8a33d8968c"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_API-276ff3dc2151.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "0c9b1978771d60535be0843db1bba48bff319590"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_API-b80eb03c61f9.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "aaa5318401516e46c2c80415959abfd6a653a3eb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_BUILD-68758c7332c8.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "7dc766f6aac92a8a9f90119b305f78dd6c634aeb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_BUILD-7a74f591bf01.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "2798160eac291832876096cefdd20bd2211e5d23"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_BUILD-91ca464ce5ff.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "8fb75ba0162cea7312428907880c0801138d2193"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_BUILD-cf0bf1a6b2ee.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "fc65ecbd3294fd59f5c18d12020fd801fd4f5567"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_DATABASE-0e46a0878c11.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "a3a21f63324eb4fe88b77f9b859562979b6b2cc8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_E2E-2f82bf05eac2.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "eca81d523d24b53f1ddfd12eec90615e0a6a9f15"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_E2E-61e31bf0d71a.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "be2ff5e514e3b71eb1c21043a15a73e3399824e4"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_E2E-87a4d89beef2.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "42ba781299c2f47423a3c166e39c34f36370ac02"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_E2E-965acebb4ce2.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1455a4b2c614ca1370860cb37c7c44d551aa8606"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_E2E-ace7fe28ecf1.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "33c1d4d8ca841642f1676ca43d6895826ddf2a5c"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_LINT-48993f69a78e.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "d1ba60bda80423bc9dfdff3d8263fc16db8acb3e"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_LINT-d2aa342157ab.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "bcb5e7d5c1d36dc2cc47d745882289e8399561f8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_LINT-f16073ac656b.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "c5381145eb2d65d99fa48ecdd65414ba050cece9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_LINT-f4dbb3362574.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "67aabb4ad1cd62f4597805550ead05852c04ade1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_SECURITY-5720c070c175.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "85774daf157677e5b03e6f29a0d82302251e4227"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_TYPECHECK-1238549e4d49.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "06c77de4688e37de809182cbb4274858a6df7d71"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_TYPECHECK-184b407e3933.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "8f7872fd144d6519a86b3bcbd5bd80ac222088fa"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_TYPECHECK-d3e4559e8a14.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "de0c1391e5a03a1518c5da8b29f06eaa1b013e44"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_TYPECHECK-fdf5db1c170f.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "dc50fff47b9fabcaf6b13ddf60e8c8c4538c2292"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M23_UNIT-30f4da6533cc.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "2bc870933f3a090252d9a2a49db91b80eece92b2"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_API-1d867a9344c7.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "d680058e9bbfd8db646d9ab61eab3ccd719fcb57"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_API-6f81a0b2ef71.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "6e139e8a40c36b63fc8c1d9beef0632ee060b821"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_BROWSER-096016b310d6.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "504743c03db15f0ed4a01e9a524016e0ec84e8d1"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_BROWSER-1194f4587750.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "eb77800f0934a6778e9e5329e20841fe0f95c3f3"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_BROWSER-41afb449dcbe.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "9e89e1973433d2c434f1f8e2df663025bdfe2a28"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_BROWSER-7f040aa9eb8e.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "e0f607c551a76796e1ed761cad49094f98651828"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_BROWSER-97a7b9fc4a9d.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "9cabcb50583430c03d9453cbe3eca2e79f1e956a"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_SECURITY-fb92a59ff7ae.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "172842ad4b2a2748ef10a5158c68413390c3e579"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M23_SOURCE_COVERAGE-9547c865d408.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1490020f677ad4cd3815b41b918efbc310114c8b"
+    },
+    {
+      "path": "docs/verification/MILESTONE_23_VERIFICATION.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "f218523a2c37647236f453c7a123eb5ab90eec8d"
+    },
+    {
+      "path": "package.json",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "ad616dff3d2bcc0e83f2cbd1247c317f38c662cd"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "fd0617cd37a13eb97118f54e59294b891a73ee02"
+    },
+    {
+      "path": "packages/contracts/src/request-filters.ts",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "0fd975d7e54aafc349bc0d03f73dc033b7d81b0f"
+    },
+    {
+      "path": "packages/contracts/src/saved-request-views.ts",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "36c219cfc834c486a3df0a8a61b83564af0d7d05"
+    },
+    {
+      "path": "playwright.m23.config.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "0a199308950e944d16a0ade5ff2db8154c8d8e9f"
+    },
+    {
+      "path": "scripts/verification/docker-compose.m23.yml",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "8db5f5a7253c93247d48840fbefc77861f7374d3"
+    },
+    {
+      "path": "scripts/verification/m23-browser-server.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "529956500b37a31e575fdc9b32639a8f858601f0"
+    },
+    {
+      "path": "scripts/verification/m23-browser.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "622b2f934a380a847a3e397f3f9536bb52e95d4f"
+    },
+    {
+      "path": "scripts/verification/m23-capture.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "3bb26b8d4eafbd76d1b16657535684163354303c"
+    },
+    {
+      "path": "scripts/verification/m23-database.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "369f7e5959f15ea1282887a1260964abaac2a4c5"
+    },
+    {
+      "path": "scripts/verification/m23-final.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "b34dfdb1ae496c1fec30d21cfe963d126f37ae45"
+    },
+    {
+      "path": "scripts/verification/m23-integration.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "e594c5306d0e019452eb82c33fc34610d8919501"
+    },
+    {
+      "path": "scripts/verification/m23-linux.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "09de92486947fe2d9f4baf673fe78c430f66069a"
+    },
+    {
+      "path": "scripts/verification/m23-migrations.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "78cad7f6c9c16aaccba135c8460e516714d4f971"
+    },
+    {
+      "path": "scripts/verification/m23-runtime.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "7e727b58de7b3d4b3733f7e9302867fdfe344c07"
+    },
+    {
+      "path": "scripts/verification/m23-security.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "f19a9a5baaeaf970a4732da3ac1c060073e21f14"
+    },
+    {
+      "path": "scripts/verification/m23-source-coverage.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "275866cd60cfd6f360f2acdee26d69ee56374e1a"
+    },
+    {
+      "path": "scripts/verification/m23-source.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "5e980d2911893036f5286394055612cbb2fc718e"
+    }
+  ],
+  "inventoryFingerprint": "e2eca768212e0ed9a9b60a45f5a7dc849380699859814a08fe5360b0e9e2a487",
+  "excludedFromRecursiveManifest": [
+    "docs/v1.3/evidence/M23_FINAL.json",
+    "docs/v1.3/evidence/gates/M23_FINAL.json"
+  ],
+  "developerMigrations": 7,
+  "developerDatabaseModified": false,
+  "developerStack": "Original running container identities/start times/ports preserved; no normal-stack restart/build/migrate/reset/reseed",
+  "ownedTestContainersAndVolumes": "REMOVED; synthetic databases dropped by owning harness",
+  "portsReleased": [
+    55423,
+    33023,
+    33500,
+    33501
+  ],
+  "mainUnchanged": true,
+  "historicalTagsAndCheckpointsUnchanged": true,
+  "historicalDocumentsAndEvidenceFrozen": 206,
+  "m24": "NOT STARTED",
+  "deployment": "NOT RUN",
+  "gitClosure": "Evaluate live refs after commit/push; no prospective SHA or publication assertion",
+  "stagingReviewUpdatedAt": "2026-10-03T18:59:12.377Z",
+  "documentationUpdates": [
+    {
+      "path": "README.md",
+      "originalAuditBlob": "6d8181280116d4adbe466ed158c255a3c85a2ce3",
+      "reviewedBlob": "be4098cdf16c5dec43f676712392c3e00f82cbad"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "originalAuditBlob": "440aacaa49fac6a065b17969bbca33de9ed1ddd9",
+      "reviewedBlob": "d1d34b4592e99ca9a3cf4bfab2039caa13371c9f"
+    },
+    {
+      "path": "docs/v1.3/M23_CHECKPOINT_CLOSURE.md",
+      "originalAuditBlob": "a5d05101370c66b0bf67ccb5b8e56d5b0e53521a",
+      "reviewedBlob": "030a7d17a9e02e31e1eeb545b34aa738aca3dbbd"
+    },
+    {
+      "path": "docs/v1.3/M23_SAVED_VIEWS_FILTERS_VERIFICATION.md",
+      "originalAuditBlob": "9537090110963ba98e61ad5065826229f0d1007e",
+      "reviewedBlob": "0c4ffcf181d1fc4980339f68c177f173e711615a"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "originalAuditBlob": "3258a5da1f65a3e99ded677d55ae42bec4d88b2c",
+      "reviewedBlob": "5d563dcc802c7523717f66fb53742e33fcc42aec"
+    },
+    {
+      "path": "docs/verification/MILESTONE_23_VERIFICATION.md",
+      "originalAuditBlob": "03a13e3abe3c561a4d8b2ff01b1a15c5062d5c24",
+      "reviewedBlob": "f218523a2c37647236f453c7a123eb5ab90eec8d"
+    }
+  ]
+}

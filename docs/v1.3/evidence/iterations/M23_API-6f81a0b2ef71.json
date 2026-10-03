@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-03T18:26:41.714Z",
+  "checks": {
+    "crudAtomicPreference": "PASS",
+    "ownershipGuardsOpenApi": "PASS",
+    "authorizedCanonicalQueries": "PASS",
+    "corruptAndLiveRole": "PASS",
+    "capConcurrency": "PASS",
+    "nameAndVersionConcurrency": "PASS",
+    "auditRollback": "PASS",
+    "performance": "PASS"
+  },
+  "metrics": {
+    "cap": {
+      "startingViews": 49,
+      "concurrentCreates": 2,
+      "blockedWaitersObserved": 2,
+      "successes": 1,
+      "finalViews": 50,
+      "independentOwnerProgress": true
+    },
+    "performance": {
+      "savedViews": 50,
+      "addedSyntheticRequests": 100,
+      "totalRequests": 112,
+      "samples": [
+        {
+          "listMs": 10.645865999999842,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 13.696944000000258,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 8.977917000000161,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 6.669745000000148,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 7.277806999999484,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 6.667483999999604,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 7.514143000000331,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.337868999999955,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 8.369324999999662,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.80952200000047,
+          "applySql": 10,
+          "resultRows": 20
+        }
+      ],
+      "claim": "Local synthetic samples only; no enterprise SLO"
+    }
+  },
+  "aiCalls": 0,
+  "synthetic": true,
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/saved-views.integration.test.mjs"
+}

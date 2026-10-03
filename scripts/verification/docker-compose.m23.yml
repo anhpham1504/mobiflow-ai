@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg17
+    container_name: mobiflow-m23-verification-postgres
+    environment:
+      POSTGRES_DB: mobiflow
+      POSTGRES_USER: mobiflow_owner
+      POSTGRES_PASSWORD: ${M23_OWNER_PASSWORD:?Isolated runtime required}
+      POSTGRES_APP_PASSWORD: ${M23_APP_PASSWORD:?Isolated runtime required}
+    ports: ["127.0.0.1:55423:5432", "127.0.0.1:33023:33023", "127.0.0.1:33500:33500", "127.0.0.1:33501:33501"]
+    volumes:
+      - m23_postgres:/var/lib/postgresql/data
+      - ../../docker/postgres/10-app-role.sh:/docker-entrypoint-initdb.d/10-app-role.sh:ro
+      - ../../apps/api/prisma/migrations/202609280001_enable_vector/migration.sql:/docker-entrypoint-initdb.d/20-vector.sql:ro
+    mem_limit: 1g
+    cpus: 2
+volumes:
+  m23_postgres:

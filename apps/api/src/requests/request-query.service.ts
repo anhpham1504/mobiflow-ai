@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
-import { categories, priorities, statuses } from '@mobiflow/contracts';
+import { requestListQuerySchema } from '@mobiflow/contracts';
 import type { Prisma } from '../generated/prisma/client.js';
 import { PrismaService } from '../database/prisma.service.js';
 import { AuthorizationPolicyService } from '../authorization/authorization-policy.service.js';
@@ -11,12 +11,9 @@ import { databaseNow } from './sla-sql.js';
 import { parse } from './validation.js';
 import { lockCollaborationIdentity, lockCollaborationRequest } from './collaboration-access.js';
 import { INTERNAL_NOTIFICATION_TYPES } from './internal-notification-types.js';
+import { assertRequestFilters } from './request-filter-policy.js';
 
-const querySchema=z.object({
-  limit:z.string().regex(/^[0-9]+$/).transform(Number).pipe(z.number().int().min(1).max(100)).optional(),
-  cursor:z.string().max(500).optional(),status:z.enum(statuses).optional(),priority:z.enum(priorities).optional(),category:z.enum(categories).optional(),
-  assigneeId:z.uuid().optional(),from:z.iso.datetime().optional(),to:z.iso.datetime().optional(),unreadOnly:z.enum(['true','false']).optional(),
-}).strict().refine(q=>!q.from||!q.to||q.from<q.to,'Invalid date range');
+const querySchema=requestListQuerySchema.safeExtend({unreadOnly:z.enum(['true','false']).optional()});
 const cursorSchema=z.object({id:z.uuid(),createdAt:z.iso.datetime()}).strict();
 export function pagination(input:unknown) {
   const query=parse(querySchema,input);
@@ -51,6 +48,8 @@ export class RequestQueryService {
     return {...this.view(r,actor,await databaseNow(this.prisma)),...(checklist?{checklist}: {})};
   }
   async list(actor:AuthenticatedActor,input:unknown,kind:'mine'|'queue'|'manager'|'approvals') {
+    const validated=parse(requestListQuerySchema,input);
+    await assertRequestFilters(this.prisma,validated,actor.role);
     const {query,where,limit}=pagination(input);
     const filters:Prisma.RequestWhereInput={...(query.status?{status:query.status}:{}),...(query.priority?{priority:query.priority}:{}),...(query.category?{category:query.category}:{}),...(query.assigneeId?{currentAssigneeId:query.assigneeId}:{}),...(query.from||query.to?{createdAt:{gte:query.from?new Date(query.from):undefined,lt:query.to?new Date(query.to):undefined}}:{})};
     const scope:Prisma.RequestWhereInput=kind==='queue'?{status:{in:['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']}}:kind==='approvals'?{status:'PENDING_APPROVAL',reviewKind:{in:['AI','MANUAL']}}:{};

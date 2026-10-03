@@ -1,0 +1,240 @@
+{
+  "checkedAt": "2026-10-03T18:30:06.157Z",
+  "runId": "dff615d5-1b16-4b64-ad93-10c431e4fa2f",
+  "synthetic": true,
+  "browser": "Microsoft Edge on Windows / Playwright",
+  "runtime": "Production Next and real API/PG in isolated Linux container",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33500,
+    33501
+  ],
+  "stats": {
+    "startTime": "2026-10-03T18:29:39.418Z",
+    "duration": 26069.202,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "dff615d5-1b16-4b64-ad93-10c431e4fa2f",
+      "result": "PASS",
+      "managerDirectoryFilter": true,
+      "userOwnFilters": true,
+      "noCrossAccountViews": true,
+      "actualScopedResults": true
+    },
+    {
+      "runId": "dff615d5-1b16-4b64-ad93-10c431e4fa2f",
+      "result": "PASS",
+      "scans": [
+        {
+          "role": "staff",
+          "surface": "list",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "dialog",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "list",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "dialog",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "list",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "dialog",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "list",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "staff",
+          "surface": "dialog",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "list",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "dialog",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "list",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "dialog",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "list",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "dialog",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "list",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "manager",
+          "surface": "dialog",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "list",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "dialog",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "list",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "dialog",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "list",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "dialog",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "list",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        },
+        {
+          "role": "user",
+          "surface": "dialog",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false
+        }
+      ],
+      "applicationPageErrors": 0,
+      "applicationConsoleErrors": 0,
+      "failedNetwork": 0,
+      "blockedExternalAv": 22,
+      "note": "Exact external AV injections denied by unchanged CSP counted separately; navigation cancellations excluded."
+    }
+  ],
+  "result": "FAIL",
+  "aiCalls": 0,
+  "database": "mobiflow_m23_test",
+  "businessVersionsUnchanged": 34,
+  "sourceFingerprint": "e31272db3b8cf02fc4a65bbc5c984a24273590630a647a82de35a3cd6470e294",
+  "artifactDirectory": "artifacts/m23/browser-runs/dff615d5-1b16-4b64-ad93-10c431e4fa2f",
+  "limitations": "503/delay cases are transport fixtures; real preference CRUD/apply use server/database. No WCAG certification or live AI."
+}

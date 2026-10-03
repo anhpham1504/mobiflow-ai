@@ -24,6 +24,20 @@ All request mutations after creation carry `expectedVersion:positive integer`, i
 
 ## Endpoint inventory
 
+### M23 private Saved Views (2026-10-04)
+
+Existing live AccessGuard/RolesGuard/WorkflowGuard and no-store apply under /api/v1. All roles CRUD their own views only, no manager override. Strict empty query on every saved-view route. Unknown fields400, inactive/expired/revoked401, prohibited current-role filter/origin403, foreign/unknown404, stale/name/cap409, unavailable reference422, payload413/media415/rate429 with Retry-After. Shared Zod drives generated OpenAPI. [REQUEST_FILTER_SPEC](REQUEST_FILTER_SPEC.md) owns canonical filters; normal Request list routes validate independently, including current role/reference and date ordering.
+
+| Method/path | Strict input | Output |
+|---|---|---|
+| GET /saved-request-views | Empty query | {data:[AVAILABLE or UNAVAILABLE],requestId}; max50, createdAt DESC/id DESC |
+| POST /saved-request-views | name1–80 Unicode points,filters canonical strict object | 201 AVAILABLE version1; server identity/schema/timestamps |
+| GET /saved-request-views/:id | UUID, empty query | Current owned/current-role/reference-validated descriptor |
+| PUT /saved-request-views/:id | Full name/filters replacement plus expectedVersion positive int≤2147483646 | 200 version+1, stale409 no partial write |
+| DELETE /saved-request-views/:id | expectedVersion positive int≤2147483646 | 200 {data:{id,deleted:true},requestId}; preference only |
+
+AVAILABLE includes id/name/version/availability/schemaVersion/filters/createdAt/updatedAt. UNAVAILABLE includes only id/safe name/version/availability/reasonCode: UNSUPPORTED_VERSION, INVALID_FILTERS, ROLE_INCOMPATIBLE or REFERENCE_UNAVAILABLE. No filter metadata or partial execution. Owner DELETE needs no old filter parsing; PUT replaces the entire definition after new validation. Missing row404, including concurrent deletion winning first; stale existing row409. No result endpoint, owner transfer or client-selected schemaVersion. Optional from/to and manager-only assigneeId are documented on normal list OpenAPI routes; role mismatch is403.
+
 ### M21 rule-based routing (2026-10-02)
 
 All routes below are under `/api/v1`, live MANAGER-only, guarded by existing access/role/workflow controls and `Cache-Control: no-store`. USER/STAFF403; unauthenticated/revoked/inactive401. Request evaluation reuses the backend Request scope; unknown/out-of-scope404. No new tenant or scope override. Shared strict Zod inputs and responses own generated OpenAPI; existing origin, JSON64KiB, read120/write60 per minute controls apply.

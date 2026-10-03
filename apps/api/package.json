@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "start": "node dist/main.js",
-    "test": "npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/templates.test.mjs test/routing.test.mjs test/internal-notes.test.mjs test/mentions-watchers.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/recommendation.test.mjs test/recommendation-v2.test.mjs test/m15-reliability.test.mjs test/operational.test.mjs test/analytics.test.mjs test/analytics-v2.test.mjs test/dashboard-sla.test.mjs test/sla-alert.test.mjs",
+    "test": "npm run build && node --test test/health.test.mjs test/authorization.test.mjs test/templates.test.mjs test/routing.test.mjs test/internal-notes.test.mjs test/mentions-watchers.test.mjs test/rate-limiter.test.mjs test/workflow.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/recommendation.test.mjs test/recommendation-v2.test.mjs test/m15-reliability.test.mjs test/operational.test.mjs test/analytics.test.mjs test/analytics-v2.test.mjs test/dashboard-sla.test.mjs test/sla-alert.test.mjs test/saved-views.test.mjs",
     "test:recommendation:m14": "node --test test/recommendation-v2.test.mjs test/recommendation.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/workflow.test.mjs test/authorization.test.mjs",
     "test:recommendation:m15": "node --test test/m15-reliability.test.mjs test/recommendation-v2.test.mjs test/recommendation.test.mjs test/analysis.test.mjs test/knowledge.test.mjs test/authorization.test.mjs"
   },

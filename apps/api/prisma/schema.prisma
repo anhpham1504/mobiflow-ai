@@ -171,8 +171,25 @@ model User {
   templateRevisions       OperationalTemplateRevision[]
   routingRules            RoutingRule[]
   routingRevisions        RoutingRuleRevision[]
+  savedRequestViews       SavedRequestView[]
 
   @@index([role, active])
+}
+
+model SavedRequestView {
+  id             String   @id @db.Uuid
+  ownerUserId    String   @db.Uuid
+  name           String   @db.Text
+  normalizedName String   @db.Text
+  schemaVersion  String   @db.VarChar(80)
+  filters        Json     @db.JsonB
+  version        Int      @default(1)
+  createdAt      DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  owner          User     @relation(fields: [ownerUserId], references: [id], onDelete: Restrict)
+
+  @@unique([ownerUserId, normalizedName])
+  @@index([ownerUserId, createdAt(sort: Desc), id(sort: Desc)])
 }
 
 model RefreshSession {

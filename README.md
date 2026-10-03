@@ -972,6 +972,10 @@ Các giới hạn này là ranh giới an toàn và phạm vi sản phẩm, khô
 
 Khi tài liệu có khác biệt, ưu tiên tài liệu sở hữu đúng domain: state machine, authorization, SLA, AI, tool, RAG, database hoặc API tương ứng. Không tự chọn quy tắc thuận tiện hơn.
 
+## V1.3 M23 checkpoint
+
+M23 Saved Views & Filters được thực thi trên `feat/v1.3-saved-views-filters`, từ M22 đã xác minh `58aae141ee2a4e8d9af341fd88dce370106a8c16`. [V1.3 index](docs/v1.3/README.md), [M23 plan](docs/v1.3/M23_SAVED_VIEWS_FILTERS_IMPLEMENTATION_PLAN.md) và [filter contract](docs/specs/REQUEST_FILTER_SPEC.md) xác định phạm vi. View riêng từng người không mở rộng quyền xem yêu cầu. Database developer vẫn ở migration7; migration13 chỉ áp dụng trong kiểm thử cô lập. V1.3 IN DEVELOPMENT, M24 NOT STARTED. Trạng thái kỹ thuật và điều kiện Git closure nằm trong verification/closure M23; mục này không khẳng định push trước khi thực hiện.
+
 ## Trạng thái phát hành
 
 M11–M16 đã hoàn tất theo [V1.2 index](docs/v1.2/README.md). Recommendation V2 vẫn advisory: chấp nhận/chỉnh sửa/từ chối đề xuất không tự phân công hay đổi trạng thái; phê duyệt nghiệp vụ là bước riêng của con người. M17 đóng release bằng fast-forward main và annotated tag `v1.2.0`, với kiểm tra SHA local/remote ở handoff sau commit. Blocker ban đầu ở DB/image developer đã được xử lý theo phép bổ sung của người dùng, giữ nguyên dữ liệu và dùng đúng migration M14 hiện có. Sanity current stack PASS; Ollama chưa chạy nên AI/RAG không được báo READY. Deployment NOT RUN.
@@ -990,3 +994,5 @@ Package gốc được đánh dấu `private: true` và repository hiện không
 ---
 
 MobiFlow AI được thiết kế quanh một nguyên tắc đơn giản: **AI có thể giúp đội vận hành hiểu nhanh hơn và đề xuất tốt hơn, nhưng quyền quyết định, trách nhiệm và dấu vết kiểm chứng luôn thuộc về con người.**
+
+M23 technical PASS — AUTO CHECKPOINT: [verification](docs/v1.3/M23_SAVED_VIEWS_FILTERS_VERIFICATION.md), [milestone record](docs/verification/MILESTONE_23_VERIFICATION.md), [closure evaluated from live Git refs](docs/v1.3/M23_CHECKPOINT_CLOSURE.md). Independent human review NOT RUN; M24 NOT STARTED.

@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-03T18:36:57.263Z",
+  "checks": {
+    "crudAtomicPreference": "PASS",
+    "ownershipGuardsOpenApi": "PASS",
+    "authorizedCanonicalQueries": "PASS",
+    "corruptAndLiveRole": "PASS",
+    "capConcurrency": "PASS",
+    "nameAndVersionConcurrency": "PASS",
+    "auditRollback": "PASS",
+    "performance": "PASS",
+    "rateAndRevocation": "PASS"
+  },
+  "metrics": {
+    "cap": {
+      "startingViews": 49,
+      "concurrentCreates": 2,
+      "blockedWaitersObserved": 2,
+      "successes": 1,
+      "finalViews": 50,
+      "independentOwnerProgress": true
+    },
+    "performance": {
+      "savedViews": 50,
+      "addedSyntheticRequests": 100,
+      "totalRequests": 112,
+      "samples": [
+        {
+          "listMs": 10.78287999999975,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 12.110740000000078,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 8.09436100000039,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 7.709468000000015,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 7.778986000000259,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.269899999999325,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 7.472716000000219,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.481488000000354,
+          "applySql": 10,
+          "resultRows": 20
+        },
+        {
+          "listMs": 6.566254999999728,
+          "listSql": 9,
+          "preferenceSelects": 1,
+          "applyMs": 5.36460199999965,
+          "applySql": 10,
+          "resultRows": 20
+        }
+      ],
+      "claim": "Local synthetic samples only; no enterprise SLO"
+    },
+    "rate": {
+      "successfulWindowReads": 120,
+      "rejectedNextRead": 429,
+      "retryAfterSeconds": 60,
+      "fakeClockAdvanced": true,
+      "revokedSession": 401
+    }
+  },
+  "aiCalls": 0,
+  "synthetic": true,
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/saved-views.integration.test.mjs"
+}

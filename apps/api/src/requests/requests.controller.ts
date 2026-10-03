@@ -30,6 +30,9 @@ export class RequestsController {
   @ApiQuery({name:'limit',required:false,type:Number}) @ApiQuery({name:'cursor',required:false,type:String})
   @ApiQuery({name:'status',required:false,enum:contracts.statuses}) @ApiQuery({name:'priority',required:false,enum:contracts.priorities})
   @ApiQuery({name:'category',required:false,enum:contracts.categories})
+  @ApiQuery({name:'from',required:false,type:String,description:'Inclusive UTC creation instant'})
+  @ApiQuery({name:'to',required:false,type:String,description:'Exclusive UTC creation instant; after from'})
+  @ApiQuery({name:'assigneeId',required:false,type:String,description:'MANAGER only; current active STAFF UUID'})
   async mine(@Query() query:unknown,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response) {
     return {...await this.queries.list(req.auth!,query,'mine'),requestId:res.locals.requestId};
   }
@@ -38,6 +41,9 @@ export class RequestsController {
   @ApiQuery({name:'limit',required:false,type:Number}) @ApiQuery({name:'cursor',required:false,type:String})
   @ApiQuery({name:'status',required:false,enum:contracts.statuses}) @ApiQuery({name:'priority',required:false,enum:contracts.priorities})
   @ApiQuery({name:'category',required:false,enum:contracts.categories})
+  @ApiQuery({name:'from',required:false,type:String,description:'Inclusive UTC creation instant'})
+  @ApiQuery({name:'to',required:false,type:String,description:'Exclusive UTC creation instant; after from'})
+  @ApiQuery({name:'assigneeId',required:false,type:String,description:'MANAGER only; current active STAFF UUID'})
   async queue(@Query() query:unknown,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response) {
     return {...await this.queries.list(req.auth!,query,'queue'),requestId:res.locals.requestId};
   }
@@ -46,6 +52,9 @@ export class RequestsController {
   @ApiQuery({name:'limit',required:false,type:Number}) @ApiQuery({name:'cursor',required:false,type:String})
   @ApiQuery({name:'status',required:false,enum:contracts.statuses}) @ApiQuery({name:'priority',required:false,enum:contracts.priorities})
   @ApiQuery({name:'category',required:false,enum:contracts.categories})
+  @ApiQuery({name:'from',required:false,type:String,description:'Inclusive UTC creation instant'})
+  @ApiQuery({name:'to',required:false,type:String,description:'Exclusive UTC creation instant; after from'})
+  @ApiQuery({name:'assigneeId',required:false,type:String,description:'MANAGER only; current active STAFF UUID'})
   async list(@Query() query:unknown,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response) {
     return {...await this.queries.list(req.auth!,query,'manager'),requestId:res.locals.requestId};
   }
@@ -54,6 +63,9 @@ export class RequestsController {
   @ApiQuery({name:'limit',required:false,type:Number}) @ApiQuery({name:'cursor',required:false,type:String})
   @ApiQuery({name:'status',required:false,enum:contracts.statuses}) @ApiQuery({name:'priority',required:false,enum:contracts.priorities})
   @ApiQuery({name:'category',required:false,enum:contracts.categories})
+  @ApiQuery({name:'from',required:false,type:String,description:'Inclusive UTC creation instant'})
+  @ApiQuery({name:'to',required:false,type:String,description:'Exclusive UTC creation instant; after from'})
+  @ApiQuery({name:'assigneeId',required:false,type:String,description:'MANAGER only; current active STAFF UUID'})
   async approvals(@Query() query:unknown,@Req() req:AuthenticatedRequest,@Res({passthrough:true}) res:Response) {
     return {...await this.queries.list(req.auth!,query,'approvals'),requestId:res.locals.requestId};
   }

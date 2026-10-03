@@ -58,6 +58,8 @@ import { TemplateController } from './templates/template.controller.js';
 import { TemplateService } from './templates/template.service.js';
 import { RoutingService } from './routing/routing.service.js';
 import { RoutingController, RequestRoutingController } from './routing/routing.controller.js';
+import { SavedViewController } from './saved-views/saved-view.controller.js';
+import { SavedViewService } from './saved-views/saved-view.service.js';
 
 export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; recommendationProvider?:StructuredProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean; slaAlertClock?: SlaAlertClock } = {}) {
   if(env.NODE_ENV!=='test'&&(options.aiProvider||options.recommendationProvider||options.aiWorker!==undefined||options.embeddingProvider||options.knowledgeWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
@@ -66,10 +68,10 @@ export async function createApplication(env: ApiEnvironment, options: { database
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
   @Module({
-    controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController, RequestCollaborationController,TemplateController,RoutingController,RequestRoutingController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
+    controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController, RequestCollaborationController,TemplateController,RoutingController,RequestRoutingController,SavedViewController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
     providers: [
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
-      RequestStateMachineService, RequestQueryService, InternalNoteService, RequestCollaborationService, TemplateService, RoutingService, WorkflowGuard, DashboardService,
+      RequestStateMachineService, RequestQueryService, InternalNoteService, RequestCollaborationService, TemplateService, RoutingService, SavedViewService, WorkflowGuard, DashboardService,
       AnalysisWorker,AnalysisQueryService,
       RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,SlaAlertService,AnalyticsService,
       { provide: SLA_ALERT_CLOCK, useValue: options.slaAlertClock ?? databaseNow }, { provide: SLA_ALERT_LOG, useValue: log },

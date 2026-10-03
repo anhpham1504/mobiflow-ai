@@ -19,6 +19,12 @@ Fresh1→11, M20 10→11, M19 9→10→11 and V1.2 7→8→9→10→11 are verif
 
 ## Conventions and invariants
 
+### M23 SavedRequestView (2026-10-04)
+
+Additive migration13 `20261004010000_m23_saved_request_views` adds one table. Historical migrations1–12 unchanged. UUID PK, ownerUserId User FK RESTRICT, name TEXT1–80 Unicode points, normalizedName from shared NFC+trim+lowercase (retain accents), schemaVersion, filters JSONB object, positive version default1, createdAt/updatedAt timestamptz. Unique(ownerUserId,normalizedName), owner/createdAt DESC/id DESC index. No role/scope/results/counts. Single `saved-request-view.v1`; server validates version and complete JSON on write/read/apply, otherwise unavailable.
+
+Owner User FOR UPDATE precedes identity check and count+insert in one transaction: max50 under concurrent distinct names, no global lock. Atomic expectedVersion update increments version; delete uses the same guard. Shared application normalization derives identical create/update keys, and DB uniqueness catches concurrent collisions; no second locale-dependent DB normalization. Runtime SELECT/INSERT/DELETE and column UPDATE(name,normalizedName,schemaVersion,filters,version,updatedAt) only; no owner/id/createdAt UPDATE, TRUNCATE or DDL. User deletion stays RESTRICT. Preferences need no immutable revision history. Minimal AuditLog writes share the transaction and omit names/filters/Request FK. Isolated fresh1→13, M22 12→13 and V1.2 7→8→9→10→11→12→13 preserve prior rows/checksums including M18–M22 data. Normal developer DB stays7.
+
 ### M20 operational templates (2026-10-02)
 
 Authorized by [M20 plan](../v1.3/M20_RESPONSE_CHECKLIST_TEMPLATES_IMPLEMENTATION_PLAN.md), migration10 `20261002030000_m20_response_checklist_templates`, additive over the nine unchanged historical migrations. OperationalTemplateType RESPONSE/CHECKLIST and OperationalTemplateStatus ACTIVE/ARCHIVED are database enums. OperationalTemplate holds current searchable name/description, currentRevision and creator/time/archive metadata; names are not unique identities. OperationalTemplateRevision preserves immutable name/description/body/creator/time, itemCount and unique(templateId,revision). Ordered OperationalTemplateChecklistItemRevision stores text/required under primary key(revisionId,position). RESPONSE body1–4,000 with itemCount0; CHECKLIST no body,1–30 ordered text1–500 items. Shared schemas count Unicode code points. No arbitrary JSON payloads.
