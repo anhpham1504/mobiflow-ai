@@ -1,0 +1,8 @@
+{
+  "command": "node --env-file=.env scripts/verification/m21-final-sanity.mjs",
+  "startedAt": "2026-10-02T10:10:58.385Z",
+  "finishedAt": "2026-10-02T10:11:05.608Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m21/gates/M21_FINAL_SANITY-2026-10-02T10-10-58-385Z.txt"
+}

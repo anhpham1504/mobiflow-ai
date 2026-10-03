@@ -14,7 +14,7 @@ function navFor(role:Role|null){
   const work:NavItem[]=role==='USER'?
     [{href:'/user/requests',label:'Yêu cầu của tôi',icon:BriefcaseBusiness},{href:'/notifications',label:'Thông báo',icon:Bell}]:role==='STAFF'?
     [{href:'/staff/work-queue',label:'Công việc của tôi',icon:ClipboardCheck},{href:'/notifications',label:'Thông báo',icon:Bell}]:
-    [{href:'/manager/requests',label:'Yêu cầu',icon:BriefcaseBusiness},{href:'/manager/approvals',label:'Chờ phê duyệt',icon:UsersRound},{href:'/manager/templates',label:'Mẫu phản hồi & checklist',icon:ClipboardCheck},{href:'/notifications',label:'Thông báo',icon:Bell}];
+    [{href:'/manager/requests',label:'Yêu cầu',icon:BriefcaseBusiness},{href:'/manager/approvals',label:'Chờ phê duyệt',icon:UsersRound},{href:'/manager/templates',label:'Mẫu phản hồi & checklist',icon:ClipboardCheck},{href:'/manager/routing-rules',label:'Quy tắc định tuyến',icon:UsersRound},{href:'/notifications',label:'Thông báo',icon:Bell}];
   return [{label:'Tổng quan',items:overview},{label:'Công việc',items:work},...(role==='MANAGER'?[{label:'AI & tri thức',items:[{href:'/manager/knowledge',label:'Kho tri thức',icon:BookOpen}]},{label:'Quản trị',items:[{href:'/manager/analytics',label:'Chất lượng & analytics',icon:BarChart3},{href:'/',label:'Trạng thái hệ thống',icon:Activity}]}]:[])];
 }
 function Brand(){return <Link href="/" className="brand" aria-label="MobiFlow AI — Trang chủ"><span className="brand-mark" aria-hidden="true">m</span><span>MobiFlow <b>AI</b></span></Link>;}

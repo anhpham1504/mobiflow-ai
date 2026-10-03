@@ -1,0 +1,627 @@
+{
+  "checkedAt": "2026-10-03T15:28:42.957Z",
+  "phase": "final",
+  "result": "PASS",
+  "baseline": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+  "branch": "feat/v1.3-rule-based-routing",
+  "initialInventory": {
+    "total": 63,
+    "modified": 18,
+    "new": 45
+  },
+  "finalInventory": {
+    "total": 65,
+    "modified": 18,
+    "new": 47,
+    "categories": {
+      "A": 2,
+      "B": 6,
+      "C": 2,
+      "D": 6,
+      "E": 5,
+      "F": 9,
+      "G": 13,
+      "H": 22,
+      "I": 0,
+      "J": 0
+    }
+  },
+  "inventory": [
+    {
+      "path": "apps/api/package.json",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "6054fb279ff99aefdc732c5bfbc8bf4f04869869"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002040000_m21_rule_based_routing/migration.sql",
+      "category": "A",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "c0178b3792b96aae8f34715fece73f654444cb0f"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "category": "A",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "afee8fbb98188c54c9b40600317c942a6c2ec857"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "8db039ab9a87220c8112ca8da946040412ce4b25"
+    },
+    {
+      "path": "apps/api/src/authorization/authorization-policy.service.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "a5b83f7a6668088c8b2b387a837ff8310d813f23"
+    },
+    {
+      "path": "apps/api/src/routing/routing-evaluator.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "275b61e473f7928f504889134c4f26cffa72d0fd"
+    },
+    {
+      "path": "apps/api/src/routing/routing-facts.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "3c0880b29a807cb833268ba242b6dbebc30b32bf"
+    },
+    {
+      "path": "apps/api/src/routing/routing.controller.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "7400c42556da012175560e96753236b95a199d04"
+    },
+    {
+      "path": "apps/api/src/routing/routing.service.ts",
+      "category": "B",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "fdd859b865956fddce0d44d93bf734597912c83c"
+    },
+    {
+      "path": "apps/api/test/helpers/routing-fixture.mjs",
+      "category": "E",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "d4638072cd4d64471879f3467d89545e7ed41224"
+    },
+    {
+      "path": "apps/api/test/routing.integration.test.mjs",
+      "category": "E",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "07475808a8feda49836163e24d3354de7c22649f"
+    },
+    {
+      "path": "apps/api/test/routing.test.mjs",
+      "category": "E",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "f4752662762a7a2b087347116cadb0227a791b7c"
+    },
+    {
+      "path": "apps/web/e2e/routing.spec.mjs",
+      "category": "E",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "c1d7cbe6a71178f59516529d51cceffa55a1504a"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "d8148a45b3b23803ac799a72cfe4f24535e6c821"
+    },
+    {
+      "path": "apps/web/src/app/manager/routing-rules/page.tsx",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "13d51f6d7f3b37ba56d4afb47f3bb3058ddebc12"
+    },
+    {
+      "path": "apps/web/src/components/request-detail.tsx",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "32cf5b44932feca14ccdfb418f473edc64e7f66b"
+    },
+    {
+      "path": "apps/web/src/components/routing-assignment.tsx",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "e14b46361b3b377028c55ad15b470b2453c42222"
+    },
+    {
+      "path": "apps/web/src/components/routing-management.tsx",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "eaf81e3d0aa1cb1270b6cd31fa1c616cace5bc5c"
+    },
+    {
+      "path": "apps/web/src/components/session-shell.tsx",
+      "category": "D",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "adbd56c90dc3e62d6f6345612d3320f881e126bc"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "52bc45a27b2dba5cfe120eba81c6c1c4df32e1e3"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "4a7fa845a6076749228084fecc257eaf8e8b6de8"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "5c75a7cad2b4b2f153f4d9443804f2680d10658b"
+    },
+    {
+      "path": "docs/specs/BUSINESS_WORKFLOW.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "1458234df12207bf5241cfbdc34182ff4fc2b05d"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "5bfac1d959a95e530b0cccb0f11e76d4947f929c"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "6992916863c553b8ee3c88bf2fde79df49043488"
+    },
+    {
+      "path": "docs/specs/UI_SPEC.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "31950920a753637b2631c8be58c5012f700d4e68"
+    },
+    {
+      "path": "docs/v1.3/M21_CHECKPOINT_CLOSURE.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "a3dc33ebb19033a7325af7a57afb23a8970c98b5"
+    },
+    {
+      "path": "docs/v1.3/M21_RULE_BASED_ROUTING_IMPLEMENTATION_PLAN.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "95674faa81afef502ad0099817a207ccc7823f18"
+    },
+    {
+      "path": "docs/v1.3/M21_RULE_BASED_ROUTING_VERIFICATION.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "2016bebc2d553150482cb3cf52560e3364968963"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "0871b3db8cb86df34ba4869d06603e2efcdb631a"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "c5e250665f763b57b679f5166ea0c2884c977613"
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_API.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "2d489f74aa471ae129f84db771dcd72dcbe7c03c"
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_BROWSER.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "732256361811d0356428d34e5408d39ffdba1e53"
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_CHECKPOINT_AUDIT.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": null
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_DATABASE.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "08574c19587a665d4b21ff6bb48612ec3e7bf2d8"
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_FINAL.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "c20a01545a7cfbed9b07a1a234f916d1cb852dcf"
+    },
+    {
+      "path": "docs/v1.3/evidence/M21_SECURITY.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "bd3eff04a26148e7cf6c6c6103f73a85b31a4f76"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_BUILD.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "b612f0f91e1f41875492d6acabd6db735a069b74"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_E2E.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "450a4ee83fd353bdf457c2a61fd47d1eb19f52a5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_FINAL_SANITY.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "00784c082a02efe25b038da6fa724ba71ccccad2"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_LINT.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "938b00b3cd55ebb58c9d50ed8914d5e8c2a7edb0"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_SECURITY.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "3fda15ae94ce8c5e08c4c03d2098302dfd7175f2"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_TYPECHECK.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "394f40c27473659978e47e4d829763c72a32b279"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M21_UNIT.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "875b88febd03f951b4e85a82e5e8c9d5f706d7ad"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M21_LINT-96d864032d19.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "c7fc41da547765f0407d41f61158ac5b14b08ab0"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M21_SECURITY-0cbee3a41604.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "6377ec87e9045fdc523490b77f2205eeb30c4b1e"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M21_SECURITY-94e68c6a89c8.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "c982544e2704ff5510a2cda13ef91b4a5436d8b6"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_API-2362bc04fa44.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "ec66d9262cd75940f940e61f7694e58a98e4b6e3"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_API-796b83279a30.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "4209cd455eacb8bcbeb447c48eb6e890b609abfe"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_BROWSER-2df270b71019.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "4f608efdace0a2121e1d9d7ae7708a4868ce5850"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_BROWSER-60ac59a15fbc.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "7070c2dd977629492babd6560ecc4af6207d7939"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_BROWSER-7073475e8758.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "618012c9360e8f11c1993f1f3faf32438c70ba13"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M21_SECURITY-bfcfccd7b280.json",
+      "category": "H",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "4c4d7d6d6a1133d1d414bef14739701718424a1d"
+    },
+    {
+      "path": "docs/verification/MILESTONE_21_VERIFICATION.md",
+      "category": "G",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "9963dbc8cfa89d1b9e12c78cc0418ddaf2153229"
+    },
+    {
+      "path": "package.json",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "cb603594d3b13f2e85732aa7df6bbeadf6c99205"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "category": "C",
+      "disposition": "INCLUDE",
+      "change": "MODIFIED",
+      "gitBlob": "d7a492721e5970bf2b0ce667f2128d3a80817878"
+    },
+    {
+      "path": "packages/contracts/src/routing.ts",
+      "category": "C",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "dcd5da6cf9a7d7c84b54980269cc5545098c89df"
+    },
+    {
+      "path": "playwright.m21.config.mjs",
+      "category": "E",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "8d970e219e7d789bf8b3c435e65884dd2e266034"
+    },
+    {
+      "path": "scripts/verification/m21-browser.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "d91814f9ad04ef72722227fd20e18b6389490c66"
+    },
+    {
+      "path": "scripts/verification/m21-capture.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "2dee77a81ad9c6dfb5d4c1441ace4f54b9ccf68b"
+    },
+    {
+      "path": "scripts/verification/m21-database.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "dd2c5b3f3d71b38c36bf71a81933e2c8af29a570"
+    },
+    {
+      "path": "scripts/verification/m21-final-sanity.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "d16f81c439c7cd54282f6deb078f49b66ab875b8"
+    },
+    {
+      "path": "scripts/verification/m21-integration.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "f00abd50660d9eba26945d7682125a7c6c137c27"
+    },
+    {
+      "path": "scripts/verification/m21-migrations.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "effabd010e674755d1ee91cfa22654eb59da9453"
+    },
+    {
+      "path": "scripts/verification/m21-security.mjs",
+      "category": "F",
+      "disposition": "INCLUDE",
+      "change": "NEW",
+      "gitBlob": "60e55d252bc7f9e88c28d578c12857f83b50a3fe"
+    }
+  ],
+  "productChangedDuringClosure": false,
+  "acceptedRestoredContentVerified": true,
+  "protectedPaths": [
+    "apps/api/src/requests",
+    "apps/api/src/templates",
+    "apps/api/src/ai",
+    "apps/api/src/knowledge",
+    "apps/api/src/analytics",
+    "apps/api/src/dashboard",
+    "packages/contracts/src/workflow.ts",
+    "packages/contracts/src/templates.ts",
+    "packages/contracts/src/internal-notes.ts",
+    "packages/config",
+    "package-lock.json",
+    "scripts/demo",
+    "compose.yaml",
+    "compose.yml",
+    ".env.example",
+    "apps/api/Dockerfile",
+    "apps/web/Dockerfile",
+    "docs/reference",
+    "docs/v1.2"
+  ],
+  "migrationIntegrity": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "baselineBlob": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+      "currentBlob": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "baselineBlob": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+      "currentBlob": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "baselineBlob": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+      "currentBlob": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+      "baselineBlob": "3186661f01426396ad27fce70f78a92f681f5d61",
+      "currentBlob": "3186661f01426396ad27fce70f78a92f681f5d61"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+      "baselineBlob": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+      "currentBlob": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+      "baselineBlob": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+      "currentBlob": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+      "baselineBlob": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4",
+      "currentBlob": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+      "baselineBlob": "374e668627b39b27deb9d95e2e10ca201fcdd40b",
+      "currentBlob": "374e668627b39b27deb9d95e2e10ca201fcdd40b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+      "baselineBlob": "c06546a4a93eae1dc69066a90cb7d104d514780b",
+      "currentBlob": "c06546a4a93eae1dc69066a90cb7d104d514780b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+      "baselineBlob": "61e5d3b03e509a8c1afdcd35e20fce23a8b0288c",
+      "currentBlob": "61e5d3b03e509a8c1afdcd35e20fce23a8b0288c"
+    }
+  ],
+  "repositoryMigrations": 11,
+  "developerMigrations": 7,
+  "developerDatabase": "Accepted M21 metadata; no closure DB connection or mutation",
+  "acceptedTests": {
+    "lint": "PASS,0 warnings",
+    "typecheck": "PASS",
+    "unit": "198/198",
+    "build": "PASS",
+    "database": "four paths PASS",
+    "integration": "11/11",
+    "security": "PASS,0 findings",
+    "e2e": "4/4",
+    "axe": "12 scans,0 violations"
+  },
+  "productTestsRerun": false,
+  "reason": "Closure documentation/evidence only; reviewed accepted tests and unchanged content",
+  "keywordHitCount": 58,
+  "keywordDisposition": "Environment variable names, public synthetic demo credentials, dynamically generated isolated test tokens and negative-test/log-redaction assertions; no embedded live credentials",
+  "debugHits": [
+    {
+      "path": "apps/api/src/app.ts",
+      "line": 64
+    },
+    {
+      "path": "apps/api/test/helpers/routing-fixture.mjs",
+      "line": 37
+    },
+    {
+      "path": "scripts/verification/m21-final-sanity.mjs",
+      "line": 55
+    },
+    {
+      "path": "scripts/verification/m21-migrations.mjs",
+      "line": 100
+    },
+    {
+      "path": "scripts/verification/m21-security.mjs",
+      "line": 68
+    }
+  ],
+  "debugDisposition": "Existing app safe JSON logger and intentional verification JSON result output / source-check regex; no introduced product debug statement, focused test or accidental skip",
+  "findings": [],
+  "preExistingFutureTerms": [
+    {
+      "path": "apps/web/src/components/request-detail.tsx",
+      "line": 77,
+      "disposition": "Unchanged baseline line; existing AI job-status UI polling, not routing or M22"
+    }
+  ],
+  "liveSecrets": 0,
+  "privateRealData": 0,
+  "m22ProductCode": 0,
+  "absoluteMachinePaths": 0,
+  "unrelated": 0,
+  "runtimePrivateCandidates": 0,
+  "excludedRuntimeDirectories": [
+    "artifacts/",
+    ".env",
+    "node_modules/",
+    "apps/web/.next/",
+    "coverage/"
+  ],
+  "evidencePolicy": "Sanitized JSON only; local raw stdout/stderr, screenshots, traces and fixture credentials excluded. Prior failed iterations retained.",
+  "independentExternalReview": "NOT PERFORMED — agent closure audit of accepted implementation",
+  "gitPublication": "Preparation snapshot before the single authorized commit/push; actual SHA and remote/clean-tree checks belong to final chat handoff",
+  "selfHash": "Omitted for this audit file to avoid recursive self-reference"
+}

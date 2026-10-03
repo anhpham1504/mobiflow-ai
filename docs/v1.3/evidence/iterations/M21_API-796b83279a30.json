@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-02T09:34:00.823Z",
+  "synthetic": true,
+  "database": "mobiflow_m21_test",
+  "checks": {
+    "RBAC / absent and scoped request IDOR / A01 policy reuse / no delete": "PASS",
+    "Strict JSON/query / injection / fact overrides / origin / media / size": "PASS",
+    "Manager CRUD lifecycle / immutable paginated history / search / targets / safe atomic audit": "PASS",
+    "Two writers / activate-archive / revise-archive / lifecycle ABA staleness": "PASS",
+    "Authoritative null facts / MATCH / NO_MATCH / tie / CONFLICT / priority / all workflow tables unchanged": "PASS",
+    "Missing/inactive/empty-eligible target / fail closed without lower-priority redirect": "PASS",
+    "Stale rule snapshot detectable / stale expectedVersion409 / no partial protected writes": "PASS",
+    "Explicit human assignment / target override / M19 one fan-out / M18 privacy / M20 provenance unchanged / SLA unchanged": "PASS",
+    "Physical row-order determinism /50x10 mixed rules / batched SQL and actual latency": "PASS",
+    "Generated OpenAPI refs / unique IDs / bearer / safe logs / zero AI activity": "PASS"
+  },
+  "performance": {
+    "fixture": {
+      "rules": 50,
+      "active": 33,
+      "inactive": 17,
+      "conditionsPerRule": 10
+    },
+    "activeRuleLoadSql": 2,
+    "evaluationSql": 9,
+    "ruleListSql": 7,
+    "evaluationSamplesMs": [
+      15.65,
+      13.39,
+      21.78,
+      14.83,
+      14.05
+    ],
+    "sqlCountsIncludeTransactionAndIdentity": true,
+    "NPlusOne": false,
+    "enterpriseSlo": "NOT CLAIMED"
+  },
+  "rateWaitsSeconds": [],
+  "aiCalls": 0,
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/routing.integration.test.mjs"
+}

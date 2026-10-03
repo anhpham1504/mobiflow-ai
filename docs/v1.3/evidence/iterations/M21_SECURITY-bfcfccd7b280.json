@@ -1,0 +1,103 @@
+{
+  "checkedAt": "2026-10-02T10:06:37.862Z",
+  "result": "PASS",
+  "baseline": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+  "scope": "Focused source/credential review backed by real PostgreSQL/HTTP/race/rollback and production-browser evidence",
+  "sourceReview": {
+    "backendManagerOnlyAndLiveIdentity": true,
+    "scopedRequestBeforeFacts": true,
+    "noFactOverridesAndStrictAllowlist": true,
+    "narrowFactsNoPrivateContext": true,
+    "pureStableEvaluator": true,
+    "liveSharedTargetEligibilityAndBoundSql": true,
+    "versionedAtomicRuleWrites": true,
+    "immutableRevisionAndTerminalArchive": true,
+    "leastPrivilegeNoDeleteApi": true,
+    "boundedBatchedReadSnapshot": true,
+    "safeResourceAudit": true,
+    "noBusinessWrites": true,
+    "noStoreEscapedUi": true,
+    "prefillRechecksNoAutoStaff": true,
+    "boundedFailureRetainsManual": true
+  },
+  "migrationFreeze": [
+    {
+      "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+      "baseline": "441773376ce58a9ca853dcdaa21b2f55238b638e",
+      "current": "441773376ce58a9ca853dcdaa21b2f55238b638e"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+      "baseline": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436",
+      "current": "e4f18303d8a2ed928efaf7202df4f6b4bf3db436"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+      "baseline": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0",
+      "current": "4cada5c20b7e8d8762df29f4c634bc02edfc41e0"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+      "baseline": "3186661f01426396ad27fce70f78a92f681f5d61",
+      "current": "3186661f01426396ad27fce70f78a92f681f5d61"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+      "baseline": "cb8d4e02c16ad01424f4da4939de2005fbf493b6",
+      "current": "cb8d4e02c16ad01424f4da4939de2005fbf493b6"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+      "baseline": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5",
+      "current": "bfc6b9d5d69a19df3ef5d3f633a6445df2c05bb5"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+      "baseline": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4",
+      "current": "6dc3800d4e35e244180e4c30149d8cd026d8dbd4"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+      "baseline": "374e668627b39b27deb9d95e2e10ca201fcdd40b",
+      "current": "374e668627b39b27deb9d95e2e10ca201fcdd40b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+      "baseline": "c06546a4a93eae1dc69066a90cb7d104d514780b",
+      "current": "c06546a4a93eae1dc69066a90cb7d104d514780b"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+      "baseline": "61e5d3b03e509a8c1afdcd35e20fce23a8b0288c",
+      "current": "61e5d3b03e509a8c1afdcd35e20fce23a8b0288c"
+    }
+  ],
+  "preservedOwners": [
+    "apps/api/src/requests",
+    "apps/api/src/templates",
+    "apps/api/src/ai",
+    "apps/api/src/knowledge",
+    "apps/api/src/analytics",
+    "apps/api/src/dashboard",
+    "packages/contracts/src/workflow.ts",
+    "packages/contracts/src/internal-notes.ts",
+    "packages/contracts/src/templates.ts",
+    "apps/web/src/components/template-management.tsx",
+    "apps/web/src/components/template-selector.tsx",
+    "apps/web/src/components/checklist-draft-editor.tsx",
+    "scripts/demo",
+    "packages/config",
+    "package-lock.json",
+    "docker-compose.yml",
+    "compose.yaml"
+  ],
+  "apiCheckedAt": "2026-10-02T09:50:36.641Z",
+  "browserRunId": "402ca1b0-3ba2-4227-a9e9-130fcdfbffb6",
+  "filesScanned": 55,
+  "bundleFilesScanned": 24,
+  "findings": [],
+  "developerMigrations": 7,
+  "developerDatabaseModified": false,
+  "ollama": "NOT RUN — no probe/start/generation required",
+  "limitations": "Targeted review, not penetration testing, WCAG certification, live AI evaluation or enterprise load SLO."
+}

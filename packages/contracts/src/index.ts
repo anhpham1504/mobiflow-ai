@@ -26,3 +26,4 @@ export type Readiness = z.infer<typeof readinessSchema>;
 export type ReadinessResponse = z.infer<typeof readinessResponseSchema>;
 export * from './internal-notes.js';
 export * from './templates.js';
+export * from './routing.js';

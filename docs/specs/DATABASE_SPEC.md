@@ -1,6 +1,21 @@
 # Database Specification
 
-Authority: master-plan §5, M2–M9; supporting choices implement the frozen contracts without changing product scope. This is a logical schema, not an applied Prisma migration. PostgreSQL with pgvector in one instance; Prisma for supported types and a parameterized vector repository as required.
+Authority: master-plan §5, M2–M9; later authorized storage amendments are recorded below. PostgreSQL with pgvector in one instance; Prisma for supported types and parameterized SQL where required. Verification records distinguish the implemented repository schema from any applied environment.
+
+## M21 routing storage amendment (2026-10-02)
+
+Migration11 `20261002040000_m21_rule_based_routing` adds `RoutingRuleStatus`, `RoutingRule` and `RoutingRuleRevision` only. Historical migrations1–10 remain byte-identical. No Request/Assignment/SLA/Checklist/message/AI column changes or developer DB migration.
+
+| Entity | Stored contract |
+|---|---|
+| RoutingRule | UUID; INACTIVE default / ACTIVE / terminal ARCHIVED; currentRevision≥1; version≥1; creator FK and created/updated/archived timestamps; archive status/timestamp consistency |
+| RoutingRuleRevision | UUID; rule FK; positive revision; name1–120, nullable description1–500; priority1–10000; Team FK RESTRICT; bounded typed conditions JSONB; creator FK/timestamp; unique(ruleId,revision) |
+
+Revision JSON is data only. `m21_valid_conditions` enforces exact field/operator/value keys, existing enum values, EQ one value / IN1–20, and1–10 conditions. The parent composite current-pointer FK is deferred to permit an atomic parent/revision insert. Deferred parent/child triggers enforce contiguous revisions from1 to currentRevision; no gaps, extra append or pointer rollback. BEFORE UPDATE/DELETE blocks revision mutation even through ordinary owner DML. Parent trigger fixes identity/creation fields, requires version+1, permits currentRevision unchanged or+1 and rejects changes to archived parents. Target/creator/history FKs restrict deletion. Indexes support status/list and parent/history pagination.
+
+Runtime role has SELECT/INSERT on both tables and column-scoped UPDATE(status,currentRevision,version,updatedAt,archivedAt) on the parent. It has no whole-table UPDATE, revision UPDATE/DELETE, routing DELETE/TRUNCATE or DDL. All normal writes come through the role-authorized service; no trigger can protect against a database owner deliberately disabling constraints. Rule row locks serialize revision/lifecycle changes; expectedRevision plus expectedRuleVersion catches status ABA. Definition writes and safe AuditLog rows commit together. Evaluation uses RepeatableRead, batches target eligibility and writes no business row.
+
+Fresh1→11, M20 10→11, M19 9→10→11 and V1.2 7→8→9→10→11 are verified only on isolated synthetic `mobiflow_m21_test`; compare all preexisting row values including seeded notes/mentions/watchers/templates/provenance and domain/AI rows. Developer migration metadata is read-only and remains7. Detailed results: [M21 verification](../v1.3/M21_RULE_BASED_ROUTING_VERIFICATION.md).
 
 ## Conventions and invariants
 

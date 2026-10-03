@@ -1,0 +1,172 @@
+{
+  "checkedAt": "2026-10-02T09:42:49.294Z",
+  "runId": "bacdbcb7-f191-4072-978b-c0b07c86292f",
+  "result": "PASS",
+  "synthetic": true,
+  "database": "mobiflow_m21_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33300,
+    33301
+  ],
+  "stats": {
+    "startTime": "2026-10-02T09:42:31.432Z",
+    "duration": 17833.144,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "bacdbcb7-f191-4072-978b-c0b07c86292f",
+      "result": "PASS",
+      "create": true,
+      "typedEQIN": true,
+      "revise": true,
+      "activateDeactivate": true,
+      "immutableHistory": true,
+      "archiveConfirmKeyboardFocus": true,
+      "searchStatus": true,
+      "literalNameDescription": true
+    },
+    {
+      "runId": "bacdbcb7-f191-4072-978b-c0b07c86292f",
+      "result": "PASS",
+      "localPrefillNoWrite": true,
+      "noStaffAutoSelect": true,
+      "focusStaff": true,
+      "humanOverride": true,
+      "explicitProtectedAssignment": true,
+      "explicitReassign": true,
+      "SLAClockPreserved": true,
+      "M20TemplateDraft": true,
+      "userNoMetadata": true
+    },
+    {
+      "runId": "bacdbcb7-f191-4072-978b-c0b07c86292f",
+      "result": "PASS",
+      "conflictNoPrefill": true,
+      "noMatchManual": true,
+      "failureManual": true,
+      "loading": true,
+      "retry": true,
+      "staleRuleRefusesOldPrefill": true,
+      "staleRequestApply": true,
+      "staleProtectedSubmit409": true,
+      "failuresAreTransportFixtures": true
+    },
+    {
+      "runId": "bacdbcb7-f191-4072-978b-c0b07c86292f",
+      "result": "PASS",
+      "scans": [
+        {
+          "surface": "rule-management-editor",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "rule-management-editor",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "rule-management-editor",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "rule-management-editor",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-reassignment",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-reassignment",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-reassignment",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-reassignment",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-manual-draft",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-manual-draft",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-manual-draft",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        },
+        {
+          "surface": "request-manual-draft",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "allViolations": [],
+          "overflow": false
+        }
+      ],
+      "consoleErrors": [],
+      "xssRequests": [],
+      "keyboardOrder": true,
+      "literalTarget": true,
+      "serious": 0,
+      "critical": 0
+    }
+  ],
+  "aiCalls": 0,
+  "artifactDirectory": "artifacts/m21/browser-runs/bacdbcb7-f191-4072-978b-c0b07c86292f",
+  "limitations": "Real PostgreSQL/API and production Next;503/delay transport fixtures explicitly labeled. No live AI or full WCAG certification."
+}

@@ -1,0 +1,8 @@
+{
+  "command": "npm test",
+  "startedAt": "2026-10-02T09:57:41.848Z",
+  "finishedAt": "2026-10-02T09:58:04.364Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m21/gates/M21_UNIT-2026-10-02T09-57-41-848Z.txt"
+}

@@ -1,0 +1,8 @@
+{
+  "command": "npm run verify:security:m21",
+  "startedAt": "2026-10-02T10:05:42.251Z",
+  "finishedAt": "2026-10-02T10:05:42.742Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m21/gates/M21_SECURITY-2026-10-02T10-05-42-251Z.txt"
+}

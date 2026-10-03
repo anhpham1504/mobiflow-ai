@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:e2e:m21",
+  "startedAt": "2026-10-02T10:02:19.910Z",
+  "finishedAt": "2026-10-02T10:03:14.126Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m21/gates/M21_E2E-2026-10-02T10-02-19-910Z.txt"
+}

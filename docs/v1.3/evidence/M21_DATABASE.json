@@ -1,0 +1,161 @@
+{
+  "checkedAt": "2026-10-02T09:28:04.747Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migration": "20261002040000_m21_rule_based_routing",
+  "migrationCount": 11,
+  "checks": [
+    {
+      "baseline": 11,
+      "result": "PASS",
+      "path": "fresh1→11",
+      "upgrades": [],
+      "privileges": {
+        "RoutingRule": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RoutingRuleRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "constraints": "FK/unique/typed JSON/priority/status/contiguity/immutable/lifecycle PASS",
+      "runtimeDdlDenied": true,
+      "fallback": "NOT IMPLEMENTED — optional",
+      "historicalMigrations": "byte-identical"
+    },
+    {
+      "baseline": 10,
+      "result": "PASS",
+      "path": "M20 10→11",
+      "upgrades": [
+        {
+          "from": 10,
+          "to": 11,
+          "tables": 32,
+          "rows": 160
+        }
+      ],
+      "privileges": {
+        "RoutingRule": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RoutingRuleRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "constraints": "FK/unique/typed JSON/priority/status/contiguity/immutable/lifecycle PASS",
+      "runtimeDdlDenied": true,
+      "fallback": "NOT IMPLEMENTED — optional",
+      "historicalMigrations": "byte-identical"
+    },
+    {
+      "baseline": 9,
+      "result": "PASS",
+      "path": "M19 9→10→11",
+      "upgrades": [
+        {
+          "from": 9,
+          "to": 10,
+          "tables": 29,
+          "rows": 157
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "tables": 32,
+          "rows": 160
+        }
+      ],
+      "privileges": {
+        "RoutingRule": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RoutingRuleRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "constraints": "FK/unique/typed JSON/priority/status/contiguity/immutable/lifecycle PASS",
+      "runtimeDdlDenied": true,
+      "fallback": "NOT IMPLEMENTED — optional",
+      "historicalMigrations": "byte-identical"
+    },
+    {
+      "baseline": 7,
+      "result": "PASS",
+      "path": "V1.2 7→8→9→10→11",
+      "upgrades": [
+        {
+          "from": 7,
+          "to": 8,
+          "tables": 26,
+          "rows": 152
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "tables": 27,
+          "rows": 153
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "tables": 29,
+          "rows": 157
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "tables": 32,
+          "rows": 160
+        }
+      ],
+      "privileges": {
+        "RoutingRule": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        },
+        "RoutingRuleRevision": {
+          "read": true,
+          "insert": true,
+          "update": false,
+          "delete": false,
+          "truncate": false
+        }
+      },
+      "constraints": "FK/unique/typed JSON/priority/status/contiguity/immutable/lifecycle PASS",
+      "runtimeDdlDenied": true,
+      "fallback": "NOT IMPLEMENTED — optional",
+      "historicalMigrations": "byte-identical"
+    }
+  ],
+  "developerMigrations": 7,
+  "developerMetadataReadOnly": true,
+  "developerDatabaseModified": false
+}

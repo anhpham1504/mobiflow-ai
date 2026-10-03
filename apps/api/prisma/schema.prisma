@@ -169,6 +169,8 @@ model User {
   feedback                Feedback[]
   operationalTemplates    OperationalTemplate[]
   templateRevisions       OperationalTemplateRevision[]
+  routingRules            RoutingRule[]
+  routingRevisions        RoutingRuleRevision[]
 
   @@index([role, active])
 }
@@ -200,6 +202,7 @@ model Team {
   members     TeamMember[]
   requests    Request[]
   assignments Assignment[]
+  routingRevisions RoutingRuleRevision[]
 }
 
 model TeamMember {
@@ -777,4 +780,46 @@ model AuditLog {
 
   @@index([requestId, createdAt, id])
   @@index([resourceType, resourceId, createdAt])
+}
+
+enum RoutingRuleStatus {
+  ACTIVE
+  INACTIVE
+  ARCHIVED
+}
+
+model RoutingRule {
+  id String @id @default(uuid()) @db.Uuid
+  status RoutingRuleStatus @default(INACTIVE)
+  currentRevision Int @default(1)
+  version Int @default(1)
+  createdById String @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @db.Timestamptz(6)
+  archivedAt DateTime? @db.Timestamptz(6)
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  current RoutingRuleRevision @relation("RoutingCurrent", fields: [id, currentRevision], references: [ruleId, revision], onDelete: Restrict, onUpdate: NoAction)
+  revisions RoutingRuleRevision[] @relation("RoutingRevisions")
+
+  @@index([status, createdAt, id])
+}
+
+model RoutingRuleRevision {
+  id String @id @default(uuid()) @db.Uuid
+  ruleId String @db.Uuid
+  revision Int
+  name String @db.VarChar(120)
+  description String? @db.VarChar(500)
+  priority Int
+  targetTeamId String @db.Uuid
+  conditions Json
+  createdById String @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  rule RoutingRule @relation("RoutingRevisions", fields: [ruleId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  currentFor RoutingRule[] @relation("RoutingCurrent")
+  targetTeam Team @relation(fields: [targetTeamId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  createdBy User @relation(fields: [createdById], references: [id], onDelete: Restrict)
+
+  @@unique([ruleId, revision])
+  @@index([ruleId, createdAt, id])
 }

@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-10-02T09:41:10.127Z",
+  "runId": "3932b88c-4ae2-4400-be50-f41ab6ab11f5",
+  "result": "FAIL",
+  "synthetic": true,
+  "database": "mobiflow_m21_test",
+  "browser": "Microsoft Edge / Playwright",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33300,
+    33301
+  ],
+  "stats": {
+    "startTime": "2026-10-02T09:40:33.334Z",
+    "duration": 36765.366,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "3932b88c-4ae2-4400-be50-f41ab6ab11f5",
+      "result": "PASS",
+      "create": true,
+      "typedEQIN": true,
+      "revise": true,
+      "activateDeactivate": true,
+      "immutableHistory": true,
+      "archiveConfirmKeyboardFocus": true,
+      "searchStatus": true,
+      "literalNameDescription": true
+    }
+  ],
+  "aiCalls": 0,
+  "artifactDirectory": "artifacts/m21/browser-runs/3932b88c-4ae2-4400-be50-f41ab6ab11f5",
+  "limitations": "Real PostgreSQL/API and production Next;503/delay transport fixtures explicitly labeled. No live AI or full WCAG certification."
+}

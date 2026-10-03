@@ -7,6 +7,10 @@ interface RequestOwnership { createdById: string; currentAssigneeId: string | nu
 
 @Injectable()
 export class AuthorizationPolicyService {
+  assertCanRoute(actor: AuthenticatedActor) {
+    if (actor.role !== 'MANAGER') throw new ApiError(403, 'FORBIDDEN', 'Only managers may access routing.');
+  }
+
   templateScope(actor: AuthenticatedActor): Prisma.OperationalTemplateWhereInput {
     if (actor.role === 'STAFF') return { type: 'RESPONSE', status: 'ACTIVE' };
     if (actor.role === 'MANAGER') return {};

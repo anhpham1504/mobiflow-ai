@@ -1,0 +1,8 @@
+{
+  "command": "npm run typecheck",
+  "startedAt": "2026-10-02T09:54:57.411Z",
+  "finishedAt": "2026-10-02T09:55:10.171Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m21/gates/M21_TYPECHECK-2026-10-02T09-54-57-411Z.txt"
+}

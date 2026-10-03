@@ -1,0 +1,8 @@
+{
+  "command": "npm run lint",
+  "startedAt": "2026-10-02T09:54:57.401Z",
+  "finishedAt": "2026-10-02T09:55:12.911Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m21/gates/M21_LINT-2026-10-02T09-54-57-401Z.txt"
+}

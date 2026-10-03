@@ -2,7 +2,7 @@
 
 Status: frozen V1 contract established at M0, 2026-09-28. Authority: master-plan sections 1–3, 11 and 29–46; the [M0 execution request](../reference/M0_EXECUTION_PROMPT.txt) limited the original delivery to M0. Subsequent authorized amendments below define later scope; verification records establish actual implementation.
 
-Current execution authority: [M20 checkpoint closure only](../v1.3/M20_CHECKPOINT_CLOSURE.md), from closed M19 checkpoint `35e4b1c41165fa04348871dee31bd20c28386b47`. The subsequent direct user request permits review, exactly one M20 checkpoint commit and ordinary feature-branch push, then local/remote SHA and clean-tree verification and STOP. No new feature, main merge/push, tag, deployment or developer DB migration/reset/reseed. M21–M24 remain NOT STARTED and V1.3 IN DEVELOPMENT.
+Current execution authority: the later direct [M21 checkpoint closure request](../v1.3/M21_CHECKPOINT_CLOSURE.md), following accepted M21 PASS — READY FOR HUMAN REVIEW from closed M20 checkpoint `b75d15acc2dbbb16d00ce47db8ed891af210a48d` on `feat/v1.3-rule-based-routing`. The [M21 plan](../v1.3/M21_RULE_BASED_ROUTING_IMPLEMENTATION_PLAN.md) and accepted verification remain historical implementation snapshots. Closure authorizes file/evidence review, current authority documentation, exactly one reviewed M21 commit, ordinary push of that exact branch, local/remote SHA and clean-tree verification, then STOP. No new product work, historical test replay, main merge, tag, deployment, developer DB access/migration/reset/reseed, normal-stack restart or Ollama action. M22–M24 remain NOT STARTED and V1.3 IN DEVELOPMENT. Earlier amendments retain their historical execution boundaries.
 
 ## Product and success criteria
 
@@ -61,6 +61,16 @@ These choices resolve unspecified implementation details without adding product 
 M1 must verify compatible package/runtime/container versions, actual Ollama connectivity and installed model names. M4 must verify Vietnamese model behavior. M5 must probe embedding dimension and validate retrieval before selecting/indexing a model. M9 must measure quality/latency/benchmark; no numeric quality success is claimed here. These are explicit later gates, not unresolved business rules or M0 blockers.
 
 ## Acceptance
+
+### Authorized V1.3 M21 amendment (2026-10-02)
+
+M21 adds MANAGER-only deterministic routing rules within existing A01 scope. `RoutingFactsBuilder` projects only canonical Request.category, Request.subcategory and Request.priority; classification may be null before human approval and null never matches. Manual drafts, AI artifacts, free text, notes, mentions, watches and templates are excluded. Shared `ROUTING_FIELD_DEFINITIONS` fixes enum values, field types, normalization and EQ/IN operators. Flat AND combines1–10 conditions; EQ has one exact enum value, IN has1–20 valid values deduplicated/sorted on write. No arbitrary expression, field path or client fact override.
+
+ACTIVE current revisions match at the lowest numeric priority (integer1–10000). All best-priority rules pointing to one Team produce MATCH with every winning revision; different Teams produce CONFLICT and no target. No match produces NO_MATCH. A winning ineligible target yields NO_MATCH/INVALID_TARGET without a lower-priority redirect. Fallback and skill/staff targets are omitted. Eligible Team means active with an active membership to active/available STAFF, using the existing assignment predicate. Never choose staff automatically.
+
+Rules start INACTIVE at revision1/version1. Definitions are immutable revisions; edits append, lifecycle changes increment parent version, archive is terminal. Mutations require expectedRevision and expectedRuleVersion under a row lock, with atomic resource-only safe audit. Evaluation is read-only under a consistent database snapshot; responses are manager-only and no-store. It returns immutable revision identities, explanations and requestVersion. Apply re-evaluates, rejects stale displayed observations, then copies only Team to local form state and clears staff. Actual assignment/reassignment uses unchanged human protected commands and expectedVersion. No persisted routing-acceptance field is added because existing commands have no routing-source channel.
+
+Migration11 adds only routing storage/constraints/grants. Developer DB remains at migration7; all schema/API/browser tests use the guarded synthetic M21 database. No new dependency, notification, background router, SLA policy, analytics, AI context or later milestone. [M21 verification](../v1.3/M21_RULE_BASED_ROUTING_VERIFICATION.md) and [milestone record](../verification/MILESTONE_21_VERIFICATION.md) establish actual results.
 
 ### Authorized V1.3 M20 amendment (2026-10-02)
 

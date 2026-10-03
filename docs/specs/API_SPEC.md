@@ -24,6 +24,27 @@ All request mutations after creation carry `expectedVersion:positive integer`, i
 
 ## Endpoint inventory
 
+### M21 rule-based routing (2026-10-02)
+
+All routes below are under `/api/v1`, live MANAGER-only, guarded by existing access/role/workflow controls and `Cache-Control: no-store`. USER/STAFF403; unauthenticated/revoked/inactive401. Request evaluation reuses the backend Request scope; unknown/out-of-scope404. No new tenant or scope override. Shared strict Zod inputs and responses own generated OpenAPI; existing origin, JSON64KiB, read120/write60 per minute controls apply.
+
+| Method / path | Input | Result |
+|---|---|---|
+| GET /routing-rules | status ACTIVE/INACTIVE/ARCHIVED, q≤120, limit1–50/default20, cursor | Current revisions; SQL search/filter/keyset pagination |
+| GET /routing-rules/targets | Empty query | Eligible Team id/displayName/type/eligible; bounded500, no staff/workload projection |
+| GET /routing-rules/:id | UUID | Current revision and lifecycle metadata; unknown404 |
+| POST /routing-rules | name1–120, optional description1–500 code points, priority1–10000, TEAM target UUID, typed conditions | 201 INACTIVE revision1/version1 |
+| GET /routing-rules/:id/revisions | limit/cursor | Immutable history including archived rules, default20/max50 |
+| POST /routing-rules/:id/revisions | Full definition plus expectedRevision/expectedRuleVersion | 201 revisionN+1, parent versionN+1 |
+| POST /routing-rules/:id/activate | expectedRevision/expectedRuleVersion | 200 ACTIVE; current target revalidated |
+| POST /routing-rules/:id/deactivate | expectedRevision/expectedRuleVersion | 200 INACTIVE; history preserved |
+| POST /routing-rules/:id/archive | expectedRevision/expectedRuleVersion | 200 terminal ARCHIVED; no delete/unarchive |
+| POST /requests/:id/routing/evaluate | Body absent or strict{}, empty query | 200 read-only MATCH / NO_MATCH / CONFLICT |
+
+Condition allowlist: category/subcategory/priority with exact existing enums; EQ exactly one value, IN1–20 values,1–10 flat AND conditions. Reject unknown keys, arbitrary paths, unsupported operators/types, free-text expressions, client facts and execute/autoAssign fields400. Targets must satisfy the shared active Team/membership/available STAFF predicate; invalid target422 INVALID_ROUTING_TARGET. Stale revision/parent version, terminal archive and repeated lifecycle command409 STALE_ROUTING_RULE; no partial write/audit. No API breaking change or new protected business command.
+
+Evaluation returns status, diagnostic, requestVersion, three canonical facts, evaluatedRevisions (rule/revision IDs, revision and parent ruleVersion), best-priority ruleRevisions (name/priority/target and per-condition actual/expected/matched explanation) and nullable suggestedTarget. Equal priority never chooses between different Teams; rule ID sorting affects presentation only. Canonical null facts do not match; invalid winning target suppresses suggestion. No evaluation timestamp/random result, audit, notification or business write. Maximum500 ACTIVE rules,501 detection returns503 ROUTING_LIMIT_EXCEEDED; target lookup has the same500 bound. Failure preserves manual workflow. Existing human assignment/reassignment bodies and expectedVersion remain unchanged. See [M21 plan](../v1.3/M21_RULE_BASED_ROUTING_IMPLEMENTATION_PLAN.md).
+
 ### M20 operational templates (2026-10-02)
 
 M20 adds these strict shared-contract routes and generated OpenAPI operations. All require live authentication, no-store, existing origin/JSON64KiB/read120-write60 per minute guards and safe errors. USER403 everywhere; STAFF list/detail only ACTIVE RESPONSE (prohibited filters/history/management403, guessed archived/checklist/detail IDs404); MANAGER both types/history/management in A01. No delete/unarchive or request-scope override.
