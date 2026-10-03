@@ -42,6 +42,13 @@ const apiEnvironmentSchema = z.object({
   OLLAMA_BASE_URL: httpUrl,
   OLLAMA_MODEL: model, OLLAMA_EMBEDDING_MODEL: model,
   HEALTH_TIMEOUT_MS: z.coerce.number().int().min(100).max(10000).default(2000),
+  SLA_ALERT_ENABLED: explicitBoolean.default(true),
+  SLA_ALERT_EARLY_RATIO: z.coerce.number().gt(0).lt(0.8).default(0.5),
+  SLA_ALERT_AT_RISK_ENABLED: explicitBoolean.default(true),
+  SLA_ALERT_BREACH_ENABLED: explicitBoolean.default(true),
+  SLA_ALERT_INTERVAL_SECONDS: z.coerce.number().int().min(30).max(3600).default(60),
+  SLA_ALERT_BATCH_SIZE: z.coerce.number().int().min(1).max(200).default(100),
+  SLA_ALERT_TIME_BUDGET_MS: z.coerce.number().int().min(1000).max(30000).default(10000),
 }).superRefine((env,context)=>{
   if(env.JWT_SECRET===env.REFRESH_TOKEN_SECRET)context.addIssue({code:'custom',path:['REFRESH_TOKEN_SECRET'],message:'Secrets must be distinct'});
   if(env.NODE_ENV==='production')for(const key of ['JWT_SECRET','REFRESH_TOKEN_SECRET'] as const)if(new Set(env[key]).size<8)context.addIssue({code:'custom',path:[key],message:'Production secret lacks entropy'});

@@ -1,0 +1,8 @@
+{
+  "command": "npm run test:database:m22",
+  "startedAt": "2026-10-03T16:09:47.627Z",
+  "finishedAt": "2026-10-03T16:09:56.892Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m22/gates/M22_DATABASE-2026-10-03T16-09-47-627Z.txt"
+}

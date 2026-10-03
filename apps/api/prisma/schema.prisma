@@ -282,6 +282,7 @@ model Request {
   analyses                AiAnalysis[]           @relation("RequestAnalyses")
   recommendations         AiRecommendation[]     @relation("RequestRecommendations")
   slaInstance             SlaInstance?
+  slaAlerts               SlaOperationalAlert[]
   notifications           Notification[]
   audits                  AuditLog[]
   feedback                Feedback?
@@ -732,7 +733,9 @@ model SlaInstance {
   request                  Request        @relation(fields: [requestId], references: [id], onDelete: Restrict)
   policy                   SlaPolicy      @relation(fields: [policyId], references: [id], onDelete: Restrict)
   notifications            Notification[]
+  operationalAlerts        SlaOperationalAlert[]
 
+  @@unique([requestId, id])
   @@index([status, dueAt])
 }
 
@@ -745,13 +748,16 @@ model Notification {
   safeActorMetadataJson Json
   slaInstanceId         String?      @db.Uuid
   warningLevel          String?      @db.VarChar(40)
+  slaAlertId            String?      @db.Uuid
   createdAt             DateTime     @default(now()) @db.Timestamptz(6)
   readAt                DateTime?    @db.Timestamptz(6)
   recipient             User         @relation(fields: [recipientId], references: [id], onDelete: Restrict)
   request               Request?     @relation(fields: [requestId], references: [id], onDelete: Restrict)
   event                 AuditLog     @relation(fields: [eventId], references: [id], onDelete: Restrict)
   slaInstance           SlaInstance? @relation(fields: [slaInstanceId], references: [id], onDelete: Restrict)
+  slaAlert              SlaOperationalAlert? @relation(fields: [slaAlertId], references: [id], onDelete: Restrict)
 
+  @@unique([slaAlertId, recipientId])
   @@unique([recipientId, eventId, type])
   @@index([recipientId, readAt, createdAt, id])
 }
@@ -777,9 +783,46 @@ model AuditLog {
   assignments          Assignment[]
   resolutions          RequestResolution[]
   notifications        Notification[]
+  slaAlert             SlaOperationalAlert?
 
   @@index([requestId, createdAt, id])
   @@index([resourceType, resourceId, createdAt])
+}
+
+enum SlaOperationalAlertType {
+  SLA_REMINDER
+  SLA_AT_RISK_ESCALATION
+  SLA_BREACH_ESCALATION
+}
+
+model SlaOperationalAlert {
+  id String @id @default(uuid()) @db.Uuid
+  requestId String @db.Uuid
+  slaInstanceId String @db.Uuid
+  dimension String @db.VarChar(40)
+  eventType SlaOperationalAlertType
+  thresholdKey String @db.VarChar(80)
+  canonicalState SlaStatus
+  deadlineAt DateTime @db.Timestamptz(6)
+  elapsedSeconds Int
+  remainingSeconds Int
+  targetSeconds Int
+  observedAt DateTime @db.Timestamptz(6)
+  configIdentity String @db.VarChar(200)
+  eventId String @unique @db.Uuid
+  request Request @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  slaInstance SlaInstance @relation(fields: [requestId, slaInstanceId], references: [requestId, id], onDelete: Restrict)
+  event AuditLog @relation(fields: [eventId], references: [id], onDelete: Restrict)
+  notifications Notification[]
+
+  @@unique([requestId, slaInstanceId, dimension, eventType, thresholdKey], map: "SlaOperationalAlert_cycle_level_key")
+}
+
+model SlaAlertScanProgress {
+  id String @id @db.VarChar(40)
+  cursorId String? @db.Uuid
+  version Int @default(1)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
 }
 
 enum RoutingRuleStatus {

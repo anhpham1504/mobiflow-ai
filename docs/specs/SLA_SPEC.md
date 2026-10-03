@@ -56,7 +56,23 @@ Before entering WAITING_USER or RESOLVED, assess elapsed/breach at that timestam
 
 ## Notifications, audit and failures
 
-Persist risk transitions with a domain event and send one warning per `(slaInstanceId,level,recipientId)` for the instance lifetime. Reassignment allows the newly assigned recipient to receive an already-reached warning level once. Pause/resume and repeated scheduler ticks do not spam prior recipients. Notify current staff and active managers only; cancellation suppresses later warnings. A clock update, warning records and audit must commit atomically.
+M22 supersedes the old monitor warning fan-out: M12 monitor still persists canonical clock assessments in its own locked transaction; protected lifecycle/priority changes retain their original state-machine transaction/audit. M22 never writes the clock. An operational observation, exactly one safe resource-only SYSTEM audit and its eligible Notification rows commit atomically in a separate transaction after Request then SlaInstance locks and canonical reassessment. Clock persistence need not precede the observation; the assessed M12 snapshot is authoritative. Warning delivery failure rolls back observation/audit/delivery without blocking manual workflow.
+
+Preserve one warning per `(slaInstanceId,level,recipientId)` for the instance lifetime, including historical warning rows. Reassignment permits a newly assigned eligible recipient to receive the current warning once; a return to an already-delivered recipient does not resend. Paused, confirmation-held and terminal instances suppress operational delivery. Current role/assignment/scope revalidation also governs legacy SLA notifications.
+
+## M22 operational observation contract (2026-10-03)
+
+The sole dimension is RESOLUTION, keyed by the existing lifetime SlaInstance.id. Pause/resume/reopen/priority edits/reassignment and config changes do not create a cycle. `slaConsumedRatio` belongs to the canonical clock owner; M22 does not reconstruct elapsed/deadline math. Defaults: early consumed ratio0.5, risk/breach enabled,60s cadence,100 items/batch,10s monotonic budget checked between items. Config strictly bounds ratio(0,0.8), cadence30..3600s, batch1..200 and budget1000..30000ms; changing cadence/config creates no delivery identity. Tests inject instants; production obtains database time after locks.
+
+| Highest current level | Stable threshold key | Notification / recipients |
+|---|---|---|
+| SAFE with consumed>=early ratio | EARLY_REMINDER_PRIMARY | SLA_REMINDER / current active authorized STAFF only |
+| Canonical AT_RISK | CANONICAL_AT_RISK | SLA_AT_RISK / current STAFF and active scoped MANAGER |
+| Canonical BREACHED, including sticky breach | CANONICAL_BREACH | SLA_BREACHED / same escalation recipients |
+
+Only one level is considered per observation. A disabled highest level suppresses delivery instead of falling back to an obsolete lower level. A first scan already at risk/breach emits only that current event; observedAt is the actual observation and logical deadline/breach remain canonical. No overdue catch-up delivery/backdating. Dedup is `(requestId,slaInstanceId,dimension,eventType,thresholdKey)`; configIdentity is immutable evidence, not part of identity. Persist the canonical state/deadline/elapsed/remaining/target snapshot, safe IDs and audit event ID without customer/note/body/AI text. Existing lifetime Notification uniqueness supplements `(slaAlertId,recipientId)` for upgrade continuity.
+
+One durable ascending UUID keyset cursor/version with compare-and-swap advances across successes, dedup and item failures; a failed item retries next sweep. Wrap to start on exhaustion; an exactly full last batch needs one empty tick. With N unchanged candidates and no time-budget exhaustion, coverage is ceil(N/batchSize)+1 ticks. Budget is checked between transactions (maxWait3s/transaction5s), not a hard wall-clock deadline. Managers are discovered once/batch with explicit100-manager bound (overflow safely fails the tick); current eligible identities are locked/rechecked per item in bulk. No per-recipient query. Failures have safe aggregate codes/status and do not alter core readiness. No public scheduler trigger/status endpoint. [Plan](../v1.3/M22_REMINDER_SLA_ESCALATION_IMPLEMENTATION_PLAN.md), [verification](../v1.3/M22_REMINDER_SLA_ESCALATION_VERIFICATION.md).
 
 The DB time is authoritative; inject a test clock for unit tests. A missed poll is recoverable by recomputation, not accumulated drift. Invalid/negative duration/configuration blocks the operation and logs a safe error; it does not silently reset the clock. A DB failure rolls back the surrounding state action.
 

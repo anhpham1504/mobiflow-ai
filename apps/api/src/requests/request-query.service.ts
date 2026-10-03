@@ -10,6 +10,7 @@ import { slaView } from './sla-clock.js';
 import { databaseNow } from './sla-sql.js';
 import { parse } from './validation.js';
 import { lockCollaborationIdentity, lockCollaborationRequest } from './collaboration-access.js';
+import { INTERNAL_NOTIFICATION_TYPES } from './internal-notification-types.js';
 
 const querySchema=z.object({
   limit:z.string().regex(/^[0-9]+$/).transform(Number).pipe(z.number().int().min(1).max(100)).optional(),
@@ -80,7 +81,7 @@ export class RequestQueryService {
     const scope=this.policy.notificationScope(actor);
     const existing=await tx.notification.findFirst({where:{AND:[{id},scope]},select:{id:true,type:true,requestId:true}});
     if(!existing) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
-    if(['INTERNAL_NOTE_MENTION','REQUEST_WATCH_ACTIVITY'].includes(existing.type)) {
+    if((INTERNAL_NOTIFICATION_TYPES as readonly string[]).includes(existing.type)) {
       if(!existing.requestId) throw new ApiError(404,'NOT_FOUND','The resource was not found.');
       await lockCollaborationRequest(tx,this.policy,existing.requestId,actor,false);
     }

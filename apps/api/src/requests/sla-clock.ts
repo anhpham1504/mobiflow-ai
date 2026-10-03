@@ -2,6 +2,10 @@ import type { SlaInstance, SlaStatus } from '../generated/prisma/client.js';
 
 export const second = (date: Date) => new Date(Math.floor(date.getTime()/1000)*1000);
 export const SLA_RISK_RATIO = 0.2;
+// M12 owns budget measurement; operational consumers never reconstruct clock math.
+export function slaConsumedRatio(assessment: { elapsedSeconds: number; targetSeconds: number }) {
+  return assessment.elapsedSeconds / assessment.targetSeconds;
+}
 // Both the scalar clock and the PostgreSQL aggregate use this budget equation.
 export function slaElapsed<T>(effective:T,started:T,paused:T,hold:T,math:{subtract:(a:T,b:T)=>T;nonnegative:(value:T)=>T}):T {
   return math.nonnegative(math.subtract(math.subtract(math.subtract(effective,started),paused),hold));

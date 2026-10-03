@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-10-03T16:27:15.774Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migration": "20261003010000_m22_reminder_sla_escalation",
+  "migrationCount": 12,
+  "checks": [
+    {
+      "baseline": 12,
+      "result": "PASS",
+      "path": "fresh1→12",
+      "upgrades": [],
+      "privileges": {
+        "read": true,
+        "insert": true,
+        "update": false,
+        "delete": false
+      },
+      "constraints": "NOT NULL/FK/cycle-level uniqueness/snapshot/type/delivery source/immutable PASS",
+      "runtimeDdlDenied": true,
+      "historicalMigrations": "byte-identical"
+    },
+    {
+      "baseline": 11,
+      "result": "PASS",
+      "path": "M21 11→12",
+      "upgrades": [
+        {
+          "from": 11,
+          "to": 12,
+          "tables": 34,
+          "rows": 161
+        }
+      ],
+      "privileges": {
+        "read": true,
+        "insert": true,
+        "update": false,
+        "delete": false
+      },
+      "constraints": "NOT NULL/FK/cycle-level uniqueness/snapshot/type/delivery source/immutable PASS",
+      "runtimeDdlDenied": true,
+      "historicalMigrations": "byte-identical"
+    },
+    {
+      "baseline": 7,
+      "result": "PASS",
+      "path": "V1.2 7→8→9→10→11→12",
+      "upgrades": [
+        {
+          "from": 7,
+          "to": 8,
+          "tables": 26,
+          "rows": 152
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "tables": 27,
+          "rows": 153
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "tables": 29,
+          "rows": 157
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "tables": 32,
+          "rows": 159
+        },
+        {
+          "from": 11,
+          "to": 12,
+          "tables": 34,
+          "rows": 161
+        }
+      ],
+      "privileges": {
+        "read": true,
+        "insert": true,
+        "update": false,
+        "delete": false
+      },
+      "constraints": "NOT NULL/FK/cycle-level uniqueness/snapshot/type/delivery source/immutable PASS",
+      "runtimeDdlDenied": true,
+      "historicalMigrations": "byte-identical"
+    }
+  ],
+  "developerMigrations": 7,
+  "developerMetadata": "Host runtime-baseline snapshot; rechecked by final host gate",
+  "developerDatabaseModified": false,
+  "isolatedPort": 55422
+}

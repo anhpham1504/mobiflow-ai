@@ -1,0 +1,11 @@
+{
+  "command": "npm run test:integration:m22",
+  "startedAt": "2026-10-03T16:42:27.509Z",
+  "finishedAt": "2026-10-03T16:42:45.652Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m22/gates/M22_API-2026-10-03T16-42-27-509Z.txt",
+  "platform": "linux",
+  "node": "v24.19.0",
+  "sourceFingerprint": "0112ad5bbf5004004f4c0cf809a6322b8df19130d87111b8ebc67529ca05f83e"
+}

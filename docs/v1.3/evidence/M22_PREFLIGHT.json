@@ -1,0 +1,53 @@
+{
+  "checkedAt": "2026-10-03T15:49:44.208Z",
+  "result": "PASS",
+  "checkpoints": [
+    {
+      "milestone": "18",
+      "branch": "feat/v1.3-internal-notes",
+      "sha": "1f54dce3c8427976763b19ef33f181b4ef9a3337",
+      "parent": "31b445caf07dad606601a1e38e8ed39836d9f825",
+      "gates": 9,
+      "result": "PASS"
+    },
+    {
+      "milestone": "19",
+      "branch": "feat/v1.3-mentions-watchers",
+      "sha": "35e4b1c41165fa04348871dee31bd20c28386b47",
+      "parent": "1f54dce3c8427976763b19ef33f181b4ef9a3337",
+      "gates": 10,
+      "result": "PASS"
+    },
+    {
+      "milestone": "20",
+      "branch": "feat/v1.3-response-checklist-templates",
+      "sha": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+      "parent": "35e4b1c41165fa04348871dee31bd20c28386b47",
+      "gates": 10,
+      "result": "PASS"
+    },
+    {
+      "milestone": "21",
+      "branch": "feat/v1.3-rule-based-routing",
+      "sha": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+      "parent": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+      "gates": 7,
+      "result": "PASS"
+    }
+  ],
+  "previousCheckpointSha": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+  "startingHead": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+  "startingBranch": "feat/v1.3-rule-based-routing",
+  "workingTree": "CLEAN",
+  "m21AuditedBlobs": 64,
+  "migrationCount": 11,
+  "main": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "originMain": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "tags": "1f7fe58b633d8b876a9b33a6a88da8e98b9fe4df refs/tags/M6-PASS---tools,-similar-cases-and-grounded-recommendations\n657605aab1ecc334a0d4eea12e4af75c263ca30d refs/tags/v0.5.0-m5\n687a3181be77697472d62e578fb3f7624640f774 refs/tags/v0.6.0-m6\nf2eb8850e20e8096b3e80668b7399db4e91d4fe1 refs/tags/v0.7.0-m7\nce314c559fa427d63235473dab049e438a7c244a refs/tags/v0.8.0-m8\na5550b8b182c5a56e2418cf4dfb22fc1f747908e refs/tags/v0.9.0-m9\nad2844cfbfb91e0c8b10d2dfd07898e963052628 refs/tags/v1.0.0\n73b1a45eca2a9cab946a909c0bd565f14f752622 refs/tags/v1.1.0\ncd8dec95a99b46c3c25f33c11091cf4f3e476b1f refs/tags/v1.2.0",
+  "runtimeAtStart": {
+    "dockerEngine": "UNAVAILABLE",
+    "postgres": "ECONNREFUSED",
+    "developerStack": "OFFLINE — no restart/migration/reset/reseed authorized"
+  },
+  "authorization": "RECEIVED — direct user EXECUTE M22 request; commit/push conditional on all required gates"
+}

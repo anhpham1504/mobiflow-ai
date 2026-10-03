@@ -1,0 +1,168 @@
+{
+  "checkedAt": "2026-10-03T16:42:45.565Z",
+  "checks": {
+    "progression_dedup_restart_business_immutability": "PASS",
+    "startup_skipped_levels_current_observation": "PASS",
+    "real_concurrent_worker_dedup": "PASS",
+    "human_handoff_recipient_reconciliation_scope": "PASS",
+    "no_recipient_and_canonical_lifecycle": "PASS",
+    "notification_and_audit_failure_atomic_retry": "PASS",
+    "state_at_insert_real_lock_barriers": "PASS",
+    "canonical_m12_and_monitor_regression": "PASS",
+    "security_private_contract_no_public_trigger": "PASS",
+    "fairness_error_progress_restart_performance": "PASS"
+  },
+  "metrics": {
+    "lockBarriers": 5,
+    "scalarSqlParity": 7,
+    "performance": {
+      "fixture": 300,
+      "batchSize": 100,
+      "ticks": [
+        {
+          "scanned": 100,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 392.24
+        },
+        {
+          "scanned": 100,
+          "events": 74,
+          "notifications": 123,
+          "failures": 1,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 464.41
+        },
+        {
+          "scanned": 100,
+          "events": 75,
+          "notifications": 125,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 492.83
+        },
+        {
+          "scanned": 0,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": true,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 3.37
+        }
+      ],
+      "candidateSql": 4,
+      "projectionQueries": 300,
+      "notificationInserts": 224,
+      "recipients": 248,
+      "maximumCoverageTicks": 4,
+      "rescan": [
+        {
+          "scanned": 100,
+          "events": 75,
+          "notifications": 150,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 499.56
+        },
+        {
+          "scanned": 100,
+          "events": 76,
+          "notifications": 152,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 505.09
+        },
+        {
+          "scanned": 100,
+          "events": 75,
+          "notifications": 150,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 492.98
+        },
+        {
+          "scanned": 0,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": true,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 2.48
+        }
+      ],
+      "steady": [
+        {
+          "scanned": 100,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 402.63
+        },
+        {
+          "scanned": 100,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 411.95
+        },
+        {
+          "scanned": 100,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": false,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 413.01
+        },
+        {
+          "scanned": 0,
+          "events": 0,
+          "notifications": 0,
+          "failures": 0,
+          "wrapped": true,
+          "progressSaved": true,
+          "disabled": false,
+          "durationMs": 2.36
+        }
+      ],
+      "limitations": "Local synthetic samples; no enterprise SLO"
+    }
+  },
+  "aiCalls": 0,
+  "synthetic": true,
+  "environment": {
+    "platform": "linux",
+    "node": "v24.19.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "cpuCount": 20,
+    "memoryBytes": 12428410880
+  },
+  "logsSafe": true,
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/sla-alert.integration.test.mjs"
+}

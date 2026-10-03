@@ -61,4 +61,5 @@ form label{display:flex;flex-direction:column;gap:7px;margin:14px 0;color:#34425
 .routing-condition { margin-block: 1rem; padding: .8rem; border: 1px solid var(--border); border-radius: .5rem; }
 .routing-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1rem; margin-block: 1rem; }
 .routing-confirm { max-width: min(32rem, calc(100vw - 2rem)); padding: 1.5rem; border: 1px solid var(--border); border-radius: .75rem; color: var(--foreground); background: var(--surface); overflow-wrap: anywhere; }
+.page-header>div{min-width:0}.page-header h1{overflow-wrap:anywhere}.notification-list button[aria-disabled=true]{opacity:.55;cursor:wait}
 .routing-confirm::backdrop { background: rgb(15 23 42 / 55%); }

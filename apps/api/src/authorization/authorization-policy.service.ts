@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Prisma } from '../generated/prisma/client.js';
 import { ApiError } from '../http.js';
 import type { AuthenticatedActor } from '../auth/auth.types.js';
+import { INTERNAL_NOTIFICATION_TYPES } from '../requests/internal-notification-types.js';
 
 interface RequestOwnership { createdById: string; currentAssigneeId: string | null }
 
@@ -27,7 +28,7 @@ export class AuthorizationPolicyService {
   }
 
   notificationScope(actor: AuthenticatedActor): Prisma.NotificationWhereInput {
-    const internal = ['INTERNAL_NOTE_MENTION', 'REQUEST_WATCH_ACTIVITY'];
+    const internal = [...INTERNAL_NOTIFICATION_TYPES];
     return { recipientId: actor.id, recipient: { active: true, role: actor.role }, OR: [
       { type: { notIn: internal } },
       ...(actor.role === 'USER' ? [] : [{ type: { in: internal }, request: { is: this.internalNoteScope(actor) } }]),

@@ -1,0 +1,11 @@
+{
+  "command": "npm run verify:security:m22",
+  "startedAt": "2026-10-03T16:50:59.167Z",
+  "finishedAt": "2026-10-03T16:51:01.613Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m22/gates/M22_SECURITY-2026-10-03T16-50-59-167Z.txt",
+  "platform": "win32",
+  "node": "v24.19.0",
+  "sourceFingerprint": "abc75f1a9c0b9b1363edc5bf9d3ca290d4bc7b21f4d1c87569a70b2b9a99dd01"
+}

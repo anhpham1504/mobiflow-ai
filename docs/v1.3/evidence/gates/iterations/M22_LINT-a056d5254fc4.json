@@ -1,0 +1,11 @@
+{
+  "command": "npm run lint",
+  "startedAt": "2026-10-03T16:31:39.667Z",
+  "finishedAt": "2026-10-03T16:32:36.256Z",
+  "exitCode": 1,
+  "result": "FAIL",
+  "log": "artifacts/m22/gates/M22_LINT-2026-10-03T16-31-39-667Z.txt",
+  "platform": "win32",
+  "node": "v24.19.0",
+  "sourceFingerprint": "3fe9cf3b08f8c6b83edc0675b86f13b61ec72abface2b525fac765b207580db9"
+}

@@ -1,0 +1,625 @@
+{
+  "checkedAt": "2026-10-03T17:31:55.365Z",
+  "result": "PASS",
+  "previousCheckpointSha": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+  "branch": "feat/v1.3-reminder-sla-escalation",
+  "closureAuthorization": "RECEIVED — explicit user execution prompt",
+  "technicalSelfReview": "PASS",
+  "independentExternalHumanReview": "NOT RUN",
+  "sourceFingerprint": "259c92a5014b172ae57048ebf073385b675255d5deedfb703626aab7bbdeae53",
+  "productFingerprint": "6c2b99a4d7433d816bcd37041fa5df2d4a99e7b70d5f1f2f73915f6906c4fe1b",
+  "reviewedFiles": [
+    {
+      "path": "apps/api/package.json",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "b5738cf2bddfbeaeaa8eaa50a4f3eaa559db7c80"
+    },
+    {
+      "path": "apps/api/prisma/migrations/20261003010000_m22_reminder_sla_escalation/migration.sql",
+      "category": "database",
+      "disposition": "INCLUDE",
+      "gitBlob": "dae4083e529024d888018c97a898dbcbef92ec40"
+    },
+    {
+      "path": "apps/api/prisma/schema.prisma",
+      "category": "database",
+      "disposition": "INCLUDE",
+      "gitBlob": "200d01ce3d40e1f37a81075cdc02de1a3f59c578"
+    },
+    {
+      "path": "apps/api/src/app.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "064d7e4a29433eb882c658e1dbbfaa22f3a15f66"
+    },
+    {
+      "path": "apps/api/src/authorization/authorization-policy.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "ecb5ba24b151c95f6ca969c335c2ed9026985efc"
+    },
+    {
+      "path": "apps/api/src/requests/internal-notification-types.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "8370b578d10f8f3d4e1ddd6f4e9b2cfa436c6c2a"
+    },
+    {
+      "path": "apps/api/src/requests/request-query.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "21dd796b0d7271b755348f9701699ecf2127b8ee"
+    },
+    {
+      "path": "apps/api/src/requests/sla-alert-policy.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "0acc1d98d257d87c24c5f3c1628f0abde88b5439"
+    },
+    {
+      "path": "apps/api/src/requests/sla-alert.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "a60ea460b458e0d103d8f1e32eb119a23fed40d3"
+    },
+    {
+      "path": "apps/api/src/requests/sla-clock.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "bb2c1eba6f0c9968fe0dd2e31f0a310a1576e7f3"
+    },
+    {
+      "path": "apps/api/src/requests/sla-monitor.service.ts",
+      "category": "backend",
+      "disposition": "INCLUDE",
+      "gitBlob": "3c90a180866f9e0cc9520717238f33317279b900"
+    },
+    {
+      "path": "apps/api/test/helpers/sla-alert-fixture.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "4b8793980e8c6cc4e5e068a1e2e7e414d5b22f5f"
+    },
+    {
+      "path": "apps/api/test/mentions-watchers.test.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "56ae59742d0cc3c99dbec6d51b7350cc0c1409dc"
+    },
+    {
+      "path": "apps/api/test/sla-alert.integration.test.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "cea01064cf185116403f032674fd451de5daa298"
+    },
+    {
+      "path": "apps/api/test/sla-alert.test.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "c8b145081c014da24757c2910c9b351ded78d705"
+    },
+    {
+      "path": "apps/web/e2e/sla-alert.spec.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "464a490f344af298a8d1497c3b26c982a8c9e3ed"
+    },
+    {
+      "path": "apps/web/src/app/globals.css",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "428820e33e604afd9ea51a1ae1da178c10fd0584"
+    },
+    {
+      "path": "apps/web/src/components/notifications.tsx",
+      "category": "frontend",
+      "disposition": "INCLUDE",
+      "gitBlob": "2b2fe8b1cc63b2e63e4309c60b5648d1e0ef8f11"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "6956fdf535a032b8e08858f81007c3c25bc1f2e8"
+    },
+    {
+      "path": "docs/specs/API_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "ed25f40ccd57af83f1f1413f09f9976b177c938d"
+    },
+    {
+      "path": "docs/specs/AUTHORIZATION_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "9d5e85b41afb0f7fd08197173aa5f7ab47054729"
+    },
+    {
+      "path": "docs/specs/DATABASE_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "726108db5be59f961c949d7f0c99c4b952f42055"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "80d912f8d42a70983bb07c5b41f5fb117a76f3f5"
+    },
+    {
+      "path": "docs/specs/SLA_SPEC.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "08f31a942f2e347aaa31e2333e1392e2f174a411"
+    },
+    {
+      "path": "docs/v1.3/M22_CHECKPOINT_CLOSURE.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "42ab3217b6cf35126faeaa84ba9c98af968d4b12"
+    },
+    {
+      "path": "docs/v1.3/M22_REMINDER_SLA_ESCALATION_IMPLEMENTATION_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "f938e3645f923c4b5c91407dbd9ed8fc1dec3a46"
+    },
+    {
+      "path": "docs/v1.3/M22_REMINDER_SLA_ESCALATION_VERIFICATION.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "323e82253bc9c34b20670569406c8df2ea8c5637"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "6c2e9857a98a6a4f25b7195918da0004e7887a81"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "27b6dd2892cd36fef2dd83bef0cb8a456c22d92b"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_API.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "5becc7c61ecf2da0453ca771684f9a4afdac3985"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_BROWSER.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "ef66b80d851869169fe0d0eed877ae60eb329bf3"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_DATABASE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "288dcb439a98933e58187f36a5d0aaf83b6d3311"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_PREFLIGHT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1b5325c8602d7ed87b53f88232e21f21a4c4cd59"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_SECURITY.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "c9ac6c09e6cc4f24cfd05dc021d39a8b40032e6a"
+    },
+    {
+      "path": "docs/v1.3/evidence/M22_SOURCE_COVERAGE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "2700cd8a9b1964b1ddf191051454ffec970b2b94"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_API.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "a8e4ae140a8f3962e8cbe8797251f4027564165a"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_BUILD.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "163080bf314394bb18590d7460601fb540dd32e7"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_DATABASE.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "4b7b3ddb72ee7cc76b822d846da3f12f671aeaeb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_E2E.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "67e1e5be8f19c0ebb25015f2da59df89505303b9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_LINT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "11951704047e59bef38ff9eec5bfc1d53f47e55b"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_SECURITY.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "9bb785d211f02fa9258f01e7292fe96e412b0b72"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_TYPECHECK.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1eaf77a1955a32b61bec3a6cb3ebf8bc4f6f71f0"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M22_UNIT.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "5b6e3b89067778a6d94efa71529868c33a8461eb"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_API-0a92ee2cdd79.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1385dd4d0524efca856268335242f701a9c13191"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_API-6c0dd97fb6ff.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "19528033d05d9c04dfa0611b43bffa4654867236"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_BUILD-9be581e17c44.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "f28f0a39ca2e9817006efa45708b8897fb16357c"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_DATABASE-d682b72d84c3.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "a5ec4d1f186c1509b3fceb6a85bfa64d3b187f57"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_E2E-16c3f7e9f56e.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "524cfc369f4f3ba636961023d61efb5921c63bbe"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_E2E-2cbd9f1b9404.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "19c06ef0ec1c2d3ab80c62521e62d8a62d8c8f87"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_E2E-7d844855e486.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "4118099aea1f4964c8da82e5b851a80fdc453019"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_E2E-a4f2a929feea.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "641a2c21d0ad8e028f3f26ff404bbf084f5e781d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_FINAL-5e33892db6aa.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "6894b84f9c1efa942e12070630e1e2fc6fcc7589"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-203e04b62c26.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "b0ba23bb6db2fa18e898e101d22744ece2d5b4c8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-3bde89c6376b.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "dd918c348843a413170f53cbd5a613b47ebc8669"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-40b31481c81e.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "eea2e14f17d9c65c58b1e8e67849ddc4b0795195"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-a056d5254fc4.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "9be9c83d865bc0503ab86be0d3e1ed63bd49f6a1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-adf08b72b37e.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1cb10394a6ef0ce25862809af88d6cd687961cad"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_LINT-ec840f77f4cc.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "de7552aafec341b03fbad0e5fff3321c5bf63774"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-0545d179360c.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "593a6ca0fd3a375b451b905a4222f7f236281936"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-1e103ce90bf8.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "0f25ed1722a405f300ea077584bde233f04875ad"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-61df4d4359d9.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "d122c45d0e931948f58f330098b613a3646e7cc9"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-67fc761c876f.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "c4b8f5e8b821c8eaac811ed9c5bfc99fa301f5a8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-9acb80538749.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "bf295a8515a816fc08ba121b5bf729ad26bded5f"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_SECURITY-aeabf0781fdd.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "9d1b42177231d592218c3e09a50131c95018e961"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M22_UNIT-cab60f141e73.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "ee50e0093e094d84d00c7d2e023bc1d3e0dbd1d2"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_API-8feb4497a871.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "0f857bbdee3b496926c24bafca76ab2bf18c6a65"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_API-fe2fd6ada132.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "f9506bb90977f481e598ca9de8c561fcd4ca7ffe"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_BROWSER-07721b9938b5.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "1dee409fd2dcbb31bf4e56736d8a6cfee2290b99"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_BROWSER-168adb5185f6.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "dbd6c721df466c1ed2e10de04b65326b7ae84704"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_BROWSER-88377c538aca.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "b24181cac9406e1fa88bb065d42131642f1c9a81"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_BROWSER-d72eef3957c5.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "b2a0f147460007a6d97bb20c5dab70026cd6b1a3"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_DATABASE-83988a905fd2.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "3f42a231a0ae960a28427ff03dea070938844818"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SECURITY-145e64b0c91f.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "a08be961e2512cd4519e25cf04367648622134ec"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SECURITY-1e2e7f8c1f9c.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "385a16d4e2e91fd75143b5a8c93cd4ff4ebdef91"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SECURITY-cfe9d2194fc2.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "6183aed30e92db489e2bbb4e194c92d070103a68"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-1db7b186361d.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "761bb013d50fb15a129e807f7c3bbcdfe1fd4848"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-2931c003ad6d.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "e5895b90c7200412b95574b6773f28149e264c38"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-30903a3b793d.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "04c455b761d6523313bb0f89f2b4bd7c23bcc953"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-a4a3ff3392b8.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "90f64d6845cdd10ea4a59092143b13bf2f200b62"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-a956962b9cd9.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "f8661e3b5102ff1ba72ce8cd031caef127b00fc0"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M22_SOURCE_COVERAGE-b6a008cb3de5.json",
+      "category": "sanitized-evidence",
+      "disposition": "INCLUDE",
+      "gitBlob": "e5173936851c9f540fa8ea98503efbeaa0dcc535"
+    },
+    {
+      "path": "docs/verification/MILESTONE_22_VERIFICATION.md",
+      "category": "documentation",
+      "disposition": "INCLUDE",
+      "gitBlob": "cbb3a231b5530c926f1fa9199025d4b08d90cebb"
+    },
+    {
+      "path": "package.json",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "fa8c7afe5f4e76696d6b1b14e44827a1525bd469"
+    },
+    {
+      "path": "packages/config/src/index.ts",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "f78fd17ba4565583c523f4058e6d674cc8db2648"
+    },
+    {
+      "path": "playwright.m22.config.mjs",
+      "category": "tests",
+      "disposition": "INCLUDE",
+      "gitBlob": "0cbcf979f43d890f73d3fc7128a67713cd612576"
+    },
+    {
+      "path": "scripts/verification/docker-compose.m22.yml",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "083d0f560c84f15e913f3c4b881c140ac684b34e"
+    },
+    {
+      "path": "scripts/verification/m22-browser-server.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "83f3a6425de9aeb3a79664f20e0a622ca8a69196"
+    },
+    {
+      "path": "scripts/verification/m22-browser.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "4d078542b336503edd562c3856cb38355e7806ff"
+    },
+    {
+      "path": "scripts/verification/m22-capture.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "5077cff67ac9bf0a0f75bdcefecb0cd8027a95f2"
+    },
+    {
+      "path": "scripts/verification/m22-database.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "6325d209fe99b02feb9a071ecd4fdad2f2824a84"
+    },
+    {
+      "path": "scripts/verification/m22-final.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "9b85dd790475022580772407a04eb28d2684a954"
+    },
+    {
+      "path": "scripts/verification/m22-integration.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "501c90ffc22be4eb8b065c2b4053731d6d15e044"
+    },
+    {
+      "path": "scripts/verification/m22-linux.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "d6057475a87e626d6da0b3ac2cd80e5ec4c6737b"
+    },
+    {
+      "path": "scripts/verification/m22-migrations.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "da584d4a2d41334fa2c511ed12e5b942a6523329"
+    },
+    {
+      "path": "scripts/verification/m22-runtime.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "d0065c3fc2a0d264dc47a480e73de0d8df1ad16a"
+    },
+    {
+      "path": "scripts/verification/m22-security.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "7601cb066f587561c0d8c3c8ee865a627c34bcac"
+    },
+    {
+      "path": "scripts/verification/m22-source-coverage.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "0d1556b313abc7282fa8c6068db998c8eeac617d"
+    },
+    {
+      "path": "scripts/verification/m22-source.mjs",
+      "category": "verification",
+      "disposition": "INCLUDE",
+      "gitBlob": "3277fbd65cc48e0af87cb8af2511ce161e0737ea"
+    }
+  ],
+  "inventoryFingerprint": "86bf79514cd224eaf7ae35d6cf54923832197b5f3f3015aebf1dd4a424a57c9c",
+  "excludedFromRecursiveManifest": [
+    "docs/v1.3/evidence/M22_FINAL.json",
+    "docs/v1.3/evidence/gates/M22_FINAL.json"
+  ],
+  "developerMigrations": 7,
+  "developerDatabaseModified": false,
+  "developerStack": "Initially offline; Docker Desktop automatically resumed existing containers. Preserved post-start IDs/start times/ports; no normal Compose/build/migrate/reset/reseed",
+  "ownedTestContainersAndVolumes": "REMOVED; each synthetic database dropped by harness",
+  "portsReleased": [
+    55422,
+    33022,
+    33400,
+    33401
+  ],
+  "mainUnchanged": true,
+  "historicalTagsAndCheckpointsUnchanged": true,
+  "historicalDocumentsAndEvidenceFrozen": 149,
+  "m23": "NOT STARTED",
+  "deployment": "NOT RUN",
+  "gitClosure": "Evaluate live refs after commit/push; this record makes no prospective SHA/publication assertion",
+  "stagingReviewUpdatedAt": "2026-10-03T17:37:03.688Z",
+  "stagingReviewReason": "Metadata-only review of descriptive corrections and final capture archive; actual gate results/timestamps preserved",
+  "allowedCommitFileCount": 100
+}

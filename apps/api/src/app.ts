@@ -48,6 +48,8 @@ import {RECOMMENDATION_PROVIDER,type StructuredProvider} from './ai/provider.js'
 import {OperationalAiController} from './ai/operational-ai.controller.js';
 import {OperationalAiService} from './ai/operational-ai.service.js';
 import {SlaMonitorService} from './requests/sla-monitor.service.js';
+import { SlaAlertService, SLA_ALERT_CLOCK, SLA_ALERT_LOG, type SlaAlertClock } from './requests/sla-alert.service.js';
+import { databaseNow } from './requests/sla-sql.js';
 import {AnalyticsController} from './analytics/analytics.controller.js';
 import {AnalyticsService} from './analytics/analytics.service.js';
 import {DashboardController} from './dashboard/dashboard.controller.js';
@@ -57,8 +59,9 @@ import { TemplateService } from './templates/template.service.js';
 import { RoutingService } from './routing/routing.service.js';
 import { RoutingController, RequestRoutingController } from './routing/routing.controller.js';
 
-export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; recommendationProvider?:StructuredProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean } = {}) {
+export async function createApplication(env: ApiEnvironment, options: { database?: DatabaseProbe; prisma?: PrismaService; log?: LogSink; quiet?: boolean; aiProvider?:AiProvider; recommendationProvider?:StructuredProvider; aiWorker?:boolean;embeddingProvider?:EmbeddingProvider;knowledgeWorker?:boolean; slaAlertClock?: SlaAlertClock } = {}) {
   if(env.NODE_ENV!=='test'&&(options.aiProvider||options.recommendationProvider||options.aiWorker!==undefined||options.embeddingProvider||options.knowledgeWorker!==undefined))throw new Error('AI test overrides require NODE_ENV=test');
+  if (env.NODE_ENV !== 'test' && options.slaAlertClock) throw new Error('SLA clock overrides require NODE_ENV=test');
   const database = options.database ?? new PostgresProbe(env.DATABASE_URL, env.HEALTH_TIMEOUT_MS);
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
@@ -68,7 +71,8 @@ export async function createApplication(env: ApiEnvironment, options: { database
       HealthService, AuthService, AuthRateLimiter, AccessGuard, AuthCsrfGuard, RolesGuard, AuthorizationPolicyService,
       RequestStateMachineService, RequestQueryService, InternalNoteService, RequestCollaborationService, TemplateService, RoutingService, WorkflowGuard, DashboardService,
       AnalysisWorker,AnalysisQueryService,
-      RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,AnalyticsService,
+      RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,SlaAlertService,AnalyticsService,
+      { provide: SLA_ALERT_CLOCK, useValue: options.slaAlertClock ?? databaseNow }, { provide: SLA_ALERT_LOG, useValue: log },
       {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??new OllamaProvider(env)},
       DocumentService,VectorRepository,IngestionWorker,KnowledgeRetriever,SourceService,KnowledgeGuard,RagHealth,
       {provide:EMBEDDING_PROVIDER,useValue:options.embeddingProvider??new OllamaEmbeddingProvider(env)},

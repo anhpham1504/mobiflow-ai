@@ -2,7 +2,7 @@
 
 Status: frozen V1 contract established at M0, 2026-09-28. Authority: master-plan sections 1–3, 11 and 29–46; the [M0 execution request](../reference/M0_EXECUTION_PROMPT.txt) limited the original delivery to M0. Subsequent authorized amendments below define later scope; verification records establish actual implementation.
 
-Current execution authority: the later direct [M21 checkpoint closure request](../v1.3/M21_CHECKPOINT_CLOSURE.md), following accepted M21 PASS — READY FOR HUMAN REVIEW from closed M20 checkpoint `b75d15acc2dbbb16d00ce47db8ed891af210a48d` on `feat/v1.3-rule-based-routing`. The [M21 plan](../v1.3/M21_RULE_BASED_ROUTING_IMPLEMENTATION_PLAN.md) and accepted verification remain historical implementation snapshots. Closure authorizes file/evidence review, current authority documentation, exactly one reviewed M21 commit, ordinary push of that exact branch, local/remote SHA and clean-tree verification, then STOP. No new product work, historical test replay, main merge, tag, deployment, developer DB access/migration/reset/reseed, normal-stack restart or Ollama action. M22–M24 remain NOT STARTED and V1.3 IN DEVELOPMENT. Earlier amendments retain their historical execution boundaries.
+Current execution authority: the direct user EXECUTE request on 3 October 2026 authorizes the complete attached M22 Reminder + SLA Escalation document, implementation, actual tests, technical self-review and automatic reviewed commit/push/checkpoint closure when all required gates PASS. Start from published M21 `758caf220fc0a672e5d9a9e5d6f47653e6478fa2` on `feat/v1.3-reminder-sla-escalation`. [M22 plan](../v1.3/M22_REMINDER_SLA_ESCALATION_IMPLEMENTATION_PLAN.md) and [closure record](../v1.3/M22_CHECKPOINT_CLOSURE.md) govern this execution. Independent external/human review is NOT RUN. Stop after M22; M23/M24 NOT STARTED; no main merge/tag/deployment or live AI. Earlier milestone execution/closure documents remain historical snapshots; their old stop boundaries do not override this direct authorization. V1.3 remains IN DEVELOPMENT.
 
 ## Product and success criteria
 
@@ -61,6 +61,14 @@ These choices resolve unspecified implementation details without adding product 
 M1 must verify compatible package/runtime/container versions, actual Ollama connectivity and installed model names. M4 must verify Vietnamese model behavior. M5 must probe embedding dimension and validate retrieval before selecting/indexing a model. M9 must measure quality/latency/benchmark; no numeric quality success is claimed here. These are explicit later gates, not unresolved business rules or M0 blockers.
 
 ## Acceptance
+
+### Authorized V1.3 M22 amendment (2026-10-03)
+
+M22 adds deterministic operational signals only. M12 remains the clock authority: continuous UTC seconds, canonical AT_RISK/BREACHED, exclusions, sticky breach and one lifetime SlaInstance across pause/reopen/reassignment/priority changes. Early reminder uses the canonical consumed budget, default50%; canonical risk/breach provide higher levels. Emit only the highest actionable current level at observation time, no startup catch-up or backdated delivery. Stable RESOLUTION/cycle/level keys ignore config revisions and never resend to an already-delivered recipient.
+
+Early reminder goes only to current authorized STAFF. Risk/breach additionally notify currently authorized active MANAGER accounts within existing single-organization A01 scope. Watchers do not expand the recipient set. Current access filters all internal SLA types, including legacy warning rows, before list/unread pagination and read-state writes. Alert records, safe SYSTEM resource-only audit and eligible bulk delivery commit atomically after locking/rereading current Request/SLA/recipient state. Recipient handoff reconciles the same current event once; paused/held/terminal or obsolete lower levels deliver nothing.
+
+No Request/version/assignment/priority/message/checklist/note/mention/watch, routing/template or AI mutation/invocation. Reuse existing notifications and canonical Request detail; no new public endpoint/contract, policy CRUD, debug trigger, provider or analytics. Migration12 adds immutable observations, a durable bounded fair cursor and nullable Notification linkage, preserving old lifetime keys and rows. Normal developer database remains7 and is not migrated/reset/reseeded. Test execution uses isolated synthetic PostgreSQL and Linux Node because Windows Application Control blocks native argon2; existing Edge exercises the production UI. These test choices do not change application authentication.
 
 ### Authorized V1.3 M21 amendment (2026-10-02)
 

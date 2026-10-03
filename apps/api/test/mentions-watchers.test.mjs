@@ -28,7 +28,7 @@ test('M19 collaborator eligibility is active A01 MANAGER/current STAFF and never
   const policy = new AuthorizationPolicyService();
   assert.deepEqual(policy.internalCollaborators({ currentAssigneeId: other }), { active: true, OR: [{ role: 'MANAGER' }, { role: 'STAFF', id: other }] });
   const user = policy.notificationScope({ ...actor, role: 'USER' });
-  assert.equal(user.OR.length, 1); assert.deepEqual(user.OR[0].type.notIn, ['INTERNAL_NOTE_MENTION', 'REQUEST_WATCH_ACTIVITY']);
+  assert.equal(user.OR.length, 1); assert.deepEqual(user.OR[0].type.notIn, ['INTERNAL_NOTE_MENTION', 'REQUEST_WATCH_ACTIVITY', 'SLA_REMINDER', 'SLA_AT_RISK', 'SLA_BREACHED']);
   assert.deepEqual(policy.notificationScope(actor).OR[1].request.is, { currentAssigneeId: id });
 });
 test('M19 forbidden roles/self mention are denied before child writes', async () => {

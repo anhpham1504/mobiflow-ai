@@ -41,13 +41,15 @@ All accounts must be active. Roles are not cumulative: MANAGER does not imperson
 | Similar-request detail | No peer records | Only currently assigned records | All V1 authorized results |
 | Operational SLA | Own simplified progress | Assigned | All V1 |
 | Audit/analytics/evaluation reports | No | Request-safe timeline only | Yes |
-| Notifications/read-state | Own legacy notifications; no M19 internal types | Own recipient; M19 internal types also require current assignment | Own recipient; M19 internal types also require current A01 scope |
+| Notifications/read-state | Own legacy business notifications; no M19/M22 internal types | Own recipient; internal types also require current assignment | Own recipient; internal types also require current A01 scope |
 | Feedback | Own CLOSED, once | No | No |
 | Cancel | Own four preassignment states | No | Seven states in state matrix |
 
 Every state-qualified permission also requires a matching current version and payload invariants. See [REQUEST_STATE_MACHINE](REQUEST_STATE_MACHINE.md) for exact state sets.
 
 ## Enforcement and response projections
+
+M22 amendment (2026-10-03): operational reminder delivery uses the current active assigned STAFF; escalation also includes active authorized MANAGER accounts through the existing A01 organization scope. USER, obsolete STAFF, inactive accounts and watchers without current access receive no delivery. The SYSTEM audit actor has no login role. Lock Request then SLA and re-read lifecycle/assignment; lock candidate User IDs in stable order then recheck `internalCollaborators` before bulk delivery. A historical delivery/watch/mention confers no access. The shared internal notification set includes M19 mention/watch and SLA_REMINDER/SLA_AT_RISK/SLA_BREACHED (including old rows): list/unreadOnly filters current role/scope before pagination; read/unread locks the parent and uses the same predicate. Reassignment removes old STAFF access immediately, unknown/stale/foreign IDs return404, USER has no internal payload/count/history. Resource-only alert audit has null request FK and no private body; no AI/analytics/requester-context inclusion or public alert/trigger surface. Human protected commands retain live guards and expectedVersion. [SLA_SPEC](SLA_SPEC.md) owns reconciliation/dedup/lifecycle.
 
 M21 amendment (2026-10-02): only MANAGER can list/read/manage rules, read immutable history/targets or evaluate request routing. USER and STAFF receive403 on every routing surface, including guessed rule/revision/request IDs. Management uses existing single-organization A01 authority; evaluation combines the Request ID with `requestScope(actor)` before facts are projected, then checks read authorization. No invented tenant boundary, enlarged STAFF scope or role inherited from membership/watch/mention. Live account/role/session is rechecked under the existing identity lock in every service transaction. Missing/out-of-scope Request404; no fact, target, role, owner or scope override in evaluation input.
 

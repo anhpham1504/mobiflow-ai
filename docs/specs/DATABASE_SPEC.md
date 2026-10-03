@@ -4,7 +4,7 @@ Authority: master-plan §5, M2–M9; later authorized storage amendments are rec
 
 ## M21 routing storage amendment (2026-10-02)
 
-Migration11 `20261002040000_m21_rule_based_routing` adds `RoutingRuleStatus`, `RoutingRule` and `RoutingRuleRevision` only. Historical migrations1–10 remain byte-identical. No Request/Assignment/SLA/Checklist/message/AI column changes or developer DB migration.
+Current M22 migration12 `20261003010000_m22_reminder_sla_escalation` adds operational observations/durable scan progress and nullable Notification linkage. Historical migrations1–11 remain byte-identical; no developer database migration. Historical M21 migration11 `20261002040000_m21_rule_based_routing` added `RoutingRuleStatus`, `RoutingRule` and `RoutingRuleRevision` only.
 
 | Entity | Stored contract |
 |---|---|
@@ -99,7 +99,7 @@ Status history, messages, assignments and resolutions reference the same eventId
 - Resolve persists RequestResolution and event, freezes SLA and schedules the summary atomically. Summary retry creates a new failed/successful attempt under the same resolution provenance, never overwrites human facts. Use a unique successful summary per resolution (partial index) and at most one active run. Reopen clears currentResolutionId, cancels obsolete active summary jobs and retains prior resolution rows/artifacts.
 - Intake completion validates activeAnalysisRunId and post-start contextVersion. Stale/failing run cleanup locks the current request, verifies the same active pointer/state and uses the latest version to restore NEW without discarding later messages. Completion/failure/cancel clears the pointer; stale jobs with a different current state/run are telemetry-only.
 - Cancellation invalidates pending recommendation before leaving review so partial unique constraints do not block later valid work. Stale jobs cannot publish after cancellation or reassignment.
-- SLA tick locks/rechecks request state and clock version, computes status, inserts deduplicated warning and audit in one transaction. Priority/reassignment/checklist/message commands use expected request version.
+- M12 assessment tick locks Request then SLA and persists canonical state/clock version. M22 separately locks/rechecks current Request/SLA/recipients and commits immutable observation + resource-only audit + bulk deduplicated delivery atomically, without clock/business writes. Priority/reassignment/checklist/message commands retain expected request version.
 - Auth refresh consumes prior credential and inserts replacement in one transaction. Replay revokes all family records atomically.
 
 ## Migration, data access and rollback policy
@@ -107,6 +107,14 @@ Status history, messages, assignments and resolutions reference the same eventId
 M1 enables pgvector/infrastructure; M2 implements baseline business schema and constraints. Vector(D) storage/index migration is M5 after a real dimension probe; RequestEmbedding is populated/queried in M6. M2 may stage vector-related tables without an embedding column; do not invent D to satisfy a schema. Every later change has a forward migration; no `db push` replacing migration history for release verification.
 
 App DB principal has required CRUD on business tables but no general DDL; migrations use separate credentials. Append-only audit permissions deny update/delete in normal runtime. Vector SQL binds every value and uses allowlisted identifiers; no interpolation of query text. Paginate lists and bounded joins to avoid unbounded scans/N+1. Migration failure stops the gate; retain data and fix forward, never blindly reset a non-demo database. M10 demo reset verifies explicit demo flag/target and synthetic markers before destructive operations; backup/recovery of local demo data is documented there, not claimed tested now.
+
+## M22 additive storage (2026-10-03)
+
+`SlaOperationalAlertType` has SLA_REMINDER/SLA_AT_RISK_ESCALATION/SLA_BREACH_ESCALATION. `SlaOperationalAlert` stores UUID id/requestId/slaInstanceId/eventId, non-null RESOLUTION dimension/stable thresholdKey, canonical state/deadline/elapsed/remaining/target snapshot, actual observedAt and nonempty configIdentity. Composite Request/SlaInstance FK, unique audit FK, snapshot/level checks and unique cycle/dimension/level/key prevent cross-request, malformed and duplicate observations. UPDATE/DELETE trigger enforces immutability even for owner; runtime receives SELECT/INSERT only, no UPDATE/DELETE/TRUNCATE/DDL. No mutable request-related business field is added.
+
+`Notification.slaAlertId` is nullable with RESTRICT FK; unique(alert,recipient) and source-validation trigger match request/instance/event/type/warning to the observation. Existing legacy keys/rows remain unchanged and prevent redelivery across upgrade. SYSTEM audit omits request FK; safe metadata contains request/alert/instance IDs, canonical state and key only. Event plus audit plus notifications use one transaction; no second outbox/provider.
+
+`SlaAlertScanProgress` has one seeded M22_PRIMARY row, nullable UUID cursor, positive version and updatedAt. Runtime has SELECT and column-only UPDATE(cursorId,version,updatedAt); no creation/deletion/key update/DDL. Cursor is scan progress, not business/SLA state. The scheduler query uses ascending indexed SlaInstance.id; the composite instance index supports the FK and unique alert/notification indexes support actual dedup. No speculative analytics index/backfill/reset. Dedicated guarded synthetic `mobiflow_m22_test` verifies fresh1→12, M21 11→12, V1.2 7→8→9→10→11→12 with all old row values/counts/checksums preserved. Normal developer DB stays7. [Verification](../v1.3/M22_REMINDER_SLA_ESCALATION_VERIFICATION.md).
 
 ## Acceptance
 

@@ -92,7 +92,11 @@
     "test:database:m21": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m21-migrations.mjs",
     "test:integration:m21": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m21-integration.mjs",
     "test:e2e:m21": "node --env-file=.env scripts/verification/m21-browser.mjs",
-    "verify:security:m21": "node --env-file=.env scripts/verification/m21-security.mjs"
+    "verify:security:m21": "node --env-file=.env scripts/verification/m21-security.mjs",
+    "test:database:m22": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m22-migrations.mjs",
+    "test:integration:m22": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m22-integration.mjs",
+    "test:e2e:m22": "node --env-file=.env scripts/verification/m22-browser.mjs",
+    "verify:security:m22": "node --env-file=.env scripts/verification/m22-security.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

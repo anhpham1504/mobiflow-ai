@@ -1,0 +1,11 @@
+{
+  "command": "npm run test:e2e:m22",
+  "startedAt": "2026-10-03T16:47:20.293Z",
+  "finishedAt": "2026-10-03T16:47:42.755Z",
+  "exitCode": 0,
+  "result": "PASS",
+  "log": "artifacts/m22/gates/M22_E2E-2026-10-03T16-47-20-293Z.txt",
+  "platform": "win32",
+  "node": "v24.19.0",
+  "sourceFingerprint": "86bf3a3fcacae9c0b8c268dc162477a829f647747a5ccb9d98a9e510e963a035"
+}

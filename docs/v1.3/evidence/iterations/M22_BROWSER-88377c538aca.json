@@ -1,0 +1,209 @@
+{
+  "checkedAt": "2026-10-03T16:47:42.713Z",
+  "runId": "5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+  "synthetic": true,
+  "browser": "Microsoft Edge on Windows / Playwright",
+  "runtime": "Production Next and real API/PG in isolated Linux container",
+  "productionBuild": true,
+  "isolatedPorts": [
+    33400,
+    33401
+  ],
+  "stats": {
+    "startTime": "2026-10-03T16:47:24.400Z",
+    "duration": 17606.485,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "runId": "5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+      "result": "PASS",
+      "labels": true,
+      "keyboardReadUnread": true,
+      "realPersistedReadState": true,
+      "scopedNavigation": true,
+      "xssEscaped": true
+    },
+    {
+      "runId": "5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+      "result": "PASS",
+      "scopedEscalation": true,
+      "noEarlyManagerBroadcast": true,
+      "humanHandoff": true,
+      "staleStaffHidden": true
+    },
+    {
+      "runId": "5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+      "result": "PASS",
+      "scans": [
+        {
+          "role": "staff",
+          "surface": "notifications",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "request-detail",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notifications",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "request-detail",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notifications",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "request-detail",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notifications",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "request-detail",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "notifications",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "request-detail",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "notifications",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "request-detail",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "notifications",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "request-detail",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "notifications",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "request-detail",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        }
+      ],
+      "consolePageErrors": []
+    },
+    {
+      "runId": "5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+      "result": "PASS",
+      "userNoInternalSla": true,
+      "loading": true,
+      "error": true,
+      "retryRealBackend": true,
+      "empty": true,
+      "transportFixtures": [
+        "delayed503",
+        "empty200"
+      ]
+    }
+  ],
+  "result": "PASS",
+  "aiCalls": 0,
+  "database": "mobiflow_m22_test",
+  "sourceFingerprint": "86bf3a3fcacae9c0b8c268dc162477a829f647747a5ccb9d98a9e510e963a035",
+  "artifactDirectory": "artifacts/m22/browser-runs/5205b994-4ceb-4a32-be43-ef7a4ea97d52",
+  "limitations": "503/delay cases are transport fixtures; real delivery/read/handoff use server/database. No WCAG certification or live AI."
+}
