@@ -1,5 +1,7 @@
 # SLA Specification
 
+M24 packaging amendment (4 October 2026): normal Compose and public env example now expose the seven already-accepted M22 SLA_ALERT settings. [Configuration reference](../v1.3/M24_CONFIGURATION_REFERENCE.md) owns defaults/ranges/operator usage. M12 clock math, M22 lifetime/event/recipient dedup and explicit human business actions are unchanged. Actual production batch2/cadence30 and API restart dedup were verified; no new SLA feature or migration.
+
 Authority: master-plan §5.11, M3.7, M8.4–M8.5 and §27. Assumptions A05/A08/A15 in [PROJECT_SPEC](PROJECT_SPEC.md). All times use UTC instants; UI displays Asia/Ho_Chi_Minh. SLA uses continuous elapsed time, not a business-hours calendar.
 
 ## Policy selection and approval

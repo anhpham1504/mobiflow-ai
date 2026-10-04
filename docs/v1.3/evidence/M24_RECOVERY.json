@@ -1,0 +1,70 @@
+{
+  "startedAt": "2026-10-04T06:37:31.138Z",
+  "checkedAt": "2026-10-04T06:39:42.103Z",
+  "result": "PASS",
+  "production": true,
+  "realContainerRestarts": [
+    "api",
+    "web",
+    "postgres"
+  ],
+  "outage": {
+    "readinessStatus": 503,
+    "coreReady": false,
+    "liveStatus": 200,
+    "protectedRead": 503,
+    "safeError": true
+  },
+  "scheduler": {
+    "batch": 2,
+    "active": 7,
+    "observedTicksAtLeast": 5,
+    "persistedEvents": 5,
+    "persistedRecipients": 10,
+    "duplicateEvents": 0,
+    "duplicateRecipients": 0,
+    "protectedBusinessRowsUnchanged": true
+  },
+  "optionalOllama": {
+    "status": "DEGRADED",
+    "coreReady": true,
+    "aiReady": false,
+    "rag": {
+      "enabled": false,
+      "status": "DISABLED",
+      "embedding": "NOT_VERIFIED",
+      "knowledge": "NOT_VERIFIED",
+      "errorCode": null,
+      "documents": 0,
+      "chunks": 0,
+      "checkedAt": null
+    },
+    "checkedAt": "2026-10-04T06:39:42.102Z",
+    "components": {
+      "API": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "DATABASE": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "VECTOR_EXTENSION": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_SERVER": {
+        "status": "DOWN",
+        "code": "UNAVAILABLE"
+      },
+      "OLLAMA_LLM_MODEL": {
+        "status": "NOT_CONFIGURED",
+        "code": "NOT_CONFIGURED"
+      },
+      "OLLAMA_EMBEDDING_MODEL": {
+        "status": "NOT_CONFIGURED",
+        "code": "NOT_CONFIGURED"
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-10-04T06:34:13.985Z",
+  "checks": {
+    "humanControlAndIntegratedWorkflow": "PASS",
+    "rbacIdorPrivacyCurrentRecipients": "PASS",
+    "deterministicAiIsolationNoProtectedWrites": "PASS",
+    "schedulerFairnessHandoffPolicyDedup": "PASS",
+    "transportRateSessionGuards": "PASS"
+  },
+  "metrics": {
+    "scheduler": {
+      "fixtures": 5,
+      "batch": 2,
+      "ticks": 3,
+      "samples": [
+        {
+          "scanned": 2,
+          "durationMs": 21.07,
+          "events": 2
+        },
+        {
+          "scanned": 2,
+          "durationMs": 14.82,
+          "events": 2
+        },
+        {
+          "scanned": 2,
+          "durationMs": 13.14,
+          "events": 1
+        }
+      ],
+      "policyEditNewEvents": 0
+    }
+  },
+  "synthetic": true,
+  "deterministicAiCalls": {
+    "intake": 1,
+    "structured": 2,
+    "embedding": 2
+  },
+  "liveAi": "NOT RUN",
+  "rateWaitsSeconds": [],
+  "result": "PASS",
+  "exitCode": 0,
+  "testCommand": "node --test apps/api/test/release-hardening.integration.test.mjs"
+}

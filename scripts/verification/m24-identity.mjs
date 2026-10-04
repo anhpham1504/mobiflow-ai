@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {saveEvidence} from './evidence.mjs';
+const git=(...args)=>execFileSync('git',args,{encoding:'utf8',windowsHide:true}).trim(),norm=s=>s.replaceAll('\r\n','\n').trim(),read=p=>norm(readFileSync(p,'utf8')),sha=s=>createHash('sha256').update(s).digest('hex'),baseline='31b445caf07dad606601a1e38e8ed39836d9f825';
+const paths=git('ls-tree','-r','--name-only',baseline,'apps/api/src/ai','apps/api/src/knowledge','scripts/evaluation','packages/contracts/src/analysis.ts','packages/contracts/src/recommendation.ts').split('\n');
+const owners=paths.map(path=>{const accepted=norm(git('show',baseline+':'+path)),current=read(path);assert.equal(current,accepted,path);return {path,sha256:sha(current),baselineBlob:git('rev-parse',baseline+':'+path)};});
+const config=read('packages/config/src/index.ts'),configBaseline=norm(git('show',baseline+':packages/config/src/index.ts'));assert.equal(config.split('\n').filter(l=>!l.trim().startsWith('SLA_ALERT_')).join('\n'),configBaseline);
+const workflow=read('packages/contracts/src/workflow.ts'),oldWorkflow=git('show',baseline+':packages/contracts/src/workflow.ts');
+const actionBlock=s=>s.slice(s.indexOf('export const copilotActions='),s.indexOf('export const requestViewSchema='));assert.equal(actionBlock(workflow),actionBlock(oldWorkflow));
+const policy=read('apps/api/src/authorization/authorization-policy.service.ts'),oldPolicy=git('show',baseline+':apps/api/src/authorization/authorization-policy.service.ts');assert.equal(policy.slice(policy.indexOf('  requestScope(actor:')),oldPolicy.slice(oldPolicy.indexOf('  requestScope(actor:')));
+const historical=JSON.parse(readFileSync('docs/v1.2/evidence/M15_SEMANTIC_REVIEW.json')).finalIdentities,matched=[];
+for(const [path,hash]of Object.entries(historical.sourceHashes)){const lf=readFileSync(path,'utf8').replaceAll('\r\n','\n'),bytes=path.startsWith('scripts/')?lf:lf.replaceAll('\n','\r\n');if(path==='packages/config/src/index.ts')continue;assert.equal(sha(bytes),hash,path+' M15 identity');matched.push({path,sha256:hash});}
+assert.equal(JSON.parse(readFileSync('docs/v1.2/evidence/M15_RECOMMENDATION_EVAL.json')).datasetSha256,historical.datasetSha256);
+const actions=workflow.match(/export const copilotActions=\[(.*?)\]/)[1].split(',').map(x=>x.replaceAll("'",''));assert.equal(actions.length,6);
+await saveEvidence('docs/v1.3/evidence/M24_AI_IDENTITY.json',{checkedAt:new Date().toISOString(),result:'PASS',baseline,owners,acceptedM15:{...historical,matchedSourceHashes:matched,hashEncoding:"Historical M15 app/contracts CRLF and evaluation scripts LF; V1.2 comparisons normalize EOL only"},actions,configDelta:'Only seven SLA_ALERT declarations; all model/embedding/provider/timeout settings unchanged',authorizationReview:'Request/AI scope methods byte-identical; new methods only template/routing/collaboration/notification scopes',projectionReview:'AI owners build explicit projections directly and do not call RequestQueryService. M20 transport provenance fields never enter those unchanged builders. M24 integrated private-canary capture passed intake/recommendation/Copilot; only human-edited final text/checklist enters established public context.',evidenceReuse:'M15 synthetic 100 cases +30 consistency runs remains historical accepted evidence; no new live quality claim',runtime:'Optional provider deliberately unavailable, model labels unconfigured; no model downloaded or replaced',liveAi:'NOT RUN'});
+console.log(JSON.stringify({event:'m24.ai-identity',result:'PASS',ownerFiles:owners.length,matchedM15:matched.length,actions:actions.length}));

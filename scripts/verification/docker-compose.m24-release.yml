@@ -1,0 +1,8 @@
+services:
+  api:
+    environment:
+      # Deliberate optional-provider outage in the isolated rehearsal only.
+      OLLAMA_BASE_URL: http://127.0.0.1:9
+      AI_AUTO_ANALYZE: "false"
+      SLA_ALERT_INTERVAL_SECONDS: "30"
+      SLA_ALERT_BATCH_SIZE: "2"

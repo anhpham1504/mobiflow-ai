@@ -1,0 +1,372 @@
+{
+  "checkedAt": "2026-10-04T06:42:40.838Z",
+  "result": "PASS",
+  "baseline": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "owners": [
+    {
+      "path": "apps/api/src/ai/analysis-execution.ts",
+      "sha256": "e0bc8e5f309e86de1738ac9734a50a9ce5a0b3bc8006b0a8b06cdbd166a06f60",
+      "baselineBlob": "0fd4cb7d0d8c661db997108862d95a7d675ae94c"
+    },
+    {
+      "path": "apps/api/src/ai/analysis-query.service.ts",
+      "sha256": "b3a6ed40e1a9a4ef0596850ccd107f0b0730fda96fada8b06c6f395bf4e3841f",
+      "baselineBlob": "c566cd77b32f8b77abff5aa229015f364d66e784"
+    },
+    {
+      "path": "apps/api/src/ai/analysis-worker.ts",
+      "sha256": "48e213842654c193f195bfed3cfcc1eca6e58ece7496351df0c89357dee6ab01",
+      "baselineBlob": "9b149ffbb6c727a04d9971f8aa7b65a8df94de5e"
+    },
+    {
+      "path": "apps/api/src/ai/analysis.controller.ts",
+      "sha256": "4235962095097cbe7925e9a698338b70a186994250ec34da8f5a56f9ec71490e",
+      "baselineBlob": "d57c98773fd261cd374836977cc540c484042fdc"
+    },
+    {
+      "path": "apps/api/src/ai/ollama-provider.ts",
+      "sha256": "6668aec7c3736a2e7e74e3065fea09e86d5afc6ab7202f916cab617cecf68539",
+      "baselineBlob": "42840b7022209f51199ce01460d6ad2132ea9a0f"
+    },
+    {
+      "path": "apps/api/src/ai/operational-ai.controller.ts",
+      "sha256": "5071a49e92c30b04cc0b168b6de4a300ee0312ff1fbef429344fad5508bfcb83",
+      "baselineBlob": "103d0e74d78eb6d78e5672870245b3d6dc2e92c7"
+    },
+    {
+      "path": "apps/api/src/ai/operational-ai.service.ts",
+      "sha256": "21dd59922634b9b68284c6ef0b5cf7be25a9c34b1fd41dada543bb89de5f5f19",
+      "baselineBlob": "b76bf040c41c536a3aa6a77ad0a3e8cf0ed0b13f"
+    },
+    {
+      "path": "apps/api/src/ai/operational-output.ts",
+      "sha256": "9ae894984bb3e4a394120316731069b310d22e254a51d9da522291ae211b0cf6",
+      "baselineBlob": "785eb75db58508aab285e4e2868f316addb97acb"
+    },
+    {
+      "path": "apps/api/src/ai/prompts/copilot.ts",
+      "sha256": "f3633620432aee075d80e8aa3164f985992e5968983cab91c7e00106692b799f",
+      "baselineBlob": "3d7066b8025601a5da4686c0a7dc36c004a1bb91"
+    },
+    {
+      "path": "apps/api/src/ai/prompts/recommendation.ts",
+      "sha256": "ec02142ee932b818ca0dbd5829faa50b098faf34fd7c034374d34d3b1f54bd0a",
+      "baselineBlob": "36ffaea1d93298f4741f4e15469020cff00166b1"
+    },
+    {
+      "path": "apps/api/src/ai/prompts/request-analysis.ts",
+      "sha256": "630be2dec295d0509084a2a28b2161e7ef62825b15f7644d2cc3060268b2f334",
+      "baselineBlob": "f066241e9de61c8b99711cf327176705ce23e0ff"
+    },
+    {
+      "path": "apps/api/src/ai/provider.ts",
+      "sha256": "622d265d63e07bf362f352df2b28f23a5a6859828aef294de2abc2169e85071d",
+      "baselineBlob": "7aa793683254a16f064adfd90e1442d8e239c360"
+    },
+    {
+      "path": "apps/api/src/ai/recommendation-output.ts",
+      "sha256": "5d0b6c5af62a2ea95a87c9b3568d85746797c815a44642875c52ba3b7f5979b2",
+      "baselineBlob": "88490b39f2bfe2e245b934ae7c44233a3f9705fc"
+    },
+    {
+      "path": "apps/api/src/ai/recommendation-snapshot.ts",
+      "sha256": "d8329c37e6ec39a79e6f39f8fe78ceb8b1d027e721974ff8a0fcbdbd5014fee5",
+      "baselineBlob": "718177d5ed6d09362a52f39458d587dfa0473948"
+    },
+    {
+      "path": "apps/api/src/ai/recommendation-validation.ts",
+      "sha256": "ab5b421f4c2929395928468ea2b99af185062f0e0d7abbd4be74c2e39af4742f",
+      "baselineBlob": "f36b7dfba8a37585eaa661adde942520d4f7e104"
+    },
+    {
+      "path": "apps/api/src/ai/recommendation.controller.ts",
+      "sha256": "f9afe570e9cab0217d7d1db1dcb3fdf9e26153d3266dd7a58c8b90ebc6e5d726",
+      "baselineBlob": "a5bab963b458cf7b42c6c0f77e6c478501722686"
+    },
+    {
+      "path": "apps/api/src/ai/recommendation.service.ts",
+      "sha256": "fc5c0db228315d6058eebfb729445a502ed157168a2125f6f400f2031b84669f",
+      "baselineBlob": "2689e7aa44e1aee31d8e41b06577c07ffb0269f1"
+    },
+    {
+      "path": "apps/api/src/ai/tools/domain-tools.ts",
+      "sha256": "19aae778d9b586a741fbcc6149a7e333130941910b601530cd9592835c2a9f90",
+      "baselineBlob": "30293a591e6312b239665af373ff004fafd09f25"
+    },
+    {
+      "path": "apps/api/src/ai/tools/registry.ts",
+      "sha256": "e8aff750fd45cad47e81178dd3399335cc52ebd7dba603809991619f1244cef1",
+      "baselineBlob": "d27bf812961d011ff53825aa49f2f6080245d335"
+    },
+    {
+      "path": "apps/api/src/ai/tools/request-vectors.ts",
+      "sha256": "8d07ab6f16853d0e11f4963aef9e2515602708a767a4f9c51f109568ca315a2b",
+      "baselineBlob": "f1ec77b2254cd1bf23af89ac85f45b221d304e6c"
+    },
+    {
+      "path": "apps/api/src/ai/tools/staff.ts",
+      "sha256": "fec617ff7b091afe5b520b172593f22a04cb4fad7bdb8bf1f1c7125cb4f7ed94",
+      "baselineBlob": "e22968c36faa8126511f597266de84bc13fa7ed2"
+    },
+    {
+      "path": "apps/api/src/knowledge/chunker.ts",
+      "sha256": "61299f70fc96c8ccfa8e471ebc06dfa677f5e27e1cc967563059716c74946af4",
+      "baselineBlob": "238e8d60a715fbc1f89527c2240c87c86aef6242"
+    },
+    {
+      "path": "apps/api/src/knowledge/document.service.ts",
+      "sha256": "52855daed8a75ddb84017d9cded29cf4b2401ebbc889de20af5fa41938a874fc",
+      "baselineBlob": "8ffe1eb6ef395f10fd0814cb112463c02c0f7628"
+    },
+    {
+      "path": "apps/api/src/knowledge/embedding-provider.ts",
+      "sha256": "8832a57464fbbe1b7736803be2924c043c93708259cd490ea8a0586f48964232",
+      "baselineBlob": "4df138520918b4562f1b1c1f78407f7a42383c1b"
+    },
+    {
+      "path": "apps/api/src/knowledge/file-store.ts",
+      "sha256": "2c97b0d74c44d443bfdf657971ec8108f61de27e62fdfd0b810f0cdd42013df1",
+      "baselineBlob": "226719ff23b2a9c7ee10cb040f9ff469d69fa898"
+    },
+    {
+      "path": "apps/api/src/knowledge/ingestion-worker.ts",
+      "sha256": "e1cf13a1ba7e252d1601a6369bb7737d88c96fcf64d9af8f0b4fc2c0230e1154",
+      "baselineBlob": "0cb0a0a63352e6ee76c474f9ca22edaa1d1c335f"
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge-access.ts",
+      "sha256": "8a67e878a607fb600347dbbbe3db38c6509f3ba4bb43a5c995d0c640b10b5529",
+      "baselineBlob": "dc04685aa80445d2465405601f62dba7e5532fc3"
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge.controller.ts",
+      "sha256": "3fd26a3b7e5f21c234a33c09accf966f79bb6bb806494510fc1cacf2f3563106",
+      "baselineBlob": "be20bec303d46e103522eb86cdaf2190a5bca499"
+    },
+    {
+      "path": "apps/api/src/knowledge/knowledge.guard.ts",
+      "sha256": "bb6ec6b387d45d2cd526361b0c8787854583337e0d4f2847d074b2faf4ae583c",
+      "baselineBlob": "1ae77c0765a4266c447f4998a0fa971d44f90f95"
+    },
+    {
+      "path": "apps/api/src/knowledge/parser.ts",
+      "sha256": "002953bb76a6cc2fcb397eb7de9f797dffbe7f4764fc48df97070d828044d62e",
+      "baselineBlob": "68cf05249689f2861cbf5a8c8ea5fcd64e8dd383"
+    },
+    {
+      "path": "apps/api/src/knowledge/pdf-worker.ts",
+      "sha256": "1d40d686a7b2475eb9276c0e58df83bc20d2c4d515f20392890458150f837b67",
+      "baselineBlob": "148ba3e519f7c73bdb86a25d0e9133ae247ec7e0"
+    },
+    {
+      "path": "apps/api/src/knowledge/rag-health.ts",
+      "sha256": "d7f8dc7fa66e2780e2eb465eaa3486a6fa0eb8113752df3e5d20e7d1de0ebb49",
+      "baselineBlob": "a55a9cd21358f1c6716a9506c54d51a4698c2757"
+    },
+    {
+      "path": "apps/api/src/knowledge/rag-output.ts",
+      "sha256": "fdac2fd9f3288571dbadd69810f6aea7f274e20d612b3696a8211aa93d50d720",
+      "baselineBlob": "52bbdd2dade727f10576f4298a6b8844f24155d7"
+    },
+    {
+      "path": "apps/api/src/knowledge/retriever.ts",
+      "sha256": "21e710102f2448ff0463386c4daea7c5a86aec2b2cd21bb4c09f293955efac2a",
+      "baselineBlob": "15a562c547d06868161e6a8208a07acf46470e9d"
+    },
+    {
+      "path": "apps/api/src/knowledge/source.service.ts",
+      "sha256": "0e3d04a426cf4ea357dd3574a63a09bd97e75cf8e5b089e13e3973c3ccf3d299",
+      "baselineBlob": "34036af4a9f18bb0d005dcb31955b103e4947d92"
+    },
+    {
+      "path": "apps/api/src/knowledge/vector.repository.ts",
+      "sha256": "37c024dae3b52949df64d4b0367e74049ff1487ca2a55101c9192608caaa2353",
+      "baselineBlob": "9b624cf5c815e7dbc8cb54e891298214f57dffcd"
+    },
+    {
+      "path": "packages/contracts/src/analysis.ts",
+      "sha256": "663735221d129475ae083164138918cf82fc59ef1fe75a14fe5acd48d8eb7544",
+      "baselineBlob": "6ea8b372f24381065aa6c7e5e7a0e4fb6376e974"
+    },
+    {
+      "path": "packages/contracts/src/recommendation.ts",
+      "sha256": "6e749ba706a127bc96bb724fdf6d67a9d6313d185c6c0993156b07d9a2b2399c",
+      "baselineBlob": "fb818fb30e9083d96f8ccf6319bb8798482f34c6"
+    },
+    {
+      "path": "scripts/evaluation/analysis-observer.mjs",
+      "sha256": "8ff0e8659a48e164e1340ede29a963776639e3c96fb3e703e6709e45bb89310b",
+      "baselineBlob": "82c3242f27db20be06403930f3053cfc8d7dbaf7"
+    },
+    {
+      "path": "scripts/evaluation/capture-release-environment.mjs",
+      "sha256": "8e8d90513180aa539c2772634b16fdacb1f0dd0f51a4962e654daaf0d0e30b97",
+      "baselineBlob": "814c8b33396cdb24d384f10376cd0711a2636c2d"
+    },
+    {
+      "path": "scripts/evaluation/capture-release-host.ps1",
+      "sha256": "fe318b1a61404080922b1e6b2eab0af1c2c2a6aafe05ca011ed377c705978819",
+      "baselineBlob": "0da8a60a0c1fcded6e26a7b3a63ce15c5c8cdf73"
+    },
+    {
+      "path": "scripts/evaluation/evidence-output.mjs",
+      "sha256": "f1af68d03da5038699a1effb494004e998c48ac5fd08e27fef6ddce78e814294",
+      "baselineBlob": "2f8fea5d7ae9275ab49d2125c35ce1fb07fa52e6"
+    },
+    {
+      "path": "scripts/evaluation/m14-cases.mjs",
+      "sha256": "1de6395397969c35a9ea286f1f31d25d650e0d4eedbed5dab316b4b1edb6594b",
+      "baselineBlob": "218c7b4f9cc5842f62ac021aca74252f61a6442a"
+    },
+    {
+      "path": "scripts/evaluation/m14-recommendation-evaluate.mjs",
+      "sha256": "c22bc01de9de73837327982b855541c063595bfe48668fdb3cce02fe6f71e651",
+      "baselineBlob": "559a227325e680d0d66ae458bc235710373482aa"
+    },
+    {
+      "path": "scripts/evaluation/m15-dataset.mjs",
+      "sha256": "13980424da7e935cf46ca08519c4d3186b29867d55ac095ad4915e1580e547c6",
+      "baselineBlob": "778d6e5155df3d926661fc0ebcef820789496330"
+    },
+    {
+      "path": "scripts/evaluation/m15-dataset.test.mjs",
+      "sha256": "0580c34f5709a42eb060812f308e737cb8ed7f1b68ba99dde89d160df68eedf8",
+      "baselineBlob": "3db958ced7a0a151f5ab68a7922c21c72dc99c08"
+    },
+    {
+      "path": "scripts/evaluation/m15-evaluation.test.mjs",
+      "sha256": "51555ee0c44e427ea5a0ad899ad7823f5364a4b9820f857173c577cdf20b62b1",
+      "baselineBlob": "e6ccad2593737575942ac9f1581e87c487970ca4"
+    },
+    {
+      "path": "scripts/evaluation/m15-metrics.mjs",
+      "sha256": "a8235df45cf93ce45db2945ea2e7c49229e8d6e6b9f24de5c874c2a74752adfc",
+      "baselineBlob": "df23718cf6856000d6d0de96e285d6e26e766856"
+    },
+    {
+      "path": "scripts/evaluation/m15-prompt.test.mjs",
+      "sha256": "3b9f8ac7408baad0667023dfe751ffccf96db6020be9022b9fea8f16e5b0e824",
+      "baselineBlob": "610363bfa0bd30c42adaea32a3a95cd36590a422"
+    },
+    {
+      "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+      "sha256": "284decfd8fe0abf2126b7897f4fa02eb4e65097d252307227524cecf6427e6d0",
+      "baselineBlob": "7f112978649d364b5382ce2fddb3a801e0ddfc4e"
+    },
+    {
+      "path": "scripts/evaluation/m4-evaluate.mjs",
+      "sha256": "558bebe5fda2d922d795effba125b7632791ee6b3ac41f7d90c8422715bcdf67",
+      "baselineBlob": "20220a1adce0c3f08da8aa67258db91fd775decb"
+    },
+    {
+      "path": "scripts/evaluation/m5-rag.mjs",
+      "sha256": "3170171d2995b49e45cb154a9efcfa17d9b50d02ef6716383c3f9f72210271d0",
+      "baselineBlob": "6588905380fdb8193ebabcf9de4eb98bb62ce921"
+    },
+    {
+      "path": "scripts/evaluation/m5-retrieval.mjs",
+      "sha256": "ae359b3f6f81249e39ef00521f16b7ff4f2265ff96465d2712790a1d21e7a1cd",
+      "baselineBlob": "17d24eb3c23eba3b225ffdde8f69255afa02e8ed"
+    },
+    {
+      "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+      "sha256": "161095d889c30ab4ef38913a192199642885a927cde5705b3dc09b8ca8cd6464",
+      "baselineBlob": "63571711a064b67b7151fe9b71245112bae5c51e"
+    },
+    {
+      "path": "scripts/evaluation/m8-summary-evaluate.mjs",
+      "sha256": "d015770eead5b46e3ac039a997c42e73259993834149390ad47bd61625a12168",
+      "baselineBlob": "2b542c58e917d9d20d0a9f8c72af590f193e194b"
+    },
+    {
+      "path": "scripts/evaluation/m9-compare.mjs",
+      "sha256": "1f1ff849dd051e4923e4826a8eafa6da2f4c810c588e46c2bf7477c8ce41b229",
+      "baselineBlob": "d221052964b715fe8e02bbe5801780224980047e"
+    },
+    {
+      "path": "scripts/evaluation/m9-evaluate.mjs",
+      "sha256": "3bbea06d5fb3f3904b58b89cdb4f010cd440af34dba4f3069ae56b0f0c01f0a8",
+      "baselineBlob": "7990307bb27075d201da8463f0dfc0ae231ed192"
+    },
+    {
+      "path": "scripts/evaluation/m9-expand-dataset.mjs",
+      "sha256": "6cbab1ea4278668dc2debcf3453e7c1c0ee99b39754e6af78a2cdd0c8fa66ac1",
+      "baselineBlob": "1758f69cbd3108c4a34ea26484adac93d0e34292"
+    },
+    {
+      "path": "scripts/evaluation/release-evaluate.mjs",
+      "sha256": "38a0998e4ede1afc7d8ed0d2fd014cfcbcbb4b6cb827c102136c0417c275461f",
+      "baselineBlob": "ffe73e0b8a7a4104383cd46a12f6dbabd1b5bc1f"
+    },
+    {
+      "path": "scripts/evaluation/release-evaluation.test.mjs",
+      "sha256": "e54885854ec1a9f130df8e888f1f8c1ea8389e4ec85fafcb1eb93164046b041a",
+      "baselineBlob": "e6ebea5ff81448959a138da3b6b32d8d1c33d523"
+    },
+    {
+      "path": "scripts/evaluation/release-results.mjs",
+      "sha256": "c42398f824d786be2bfb649526fe20bc9c0e5f03644a39d31900cfceda0e6c1d",
+      "baselineBlob": "b2de277414cb01d359518872b1d24a7d41c49bbb"
+    }
+  ],
+  "acceptedM15": {
+    "datasetSha256": "e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290",
+    "sourceHashes": {
+      "apps/api/src/ai/prompts/recommendation.ts": "71d7bbd664a232f31c7ef637601bbb812695e27a9a3acf7b6c76586cc34661de",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "apps/api/src/ai/recommendation-output.ts": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698",
+      "apps/api/src/ai/ollama-provider.ts": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+      "packages/config/src/index.ts": "6edbebd5e6b7d3acbabaf60e6f0ed71463c0b4c7dd7933afa0a1d4e3a0af4130",
+      "scripts/evaluation/m15-recommendation-evaluate.mjs": "4806db71c8ad6a346f61583f343533be31ea36e9cde000588fba7b5996d00dc0",
+      "scripts/evaluation/m15-metrics.mjs": "3ea84a6d20e3620f7b6a6636a1bd6bddc9e50496f533617e546346e141d54222",
+      "scripts/evaluation/m15-dataset.mjs": "a090bccd953a99faf19845a938b7c0e8e6e890798219c7cdb7e82e145a620351"
+    },
+    "promptVersion": "grounded-recommendation.v2.10",
+    "schemaVersion": "recommendation.v2",
+    "matchedSourceHashes": [
+      {
+        "path": "apps/api/src/ai/prompts/recommendation.ts",
+        "sha256": "71d7bbd664a232f31c7ef637601bbb812695e27a9a3acf7b6c76586cc34661de"
+      },
+      {
+        "path": "packages/contracts/src/recommendation.ts",
+        "sha256": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb"
+      },
+      {
+        "path": "apps/api/src/ai/recommendation-output.ts",
+        "sha256": "2489638d4fb0dcd653e099784fee41fb21e2a568249df03f52a414f8979a0698"
+      },
+      {
+        "path": "apps/api/src/ai/ollama-provider.ts",
+        "sha256": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c"
+      },
+      {
+        "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+        "sha256": "4806db71c8ad6a346f61583f343533be31ea36e9cde000588fba7b5996d00dc0"
+      },
+      {
+        "path": "scripts/evaluation/m15-metrics.mjs",
+        "sha256": "3ea84a6d20e3620f7b6a6636a1bd6bddc9e50496f533617e546346e141d54222"
+      },
+      {
+        "path": "scripts/evaluation/m15-dataset.mjs",
+        "sha256": "a090bccd953a99faf19845a938b7c0e8e6e890798219c7cdb7e82e145a620351"
+      }
+    ],
+    "hashEncoding": "Historical M15 app/contracts CRLF and evaluation scripts LF; V1.2 comparisons normalize EOL only"
+  },
+  "actions": [
+    "SUMMARIZE_REQUEST",
+    "FIND_SOP",
+    "SUGGEST_NEXT_STEP",
+    "GENERATE_CHECKLIST",
+    "FIND_SIMILAR_REQUESTS",
+    "EXPLAIN_CLASSIFICATION"
+  ],
+  "configDelta": "Only seven SLA_ALERT declarations; all model/embedding/provider/timeout settings unchanged",
+  "authorizationReview": "Request/AI scope methods byte-identical; new methods only template/routing/collaboration/notification scopes",
+  "projectionReview": "AI owners build explicit projections directly and do not call RequestQueryService. M20 transport provenance fields never enter those unchanged builders. M24 integrated private-canary capture passed intake/recommendation/Copilot; only human-edited final text/checklist enters established public context.",
+  "evidenceReuse": "M15 synthetic 100 cases +30 consistency runs remains historical accepted evidence; no new live quality claim",
+  "runtime": "Optional provider deliberately unavailable, model labels unconfigured; no model downloaded or replaced",
+  "liveAi": "NOT RUN"
+}

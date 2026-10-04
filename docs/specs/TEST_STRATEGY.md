@@ -1,5 +1,7 @@
 # Test Strategy
 
+M24 release acceptance (4 October 2026): execute current lint/typecheck/217 units/production build, actual fresh13 and materialized V1.2 schema7→13 with preservation and current app startup, integrated API/production Edge browser,28 targeted responsive/Axe scans, actual dependency/restart recovery, populated seed idempotence, AI identity/isolation, packaging/secret scan and exact tested-source/cleanup gates. Accepted historical deep tests may be reused only with unchanged owner hashes. [M24 verification](../v1.3/M24_RELEASE_HARDENING_VERIFICATION.md) owns actual commands/failures/limitations; all required failures block publication. No full historical replay, live AI or human-review claim.
+
 Authority: master-plan §§22, 30–31, 34, 36, 39–40 and milestone-specific gates. No application tests, builds or live evaluations have run in M0. [MILESTONE_0_VERIFICATION](../verification/MILESTONE_0_VERIFICATION.md) records actual documentation checks separately.
 
 ## Layers and isolation

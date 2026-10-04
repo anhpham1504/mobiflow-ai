@@ -1,0 +1,261 @@
+{
+  "checkedAt": "2026-10-04T06:10:54.645Z",
+  "result": "PASS",
+  "previousCheckpointSha": "4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+  "startingBranch": "feat/v1.3-saved-views-filters",
+  "startingHead": "4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+  "startingWorkingTree": "CLEAN",
+  "branch": "feat/v1.3-release-hardening",
+  "main": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "originMain": "31b445caf07dad606601a1e38e8ed39836d9f825",
+  "tags": "1f7fe58b633d8b876a9b33a6a88da8e98b9fe4df refs/tags/M6-PASS---tools,-similar-cases-and-grounded-recommendations\n7750319e97d5db476c627511102b9e730417023f refs/tags/M6-PASS---tools,-similar-cases-and-grounded-recommendations^{}\n657605aab1ecc334a0d4eea12e4af75c263ca30d refs/tags/v0.5.0-m5\n7fe687ae4517c37f9fbe3fcf01668980ebe85a23 refs/tags/v0.5.0-m5^{}\n687a3181be77697472d62e578fb3f7624640f774 refs/tags/v0.6.0-m6\n7750319e97d5db476c627511102b9e730417023f refs/tags/v0.6.0-m6^{}\nf2eb8850e20e8096b3e80668b7399db4e91d4fe1 refs/tags/v0.7.0-m7\n19395c9ff950ec667dabc658292814b3dadadd8c refs/tags/v0.7.0-m7^{}\nce314c559fa427d63235473dab049e438a7c244a refs/tags/v0.8.0-m8\n9a9e506eb95393b53b3bf6f4eefac2e5eaee4fad refs/tags/v0.8.0-m8^{}\na5550b8b182c5a56e2418cf4dfb22fc1f747908e refs/tags/v0.9.0-m9\nc0e7c9520ae4172b28415b609f8e66191d906803 refs/tags/v0.9.0-m9^{}\nad2844cfbfb91e0c8b10d2dfd07898e963052628 refs/tags/v1.0.0\ncf59b68852aa69bd54d8b478c1dd0a595b3220fe refs/tags/v1.0.0^{}\n73b1a45eca2a9cab946a909c0bd565f14f752622 refs/tags/v1.1.0\n2604590a0ff07bee8b994cc337d8f7e42da61e70 refs/tags/v1.1.0^{}\ncd8dec95a99b46c3c25f33c11091cf4f3e476b1f refs/tags/v1.2.0\n31b445caf07dad606601a1e38e8ed39836d9f825 refs/tags/v1.2.0^{}",
+  "releaseTag": "ABSENT local/remote",
+  "checkpoints": [
+    {
+      "milestone": 18,
+      "branch": "feat/v1.3-internal-notes",
+      "sha": "1f54dce3c8427976763b19ef33f181b4ef9a3337",
+      "parent": "31b445caf07dad606601a1e38e8ed39836d9f825",
+      "gates": [
+        "M18_BUILD.json",
+        "M18_DATABASE.json",
+        "M18_E2E.json",
+        "M18_INTEGRATION.json",
+        "M18_LINT.json",
+        "M18_SECURITY.json",
+        "M18_TARGETED_REGRESSION.json",
+        "M18_TYPECHECK.json",
+        "M18_UNIT.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "milestone": 19,
+      "branch": "feat/v1.3-mentions-watchers",
+      "sha": "35e4b1c41165fa04348871dee31bd20c28386b47",
+      "parent": "1f54dce3c8427976763b19ef33f181b4ef9a3337",
+      "gates": [
+        "M19_BUILD.json",
+        "M19_DATABASE.json",
+        "M19_E2E.json",
+        "M19_FINAL.json",
+        "M19_INTEGRATION.json",
+        "M19_LINT.json",
+        "M19_SECURITY.json",
+        "M19_TARGETED_UNIT.json",
+        "M19_TYPECHECK.json",
+        "M19_UNIT.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "milestone": 20,
+      "branch": "feat/v1.3-response-checklist-templates",
+      "sha": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+      "parent": "35e4b1c41165fa04348871dee31bd20c28386b47",
+      "gates": [
+        "M20_BUILD.json",
+        "M20_DATABASE.json",
+        "M20_E2E.json",
+        "M20_FINAL_SANITY.json",
+        "M20_INTEGRATION.json",
+        "M20_LINT.json",
+        "M20_SECURITY.json",
+        "M20_TARGETED_UNIT.json",
+        "M20_TYPECHECK.json",
+        "M20_UNIT.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "milestone": 21,
+      "branch": "feat/v1.3-rule-based-routing",
+      "sha": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+      "parent": "b75d15acc2dbbb16d00ce47db8ed891af210a48d",
+      "gates": [
+        "M21_BUILD.json",
+        "M21_E2E.json",
+        "M21_FINAL_SANITY.json",
+        "M21_LINT.json",
+        "M21_SECURITY.json",
+        "M21_TYPECHECK.json",
+        "M21_UNIT.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "milestone": 22,
+      "branch": "feat/v1.3-reminder-sla-escalation",
+      "sha": "58aae141ee2a4e8d9af341fd88dce370106a8c16",
+      "parent": "758caf220fc0a672e5d9a9e5d6f47653e6478fa2",
+      "gates": [
+        "M22_API.json",
+        "M22_BUILD.json",
+        "M22_DATABASE.json",
+        "M22_E2E.json",
+        "M22_FINAL.json",
+        "M22_LINT.json",
+        "M22_SECURITY.json",
+        "M22_TYPECHECK.json",
+        "M22_UNIT.json"
+      ],
+      "result": "PASS"
+    },
+    {
+      "milestone": 23,
+      "branch": "feat/v1.3-saved-views-filters",
+      "sha": "4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+      "parent": "58aae141ee2a4e8d9af341fd88dce370106a8c16",
+      "gates": [
+        "M23_API.json",
+        "M23_BUILD.json",
+        "M23_DATABASE.json",
+        "M23_E2E.json",
+        "M23_FINAL.json",
+        "M23_LINT.json",
+        "M23_SECURITY.json",
+        "M23_TYPECHECK.json",
+        "M23_UNIT.json"
+      ],
+      "result": "PASS"
+    }
+  ],
+  "previousReviewedBlobs": 94,
+  "migrationCount": 13,
+  "commands": [
+    {
+      "command": "git status --porcelain=v1 --untracked-files=all",
+      "exitCode": 0
+    },
+    {
+      "command": "git fetch origin",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse HEAD",
+      "exitCode": 0
+    },
+    {
+      "command": "git branch --show-current",
+      "exitCode": 0
+    },
+    {
+      "command": "git ls-remote origin",
+      "exitCode": 0
+    },
+    {
+      "command": "git branch --list feat/v1.3-release-hardening",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse HEAD^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-internal-notes",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-internal-notes",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse 1f54dce3c8427976763b19ef33f181b4ef9a3337^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-mentions-watchers",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-mentions-watchers",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse 35e4b1c41165fa04348871dee31bd20c28386b47^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-response-checklist-templates",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-response-checklist-templates",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse b75d15acc2dbbb16d00ce47db8ed891af210a48d^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-rule-based-routing",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-rule-based-routing",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse 758caf220fc0a672e5d9a9e5d6f47653e6478fa2^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-reminder-sla-escalation",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-reminder-sla-escalation",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse 58aae141ee2a4e8d9af341fd88dce370106a8c16^",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse feat/v1.3-saved-views-filters",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/feat/v1.3-saved-views-filters",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse 4735afafe7cda4dbf98bdd387cc2fd49db22f764^",
+      "exitCode": 0
+    },
+    {
+      "command": "git ls-tree -r 4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse main",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse origin/main",
+      "exitCode": 0
+    },
+    {
+      "command": "git merge-base --is-ancestor 31b445caf07dad606601a1e38e8ed39836d9f825 4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+      "exitCode": 0
+    },
+    {
+      "command": "git show-ref --tags -d",
+      "exitCode": 0
+    },
+    {
+      "command": "git ls-tree -r --name-only 4735afafe7cda4dbf98bdd387cc2fd49db22f764 apps/api/prisma/migrations",
+      "exitCode": 0
+    },
+    {
+      "command": "git switch -c feat/v1.3-release-hardening 4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+      "exitCode": 0
+    },
+    {
+      "command": "git rev-parse HEAD",
+      "exitCode": 0
+    }
+  ],
+  "authorization": "RECEIVED — direct user confirmed EXECUTE attached M24; includes checkpoint, ff-only main and annotated v1.3.0 publication",
+  "humanReview": "NOT RUN"
+}

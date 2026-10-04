@@ -1,0 +1,462 @@
+{
+  "checkedAt": "2026-10-04T06:58:09.186Z",
+  "result": "PASS",
+  "previousCheckpointSha": "4735afafe7cda4dbf98bdd387cc2fd49db22f764",
+  "branch": "feat/v1.3-release-hardening",
+  "closureAuthorization": "RECEIVED — user confirmed execution of attached M24",
+  "technicalSelfReview": "PASS",
+  "independentExternalHumanReview": "NOT RUN",
+  "sourceFingerprint": "45be55555114aa0bf3f64d415cab6e7e97652ab35d3c08b37e7b01c42d8560b0",
+  "productFingerprint": "d711b1fdd1b633a8b5c69a0d6bf2772de18b12b9df9a775aa7cf160f1f4d41ae",
+  "reviewedFiles": [
+    {
+      "path": ".env.example",
+      "disposition": "INCLUDE",
+      "gitBlob": "f9ed889de26ecc420ff74104efeaaf3f83de9a7b"
+    },
+    {
+      "path": "README.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "e9bc48a9bde5a54aea4ade43862d8707195c9baf"
+    },
+    {
+      "path": "apps/api/test/helpers/release-hardening-fixture.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "abe1f613042706a7c6d4ddbad07757da73120dc7"
+    },
+    {
+      "path": "apps/api/test/release-hardening.integration.test.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "a1e3c784c665222577b26044101ddc2ac94c00b7"
+    },
+    {
+      "path": "apps/web/e2e/release-hardening.spec.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "e206e0c044da9ecc629c4a55b4df57b82876a86c"
+    },
+    {
+      "path": "docker-compose.yml",
+      "disposition": "INCLUDE",
+      "gitBlob": "5d99da81b4d0ceafde2d89087a86a7f7a0998a35"
+    },
+    {
+      "path": "docs/IMPLEMENTATION_PLAN.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "d4a87e5ac9e39acc6fa1be513e5d8a6a49dbc27a"
+    },
+    {
+      "path": "docs/specs/PROJECT_SPEC.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "2c45b31978d49ba07f6331045492234c5f33b3b9"
+    },
+    {
+      "path": "docs/specs/SLA_SPEC.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "4ce9994a09eafd47eaaeb0d35510f98f52cb4c7f"
+    },
+    {
+      "path": "docs/specs/TEST_STRATEGY.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "2f464474d0d1dafd2410d06597c4ab97fe1db8c0"
+    },
+    {
+      "path": "docs/v1.3/M24_CHECKPOINT_CLOSURE.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "06ad4e8b3283ab69295e38f687fa207028f48281"
+    },
+    {
+      "path": "docs/v1.3/M24_CONFIGURATION_REFERENCE.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "237bc2b837d682e57e67d965957540ffd9309946"
+    },
+    {
+      "path": "docs/v1.3/M24_DEMO_RUNBOOK.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "a62e408e01b4976c622a7f59b8fb42eeae03383e"
+    },
+    {
+      "path": "docs/v1.3/M24_RELEASE_HARDENING_IMPLEMENTATION_PLAN.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "eded1725d13dea0134459ffae271ddd9e9dcbe26"
+    },
+    {
+      "path": "docs/v1.3/M24_RELEASE_HARDENING_VERIFICATION.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "26f1da3acd0b20404b6454370c208709cfa1a378"
+    },
+    {
+      "path": "docs/v1.3/M24_RELEASE_INVENTORY.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "501671da40967540e774a334b10429f2d58994ff"
+    },
+    {
+      "path": "docs/v1.3/README.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "a48adddf682d173338490a218fdfed760fa25165"
+    },
+    {
+      "path": "docs/v1.3/V1_3_MASTER_PLAN.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "372ebfb177106624ed40701ebbf806362fc2f3ab"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_AI_IDENTITY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "465d414e2ed644b68f410312e5adebde913db3e3"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_API.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "70715d69944ba73bcfd2ad93a38ba263fffb08dc"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_BROWSER.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "ab634b6aa1144fcf70484091a043cab6ec58d71b"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_DATABASE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "42594d329b8272bd377ca1d989671a9daae34df5"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_PREFLIGHT.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "eee451b3796741ccb3c33840201cb04f76378e79"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_PRODUCTION_SMOKE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "cdc12f5909f10ca9cf76db600f07a1b3e3a32586"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_RECOVERY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "40fb84930d33a8bc34b70744d72dea8d12aba913"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_RUNTIME.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "870ffa7c96be1b275474b4e269aeb1308ac9ccbf"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_SECURITY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "76226cfe89efa61fb95d9b49afef5b0da7aec057"
+    },
+    {
+      "path": "docs/v1.3/evidence/M24_SOURCE_COVERAGE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "cbaafada194c86667dacaabf4a8ab68f67224ac0"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_AI_IDENTITY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "133a57e47ee2ad5467f21d002cd8f37ac5113582"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_BUILD.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "0430ab4b26d1db25dd0d90b5999e1340cf3feeb8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_CLEANUP_DATABASE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "566e5f328c8d176c975816f27a0b062d21c9773e"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_CLEANUP_RELEASE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "8d3e006845a8740ec8a64d0f394c3a940f2bfb7d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_CLEANUP_RUNNER.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "780f527261678ef6179775068e5576c47a6e6a84"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_DATABASE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "491a57458433007eff59ef9ad0428ccd6a95659f"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_E2E.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "2f927840f81ea7a48cbe847169a083c7b4a152e5"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_INTEGRATION.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "501e0f191fef3ccbbbbc4536dd71d4c4981f5a5b"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_LINT.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "856b17825197fb7b45fdea16e395de6955ce4419"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_PACKAGING_BUILD.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "83554f5663d6000901fb2fb15e75fb251cb6a8c1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_PRODUCTION_SMOKE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "d96cda1cf19b4b01a316cfd1c49d354f36643492"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_RECOVERY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "1c8b93cd3be135714a2fcb97a75f92dc6637c118"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_RELEASE_DATABASE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "25cf71c719c41d5d197a4b544ce24b39cf866558"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_RUNTIME_START.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "7922dc7d1912981ab5e716696dcccc910ce4ba50"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_SECURITY.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "4250556dc2728c981db57f9a9a2f0c9edc95d05d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_SEED_IDEMPOTENCE.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "18b953e85c310566f7c6523e2dc27dba3976f8d4"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_SETUP.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "48e3231a129f8070b98f75fb0d635e95f88b51ee"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_TYPECHECK.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "8708acaf6fc1b34a804d5bd4cdf367a084254c41"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/M24_UNIT.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "e55ae278b455caee80b828757b6a068ad53b3a0c"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_AI_IDENTITY-56b2f1da687c.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "340f4a6ac24c3c3c0849b04b616ff602312f773d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_AI_IDENTITY-5cc20d7d39dd.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "c33a1c9799ffaf2687ec793b94a14a06d2200ba1"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_AI_IDENTITY-80fed86588d1.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "1c0d7cceeb5aea117ecaaae174bb4f43dd99c6d8"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_DATABASE-ee36cdaa8b81.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "69301f9706da025d50f0911537c491d8bb445e50"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_E2E-13c2ebcc51be.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "00e4cdff39390b2586eaf4b5eee6190b0212f4c2"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_INTEGRATION-12528487752c.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "5e4b8d025edd0cbd2552f9ac2c46ec68b539f2ea"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_LINT-9be5bfe89646.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "38ea4efeb3d81be2966f563babd54273b94d771b"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_LINT-d468e8ac69aa.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "48c9272e963ff61f1a75a0ac1635a1364acc54aa"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_RELEASE_DATABASE-ebfc339d3409.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "95d76b1a74221ad53fb5f0df352d415265d796d3"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_SECURITY-3f0b272cc7ad.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "82aa29d8a158cc77f4415a25392f065a9086879d"
+    },
+    {
+      "path": "docs/v1.3/evidence/gates/iterations/M24_SECURITY-97cb142a3cae.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "1cece4f166c589c9d8f4cabbaea83e6ca12859ac"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M24_API-547bf56f3f99.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "6c0dcb2a7b039b305f6517ebe5b4dc170d5b67ec"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M24_BROWSER-9ae6c565852d.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "e76c0f47a9614af02a79c5ac846401418eb9f7ef"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M24_DATABASE-18956d65669b.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "e3aa779ae293bb716efd623d00cab7f90d1e467f"
+    },
+    {
+      "path": "docs/v1.3/evidence/iterations/M24_SECURITY-a0cf63624a2f.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "d128062d943478f94f930b5fdca677ad6d47f8d5"
+    },
+    {
+      "path": "docs/verification/MILESTONE_24_VERIFICATION.md",
+      "disposition": "INCLUDE",
+      "gitBlob": "87021057259adb84399a126716c7148d65a0aea9"
+    },
+    {
+      "path": "package.json",
+      "disposition": "INCLUDE",
+      "gitBlob": "c3351ef9b4916ab0428824029cc2eb9e535c97e4"
+    },
+    {
+      "path": "playwright.m24.config.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "65e79ec64de643995facb362e4be7ca37d81783c"
+    },
+    {
+      "path": "scripts/verification/docker-compose.m24-release.yml",
+      "disposition": "INCLUDE",
+      "gitBlob": "01ce4a38ef061e57e43bb47ab3800f677f347570"
+    },
+    {
+      "path": "scripts/verification/docker-compose.m24.yml",
+      "disposition": "INCLUDE",
+      "gitBlob": "cb7627f8a0205ad075a8a174b54d3b1db61c31a5"
+    },
+    {
+      "path": "scripts/verification/m24-browser.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "e61a9e3d0eb9431e8740decaafe1a6e735dacadd"
+    },
+    {
+      "path": "scripts/verification/m24-capture.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "a35f93260333b4686c797e88f037bf7a95107ef4"
+    },
+    {
+      "path": "scripts/verification/m24-client.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "132760191a5c1f0c6509f6b5b3ca209786e61f0f"
+    },
+    {
+      "path": "scripts/verification/m24-database.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "ef71da056743384d999389761e3d2557995081e1"
+    },
+    {
+      "path": "scripts/verification/m24-final.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "0eac78c307a98408b67fe9071bb1adcaf6cc6793"
+    },
+    {
+      "path": "scripts/verification/m24-identity.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "b26977d5b74b91680794a7d6644689fecd5adc59"
+    },
+    {
+      "path": "scripts/verification/m24-integration.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "a8b78716c3ea8ce1a6120e9220286aa8d84de6c9"
+    },
+    {
+      "path": "scripts/verification/m24-linux.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "e26da45f7a907102444435fc365843cafc108a74"
+    },
+    {
+      "path": "scripts/verification/m24-migrations.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "2ee44ca94a63d8b49850930fbd37ed7e8f93d2d8"
+    },
+    {
+      "path": "scripts/verification/m24-recovery.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "a5336029ea455acddd1da6811ddeddb02af56c2e"
+    },
+    {
+      "path": "scripts/verification/m24-release-seed.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "b9ebc78d924a315f0aa4c68230c93b8f95551099"
+    },
+    {
+      "path": "scripts/verification/m24-release.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "b63099756121c6a5f5ce1c1d016c4b884cb9ef0d"
+    },
+    {
+      "path": "scripts/verification/m24-runtime.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "32908ff9d4b30c96d2133c635e48f9cc2fc016a4"
+    },
+    {
+      "path": "scripts/verification/m24-security.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "ff86d97d2f0cf242ca084c59c4b6c9561205e866"
+    },
+    {
+      "path": "scripts/verification/m24-smoke.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "b61de54d79a84a604da621065ac106ced74d608c"
+    },
+    {
+      "path": "scripts/verification/m24-source-coverage.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "4839617d6f54bce76380345912a7eb402a32ed42"
+    },
+    {
+      "path": "scripts/verification/m24-source.mjs",
+      "disposition": "INCLUDE",
+      "gitBlob": "0ef6e45680dc8efdccd5dba6d562fee4cfaa1a70"
+    }
+  ],
+  "inventoryFingerprint": "6e2dc88604ede3c799acc187678724acedc64928db3a6acfa214105a0761b776",
+  "excludedFromRecursiveManifest": [
+    "docs/v1.3/evidence/M24_FINAL.json",
+    "docs/v1.3/evidence/gates/M24_FINAL.json"
+  ],
+  "historicalDocumentsAndEvidenceFrozen": 256,
+  "developerMigrations": 7,
+  "developerDatabaseModified": false,
+  "developerStack": "IDs/start times/running/ports match post-Docker-engine-start baseline; engine startup had auto-resumed developer PG only, API/Web remained stopped",
+  "ownedTestContainersAndVolumes": "REMOVED; only M24 resources",
+  "portsReleased": [
+    55424,
+    33024,
+    55425,
+    33600,
+    33601
+  ],
+  "oldTagsAndCheckpointsUnchanged": true,
+  "mainUnchanged": true,
+  "remainingBlockers": 0,
+  "deployment": "NOT RUN",
+  "v1_4": "NOT STARTED",
+  "gitClosure": "Evaluate exact committed source and live refs after normal branch push, then Phase B release; no prospective self-SHA",
+  "stagingReviewUpdatedAt": "2026-10-04T06:59:20.761Z",
+  "stagingDocumentationRefresh": [
+    "docs/v1.3/M24_CHECKPOINT_CLOSURE.md",
+    "docs/v1.3/M24_RELEASE_HARDENING_VERIFICATION.md",
+    "docs/verification/MILESTONE_24_VERIFICATION.md"
+  ]
+}

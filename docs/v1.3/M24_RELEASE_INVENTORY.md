@@ -1,0 +1,25 @@
+# V1.3 release inventory
+
+Theme: **Operational Collaboration & Workflow Productivity**. Baseline v1.2.0/main `31b445caf07dad606601a1e38e8ed39836d9f825`; hardening starts at M23 `4735afafe7cda4dbf98bdd387cc2fd49db22f764`. Hardening source and Git closure are resolved through [M24 verification](M24_RELEASE_HARDENING_VERIFICATION.md), [coverage](evidence/M24_SOURCE_COVERAGE.json) and [AUTO closure](M24_CHECKPOINT_CLOSURE.md). Phase B records the existing hardening SHA in release documentation; no future self-SHA is embedded here.
+
+| Milestone | Accepted checkpoint | Release scope |
+|---|---|---|
+| M18 | 1f54dce3c8427976763b19ef33f181b4ef9a3337 | Private internal notes for managers/current staff, explicit human create, USER exclusion |
+| M19 | 35e4b1c41165fa04348871dee31bd20c28386b47 | Allowed mention picker, personal watch state, current-scope deduplicated collaboration notifications |
+| M20 | b75d15acc2dbbb16d00ce47db8ed891af210a48d | Versioned RESPONSE/CHECKLIST libraries; editable local drafts, explicit human adoption/approval, private provenance |
+| M21 | 758caf220fc0a672e5d9a9e5d6f47653e6478fa2 | Manager rules and read-only MATCH/NO_MATCH/CONFLICT evaluation; apply only prefills human form |
+| M22 | 58aae141ee2a4e8d9af341fd88dce370106a8c16 | Bounded operational reminders/escalations, durable event/recipient dedup and fair scan cursor |
+| M23 | 4735afafe7cda4dbf98bdd387cc2fd49db22f764 | Private versioned Saved Views, cap50, canonical current-role Request filters and URL semantics |
+| M24 | Resolve live hardening branch/closure record | Expose7 existing SLA config settings, integrated tests/recovery, release docs and Git publication |
+
+Database: one PostgreSQL17/pgvector,13 immutable migrations. V1.2 had7; M18 note8, M19 mention/watch9, M20 templates10, M21 routing11, M22 alerts12, M23 views13. M24 adds0. Runtime uses least-privilege mobiflow_app; migrations use separate owner credentials. No second vector store or production data. Fresh and sequential actual V1.2 upgrade/data preservation plus current app startup pass. Normal developer DB is intentionally7, untouched by migrations/seed.
+
+API: existing `/api/v1`, exactly USER/STAFF/MANAGER login roles; generated OpenAPI remains current. V1.3 adds private internal-note/mention-candidate/watch endpoints, template revisions/lifecycle, manager routing rules/evaluation and per-owner saved-request-views; existing notifications deliver scoped M19/M22 types. M23 canonical query fields status/priority/category/from/to and manager-only assigneeId preserve Request authorization. M24 changes no endpoint/schema. No note/library/rule/view metadata leaks into USER public DTO/history/dashboard/notifications or AI context.
+
+UI: existing role shells, request detail and notification inbox; private notes/mention/watch controls, response template composer, manager checklist library/draft, routing management/prefill, SLA notices, saved-filter bar/dialogs. Four production Edge scenarios and28 responsive/Axe scans at360/768/1440/1920 pass. Existing human save/submit/approval/send controls remain necessary; no AI or background protected action.
+
+AI foundation: unchanged V1.2 owners and six actions SUMMARIZE_REQUEST, FIND_SOP, SUGGEST_NEXT_STEP, GENERATE_CHECKLIST, FIND_SIMILAR_REQUESTS, EXPLAIN_CLASSIFICATION. Historical accepted M15 completion `qwen3:4b-instruct-2507-q4_K_M`, digest `d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641`; embedding `bge-m3:latest`, digest `7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab`, dimension1024/revisionm5.v1. Prompt grounded-recommendation.v2.10 and synthetic dataset identity are retained in [AI identity](evidence/M24_AI_IDENTITY.json). These are historical accepted identities; the M24 production rehearsal deliberately uses optional Ollama unavailable/unconfigured and reports coreReady=true/aiReady=false/DEGRADED. No new live quality result.
+
+Runtime/packaging: npm workspaces, strict TypeScript, NestJS API, Next App Router Web, Node24.19.0, existing Dockerfile images. API/Web non-root, read-only root filesystems, drop ALL capabilities, no-new-privileges, bounded resources and loopback host ports verified on actual containers. Root Compose now passes all7 SLA_ALERT settings. No lockfile/dependency change. Setup, isolated recovery, seed and [runbook](M24_DEMO_RUNBOOK.md) are documented; all owned runtime resources are cleaned before closure.
+
+Limits: synthetic local tests are not production accuracy or an enterprise SLO. Private views have50/account cap and fixed sorting; routing has no background assignment; templates are drafts; alerts are operational snapshots, not M12 state changes. Optional-provider availability/latency is host-dependent. No penetration test, full WCAG certification, full DR rehearsal or unsupported browser claim. Independent human review, production deployment, full historical replay and V1.4: NOT RUN/NOT STARTED as applicable. Required technical gates and zero blockers are prerequisites to publication, which is verified from live refs.

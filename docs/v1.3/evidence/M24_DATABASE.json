@@ -1,0 +1,84 @@
+{
+  "checkedAt": "2026-10-04T06:38:52.583Z",
+  "result": "PASS",
+  "synthetic": true,
+  "migration": "20261004010000_m23_saved_request_views",
+  "migrationCount": 13,
+  "checks": [
+    {
+      "baseline": 13,
+      "result": "PASS",
+      "path": "fresh1→13",
+      "upgrades": [],
+      "privileges": {
+        "read": true,
+        "insert": true,
+        "update_name": true,
+        "update_owner": false,
+        "delete": true
+      },
+      "constraints": "PK/NOT NULL/FK/normalized uniqueness/name/JSON/version PASS",
+      "runtimeDdlDenied": true,
+      "historicalMigrations": "all13 byte-identical",
+      "currentApplicationThreeRoleLoginDashboardAndPreservedRequest": "PASS"
+    },
+    {
+      "baseline": 7,
+      "result": "PASS",
+      "path": "V1.2 7→8→9→10→11→12→13",
+      "upgrades": [
+        {
+          "from": 7,
+          "to": 8,
+          "tables": 26,
+          "rows": 152
+        },
+        {
+          "from": 8,
+          "to": 9,
+          "tables": 27,
+          "rows": 153
+        },
+        {
+          "from": 9,
+          "to": 10,
+          "tables": 29,
+          "rows": 157
+        },
+        {
+          "from": 10,
+          "to": 11,
+          "tables": 32,
+          "rows": 159
+        },
+        {
+          "from": 11,
+          "to": 12,
+          "tables": 34,
+          "rows": 161
+        },
+        {
+          "from": 12,
+          "to": 13,
+          "tables": 36,
+          "rows": 164
+        }
+      ],
+      "privileges": {
+        "read": true,
+        "insert": true,
+        "update_name": true,
+        "update_owner": false,
+        "delete": true
+      },
+      "constraints": "PK/NOT NULL/FK/normalized uniqueness/name/JSON/version PASS",
+      "runtimeDdlDenied": true,
+      "historicalMigrations": "all13 byte-identical",
+      "currentApplicationThreeRoleLoginDashboardAndPreservedRequest": "PASS"
+    }
+  ],
+  "developerMigrations": 7,
+  "developerMetadata": "Host runtime-baseline snapshot; rechecked by final host gate",
+  "developerDatabaseModified": false,
+  "isolatedPort": 55424
+}

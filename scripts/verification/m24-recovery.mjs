@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import {readFileSync} from 'node:fs';
+import {call,login,releaseDb,waitUntil,apiBase,webOrigin} from './m24-client.mjs';
+import {saveEvidence} from './evidence.mjs';
+const project='mobiflow-m24-release',docker=(...args)=>execFileSync('docker',args,{encoding:'utf8',windowsHide:true}).trim();
+for(const service of ['api','web','postgres'])assert.equal(docker('inspect','--format','{{ index .Config.Labels "com.docker.compose.project" }}',project+'-'+service+'-1'),project);
+const f=JSON.parse(readFileSync('artifacts/m24/production-fixtures.json')),ids=f.requests.map(r=>r.id),token=await login('staff.iot'),db=await releaseDb();
+db.on('error',()=>{});
+const snapshot=async c=>({alerts:(await c.query('SELECT * FROM "SlaOperationalAlert" WHERE "requestId"=ANY($1::uuid[]) ORDER BY id',[ids])).rows,notices:(await c.query('SELECT * FROM "Notification" WHERE "requestId"=ANY($1::uuid[]) AND "slaAlertId" IS NOT NULL ORDER BY id',[ids])).rows,requests:(await c.query('SELECT id,status,priority,version,"currentAssigneeId","teamId" FROM "Request" WHERE id=ANY($1::uuid[]) ORDER BY id',[ids])).rows});
+const before=await snapshot(db);assert.equal(before.alerts.length,5);assert.equal(before.notices.length,10);assert.equal(new Set(before.notices.map(n=>n.eventId+':'+n.recipientId)).size,10);
+const progress=Number((await db.query('SELECT version FROM "SlaAlertScanProgress"')).rows[0].version),active=Number((await db.query('SELECT count(*) FROM "SlaInstance" s JOIN "Request" r ON r.id=s."requestId" WHERE s."stoppedAt" IS NULL AND r.status IN (\'ASSIGNED\',\'IN_PROGRESS\')')).rows[0].count),ticks=Math.ceil(active/2)+1;
+await db.end();const started=new Date().toISOString();
+docker('restart',project+'-api-1',project+'-web-1');
+await waitUntil(async()=>{try{return (await fetch(apiBase+'/health/ready',{signal:AbortSignal.timeout(2500)})).ok&&(await fetch(webOrigin+'/login',{signal:AbortSignal.timeout(2500)})).ok;}catch{return false;}});
+assert.equal((await call(token,'/staff/work-queue')).status,200);
+console.log(JSON.stringify({event:'m24.recovery.restart',result:'PASS',active,batch:2,waitForPersistedTicks:ticks}));
+let c=await releaseDb();await waitUntil(async()=>Number((await c.query('SELECT version FROM "SlaAlertScanProgress"')).rows[0].version)>=progress+ticks,{attempts:270,interval:1000});assert.deepEqual(await snapshot(c),before);await c.end();
+let outage;
+try{docker('stop',project+'-postgres-1');const ready=await fetch(apiBase+'/health/ready',{signal:AbortSignal.timeout(15000)}),body=await ready.json();assert.equal(ready.status,503);assert.equal(body.data.coreReady,false);assert.equal(body.data.aiReady,false);assert.equal((await fetch(apiBase+'/health/live')).status,200);
+ const response=await call(token,'/staff/work-queue');assert.equal(response.status,503);assert.doesNotMatch(JSON.stringify(response.body),/Prisma|postgresql:\/\/|SELECT |password|stack/i);outage={readinessStatus:ready.status,coreReady:body.data.coreReady,liveStatus:200,protectedRead:response.status,safeError:true};
+}finally{docker('start',project+'-postgres-1');}
+await waitUntil(async()=>{try{return (await fetch(apiBase+'/health/ready',{signal:AbortSignal.timeout(2500)})).ok;}catch{return false;}});
+assert.equal((await call(token,'/staff/work-queue')).status,200);c=await releaseDb();assert.deepEqual(await snapshot(c),before);await c.end();const health=(await(await fetch(apiBase+'/health/ready')).json()).data;assert.equal(health.status,'DEGRADED');assert.equal(health.coreReady,true);assert.equal(health.aiReady,false);
+await saveEvidence('docs/v1.3/evidence/M24_RECOVERY.json',{startedAt:started,checkedAt:new Date().toISOString(),result:'PASS',production:true,realContainerRestarts:['api','web','postgres'],outage,scheduler:{batch:2,active,observedTicksAtLeast:ticks,persistedEvents:5,persistedRecipients:10,duplicateEvents:0,duplicateRecipients:0,protectedBusinessRowsUnchanged:true},optionalOllama:health});console.log(JSON.stringify({event:'m24.recovery',result:'PASS'}));

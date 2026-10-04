@@ -1,0 +1,296 @@
+{
+  "checkedAt": "2026-10-04T06:34:48.366Z",
+  "runId": "6ae2f4a8-b859-483f-8a96-577b5312b9a8",
+  "result": "FAIL",
+  "browser": "Windows Microsoft Edge / Chromium",
+  "runtime": "Actual production Docker API/Web + PostgreSQL",
+  "stats": {
+    "startTime": "2026-10-04T06:34:13.303Z",
+    "duration": 35023.528,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  },
+  "checks": [
+    {
+      "name": "manager",
+      "result": "PASS",
+      "routingPrefillNoAssignment": true,
+      "checklistNoActivation": true,
+      "managementCreate": true,
+      "archiveCancelFocus": true
+    },
+    {
+      "name": "responsive",
+      "result": "PASS",
+      "scans": [
+        {
+          "role": "staff",
+          "surface": "notes-mentions-watch",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notes-mentions-watch",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notes-mentions-watch",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "notes-mentions-watch",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "saved-filters",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "saved-filters",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "saved-filters",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "saved-filters",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "sla-notifications",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "sla-notifications",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "sla-notifications",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "staff",
+          "surface": "sla-notifications",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "template-management",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "template-management",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "template-management",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "template-management",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-management",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-management",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-management",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-management",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-checklist",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-checklist",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-checklist",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "routing-checklist",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "manager-filters",
+          "width": 360,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "manager-filters",
+          "width": 768,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "manager-filters",
+          "width": 1440,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        },
+        {
+          "role": "manager",
+          "surface": "manager-filters",
+          "width": 1920,
+          "serious": 0,
+          "critical": 0,
+          "overflow": false,
+          "allViolations": []
+        }
+      ],
+      "pageErrors": [],
+      "consoleErrors": [],
+      "networkErrors": [],
+      "externalCsp": 16,
+      "externalException": "Only Kaspersky script blocked by unchanged CSP"
+    },
+    {
+      "name": "user",
+      "result": "PASS",
+      "publicFinalMessage": true,
+      "noPrivateNotesOrTemplateMetadata": true,
+      "managerRouteDenied": true
+    }
+  ],
+  "artifactDirectory": "artifacts/m24/browser-runs/6ae2f4a8-b859-483f-8a96-577b5312b9a8"
+}

@@ -1,0 +1,35 @@
+# M24 release hardening implementation plan
+
+Frozen before product/config edits, 4 October 2026 Asia/Saigon. The user explicitly confirmed EXECUTE of the attached M24 release-hardening document. Checkpoint closure authorization: RECEIVED, including an ordinary checkpoint commit/push, release documentation, ff-only main integration, new annotated v1.3.0 and verified publication. Independent external/human review NOT RUN. No production deployment, old-tag mutation, force push or V1.4.
+
+## Verified baseline
+
+M23/start HEAD `4735afafe7cda4dbf98bdd387cc2fd49db22f764`, published on `feat/v1.3-saved-views-filters`, CLEAN. Six sole-parent checkpoints M18–M23, all current gate reports and94 audited M23 blobs match. New `feat/v1.3-release-hardening` begins at that exact SHA. Main/local remote remains `31b445caf07dad606601a1e38e8ed39836d9f825`, an ancestor; v1.3.0 absent locally/remotely. Actual migration count13. [Preflight](evidence/M24_PREFLIGHT.json) retains commands/refs and old tag objects/peeled commits. Preserve historical evidence and all13 existing migration files.
+
+## Audit and permitted fixes
+
+No new feature, API contract, role, model capability, schema or business behavior is planned. Preserve M12 clocks, M18 private notes, M19 current-scope mention/watch delivery, M20 local template drafts, M21 read-only routing/prefill, M22 bounded alerts and M23 private canonical filters. Current source/tests and owner contracts are the release contract; no business guard is disabled.
+
+Packaging audit found seven M22 SLA_ALERT settings parsed by config but omitted from normal Compose and `.env.example`. Add explicit environment passthrough with existing defaults and operator documentation; this makes the accepted scheduler settings configurable without changing defaults/semantics. Test actual resolved Compose configuration and real production scheduler startup/restart. Other fixes require an observed defect and affected gates, recorded in verification.
+
+## Runtime and data strategy
+
+Use two owned isolated targets: verification PostgreSQL on55424/HTTP33024 with a Linux Node24.19.0 work volume for real authentication, and a separate production Compose project `mobiflow-m24-release` on PostgreSQL55425/API33601/Web33600. Build actual `docker/Dockerfile` API/web targets from candidate source; preserve non-root/read-only/capability/resource controls. No developer-stack restart/build/migrate/reset/reseed. Capture developer container identities/start times/ports and read-only migration checksums before/after. Synthetic env files/manifests, logs, tokens/screenshots/traces remain ignored under artifacts/m24. Cleanup verifies ownership before removing only M24 resources.
+
+Fresh database: all13 migrations, deterministic seed, constraints/runtime grants and production startup. Upgrade: actual v1.2.0 schema and first7 migrations, synthetic data and snapshots, successive M18–M23 migrations with row/checksum preservation, then current application. Keep users/requests/messages/SLA/audit/history/AI-RAG/notifications and relevant collaboration data. Repeat seed on an isolated release DB and assert no duplicate templates/rules/views/alerts or data loss. No migration14 is expected.
+
+## Required gates and evidence reuse
+
+Run lint, typecheck, current root units and explicit production build. Add real fresh/upgrade database verification; integrated API human-control/privacy/authorization and deterministic AI-isolation regression; production Docker startup; production browser smoke for USER/STAFF/MANAGER; responsive/Axe/keyboard across request detail/notes/mentions/watch, template management, routing, SLA notifications and saved filters; real API/web/DB outage and restart recovery plus durable scheduler dedup; packaging/config/grants/credential/source checks and owned-resource cleanup.
+
+Browser audit: no CI configuration exists. Current release and all operational Playwright configurations use Chromium via installed Microsoft Edge on Windows. Freeze this supported representative matrix for M24; do not claim Firefox/WebKit execution. Four widths360/768/1440/1920 and targeted Axe0 serious/critical. Preserve failures and labeled transport fixtures; no retry-to-hide-failure. Missing mandatory services/browser means BLOCKED.
+
+Deep milestone suites are reused only after owner/source comparison to accepted checkpoints. Do not replay M0–M23 in full. Integrated scenarios must independently prove current cross-feature interaction: USER public-only DTO/history/dashboard/notifications; STAFF own request private collaboration/response draft/saved filters; MANAGER templates/routing/analytics/escalations; foreign IDs and management denials; read-only routing/no-match/conflict; no template auto-send, alert business mutation or AI protected action; deduplicated notifications and stale recipient filtering. Scheduler smoke includes more than one batch, recipient handoff, policy change without a fake lifetime cycle and actual process restart.
+
+Compare AI identity against accepted V1.2/M15 by prompt/parser/schema/dataset/config/context/projection/tool/action files, not model name alone. Record exact matching hashes and any affected owners. Preserve six Copilot actions and deterministic context exclusion of private collaboration/preferences/alerts. No full M15/live model evaluation unless changed semantics require it. Release runtime deliberately probes unavailable optional Ollama without downloading/starting/changing a model; require truthful coreReady=true, aiReady=false, DEGRADED, and manual workflow. Existing health/runbook contract permits optional-provider degradation; historical quality remains historical evidence, never a new runtime READY claim.
+
+## Documentation, source identity and closure
+
+Write detailed verification, master-section34 milestone record, release inventory, demo/config/runbook and AUTO checkpoint record. Each gate records actual command/exit/environment and tested source inventory; final committed product/config/migration bytes must match tested source. Review all staged paths, scan secrets, exclude private/runtime output and preserve old records. Current owning specs/index receive M24 authority and verified hardening scope; no frozen business-semantic rewrite.
+
+After all mandatory technical gates PASS and blockers0, commit `chore(v1.3): complete M24 release hardening`, push exact branch normally, verify live matching SHA/CLEAN. Then create release preparation docs with that existing hardening SHA, theme/accepted features/gates/migrations/degraded runtime/limitations/runbook and symbolic final identity v1.3.0^{}. If changed, one docs-only `chore(release): prepare MobiFlow AI v1.3.0` commit; no prospective self-SHA loop. Push and verify candidate, recheck main ancestry/tag absence/source coverage, ff-only main, create annotated v1.3.0, prefer atomic push main+tag. Verify local/remote main, annotated object and peeled commit exactly match candidate, old tags unchanged, main/CLEAN. Stop after V1.3 RELEASED; if any gate/divergence/publication fails preserve state and report its actual blocker.

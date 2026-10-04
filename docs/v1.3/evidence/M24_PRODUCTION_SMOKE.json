@@ -1,0 +1,59 @@
+{
+  "checkedAt": "2026-10-04T06:31:00.075Z",
+  "result": "PASS",
+  "runId": "f0c14cd8-4f5d-4043-9f49-2138d02681a2",
+  "production": true,
+  "synthetic": true,
+  "checks": {
+    "threeRoleLoginDashboard": "PASS",
+    "manualTriageSubmitApprove": "PASS",
+    "notesMentionsWatch": "PASS",
+    "templatesRoutingSavedViews": "PASS",
+    "privacyIdor": "PASS",
+    "managerAnalytics": "PASS",
+    "optionalAiDegraded": "PASS"
+  },
+  "schedulerFixtures": 5,
+  "health": {
+    "status": "DEGRADED",
+    "coreReady": true,
+    "aiReady": false,
+    "rag": {
+      "enabled": false,
+      "status": "DISABLED",
+      "embedding": "NOT_VERIFIED",
+      "knowledge": "NOT_VERIFIED",
+      "errorCode": null,
+      "documents": 0,
+      "chunks": 0,
+      "checkedAt": null
+    },
+    "checkedAt": "2026-10-04T06:31:00.051Z",
+    "components": {
+      "API": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "DATABASE": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "VECTOR_EXTENSION": {
+        "status": "UP",
+        "code": "OK"
+      },
+      "OLLAMA_SERVER": {
+        "status": "DOWN",
+        "code": "UNAVAILABLE"
+      },
+      "OLLAMA_LLM_MODEL": {
+        "status": "NOT_CONFIGURED",
+        "code": "NOT_CONFIGURED"
+      },
+      "OLLAMA_EMBEDDING_MODEL": {
+        "status": "NOT_CONFIGURED",
+        "code": "NOT_CONFIGURED"
+      }
+    }
+  }
+}

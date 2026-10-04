@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-04T06:30:34.251Z",
+  "checks": {
+    "humanControlAndIntegratedWorkflow": "PASS",
+    "deterministicAiIsolationNoProtectedWrites": "PASS",
+    "transportRateSessionGuards": "PASS"
+  },
+  "metrics": {},
+  "synthetic": true,
+  "deterministicAiCalls": {
+    "intake": 1,
+    "structured": 2,
+    "embedding": 2
+  },
+  "liveAi": "NOT RUN",
+  "rateWaitsSeconds": [],
+  "result": "FAIL",
+  "exitCode": 1,
+  "testCommand": "node --test apps/api/test/release-hardening.integration.test.mjs"
+}
