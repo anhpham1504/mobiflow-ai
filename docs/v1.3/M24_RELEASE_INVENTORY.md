@@ -1,5 +1,7 @@
 # V1.3 release inventory
 
+M24 hardening checkpoint CLOSED at `c50d8d84378502d3d3654f8d7fd07f2371065351`, live local/remote verification4 October2026. [V1.3 release record](../release/V1_3_RELEASE.md) prepares final identity `v1.3.0^{}`; RELEASED is evaluated from synchronized live main/tag refs and CLEAN tree. This release-preparation update is docs-only. Deployment NOT RUN; V1.4 NOT STARTED.
+
 Theme: **Operational Collaboration & Workflow Productivity**. Baseline v1.2.0/main `31b445caf07dad606601a1e38e8ed39836d9f825`; hardening starts at M23 `4735afafe7cda4dbf98bdd387cc2fd49db22f764`. Hardening source and Git closure are resolved through [M24 verification](M24_RELEASE_HARDENING_VERIFICATION.md), [coverage](evidence/M24_SOURCE_COVERAGE.json) and [AUTO closure](M24_CHECKPOINT_CLOSURE.md). Phase B records the existing hardening SHA in release documentation; no future self-SHA is embedded here.
 
 | Milestone | Accepted checkpoint | Release scope |

@@ -1,5 +1,7 @@
 # MobiFlow AI V1.3 — Authoritative Master Plan
 
+M24 hardening checkpoint CLOSED at `c50d8d84378502d3d3654f8d7fd07f2371065351`, live local/remote verification4 October2026. [V1.3 release record](../release/V1_3_RELEASE.md) prepares final identity `v1.3.0^{}`; RELEASED is evaluated from synchronized live main/tag refs and CLEAN tree. This release-preparation update is docs-only. Deployment NOT RUN; V1.4 NOT STARTED.
+
 Current M24 authority (4 October 2026): the user confirmed execution of the attached Release Hardening & Final Release Closure document from verified M23 `4735afafe7cda4dbf98bdd387cc2fd49db22f764` on `feat/v1.3-release-hardening`. It authorizes required gates, scoped fixes, technical self-review, automatic checkpoint commit/push, release documentation, ff-only main and new annotated v1.3.0 publication with exact live-ref verification. Independent external/human review NOT RUN. Deployment NOT RUN; stop after V1.3 release, V1.4 NOT STARTED. Earlier milestone stop boundaries below are historical.
 
 Historical M23 authority (4 October 2026): direct user EXECUTE of the attached Saved Views & Filters checkpoint, from verified published M22 `58aae141ee2a4e8d9af341fd88dce370106a8c16` on `feat/v1.3-saved-views-filters`. Complete actual mandatory gates and technical self-review, then automatically commit/push reviewed M23 scope and verify live Git closure. Independent external/human review: NOT RUN. Stop after M23; M24 NOT STARTED. V1.3 IN DEVELOPMENT; no main merge, tag, deployment or live AI. Earlier authorities are historical and preserved.

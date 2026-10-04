@@ -1,10 +1,12 @@
 # MobiFlow AI V1.3
 
+M24 hardening checkpoint CLOSED at `c50d8d84378502d3d3654f8d7fd07f2371065351`, live local/remote verification4 October2026. [V1.3 release record](../release/V1_3_RELEASE.md) prepares final identity `v1.3.0^{}`; RELEASED is evaluated from synchronized live main/tag refs and CLEAN tree. This release-preparation update is docs-only. Deployment NOT RUN; V1.4 NOT STARTED.
+
 Current M24 authority (4 October 2026): the user confirmed execution of the attached Release Hardening & Final Release Closure document from verified M23 `4735afafe7cda4dbf98bdd387cc2fd49db22f764` on `feat/v1.3-release-hardening`. It authorizes required gates, scoped fixes, technical self-review, automatic checkpoint commit/push, release documentation, ff-only main and new annotated v1.3.0 publication with exact live-ref verification. Independent external/human review NOT RUN. Deployment NOT RUN; stop after V1.3 release, V1.4 NOT STARTED. Earlier milestone stop boundaries below are historical.
 
 Historical M23 authority (4 October 2026): direct user EXECUTE of the attached Saved Views & Filters checkpoint, from verified published M22 `58aae141ee2a4e8d9af341fd88dce370106a8c16` on `feat/v1.3-saved-views-filters`. Complete actual mandatory gates and technical self-review, then automatically commit/push reviewed M23 scope and verify live Git closure. Independent external/human review: NOT RUN. Stop after M23; M24 NOT STARTED. V1.3 IN DEVELOPMENT; no main merge, tag, deployment or live AI. Earlier authorities are historical and preserved.
 
-V1.3 status: **IN DEVELOPMENT**. Theme: **Operational Collaboration & Workflow Productivity**.
+V1.3 status: **RELEASE PREPARED — publication evaluated from live refs**. Theme: **Operational Collaboration & Workflow Productivity**.
 
 The initial 2 October 2026 user request establishes [V1_3_MASTER_PLAN](V1_3_MASTER_PLAN.md) as authority for M18–M24. Released V1.2 remains `v1.2.0` at `31b445caf07dad606601a1e38e8ed39836d9f825`; its tag and historical evidence are preserved. [M18 checkpoint closure](M18_CHECKPOINT_CLOSURE.md) produced published checkpoint `1f54dce3c8427976763b19ef33f181b4ef9a3337`. [M19 checkpoint closure](M19_CHECKPOINT_CLOSURE.md) produced published checkpoint `35e4b1c41165fa04348871dee31bd20c28386b47` on `feat/v1.3-mentions-watchers`. Those preparation records remain immutable historical snapshots.
 
@@ -19,7 +21,7 @@ Historical M22 authority: the direct3 October2026 EXECUTE request authorizes ful
 | M21 | Rule-based Routing | PASS — CHECKPOINT CLOSED; [closure record](M21_CHECKPOINT_CLOSURE.md) |
 | M22 | Reminder + SLA Escalation | PASS — AUTO CHECKPOINT; [closure evaluated by Git refs](M22_CHECKPOINT_CLOSURE.md) |
 | M23 | Saved Views & Filters | PASS — AUTO CHECKPOINT; [closure evaluated from live Git refs](M23_CHECKPOINT_CLOSURE.md) |
-| M24 | V1.3 Release Hardening & Release Closure | Technical gates PASS; [AUTO closure evaluated by live refs](M24_CHECKPOINT_CLOSURE.md) |
+| M24 | V1.3 Release Hardening & Release Closure | Hardening PASS/CLOSED, `c50d8d84378502d3d3654f8d7fd07f2371065351`; [release publication evaluated from live refs](../release/V1_3_RELEASE.md) |
 
 M18 plan and evidence: [implementation plan](M18_INTERNAL_NOTES_IMPLEMENTATION_PLAN.md), [verification](M18_INTERNAL_NOTES_VERIFICATION.md), [milestone record](../verification/MILESTONE_18_VERIFICATION.md). Baseline lint/typecheck/176 units/production build, fresh/upgrade database, 11 integration and four production browser tests passed. STAFF/MANAGER four-width checks and Axe zero serious/critical passed. Targeted source/security and existing authorization regression passed. Earlier failures are retained and explained in verification.
 
