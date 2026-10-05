@@ -36,7 +36,9 @@ async function fixture(t,mode){
     res.end(JSON.stringify({model:'test:1',done:true,done_reason:mode==='length'?'length':'stop',message:{content:mode==='invalid'?'not JSON':JSON.stringify(valid),thinking:'PRIVATE REASONING MUST BE DISCARDED'}}));
   });
   await new Promise(r=>server.listen(0,'127.0.0.1',r));t.after(()=>{server.closeAllConnections();server.close();});
-  const env=parseApiEnvironment({...environment,OLLAMA_BASE_URL:'http://127.0.0.1:'+server.address().port,AI_ATTEMPT_TIMEOUT_MS:'100'});
+  // Functional response checks tolerate parallel test scheduling. Only the
+  // deliberately nonresponding fixture exercises the short timeout boundary.
+  const env=parseApiEnvironment({...environment,OLLAMA_BASE_URL:'http://127.0.0.1:'+server.address().port,AI_ATTEMPT_TIMEOUT_MS:mode==='timeout'?'100':'2000'});
   return {provider:new OllamaProvider(env),calls};
 }
 test('real HTTP adapter sends JSON schema, exact model, bounds and excludes provider thinking',async t=>{

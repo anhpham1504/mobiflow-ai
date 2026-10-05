@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-10-05T08:14:06.407Z",
+  "authority": "Direct human user instruction in this chat after reviewing the remediation evidence",
+  "authorization": "I ACCEPT THE DEVELOPER DB PRESERVATION EXCEPTION.",
+  "status": "ACCEPTED EXCEPTION — USER AUTHORIZED",
+  "originalMeasurement": {
+    "gate": "BASELINE_PRESERVATION",
+    "result": "FAIL",
+    "volume": "mobiflow-ai_postgres_data",
+    "baselineHash": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+    "observedHash": "8375a84c8e36392a52f1b59d5beeb333fdb1e8cb82302138c432d3cdb642f71a"
+  },
+  "acceptedLimitation": "Bitwise and logical equality with the pre-start developer PostgreSQL state cannot be established because corresponding per-file/logical baseline evidence is unavailable.",
+  "scope": "Accept the documented developer storage discrepancy for this checkpoint; preserve all original FAIL records, hashes and uncertainty. This does not prove unchanged or harmless data.",
+  "publicationAuthorization": "Verify tested candidate source, stage the reviewed allowlist, run diff/secret checks, commit and ordinary push only fix/v1.3-local-ai-demo-stability, verify local/remote SHA and CLEAN agent worktree; keep main and v1.3.0 unchanged.",
+  "preservationClosureBlockerCount": 0,
+  "independentHumanReview": "NOT_RUN",
+  "prohibited": [
+    "merge main",
+    "new tag",
+    "production deployment",
+    "V1.4"
+  ],
+  "historicalEvidence": [
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check.json",
+      "sha256": "6e852e61a80ada4e863920b014da6b0bb7fee2ced5f054154c642c72e62b424b"
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check-2.json",
+      "sha256": "e9fac59a07230ae08cc634bca0ca81189f4a4c63207a20a0ec3192089a55f8e9"
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check-3.json",
+      "sha256": "e95efff763abcf3c9883f3be08beb97dfcd3e4836e359b921ef40343aa6deb2e"
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check-4.json",
+      "sha256": "85ae4499be9720a8df906d4402e504ddcf7accc3680da3eac1216f9254061ac7"
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-storage-impact.json",
+      "sha256": "3baa04c1e09118b69cc1cc7ac23ce9cfeb78009dfd516e71f8b27a39fc003a3c"
+    }
+  ],
+  "sourceBeforeDocsUpdate": {
+    "reviewedPaths": 40,
+    "allExactHashesMatch": true,
+    "previousReview": "artifacts/ai-demo-stability/20261005-1138/handoff-review.json"
+  }
+}

@@ -18,6 +18,7 @@ import {DocumentService} from '../dist/knowledge/document.service.js';
 import {IngestionWorker} from '../dist/knowledge/ingestion-worker.js';
 import {AiFailure} from '../dist/ai/provider.js';
 import {identityKey} from '../dist/knowledge/embedding-provider.js';
+import {resolutionSummaryPromptVersion} from '../dist/ai/prompts/copilot.js';
 import {Client} from 'pg';
 const db=process.env.M2_INTEGRATION_DATABASE_URL;
 if(!db||new URL(db).pathname!=='/mobiflow_m2_test'||!['localhost','127.0.0.1'].includes(new URL(db).hostname))throw Error('Dedicated local test DB required');
@@ -43,7 +44,9 @@ async function setup(t,{real=false,hook,provider,embed=embeddings,envOverrides={
     if(live)await worker.tick();else{await machine.claimAnalysis(run.id);await machine.finishAnalysis(run.id,{analysis,identity:{provider:'test',model:'fixture',digest:'test-only'},outputSize:500,retryCount:0,latencyMs:1,firstAttemptValid:true});}
     return s.prisma.request.findUniqueOrThrow({where:{id}});
   }
-  async function recommend(r){const run=await service.schedule(r.id,manager.actor,r.version,randomUUID());await service.cycle(AbortSignal.timeout(300000));return s.prisma.aiRun.findUniqueOrThrow({where:{id:run.id}});}
+  // These historical M6/M7 fixtures return V1. V2's default/artifact-only path
+  // is verified separately by recommendation-v2.integration.test.mjs.
+  async function recommend(r){const run=await service.schedule(r.id,manager.actor,r.version,randomUUID(),'recommendation.v1');await service.cycle(AbortSignal.timeout(300000));return s.prisma.aiRun.findUniqueOrThrow({where:{id:run.id}});}
   return {...s,env,base,call,manager,user,staff,machine,service,vectors,docs,ingestion,worker,create,recommend};
 }
 test('M6 real PostgreSQL tools, atomic pending publication, concurrent scheduling, no business mutation and manager-only delivery',async t=>{
@@ -54,7 +57,7 @@ test('M6 real PostgreSQL tools, atomic pending publication, concurrent schedulin
   }
   assert.equal((await s.call(s.manager.token,'/manager/requests/'+r.id+'/ai/recommend',{expectedVersion:r.version,actor:'SYSTEM'})).status,400);
   assert.equal((await s.call(s.manager.token,'/manager/requests/'+r.id+'/ai/recommend',{expectedVersion:r.version+1})).status,409);
-  const runs=await Promise.all([s.service.schedule(r.id,s.manager.actor,r.version,randomUUID()),s.service.schedule(r.id,s.manager.actor,r.version,randomUUID())]);assert.equal(runs[0].id,runs[1].id);
+  const runs=await Promise.all([s.service.schedule(r.id,s.manager.actor,r.version,randomUUID(),'recommendation.v1'),s.service.schedule(r.id,s.manager.actor,r.version,randomUUID(),'recommendation.v1')]);assert.equal(runs[0].id,runs[1].id);
   await s.service.cycle(AbortSignal.timeout(300000));const view=await s.call(s.manager.token,'/manager/requests/'+r.id+'/ai/recommendation');recommendationResponseSchema.parse(view.body);
   assert.equal(view.body.data.status,'SUCCEEDED',JSON.stringify(view.body));assert.equal(view.body.data.stale,false);
   assert.equal((await s.call(s.manager.token,'/ai/runs/'+runs[0].id)).body.data.purpose,'RECOMMENDATION');assert.equal((await s.call(s.user.token,'/ai/runs/'+runs[0].id)).status,404);assert.equal((await s.call(s.staff.token,'/ai/runs/'+runs[0].id)).status,403);
@@ -162,12 +165,12 @@ test('M6 source disable and policy changes invalidate publication and delivery',
   });
 });
 
-test('M8 Copilot adoption, SLA dedupe, factual summary and immutable feedback use real PostgreSQL',async t=>{
+test('M8 Copilot adoption, canonical SLA assessment, factual summary and immutable feedback use real PostgreSQL',async t=>{
   const provider={generateStructured:async messages=>{
     const body=messages[1].content.slice(messages[1].content.indexOf('\n')+1),facts=JSON.parse(body.slice(0,body.indexOf('\nALLOWED_')));
     if(messages[0].content.includes('Tạo tóm tắt')){
-      const r=facts.resolution,event=facts.events.at(-1)??facts.events[0];
-      void r;return {raw:JSON.stringify({executiveSummary:'Yêu cầu đã được xử lý theo dữ kiện đã lưu.',timeline:[{eventId:event.eventId,summary:'Hoàn tất xử lý'}]}),outputSize:500,identity:{provider:'test',model:'m8-fixture',digest:'test-only'}};
+      const event=facts.events.at(-1)??facts.events[0];
+      return {raw:JSON.stringify({executiveSummary:facts.executiveSummary,timeline:[{eventId:event.eventId,summary:event.summary}]}),outputSize:500,identity:{provider:'test',model:'m8-fixture',digest:'test-only'}};
     }
     const source=facts.sources[0];return {raw:JSON.stringify({message:'Checklist nháp dựa trên trạng thái hiện tại.',items:source?[{text:'Xác minh kết nối thiết bị tại hiện trường',sourceIds:[source.sourceId]}]:[]}),outputSize:400,identity:{provider:'test',model:'m8-fixture',digest:'test-only'}};
   }};
@@ -188,8 +191,10 @@ test('M8 Copilot adoption, SLA dedupe, factual summary and immutable feedback us
   assert.equal((await s.call(s.staff.token,'/requests/'+r.id+'/checklist',{expectedVersion:r.version,sourceRunId:queued.body.data.aiRunId,items:job.body.data.result.checklistDraft})).status,409);
   assert.equal((await s.call(s.staff.token,'/requests/'+r.id+'/checklist/'+item.id,{expectedVersion:r.version,operation:'COMPLETE'})).status,404); // helper is POST-only; PATCH is separately covered by workflow integration.
   await s.machine.transition(r.id,'CHECKLIST_EDIT',s.staff.actor,{expectedVersion:r.version,itemId:item.id,operation:'COMPLETE'},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});
-  const sla=await s.prisma.slaInstance.findUniqueOrThrow({where:{requestId:r.id}});const riskAt=new Date(sla.startedAt.getTime()+sla.targetSeconds*800);await monitor.tick(riskAt);await monitor.tick(riskAt);const managers=await s.prisma.user.count({where:{role:'MANAGER',active:true}});assert.equal(await s.prisma.notification.count({where:{slaInstanceId:sla.id,warningLevel:'AT_RISK'}}),managers+1);
-  await s.machine.transition(r.id,'RESOLVE',s.staff.actor,{expectedVersion:r.version,rootCause:'Mất kết nối tại thiết bị đầu cuối',resolution:'Khôi phục cấu hình kết nối thiết bị',verification:'Thiết bị đã kết nối và truyền dữ liệu'},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id},include:{currentResolution:true}});const queuedSummary=await s.prisma.aiRun.findFirstOrThrow({where:{resolutionId:r.currentResolutionId,purpose:'RESOLUTION_SUMMARY'},orderBy:{createdAt:'desc'}});await completeOperational(queuedSummary.id);const summary=await s.prisma.aiRun.findUniqueOrThrow({where:{id:queuedSummary.id}});assert.equal(summary.status,'SUCCEEDED',summary.errorCode);assert.equal(summary.safeResultJson.rootCause,r.currentResolution.rootCause);
+  // M12's canonical monitor persists clock assessment; M22 owns delivery and
+  // its deduplication gate. The legacy monitor must not emit notifications.
+  const sla=await s.prisma.slaInstance.findUniqueOrThrow({where:{requestId:r.id}}),notices=await s.prisma.notification.count();const riskAt=new Date(sla.startedAt.getTime()+sla.targetSeconds*800);await monitor.tick(riskAt);await monitor.tick(riskAt);assert.equal((await s.prisma.slaInstance.findUniqueOrThrow({where:{id:sla.id}})).status,'AT_RISK');assert.equal(await s.prisma.notification.count(),notices);
+  await s.machine.transition(r.id,'RESOLVE',s.staff.actor,{expectedVersion:r.version,rootCause:'Mất kết nối tại thiết bị đầu cuối',resolution:'Khôi phục cấu hình kết nối thiết bị',verification:'Thiết bị đã kết nối và truyền dữ liệu'},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id},include:{currentResolution:true}});const queuedSummary=await s.prisma.aiRun.findFirstOrThrow({where:{resolutionId:r.currentResolutionId,purpose:'RESOLUTION_SUMMARY'},orderBy:{createdAt:'desc'}});assert.equal(queuedSummary.promptVersion,resolutionSummaryPromptVersion);await completeOperational(queuedSummary.id);const summary=await s.prisma.aiRun.findUniqueOrThrow({where:{id:queuedSummary.id}});assert.equal(summary.status,'SUCCEEDED',summary.errorCode);assert.equal(summary.safeResultJson.rootCause,r.currentResolution.rootCause);
   await s.machine.transition(r.id,'USER_CONFIRM',s.user.actor,{expectedVersion:r.version},randomUUID());r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});assert.equal((await s.call(s.user.token,'/requests/'+r.id+'/feedback',{expectedVersion:r.version,rating:5,comment:'Đã xử lý tốt'})).status,201);r=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});assert.equal((await s.call(s.user.token,'/requests/'+r.id+'/feedback',{expectedVersion:r.version,rating:4})).status,409);assert.equal(await s.prisma.feedback.count({where:{requestId:r.id}}),1);
 });
 

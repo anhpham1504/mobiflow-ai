@@ -1,0 +1,262 @@
+{
+  "lifecycle": {
+    "at": "2026-10-05T07:21:21.125Z",
+    "result": "PASS",
+    "project": "mobiflow-ai-stability-20261005",
+    "containerId": "4838cf2296b14ac886b87eb621ed63c37b4e0dad1991b3f4f3760e905b93cb2b",
+    "image": "sha256:cd7c54c010101f7acf4b610277356cdd1e70cd8c5f95fac32d88d9bb80a53495",
+    "index": {
+      "eligible": 16,
+      "indexed": 16
+    },
+    "embeddingProbeMs": 111,
+    "runtimeVersion": "0.35.0",
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+      },
+      {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      }
+    ],
+    "embedding": {
+      "provider": "ollama",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimension": 1024,
+      "revision": "m5.v1",
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+    },
+    "lifecycle": [
+      {
+        "command": [
+          "docker",
+          "stop",
+          "--time",
+          "30",
+          "mobiflow-ai-stability-20261005-api-1"
+        ],
+        "elapsedMs": 750,
+        "id": "4838cf2296b14ac886b87eb621ed63c37b4e0dad1991b3f4f3760e905b93cb2b",
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "docker",
+          "start",
+          "mobiflow-ai-stability-20261005-api-1"
+        ],
+        "id": "4838cf2296b14ac886b87eb621ed63c37b4e0dad1991b3f4f3760e905b93cb2b"
+      }
+    ],
+    "protected": {
+      "requests": [
+        "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+        "0a7982e1-cf60-4f9d-9d3a-c60d89b4e6ef",
+        "110dd168-4e1f-40d4-8cb6-76186d6cc4d7",
+        "f262541a-d465-42b8-8aee-01505133d524",
+        "895e2a3f-f2ca-45f8-8d1d-32f2a2f44232"
+      ],
+      "beforeHash": "6b85bbbd2571fc89b1be092128df53a30dc31572ea05e1ba8603f063213b35d6",
+      "afterHash": "6b85bbbd2571fc89b1be092128df53a30dc31572ea05e1ba8603f063213b35d6",
+      "unchanged": true
+    },
+    "readiness": {
+      "status": "READY",
+      "coreReady": true,
+      "aiReady": true,
+      "checkedAt": "2026-10-05T07:21:21.107Z",
+      "rag": {
+        "enabled": true,
+        "status": "READY",
+        "embedding": "UP",
+        "knowledge": "READY",
+        "errorCode": null,
+        "documents": 9,
+        "chunks": 12,
+        "checkedAt": "2026-10-05T07:21:15.481Z"
+      }
+    },
+    "retrieval": {
+      "sourceRequest": "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+      "windowMinutes": 43200,
+      "returnedCount": 5,
+      "truncated": true,
+      "caseCount": 5
+    }
+  },
+  "handoff": {
+    "at": "2026-10-05T07:38:53.754Z",
+    "result": "PASS",
+    "project": "mobiflow-ai-stability-20261005",
+    "containerId": "4838cf2296b14ac886b87eb621ed63c37b4e0dad1991b3f4f3760e905b93cb2b",
+    "image": "sha256:cd7c54c010101f7acf4b610277356cdd1e70cd8c5f95fac32d88d9bb80a53495",
+    "index": {
+      "eligible": 16,
+      "indexed": 16
+    },
+    "embeddingProbeMs": 78,
+    "runtimeVersion": "0.35.0",
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+      },
+      {
+        "name": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+      }
+    ],
+    "embedding": {
+      "provider": "ollama",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimension": 1024,
+      "revision": "m5.v1",
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+    },
+    "lifecycle": [],
+    "protected": {
+      "requests": [
+        "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+        "0a7982e1-cf60-4f9d-9d3a-c60d89b4e6ef",
+        "110dd168-4e1f-40d4-8cb6-76186d6cc4d7",
+        "f262541a-d465-42b8-8aee-01505133d524",
+        "895e2a3f-f2ca-45f8-8d1d-32f2a2f44232"
+      ],
+      "beforeHash": "6b85bbbd2571fc89b1be092128df53a30dc31572ea05e1ba8603f063213b35d6",
+      "afterHash": "6b85bbbd2571fc89b1be092128df53a30dc31572ea05e1ba8603f063213b35d6",
+      "unchanged": true
+    },
+    "readiness": {
+      "status": "READY",
+      "coreReady": true,
+      "aiReady": true,
+      "checkedAt": "2026-10-05T07:38:53.741Z",
+      "rag": {
+        "enabled": true,
+        "status": "READY",
+        "embedding": "UP",
+        "knowledge": "READY",
+        "errorCode": null,
+        "documents": 9,
+        "chunks": 12,
+        "checkedAt": "2026-10-05T07:38:45.419Z"
+      }
+    },
+    "retrieval": {
+      "sourceRequest": "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+      "windowMinutes": 43200,
+      "returnedCount": 5,
+      "truncated": true,
+      "caseCount": 5
+    }
+  },
+  "gitHandoff": {
+    "at": "2026-10-05T07:39:43.809Z",
+    "head": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "branch": "fix/v1.3-local-ai-demo-stability",
+    "agentStagedPaths": [],
+    "originalStagedPaths": [],
+    "commitCreated": false,
+    "pushed": false,
+    "reason": "Unresolved developer volume preservation discrepancy; no authorized zero-blocker checkpoint publication",
+    "limitations": "Index content has no staged changes as at baseline; binary index bytes were not independently frozen."
+  },
+  "browser": {
+    "retry": {
+      "startedAt": "2026-10-05T07:30:55.425Z",
+      "finishedAt": "2026-10-05T07:31:05.138Z",
+      "result": "PASS",
+      "requestId": "c38c9b2a-76e3-4c54-9d98-98c63acf19d1",
+      "loadingObserved": true,
+      "realSourceShown": true,
+      "independentHumanReview": "NOT_RUN"
+    },
+    "userSummary": {
+      "at": "2026-10-05T07:18:11.548Z",
+      "result": "PASS"
+    },
+    "independentHumanReview": "NOT_RUN",
+    "transportError": "Controlled browser-only HTTP503; no backend AI run for that error",
+    "retryOrigin": "Separate live local Ollama FIND_SOP",
+    "network": {
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-requests-5.log",
+        "sha256": "2f755a579162e999acc82a4987e53caa3ba4603ba12bbe1712dc30704e7f6c51",
+        "bytes": 85403
+      },
+      "localRoutes": {
+        "GET http://localhost:33800/ 200": 4,
+        "GET http://localhost:33800/login 200": 5,
+        "POST http://localhost:33801/api/v1/auth/refresh 200": 1,
+        "GET http://localhost:33801/api/v1/requests/:id 200": 1,
+        "GET http://localhost:33801/api/v1/requests/:id/history 200": 1,
+        "GET http://localhost:33800/staff/dashboard 200": 2,
+        "GET http://localhost:33800/staff/work-queue 200": 2,
+        "GET http://localhost:33800/notifications 200": 2,
+        "GET http://localhost:33800/profile 200": 2,
+        "GET http://localhost:33801/api/v1/requests/:id/ai/explanation 200": 1,
+        "GET http://localhost:33801/api/v1/requests/:id/watch 200": 1,
+        "GET http://localhost:33801/api/v1/requests/:id/internal-notes 200": 1,
+        "GET http://localhost:33801/api/v1/templates 200": 2,
+        "GET http://localhost:33801/api/v1/requests/:id/mention-candidates 200": 1,
+        "POST http://localhost:33801/api/v1/requests/:id/ai/copilot/action 503": 2,
+        "GET http://localhost:33800/knowledge/sources/KD-:id-G1-C0 200": 2,
+        "POST http://localhost:33801/api/v1/requests/:id/ai/copilot/action 202": 1,
+        "GET http://localhost:33801/api/v1/ai/operational-runs/:id 200": 4,
+        "POST http://localhost:33801/api/v1/auth/logout 204": 1,
+        "POST http://localhost:33801/api/v1/auth/refresh 401": 1
+      },
+      "externalHostCounts": {
+        "me.kis.v2.scr.kaspersky-labs.com": 421
+      },
+      "queriesAndExternalPathsExcluded": true
+    },
+    "console": {
+      "browser-console-1.log": {
+        "log": {
+          "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-1.log",
+          "sha256": "0187c4773aa8604a59cdb138f09abaf1d5f3ea030445893af5328685e564a1b4",
+          "bytes": 184
+        },
+        "reportedMessages": 1,
+        "reportedErrors": 1,
+        "reportedWarnings": 0,
+        "authRefresh401Lines": 1
+      },
+      "browser-console-2.log": {
+        "log": {
+          "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-2.log",
+          "sha256": "ec479a1783c48faabafba16de0fd927b74197861b09a1030c8a7c91be1de20a8",
+          "bytes": 46
+        },
+        "reportedMessages": 0,
+        "reportedErrors": 0,
+        "reportedWarnings": 0,
+        "authRefresh401Lines": 0
+      },
+      "browser-console-3.log": {
+        "log": {
+          "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-3.log",
+          "sha256": "0187c4773aa8604a59cdb138f09abaf1d5f3ea030445893af5328685e564a1b4",
+          "bytes": 184
+        },
+        "reportedMessages": 1,
+        "reportedErrors": 1,
+        "reportedWarnings": 0,
+        "authRefresh401Lines": 1
+      }
+    },
+    "finalLogout": {
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-final-logout.log",
+        "sha256": "20ee8367b3fafe6d4febefceb0b4409f8513c2ff3c3eda71da85760d8b360091",
+        "bytes": 412
+      },
+      "loginRedirectObserved": true
+    }
+  }
+}

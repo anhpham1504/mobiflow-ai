@@ -4,6 +4,7 @@ import type { ApiEnvironment } from '@mobiflow/config';
 import { API_ENV } from '../tokens.js';
 import { analysisSchema, analysisSchemaVersion } from '@mobiflow/contracts';
 import { promptVersion, type AnalysisInput } from '../ai/prompts/request-analysis.js';
+import {resolutionSummaryPromptVersion} from '../ai/prompts/copilot.js';
 import type { executeAnalysis } from '../ai/analysis-execution.js';
 import { randomUUID } from 'node:crypto';
 import { finalDecisionSchema, type FinalDecision } from '@mobiflow/contracts';
@@ -163,7 +164,7 @@ export class RequestStateMachineService {
         const latest=await tx.requestResolution.aggregate({where:{requestId:id},_max:{cycle:true}});
         const resolution=await tx.requestResolution.create({data:{requestId:id,cycle:(latest._max.cycle??0)+1,resolvedById:actor.id,rootCause:command.rootCause!,resolution:command.resolution!,verification:command.verification!,resolvedAt:now,eventId:event.id}});
         data.resolvedAt=now;data.currentResolutionId=resolution.id;
-        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:'resolution-summary.m8.v3',schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
         notification='REQUEST_RESOLVED';recipients=[request.createdById];
       }
       if (action==='USER_REOPEN' || action==='USER_CONFIRM') {

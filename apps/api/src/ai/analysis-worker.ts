@@ -32,8 +32,14 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
     const next=await this.prisma.aiRun.findFirst({where:{purpose:'ANALYSIS',status:'QUEUED'},orderBy:[{createdAt:'asc'},{id:'asc'}]});
     if(!next){
       const controller=new AbortController();this.controller=controller;
-      try{if(!await this.recommendations.cycle(controller.signal)&&!await this.operational.cycle(controller.signal))await this.requestVectors.next(AbortSignal.any([controller.signal,AbortSignal.timeout(30000)]));}
-      catch{this.log({event:'request.embedding.deferred',errorCode:'REQUEST_EMBEDDING_UNAVAILABLE'});}
+      try{
+        if(!await this.recommendations.cycle(controller.signal)&&!await this.operational.cycle(controller.signal)){
+          try{
+            const recovery=await this.requestVectors.next(AbortSignal.any([controller.signal,AbortSignal.timeout(30000)]));
+            if(recovery)this.log(recovery);
+          }catch{this.log({event:'request.embedding.deferred',...this.requestVectors.backfillStatus});}
+        }
+      }
       finally{this.controller=undefined;}return;
     }
     const job=await this.machine.claimAnalysis(next.id);if(!job)return;

@@ -1,0 +1,195 @@
+{
+  "at": "2026-10-05T07:46:44.490Z",
+  "kind": "SANITIZED_EVIDENCE_SNAPSHOT",
+  "checkpointDecision": "NOT_ASSIGNED_BY_EXPORTER",
+  "independentHumanReview": "NOT_RUN",
+  "knownPreservationBlocker": "DEVELOPER_VOLUME_PRESERVATION_HASH_MISMATCH",
+  "observedResults": {
+    "sourceCoverage": "PASS",
+    "securityPrivacy": "PASS",
+    "preservationInitial": "FAIL",
+    "preservationLatest": "FAIL",
+    "technical": [
+      {
+        "name": "lint-attempt3.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "typecheck-attempt2.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "test-attempt2.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "final-build.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "integration-m14.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "integration-m2.json",
+        "outcome": "PASS",
+        "tests": null
+      },
+      {
+        "name": "recovery-m2-1.json",
+        "outcome": "PASS",
+        "tests": null
+      }
+    ],
+    "M15": "PASS",
+    "targeted": "PASS",
+    "workflows": "PASS",
+    "runtime": "PASS",
+    "runtimeHandoff": "PASS",
+    "browserRetry": "PASS"
+  },
+  "counts": {
+    "M15": {
+      "evaluation": 100,
+      "consistency": 30
+    },
+    "M15FirstFailures": 0,
+    "targetedRecommendation": {
+      "executed": 20,
+      "succeeded": 20,
+      "failed": 0,
+      "attempts": 20,
+      "firstAttemptFailures": 0,
+      "firstAttemptQualityViolationRuns": 0,
+      "retriedRuns": 0,
+      "attemptFailureCategories": {},
+      "latency": {
+        "allRuns": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "successfulRuns": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "failedRuns": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "allAttempts": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "firstAttempts": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "retryAttempts": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "providerInvocation": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        }
+      },
+      "loadedObservations": {
+        "loadedBefore": 20,
+        "unloadedBefore": 0,
+        "unmeasured": 0
+      }
+    },
+    "targetedSummary": {
+      "executed": 20,
+      "succeeded": 20,
+      "failed": 0,
+      "attempts": 20,
+      "firstAttemptFailures": 0,
+      "firstAttemptQualityViolationRuns": 0,
+      "retriedRuns": 0,
+      "attemptFailureCategories": {},
+      "latency": {
+        "allRuns": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "successfulRuns": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "failedRuns": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "allAttempts": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "firstAttempts": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "retryAttempts": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "providerInvocation": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        }
+      },
+      "loadedObservations": {
+        "loadedBefore": 20,
+        "unloadedBefore": 0,
+        "unmeasured": 0
+      }
+    },
+    "workflows": {
+      "completed": 5,
+      "passed": 5,
+      "failed": 0,
+      "runs": 20,
+      "runFailures": 0,
+      "attemptFailures": 0
+    }
+  },
+  "limitations": [
+    "Agent technical self-review; independent human review NOT_RUN.",
+    "Synthetic bounded samples do not establish general AI accuracy.",
+    "All latency samples retain failed runs and attempts; concurrent local model usage is not an isolated benchmark.",
+    "Private locators/hashes allow verification; raw prompts, model outputs, private env, bodies, tokens and screenshots are not published."
+  ]
+}

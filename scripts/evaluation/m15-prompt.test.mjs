@@ -9,6 +9,21 @@ import {measureAttempt} from './m15-metrics.mjs';
 const {dataset}=await loadM15Dataset();
 const branches=e=>{const format=recommendationFormatV2(e);return format.anyOf??[format];};
 const required=branch=>(Array.isArray(branch.properties.warnings.items)?branch.properties.warnings.items:[]);
+test('local demo regression binds checklist IDs and required evidence to the selected procedure set',()=>{
+  const e=globalThis.structuredClone(dataset.cases.find(c=>c.evidence.sources.length&&!c.evidence.analysis.missingFields.length).evidence);
+  e.sources.push({...e.sources[0],documentId:'99999999-9999-4999-8999-999999999999',sourceId:'KD-99999999-9999-4999-8999-999999999999-G1-C0'});
+  const [a,b]=e.sources,proposal=recommendationFixture(e);proposal.procedureSources=[{sourceId:a.sourceId}];proposal.suggestedChecklist=[{text:'Kiểm tra theo SOP',sourceIds:[b.sourceId]}];
+  assert.throws(()=>parseRecommendationV2(JSON.stringify(proposal),e),error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('ACTION_SOURCE_NOT_IN_PROCEDURE:'));
+  const sufficient=branches(e).filter(branch=>branch.properties.evidenceStatus.const==='SUFFICIENT');assert.equal(sufficient.length,3);
+  for(const branch of sufficient){
+    const selected=branch.properties.procedureSources.items.map(item=>item.properties.sourceId.const);
+    const permitted=branch.properties.suggestedChecklist.items.properties.sourceIds.items;
+    assert.deepEqual(permitted.enum??[permitted.const],selected);
+    const requiredEvidence=branch.properties.evidence.items.map(item=>item.properties.referenceId.const);
+    assert.ok(selected.every(source=>requiredEvidence.includes(source)));
+    if(selected.length===1&&selected[0]===a.sourceId)assert.equal((permitted.enum??[permitted.const]).includes(b.sourceId),false);
+  }
+});
 test('supported canonical SLA states require exact warning and request reference in every native branch',()=>{
   for(const c of dataset.cases.filter(c=>['AT_RISK','BREACHED'].includes(c.evidence.requestContext.sla?.state))){
     const code=c.evidence.requestContext.sla.state==='AT_RISK'?'SLA_AT_RISK':'SLA_BREACHED';

@@ -1,0 +1,805 @@
+{
+  "directory": "workflows-4",
+  "observationOutcome": "PASS",
+  "reportedResult": "PASS",
+  "at": "2026-10-05T07:06:34.130Z",
+  "caseHash": "04cfd9b89f0bac62c301019d158171b800e63024197fde27949596c249a00b9e",
+  "registeredCaseIds": [
+    "FLOW-1",
+    "FLOW-2",
+    "FLOW-3",
+    "FLOW-4",
+    "FLOW-5"
+  ],
+  "registeredCount": 5,
+  "sourceHashes": {
+    "scripts/verification/ai-demo-stability-workflow.mjs": "0bc1b4e88cfbc1089d230e09ab1a6a38c81700f563058be63fa4c9b042f7d842",
+    "apps/api/src/ai/tools/request-vectors.ts": "3694aeb0c15b4a0fe422fd3831abde97bf89a4164065da45caed0ca8b04eba07",
+    "apps/api/src/ai/operational-ai.service.ts": "0ea64ec12eafbb3b1fe9d588f164a74d5dbb3d9758ed29a1f30cf86738df2b18"
+  },
+  "observedCounts": {
+    "completed": 5,
+    "passed": 5,
+    "failed": 0,
+    "runs": 20,
+    "runFailures": 0,
+    "attemptFailures": 0
+  },
+  "latency": {
+    "workflows": {
+      "n": 5,
+      "minMs": 141922,
+      "medianMs": 148578,
+      "maxMs": 173065
+    },
+    "failedWorkflows": {
+      "n": 0,
+      "minMs": null,
+      "medianMs": null,
+      "maxMs": null
+    },
+    "AI": {
+      "n": 20,
+      "minMs": 25579,
+      "medianMs": 35226.5,
+      "maxMs": 56610
+    },
+    "failedAI": {
+      "n": 0,
+      "minMs": null,
+      "medianMs": null,
+      "maxMs": null
+    },
+    "indexRecovery": {
+      "n": 5,
+      "minMs": 1506,
+      "medianMs": 1512,
+      "maxMs": 1514
+    }
+  },
+  "httpCounts": {
+    "POST /requests 201": 5,
+    "GET /requests/:id 200": 112,
+    "GET /manager/requests 403": 5,
+    "GET /requests/:id 404": 5,
+    "GET /requests/:id 401": 5,
+    "POST /manager/requests/:id/ai/recommend 202": 5,
+    "GET /manager/requests/:id/ai/recommendation 200": 170,
+    "GET /knowledge/sources/KD-:id-G1-C0 200": 20,
+    "GET /knowledge/sources/KD-:id-G1-C1 200": 13,
+    "POST /manager/approvals/:id/reject 200": 5,
+    "POST /manager/requests/:id/triage 200": 5,
+    "POST /manager/requests/:id/submit-approval 200": 5,
+    "POST /manager/approvals/:id/accept 403": 5,
+    "POST /manager/approvals/:id/accept 200": 5,
+    "POST /requests/:id/start 200": 5,
+    "POST /requests/:id/internal-notes 201": 5,
+    "GET /requests/:id/internal-notes 403": 5,
+    "POST /requests/:id/ai/copilot/action 202": 5,
+    "GET /ai/operational-runs/:id 200": 239,
+    "POST /requests/:id/messages 409": 5,
+    "POST /requests/:id/request-info 200": 5,
+    "POST /requests/:id/provide-info 200": 5,
+    "POST /requests/:id/resolve 422": 5,
+    "PATCH /requests/:id/checklist/:id 200": 5,
+    "POST /requests/:id/resolve 200": 5,
+    "GET /requests/:id/history 200": 5,
+    "POST /requests/:id/confirm 200": 5,
+    "GET /analytics 200": 1
+  },
+  "rows": [
+    {
+      "caseId": "FLOW-1",
+      "requestId": "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+      "startedAt": "2026-10-05T07:06:34.859Z",
+      "status": "PASS",
+      "elapsedMs": 141922,
+      "indexRecoveryMs": 1514,
+      "errorCategory": null,
+      "final": {
+        "status": "CLOSED",
+        "version": 12,
+        "sla": {
+          "status": "MET",
+          "state": "MET",
+          "targetSeconds": 7200,
+          "elapsedSeconds": 30,
+          "totalPausedSeconds": 0,
+          "remainingSeconds": 7170,
+          "breachedBySeconds": 0
+        }
+      },
+      "protectedChecks": [
+        {
+          "operation": "recommendation",
+          "beforeHash": "dcefad1bbecd2241c57757ebba86b783a8b54a3da7a927259d67ba2d9252ea47",
+          "afterHash": "dcefad1bbecd2241c57757ebba86b783a8b54a3da7a927259d67ba2d9252ea47",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "advisory review",
+          "beforeHash": "dcefad1bbecd2241c57757ebba86b783a8b54a3da7a927259d67ba2d9252ea47",
+          "afterHash": "dcefad1bbecd2241c57757ebba86b783a8b54a3da7a927259d67ba2d9252ea47",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "copilot",
+          "beforeHash": "36b34dea6c554c0e942d1b23355492b0f6f1057e19dab4445dc4cf433fcdbce0",
+          "afterHash": "97224efed75778774d554382a726202c918de71695332fd92d347e07ce41578d",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 1
+        }
+      ],
+      "sourceCounts": {
+        "retrieved": 5,
+        "procedures": 2,
+        "copilot": 1,
+        "summaryEvents": 8
+      },
+      "runs": [
+        {
+          "id": "d4a9a27f-5c35-4012-a59f-39b8ac63b9be",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 25579,
+          "retryCount": 0,
+          "promptVersion": "request-analysis-rag.v1",
+          "schemaVersion": "analysis.v1",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "92f1d847-9f1b-4419-95ab-3c1e5b972297",
+          "purpose": "RECOMMENDATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 50289,
+          "retryCount": 0,
+          "promptVersion": "grounded-recommendation.v2.11",
+          "schemaVersion": "recommendation.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "145339ba-405e-4e6a-a4d0-0c232c743ab1",
+          "purpose": "COPILOT",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 28772,
+          "retryCount": 0,
+          "promptVersion": "copilot.m8.v2",
+          "schemaVersion": "copilot.m8.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "d10b593a-9bd3-4088-9d1a-1c5df70765fa",
+          "purpose": "RESOLUTION_SUMMARY",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 31951,
+          "retryCount": 0,
+          "promptVersion": "resolution-summary.m8.v5",
+          "schemaVersion": "resolution-summary.m8.v3",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        }
+      ]
+    },
+    {
+      "caseId": "FLOW-2",
+      "requestId": "0a7982e1-cf60-4f9d-9d3a-c60d89b4e6ef",
+      "startedAt": "2026-10-05T07:08:57.455Z",
+      "status": "PASS",
+      "elapsedMs": 146505,
+      "indexRecoveryMs": 1506,
+      "errorCategory": null,
+      "final": {
+        "status": "CLOSED",
+        "version": 12,
+        "sla": {
+          "status": "MET",
+          "state": "MET",
+          "targetSeconds": 7200,
+          "elapsedSeconds": 34,
+          "totalPausedSeconds": 0,
+          "remainingSeconds": 7166,
+          "breachedBySeconds": 0
+        }
+      },
+      "protectedChecks": [
+        {
+          "operation": "recommendation",
+          "beforeHash": "4d5d03eb0ef43b1dc26e8365592dc11039a6f374e60c6f1c26e973f1e2fb92a2",
+          "afterHash": "4d5d03eb0ef43b1dc26e8365592dc11039a6f374e60c6f1c26e973f1e2fb92a2",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "advisory review",
+          "beforeHash": "4d5d03eb0ef43b1dc26e8365592dc11039a6f374e60c6f1c26e973f1e2fb92a2",
+          "afterHash": "4d5d03eb0ef43b1dc26e8365592dc11039a6f374e60c6f1c26e973f1e2fb92a2",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "copilot",
+          "beforeHash": "15b057505faf2c2b3f79f46fc08fa65f03e712f8f99fc8e3aa81348ee65a85e2",
+          "afterHash": "1d93ce22a5d7cb839d573e0ab1ff65f6a93956841dfb6d93ddbf1c33984c6b49",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 1
+        }
+      ],
+      "sourceCounts": {
+        "retrieved": 5,
+        "procedures": 2,
+        "copilot": 2,
+        "summaryEvents": 8
+      },
+      "runs": [
+        {
+          "id": "05c3d8e2-9cf8-494b-b387-855a39efb0d5",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 25784,
+          "retryCount": 0,
+          "promptVersion": "request-analysis-rag.v1",
+          "schemaVersion": "analysis.v1",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "94cd0533-cbd9-4768-8150-da41dbb806a0",
+          "purpose": "RECOMMENDATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 40942,
+          "retryCount": 0,
+          "promptVersion": "grounded-recommendation.v2.11",
+          "schemaVersion": "recommendation.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "d5906f9f-9ea5-4b03-98e3-c0aed45a09f8",
+          "purpose": "COPILOT",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 33017,
+          "retryCount": 0,
+          "promptVersion": "copilot.m8.v2",
+          "schemaVersion": "copilot.m8.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "b7d17e6d-d6fc-4a3e-ae85-c1b10170bfeb",
+          "purpose": "RESOLUTION_SUMMARY",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 40252,
+          "retryCount": 0,
+          "promptVersion": "resolution-summary.m8.v5",
+          "schemaVersion": "resolution-summary.m8.v3",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        }
+      ]
+    },
+    {
+      "caseId": "FLOW-3",
+      "requestId": "110dd168-4e1f-40d4-8cb6-76186d6cc4d7",
+      "startedAt": "2026-10-05T07:11:24.969Z",
+      "status": "PASS",
+      "elapsedMs": 173065,
+      "indexRecoveryMs": 1510,
+      "errorCategory": null,
+      "final": {
+        "status": "CLOSED",
+        "version": 12,
+        "sla": {
+          "status": "MET",
+          "state": "MET",
+          "targetSeconds": 7200,
+          "elapsedSeconds": 29,
+          "totalPausedSeconds": 0,
+          "remainingSeconds": 7171,
+          "breachedBySeconds": 0
+        }
+      },
+      "protectedChecks": [
+        {
+          "operation": "recommendation",
+          "beforeHash": "7a763e7339275bcf36a7643ba62ed352906e381d06e30d6e7abaa21c9d0dd58e",
+          "afterHash": "7a763e7339275bcf36a7643ba62ed352906e381d06e30d6e7abaa21c9d0dd58e",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "advisory review",
+          "beforeHash": "7a763e7339275bcf36a7643ba62ed352906e381d06e30d6e7abaa21c9d0dd58e",
+          "afterHash": "7a763e7339275bcf36a7643ba62ed352906e381d06e30d6e7abaa21c9d0dd58e",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "copilot",
+          "beforeHash": "775fa473c6a96a1e527ffa65c91f6072308f71837c87512c071a4fd4716db137",
+          "afterHash": "8a86f0a69480791b6e8dbd10f3d3a14ba737e3402323888ddd9de2caa6a37a5f",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 1
+        }
+      ],
+      "sourceCounts": {
+        "retrieved": 5,
+        "procedures": 2,
+        "copilot": 2,
+        "summaryEvents": 8
+      },
+      "runs": [
+        {
+          "id": "53bf8513-4b78-4844-a136-e3a4f50641ad",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 36736,
+          "retryCount": 0,
+          "promptVersion": "request-analysis-rag.v1",
+          "schemaVersion": "analysis.v1",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "d9c984c0-4426-462a-b29d-fb7ed555ac87",
+          "purpose": "RECOMMENDATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 56610,
+          "retryCount": 0,
+          "promptVersion": "grounded-recommendation.v2.11",
+          "schemaVersion": "recommendation.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "9fb6039c-d9f9-4549-bdd6-0e3fdf743879",
+          "purpose": "COPILOT",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 27640,
+          "retryCount": 0,
+          "promptVersion": "copilot.m8.v2",
+          "schemaVersion": "copilot.m8.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "f18c1794-e929-4f66-a6a9-8d5d5b267847",
+          "purpose": "RESOLUTION_SUMMARY",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 45633,
+          "retryCount": 0,
+          "promptVersion": "resolution-summary.m8.v5",
+          "schemaVersion": "resolution-summary.m8.v3",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        }
+      ]
+    },
+    {
+      "caseId": "FLOW-4",
+      "requestId": "f262541a-d465-42b8-8aee-01505133d524",
+      "startedAt": "2026-10-05T07:14:18.621Z",
+      "status": "PASS",
+      "elapsedMs": 148578,
+      "indexRecoveryMs": 1512,
+      "errorCategory": null,
+      "final": {
+        "status": "CLOSED",
+        "version": 12,
+        "sla": {
+          "status": "MET",
+          "state": "MET",
+          "targetSeconds": 7200,
+          "elapsedSeconds": 28,
+          "totalPausedSeconds": 0,
+          "remainingSeconds": 7172,
+          "breachedBySeconds": 0
+        }
+      },
+      "protectedChecks": [
+        {
+          "operation": "recommendation",
+          "beforeHash": "f2cd675d09125614d25226639ff5e1d020ad10a5c4b68b41e17a65c81d5feafb",
+          "afterHash": "f2cd675d09125614d25226639ff5e1d020ad10a5c4b68b41e17a65c81d5feafb",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "advisory review",
+          "beforeHash": "f2cd675d09125614d25226639ff5e1d020ad10a5c4b68b41e17a65c81d5feafb",
+          "afterHash": "f2cd675d09125614d25226639ff5e1d020ad10a5c4b68b41e17a65c81d5feafb",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "copilot",
+          "beforeHash": "da1d78ea3126b77300aba376eb6d0ed9f589423c55cdf55fb3f99f4edceed820",
+          "afterHash": "c5e92418204626563d57cb65f1a6c4e7d450f552279ddaa2d64b4514d35901f9",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 1
+        }
+      ],
+      "sourceCounts": {
+        "retrieved": 5,
+        "procedures": 2,
+        "copilot": 2,
+        "summaryEvents": 8
+      },
+      "runs": [
+        {
+          "id": "336a7c80-acc1-48bb-aae2-4527be3141bd",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 26529,
+          "retryCount": 0,
+          "promptVersion": "request-analysis-rag.v1",
+          "schemaVersion": "analysis.v1",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "7d5cf59b-b117-4f81-9892-cd2823d1014f",
+          "purpose": "RECOMMENDATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 47236,
+          "retryCount": 0,
+          "promptVersion": "grounded-recommendation.v2.11",
+          "schemaVersion": "recommendation.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "540f64c4-ffc1-4292-83cf-61cfcf181627",
+          "purpose": "COPILOT",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 27273,
+          "retryCount": 0,
+          "promptVersion": "copilot.m8.v2",
+          "schemaVersion": "copilot.m8.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "383e79ef-d3d3-4247-9d2d-da1d48c2cbe3",
+          "purpose": "RESOLUTION_SUMMARY",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 40565,
+          "retryCount": 0,
+          "promptVersion": "resolution-summary.m8.v5",
+          "schemaVersion": "resolution-summary.m8.v3",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        }
+      ]
+    },
+    {
+      "caseId": "FLOW-5",
+      "requestId": "895e2a3f-f2ca-45f8-8d1d-32f2a2f44232",
+      "startedAt": "2026-10-05T07:16:48.123Z",
+      "status": "PASS",
+      "elapsedMs": 155815,
+      "indexRecoveryMs": 1513,
+      "errorCategory": null,
+      "final": {
+        "status": "CLOSED",
+        "version": 12,
+        "sla": {
+          "status": "MET",
+          "state": "MET",
+          "targetSeconds": 7200,
+          "elapsedSeconds": 33,
+          "totalPausedSeconds": 0,
+          "remainingSeconds": 7167,
+          "breachedBySeconds": 0
+        }
+      },
+      "protectedChecks": [
+        {
+          "operation": "recommendation",
+          "beforeHash": "9d89559418022fb093c00cf23b5fa479e465247ac3ac93a13611932141c6d5d9",
+          "afterHash": "9d89559418022fb093c00cf23b5fa479e465247ac3ac93a13611932141c6d5d9",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "advisory review",
+          "beforeHash": "9d89559418022fb093c00cf23b5fa479e465247ac3ac93a13611932141c6d5d9",
+          "afterHash": "9d89559418022fb093c00cf23b5fa479e465247ac3ac93a13611932141c6d5d9",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 0
+        },
+        {
+          "operation": "copilot",
+          "beforeHash": "b27743001eca6b0022693f339f6ab83bc5492d815482dbf0dd69f32e976eb9e8",
+          "afterHash": "95bfc232d3d797c8b86130823f9758bb3184956ae946127877a48fcf22dde42f",
+          "result": "PASS",
+          "permittedClockAssessmentCount": 1
+        }
+      ],
+      "sourceCounts": {
+        "retrieved": 5,
+        "procedures": 2,
+        "copilot": 1,
+        "summaryEvents": 8
+      },
+      "runs": [
+        {
+          "id": "8f2ac650-0385-4493-a28c-631e98e7ab83",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 36869,
+          "retryCount": 0,
+          "promptVersion": "request-analysis-rag.v1",
+          "schemaVersion": "analysis.v1",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "45ec5826-a360-4ced-91a4-188cd6276201",
+          "purpose": "RECOMMENDATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 46435,
+          "retryCount": 0,
+          "promptVersion": "grounded-recommendation.v2.11",
+          "schemaVersion": "recommendation.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "eefb50da-254e-4c51-9c51-b6e7a00b6717",
+          "purpose": "COPILOT",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 29894,
+          "retryCount": 0,
+          "promptVersion": "copilot.m8.v2",
+          "schemaVersion": "copilot.m8.v2",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        },
+        {
+          "id": "bd888d8a-48ae-4a71-a809-e699f8e8582f",
+          "purpose": "RESOLUTION_SUMMARY",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "latencyMs": 33717,
+          "retryCount": 0,
+          "promptVersion": "resolution-summary.m8.v5",
+          "schemaVersion": "resolution-summary.m8.v3",
+          "modelIdentity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "attemptFailures": []
+        }
+      ]
+    }
+  ],
+  "analytics": {
+    "operations": {
+      "requestVolume": 17,
+      "createdCount": 17,
+      "resolvedCount": 8,
+      "closedCount": 7,
+      "statusDistribution": {
+        "NEW": 0,
+        "AI_ANALYZING": 0,
+        "TRIAGED": 2,
+        "PENDING_APPROVAL": 0,
+        "ASSIGNED": 1,
+        "IN_PROGRESS": 4,
+        "WAITING_USER": 1,
+        "RESOLVED": 1,
+        "CLOSED": 7,
+        "CANCELED": 1
+      },
+      "priorityDistribution": {
+        "LOW": 1,
+        "MEDIUM": 5,
+        "HIGH": 11,
+        "URGENT": 0
+      }
+    },
+    "sla": {
+      "slaEligibleCount": 8,
+      "slaMetCount": 8,
+      "slaBreachedCount": 0,
+      "slaComplianceRate": 1,
+      "averageResolutionSeconds": 1144.25,
+      "averageWallClockResolutionSeconds": 2882.2423749999994
+    },
+    "ai": {
+      "windowDays": 30,
+      "runs": {
+        "total": 31,
+        "succeeded": 30,
+        "failed": 1,
+        "firstAttemptValid": 30,
+        "repairedSuccess": 0,
+        "averageAttempts": 1,
+        "averageLatencyMs": 36671.6,
+        "p50LatencyMs": 35319,
+        "p95LatencyMs": 50289
+      },
+      "byPurpose": {
+        "COPILOT": 8,
+        "ANALYSIS": 9,
+        "RECOMMENDATION": 9,
+        "RESOLUTION_SUMMARY": 5
+      },
+      "byModel": {
+        "qwen3:4b-instruct-2507-q4_K_M": 31
+      },
+      "byVersion": {
+        "copilot.m8.v2 / copilot.m8.v2": 8,
+        "request-analysis-rag.v1 / analysis.v1": 9,
+        "grounded-recommendation.v2.11 / recommendation.v2": 9,
+        "resolution-summary.m8.v5 / resolution-summary.m8.v3": 5
+      },
+      "failures": {
+        "AI_TIMEOUT": 1
+      },
+      "recommendations": {
+        "generated": 9,
+        "accepted": 0,
+        "modified": 0,
+        "rejected": 8,
+        "denominator": 8,
+        "acceptanceRate": 0,
+        "modificationRate": 0,
+        "rejectionRate": 1
+      }
+    },
+    "copilot": {
+      "copilotRuns": 8,
+      "successfulCopilotRuns": 7,
+      "failedCopilotRuns": 1,
+      "canceledCopilotRuns": 0,
+      "pendingCopilotRuns": 0,
+      "unclassifiedRuns": 0,
+      "copilotRunsByAction": [
+        {
+          "runs": 0,
+          "succeeded": 0,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "runs": 8,
+          "succeeded": 7,
+          "failed": 1,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "runs": 0,
+          "succeeded": 0,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "runs": 0,
+          "succeeded": 0,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "runs": 0,
+          "succeeded": 0,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        },
+        {
+          "runs": 0,
+          "succeeded": 0,
+          "failed": 0,
+          "canceled": 0,
+          "pending": 0
+        }
+      ]
+    }
+  }
+}

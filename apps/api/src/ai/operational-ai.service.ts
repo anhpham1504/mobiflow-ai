@@ -15,6 +15,7 @@ import {KnowledgeRetriever} from '../knowledge/retriever.js';
 import {RequestVectors} from './tools/request-vectors.js';
 import {copilotModelSchemas,parseStrictOutput,parseSummaryOutput,type CopilotAction} from './operational-output.js';
 import {copilotFormat,copilotMessages,copilotPromptVersion,resolutionSummaryPromptVersion,summaryFormat,summaryMessages} from './prompts/copilot.js';
+import {resolutionSummaryFacts,summaryEventLabels,validateSummaryFacts} from './resolution-summary-facts.js';
 
 const allowedStates=new Set<RequestStatus>(['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']);
 const copilotSchemaVersion='copilot.m8.v2',summarySchemaVersion='resolution-summary.m8.v3';
@@ -133,16 +134,15 @@ export class OperationalAiService {
   }
 
   private async executeSummary(run:AiRun,signal:AbortSignal){
-    const resolution=await this.prisma.requestResolution.findUnique({where:{id:run.resolutionId!},include:{request:{include:{latestAnalysis:true,assignments:{orderBy:{assignedAt:'asc'}},checklist:{include:{items:{orderBy:{ordinal:'asc'}}}},audits:{where:{outcome:'SUCCEEDED'},orderBy:{createdAt:'asc'},take:50}}}}});
+    const resolution=await this.prisma.requestResolution.findUnique({where:{id:run.resolutionId!},include:{request:true}});
     if(!resolution||resolution.request.currentResolutionId!==resolution.id||!['RESOLVED','CLOSED'].includes(resolution.request.status))throw new AiFailure('STALE_CONTEXT');
-    const events=resolution.request.audits.filter(a=>a.createdAt<=resolution.resolvedAt).map(a=>({eventId:a.id,action:a.action,at:a.createdAt.toISOString()})),byId=new Map(events.map(event=>[event.eventId,event])),allowed=new Set(byId.keys());
-    const context={request:{createdAt:resolution.request.createdAt,title:resolution.request.title,description:resolution.request.description,category:resolution.request.category,priority:resolution.request.priority},analysis:resolution.request.latestAnalysis?{reasonSummary:resolution.request.latestAnalysis.reasonSummary}:null,assignments:resolution.request.assignments.map(a=>({staffId:a.staffId,assignedAt:a.assignedAt,endedAt:a.endedAt})),checklist:resolution.request.checklist?.items.map(i=>({text:i.text,completedAt:i.completedAt,waivedAt:i.waivedAt})),resolution:{id:resolution.id,cycle:resolution.cycle,rootCause:resolution.rootCause,resolution:resolution.resolution,verification:resolution.verification,resolvedAt:resolution.resolvedAt},events};
+    const audits=await this.prisma.auditLog.findMany({where:{requestId:resolution.requestId,outcome:'SUCCEEDED',createdAt:{lte:resolution.resolvedAt},action:{in:Object.keys(summaryEventLabels)}},orderBy:[{createdAt:'desc'},{id:'desc'}],take:50});
+    const context=resolutionSummaryFacts(resolution,audits.reverse().map(a=>({eventId:a.id,action:a.action,actorType:a.actorType,at:a.createdAt.toISOString()}))),events=context.events,byId=new Map(events.map(event=>[event.eventId,event])),allowed=new Set(byId.keys());
     let repair:{raw:string;feedback:string}|undefined,lastInputSize=0;
     for(let attempt=0;attempt<2;attempt++){
       const prompt=summaryMessages(context,[...allowed],repair);lastInputSize=JSON.stringify(prompt).length;if(lastInputSize>24000)throw new AiFailure('CONTEXT_TOO_LARGE');await this.prisma.aiRun.updateMany({where:{id:run.id,status:'RUNNING'},data:{retryCount:attempt,inputSize:lastInputSize}});
       try{
-        const generated=await this.provider.generateStructured(prompt,summaryFormat(),signal),output=parseSummaryOutput(generated.raw);if(output.timeline.some(item=>!allowed.has(item.eventId)))throw new AiFailure('INVALID_REFERENCE',true,'EVENT_MEMBERSHIP: Use only ALLOWED_EVENT_IDS.',generated.raw.slice(0,6000));
-        const indices=output.timeline.map(item=>events.findIndex(event=>event.eventId===item.eventId));if(indices.some((index,i)=>i>0&&index<indices[i-1]!))throw new AiFailure('INVALID_REFERENCE',true,'EVENT_ORDER: Keep timeline IDs in chronological order.',generated.raw.slice(0,6000));
+        const generated=await this.provider.generateStructured(prompt,summaryFormat(context),signal),output=parseSummaryOutput(generated.raw);validateSummaryFacts(output,context,generated.raw);
         const sourceEventIds=[...new Set(output.timeline.map(item=>item.eventId))],data:z.infer<typeof resolutionSummarySchema>={executiveSummary:output.executiveSummary,timeline:output.timeline.map(item=>({eventId:item.eventId,at:byId.get(item.eventId)!.at,summary:item.summary})),rootCause:resolution.rootCause,resolution:resolution.resolution,verification:resolution.verification,resolutionSeconds:Math.max(0,Math.floor((resolution.resolvedAt.getTime()-resolution.request.createdAt.getTime())/1000)),sourceEventIds};
         return {data,identity:generated.identity,outputSize:generated.outputSize,inputSize:lastInputSize,retryCount:attempt,snapshot:{resolutionId:resolution.id,eventIds:[...allowed]}};
       }catch(error){const failure=normalizedFailure(error,signal);await this.attemptFailed(run,attempt,failure);if(!failure.retryable||attempt===1||signal.aborted)throw failure;repair={raw:failure.invalidOutput,feedback:failure.repairFeedback||failure.code};if(!failure.invalidOutput)await delay(1000,undefined,{signal});}

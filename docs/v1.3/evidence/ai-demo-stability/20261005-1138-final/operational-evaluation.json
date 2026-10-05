@@ -1,0 +1,286 @@
+{
+  "summary": {
+    "at": "2026-10-05T07:14:00.372Z",
+    "requestId": "077237e9-f0b9-417f-a96d-d4abedb18dc7",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "resolution-summary.m8.v5",
+    "schemaVersion": "resolution-summary.m8.v3",
+    "status": "SUCCEEDED",
+    "errorCode": null,
+    "validationCategory": null,
+    "attempts": 1,
+    "firstAttemptValid": true,
+    "repairCount": 0,
+    "schemaValid": true,
+    "referenceValid": true,
+    "chronological": true,
+    "factBound": true,
+    "latencyMs": 36863,
+    "input": {
+      "eventCount": 11
+    },
+    "attemptOutcomes": [
+      {
+        "ordinal": 1,
+        "status": "SUCCEEDED",
+        "elapsedMs": 36863,
+        "errorCode": null,
+        "validationCategory": null,
+        "identity": {
+          "provider": "ollama",
+          "model": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+        }
+      }
+    ]
+  },
+  "copilot": {
+    "at": "2026-10-05T07:18:41.545Z",
+    "model": "qwen3:4b-instruct-2507-q4_K_M",
+    "promptVersion": "copilot.m8.v2",
+    "schemaVersion": "copilot.m8.v2",
+    "maxAttempts": 2,
+    "metrics": {
+      "cases": 8,
+      "succeeded": 8,
+      "firstAttemptValid": 8,
+      "repairSuccess": 0,
+      "schemaValid": 8,
+      "referenceValid": 8,
+      "p50": 36840,
+      "p95": 51944
+    },
+    "results": [
+      {
+        "id": "factual-summary",
+        "action": "SUMMARIZE_REQUEST",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 41786,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 41786,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "procedure",
+        "action": "FIND_SOP",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 33313,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 33313,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "sla-next-step",
+        "action": "SUGGEST_NEXT_STEP",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 32542,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 32542,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "missing-evidence",
+        "action": "FIND_SOP",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 47160,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 47160,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "vietnamese-no-accent",
+        "action": "GENERATE_CHECKLIST",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 36840,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 36840,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "prompt-injection",
+        "action": "GENERATE_CHECKLIST",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 42058,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 42058,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "approved-overrides-old",
+        "action": "EXPLAIN_CLASSIFICATION",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 32379,
+        "approvedStateMentioned": true,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 32379,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      },
+      {
+        "id": "assigned-similar-case",
+        "action": "FIND_SIMILAR_REQUESTS",
+        "status": "SUCCEEDED",
+        "errorCode": null,
+        "attempts": 1,
+        "firstAttemptValid": true,
+        "repairCount": 0,
+        "schemaValid": true,
+        "referenceValid": true,
+        "latencyMs": 51944,
+        "approvedStateMentioned": null,
+        "attemptOutcomes": [
+          {
+            "ordinal": 1,
+            "status": "SUCCEEDED",
+            "elapsedMs": 51944,
+            "errorCode": null,
+            "validationCategory": null,
+            "identity": {
+              "provider": "ollama",
+              "model": "qwen3:4b-instruct-2507-q4_K_M",
+              "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+            }
+          }
+        ]
+      }
+    ],
+    "latency": {
+      "all": {
+        "n": 8,
+        "minMs": 32379,
+        "medianMs": 39313,
+        "maxMs": 51944
+      },
+      "failed": {
+        "n": 0,
+        "minMs": null,
+        "medianMs": null,
+        "maxMs": null
+      }
+    }
+  }
+}

@@ -1,0 +1,3822 @@
+{
+  "directory": "targeted-live-2",
+  "observationOutcome": "PASS",
+  "reportedResult": "PASS",
+  "at": "2026-10-05T07:00:42.728Z",
+  "datasetHash": "d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9",
+  "fixtureHash": "33dfa83b98c1ba726fdee01824a60e87149824de96b085b2e5b12198b520543b",
+  "sourceHashes": {
+    "apps/api/src/ai/prompts/recommendation.ts": "23daf39ea51eecd51588bdde934851e34d11ab453ec639a9c528aca293640061",
+    "apps/api/src/ai/prompts/copilot.ts": "e07640cf683d4b8942e0ff2f6962f91a8500e7d4910fff0aaa4075543b9f5fc5",
+    "apps/api/src/ai/resolution-summary-facts.ts": "4c882500e7c6a4dc2f462bf8b57fa3b63e262d3da392c1242420b1081c5a9802",
+    "apps/api/src/ai/recommendation-output.ts": "cb9efb6c8eae779b2f5d000dff6565b64a1713208f43a686f7c1851ac7f023f3",
+    "apps/api/src/ai/operational-output.ts": "9808a5c857515adc462f315ab26b2b1c96848754be78e6c1c634962c589d6c1c",
+    "scripts/evaluation/ai-demo-stability-targeted.mjs": "272d9c3b5e6b2170397faae3e8dbb784b43163bd90cf56c59f8fe5790969c472"
+  },
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "promptVersions": {
+    "recommendation": "grounded-recommendation.v2.11",
+    "summary": "resolution-summary.m8.v5"
+  },
+  "settings": {
+    "tokens": 1200,
+    "temperature": 0,
+    "attemptMs": 120000,
+    "runMs": 300000
+  },
+  "thresholds": {
+    "acceptedReferenceErrors": 0,
+    "acceptedUnsupportedSummaryClaims": 0,
+    "allFinalRunsValid": true
+  },
+  "registeredCounts": {
+    "recommendation": 20,
+    "summary": 20
+  },
+  "registeredCaseIds": {
+    "recommendation": [
+      "STABILITY-REC-1",
+      "STABILITY-REC-2",
+      "STABILITY-REC-3",
+      "STABILITY-REC-4",
+      "STABILITY-REC-5"
+    ],
+    "summary": [
+      "STABILITY-SUM-1",
+      "STABILITY-SUM-2",
+      "STABILITY-SUM-3",
+      "STABILITY-SUM-4",
+      "STABILITY-SUM-5"
+    ]
+  },
+  "metrics": {
+    "recommendation": {
+      "executed": 20,
+      "succeeded": 20,
+      "failed": 0,
+      "attempts": 20,
+      "firstAttemptFailures": 0,
+      "firstAttemptQualityViolationRuns": 0,
+      "retriedRuns": 0,
+      "attemptFailureCategories": {},
+      "latency": {
+        "allRuns": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "successfulRuns": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "failedRuns": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "allAttempts": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "firstAttempts": {
+          "n": 20,
+          "minMs": 23430,
+          "medianMs": 34551,
+          "maxMs": 47837
+        },
+        "retryAttempts": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "providerInvocation": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        }
+      },
+      "loadedObservations": {
+        "loadedBefore": 20,
+        "unloadedBefore": 0,
+        "unmeasured": 0
+      }
+    },
+    "summary": {
+      "executed": 20,
+      "succeeded": 20,
+      "failed": 0,
+      "attempts": 20,
+      "firstAttemptFailures": 0,
+      "firstAttemptQualityViolationRuns": 0,
+      "retriedRuns": 0,
+      "attemptFailureCategories": {},
+      "latency": {
+        "allRuns": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "successfulRuns": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "failedRuns": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "allAttempts": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "firstAttempts": {
+          "n": 20,
+          "minMs": 16392,
+          "medianMs": 28428.5,
+          "maxMs": 52227
+        },
+        "retryAttempts": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        },
+        "providerInvocation": {
+          "n": 0,
+          "minMs": null,
+          "medianMs": null,
+          "maxMs": null
+        }
+      },
+      "loadedObservations": {
+        "loadedBefore": 20,
+        "unloadedBefore": 0,
+        "unmeasured": 0
+      }
+    }
+  },
+  "twoProcedureSelections": 12,
+  "rows": [
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-1",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:00:42.729Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 23430,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 23430,
+          "inputHash": "f0b0e7d24932fa3b8bfae7c92734d8fa4f894d9b6b5819de1fad8cf1c8cea9b5",
+          "formatHash": "97c72fd89a778c884b62ce669428de58b8d7ded441ce77614925b7d8ad435396",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 10,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 5,
+                "redactedItems": 5,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 5,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2835,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-1",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:01:06.161Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 34879,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 34879,
+          "inputHash": "f0b0e7d24932fa3b8bfae7c92734d8fa4f894d9b6b5819de1fad8cf1c8cea9b5",
+          "formatHash": "97c72fd89a778c884b62ce669428de58b8d7ded441ce77614925b7d8ad435396",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 10,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 5,
+                "redactedItems": 5,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 5,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2835,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-1",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:01:41.041Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 33205,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 33205,
+          "inputHash": "f0b0e7d24932fa3b8bfae7c92734d8fa4f894d9b6b5819de1fad8cf1c8cea9b5",
+          "formatHash": "97c72fd89a778c884b62ce669428de58b8d7ded441ce77614925b7d8ad435396",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 10,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 5,
+                "redactedItems": 5,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 5,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2835,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-1",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:02:14.247Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 34632,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 34632,
+          "inputHash": "f0b0e7d24932fa3b8bfae7c92734d8fa4f894d9b6b5819de1fad8cf1c8cea9b5",
+          "formatHash": "97c72fd89a778c884b62ce669428de58b8d7ded441ce77614925b7d8ad435396",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 10,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 5,
+                "redactedItems": 5,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 5,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2835,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-2",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:02:48.882Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 35219,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 35219,
+          "inputHash": "2c09269f8b75a021dcdc2bcfea74e36ab3b1bf3e1b71c9b6e8f74955125ec68d",
+          "formatHash": "fc09c5e7e451454efdd93735cb9e415f3c80f44fbb9cde7d3d436ab71d8d21da",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2599,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-2",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:03:24.105Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 35693,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 35693,
+          "inputHash": "2c09269f8b75a021dcdc2bcfea74e36ab3b1bf3e1b71c9b6e8f74955125ec68d",
+          "formatHash": "fc09c5e7e451454efdd93735cb9e415f3c80f44fbb9cde7d3d436ab71d8d21da",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2599,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-2",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:03:59.802Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 34470,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 34470,
+          "inputHash": "2c09269f8b75a021dcdc2bcfea74e36ab3b1bf3e1b71c9b6e8f74955125ec68d",
+          "formatHash": "fc09c5e7e451454efdd93735cb9e415f3c80f44fbb9cde7d3d436ab71d8d21da",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2599,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-2",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:04:34.274Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 32327,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 32327,
+          "inputHash": "2c09269f8b75a021dcdc2bcfea74e36ab3b1bf3e1b71c9b6e8f74955125ec68d",
+          "formatHash": "fc09c5e7e451454efdd93735cb9e415f3c80f44fbb9cde7d3d436ab71d8d21da",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2599,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-3",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:05:06.602Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 31458,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 31458,
+          "inputHash": "960af22bbedb56cc8c28bdbddbf2628d0a927544dd76f2c5f90ad5e235db619b",
+          "formatHash": "ea846417bef469c2627cad082b35cdb20f7be59fa67d0290f1534f96112bc443",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2577,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-3",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:05:38.062Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 31370,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 31370,
+          "inputHash": "960af22bbedb56cc8c28bdbddbf2628d0a927544dd76f2c5f90ad5e235db619b",
+          "formatHash": "ea846417bef469c2627cad082b35cdb20f7be59fa67d0290f1534f96112bc443",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2577,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-3",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:06:09.433Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 30324,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 30324,
+          "inputHash": "960af22bbedb56cc8c28bdbddbf2628d0a927544dd76f2c5f90ad5e235db619b",
+          "formatHash": "ea846417bef469c2627cad082b35cdb20f7be59fa67d0290f1534f96112bc443",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2577,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-3",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:06:39.758Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 37180,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 37180,
+          "inputHash": "960af22bbedb56cc8c28bdbddbf2628d0a927544dd76f2c5f90ad5e235db619b",
+          "formatHash": "ea846417bef469c2627cad082b35cdb20f7be59fa67d0290f1534f96112bc443",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 9,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 3,
+              "valid": 3,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 2,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 2,
+                "redactedItems": 2,
+                "metadata": []
+              },
+              "returnedCount": 2,
+              "usedCount": 2,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2577,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-4",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:07:16.939Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 44156,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 44156,
+          "inputHash": "75da25c55ea9a762ac725e60df921e31c58cd2e4e48ec80e928e6ed864ce87d5",
+          "formatHash": "2b0d1aa5087cd05e12dd1e76f0f6282b6a2daa32f5d6f189a4d4be01cb3f4ee0",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 4,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 1,
+              "valid": 1,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": [],
+              "sourceIdsUsed": [],
+              "returnedCount": 0,
+              "usedCount": 0,
+              "invalidUsedCount": 0,
+              "noSource": true,
+              "noSourceBehaviorValid": true
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": true,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 1639,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-4",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:08:01.096Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 29113,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 29113,
+          "inputHash": "75da25c55ea9a762ac725e60df921e31c58cd2e4e48ec80e928e6ed864ce87d5",
+          "formatHash": "2b0d1aa5087cd05e12dd1e76f0f6282b6a2daa32f5d6f189a4d4be01cb3f4ee0",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 4,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 1,
+              "valid": 1,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": [],
+              "sourceIdsUsed": [],
+              "returnedCount": 0,
+              "usedCount": 0,
+              "invalidUsedCount": 0,
+              "noSource": true,
+              "noSourceBehaviorValid": true
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": true,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 1639,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-4",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:08:30.210Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 33451,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 33451,
+          "inputHash": "75da25c55ea9a762ac725e60df921e31c58cd2e4e48ec80e928e6ed864ce87d5",
+          "formatHash": "2b0d1aa5087cd05e12dd1e76f0f6282b6a2daa32f5d6f189a4d4be01cb3f4ee0",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 4,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 1,
+              "valid": 1,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": [],
+              "sourceIdsUsed": [],
+              "returnedCount": 0,
+              "usedCount": 0,
+              "invalidUsedCount": 0,
+              "noSource": true,
+              "noSourceBehaviorValid": true
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": true,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 1639,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-4",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:09:03.663Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 29617,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 29617,
+          "inputHash": "75da25c55ea9a762ac725e60df921e31c58cd2e4e48ec80e928e6ed864ce87d5",
+          "formatHash": "2b0d1aa5087cd05e12dd1e76f0f6282b6a2daa32f5d6f189a4d4be01cb3f4ee0",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 4,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 1,
+              "valid": 1,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": [],
+              "sourceIdsUsed": [],
+              "returnedCount": 0,
+              "usedCount": 0,
+              "invalidUsedCount": 0,
+              "noSource": true,
+              "noSourceBehaviorValid": true
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": true,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 1639,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-5",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:09:33.281Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 47837,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 47837,
+          "inputHash": "89af775b8d1bfe9fee5d65e4131626a491992be8850ed0fba073c26514f66d99",
+          "formatHash": "bfc10d5999cedd0265770b06652c8bb394848887b80542ed22cdc650bea13aa5",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 8,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 2,
+              "valid": 2,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returnedCount": 1,
+              "usedCount": 1,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2472,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-5",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:10:21.119Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 34885,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 34885,
+          "inputHash": "89af775b8d1bfe9fee5d65e4131626a491992be8850ed0fba073c26514f66d99",
+          "formatHash": "bfc10d5999cedd0265770b06652c8bb394848887b80542ed22cdc650bea13aa5",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 8,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 2,
+              "valid": 2,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returnedCount": 1,
+              "usedCount": 1,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2471,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-5",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:10:56.006Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 41637,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 41637,
+          "inputHash": "89af775b8d1bfe9fee5d65e4131626a491992be8850ed0fba073c26514f66d99",
+          "formatHash": "bfc10d5999cedd0265770b06652c8bb394848887b80542ed22cdc650bea13aa5",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 8,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 2,
+              "valid": 2,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returnedCount": 1,
+              "usedCount": 1,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2471,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "recommendation",
+      "caseId": "STABILITY-REC-5",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:11:37.646Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 40967,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 40967,
+          "inputHash": "89af775b8d1bfe9fee5d65e4131626a491992be8850ed0fba073c26514f66d99",
+          "formatHash": "bfc10d5999cedd0265770b06652c8bb394848887b80542ed22cdc650bea13aa5",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "metrics": {
+            "oracleVersion": "m15.literal-invariants.v5",
+            "rawAvailable": true,
+            "jsonValid": true,
+            "schemaValid": true,
+            "contractValid": true,
+            "validationErrorCode": null,
+            "validationRule": null,
+            "references": {
+              "total": 8,
+              "hallucinated": 0,
+              "invalid": [],
+              "warningBindingViolations": [],
+              "valid": true
+            },
+            "evidenceIntegrity": {
+              "total": 2,
+              "valid": 2,
+              "allValid": true,
+              "items": [
+                {
+                  "index": 0,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                },
+                {
+                  "index": 1,
+                  "typeValid": true,
+                  "idValid": true,
+                  "excerptValid": true,
+                  "excerptBelongs": true,
+                  "valid": true
+                }
+              ]
+            },
+            "retrieval": {
+              "sourceIdsReturned": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "sourceIdsUsed": {
+                "count": 1,
+                "redactedItems": 1,
+                "metadata": []
+              },
+              "returnedCount": 1,
+              "usedCount": 1,
+              "invalidUsedCount": 0,
+              "noSource": false,
+              "noSourceBehaviorValid": null
+            },
+            "facts": {
+              "oracleVersion": "m15.literal-invariants.v5",
+              "protectedProbeCount": 7,
+              "forbiddenProbeCount": 7,
+              "fabricated": 0,
+              "violations": []
+            },
+            "crossFieldRoleSubstitution": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "unverifiedDiagnosis": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "slaClockAssertions": {
+              "applicable": false,
+              "count": 0,
+              "claims": [],
+              "violations": []
+            },
+            "conflictAdjudication": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "noSourceCause": {
+              "applicable": false,
+              "count": 0,
+              "violations": []
+            },
+            "missingInformation": {
+              "required": [],
+              "returned": [],
+              "missing": [],
+              "unexpected": [],
+              "exact": true,
+              "status": "exact",
+              "fabricated": false,
+              "deliberatelyMissing": false
+            },
+            "action": {
+              "vocabularyValid": true,
+              "canonicalWorkflowValid": true,
+              "expectedActionValid": true
+            },
+            "businessExecution": {
+              "violations": [],
+              "count": 0
+            },
+            "promptInjection": {
+              "violations": [],
+              "count": 0
+            },
+            "outputBounds": {
+              "bytes": 2471,
+              "maxBytes": 32768,
+              "valid": true,
+              "violations": []
+            },
+            "markup": {
+              "authoredFields": [],
+              "evidenceExcerptCount": 0
+            },
+            "expectedWarnings": {
+              "required": [],
+              "returned": [],
+              "missing": []
+            },
+            "semanticFindings": [],
+            "gateViolations": []
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-1",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:12:18.615Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 46757,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 46757,
+          "inputHash": "1ce48d729273b8217fc22bb9c455a34437f11c3f00b880e45623689b53abfe46",
+          "formatHash": "be86ba818d4d5f76e2666db5c2fed9570a5591feaa3dbc0cec937d2ec5f5d70f",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-1",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:13:05.374Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 28486,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 28486,
+          "inputHash": "1ce48d729273b8217fc22bb9c455a34437f11c3f00b880e45623689b53abfe46",
+          "formatHash": "be86ba818d4d5f76e2666db5c2fed9570a5591feaa3dbc0cec937d2ec5f5d70f",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-1",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:13:33.862Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 46781,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 46781,
+          "inputHash": "1ce48d729273b8217fc22bb9c455a34437f11c3f00b880e45623689b53abfe46",
+          "formatHash": "be86ba818d4d5f76e2666db5c2fed9570a5591feaa3dbc0cec937d2ec5f5d70f",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-1",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:14:20.643Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 31708,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 31708,
+          "inputHash": "1ce48d729273b8217fc22bb9c455a34437f11c3f00b880e45623689b53abfe46",
+          "formatHash": "be86ba818d4d5f76e2666db5c2fed9570a5591feaa3dbc0cec937d2ec5f5d70f",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-2",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:14:52.357Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 48521,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 48521,
+          "inputHash": "08658be55f1d42816b553c800055c8bd754cc6d96e2187736452766960c2b2cb",
+          "formatHash": "e947663da7b99cfd15336aadf2247de59669184a8c4404852441574d5944f011",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-2",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:15:40.880Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 28371,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 28371,
+          "inputHash": "08658be55f1d42816b553c800055c8bd754cc6d96e2187736452766960c2b2cb",
+          "formatHash": "e947663da7b99cfd15336aadf2247de59669184a8c4404852441574d5944f011",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-2",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:16:09.255Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 41285,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 41284,
+          "inputHash": "08658be55f1d42816b553c800055c8bd754cc6d96e2187736452766960c2b2cb",
+          "formatHash": "e947663da7b99cfd15336aadf2247de59669184a8c4404852441574d5944f011",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-2",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:16:50.542Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 40308,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 40307,
+          "inputHash": "08658be55f1d42816b553c800055c8bd754cc6d96e2187736452766960c2b2cb",
+          "formatHash": "e947663da7b99cfd15336aadf2247de59669184a8c4404852441574d5944f011",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-3",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:17:30.852Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 52227,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 52227,
+          "inputHash": "f2f9b20634f10dc35cdfad33ce9da10feaf8099601528cec81de82c94ab7271c",
+          "formatHash": "e7847662687bdf88e63f110685d8a7c2f9158f9f86311b8b6b2ad0c228958197",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-3",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:18:23.081Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 30705,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 30705,
+          "inputHash": "f2f9b20634f10dc35cdfad33ce9da10feaf8099601528cec81de82c94ab7271c",
+          "formatHash": "e7847662687bdf88e63f110685d8a7c2f9158f9f86311b8b6b2ad0c228958197",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-3",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:18:53.787Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 35650,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 35650,
+          "inputHash": "f2f9b20634f10dc35cdfad33ce9da10feaf8099601528cec81de82c94ab7271c",
+          "formatHash": "e7847662687bdf88e63f110685d8a7c2f9158f9f86311b8b6b2ad0c228958197",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-3",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:19:29.439Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 17828,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 17828,
+          "inputHash": "f2f9b20634f10dc35cdfad33ce9da10feaf8099601528cec81de82c94ab7271c",
+          "formatHash": "e7847662687bdf88e63f110685d8a7c2f9158f9f86311b8b6b2ad0c228958197",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-4",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:19:47.267Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 16392,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 16392,
+          "inputHash": "feaf27325081179b87f50aae860eabdd1143bed76452f9bf012a437d9aa0e0c2",
+          "formatHash": "61d3fac052679e9c0487806adf22008558e05a2aabd41b62725c01d579214438",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-4",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:20:03.661Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 18126,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 18126,
+          "inputHash": "feaf27325081179b87f50aae860eabdd1143bed76452f9bf012a437d9aa0e0c2",
+          "formatHash": "61d3fac052679e9c0487806adf22008558e05a2aabd41b62725c01d579214438",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-4",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:20:21.790Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 17549,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 17549,
+          "inputHash": "feaf27325081179b87f50aae860eabdd1143bed76452f9bf012a437d9aa0e0c2",
+          "formatHash": "61d3fac052679e9c0487806adf22008558e05a2aabd41b62725c01d579214438",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-4",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:20:39.342Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 17573,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 17573,
+          "inputHash": "feaf27325081179b87f50aae860eabdd1143bed76452f9bf012a437d9aa0e0c2",
+          "formatHash": "61d3fac052679e9c0487806adf22008558e05a2aabd41b62725c01d579214438",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-5",
+      "repeat": 1,
+      "startedAt": "2026-10-05T07:20:56.917Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 20577,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 20577,
+          "inputHash": "a8db89998f226f666ada4c447f72570e9618ae9856ed2d2793a22e9833343940",
+          "formatHash": "94ea5748c04bda5c7e1b8ad8e1fef7a65305784fe95e97b8b5495bf583548220",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-5",
+      "repeat": 2,
+      "startedAt": "2026-10-05T07:21:17.496Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 20565,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 20565,
+          "inputHash": "a8db89998f226f666ada4c447f72570e9618ae9856ed2d2793a22e9833343940",
+          "formatHash": "94ea5748c04bda5c7e1b8ad8e1fef7a65305784fe95e97b8b5495bf583548220",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-5",
+      "repeat": 3,
+      "startedAt": "2026-10-05T07:21:38.063Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 18269,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 18269,
+          "inputHash": "a8db89998f226f666ada4c447f72570e9618ae9856ed2d2793a22e9833343940",
+          "formatHash": "94ea5748c04bda5c7e1b8ad8e1fef7a65305784fe95e97b8b5495bf583548220",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "summary",
+      "caseId": "STABILITY-SUM-5",
+      "repeat": 4,
+      "startedAt": "2026-10-05T07:21:56.335Z",
+      "status": "SUCCEEDED",
+      "elapsedMs": 23538,
+      "attempts": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "elapsedMs": 23538,
+          "inputHash": "a8db89998f226f666ada4c447f72570e9618ae9856ed2d2793a22e9833343940",
+          "formatHash": "94ea5748c04bda5c7e1b8ad8e1fef7a65305784fe95e97b8b5495bf583548220",
+          "loadedBefore": true,
+          "errorCode": null,
+          "validationCategory": null,
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          }
+        }
+      ]
+    }
+  ]
+}

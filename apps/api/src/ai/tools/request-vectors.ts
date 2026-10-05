@@ -4,6 +4,7 @@ import type {SimilarCase} from '@mobiflow/contracts';
 import {Prisma} from '../../generated/prisma/client.js';
 import {PrismaService} from '../../database/prisma.service.js';
 import {EMBEDDING_PROVIDER,KnowledgeFailure,validateVector,type EmbeddingProvider,type EmbeddingIdentity} from '../../knowledge/embedding-provider.js';
+import {isDatabaseUnavailable} from '../../http.js';
 
 export const requestInputVersion='request-title-description-head.v1';
 export function requestEmbeddingInput(title:string,description:string){
@@ -20,34 +21,74 @@ export function similarityScore(cosine:number,category:boolean,location:boolean,
 export class RequestVectors {
   private identity?:EmbeddingIdentity;
   private probedAt=0;
-  private backgroundPaused=false;
+  private state:'READY'|'RETRY_WAIT'|'BLOCKED'|'STOPPED'='READY';
+  private failureCount=0;
+  private errorCode:string|null=null;
+  private nextRetryAt=0;
+  private cursor='00000000-0000-0000-0000-000000000000';
+  private busy=false;
+  private observation:{correlationId:string;stage:string;requestId:string|null;contextVersion:number|null;category:string|null;errorType:string|null}|null=null;
+  get backfillStatus(){return {...this.observation,state:this.state,failureCount:this.failureCount,errorCode:this.errorCode,nextRetryAt:this.nextRetryAt?new Date(this.nextRetryAt).toISOString():null,attemptTimeoutMs:30000,maxBackoffMs:60000};}
   constructor(private readonly prisma:PrismaService,@Inject(EMBEDDING_PROVIDER)private readonly embeddings:EmbeddingProvider){}
-  async index(requestId:string,signal:AbortSignal){
+  async index(requestId:string,signal:AbortSignal,observe?:(stage:string,version:number)=>void){
+    if(signal.aborted)throw new KnowledgeFailure('KNOWLEDGE_CANCELED');
     const request=await this.prisma.request.findUniqueOrThrow({where:{id:requestId}});
     if(request.status==='CANCELED')throw new KnowledgeFailure('STALE_CONTEXT');
+    observe?.('INFERENCE',request.version);
     const input=requestEmbeddingInput(request.title,request.description),batch=await this.embeddings.embedQuery(input.text,signal);
     validateVector(batch.vectors[0],1024);
     if(batch.identity.dimension!==1024)throw new KnowledgeFailure('EMBEDDING_DIMENSION_MISMATCH');
+    if(this.identity&&batch.identity.key!==this.identity.key)throw new KnowledgeFailure('INDEX_MODEL_MISMATCH');
+    this.identity??=batch.identity;
     if(signal.aborted)throw new KnowledgeFailure('EMBEDDING_TIMEOUT');
+    observe?.('PERSIST',request.version);
     await this.prisma.$transaction(async tx=>{
       await tx.$queryRaw(Prisma.sql`SELECT id FROM "Request" WHERE id=${requestId}::uuid FOR SHARE`);
       const current=await tx.request.findUniqueOrThrow({where:{id:requestId}});
+      if(signal.aborted)throw new KnowledgeFailure('KNOWLEDGE_CANCELED');
       if(current.version!==request.version||current.status==='CANCELED')throw new KnowledgeFailure('STALE_CONTEXT');
       await tx.$executeRaw(Prisma.sql`INSERT INTO "RequestEmbedding" (id,"requestId","contextVersion","modelIdentity",dimension,"inputVersion","inputHash","identityJson",embedding)
         VALUES (${randomUUID()}::uuid,${requestId}::uuid,${request.version},${batch.identity.key},${batch.identity.dimension},${input.inputVersion},${input.hash},${JSON.stringify({...batch.identity,inputTruncated:input.truncated})}::jsonb,${JSON.stringify(batch.vectors[0])}::vector)
         ON CONFLICT ("requestId","modelIdentity","contextVersion","inputVersion") DO NOTHING`);
+      if(signal.aborted)throw new KnowledgeFailure('KNOWLEDGE_CANCELED');
     });
     return {identity:batch.identity,contextVersion:request.version};
   }
-  async next(signal:AbortSignal){
-    // One bounded background attempt. A failure pauses backfill until process restart;
-    // explicit recommendation retry still calls index() directly. Never spin on an outage.
-    if(this.backgroundPaused)return;
+  async next(signal:AbortSignal,now?:number){
+    // One candidate per worker tick, with capped backoff for temporary failures.
+    // Identity/schema failures remain blocked and require operator intervention.
+    const asOf=now??Date.now();
+    if(this.busy||this.state==='BLOCKED'||asOf<this.nextRetryAt)return;
+    this.busy=true;
+    this.observation={correlationId:randomUUID(),stage:'PROBE',requestId:null,contextVersion:null,category:null,errorType:null};
     try{
-      if(!this.identity||Date.now()-this.probedAt>60000){this.identity=(await this.embeddings.probe(signal)).identity;this.probedAt=Date.now();}
-      const [r]=await this.prisma.$queryRaw<{id:string}[]>(Prisma.sql`SELECT r.id FROM "Request" r WHERE r.status<>'CANCELED' AND NOT EXISTS (SELECT 1 FROM "RequestEmbedding" e WHERE e."requestId"=r.id AND e."contextVersion"=r.version AND e."inputVersion"=${requestInputVersion} AND e."modelIdentity"=${this.identity.key}) ORDER BY r."updatedAt" DESC,r.id LIMIT 1`);
-      if(r)await this.index(r.id,signal);
-    }catch(error){this.backgroundPaused=true;throw error;}
+      if(signal.aborted)throw new KnowledgeFailure('KNOWLEDGE_CANCELED');
+      if(!this.identity||asOf-this.probedAt>60000){
+        const probed=(await this.embeddings.probe(signal)).identity;
+        if(this.identity&&probed.key!==this.identity.key)throw new KnowledgeFailure('INDEX_MODEL_MISMATCH');
+        if(probed.dimension!==1024)throw new KnowledgeFailure('EMBEDDING_DIMENSION_MISMATCH');
+        this.identity=probed;this.probedAt=asOf;
+      }
+      this.observation.stage='SCAN';
+      // Circular ID order advances even after a stale request. A hot newest
+      // request cannot indefinitely hide older pending requests.
+      const [r]=await this.prisma.$queryRaw<{id:string}[]>(Prisma.sql`SELECT r.id FROM "Request" r WHERE r.status<>'CANCELED' AND NOT EXISTS (SELECT 1 FROM "RequestEmbedding" e WHERE e."requestId"=r.id AND e."contextVersion"=r.version AND e."inputVersion"=${requestInputVersion} AND e."modelIdentity"=${this.identity.key}) ORDER BY CASE WHEN r.id>${this.cursor}::uuid THEN 0 ELSE 1 END,r.id LIMIT 1`);
+      if(r){this.cursor=r.id;this.observation.requestId=r.id;this.observation.stage='READ_REQUEST';}
+      const indexed=r?await this.index(r.id,signal,(stage,version)=>{this.observation!.stage=stage;this.observation!.contextVersion=version;}):undefined;
+      const recovery=this.failureCount?{event:'request.embedding.recovered',...this.observation,previousErrorCode:this.errorCode,failureCount:this.failureCount,...(r?{requestId:r.id,contextVersion:indexed!.contextVersion}:{})}:undefined;
+      this.state='READY';this.failureCount=0;this.errorCode=null;this.nextRetryAt=0;
+      return recovery;
+    }catch(error){
+      const failure=signal.aborted?new KnowledgeFailure(signal.reason?.name==='TimeoutError'?'EMBEDDING_TIMEOUT':'KNOWLEDGE_CANCELED',true):error instanceof KnowledgeFailure?error:isDatabaseUnavailable(error)?new KnowledgeFailure('DATABASE_UNAVAILABLE',true):new KnowledgeFailure('REQUEST_EMBEDDING_UNAVAILABLE');
+      const stale=failure.code==='STALE_CONTEXT',canceled=failure.code==='KNOWLEDGE_CANCELED';
+      const temporary=failure.retryable||failure.code==='EMBEDDING_TIMEOUT';
+      this.observation.category=canceled?'LIFECYCLE':stale?'REQUEST_STALE':temporary?'TRANSIENT':failure.code==='REQUEST_EMBEDDING_UNAVAILABLE'?'UNEXPECTED':'CONFIGURATION';
+      this.observation.errorType=error instanceof KnowledgeFailure?'KnowledgeFailure':isDatabaseUnavailable(error)?'DatabaseError':error instanceof TypeError?'TypeError':error instanceof Error?'Error':'Unknown';
+      this.errorCode=failure.code;this.failureCount++;
+      this.state=canceled?'STOPPED':stale?'READY':temporary?'RETRY_WAIT':'BLOCKED';
+      this.nextRetryAt=!stale&&!canceled&&temporary?(now??Date.now())+Math.min(60000,1000*2**Math.min(this.failureCount-1,6)):0;
+      throw failure;
+    }finally{this.busy=false;}
   }
   async similar(tx:Prisma.TransactionClient,requestId:string,identity:EmbeddingIdentity,timeWindow:number,limit:number,asOf:Date,staffScope?:string){
     const rows=await tx.$queryRaw<(SimilarCase&{cosine:number;vector:number;categoryMatch:number;locationMatch:number;recency:number})[]>(Prisma.sql`

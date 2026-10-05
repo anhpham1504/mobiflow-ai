@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-05T07:25:07.396Z",
+  "result": "PASS",
+  "trackedAndUntrackedFilesScanned": 1739,
+  "bundleFiles": 25,
+  "sourceCoverage": "artifacts/ai-demo-stability/20261005-1138/source-coverage.json",
+  "unchangedCriticalOwners": [
+    "packages/contracts/src/recommendation.ts",
+    "apps/api/src/ai/ollama-provider.ts",
+    "apps/api/src/knowledge/embedding-provider.ts",
+    "apps/api/src/ai/tools/registry.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "packaging": {
+    "loopbackPorts": true,
+    "appNonRoot": true,
+    "readOnly": true,
+    "capDropAll": true,
+    "noNewPrivileges": true,
+    "resourceLimits": true,
+    "noDockerSocket": true
+  },
+  "dynamicEvidence": [
+    "integration-m14.json",
+    "integration-m2.json",
+    "recovery-m2-1.json",
+    "workflows-4/summary.json",
+    "runtime-lifecycle.json"
+  ],
+  "technicalReview": "Agent technical review; no actionable product defect found",
+  "independentHumanReview": "NOT_RUN",
+  "limitations": "Conservative credential and configured-secret scan plus diff/security review, not exhaustive vulnerability proof; developer preservation is a separate unresolved gate.",
+  "findingCount": 0,
+  "findings": []
+}

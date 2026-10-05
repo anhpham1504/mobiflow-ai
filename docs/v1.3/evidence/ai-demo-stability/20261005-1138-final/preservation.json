@@ -1,0 +1,811 @@
+{
+  "initial": {
+    "at": "2026-10-05T07:06:33.832Z",
+    "result": "FAIL",
+    "checks": {
+      "originalFiles": [
+        {
+          "path": ".env",
+          "unchanged": true
+        },
+        {
+          "path": ".playwright-mcp/page-2026-10-05T04-10-47-873Z.yml",
+          "unchanged": true
+        },
+        {
+          "path": ".playwright-mcp/page-2026-10-05T04-11-02-204Z.yml",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261002040000_m21_rule_based_routing/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261003010000_m22_reminder_sla_escalation/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/20261004010000_m23_saved_request_views/migration.sql",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/prisma/migrations/migration_lock.toml",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/analysis-worker.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/operational-ai.service.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/prompts/copilot.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/prompts/recommendation.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/resolution-summary-facts.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/ai/tools/request-vectors.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/http.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/src/requests/request-state-machine.service.ts",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/test/knowledge.test.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/test/operational.test.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/test/recommendation-v2.integration.test.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "apps/api/test/recommendation.integration.test.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "docs/specs/AI_BEHAVIOR_SPEC.md",
+          "unchanged": true
+        },
+        {
+          "path": "docs/specs/RAG_SPEC.md",
+          "unchanged": true
+        },
+        {
+          "path": "docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json",
+          "unchanged": true
+        },
+        {
+          "path": "docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+          "unchanged": true
+        },
+        {
+          "path": "docs/v1.3/M24_DEMO_RUNBOOK.md",
+          "unchanged": true
+        },
+        {
+          "path": "docs/verification/MILESTONE_24_VERIFICATION.md",
+          "unchanged": true
+        },
+        {
+          "path": "package-lock.json",
+          "unchanged": true
+        },
+        {
+          "path": "scripts/evaluation/m15-prompt.test.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+          "unchanged": true
+        },
+        {
+          "path": "scripts/evaluation/m8-summary-evaluate.mjs",
+          "unchanged": true
+        }
+      ],
+      "developer": [
+        {
+          "id": "3cc22fa9e9fefe282bab8b843535ab808373c52a26c2c704a02ef7c62b1b5934",
+          "name": "/mobiflow-ai-postgres-1",
+          "image": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+          "running": false,
+          "identityUnchanged": true,
+          "stateRestored": true,
+          "startedAt": "2026-10-05T07:04:44.19509315Z",
+          "finishedAt": "2026-10-05T07:04:45.585227508Z"
+        },
+        {
+          "id": "b23c01309a4302a7862fe579366aa14e3f0eb0da18beb07f2d84ec6b17de8e45",
+          "name": "/mobiflow-ai-api-1",
+          "image": "sha256:25e9b10d5c952145ec5eac2874a9b41d862a58d71bc02d228dbae72ef262babd",
+          "running": true,
+          "identityUnchanged": true,
+          "stateRestored": true,
+          "startedAt": "2026-10-05T07:05:44.512054927Z",
+          "finishedAt": "2026-10-05T07:04:31.978633827Z"
+        },
+        {
+          "id": "46f101631dfead6dddc41479eaf32cb4853c91e130b20ad1d6dc4cfb085d0fbd",
+          "name": "/mobiflow-ai-web-1",
+          "image": "sha256:9237aeb31f97453e0d4d67df90f667d7d833309dbfca4ac8d0ff2260c11cf482",
+          "running": true,
+          "identityUnchanged": true,
+          "stateRestored": true,
+          "startedAt": "2026-10-05T07:05:45.091266248Z",
+          "finishedAt": "2026-10-05T07:04:31.985606846Z"
+        }
+      ],
+      "developerVolume": {
+        "name": "mobiflow-ai_postgres_data",
+        "baselineHash": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+        "actualHash": "8375a84c8e36392a52f1b59d5beeb333fdb1e8cb82302138c432d3cdb642f71a",
+        "unchanged": false
+      },
+      "originalEnvUnchanged": true,
+      "tagsUnchanged": true,
+      "mainUnchanged": true,
+      "migrations": [
+        {
+          "name": "202609280001_enable_vector",
+          "unchanged": true
+        },
+        {
+          "name": "20260928085048_m2_domain_auth",
+          "unchanged": true
+        },
+        {
+          "name": "20260928092000_m2_public_code_sequence",
+          "unchanged": true
+        },
+        {
+          "name": "20260928145100_m5_knowledge_vectors",
+          "unchanged": true
+        },
+        {
+          "name": "20260929034000_m6_request_embeddings",
+          "unchanged": true
+        },
+        {
+          "name": "20260929043000_m6_request_cosine_index",
+          "unchanged": true
+        },
+        {
+          "name": "20260930010000_m14_advisory_confidence",
+          "unchanged": true
+        },
+        {
+          "name": "20261002010000_m18_internal_notes",
+          "unchanged": true
+        },
+        {
+          "name": "20261002020000_m19_mentions_watchers",
+          "unchanged": true
+        },
+        {
+          "name": "20261002030000_m20_response_checklist_templates",
+          "unchanged": true
+        },
+        {
+          "name": "20261002040000_m21_rule_based_routing",
+          "unchanged": true
+        },
+        {
+          "name": "20261003010000_m22_reminder_sla_escalation",
+          "unchanged": true
+        },
+        {
+          "name": "20261004010000_m23_saved_request_views",
+          "unchanged": true
+        }
+      ]
+    },
+    "limitations": "Container processes were stopped during the interrupted environment session and restored by exact identity; no developer DB start/reset/reseed command was issued by this repair."
+  },
+  "later": [
+    {
+      "name": "preservation-check-2.json",
+      "record": {
+        "at": "2026-10-05T07:30:05.337Z",
+        "result": "FAIL",
+        "checks": {
+          "originalFiles": [
+            {
+              "path": ".env",
+              "unchanged": true
+            },
+            {
+              "path": ".playwright-mcp/page-2026-10-05T04-10-47-873Z.yml",
+              "unchanged": true
+            },
+            {
+              "path": ".playwright-mcp/page-2026-10-05T04-11-02-204Z.yml",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002040000_m21_rule_based_routing/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261003010000_m22_reminder_sla_escalation/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261004010000_m23_saved_request_views/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/migration_lock.toml",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/analysis-worker.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/operational-ai.service.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/prompts/copilot.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/prompts/recommendation.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/resolution-summary-facts.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/tools/request-vectors.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/http.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/requests/request-state-machine.service.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/knowledge.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/operational.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/recommendation-v2.integration.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/recommendation.integration.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "docs/specs/AI_BEHAVIOR_SPEC.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/specs/RAG_SPEC.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/M24_DEMO_RUNBOOK.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/verification/MILESTONE_24_VERIFICATION.md",
+              "unchanged": true
+            },
+            {
+              "path": "package-lock.json",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m15-prompt.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m8-summary-evaluate.mjs",
+              "unchanged": true
+            }
+          ],
+          "developer": [
+            {
+              "id": "3cc22fa9e9fefe282bab8b843535ab808373c52a26c2c704a02ef7c62b1b5934",
+              "name": "/mobiflow-ai-postgres-1",
+              "image": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+              "running": false,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:04:44.19509315Z",
+              "finishedAt": "2026-10-05T07:04:45.585227508Z"
+            },
+            {
+              "id": "b23c01309a4302a7862fe579366aa14e3f0eb0da18beb07f2d84ec6b17de8e45",
+              "name": "/mobiflow-ai-api-1",
+              "image": "sha256:25e9b10d5c952145ec5eac2874a9b41d862a58d71bc02d228dbae72ef262babd",
+              "running": true,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:05:44.512054927Z",
+              "finishedAt": "2026-10-05T07:04:31.978633827Z"
+            },
+            {
+              "id": "46f101631dfead6dddc41479eaf32cb4853c91e130b20ad1d6dc4cfb085d0fbd",
+              "name": "/mobiflow-ai-web-1",
+              "image": "sha256:9237aeb31f97453e0d4d67df90f667d7d833309dbfca4ac8d0ff2260c11cf482",
+              "running": true,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:05:45.091266248Z",
+              "finishedAt": "2026-10-05T07:04:31.985606846Z"
+            }
+          ],
+          "developerVolume": {
+            "name": "mobiflow-ai_postgres_data",
+            "baselineHash": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+            "actualHash": "8375a84c8e36392a52f1b59d5beeb333fdb1e8cb82302138c432d3cdb642f71a",
+            "unchanged": false
+          },
+          "originalEnvUnchanged": true,
+          "tagsUnchanged": true,
+          "mainUnchanged": true,
+          "migrations": [
+            {
+              "name": "202609280001_enable_vector",
+              "unchanged": true
+            },
+            {
+              "name": "20260928085048_m2_domain_auth",
+              "unchanged": true
+            },
+            {
+              "name": "20260928092000_m2_public_code_sequence",
+              "unchanged": true
+            },
+            {
+              "name": "20260928145100_m5_knowledge_vectors",
+              "unchanged": true
+            },
+            {
+              "name": "20260929034000_m6_request_embeddings",
+              "unchanged": true
+            },
+            {
+              "name": "20260929043000_m6_request_cosine_index",
+              "unchanged": true
+            },
+            {
+              "name": "20260930010000_m14_advisory_confidence",
+              "unchanged": true
+            },
+            {
+              "name": "20261002010000_m18_internal_notes",
+              "unchanged": true
+            },
+            {
+              "name": "20261002020000_m19_mentions_watchers",
+              "unchanged": true
+            },
+            {
+              "name": "20261002030000_m20_response_checklist_templates",
+              "unchanged": true
+            },
+            {
+              "name": "20261002040000_m21_rule_based_routing",
+              "unchanged": true
+            },
+            {
+              "name": "20261003010000_m22_reminder_sla_escalation",
+              "unchanged": true
+            },
+            {
+              "name": "20261004010000_m23_saved_request_views",
+              "unchanged": true
+            }
+          ]
+        },
+        "limitations": "Container processes were stopped during the interrupted environment session and restored by exact identity; no developer DB start/reset/reseed command was issued by this repair."
+      }
+    },
+    {
+      "name": "preservation-check-3.json",
+      "record": {
+        "at": "2026-10-05T07:39:41.223Z",
+        "result": "FAIL",
+        "checks": {
+          "originalFiles": [
+            {
+              "path": ".env",
+              "unchanged": true
+            },
+            {
+              "path": ".playwright-mcp/page-2026-10-05T04-10-47-873Z.yml",
+              "unchanged": true
+            },
+            {
+              "path": ".playwright-mcp/page-2026-10-05T04-11-02-204Z.yml",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/202609280001_enable_vector/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928085048_m2_domain_auth/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928092000_m2_public_code_sequence/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260928145100_m5_knowledge_vectors/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260929034000_m6_request_embeddings/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260929043000_m6_request_cosine_index/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20260930010000_m14_advisory_confidence/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002010000_m18_internal_notes/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002020000_m19_mentions_watchers/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002030000_m20_response_checklist_templates/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261002040000_m21_rule_based_routing/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261003010000_m22_reminder_sla_escalation/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/20261004010000_m23_saved_request_views/migration.sql",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/prisma/migrations/migration_lock.toml",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/analysis-worker.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/operational-ai.service.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/prompts/copilot.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/prompts/recommendation.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/resolution-summary-facts.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/ai/tools/request-vectors.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/http.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/src/requests/request-state-machine.service.ts",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/knowledge.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/operational.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/recommendation-v2.integration.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "apps/api/test/recommendation.integration.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "docs/specs/AI_BEHAVIOR_SPEC.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/specs/RAG_SPEC.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/v1.3/M24_DEMO_RUNBOOK.md",
+              "unchanged": true
+            },
+            {
+              "path": "docs/verification/MILESTONE_24_VERIFICATION.md",
+              "unchanged": true
+            },
+            {
+              "path": "package-lock.json",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m15-prompt.test.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+              "unchanged": true
+            },
+            {
+              "path": "scripts/evaluation/m8-summary-evaluate.mjs",
+              "unchanged": true
+            }
+          ],
+          "developer": [
+            {
+              "id": "3cc22fa9e9fefe282bab8b843535ab808373c52a26c2c704a02ef7c62b1b5934",
+              "name": "/mobiflow-ai-postgres-1",
+              "image": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+              "running": false,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:04:44.19509315Z",
+              "finishedAt": "2026-10-05T07:04:45.585227508Z"
+            },
+            {
+              "id": "b23c01309a4302a7862fe579366aa14e3f0eb0da18beb07f2d84ec6b17de8e45",
+              "name": "/mobiflow-ai-api-1",
+              "image": "sha256:25e9b10d5c952145ec5eac2874a9b41d862a58d71bc02d228dbae72ef262babd",
+              "running": true,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:05:44.512054927Z",
+              "finishedAt": "2026-10-05T07:04:31.978633827Z"
+            },
+            {
+              "id": "46f101631dfead6dddc41479eaf32cb4853c91e130b20ad1d6dc4cfb085d0fbd",
+              "name": "/mobiflow-ai-web-1",
+              "image": "sha256:9237aeb31f97453e0d4d67df90f667d7d833309dbfca4ac8d0ff2260c11cf482",
+              "running": true,
+              "identityUnchanged": true,
+              "stateRestored": true,
+              "startedAt": "2026-10-05T07:05:45.091266248Z",
+              "finishedAt": "2026-10-05T07:04:31.985606846Z"
+            }
+          ],
+          "developerVolume": {
+            "name": "mobiflow-ai_postgres_data",
+            "baselineHash": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+            "actualHash": "8375a84c8e36392a52f1b59d5beeb333fdb1e8cb82302138c432d3cdb642f71a",
+            "unchanged": false
+          },
+          "originalEnvUnchanged": true,
+          "tagsUnchanged": true,
+          "mainUnchanged": true,
+          "migrations": [
+            {
+              "name": "202609280001_enable_vector",
+              "unchanged": true
+            },
+            {
+              "name": "20260928085048_m2_domain_auth",
+              "unchanged": true
+            },
+            {
+              "name": "20260928092000_m2_public_code_sequence",
+              "unchanged": true
+            },
+            {
+              "name": "20260928145100_m5_knowledge_vectors",
+              "unchanged": true
+            },
+            {
+              "name": "20260929034000_m6_request_embeddings",
+              "unchanged": true
+            },
+            {
+              "name": "20260929043000_m6_request_cosine_index",
+              "unchanged": true
+            },
+            {
+              "name": "20260930010000_m14_advisory_confidence",
+              "unchanged": true
+            },
+            {
+              "name": "20261002010000_m18_internal_notes",
+              "unchanged": true
+            },
+            {
+              "name": "20261002020000_m19_mentions_watchers",
+              "unchanged": true
+            },
+            {
+              "name": "20261002030000_m20_response_checklist_templates",
+              "unchanged": true
+            },
+            {
+              "name": "20261002040000_m21_rule_based_routing",
+              "unchanged": true
+            },
+            {
+              "name": "20261003010000_m22_reminder_sla_escalation",
+              "unchanged": true
+            },
+            {
+              "name": "20261004010000_m23_saved_request_views",
+              "unchanged": true
+            }
+          ]
+        },
+        "limitations": "Container processes were stopped during the interrupted environment session and restored by exact identity; no developer DB start/reset/reseed command was issued by this repair."
+      }
+    }
+  ],
+  "storageInvestigation": {
+    "record": {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-storage-impact.json",
+      "sha256": "3baa04c1e09118b69cc1cc7ac23ce9cfeb78009dfd516e71f8b27a39fc003a3c",
+      "bytes": 10963
+    },
+    "privacy": "Raw offline control data and nonce are private; only the artifact locator/hash is published."
+  },
+  "interpretation": "Preservation observations are retained exactly as recorded, including FAIL. Root determines blocker/gate impact; this exporter does not close the checkpoint."
+}

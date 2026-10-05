@@ -1,0 +1,718 @@
+{
+  "at": "2026-10-05T07:46:44.490Z",
+  "kind": "IMMUTABLE_SANITIZED_SNAPSHOT",
+  "privateRoot": "artifacts/ai-demo-stability/20261005-1138",
+  "publicRoot": "docs/v1.3/evidence/ai-demo-stability/20261005-1138-final",
+  "inputRecords": [
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T07-00-22-273Z-2bdc6b4a-8e8b-4de3-b393-1bc2ddaa0273/manifest.json",
+      "sha256": "aaa98211025c7b468cef42de45a7c44e71e2f1d015505fb9fc5c21dec340f60f",
+      "bytes": 14522
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T07-00-22-273Z-2bdc6b4a-8e8b-4de3-b393-1bc2ddaa0273/details.jsonl",
+      "sha256": "3787009cd8f436299c681986de3f2921815428f80269ad7819a3026c7492df5f",
+      "bytes": 1967691
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T07-00-22-273Z-2bdc6b4a-8e8b-4de3-b393-1bc2ddaa0273/summary.json",
+      "sha256": "d160ad36ea35d7783c2ea013a056ed616790c892dea57fd11e3c7be45faef6d0",
+      "bytes": 29188
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-evaluation-attempt3.json",
+      "sha256": "53207f971aec014b9f903e23cfecea5454ab5827948eb6220d7b5b09a0b91b20",
+      "bytes": 49386
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-evaluation-attempt3.log",
+      "sha256": "5eede17aba0172b005c87bed0cfd7c5819c07fdeb7b240b2cf75fba1a5487077",
+      "bytes": 18672
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-source-reconciliation.json",
+      "sha256": "b461a306c2d42a376d7303bb3b95bb05271f3b221ce45da1a0db2ba72cd4b5a6",
+      "bytes": 3178
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-live-2/manifest.json",
+      "sha256": "a44f75401be8f294ada7721f580b008e933318a994be034f9d5a1a3f1c6ea091",
+      "bytes": 68490
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-live-2/results.jsonl",
+      "sha256": "a4e3429b8398528ad42ac7103e0896ed6a699462fd37a40a404d3067bb3dd4cf",
+      "bytes": 270167
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-live-2/summary.json",
+      "sha256": "d8aa7274fd29b8a1b4ff9df9ad933eec9861a9e9852e6b536a698fd9e0971794",
+      "bytes": 1305
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/manifest.json",
+      "sha256": "977be49fd084935a91b2b66e322f051a2804f463438176061e59e67cd273114f",
+      "bytes": 4739
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/summary.json",
+      "sha256": "b25440909222ba653c6b6765be702405030f2b386c7350e44917304c7427fa12",
+      "bytes": 25905
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/FLOW-1.json",
+      "sha256": "64f79f1f4b82287cd28e8f10e27a43fe73a4f7ff1460e75d4dce1bfe30531bb0",
+      "bytes": 45540
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/FLOW-2.json",
+      "sha256": "0380ed8e20894e72ec5b09e9dbf23ac5b6f7134a49741e85c290155b57118f1c",
+      "bytes": 48116
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/FLOW-3.json",
+      "sha256": "17da3dbebd457198ecffcfad440a5c40d5e9a3c75ec353c015dcde38026b8757",
+      "bytes": 49326
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/FLOW-4.json",
+      "sha256": "116567b82fa6361674fec8c1cf23e7218c96066dcbe877f07ecba151153eb538",
+      "bytes": 51009
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/FLOW-5.json",
+      "sha256": "bc8e634c81ec7a6e6b1416d17ef5c7e80ffa6dcff82a7bc95a08094c31edd907",
+      "bytes": 51602
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-4/http.jsonl",
+      "sha256": "98b321076341c08d739e7d12aace6317d2374ac736dce7fce8f15662eab29e23",
+      "bytes": 118296
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/source-coverage.json",
+      "sha256": "1c57104464f7ea97a808c231900d1551cd47ec1e2315eee949025bed45ad7a49",
+      "bytes": 86226
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/security-privacy.json",
+      "sha256": "842ef50e1f74bbf0ec1f45a46c16bf35956dc7b0142ab719a06e8746cfa3bfd8",
+      "bytes": 1173
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check.json",
+      "sha256": "6e852e61a80ada4e863920b014da6b0bb7fee2ced5f054154c642c72e62b424b",
+      "bytes": 7864
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint-attempt3.json",
+      "sha256": "d56c5e1ed5db3233c8ab45e25e1e8ed824d4093494052b668bd6d82550d12e16",
+      "bytes": 49294
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint-attempt3.log",
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "bytes": 55
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/typecheck-attempt2.json",
+      "sha256": "4dacb2fb047d0fadecf0e7b39b1180bf5a30ad1b58f3b718ebf1360fbe2ce107",
+      "bytes": 49304
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/typecheck-attempt2.log",
+      "sha256": "6d27d057ea773598ee073a7b315a04609077f0a7035713043c92336af212c2ae",
+      "bytes": 1712
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test-attempt2.json",
+      "sha256": "48d474a98c94bee3178195bfb6c73f34da6a28043be456a2787ff997451310b0",
+      "bytes": 49294
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test-attempt2.log",
+      "sha256": "3439cb3470c1f1133040b84f01972d4c34b75bd6debdf76fd26c9f194d45f2a2",
+      "bytes": 26330
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-build.json",
+      "sha256": "538df960fceb0dcf1d184f10f349e522d1b4bace7d8ddc8d27e9c3259a54add2",
+      "bytes": 260
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-build.log",
+      "sha256": "7234e0ca405aa871caa57b9e3152f43c044276629ebe6fcc867a79cfaeb1cfe0",
+      "bytes": 2921
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m14.json",
+      "sha256": "398f2ce4f736fd00f155bdaaadbee12b66bd8c6f2fd11e2aeebd07a0af0ebd6c",
+      "bytes": 706
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m14.log",
+      "sha256": "8393433bc331f2cb393c577df9ccd4f830326d350df9712b6f140674e07795cc",
+      "bytes": 2750
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m2.json",
+      "sha256": "534f05359cd85217461ef96cc04b4e51a1f6d6d5a308134b6db6c125cb3d6919",
+      "bytes": 779
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m2.log",
+      "sha256": "aaa33c36a0d20642a2b6072c5e28dfc03a39020d701916d83c4d45549499e8da",
+      "bytes": 386
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recovery-m2-1.json",
+      "sha256": "70146bacd9ddbfb7af64c5122345ee9ab768157c81d82a293c77de4c8420d476",
+      "bytes": 697
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recovery-m2-1.log",
+      "sha256": "b8defbc3bb39d58a1443039e517be31f098933197566e215dbc1eb5491f22fe5",
+      "bytes": 1152
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-build.json",
+      "sha256": "6c7b225452b44dfce7907a089166deeaafa60070c27b6bc8116798a24f18b626",
+      "bytes": 49286
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-final-2.json",
+      "sha256": "8cc69c5811d643a3c25eac35d91d77346fd87ae53453c06d5989e9b79a916e95",
+      "bytes": 178
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-final.json",
+      "sha256": "d7c6531df7cf0424cdeb068e36191a57ed24bce98b91c3586d531e41ef53126f",
+      "bytes": 178
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/compose-config.json",
+      "sha256": "1168afffadd65d0b6684b2ebac036d0e4a67c9953397073442502b54dbeba3ba",
+      "bytes": 49351
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/database-migrate-seed.json",
+      "sha256": "6a31e5163e390095e1863cea0e000ee7cd6a97c14c33fe7f5aa59d82ac28cf2a",
+      "bytes": 49624
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/database-start.json",
+      "sha256": "6ebdd9930737ed1afc2a4d6a3c456ce872158d78d6787a1b038c5caa2272f0f6",
+      "bytes": 49373
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-lint-2.json",
+      "sha256": "be74ddcb73972953cc84f1612dfb66ad6914e514183e4e64d0bc73f40f0f5a17",
+      "bytes": 94
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-lint.json",
+      "sha256": "b3966a3c85852f5acf464d445b048a69c48db25fd9cc597155b895c32e85d162",
+      "bytes": 94
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-observation-attempt1.json",
+      "sha256": "a27015ca822c984b21c4fd7977c9f3a17227eeec05f74d038dc72ea19232b616",
+      "bytes": 478
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-test.json",
+      "sha256": "a966d3407521c4f85ea8b365d77c6017da0efa7dc72b6dce7a89eb1e9908405c",
+      "bytes": 168
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-typecheck.json",
+      "sha256": "bbeba0cbd1c73f35b5f99b223ea1d41e4d2f1ef7e7b751415de96b207caa48d6",
+      "bytes": 177
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint-attempt2.json",
+      "sha256": "0007371c619d26d305a317469b8c70a6fecba60159de9c96e9d383299a7f6d7e",
+      "bytes": 49294
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint.json",
+      "sha256": "cf80954271a2b454bcb3b2b23cbfbbedfaa5471cc28c03ea89b4d57c8c183106",
+      "bytes": 49285
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m14-migrations.json",
+      "sha256": "6c867ae5e37b1979886f6eb03d20e79852c1d4c1f2fcb61f135ad19f844947c2",
+      "bytes": 496
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m14-seed.json",
+      "sha256": "ca4cf8bce70b4cf9c3b5358664b755478102875530a78b3b607e44202aa492aa",
+      "bytes": 472
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m2-migrations.json",
+      "sha256": "c7f317e0254d1baee3a5b1fd4c8974a5abcbcd3db52d695356deba4f7d215751",
+      "bytes": 494
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m2-seed.json",
+      "sha256": "bafd05ed8442f03c8a97b99293985b116e4bfd6a8d6a8a42c1f141ec4ceaa7f3",
+      "bytes": 457
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m8-copilot-command.json",
+      "sha256": "6eb72cf05646cd923f03bf5733b8fe1366c9a642d03bfdb1e53a4adde2192df6",
+      "bytes": 234
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m8-summary-command.json",
+      "sha256": "9bd8624b0bb492bd909b64ec40b2dbe717c57b7b0eadb8b5ede9dc37d3afd022",
+      "bytes": 290
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/production-build.json",
+      "sha256": "24db209e55d5577429a06b1d197fd45857da74c6cd1537cada752823f41f47f7",
+      "bytes": 49361
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recovery-m2.json",
+      "sha256": "36b8a00f26e53565b5946feec4c47c83f9b1c2729ea7aa73d4e627c93529542a",
+      "bytes": 695
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-handoff-command.json",
+      "sha256": "e0ce4496cce1253fd473554942bcdf52024a4cf5c5a95b1b1397c6d82f3663a3",
+      "bytes": 438
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-handoff.json",
+      "sha256": "402f765be39cb8fb1950e2e3a0be9abee67342ba154ea90ecf5a47007f9a8406",
+      "bytes": 5921
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-lifecycle-command.json",
+      "sha256": "ccc12ea5d990efc387cc444d766e94fd894cada6a8f67bd9c228f07edac9682f",
+      "bytes": 191
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-lifecycle.json",
+      "sha256": "b6454055a9347afee1f5c3a14960d75433ebd21b5b69b97f0a8e5df7b91aabb4",
+      "bytes": 6522
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-start-attempt2.json",
+      "sha256": "e72f2d473e263f7cc9f77b76e7fe177ffeea9cdbf193f4d503603bf81e8d46de",
+      "bytes": 49388
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-start.json",
+      "sha256": "eba86069c5b6347fe9d8394f875f78c70fe251f319fe14c021476ee23793b3ee",
+      "bytes": 49378
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/source-security-command-2.json",
+      "sha256": "fbe074988a735c47c0e5b420318c23cbb8e1366bd93fc3f0e16b0933ad002589",
+      "bytes": 148
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/source-security-command.json",
+      "sha256": "a5446e36ff2d6557b2866aae9b2631be343b45902ebd171f38805ef33d52a4e8",
+      "bytes": 148
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test-targets.json",
+      "sha256": "60269ce51e74e1ddfcc559f93471b820088a3a54e33cb4e56312186d6f962566",
+      "bytes": 261
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test.json",
+      "sha256": "1de57b40a31f32cc4d763844410db07a4197a046e497dfd9a784c8287e0dbe59",
+      "bytes": 49285
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/typecheck.json",
+      "sha256": "bab51932327e6f356a33b31efab14178461127833f684d6349cb4543b2e43f01",
+      "bytes": 49295
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-build.log",
+      "sha256": "c0695fef045b4e451b281a556d5babb0381a7db4cfba4d99afcee0394d3af97f",
+      "bytes": 2683
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-final-2.log",
+      "sha256": "4a0aea20a3a8e4fa87bfc95b81de4ee94cab36bcb2c1e5a4d170b5398bbeec11",
+      "bytes": 3863
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/builder-final.log",
+      "sha256": "b63787ccc2bad84dd13c1279ebcc8f06d41ba9da0b995af66cb2cb21d6fc8884",
+      "bytes": 3859
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/compose-config.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/database-migrate-seed.log",
+      "sha256": "0b33e908adb062c8d4aba9885b16a449852c6bbf9b9ea974f0b1583381717c54",
+      "bytes": 3335
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/database-start.log",
+      "sha256": "d0f7ebb00e65fb1d37f9ef02ea9471e8b4ce50e41ec576ecdb860ed257301a3c",
+      "bytes": 614
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-lint-2.log",
+      "sha256": "4da282b8194a6d996bf7806da15ae4c7baf4e6a345064680925f080eecae9561",
+      "bytes": 59
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-lint.log",
+      "sha256": "d4ccabac50f43e5ccc5c3faac4d9605d20ce20fe067e4512721c411c165e16b4",
+      "bytes": 281
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-test.log",
+      "sha256": "3dc6c0f4ae4bcd59efceaf014c6a538bcbedd9f9a894236139467899f7b6a02c",
+      "bytes": 20563
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/final-typecheck.log",
+      "sha256": "6e257aba8f0e6e3b5dd6e6fb8a4874b090ea911546e6be2b7fa9d441dc3f8734",
+      "bytes": 1758
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint-attempt2.log",
+      "sha256": "1b3c0c6139792946dc1bf5d48d02182ea2b24653e844516c328aaf99cbbc3a66",
+      "bytes": 210
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/lint.log",
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "bytes": 55
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m14-migrations.log",
+      "sha256": "35521467e8761134e96fd31155399a6c0462e4fcce4f2ab91a4d857a8f3d536f",
+      "bytes": 2915
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m14-seed.log",
+      "sha256": "612eeb9d3c38a3b7bf1539470b3a41a6c58c68f2e35433241169b224e3ada308",
+      "bytes": 186
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m2-migrations.log",
+      "sha256": "0307099d18e468a3d08744fd6da94722582181770a62594d6bfd81cbf8a13f05",
+      "bytes": 2914
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m2-seed.log",
+      "sha256": "8ef4bda216fc2397e0e685560fc735ae6c410ae35142881e2e579dff1466b09f",
+      "bytes": 185
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/production-build.log",
+      "sha256": "ff45fcfc93f336479039a682ed8148c3966cb295f194cdfd1b34b267e93126d6",
+      "bytes": 87820
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recovery-m2.log",
+      "sha256": "386dea206861bcd070e84625c64061d261c3a8c0ebb9a959f9f9c4fde1cef737",
+      "bytes": 1030
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-handoff-command.log",
+      "sha256": "747f584ac71d0468dcbc1074a7ead835799195e111105b71f4b7abc188c43377",
+      "bytes": 167
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-start-attempt2.log",
+      "sha256": "3589355f715ab08593366085f31a1e7ee66e2cb87d5d0b11ba91c78a43702e9c",
+      "bytes": 831
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/runtime-start.log",
+      "sha256": "6e9f2b03b4adf95aa468e9b44ba43371a44d9c2f18267edf21b9c82492a5e8e3",
+      "bytes": 1125
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test.log",
+      "sha256": "379ffc7ab0a20684e7d21b46127b2d8d04c52f7fc8fcf3f982f231c5640d5722",
+      "bytes": 20329
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/typecheck.log",
+      "sha256": "149fdd55e163df97b91257916805445a6f74bd747638893a69701feeb9c2048e",
+      "bytes": 1712
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-retry.log",
+      "sha256": "8d1a1879dfdfefed10684e5f69c7723392c5d2f3a7f661d975c3e1819ff562eb",
+      "bytes": 190
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/ingest-attempt2.log",
+      "sha256": "6dd767d1fc0d5766851204ba543bcc46140c12159aed31138d2a18eb5c330313",
+      "bytes": 855
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/ingest-attempt3.log",
+      "sha256": "7693fb99eb30a616efb8b9ae5d9a3678cfe89fd395448333ebb744b30c543d2b",
+      "bytes": 4894
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/ingest.log",
+      "sha256": "c34eec997327f17818b327b0a70e7109005f0106f674fb744d48a5d63ef6cf2e",
+      "bytes": 1249
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-evaluation-attempt2.log",
+      "sha256": "e10f14a51e38e1123c518550a4efb353247f264ca16e7b9aee6ed1224cfd1461",
+      "bytes": 3710
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-evaluation.log",
+      "sha256": "ab4243c255714cc537224819c678d5a04cfb4e496e2381e71914bcb233cf3c37",
+      "bytes": 3277
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recommendation-unit.log",
+      "sha256": "a5c94efa81a33447dfa7a83086baef3b356e0ca90c464e9f0b20c95b17c48c93",
+      "bytes": 1085
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-api-unit-correct-cwd.log",
+      "sha256": "5ee690c82caaaab3d291e02ad51fe70ff301fceddc285b7107fd1c6be9491546",
+      "bytes": 2263
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-unit.log",
+      "sha256": "33b02d294e441eb4726f79e3379042221f7d223b9feccf71173f6e4d7dbfa222",
+      "bytes": 4155
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test-after-builds.log",
+      "sha256": "b7123e559d927e8c9e69dac71539b6a55a5b8741c494fd766ef9be7d3e9b5e7f",
+      "bytes": 26644
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T04-41-22-825Z-73e7716c-ae20-4561-aa07-25f5efda92dd/manifest.json",
+      "sha256": "0e1b28716686660af6298626d6ec1068de1ed9d64b714b6f08832ca70d2240ff",
+      "bytes": 14520
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T04-41-22-825Z-73e7716c-ae20-4561-aa07-25f5efda92dd/details.jsonl",
+      "sha256": "94b099ea74ac7d02818102b73f797708c507a3d94f81efc9b349781dcb0a3069",
+      "bytes": 352741
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T04-51-01-365Z-00a92e90-1d22-4596-9578-34ffdce3845a/manifest.json",
+      "sha256": "71cd4df1594aea903e087c4c0a9d83244cdd319fe8041d1657d6f1c599b65a76",
+      "bytes": 14521
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15/2026-10-05T04-51-01-365Z-00a92e90-1d22-4596-9578-34ffdce3845a/details.jsonl",
+      "sha256": "f28597082756e239c1df05edbf796b154abb72147c31b5ad27baea48ce868a60",
+      "bytes": 399087
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-complete/2026-10-05T04-50-08-918Z-5d481a7f-9bcd-4229-b09d-0b3f67702899/manifest.json",
+      "sha256": "a687f0a76ad2fde4b646e0fe8c5b33be7a85a5acd1d6b27f62d66f7fad339b77",
+      "bytes": 1843
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-complete/2026-10-05T04-50-08-918Z-5d481a7f-9bcd-4229-b09d-0b3f67702899/details.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m15-complete/2026-10-05T04-50-08-918Z-5d481a7f-9bcd-4229-b09d-0b3f67702899/summary.json",
+      "sha256": "8a07e450f65caa63b6f8e30a98dc5271b92acc543ba6b3df3bd1ed51a94b1f52",
+      "bytes": 8258
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-live-1/manifest.json",
+      "sha256": "02f0a3c913e6559b0f0c2ffc6be2b945e51366ec769138419ffd5cb382103017",
+      "bytes": 68490
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/targeted-live-1/results.jsonl",
+      "sha256": "752b4bebfd7b7f07e731e2b62e3156eec9598d6d604e159759fcafb575b849d3",
+      "bytes": 113045
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-1/manifest.json",
+      "sha256": "64ad7809fb95e9ebd89c125995670a39d3073ff4860083380ebf0f410cc17abb",
+      "bytes": 4739
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-1/FLOW-1.json",
+      "sha256": "8ecaabf064da4d7c58ee82e56ed24ba779c8ce4e4566ccde88e48d0e15859a79",
+      "bytes": 43038
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-1/FLOW-2.json",
+      "sha256": "d46a77e14ea094a16fb7c9d8ea17a0fd70ed0017fc7df4299280f48abadb4cdf",
+      "bytes": 44497
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-1/http.jsonl",
+      "sha256": "7ca2e12fc8cc71e781d8ec575dcd2e520e27373dbbdb20769cd1df48aa80504c",
+      "bytes": 43333
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-2/manifest.json",
+      "sha256": "a610020ef602fbbd0189ea77237ca3af890e75677f12af933a0288647270efea",
+      "bytes": 4739
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-2/http.jsonl",
+      "sha256": "fe874e4ee687e70b35a3d45857bb7bd31cba7cdefae7bb1e38d6043ac7106813",
+      "bytes": 16329
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/workflows-3/manifest.json",
+      "sha256": "bde6dc31775de485a61a0497528fc30530a6e63bc3aa75254b06fcf400c730a8",
+      "bytes": 4739
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/corpus.json",
+      "sha256": "6ffb1ba959ca2fb918d508c6dee97e4edb9f3a06a5d5b29c8a743f358fd05228",
+      "bytes": 580
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/corpus-retry.json",
+      "sha256": "69b65c8b5ec7864948b8bb62d5d3f95d1a0befdf7b78f399d95f8e134911b1f3",
+      "bytes": 6471
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m8-summary-1/M8_SUMMARY_EVAL.json",
+      "sha256": "bc2049fa031d4eac0035bbc30b7057e23cc6a14266db6a892ed4bb410c1adc15",
+      "bytes": 1302
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/m8-copilot-1/M8_COPILOT_EVAL.json",
+      "sha256": "1a40caa27661754c9b27dbb50e899e350280fba8d8854b9d6e863856669aa5fc",
+      "bytes": 7628
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-retry-2.log",
+      "sha256": "5c8284e2870beda717038cd017574063af7864568cbf314764333386c1854396",
+      "bytes": 2452
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-user-check.log",
+      "sha256": "0a469d44bd82d412d25c4f518631ce667ccaa28fbfb33629af027b1d3742cec7",
+      "bytes": 746
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-final-logout.log",
+      "sha256": "20ee8367b3fafe6d4febefceb0b4409f8513c2ff3c3eda71da85760d8b360091",
+      "bytes": 412
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-requests-5.log",
+      "sha256": "2f755a579162e999acc82a4987e53caa3ba4603ba12bbe1712dc30704e7f6c51",
+      "bytes": 85403
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-1.log",
+      "sha256": "0187c4773aa8604a59cdb138f09abaf1d5f3ea030445893af5328685e564a1b4",
+      "bytes": 184
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-2.log",
+      "sha256": "ec479a1783c48faabafba16de0fd927b74197861b09a1030c8a7c91be1de20a8",
+      "bytes": 46
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/browser-console-3.log",
+      "sha256": "0187c4773aa8604a59cdb138f09abaf1d5f3ea030445893af5328685e564a1b4",
+      "bytes": 184
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/git-handoff.json",
+      "sha256": "807bac869be3d11a5fe545418e7b090f5debd43e7199e5c9383dc7734e9194bc",
+      "bytes": 1925
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-storage-impact.json",
+      "sha256": "3baa04c1e09118b69cc1cc7ac23ce9cfeb78009dfd516e71f8b27a39fc003a3c",
+      "bytes": 10963
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check-2.json",
+      "sha256": "e9fac59a07230ae08cc634bca0ca81189f4a4c63207a20a0ec3192089a55f8e9",
+      "bytes": 7864
+    },
+    {
+      "privateLocator": "artifacts/ai-demo-stability/20261005-1138/preservation-check-3.json",
+      "sha256": "e95efff763abcf3c9883f3be08beb97dfcd3e4836e359b921ef40343aa6deb2e",
+      "bytes": 7864
+    }
+  ],
+  "outputRecords": [
+    {
+      "path": "source-coverage.json",
+      "sha256": "1c57104464f7ea97a808c231900d1551cd47ec1e2315eee949025bed45ad7a49",
+      "bytes": 86226
+    },
+    {
+      "path": "security-privacy.json",
+      "sha256": "89b2703a10ff73f475d8f97c97e56189214aa423b5605b1eddca5d81de5cec7b",
+      "bytes": 1194
+    },
+    {
+      "path": "preservation.json",
+      "sha256": "4afad6d478906d5d2fdf2e6079dd21572d521d8bbd06b101d94ed4fada8c4916",
+      "bytes": 28006
+    },
+    {
+      "path": "technical-gates.json",
+      "sha256": "77c7954433e6dfac379b24491ca6d1e32fccda5b71c664e65ac3ffbd9e52a1bd",
+      "bytes": 159841
+    },
+    {
+      "path": "recommendation-evaluation.json",
+      "sha256": "0b48305a78a9a294b0f019d6d66e9b30e042ae32526b367c604f12c46971f8ed",
+      "bytes": 1167670
+    },
+    {
+      "path": "targeted-regression.json",
+      "sha256": "e4057407e9d10d48925a71be1bdf86c0dd2c8c63f2ee2e733e2387c93486d5b3",
+      "bytes": 117216
+    },
+    {
+      "path": "demo-repeatability.json",
+      "sha256": "44fa6ba7648c0bc1ac9add73f7e647d01581b79622e2b85a4fd2aa616a0e1d5c",
+      "bytes": 25918
+    },
+    {
+      "path": "operational-evaluation.json",
+      "sha256": "62369bb5e0e888cc5033ede2af41658f1a0eca15f3529eecb7963e4e7c2d6721",
+      "bytes": 8152
+    },
+    {
+      "path": "runtime-browser.json",
+      "sha256": "bb7e5b7cf9a852d8600d3af86ee0be2a162177cae103ad43b9e578a1f36b604a",
+      "bytes": 9227
+    },
+    {
+      "path": "retained-attempts.json",
+      "sha256": "e9d7553cf091c4beb81cb7503cfa03f500e8959ce14da54b5626bbf002c3054c",
+      "bytes": 1169655
+    },
+    {
+      "path": "aggregate.json",
+      "sha256": "7bccc45054a8d6a91e285a840fa6e674b181ca2175f3bbb5d5bfd1f86728d44d",
+      "bytes": 4714
+    }
+  ],
+  "privacy": "Explicit metadata projections; no raw evidence copying. Output files use wx and prior snapshots cannot be overwritten.",
+  "sourceHashConvention": "CRLF to LF, per normalized Git content; no logical source changes hidden",
+  "datasetHashConvention": "Dataset rawSha256 is exact execution bytes. normalizedSha256/releaseBlobSha256 are separately labeled historical EOL comparison; they do not replace exact dataset identity."
+}

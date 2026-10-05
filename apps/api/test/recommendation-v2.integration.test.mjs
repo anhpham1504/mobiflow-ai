@@ -27,8 +27,8 @@ test('M14 isolated PostgreSQL recommendation V1/V2 contract, artifact-only revie
     try{await work(s);checks.push({name,result:'PASS',durationMs:Math.round(performance.now()-start)});}catch(error){checks.push({name,result:'FAIL',message:error.message});throw error;}finally{await s.close();}
   });}
   try{
-    await check('seven migrations and nullable legacy confidence; V1 history and explicit approval remain intact',async s=>{
-      assert.equal(Number((await s.prisma.$queryRawUnsafe('SELECT count(*)::int AS count FROM _prisma_migrations WHERE finished_at IS NOT NULL'))[0].count),7);
+    await check('thirteen released migrations and nullable legacy confidence; V1 history and explicit approval remain intact',async s=>{
+      assert.equal(Number((await s.prisma.$queryRawUnsafe('SELECT count(*)::int AS count FROM _prisma_migrations WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL'))[0].count),13);
       const column=(await s.prisma.$queryRawUnsafe(`SELECT is_nullable FROM information_schema.columns WHERE table_name='AiRecommendation' AND column_name='confidence'`))[0];assert.equal(column.is_nullable,'YES');
       await s.upload();const r=await s.create(),run=await s.recommend(r,'recommendation.v1');assert.equal(run.status,'SUCCEEDED',run.errorCode);
       const request=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}}),before=await s.service.view(r.id,s.manager.actor);

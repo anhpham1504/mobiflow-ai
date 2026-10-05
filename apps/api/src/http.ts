@@ -45,7 +45,7 @@ export class ApiExceptionFilter implements ExceptionFilter {
   }
 }
 
-function isDatabaseUnavailable(exception: unknown): boolean {
+export function isDatabaseUnavailable(exception: unknown): boolean {
   if (typeof exception !== 'object' || exception === null) return false;
   if ('code' in exception && typeof exception.code === 'string' && ['P1001', 'P1002', 'P1017', 'P2024', 'ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND'].includes(exception.code)) return true;
   if (exception instanceof Error && ['timeout exceeded when trying to connect', 'Connection terminated due to connection timeout'].includes(exception.message)) return true;

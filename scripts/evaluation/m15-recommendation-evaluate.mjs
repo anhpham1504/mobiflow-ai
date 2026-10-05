@@ -16,7 +16,7 @@ import {measureAttempt,aggregateEvaluation,measureConsistency} from './m15-metri
 
 const hash=value=>createHash('sha256').update(typeof value==='string'||Buffer.isBuffer(value)?value:JSON.stringify(value)).digest('hex');
 const args=process.argv.slice(2);
-assert.ok(args.every(arg=>arg==='--skip-consistency'||arg.startsWith('--case-ids=')), 'Only --case-ids=id,id and --skip-consistency are supported');
+assert.ok(args.every(arg=>arg==='--skip-consistency'||arg.startsWith('--case-ids=')||arg.startsWith('--evidence-root=')), 'Only --case-ids=id,id, --skip-consistency and --evidence-root=path are supported');
 const {dataset,sha256:datasetSha256,path:datasetPath}=await loadM15Dataset();
 const filterArg=args.find(arg=>arg.startsWith('--case-ids='));
 const selectedIds=filterArg?filterArg.slice('--case-ids='.length).split(','):null;
@@ -24,7 +24,9 @@ if(selectedIds){assert.ok(selectedIds.length&&new Set(selectedIds).size===select
 const selected=dataset.cases.filter(c=>!selectedIds||selectedIds.includes(c.id));
 const fullRun=!selectedIds&&!args.includes('--skip-consistency');
 const startedAt=new Date().toISOString(),runId=startedAt.replace(/[:.]/g,'-')+'-'+randomUUID();
-const root='docs/v1.2/evidence/m15/'+runId;
+const evidenceRoot=args.find(arg=>arg.startsWith('--evidence-root='))?.slice('--evidence-root='.length);
+assert.ok(evidenceRoot===undefined||evidenceRoot.trim().length>0,'Evidence root cannot be empty');
+const root=(evidenceRoot??'docs/v1.2/evidence/m15')+'/'+runId;
 await mkdir(root,{recursive:true});
 const paths={manifest:root+'/manifest.json',details:root+'/details.jsonl',summary:root+'/summary.json'};
 await writeFile(paths.details,'',{flag:'wx'});
@@ -109,6 +111,6 @@ const result=setupError?'NOT_RUN':unexpectedError?'FAIL':fullRun&&rows.length===
 const summary={runId,startedAt,finishedAt:new Date().toISOString(),result,fullRun,kind:'development/synthetic evidence',datasetVersion:dataset.version,datasetSha256,datasetCaseCount:dataset.cases.length,executedCases:rows.length,consistencyRuns:consistencyRows.length,metrics,consistency,totalDurationMs:Math.round(performance.now()-started),paths,setupError,unexpectedError,limitations:manifest?.limitations??['No fixture substitutes for unavailable live services.']};
 await writeFile(paths.summary,JSON.stringify(summary,null,2)+'\n',{flag:'wx'});
 if(!manifest)await writeFile(paths.manifest,JSON.stringify({runId,startedAt,datasetVersion:dataset.version,datasetSha256,sourceHashes,configuredModel:env.OLLAMA_MODEL,configuredEmbedding:env.OLLAMA_EMBEDDING_MODEL,setupError,paths},null,2)+'\n',{flag:'wx'});
-await saveEvidence('docs/v1.2/evidence/M15_RECOMMENDATION_EVAL.json',summary);
+await saveEvidence(evidenceRoot?evidenceRoot+'/M15_RECOMMENDATION_EVAL.json':'docs/v1.2/evidence/M15_RECOMMENDATION_EVAL.json',summary);
 console.log(JSON.stringify({result,executedCases:rows.length,consistencyRuns:consistencyRows.length,summary:paths.summary}));
 if(result==='FAIL'||result==='NOT_RUN')process.exitCode=1;

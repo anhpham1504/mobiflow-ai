@@ -1,0 +1,144 @@
+{
+  "at": "2026-10-05T07:47:55.607Z",
+  "result": "PASS",
+  "relationship": "Supplement to immutable 20261005-1138-final snapshot. Its first exporter recognized TAP only and reported testTotals:null for the Node spec reporter. Both original output and this exact reporter-aware derivation remain retained.",
+  "parser": "Node TAP # or spec ℹ aggregate sections; source log SHA256 and command exit0 independently checked",
+  "runs": [
+    {
+      "name": "test-attempt2",
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/test-attempt2.log",
+        "sha256": "3439cb3470c1f1133040b84f01972d4c34b75bd6debdf76fd26c9f194d45f2a2"
+      },
+      "sections": [
+        {
+          "tests": 7,
+          "suites": 0,
+          "passed": 7,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 153,
+          "suites": 0,
+          "passed": 153,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 2,
+          "suites": 0,
+          "passed": 2,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "tests": 66,
+          "suites": 0,
+          "passed": 66,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "totals": {
+        "tests": 228,
+        "suites": 0,
+        "passed": 228,
+        "failed": 0,
+        "canceled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "integration-m14",
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m14.log",
+        "sha256": "8393433bc331f2cb393c577df9ccd4f830326d350df9712b6f140674e07795cc"
+      },
+      "sections": [
+        {
+          "tests": 26,
+          "suites": 0,
+          "passed": 26,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "totals": {
+        "tests": 26,
+        "suites": 0,
+        "passed": 26,
+        "failed": 0,
+        "canceled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "integration-m2",
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/integration-m2.log",
+        "sha256": "aaa33c36a0d20642a2b6072c5e28dfc03a39020d701916d83c4d45549499e8da"
+      },
+      "sections": [
+        {
+          "tests": 2,
+          "suites": 0,
+          "passed": 2,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "totals": {
+        "tests": 2,
+        "suites": 0,
+        "passed": 2,
+        "failed": 0,
+        "canceled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    },
+    {
+      "name": "recovery-m2-1",
+      "log": {
+        "privateLocator": "artifacts/ai-demo-stability/20261005-1138/recovery-m2-1.log",
+        "sha256": "b8defbc3bb39d58a1443039e517be31f098933197566e215dbc1eb5491f22fe5"
+      },
+      "sections": [
+        {
+          "tests": 10,
+          "suites": 0,
+          "passed": 10,
+          "failed": 0,
+          "canceled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "totals": {
+        "tests": 10,
+        "suites": 0,
+        "passed": 10,
+        "failed": 0,
+        "canceled": 0,
+        "skipped": 0,
+        "todo": 0
+      }
+    }
+  ],
+  "independentHumanReview": "NOT_RUN"
+}
