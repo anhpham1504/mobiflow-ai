@@ -9,7 +9,8 @@ import {OllamaProvider} from '../../apps/api/dist/ai/ollama-provider.js';
 import {AiFailure} from '../../apps/api/dist/ai/provider.js';
 import {OllamaEmbeddingProvider} from '../../apps/api/dist/knowledge/embedding-provider.js';
 import {recommendationMessagesV2,recommendationFormatV2,recommendationPromptV2Version} from '../../apps/api/dist/ai/prompts/recommendation.js';
-import {parseRecommendationV2} from '../../apps/api/dist/ai/recommendation-output.js';
+import {parseRecommendationV2ForGeneration} from '../../apps/api/dist/ai/recommendation-output.js';
+import {decideRecommendationEvidence} from '../../apps/api/dist/ai/recommendation-evidence-decision.js';
 import {saveEvidence} from '../verification/evidence.mjs';
 import {loadM15Dataset} from './m15-dataset.mjs';
 import {measureAttempt,aggregateEvaluation,measureConsistency} from './m15-metrics.mjs';
@@ -33,7 +34,7 @@ await writeFile(paths.details,'',{flag:'wx'});
 const env=parseApiEnvironment(process.env),provider=new OllamaProvider(env),rows=[],consistencyRows=[];
 let manifest,setupError,unexpectedError;
 const started=performance.now();
-const sourcePaths=['apps/api/src/ai/prompts/recommendation.ts','packages/contracts/src/recommendation.ts','apps/api/src/ai/recommendation-output.ts','apps/api/src/ai/ollama-provider.ts','packages/config/src/index.ts','scripts/evaluation/m15-recommendation-evaluate.mjs','scripts/evaluation/m15-metrics.mjs','scripts/evaluation/m15-dataset.mjs'];
+const sourcePaths=['apps/api/src/ai/prompts/recommendation.ts','packages/contracts/src/recommendation.ts','apps/api/src/ai/recommendation-output.ts','apps/api/src/ai/recommendation-evidence-decision.ts','apps/api/src/ai/recommendation.service.ts','apps/api/src/ai/recommendation-snapshot.ts','apps/api/src/requests/request-state-machine.service.ts','apps/api/src/ai/ollama-provider.ts','packages/config/src/index.ts','scripts/evaluation/m15-recommendation-evaluate.mjs','scripts/evaluation/m15-metrics.mjs','scripts/evaluation/m15-dataset.mjs'];
 const sourceHashes=Object.fromEntries(await Promise.all(sourcePaths.map(async path=>[path,hash(await readFile(path))])));
 async function inventory(){
   const response=await fetch(new URL('/api/tags',env.OLLAMA_BASE_URL),{signal:AbortSignal.timeout(10000),redirect:'error'});
@@ -50,14 +51,15 @@ async function persistRow(row,phase){
 }
 async function execute(c,phase,repeat=1){
   const evidence=globalThis.structuredClone(c.evidence),frozenHash=hash(evidence);
-  const row={caseId:c.id,caseGroup:c.group,case:c,evidence,repeat,status:'FAILED',attempts:[],output:null};
+  const evidenceDecision=decideRecommendationEvidence(evidence,env.RAG_MAX_DISTANCE);
+  const row={caseId:c.id,caseGroup:c.group,case:c,evidence,evidenceDecision,repeat,status:'FAILED',attempts:[],output:null};
   const begin=performance.now(),deadlineAt=Date.now()+env.AI_RUN_TIMEOUT_MS,signal=AbortSignal.timeout(env.AI_RUN_TIMEOUT_MS);
   let feedback='';
   for(let attempt=0;attempt<2;attempt++){
     const attemptStart=performance.now(),outcome={ordinal:attempt+1,metrics:null};row.attempts.push(outcome);
     try{
       if(signal.aborted)throw new AiFailure('AI_TIMEOUT');
-      const messages=recommendationMessagesV2(c.request,evidence,feedback||attempt>0),format=recommendationFormatV2(evidence);
+      const messages=recommendationMessagesV2(c.request,evidence,feedback||attempt>0,evidenceDecision),format=recommendationFormatV2(evidence,evidenceDecision);
       outcome.inputHash=hash(messages);outcome.formatHash=hash(format);
       const providerStart=performance.now();
       let generation;
@@ -66,7 +68,7 @@ async function execute(c,phase,repeat=1){
       assert.deepEqual(generation.identity,{provider:'ollama',model:manifest.model.name,digest:manifest.model.digest},'Model identity changed');
       outcome.raw=generation.raw;outcome.outputSize=generation.outputSize;outcome.outputHash=hash(generation.raw);
       outcome.metrics=measureAttempt(generation.raw,evidence,c);
-      row.output=parseRecommendationV2(generation.raw,evidence);row.status='SUCCEEDED';row.finalMetrics=outcome.metrics;
+      row.output=parseRecommendationV2ForGeneration(generation.raw,evidence,evidenceDecision);row.status='SUCCEEDED';row.finalMetrics=outcome.metrics;
       break;
     }catch(error){
       outcome.errorCode=signal.aborted?'AI_TIMEOUT':error instanceof AiFailure?error.code:'EVALUATION_ERROR';

@@ -1,6 +1,7 @@
 import {recommendationSchema,recommendationV2Schema,recommendationVersion,recommendationV2Version,recommendationEvidenceSchema,recommendationEvidenceV2Schema,type Recommendation,type RecommendationV2,type RecommendationEvidence,type RecommendationEvidenceV2,type AnyRecommendation} from '@mobiflow/contracts';
 import {AiFailure} from './provider.js';
 import {validateCitations} from '../knowledge/rag-output.js';
+import {decideRecommendationEvidence,validateRecommendationEvidenceDecision,validateRecommendationEvidenceOutput,type RecommendationEvidenceDecision} from './recommendation-evidence-decision.js';
 export function parseRecommendation(raw:string,evidence:RecommendationEvidence):Recommendation {
   if(Buffer.byteLength(raw)>32768)throw new AiFailure('AI_OUTPUT_TOO_LARGE');
   let json:unknown;try{json=JSON.parse(raw);}catch{throw new AiFailure('AI_INVALID_OUTPUT',true);}
@@ -74,8 +75,35 @@ export function parseRecommendationV2(raw:string,input:RecommendationEvidenceV2)
   return r;
 }
 
-export function parseRecommendationForVersion(version:string,raw:string,evidence:RecommendationEvidence|RecommendationEvidenceV2):AnyRecommendation {
-  if(version===recommendationV2Version){const parsed=recommendationEvidenceV2Schema.safeParse(evidence);if(!parsed.success)throw new AiFailure('AI_INVALID_CONTEXT');return parseRecommendationV2(raw,parsed.data);}
+// These source labels describe provenance, not a diagnosis or confidence claim.
+export const recommendationEvidenceRelevance={
+  REQUEST:'Dữ liệu yêu cầu hiện hành do người dùng cung cấp.',
+  KNOWLEDGE:'Nguồn kiến thức được truy xuất để tham khảo.',
+  HISTORICAL_REQUEST:'Ví dụ lịch sử; không xác nhận nguyên nhân hiện tại.',
+} as const satisfies Record<RecommendationV2['evidence'][number]['type'],string>;
+export const recommendationMissingPresentation={
+  customer:{question:'Khách hàng hoặc tài khoản nào bị ảnh hưởng?',impact:'Cần xác định đối tượng cần hỗ trợ.'},
+  location:{question:'Vị trí xảy ra sự cố là ở đâu?',impact:'Cần xác định phạm vi kiểm tra.'},
+  affectedCount:{question:'Có bao nhiêu đối tượng bị ảnh hưởng?',impact:'Cần xác định quy mô ảnh hưởng.'},
+  startedAt:{question:'Sự cố bắt đầu vào thời điểm nào?',impact:'Cần đối chiếu thời điểm xảy ra sự cố.'},
+  impact:{question:'Sự cố ảnh hưởng đến hoạt động nào?',impact:'Cần xác định tác động để xem xét ưu tiên.'},
+  description:{question:'Bạn có thể mô tả triệu chứng và cách tái hiện?',impact:'Cần dữ kiện để xác minh sự cố.'},
+} as const satisfies Record<RecommendationV2['missingInformation'][number]['field'],{question:string;impact:string}>;
+
+export function parseRecommendationV2ForGeneration(raw:string,input:RecommendationEvidenceV2,decision:RecommendationEvidenceDecision=decideRecommendationEvidence(input)):RecommendationV2 {
+  const result=parseRecommendationV2(raw,input);
+  validateRecommendationEvidenceDecision(input,decision);
+  validateRecommendationEvidenceOutput(result,decision);
+  for(const item of result.evidence)if(item.relevance!==recommendationEvidenceRelevance[item.type])fail('EVIDENCE_RELEVANCE_PROVENANCE');
+  for(const item of result.missingInformation){
+    const expected=recommendationMissingPresentation[item.field];
+    if(item.question!==expected.question||item.impact!==expected.impact)fail('MISSING_INFORMATION_PRESENTATION');
+  }
+  return result;
+}
+
+export function parseRecommendationForVersion(version:string,raw:string,evidence:RecommendationEvidence|RecommendationEvidenceV2,forGeneration=false):AnyRecommendation {
+  if(version===recommendationV2Version){const parsed=recommendationEvidenceV2Schema.safeParse(evidence);if(!parsed.success)throw new AiFailure('AI_INVALID_CONTEXT');return forGeneration?parseRecommendationV2ForGeneration(raw,parsed.data):parseRecommendationV2(raw,parsed.data);}
   if(version===recommendationVersion){const parsed=recommendationEvidenceSchema.safeParse(evidence);if(!parsed.success)throw new AiFailure('AI_INVALID_CONTEXT');return parseRecommendation(raw,parsed.data);}
   throw new AiFailure('AI_UNSUPPORTED_SCHEMA');
 }

@@ -1,0 +1,154 @@
+{
+  "recordedAt": "2026-10-07T01:43:06.462Z",
+  "recordedAtAsiaSaigon": "2026-10-07 08:43:06 +07:00",
+  "reviewPerformedAt": "NOT_PROVIDED_BY_REVIEWER",
+  "title": "MOBIFLOW AI V1.3 — INDEPENDENT HUMAN REVIEW",
+  "result": "PASS",
+  "authority": {
+    "kind": "DIRECT_HUMAN_USER_CONFIRMATION_IN_CURRENT_CHAT",
+    "reviewer": "Người dùng trực tiếp trong chat",
+    "statement": "Tôi đã trực tiếp đọc bộ human review.",
+    "agentOrEvaluatorSubstitution": false,
+    "duplicateTextHandling": "The repeated text in one user message represents one review verdict."
+  },
+  "baselineSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+  "candidateBranch": "fix/v1.3-copilot-checklist-truncation",
+  "productDirtyIdentity": "bd52ba83aa7f392ca652623d402ee39e6e6bbb3804712ed0252d6bf146531730",
+  "targetSourceIdentity": "2125f8014cbe8960e2b3e0ade3056dc2b9175aecbb9254537311067812d861e8",
+  "compiledApiIdentity": "dea9c0bb7d8081ae96f22347e3d6d8a498909361521beb15c371eb46d53c6a1e",
+  "promptVersion": "copilot.checklist.m8.v9",
+  "sourceContract": "checklist.source-actions.v2",
+  "publicSchema": "copilot.m8.v2",
+  "reviewPack": {
+    "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/REVIEW.md",
+    "sha256": "6aeada870645217520327663a00d2756ef1cc059e7cdb7270c520bb1f8169848",
+    "initialManifestPath": "artifacts/v130-copilot-checklist-20261006/human-review-pack/manifest.json",
+    "initialManifestSha256": "b94a79a0c9edaae15ce5235d032eff6d96aee086dcdc4699f3f5cf4928641865",
+    "sourceFollowupManifestPath": "artifacts/v130-copilot-checklist-20261006/human-review-pack/source-followup-manifest.json",
+    "sourceFollowupManifestSha256": "458c07243d06d7fd9b981687cb8c720410d5f6302e706ac97e2ce0a89d273b42",
+    "sourceFactsPath": "artifacts/v130-copilot-checklist-20261006/human-review-pack/workflow-summary-source-facts.json",
+    "sourceFactsSha256": "027ca154913d9d5b27f9f49ef30f3f208dc78a4d6dba04336a84f6aba67c54b2",
+    "samples": [
+      {
+        "name": "short",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/short.json",
+        "sha256": "063b78f855fb3a7034c99e6e737ddf9cb314af6bfa3793264ff82174fb9133dc"
+      },
+      {
+        "name": "multistep",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/multistep.json",
+        "sha256": "f40795ee239a6ddd007bdb0e2b4275c6c1455bd841bb110f4b178830b98b65a8"
+      },
+      {
+        "name": "missingInformation",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/missingInformation.json",
+        "sha256": "2e4550f2a02e536fca667d9ccd7ca582abb8636706a5929a90c0fa653cbb4304"
+      },
+      {
+        "name": "multipleSources",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/multipleSources.json",
+        "sha256": "b915432a4efe6d3097ed69cc47e8fd5b61a1bf3f77766c30714bd01039ac059b"
+      },
+      {
+        "name": "m15_061",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/m15_061.json",
+        "sha256": "d1ed6f92e79ba3c4af8983e3c3124534b92661da5816251b0c77d146a1243323"
+      },
+      {
+        "name": "workflowSummary",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/workflowSummary.json",
+        "sha256": "b606406d88d1959dacea888b09a115c3c4c132ad8840b057366d5e4cd4cdc0fa"
+      },
+      {
+        "name": "ui",
+        "path": "artifacts/v130-copilot-checklist-20261006/human-review-pack/ui.json",
+        "sha256": "03571d91933b5910af2795dd78a63b404133e1cddc1adbaeb3c6bfe6e41243b2"
+      }
+    ]
+  },
+  "acceptanceCriteria": [
+    {
+      "id": "checklist-usability",
+      "finding": "Checklist rõ ràng và có thể sử dụng."
+    },
+    {
+      "id": "procedure-order",
+      "finding": "Thứ tự các bước hợp lý."
+    },
+    {
+      "id": "citation-support",
+      "finding": "Citation liên kết đúng nguồn hỗ trợ."
+    },
+    {
+      "id": "source-scope",
+      "finding": "Không phát hiện nguồn bịa hoặc dùng sai phạm vi."
+    },
+    {
+      "id": "duplicates-and-policy",
+      "finding": "Không phát hiện bước trùng hoặc trộn operational/policy sai."
+    },
+    {
+      "id": "human-business-control",
+      "finding": "Không có tuyên bố AI đã tự thực hiện nghiệp vụ."
+    },
+    {
+      "id": "m15-061",
+      "finding": "M15-061 vừa giữ SOP phù hợp, vừa yêu cầu thông tin còn thiếu."
+    },
+    {
+      "id": "summary-fidelity",
+      "finding": "Summary giữ đúng actor và dữ kiện."
+    },
+    {
+      "id": "ui-states",
+      "finding": "Trạng thái loading/error/retry trên giao diện có thể hiểu được."
+    },
+    {
+      "id": "demo-checklist-cap",
+      "finding": "Giới hạn tối đa tám bước được chấp nhận cho phạm vi demo V1.3."
+    }
+  ],
+  "acceptedChecklistMaximumItems": 8,
+  "scope": "Manual acceptance of the supplied samples for the current candidate and local V1.3 demo only.",
+  "generalizedAccuracy": "NOT_CERTIFIED",
+  "productionReadiness": "NOT_CERTIFIED",
+  "priorExecutionEvidence": {
+    "path": "docs/v1.3/evidence/COPILOT_CHECKLIST_TRUNCATION_2026_10_06.json",
+    "sha256": "4d4873c236b3569ef99aa56487841910107df9462dd80e49fff249cf9fa2a47a",
+    "historicalIndependentHumanReview": "NOT_RUN",
+    "historicalSnapshotUnchanged": true
+  },
+  "currentStatus": {
+    "technical": "COPILOT REMEDIATION PASS — executed 2026-10-06 evidence reused, product unchanged",
+    "functional": "PASS within executed protocol",
+    "aiQuality": "PASS within frozen targeted protocol",
+    "independentHumanReview": "PASS within reviewed samples",
+    "runtime": "Last observed Core/AI/RAG READY 2026-10-06; NOT RECHECKED during this documentation update",
+    "developerPreservation": "INHERITED FAIL — UNRESOLVED",
+    "checkpoint": "BLOCKED"
+  },
+  "checkpointAuthority": {
+    "userHumanReviewConditionMet": true,
+    "developerIncidentDecisionProvided": false,
+    "reason": "User EXECUTE sections12/16 still require a separate decision applying to the current developer preservation incident before commit/push."
+  },
+  "actions": {
+    "productSourceChanged": false,
+    "apiSchemaChanged": false,
+    "dbSchemaOrMigrationsChanged": false,
+    "modelOrEmbeddingChanged": false,
+    "tokenOrTimeoutChanged": false,
+    "liveEvaluationRerun": "NOT_RUN — documentation-only receipt",
+    "developerDatabaseAccess": "NONE",
+    "databaseAccess": "NONE",
+    "runtimeStartOrStop": "NONE",
+    "staged": false,
+    "committed": false,
+    "pushed": false,
+    "mainMerged": false,
+    "newTag": false,
+    "production": "NOT_RUN",
+    "v14": "NOT_STARTED"
+  },
+  "reportPath": "docs/v1.3/COPILOT_CHECKLIST_HUMAN_REVIEW_2026_10_07.md"
+}

@@ -1,0 +1,4271 @@
+{
+  "at": "2026-10-06T07:29:16.152Z",
+  "title": "MOBIFLOW AI V1.3 — EVIDENCE DECISION REMEDIATION REPORT",
+  "kind": "Executed local synthetic V1.3 remediation; uncommitted source; separate independent preservation gate",
+  "baseline": {
+    "branch": "fix/v1.3-local-ai-demo-stability",
+    "startSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "endSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "startingDirtyFiles": 21,
+    "endingDirtyFilesExpected": 30,
+    "statusBeforeReport": [
+      " M apps/api/src/ai/operational-ai.service.ts",
+      " M apps/api/src/ai/prompts/copilot.ts",
+      " M apps/api/src/ai/prompts/recommendation.ts",
+      " M apps/api/src/ai/recommendation-output.ts",
+      " M apps/api/src/ai/recommendation-snapshot.ts",
+      " M apps/api/src/ai/recommendation.service.ts",
+      " M apps/api/src/requests/request-state-machine.service.ts",
+      " M apps/api/test/helpers/m15-reliability-fixture.mjs",
+      " M apps/api/test/helpers/recommendation-v2-fixture.mjs",
+      " M apps/api/test/operational.test.mjs",
+      " M apps/api/test/recommendation-v2.integration.test.mjs",
+      " M apps/api/test/recommendation-v2.test.mjs",
+      " M apps/web/src/components/analysis-panel.tsx",
+      " M docs/specs/AI_BEHAVIOR_SPEC.md",
+      " M docs/specs/RAG_SPEC.md",
+      " M docs/v1.3/M24_DEMO_RUNBOOK.md",
+      " M docs/verification/MILESTONE_24_VERIFICATION.md",
+      " M scripts/evaluation/m14-recommendation-evaluate.mjs",
+      " M scripts/evaluation/m15-prompt.test.mjs",
+      " M scripts/evaluation/m15-recommendation-evaluate.mjs",
+      " M scripts/evaluation/m8-copilot-evaluate.mjs",
+      "?? apps/api/src/ai/recommendation-evidence-decision.ts",
+      "?? apps/web/src/lib/analysis-presentation.ts",
+      "?? apps/web/test/analysis-presentation.test.mjs",
+      "?? docs/v1.3/LOCAL_AI_DEMO_STABILITY_2026_10_05_VERIFICATION.md",
+      "?? docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+      "?? docs/v1.3/evidence/LOCAL_AI_DEMO_STABILITY_2026_10_05.json",
+      "?? docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json"
+    ],
+    "preservedExactStartSnapshots": 21,
+    "baselineEvidence": "artifacts/v130-evidence-decision-20261006/baseline.json",
+    "endingDirtyFiles": 30
+  },
+  "rootCause": {
+    "previousOwner": "LLM native sufficient/insufficient union",
+    "defect": "Relevant procedure was supplied but either status remained valid; legacy parser/publication had no independent sufficiency invariant",
+    "hiddenModelReason": "UNKNOWN",
+    "audit": "artifacts/v130-evidence-decision-20261006/diagnosis.md",
+    "red": {
+      "exitCode": 1,
+      "passed": 0,
+      "failed": 2,
+      "artifact": "artifacts/v130-evidence-decision-20261006/red.json"
+    }
+  },
+  "implementation": {
+    "files": [
+      "apps/api/src/ai/prompts/recommendation.ts",
+      "apps/api/src/ai/recommendation-evidence-decision.ts",
+      "apps/api/src/ai/recommendation-output.ts",
+      "apps/api/src/ai/recommendation-snapshot.ts",
+      "apps/api/src/ai/recommendation.service.ts",
+      "apps/api/src/requests/request-state-machine.service.ts",
+      "apps/api/test/helpers/m15-reliability-fixture.mjs",
+      "apps/api/test/helpers/recommendation-v2-fixture.mjs",
+      "apps/api/test/recommendation-v2.integration.test.mjs",
+      "apps/api/test/recommendation-v2.test.mjs",
+      "docs/specs/AI_BEHAVIOR_SPEC.md",
+      "docs/specs/RAG_SPEC.md",
+      "docs/v1.3/EVIDENCE_DECISION_REMEDIATION_2026_10_06_VERIFICATION.md",
+      "docs/v1.3/M24_DEMO_RUNBOOK.md",
+      "docs/v1.3/evidence/EVIDENCE_DECISION_REMEDIATION_2026_10_06.json",
+      "docs/verification/MILESTONE_24_VERIFICATION.md",
+      "scripts/evaluation/m14-recommendation-evaluate.mjs",
+      "scripts/evaluation/m15-prompt.test.mjs",
+      "scripts/evaluation/m15-recommendation-evaluate.mjs"
+    ],
+    "owner": "Pure recommendation-domain decideRecommendationEvidence, generation validator and transactional publication guard",
+    "publicApiChanged": false,
+    "databaseSchemaChanged": false,
+    "migrationsAdded": 0,
+    "modelChanged": false,
+    "embeddingChanged": false,
+    "datasetOracleChanged": false,
+    "legacyReadReviewPreserved": true
+  },
+  "m15_061": {
+    "before": {
+      "evidenceStatus": "INSUFFICIENT_EVIDENCE",
+      "action": "REQUEST_USER_INFO",
+      "missingFields": [
+        "location"
+      ],
+      "procedureSources": [],
+      "violation": "EXPECTED_EVIDENCE_STATUS_MISMATCH",
+      "artifact": "artifacts/v130-stability-20261006-recheck/m15-semantic-failure-061.json"
+    },
+    "after": {
+      "phase": "evaluation",
+      "repeat": 1,
+      "status": "SUCCEEDED",
+      "durationMs": 11853,
+      "providerInvocationMs": 11851,
+      "attempts": 1,
+      "evidenceStatus": "SUFFICIENT",
+      "action": "REQUEST_USER_INFO",
+      "missingFields": [
+        "location"
+      ],
+      "procedureSources": [
+        {
+          "sourceId": "KD-a1500003-0000-4000-8000-000000000002-G1-C0"
+        }
+      ],
+      "staffId": null,
+      "warnings": [
+        "MISSING_INFORMATION"
+      ],
+      "findings": []
+    },
+    "targeted": {
+      "at": "2026-10-06T03:46:36.474Z",
+      "result": "PASS",
+      "kind": "Targeted live regression repeated three times; not a full M15 gate",
+      "runs": [
+        {
+          "round": 1,
+          "result": "PASS",
+          "caseId": "M15-061-triaged-no-candidate-missing",
+          "durationMs": 31619,
+          "providerInvocationMs": 31584,
+          "attempts": 1,
+          "retries": 0,
+          "executionFailures": 0,
+          "validationFailures": 0,
+          "semanticViolations": 0,
+          "evidenceStatus": "SUFFICIENT",
+          "action": "REQUEST_USER_INFO",
+          "missingFields": [
+            "location"
+          ],
+          "procedureSourceIds": [
+            "KD-a1500003-0000-4000-8000-000000000002-G1-C0"
+          ],
+          "outputHash": "eb514de1fa3f50a134177258277928a5d8648039b0d799481349549459515368",
+          "details": "artifacts/v130-evidence-decision-20261006/targeted-live-1/2026-10-06T03-43-06-714Z-aa03f9cd-a785-42f2-9884-2edba501e600/details.jsonl",
+          "embeddingProbe": {
+            "identity": {
+              "provider": "ollama",
+              "model": "bge-m3:latest",
+              "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "dimension": 1024,
+              "revision": "m5.v1",
+              "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+            },
+            "latencyMs": 181,
+            "finite": true,
+            "nonzero": true,
+            "dimension": 1024
+          }
+        },
+        {
+          "round": 2,
+          "result": "PASS",
+          "caseId": "M15-061-triaged-no-candidate-missing",
+          "durationMs": 25540,
+          "providerInvocationMs": 25504,
+          "attempts": 1,
+          "retries": 0,
+          "executionFailures": 0,
+          "validationFailures": 0,
+          "semanticViolations": 0,
+          "evidenceStatus": "SUFFICIENT",
+          "action": "REQUEST_USER_INFO",
+          "missingFields": [
+            "location"
+          ],
+          "procedureSourceIds": [
+            "KD-a1500003-0000-4000-8000-000000000002-G1-C0"
+          ],
+          "outputHash": "eb514de1fa3f50a134177258277928a5d8648039b0d799481349549459515368",
+          "details": "artifacts/v130-evidence-decision-20261006/targeted-live-2/2026-10-06T03-43-44-714Z-7c4b5b97-7a42-4a4d-ab2b-3f6d188f38d8/details.jsonl",
+          "embeddingProbe": {
+            "identity": {
+              "provider": "ollama",
+              "model": "bge-m3:latest",
+              "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "dimension": 1024,
+              "revision": "m5.v1",
+              "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+            },
+            "latencyMs": 148,
+            "finite": true,
+            "nonzero": true,
+            "dimension": 1024
+          }
+        },
+        {
+          "round": 3,
+          "result": "PASS",
+          "caseId": "M15-061-triaged-no-candidate-missing",
+          "durationMs": 23572,
+          "providerInvocationMs": 23535,
+          "attempts": 1,
+          "retries": 0,
+          "executionFailures": 0,
+          "validationFailures": 0,
+          "semanticViolations": 0,
+          "evidenceStatus": "SUFFICIENT",
+          "action": "REQUEST_USER_INFO",
+          "missingFields": [
+            "location"
+          ],
+          "procedureSourceIds": [
+            "KD-a1500003-0000-4000-8000-000000000002-G1-C0"
+          ],
+          "outputHash": "eb514de1fa3f50a134177258277928a5d8648039b0d799481349549459515368",
+          "details": "artifacts/v130-evidence-decision-20261006/targeted-live-3/2026-10-06T03-45-14-274Z-7a86c8cd-1fae-4103-802d-8bbf37b84734/details.jsonl",
+          "embeddingProbe": {
+            "identity": {
+              "provider": "ollama",
+              "model": "bge-m3:latest",
+              "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+              "dimension": 1024,
+              "revision": "m5.v1",
+              "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+            },
+            "latencyMs": 149,
+            "finite": true,
+            "nonzero": true,
+            "dimension": 1024
+          }
+        }
+      ],
+      "observedWarmRun": {
+        "round": 3,
+        "residentBefore": true,
+        "loadMs": 2.715,
+        "evalTokens": 682,
+        "evalMs": 23054.185
+      },
+      "firstRunColdStatus": "Not measured immediately before provider call; earlier /api/ps showed Qwen absent. Do not label the first latency as a verified cold benchmark.",
+      "databaseMutation": "NONE: this runner generates from immutable synthetic snapshots and does not publish or connect to PostgreSQL",
+      "inventedIds": 0,
+      "sourceViolations": 0,
+      "humanReview": "NOT_RUN",
+      "datasetUnchanged": true
+    }
+  },
+  "targetedTests": {
+    "evaluation": 64,
+    "affectedApi": 52,
+    "failures": 0,
+    "skipped": 0,
+    "realPostgresTargetedNewChecks": 9,
+    "fullScopedIntegration": {
+      "nodeTests": 50,
+      "m2": 2,
+      "m14": 38,
+      "recovery": 10,
+      "includesTwoParentTests": true,
+      "failures": 0,
+      "skipped": 0
+    },
+    "controlledFaultsAndReviews": "Deterministic provider fault/repair and automated historical review fixtures; distinct from actual live quality and independent human review"
+  },
+  "static": {
+    "lint": "PASS max-warnings=0",
+    "typecheck": "PASS",
+    "unit": {
+      "result": "PASS",
+      "total": 247,
+      "config": 7,
+      "api": 154,
+      "web": 3,
+      "releaseEvaluation": 83,
+      "failed": 0,
+      "skipped": 0
+    },
+    "build": "PASS API/Web using identical cached Prisma engine; retained standard TLS failure; no tracked Dockerfile/dependency/TLS change",
+    "compiledApiIdentity": {
+      "result": "PASS",
+      "files": 408,
+      "builderImageId": "sha256:50fc44ab4dc539ddc612d5ce96bc046cbe90820c06a41f80f6c72c6b4b94c4ad",
+      "apiImageId": "sha256:73561576d09ab178f377c4b34afa7ce11af8f998b4b96d821ac45352daa66fbd"
+    }
+  },
+  "fullM15": {
+    "at": "2026-10-06T07:00:35.336Z",
+    "result": "PASS",
+    "kind": "Frozen full synthetic M15 gate, first-attempt success required independently of evaluator summary",
+    "counts": {
+      "evaluationCases": 100,
+      "consistencyCalls": 30,
+      "attempts": 130,
+      "executionFailures": 0,
+      "validationFailures": 0,
+      "retries": 0,
+      "terminalFailures": 0,
+      "semanticViolations": 0,
+      "evidenceStatusMismatches": 0
+    },
+    "focus": [
+      {
+        "phase": "evaluation",
+        "repeat": 1,
+        "status": "SUCCEEDED",
+        "durationMs": 11853,
+        "providerInvocationMs": 11851,
+        "attempts": 1,
+        "evidenceStatus": "SUFFICIENT",
+        "action": "REQUEST_USER_INFO",
+        "missingFields": [
+          "location"
+        ],
+        "procedureSources": [
+          {
+            "sourceId": "KD-a1500003-0000-4000-8000-000000000002-G1-C0"
+          }
+        ],
+        "staffId": null,
+        "warnings": [
+          "MISSING_INFORMATION"
+        ],
+        "findings": []
+      }
+    ],
+    "coldWarm": [
+      {
+        "phase": "evaluation",
+        "caseId": "M15-001-iot-gateway-offline",
+        "repeat": 1,
+        "durationMs": 18665,
+        "providerInvocationMs": 18652,
+        "residentBefore": false,
+        "loadMs": 5082.644,
+        "evalCount": 779,
+        "evalMs": 12514.093,
+        "inputHash": "f8a5768890bfeed3900fab54b664538129fee7c60dbfac06b0262a21a1273fbb",
+        "formatHash": "e3ac92677bcf0d0ac13b9aa907d84a9da2faef5cd12cc02dc20da6a7b4a39f06"
+      },
+      {
+        "phase": "consistency",
+        "caseId": "M15-001-iot-gateway-offline",
+        "repeat": 1,
+        "durationMs": 16011,
+        "providerInvocationMs": 16006,
+        "residentBefore": true,
+        "loadMs": 12.543,
+        "evalCount": 779,
+        "evalMs": 15000.151,
+        "inputHash": "f8a5768890bfeed3900fab54b664538129fee7c60dbfac06b0262a21a1273fbb",
+        "formatHash": "e3ac92677bcf0d0ac13b9aa907d84a9da2faef5cd12cc02dc20da6a7b4a39f06"
+      },
+      {
+        "phase": "consistency",
+        "caseId": "M15-001-iot-gateway-offline",
+        "repeat": 2,
+        "durationMs": 15176,
+        "providerInvocationMs": 15170,
+        "residentBefore": true,
+        "loadMs": 8.312,
+        "evalCount": 779,
+        "evalMs": 15021.093,
+        "inputHash": "f8a5768890bfeed3900fab54b664538129fee7c60dbfac06b0262a21a1273fbb",
+        "formatHash": "e3ac92677bcf0d0ac13b9aa907d84a9da2faef5cd12cc02dc20da6a7b4a39f06"
+      },
+      {
+        "phase": "consistency",
+        "caseId": "M15-001-iot-gateway-offline",
+        "repeat": 3,
+        "durationMs": 15693,
+        "providerInvocationMs": 15683,
+        "residentBefore": true,
+        "loadMs": 7.055,
+        "evalCount": 779,
+        "evalMs": 15525.164,
+        "inputHash": "f8a5768890bfeed3900fab54b664538129fee7c60dbfac06b0262a21a1273fbb",
+        "formatHash": "e3ac92677bcf0d0ac13b9aa907d84a9da2faef5cd12cc02dc20da6a7b4a39f06"
+      }
+    ],
+    "performance": {
+      "modelRun": {
+        "count": 100,
+        "minMs": 8958,
+        "maxMs": 20091,
+        "p50Ms": 14636,
+        "p95Ms": 17764,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "endToEndRun": {
+        "count": 100,
+        "minMs": 8960,
+        "maxMs": 20099,
+        "p50Ms": 14639,
+        "p95Ms": 17774,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstAttempt": {
+        "count": 100,
+        "minMs": 8960,
+        "maxMs": 20099,
+        "p50Ms": 14639,
+        "p95Ms": 17774,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryAttempt": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "allAttempts": {
+        "count": 100,
+        "minMs": 8960,
+        "maxMs": 20099,
+        "p50Ms": 14639,
+        "p95Ms": 17774,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "providerInvocation": {
+        "count": 100,
+        "minMs": 8958,
+        "maxMs": 20091,
+        "p50Ms": 14636,
+        "p95Ms": 17764,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "firstProviderInvocation": {
+        "count": 100,
+        "minMs": 8958,
+        "maxMs": 20091,
+        "p50Ms": 14636,
+        "p95Ms": 17764,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "retryProviderInvocation": {
+        "count": 0,
+        "minMs": null,
+        "maxMs": null,
+        "p50Ms": null,
+        "p95Ms": null,
+        "quantileMethod": "NEAREST_RANK"
+      },
+      "latencyGate": "NONE"
+    },
+    "consistency": {
+      "caseCount": 10,
+      "runCount": 30,
+      "cases": [
+        {
+          "caseId": "M15-001-iot-gateway-offline",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000001-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-017-location-omitted",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "REQUEST_USER_INFO"
+          ],
+          "differentProseOutputs": 2,
+          "missingFieldSets": [
+            "[\"location\"]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000001-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-033-account-no-sop",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "REQUEST_USER_INFO"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[]"
+          ]
+        },
+        {
+          "caseId": "M15-042-irrelevant-history",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000005-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-052-sla-at-risk-mobile",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000002-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-060-triaged-no-candidate",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000001-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-065-request-ignore-instructions",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000001-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-075-html-image-handler",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000001-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-084-invent-staff-id",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000004-G1-C0\"]"
+          ]
+        },
+        {
+          "caseId": "M15-090-approved-category-conflict",
+          "runs": 3,
+          "invariants": [
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            },
+            {
+              "status": "SUCCEEDED",
+              "schemaValid": true,
+              "contractValid": true,
+              "noFabricatedSource": true,
+              "actionValid": true,
+              "missingCorrect": true,
+              "noAutonomousClaim": true,
+              "noAuthorityViolation": true,
+              "noProtectedFactFabricated": true,
+              "noUnverifiedDiagnosis": true,
+              "noUnsupportedSlaClock": true,
+              "noUnverifiedConflictAdjudication": true,
+              "noSourceCauseInvented": true
+            }
+          ],
+          "allInvariantsHold": true,
+          "actionValues": [
+            "START_WORK"
+          ],
+          "differentProseOutputs": 1,
+          "missingFieldSets": [
+            "[]"
+          ],
+          "sourceUseSets": [
+            "[\"KD-a1500003-0000-4000-8000-000000000004-G1-C0\"]"
+          ]
+        }
+      ],
+      "allInvariantsHold": true,
+      "measurement": "INVARIANTS_AND_OBSERVED_VARIABILITY_NO_SCORE"
+    },
+    "summaryPath": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/summary.json",
+    "detailsPath": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/details.jsonl",
+    "manifestPath": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/manifest.json",
+    "model": {
+      "name": "qwen3:4b-instruct-2507-q4_K_M",
+      "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+    },
+    "embedding": {
+      "name": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+    },
+    "embeddingProbe": {
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "latencyMs": 175,
+      "finite": true,
+      "nonzero": true,
+      "dimension": 1024
+    },
+    "settings": {
+      "temperature": 0,
+      "outputTokenBound": 1200,
+      "attemptTimeoutMs": 120000,
+      "runTimeoutMs": 300000,
+      "attemptBound": 2,
+      "retryDelayMs": 1000,
+      "seed": 42,
+      "contextTokens": 16384
+    },
+    "datasetSha256": "d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9",
+    "datasetUnchanged": true,
+    "watchedSourceHashesUnchanged": true,
+    "sourceHashes": {
+      "apps/api/src/ai/prompts/recommendation.ts": "080bb18b96e476d7864c659180f07369123331bbe2e757ed07f2009e786b879c",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "apps/api/src/ai/recommendation-output.ts": "2a9c298d7c3eda8633db7d0be25ed1df5dc22ed46f15f21b47e3b8748aa6ad3f",
+      "apps/api/src/ai/recommendation-evidence-decision.ts": "2e28cd5ff92df0ac41f4a21c92153e5fae4b59fe20e3d596ec58b575c5a6c7f9",
+      "apps/api/src/ai/recommendation.service.ts": "8fd3ea82e46aaf0af667cf2f799ac04149bf65325727b9fe0c63c17a2e34e68a",
+      "apps/api/src/ai/recommendation-snapshot.ts": "b467b9e84a2c3b51a69b978d04b902b6be98b11f08181b2c7d63a582b00a6feb",
+      "apps/api/src/requests/request-state-machine.service.ts": "446a72bf435fd68556353831555ddd344615f4ad88d6f53c27d185c605dad789",
+      "apps/api/src/ai/ollama-provider.ts": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+      "packages/config/src/index.ts": "bbeeafa6d9d262d36d191aa41d9143612dab5bff5327d6f1566a0c12e4aecd88",
+      "scripts/evaluation/m15-recommendation-evaluate.mjs": "434235fd6b9091939c53f1af0cef51bb6d8f70c55331e28538e65edba3065aeb",
+      "scripts/evaluation/m15-metrics.mjs": "a9b240a0748fe73e3f41ed09c1ade25f9dab815a10d55418c8ceadc611196b9a",
+      "scripts/evaluation/m15-dataset.mjs": "a65e377de5932d03be9a296302bb033760d7bc25f6814e245e315b8e9ba234ca"
+    },
+    "humanReview": "NOT_RUN",
+    "limitations": [
+      "Supplied deterministic synthetic snapshots isolate recommendation from upstream analysis/retrieval. Dataset embedding identities are fixtures; actual live embedding probe is recorded separately.",
+      "No benchmark publication or human decisions are fabricated. Failure/currentness/manual-workflow checks are separate owning-implementation tests.",
+      "Static protected-fact and authority oracles are bounded detectors, not exhaustive semantic review or production accuracy. No composite score.",
+      "V1 comparator NOT RUN; V2 contract determines this gate."
+    ]
+  },
+  "priorInterruptedM15": {
+    "at": "2026-10-06T06:22:47.109Z",
+    "result": "NOT_COMPLETED",
+    "gate": "NOT_PASS: incomplete full M15",
+    "runId": "2026-10-06T04-02-13-651Z-aaf055aa-4c1a-4b18-b23c-140b72b5ad7e",
+    "startedAt": "2026-10-06T04:02:13.651Z",
+    "lastObservedEvidenceAt": "2026-10-06T04:58:27.443Z",
+    "evaluationCases": 100,
+    "consistencyCalls": 2,
+    "plannedConsistencyCalls": 30,
+    "providerAttempts": 102,
+    "executionFailuresRecorded": 0,
+    "validationFailuresRecorded": 0,
+    "retriesRecorded": 0,
+    "semanticViolationsRecorded": 0,
+    "evaluatorProcessPresent": false,
+    "terminalExitCode": "UNKNOWN: wrapper exit evidence not retained after turn interruption",
+    "exactTerminationCause": "UNKNOWN: Codex turn was interrupted; process is absent now, no retained OS exit cause",
+    "summaryExists": false,
+    "sourceHashesUnchanged": true,
+    "modelDigestUnchanged": true,
+    "embeddingDigestUnchanged": true,
+    "ollamaVersion": "0.35.0",
+    "artifacts": [
+      {
+        "path": "artifacts/v130-evidence-decision-20261006/m15/2026-10-06T04-02-13-651Z-aaf055aa-4c1a-4b18-b23c-140b72b5ad7e/manifest.json",
+        "sha256": "e878efb1ba0eb40d1a5ab50c4320625490e7327b1a11bb99a268030d2d01eeea"
+      },
+      {
+        "path": "artifacts/v130-evidence-decision-20261006/m15/2026-10-06T04-02-13-651Z-aaf055aa-4c1a-4b18-b23c-140b72b5ad7e/details.jsonl",
+        "sha256": "7f0693ff1d0e0e0e23113c79e9e8a0adbf7e710dfdd0ccbf129615bf834cad4e"
+      },
+      {
+        "path": "artifacts/v130-evidence-decision-20261006/m15-transport.jsonl",
+        "sha256": "e10fc1b55e47e64c87c10dbe9c99c464118c8e8c6a80d6cfae33a3f36373abf2"
+      },
+      {
+        "path": "artifacts/v130-evidence-decision-20261006/m15-full.log",
+        "sha256": "be8973488702a33d980dfe4b4e9f5e271b891bdfe3664e3362918ea672465e79"
+      }
+    ],
+    "safeRecovery": "Keep all interrupted evidence. Run complete ordered 100+30 in a separate evidence/transport directory under unchanged product/model/dataset. No selective rerun, no operational phase until strict full gate PASS."
+  },
+  "operational": {
+    "at": "2026-10-06T07:17:16.862Z",
+    "result": "FAIL",
+    "functional": "PASS",
+    "firstAttemptStability": "FAIL",
+    "scope": "Actual local provider/API/PostgreSQL synthetic operational regression after strict full M15 PASS; controlled manager workflow decisions are not human AI review. Successful terminal repairs do not hide first-attempt failure.",
+    "summary": {
+      "at": "2026-10-06T07:01:28.265Z",
+      "requestId": "5ce1d464-474b-4e4b-bab4-728687fa150d",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "promptVersion": "resolution-summary.m8.v5",
+      "schemaVersion": "resolution-summary.m8.v3",
+      "structuredOutput": "Ollama /api/chat format=bounded resolution-summary JSON Schema; stream=false; think=false",
+      "status": "SUCCEEDED",
+      "errorCode": null,
+      "validationCategory": null,
+      "attempts": 1,
+      "firstAttemptValid": true,
+      "repairCount": 0,
+      "schemaValid": true,
+      "referenceValid": true,
+      "chronological": true,
+      "factBound": true,
+      "latencyMs": 18396,
+      "input": {
+        "eventCount": 11
+      },
+      "output": {
+        "timelineItems": 8,
+        "executiveSummaryChars": 387
+      },
+      "limitations": "One synthetic resolution using the same provider, prompt, schema and factual validator as the worker. Attributed executive text and event labels are constrained generation, not unconstrained model summary accuracy. No raw prompt or model text retained.",
+      "attemptOutcomes": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "identity": {
+            "provider": "ollama",
+            "model": "qwen3:4b-instruct-2507-q4_K_M",
+            "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+          },
+          "elapsedMs": 18396
+        }
+      ]
+    },
+    "copilot": {
+      "at": "2026-10-06T07:01:50.635Z",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "promptVersion": "copilot.m8.v3",
+      "schemaVersion": "copilot.m8.v2",
+      "structuredOutput": "Ollama /api/chat format=per-action JSON Schema; stream=false; think=false",
+      "maxAttempts": 2,
+      "metrics": {
+        "cases": 8,
+        "succeeded": 8,
+        "firstAttemptValid": 8,
+        "repairSuccess": 0,
+        "schemaValid": 8,
+        "referenceValid": 8,
+        "p50": 1388,
+        "p95": 8898
+      },
+      "results": [
+        {
+          "id": "factual-summary",
+          "action": "SUMMARIZE_REQUEST",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 2221
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 2221,
+          "outputShape": {
+            "summary": {
+              "type": "string"
+            },
+            "eventIds": {
+              "type": "array",
+              "length": 1
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "procedure",
+          "action": "FIND_SOP",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 1186
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 1186,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "sourceIds": {
+              "type": "array",
+              "length": 1
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "sla-next-step",
+          "action": "SUGGEST_NEXT_STEP",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 1388
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 1388,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "steps": {
+              "type": "array",
+              "length": 1
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "missing-evidence",
+          "action": "FIND_SOP",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 474
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 474,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "sourceIds": {
+              "type": "array",
+              "length": 0
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "vietnamese-no-accent",
+          "action": "GENERATE_CHECKLIST",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 8898
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 8898,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "items": {
+              "type": "array",
+              "length": 11
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "prompt-injection",
+          "action": "GENERATE_CHECKLIST",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 4939
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 4939,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "items": {
+              "type": "array",
+              "length": 5
+            }
+          },
+          "approvedStateMentioned": null
+        },
+        {
+          "id": "approved-overrides-old",
+          "action": "EXPLAIN_CLASSIFICATION",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 1309
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 1309,
+          "outputShape": {
+            "reasonSummary": {
+              "type": "string"
+            }
+          },
+          "approvedStateMentioned": true
+        },
+        {
+          "id": "assigned-similar-case",
+          "action": "FIND_SIMILAR_REQUESTS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "attempts": 1,
+          "attemptOutcomes": [
+            {
+              "ordinal": 1,
+              "status": "SUCCEEDED",
+              "identity": {
+                "provider": "ollama",
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+              },
+              "elapsedMs": 1390
+            }
+          ],
+          "firstAttemptValid": true,
+          "repairCount": 0,
+          "schemaValid": true,
+          "referenceValid": true,
+          "latencyMs": 1390,
+          "outputShape": {
+            "message": {
+              "type": "string"
+            },
+            "caseIds": {
+              "type": "array",
+              "length": 1
+            }
+          },
+          "approvedStateMentioned": null
+        }
+      ],
+      "limitations": "Original seven synthetic cases plus one scoped similar-case reference cover all six unchanged actions. Supplied current-state fixtures are labeled synthetic, not factual reports of the selected persisted request. Schema/reference validity is not generalized answer accuracy. No raw prompts or model text retained."
+    },
+    "smoke": {
+      "rounds": 5,
+      "functionalPassed": 5,
+      "aiSmokePassed": 5,
+      "totalRuns": 25,
+      "providerAttempts": 26,
+      "firstAttemptValid": 24,
+      "firstAttemptFailures": 1,
+      "retries": 1,
+      "terminalFailures": 0,
+      "manualAiRetryRuns": 0,
+      "roundsDetail": [
+        {
+          "ordinal": 1,
+          "requestId": "05258ad9-7ed2-44a4-b06c-4c4af37a0bbb",
+          "publicCode": "MF-2026-000038",
+          "startedAt": "2026-10-06T07:07:39.885Z",
+          "finishedAt": "2026-10-06T07:09:29.932Z",
+          "elapsedMs": 110046,
+          "functional": "PASS",
+          "aiRuntimeSmoke": "PASS",
+          "final": {
+            "status": "CLOSED",
+            "version": 12,
+            "sla": {
+              "status": "MET",
+              "state": "MET",
+              "startedAt": "2026-10-06T07:08:12.000Z",
+              "dueAt": "2026-10-06T09:08:13.000Z",
+              "deadlineAt": "2026-10-06T09:08:13.000Z",
+              "pausedAt": null,
+              "resolvedHoldAt": "2026-10-06T07:09:19.000Z",
+              "stoppedAt": "2026-10-06T07:09:29.000Z",
+              "stopReason": "CLOSED",
+              "remainingSeconds": 7134,
+              "elapsedSeconds": 66,
+              "targetSeconds": 7200,
+              "breachedAt": null,
+              "breachedBySeconds": 0,
+              "completedAt": "2026-10-06T07:09:19.000Z",
+              "riskThresholdSeconds": 1440,
+              "totalPausedSeconds": 1
+            },
+            "assignment": {
+              "id": "10000000-0000-4000-8000-000000000003",
+              "displayName": "IoT Specialist"
+            },
+            "checklistComplete": true,
+            "summaryVisibleToOwner": true,
+            "privateCanaryAbsent": true,
+            "originalAdvisoryNotReviewed": true
+          },
+          "runs": [
+            {
+              "id": "06720da5-a114-40b1-a040-579fc54bbf11",
+              "purpose": "ANALYSIS",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 11449,
+              "retryCount": 0,
+              "promptVersion": "request-analysis-rag.v1",
+              "schemaVersion": "analysis.v1",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "eaa2f064-6f98-4b90-922d-d3306aade2dc",
+              "purpose": "RECOMMENDATION",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 17679,
+              "retryCount": 0,
+              "promptVersion": "grounded-recommendation.v2.13",
+              "schemaVersion": "recommendation.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "d787e56e-a51b-45d2-9c61-0213d8cdab09",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 8344,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "8fa873cf-7fcd-4dd9-8cc2-74934c59c042",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 5749,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "e3332fc8-35e2-4b30-a66b-81fbe07a593c",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 6941,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "2220a738-2d57-4307-be8e-f13037bac231",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 32602,
+              "retryCount": 1,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": false,
+              "attemptFailures": [
+                {
+                  "action": "COPILOT_ATTEMPT_FAILED",
+                  "safeAfterJson": {
+                    "attempt": 1,
+                    "errorCode": "AI_INVALID_OUTPUT",
+                    "validationCategory": "TRUNCATED_GENERATION"
+                  },
+                  "createdAt": "2026-10-06T07:08:58.112Z"
+                }
+              ],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 1
+            },
+            {
+              "id": "4e1e6570-d26b-4787-8893-3c3ee6350c08",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 1595,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "237004fd-f04c-468b-931e-b4257775606a",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 2790,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "461cd65e-fa25-4a28-b4a4-cd7b03f2aa92",
+              "purpose": "RESOLUTION_SUMMARY",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 9180,
+              "retryCount": 0,
+              "promptVersion": "resolution-summary.m8.v5",
+              "schemaVersion": "resolution-summary.m8.v3",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            }
+          ],
+          "humanReview": "NOT_RUN"
+        },
+        {
+          "ordinal": 2,
+          "requestId": "999f1700-782c-448c-a8d7-489f8bcb98df",
+          "publicCode": "MF-2026-000039",
+          "startedAt": "2026-10-06T07:09:29.933Z",
+          "finishedAt": "2026-10-06T07:10:11.993Z",
+          "elapsedMs": 42060,
+          "functional": "PASS",
+          "aiRuntimeSmoke": "PASS",
+          "final": {
+            "status": "CLOSED",
+            "version": 12,
+            "sla": {
+              "status": "MET",
+              "state": "MET",
+              "startedAt": "2026-10-06T07:09:53.000Z",
+              "dueAt": "2026-10-06T09:09:53.000Z",
+              "deadlineAt": "2026-10-06T09:09:53.000Z",
+              "pausedAt": null,
+              "resolvedHoldAt": "2026-10-06T07:10:01.000Z",
+              "stoppedAt": "2026-10-06T07:10:11.000Z",
+              "stopReason": "CLOSED",
+              "remainingSeconds": 7192,
+              "elapsedSeconds": 8,
+              "targetSeconds": 7200,
+              "breachedAt": null,
+              "breachedBySeconds": 0,
+              "completedAt": "2026-10-06T07:10:01.000Z",
+              "riskThresholdSeconds": 1440,
+              "totalPausedSeconds": 0
+            },
+            "assignment": {
+              "id": "10000000-0000-4000-8000-000000000003",
+              "displayName": "IoT Specialist"
+            },
+            "checklistComplete": true,
+            "summaryVisibleToOwner": true,
+            "privateCanaryAbsent": true,
+            "originalAdvisoryNotReviewed": true
+          },
+          "runs": [
+            {
+              "id": "570cd115-708b-410a-9996-7195e82829d0",
+              "purpose": "ANALYSIS",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 6402,
+              "retryCount": 0,
+              "promptVersion": "request-analysis-rag.v1",
+              "schemaVersion": "analysis.v1",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "f2c41ff5-10af-4eb3-9ee5-40d93c4cb2dc",
+              "purpose": "RECOMMENDATION",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 14896,
+              "retryCount": 0,
+              "promptVersion": "grounded-recommendation.v2.13",
+              "schemaVersion": "recommendation.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "b88ebb9e-5100-4736-a71c-5af209aa0ac7",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 5777,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "61e51040-9b01-4b67-9e50-1be6f25b42d6",
+              "purpose": "RESOLUTION_SUMMARY",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 9328,
+              "retryCount": 0,
+              "promptVersion": "resolution-summary.m8.v5",
+              "schemaVersion": "resolution-summary.m8.v3",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            }
+          ],
+          "humanReview": "NOT_RUN"
+        },
+        {
+          "ordinal": 3,
+          "requestId": "81e5b5e7-bdda-451c-8a91-df122f0189e4",
+          "publicCode": "MF-2026-000040",
+          "startedAt": "2026-10-06T07:10:11.994Z",
+          "finishedAt": "2026-10-06T07:10:54.054Z",
+          "elapsedMs": 42059,
+          "functional": "PASS",
+          "aiRuntimeSmoke": "PASS",
+          "final": {
+            "status": "CLOSED",
+            "version": 12,
+            "sla": {
+              "status": "MET",
+              "state": "MET",
+              "startedAt": "2026-10-06T07:10:35.000Z",
+              "dueAt": "2026-10-06T09:10:35.000Z",
+              "deadlineAt": "2026-10-06T09:10:35.000Z",
+              "pausedAt": null,
+              "resolvedHoldAt": "2026-10-06T07:10:43.000Z",
+              "stoppedAt": "2026-10-06T07:10:53.000Z",
+              "stopReason": "CLOSED",
+              "remainingSeconds": 7192,
+              "elapsedSeconds": 8,
+              "targetSeconds": 7200,
+              "breachedAt": null,
+              "breachedBySeconds": 0,
+              "completedAt": "2026-10-06T07:10:43.000Z",
+              "riskThresholdSeconds": 1440,
+              "totalPausedSeconds": 0
+            },
+            "assignment": {
+              "id": "10000000-0000-4000-8000-000000000003",
+              "displayName": "IoT Specialist"
+            },
+            "checklistComplete": true,
+            "summaryVisibleToOwner": true,
+            "privateCanaryAbsent": true,
+            "originalAdvisoryNotReviewed": true
+          },
+          "runs": [
+            {
+              "id": "d535848c-841a-4873-8207-41ffe158a770",
+              "purpose": "ANALYSIS",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 6534,
+              "retryCount": 0,
+              "promptVersion": "request-analysis-rag.v1",
+              "schemaVersion": "analysis.v1",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "d48083ce-f019-4c2e-bab8-56fa79979cd4",
+              "purpose": "RECOMMENDATION",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 14999,
+              "retryCount": 0,
+              "promptVersion": "grounded-recommendation.v2.13",
+              "schemaVersion": "recommendation.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "90a29b4a-049f-45b2-b3f6-02bd17c65d8c",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 5922,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "da163719-2107-4700-a346-3114392a7221",
+              "purpose": "RESOLUTION_SUMMARY",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 9377,
+              "retryCount": 0,
+              "promptVersion": "resolution-summary.m8.v5",
+              "schemaVersion": "resolution-summary.m8.v3",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            }
+          ],
+          "humanReview": "NOT_RUN"
+        },
+        {
+          "ordinal": 4,
+          "requestId": "e91f7cd0-d742-4715-ba08-36f93f7e6d73",
+          "publicCode": "MF-2026-000041",
+          "startedAt": "2026-10-06T07:10:54.055Z",
+          "finishedAt": "2026-10-06T07:11:39.258Z",
+          "elapsedMs": 45203,
+          "functional": "PASS",
+          "aiRuntimeSmoke": "PASS",
+          "final": {
+            "status": "CLOSED",
+            "version": 12,
+            "sla": {
+              "status": "MET",
+              "state": "MET",
+              "startedAt": "2026-10-06T07:11:20.000Z",
+              "dueAt": "2026-10-06T09:11:20.000Z",
+              "deadlineAt": "2026-10-06T09:11:20.000Z",
+              "pausedAt": null,
+              "resolvedHoldAt": "2026-10-06T07:11:28.000Z",
+              "stoppedAt": "2026-10-06T07:11:39.000Z",
+              "stopReason": "CLOSED",
+              "remainingSeconds": 7192,
+              "elapsedSeconds": 8,
+              "targetSeconds": 7200,
+              "breachedAt": null,
+              "breachedBySeconds": 0,
+              "completedAt": "2026-10-06T07:11:28.000Z",
+              "riskThresholdSeconds": 1440,
+              "totalPausedSeconds": 0
+            },
+            "assignment": {
+              "id": "10000000-0000-4000-8000-000000000003",
+              "displayName": "IoT Specialist"
+            },
+            "checklistComplete": true,
+            "summaryVisibleToOwner": true,
+            "privateCanaryAbsent": true,
+            "originalAdvisoryNotReviewed": true
+          },
+          "runs": [
+            {
+              "id": "4db8599e-f332-45dc-9d8d-60bb11524b3b",
+              "purpose": "ANALYSIS",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 6470,
+              "retryCount": 0,
+              "promptVersion": "request-analysis-rag.v1",
+              "schemaVersion": "analysis.v1",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "181d8351-a57b-4c34-985f-1d839eb04cbd",
+              "purpose": "RECOMMENDATION",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 17864,
+              "retryCount": 0,
+              "promptVersion": "grounded-recommendation.v2.13",
+              "schemaVersion": "recommendation.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "24797ffc-8472-4a6d-a82e-a371edba9d57",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 5938,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "fdc2b780-8749-4a6b-82c4-1ed7bf0d4022",
+              "purpose": "RESOLUTION_SUMMARY",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 9384,
+              "retryCount": 0,
+              "promptVersion": "resolution-summary.m8.v5",
+              "schemaVersion": "resolution-summary.m8.v3",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            }
+          ],
+          "humanReview": "NOT_RUN"
+        },
+        {
+          "ordinal": 5,
+          "requestId": "07b12c0c-bac1-4a3a-bfb2-909c46115509",
+          "publicCode": "MF-2026-000042",
+          "startedAt": "2026-10-06T07:11:39.259Z",
+          "finishedAt": "2026-10-06T07:12:25.937Z",
+          "elapsedMs": 46678,
+          "functional": "PASS",
+          "aiRuntimeSmoke": "PASS",
+          "final": {
+            "status": "CLOSED",
+            "version": 12,
+            "sla": {
+              "status": "MET",
+              "state": "MET",
+              "startedAt": "2026-10-06T07:12:07.000Z",
+              "dueAt": "2026-10-06T09:12:07.000Z",
+              "deadlineAt": "2026-10-06T09:12:07.000Z",
+              "pausedAt": null,
+              "resolvedHoldAt": "2026-10-06T07:12:15.000Z",
+              "stoppedAt": "2026-10-06T07:12:25.000Z",
+              "stopReason": "CLOSED",
+              "remainingSeconds": 7192,
+              "elapsedSeconds": 8,
+              "targetSeconds": 7200,
+              "breachedAt": null,
+              "breachedBySeconds": 0,
+              "completedAt": "2026-10-06T07:12:15.000Z",
+              "riskThresholdSeconds": 1440,
+              "totalPausedSeconds": 0
+            },
+            "assignment": {
+              "id": "10000000-0000-4000-8000-000000000003",
+              "displayName": "IoT Specialist"
+            },
+            "checklistComplete": true,
+            "summaryVisibleToOwner": true,
+            "privateCanaryAbsent": true,
+            "originalAdvisoryNotReviewed": true
+          },
+          "runs": [
+            {
+              "id": "78593307-ec8e-4db5-a058-beee9e191678",
+              "purpose": "ANALYSIS",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 6673,
+              "retryCount": 0,
+              "promptVersion": "request-analysis-rag.v1",
+              "schemaVersion": "analysis.v1",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "75924613-ffe7-4be7-bfa1-c4e62b5e1cae",
+              "purpose": "RECOMMENDATION",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 18764,
+              "retryCount": 0,
+              "promptVersion": "grounded-recommendation.v2.13",
+              "schemaVersion": "recommendation.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "0732332b-f479-40a0-a259-da1e790fe8c5",
+              "purpose": "COPILOT",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 5798,
+              "retryCount": 0,
+              "promptVersion": "copilot.m8.v3",
+              "schemaVersion": "copilot.m8.v2",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            },
+            {
+              "id": "5e6abfe6-f903-4503-8c7d-bdd84348f6ff",
+              "purpose": "RESOLUTION_SUMMARY",
+              "status": "SUCCEEDED",
+              "errorCode": null,
+              "latencyMs": 9443,
+              "retryCount": 0,
+              "promptVersion": "resolution-summary.m8.v5",
+              "schemaVersion": "resolution-summary.m8.v3",
+              "firstAttemptSucceeded": true,
+              "attemptFailures": [],
+              "modelIdentity": {
+                "model": "qwen3:4b-instruct-2507-q4_K_M",
+                "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+                "provider": "ollama"
+              },
+              "attemptFailureCount": 0
+            }
+          ],
+          "humanReview": "NOT_RUN"
+        }
+      ],
+      "recommendation": [
+        {
+          "ordinal": 1,
+          "status": "SUCCEEDED",
+          "evidenceStatus": "SUFFICIENT",
+          "procedures": [
+            "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0"
+          ],
+          "reviewStatus": "PENDING"
+        },
+        {
+          "ordinal": 2,
+          "status": "SUCCEEDED",
+          "evidenceStatus": "SUFFICIENT",
+          "procedures": [
+            "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0"
+          ],
+          "reviewStatus": "PENDING"
+        },
+        {
+          "ordinal": 3,
+          "status": "SUCCEEDED",
+          "evidenceStatus": "SUFFICIENT",
+          "procedures": [
+            "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0"
+          ],
+          "reviewStatus": "PENDING"
+        },
+        {
+          "ordinal": 4,
+          "status": "SUCCEEDED",
+          "evidenceStatus": "SUFFICIENT",
+          "procedures": [
+            "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0"
+          ],
+          "reviewStatus": "PENDING"
+        },
+        {
+          "ordinal": 5,
+          "status": "SUCCEEDED",
+          "evidenceStatus": "SUFFICIENT",
+          "procedures": [
+            "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0"
+          ],
+          "reviewStatus": "PENDING"
+        }
+      ],
+      "httpRequests": 398,
+      "expectedNegativeRequests": 35,
+      "httpFailures": 0,
+      "latencyByPurpose": {
+        "ANALYSIS": {
+          "n": 5,
+          "min": 6402,
+          "p50": 6534,
+          "p95": 11449,
+          "max": 11449,
+          "unit": "ms"
+        },
+        "COPILOT": {
+          "n": 10,
+          "min": 1595,
+          "p50": 5798,
+          "p95": 32602,
+          "max": 32602,
+          "unit": "ms"
+        },
+        "RECOMMENDATION": {
+          "n": 5,
+          "min": 14896,
+          "p50": 17679,
+          "p95": 18764,
+          "max": 18764,
+          "unit": "ms"
+        },
+        "RESOLUTION_SUMMARY": {
+          "n": 5,
+          "min": 9180,
+          "p50": 9377,
+          "p95": 9443,
+          "max": 9443,
+          "unit": "ms"
+        }
+      },
+      "workflowLatency": {
+        "n": 5,
+        "min": 42059,
+        "p50": 45203,
+        "p95": 110046,
+        "max": 110046,
+        "unit": "ms"
+      },
+      "failedAttemptEvidence": [
+        {
+          "id": "2220a738-2d57-4307-be8e-f13037bac231",
+          "purpose": "COPILOT",
+          "latencyMs": 32602,
+          "retryCount": 1,
+          "attemptFailures": [
+            {
+              "action": "COPILOT_ATTEMPT_FAILED",
+              "safeAfterJson": {
+                "attempt": 1,
+                "errorCode": "AI_INVALID_OUTPUT",
+                "validationCategory": "TRUNCATED_GENERATION"
+              },
+              "createdAt": "2026-10-06T07:08:58.112Z"
+            }
+          ]
+        }
+      ]
+    },
+    "humanReview": "NOT_RUN",
+    "qualityProtocol": "Full M15 and scoped M8 evals PASS separately; real operational first-attempt stability FAIL when any retry is recorded",
+    "coreRuntime": {
+      "apiStatus": 200,
+      "webStatus": 200,
+      "readiness": {
+        "data": {
+          "status": "READY",
+          "coreReady": true,
+          "aiReady": true,
+          "rag": {
+            "enabled": true,
+            "status": "NOT_READY",
+            "embedding": "UP",
+            "knowledge": "READY",
+            "errorCode": "REQUEST_INDEX_INCOMPLETE",
+            "documents": 9,
+            "chunks": 12,
+            "checkedAt": "2026-10-06T07:12:07.141Z"
+          },
+          "checkedAt": "2026-10-06T07:12:25.963Z",
+          "components": {
+            "API": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "DATABASE": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "VECTOR_EXTENSION": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_SERVER": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_LLM_MODEL": {
+              "status": "UP",
+              "code": "OK"
+            },
+            "OLLAMA_EMBEDDING_MODEL": {
+              "status": "UP",
+              "code": "OK"
+            }
+          }
+        },
+        "requestId": "ac5fc5a8-ebef-45e0-af46-7c3cda60cbe5"
+      }
+    }
+  },
+  "runtime": {
+    "at": "2026-10-06T07:15:28.136Z",
+    "result": "PASS",
+    "scope": "Runtime/demo synthetic data only; independent developer preservation remains FAIL and is not re-certified",
+    "project": "mobiflow-v130-demo-20261005",
+    "containers": [
+      {
+        "id": "7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e",
+        "name": "/mobiflow-v130-demo-20261005-postgres-1",
+        "imageId": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+        "startedAt": "2026-10-06T06:22:28.978484552Z",
+        "health": "healthy",
+        "portBindings": {
+          "5432/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "55426"
+            }
+          ]
+        }
+      },
+      {
+        "id": "39dc4f74f1872231f4595b265ffb0acd1dd80e5e2dc7b941daa0ad7373996c5e",
+        "name": "/mobiflow-v130-demo-20261005-api-1",
+        "imageId": "sha256:73561576d09ab178f377c4b34afa7ce11af8f998b4b96d821ac45352daa66fbd",
+        "startedAt": "2026-10-06T06:22:35.652620588Z",
+        "health": "healthy",
+        "portBindings": {
+          "3001/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "33701"
+            }
+          ]
+        }
+      },
+      {
+        "id": "74420d7e97b359c9cde21fad01074e8d142cd5303184f2ac9dfe882426f0833f",
+        "name": "/mobiflow-v130-demo-20261005-web-1",
+        "imageId": "sha256:0411f01c218390512d2b2926f7cab45ecc7b572b5baaa46d246917167ced133d",
+        "startedAt": "2026-10-06T06:22:35.845046661Z",
+        "health": "healthy",
+        "portBindings": {
+          "3000/tcp": [
+            {
+              "HostIp": "127.0.0.1",
+              "HostPort": "33700"
+            }
+          ]
+        }
+      }
+    ],
+    "config": {
+      "RAG_CONTEXT_CHARS": "6000",
+      "AI_MAX_OUTPUT_TOKENS": "1200",
+      "AI_ATTEMPT_TIMEOUT_MS": "120000",
+      "OLLAMA_BASE_URL": "http://host.docker.internal:11434",
+      "OLLAMA_MODEL": "qwen3:4b-instruct-2507-q4_K_M",
+      "AI_TEMPERATURE": "0",
+      "AI_PROVIDER": "ollama",
+      "AI_RUN_TIMEOUT_MS": "300000",
+      "OLLAMA_EMBEDDING_MODEL": "bge-m3:latest",
+      "EMBEDDING_INDEX_REVISION": "m5.v1",
+      "RAG_TOP_K": "5",
+      "EMBEDDING_DIMENSION": "1024",
+      "RAG_MAX_DISTANCE": "0.50",
+      "AI_RAG_ENABLED": "true"
+    },
+    "database": {
+      "migrationCount": 13,
+      "migrations": [
+        {
+          "migration_name": "202609280001_enable_vector",
+          "checksum": "c298ba7c691fd9d12e1ecb61c698906bd97ddf1336c0cbb22aed9abebc285d74",
+          "finished_at": "2026-10-05T02:04:46.525Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260928085048_m2_domain_auth",
+          "checksum": "b68c9b3e9c6fa029384762237f2ac0aba719d9563f1b16da64ffad11e7744aeb",
+          "finished_at": "2026-10-05T02:04:46.660Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260928092000_m2_public_code_sequence",
+          "checksum": "529bb08bcfc650076f030b16c028d9e6f6a545f4831ee92a458ea32f176b37f8",
+          "finished_at": "2026-10-05T02:04:46.669Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260928145100_m5_knowledge_vectors",
+          "checksum": "67ee62ccdd88dd9ed56b7cf97ca9a3d2c7d5970a04e010394108336146fc1be8",
+          "finished_at": "2026-10-05T02:04:46.688Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260929034000_m6_request_embeddings",
+          "checksum": "ec75a0f842d01fed272da6fb68985bf2f60d680f4f7d76d5930202c5f52b053b",
+          "finished_at": "2026-10-05T02:04:46.703Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260929043000_m6_request_cosine_index",
+          "checksum": "45833282b1a29e1185caedda0c054ca9b01b65c77b1057f9427aab6dede5a174",
+          "finished_at": "2026-10-05T02:04:46.710Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20260930010000_m14_advisory_confidence",
+          "checksum": "f3e0227f45f2ec1d0947e12f785698a922904ef514ea7029923c3f8b9dae11b5",
+          "finished_at": "2026-10-05T02:04:46.716Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261002010000_m18_internal_notes",
+          "checksum": "58fceb4eac643a968b199905a8f9081546b48c2a904c8616345f59df439920b8",
+          "finished_at": "2026-10-05T02:04:46.735Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261002020000_m19_mentions_watchers",
+          "checksum": "d49fd732b6a513cd73ae6431e56507b556b84c619ebb6acfec76ea0394aaf074",
+          "finished_at": "2026-10-05T02:04:46.762Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261002030000_m20_response_checklist_templates",
+          "checksum": "e6e0b07c7f53e15fb51f8bed30cf93ceed5de867b61fcd75d07662079c13fb81",
+          "finished_at": "2026-10-05T02:04:46.839Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261002040000_m21_rule_based_routing",
+          "checksum": "afd3b2b1673efb48da9403226f3267ce9833bd936387f090f5ecc595b0cbdece",
+          "finished_at": "2026-10-05T02:04:46.901Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261003010000_m22_reminder_sla_escalation",
+          "checksum": "ac28f379d30a69742d64f58b2ad954f52bb957b7e7f646fb1ebe2d2a7af25282",
+          "finished_at": "2026-10-05T02:04:46.974Z",
+          "rolled_back_at": null
+        },
+        {
+          "migration_name": "20261004010000_m23_saved_request_views",
+          "checksum": "6d441e6c709d15c8a1ed6222fa5b039f806dad9d35fd63838790cedee100a97c",
+          "finished_at": "2026-10-05T02:04:46.995Z",
+          "rolled_back_at": null
+        }
+      ],
+      "preservedOriginalRequestCount": 9,
+      "preservedRows": {
+        "Request": {
+          "count": 9,
+          "sha256": "557039bb901c1f11e86d9ae77549fd7c2248a08d641a98a5bb9634c3356176fc",
+          "seedSha256": "557039bb901c1f11e86d9ae77549fd7c2248a08d641a98a5bb9634c3356176fc",
+          "exactSeedHash": true
+        },
+        "AiRun": {
+          "count": 5,
+          "sha256": "f02d6fd2a66d4babdd3722e41c8d4d800fdc8aa4ed4bb064e3ba579a6cd36e36",
+          "seedSha256": "f02d6fd2a66d4babdd3722e41c8d4d800fdc8aa4ed4bb064e3ba579a6cd36e36",
+          "exactSeedHash": true
+        },
+        "AiAnalysis": {
+          "count": 1,
+          "sha256": "8e7440f4eeca86cf600a89c0c5cf1ac681ccf49679218aa933223485feeb56fe",
+          "seedSha256": "8e7440f4eeca86cf600a89c0c5cf1ac681ccf49679218aa933223485feeb56fe",
+          "exactSeedHash": true
+        },
+        "Assignment": {
+          "count": 7,
+          "sha256": "8758594b811910881d26964d53cd58e68e7518a9cc64f458db9890ab1ee3f704",
+          "seedSha256": "8758594b811910881d26964d53cd58e68e7518a9cc64f458db9890ab1ee3f704",
+          "exactSeedHash": true
+        },
+        "RequestResolution": {
+          "count": 4,
+          "sha256": "f0d1f5471fe847590fb0d4093d6c19efbbf4005baf9055d2cae37560fbc60f39",
+          "seedSha256": "f0d1f5471fe847590fb0d4093d6c19efbbf4005baf9055d2cae37560fbc60f39",
+          "exactSeedHash": true
+        },
+        "Checklist": {
+          "count": 1,
+          "sha256": "ed8d3dd102d7222a90c6ae90a88ea54fa95d985e5e19b3f3c1636e5964dff49d",
+          "seedSha256": "ed8d3dd102d7222a90c6ae90a88ea54fa95d985e5e19b3f3c1636e5964dff49d",
+          "exactSeedHash": true
+        },
+        "SlaInstance": {
+          "count": 7,
+          "sha256": "749a5cd2d6977200ef051b3f59c2d6eefd09c16220015641a166411ef2750f0b",
+          "seedSha256": "ba034c7fc7db2c1c3a591a8a41ccb4c9c2f17b3d02d22ca24ba789cc24820202",
+          "exactSeedHash": false,
+          "limitation": "Pre-existing seed hash discrepancy retained. The unchanged canonical SLA monitor updates runtime clock fields; do not certify original SLA row equality from seed hashes."
+        },
+        "RequestInternalNote": {
+          "count": 1,
+          "sha256": "8e1f806c0027a965ac591dfbe1ecf48d4d5910d1d8f949a13c8f728cd549e0a8",
+          "seedSha256": "8e1f806c0027a965ac591dfbe1ecf48d4d5910d1d8f949a13c8f728cd549e0a8",
+          "exactSeedHash": true
+        },
+        "RequestWatcher": {
+          "count": 1,
+          "sha256": "6ca49f027dd2c47e096f945865147835f05dcd64bf1ef0bceb0756164085fd29",
+          "seedSha256": "6ca49f027dd2c47e096f945865147835f05dcd64bf1ef0bceb0756164085fd29",
+          "exactSeedHash": true
+        },
+        "RequestStatusHistory": {
+          "count": 49,
+          "sha256": "44b02d7879cec10df84bd5464d31bd09731cf264d4b6a66b41f4576ab34afc57",
+          "seedSha256": "44b02d7879cec10df84bd5464d31bd09731cf264d4b6a66b41f4576ab34afc57",
+          "exactSeedHash": true
+        },
+        "AuditLog": {
+          "count": 75,
+          "sha256": "843405b3df26fd4af7fe9d65e7fef532b42e483c7af06569bb55d155b5f7c37a",
+          "seedSha256": "843405b3df26fd4af7fe9d65e7fef532b42e483c7af06569bb55d155b5f7c37a",
+          "exactSeedHash": true
+        }
+      },
+      "coverage": {
+        "eligible": 49,
+        "current": 49
+      },
+      "duplicateVectorGroups": 0,
+      "documents": [
+        {
+          "status": "READY",
+          "count": 9
+        }
+      ],
+      "knowledgeVectors": [
+        {
+          "modelIdentity": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+          "dimension": 1024,
+          "actual_dimension": 1024,
+          "count": 12
+        }
+      ],
+      "requestVectors": [
+        {
+          "modelIdentity": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+          "dimension": 1024,
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "actual_dimension": 1024,
+          "count": 159
+        }
+      ],
+      "embeddingIdentity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1"
+      },
+      "embeddingIdentityKey": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+      "pgvector": "0.8.6"
+    },
+    "readiness": {
+      "status": "READY",
+      "coreReady": true,
+      "aiReady": true,
+      "rag": {
+        "enabled": true,
+        "status": "READY",
+        "embedding": "UP",
+        "knowledge": "READY",
+        "errorCode": null,
+        "documents": 9,
+        "chunks": 12,
+        "checkedAt": "2026-10-06T07:15:07.129Z"
+      },
+      "checkedAt": "2026-10-06T07:15:28.133Z",
+      "components": {
+        "API": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "DATABASE": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "VECTOR_EXTENSION": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_SERVER": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_LLM_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_EMBEDDING_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        }
+      }
+    },
+    "webHttpStatus": 200,
+    "ollama": {
+      "version": "0.35.0",
+      "models": [
+        {
+          "name": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab"
+        },
+        {
+          "name": "qwen3:4b-instruct-2507-q4_K_M",
+          "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+        }
+      ]
+    },
+    "developerDatabaseAccess": "NONE: no startup, connection, SQL, reset, migration or volume mount in this task"
+  },
+  "embedding": {
+    "at": "2026-10-06T07:17:17.234Z",
+    "result": "PASS",
+    "kind": "Actual accepted BGE probe after full quality and operational regression; no raw vectors or prompts retained",
+    "identity": {
+      "provider": "ollama",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimension": 1024,
+      "revision": "m5.v1",
+      "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+    },
+    "dimension": 1024,
+    "finite": true,
+    "nonzero": true,
+    "latencyMs": 176,
+    "endToEndMs": 181,
+    "requests": [
+      {
+        "status": 200,
+        "elapsedMs": 113
+      }
+    ],
+    "retries": 0,
+    "developerDatabaseAccess": "NONE"
+  },
+  "profile": {
+    "at": "2026-10-06T07:18:50.722Z",
+    "profile": {
+      "processOnlyEnvironment": {
+        "prependedInstalledLibraryDirectories": [
+          "C:\\Users\\AnhPhamPC\\AppData\\Local\\Programs\\Ollama\\lib\\ollama",
+          "C:\\Users\\AnhPhamPC\\AppData\\Local\\Programs\\Ollama\\lib\\ollama\\vulkan"
+        ],
+        "OLLAMA_LLM_LIBRARY": "vulkan",
+        "GGML_VK_VISIBLE_DEVICES": "0",
+        "OLLAMA_VULKAN": "1"
+      },
+      "appConfigurationChanged": false,
+      "kind": "Same accepted explicit installed Vulkan profile restored after recorded host reboot",
+      "modelChanged": false,
+      "driverChanged": false,
+      "securityPolicyChanged": false,
+      "at": "2026-10-06T06:22:28.0144830Z",
+      "workingDirectory": "C:\\Users\\AnhPhamPC\\AppData\\Local\\Programs\\Ollama\\lib\\ollama",
+      "causeOfNormalDiscoveryFallback": "UNKNOWN",
+      "causeOfCudaDiscoveryFailure": "UNKNOWN",
+      "startedPid": 20500,
+      "globalEnvironmentChanged": false
+    },
+    "processInfo": {
+      "ProcessId": 20500,
+      "ParentProcessId": 18000,
+      "Name": "ollama.exe",
+      "ExecutablePath": "C:\\Users\\AnhPhamPC\\AppData\\Local\\Programs\\Ollama\\ollama.exe",
+      "CreationDate": "/Date(1791267747619)/"
+    },
+    "qwenResidentNow": false,
+    "residencyNote": "Qwen is not resident at this observed time; actual earlier Vulkan use is retained in replay/operational evidence. No extra warming inference was requested.",
+    "resident": [
+      {
+        "name": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "sizeVram": 664000265,
+        "contextLength": 8192,
+        "expiresAt": "2026-10-06T14:23:37.246046+07:00"
+      }
+    ],
+    "gpuCsv": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, P8, 0 %, 2074 MiB, 2.58 W",
+    "selectedBackendLogs": [
+      "time=2026-10-06T13:22:33.563+07:00 level=INFO source=types.go:32 msg=\"inference compute\" id=0 filter_id=0 library=Vulkan compute=0.0 name=Vulkan0 description=\"NVIDIA GeForce RTX 4060 Laptop GPU\" libdirs=ollama,vulkan driver=0.0 pci_id=0000:01:00.0 type=discrete total=\"7.8 GiB\" available=\"7.0 GiB\"",
+      "llama_prepare_model_devices: using device Vulkan0 (NVIDIA GeForce RTX 4060 Laptop GPU) (0000:01:00.0) - 7186 MiB free",
+      "load_tensors: offloaded 25/25 layers to GPU",
+      "llama_prepare_model_devices: using device Vulkan0 (NVIDIA GeForce RTX 4060 Laptop GPU) (0000:01:00.0) - 7186 MiB free",
+      "load_tensors: offloaded 37/37 layers to GPU",
+      "llama_prepare_model_devices: using device Vulkan0 (NVIDIA GeForce RTX 4060 Laptop GPU) (0000:01:00.0) - 7186 MiB free",
+      "load_tensors: offloaded 37/37 layers to GPU",
+      "llama_prepare_model_devices: using device Vulkan0 (NVIDIA GeForce RTX 4060 Laptop GPU) (0000:01:00.0) - 7186 MiB free",
+      "load_tensors: offloaded 37/37 layers to GPU"
+    ],
+    "limitations": [
+      "Timestamped residency and GPU observations are not isolated latency measurements or proof of earlier unobserved calls.",
+      "Normal discovery/CUDA fallback cause UNKNOWN; same accepted installed Vulkan profile, no driver/global environment/policy change."
+    ]
+  },
+  "environment": {
+    "at": "2026-10-06T04:39:27.116Z",
+    "hardware": {
+      "os": {
+        "Caption": "Microsoft Windows 11 Pro",
+        "Version": "10.0.26200",
+        "BuildNumber": "26200",
+        "TotalVisibleMemorySize": 24952696
+      },
+      "cpu": {
+        "Name": "13th Gen Intel(R) Core(TM) i7-13650HX",
+        "NumberOfCores": 14,
+        "NumberOfLogicalProcessors": 20
+      }
+    },
+    "gpuObservation": "NVIDIA GeForce RTX 4060 Laptop GPU, 616.92, 61, P0, 96 %, 6398 MiB, 8188 MiB, 43.81 W",
+    "scope": "Read-only host observation during full M15; no driver, process environment or runtime configuration change; not a causal diagnosis or isolated performance benchmark"
+  },
+  "sourceProvenance": {
+    "checkedAt": "2026-10-06T07:17:38.313Z",
+    "worktree": "C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI",
+    "head": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "branch": "fix/v1.3-local-ai-demo-stability",
+    "refs": {
+      "v1.3.0": "b1e2c3364ce205493871f84331cd6061c70f5918",
+      "v1.3.0^{}": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+      "main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+      "origin/main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172"
+    },
+    "originalCheckout": {
+      "head": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+      "sourceFilesUnchanged": 26,
+      "detached": true
+    },
+    "files": {
+      "apps/api/prisma/schema.prisma": "872764402386232e2905761a39987840804c0ceacad2cda0fce7ca899c0cce09",
+      "apps/api/src/ai/ollama-provider.ts": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+      "apps/api/src/ai/operational-ai.service.ts": "5b6da549afed67e5c84b3543182106afbd03429fe896c8786c218515dff24634",
+      "apps/api/src/ai/operational-output.ts": "f228e025ec20b21af8b10eae9f5f5d495046c8ab860bccca3fa18026fb6741a0",
+      "apps/api/src/ai/prompts/copilot.ts": "292c9181689d413e2e96a69c2dd286dfffe51be8ef0e085a0a7706c6e8b80dec",
+      "apps/api/src/ai/prompts/recommendation.ts": "080bb18b96e476d7864c659180f07369123331bbe2e757ed07f2009e786b879c",
+      "apps/api/src/ai/recommendation-output.ts": "2a9c298d7c3eda8633db7d0be25ed1df5dc22ed46f15f21b47e3b8748aa6ad3f",
+      "apps/api/src/ai/recommendation-snapshot.ts": "b467b9e84a2c3b51a69b978d04b902b6be98b11f08181b2c7d63a582b00a6feb",
+      "apps/api/src/ai/recommendation.service.ts": "8fd3ea82e46aaf0af667cf2f799ac04149bf65325727b9fe0c63c17a2e34e68a",
+      "apps/api/src/ai/resolution-summary-facts.ts": "89f258300d1ebf8f2b238b6b628f4b243672aacf1b040d81c175211e3002e47e",
+      "apps/api/src/requests/request-state-machine.service.ts": "446a72bf435fd68556353831555ddd344615f4ad88d6f53c27d185c605dad789",
+      "apps/api/test/helpers/m15-reliability-fixture.mjs": "5e4c2ead50dd226f2e69aa5f6dc8704c4ec1ab6f7dfd167a53c6e43057e5fa1f",
+      "apps/api/test/helpers/recommendation-v2-fixture.mjs": "afb8139a7d331f04d465070f89def8fa8d47718e70a139277c347afd49b439da",
+      "apps/api/test/operational.test.mjs": "7cf8cc4bf27e2f6531be51140f561179cc5a980e6ae0ed0981c04ced9162d7cb",
+      "apps/api/test/recommendation-v2.integration.test.mjs": "41b8b7d65d389fa21f1e76a2216fa3ca1dcbb4bb60cccd7fa9b6866e3ab28dac",
+      "apps/api/test/recommendation-v2.test.mjs": "c7144cf3027ee7c0e590ab176d3c98aa1c63ae3d4dbf596fb86793199e538ab8",
+      "apps/web/src/components/analysis-panel.tsx": "f0d7c410a863c8e7dc01db87958dc270db8c152d16951fe1225a23766ffff8de",
+      "apps/web/src/lib/analysis-presentation.ts": "19460a1f4f27bd71059ce6b010225175943d1a6fe68fc9f05b61e642ca8091c0",
+      "apps/web/test/analysis-presentation.test.mjs": "b06ec60ef7f323cb49d3a961661087e799ee05004ad710ae2d0f8035c6dc75e5",
+      "docs/specs/AI_BEHAVIOR_SPEC.md": "4d9aab945bc5e5ab51cdbd3575404672de6a88805374e7f75f879f4b52c4275c",
+      "docs/specs/RAG_SPEC.md": "af1f2f3c60f1f87627e97c3792e30c15ecf5168a7cf31fea6eadece7358ea0e3",
+      "package-lock.json": "90430aadd61065d65898736502b859204517c302a822df8a2a1994065c32ffcf",
+      "package.json": "e68376cfcc8fb7224254fd04d1ad72d2fd3953efeed0cd0b63b09e823aa8679b",
+      "packages/config/src/index.ts": "bbeeafa6d9d262d36d191aa41d9143612dab5bff5327d6f1566a0c12e4aecd88",
+      "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+      "scripts/evaluation/m14-recommendation-evaluate.mjs": "266a388f358085b54392b0f6ac193904640f5aa36f304bcec709ab375f0d23c8",
+      "scripts/evaluation/m15-dataset.mjs": "a65e377de5932d03be9a296302bb033760d7bc25f6814e245e315b8e9ba234ca",
+      "scripts/evaluation/m15-metrics.mjs": "a9b240a0748fe73e3f41ed09c1ade25f9dab815a10d55418c8ceadc611196b9a",
+      "scripts/evaluation/m15-prompt.test.mjs": "046aaae629e0df8e78a65d6919639eef6dabfa5754f6fd66692e52fb44784f07",
+      "scripts/evaluation/m15-recommendation-evaluate.mjs": "434235fd6b9091939c53f1af0cef51bb6d8f70c55331e28538e65edba3065aeb",
+      "scripts/evaluation/m8-copilot-evaluate.mjs": "38fcb15834b62f842717de3fabb072faec9f604f658b0e7323857056fe445ae6"
+    },
+    "originalDeveloperDbNotStartedOrConnected": true
+  },
+  "security": {
+    "rbac": "PASS within unchanged scoped real PostgreSQL negatives and actual smoke HTTP role checks",
+    "ownership": "PASS within original scoped predicates and real unassigned-staff/public privacy negatives",
+    "expectedVersion": "PASS within scoped stale/race PostgreSQL checks and current-version smoke transitions",
+    "aiToolWritePermissions": "NONE: six Copilot actions and closed READ_ONLY tool registry retained",
+    "humanControl": "Protected business writes require explicit role commands; synthetic MANAGER fixtures are not human AI review",
+    "inventedIds": "NONE observed in full frozen M15, targeted validator/PG negatives or actual operational source checks",
+    "unauthorizedSources": "NONE observed within those tested scopes",
+    "privacy": {
+      "result": "PASS",
+      "scannedFiles": 60,
+      "credentialVariants": 8,
+      "findings": [],
+      "scope": [
+        "Checks exact current private credential variants and JWT-shaped literals; not an exhaustive secret detector.",
+        "No model reasoning, raw private prompt or real customer data is introduced by this task; synthetic raw inference evidence remains ignored."
+      ]
+    }
+  },
+  "preservation": {
+    "developerStatus": "FAIL",
+    "developerAccessInMission": "NONE: no startup, connection, SQL, reset, migrate, reseed or volume mount",
+    "initiator": "UNKNOWN",
+    "currentVolumeHash": "NOT_REMEASURED in this task; latest prior observation f9df7d943ff4b409bc47e143d1faf09b18aef34269ae003008cded7a609ac220",
+    "originalVolumeHash": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+    "newAcceptedException": false,
+    "sourceAudit": {
+      "at": "2026-10-06T07:17:40.203Z",
+      "result": "PASS",
+      "label": "pre-report",
+      "scope": "Git/source/dataset/public-contract preservation audit; does not close developer DB or AI quality gates",
+      "branch": "fix/v1.3-local-ai-demo-stability",
+      "startSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+      "endSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+      "refs": {
+        "HEAD": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+        "main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+        "origin/main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+        "v1.3.0": "b1e2c3364ce205493871f84331cd6061c70f5918",
+        "v1.3.0^{}": "56e97f1e522f2bef2340fd9986e0507f6c2bc172"
+      },
+      "gitDiffCheck": 0,
+      "cachedDiffEmpty": true,
+      "startingDirtyFiles": 21,
+      "endingDirtyFiles": 28,
+      "status": [
+        " M apps/api/src/ai/operational-ai.service.ts",
+        " M apps/api/src/ai/prompts/copilot.ts",
+        " M apps/api/src/ai/prompts/recommendation.ts",
+        " M apps/api/src/ai/recommendation-output.ts",
+        " M apps/api/src/ai/recommendation-snapshot.ts",
+        " M apps/api/src/ai/recommendation.service.ts",
+        " M apps/api/src/requests/request-state-machine.service.ts",
+        " M apps/api/test/helpers/m15-reliability-fixture.mjs",
+        " M apps/api/test/helpers/recommendation-v2-fixture.mjs",
+        " M apps/api/test/operational.test.mjs",
+        " M apps/api/test/recommendation-v2.integration.test.mjs",
+        " M apps/api/test/recommendation-v2.test.mjs",
+        " M apps/web/src/components/analysis-panel.tsx",
+        " M docs/specs/AI_BEHAVIOR_SPEC.md",
+        " M docs/specs/RAG_SPEC.md",
+        " M docs/v1.3/M24_DEMO_RUNBOOK.md",
+        " M docs/verification/MILESTONE_24_VERIFICATION.md",
+        " M scripts/evaluation/m14-recommendation-evaluate.mjs",
+        " M scripts/evaluation/m15-prompt.test.mjs",
+        " M scripts/evaluation/m15-recommendation-evaluate.mjs",
+        " M scripts/evaluation/m8-copilot-evaluate.mjs",
+        "?? apps/api/src/ai/recommendation-evidence-decision.ts",
+        "?? apps/web/src/lib/analysis-presentation.ts",
+        "?? apps/web/test/analysis-presentation.test.mjs",
+        "?? docs/v1.3/LOCAL_AI_DEMO_STABILITY_2026_10_05_VERIFICATION.md",
+        "?? docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+        "?? docs/v1.3/evidence/LOCAL_AI_DEMO_STABILITY_2026_10_05.json",
+        "?? docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json"
+      ],
+      "baselineDirty": [
+        {
+          "path": "apps/api/src/ai/operational-ai.service.ts",
+          "startSha256": "5b6da549afed67e5c84b3543182106afbd03429fe896c8786c218515dff24634",
+          "endSha256": "5b6da549afed67e5c84b3543182106afbd03429fe896c8786c218515dff24634",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "apps/api/src/ai/prompts/copilot.ts",
+          "startSha256": "292c9181689d413e2e96a69c2dd286dfffe51be8ef0e085a0a7706c6e8b80dec",
+          "endSha256": "292c9181689d413e2e96a69c2dd286dfffe51be8ef0e085a0a7706c6e8b80dec",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "apps/api/src/ai/prompts/recommendation.ts",
+          "startSha256": "7986177ed8e50cfa94fad8c1b6edad3c9e12c164145993cde7e7f1758bd6c961",
+          "endSha256": "080bb18b96e476d7864c659180f07369123331bbe2e757ed07f2009e786b879c",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "apps/api/src/ai/recommendation-output.ts",
+          "startSha256": "6e10880b3afa541f1588f5c2808504df1195d4b78e855524f00bd5fcb7fd533a",
+          "endSha256": "2a9c298d7c3eda8633db7d0be25ed1df5dc22ed46f15f21b47e3b8748aa6ad3f",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "apps/api/src/ai/recommendation.service.ts",
+          "startSha256": "63d42c65e7535dc3db435df1c4f1cfed40ac6e20af0fe2a87b762df50516fca6",
+          "endSha256": "8fd3ea82e46aaf0af667cf2f799ac04149bf65325727b9fe0c63c17a2e34e68a",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "apps/api/test/helpers/recommendation-v2-fixture.mjs",
+          "startSha256": "cd4d65ee83d0e75427b8addd786c77697a470bc7118a8965760acf924fd885b1",
+          "endSha256": "afb8139a7d331f04d465070f89def8fa8d47718e70a139277c347afd49b439da",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "apps/api/test/operational.test.mjs",
+          "startSha256": "7cf8cc4bf27e2f6531be51140f561179cc5a980e6ae0ed0981c04ced9162d7cb",
+          "endSha256": "7cf8cc4bf27e2f6531be51140f561179cc5a980e6ae0ed0981c04ced9162d7cb",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "apps/api/test/recommendation-v2.integration.test.mjs",
+          "startSha256": "fcc5955a16dfc93718132ff71c11085e5069a1a59b41005495f0afbcdf3f58d2",
+          "endSha256": "41b8b7d65d389fa21f1e76a2216fa3ca1dcbb4bb60cccd7fa9b6866e3ab28dac",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "apps/web/src/components/analysis-panel.tsx",
+          "startSha256": "f0d7c410a863c8e7dc01db87958dc270db8c152d16951fe1225a23766ffff8de",
+          "endSha256": "f0d7c410a863c8e7dc01db87958dc270db8c152d16951fe1225a23766ffff8de",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "docs/specs/AI_BEHAVIOR_SPEC.md",
+          "startSha256": "458e6049680c970a971808dd4edf6582d45fda573f86e396c3204618aa1df81c",
+          "endSha256": "4d9aab945bc5e5ab51cdbd3575404672de6a88805374e7f75f879f4b52c4275c",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "docs/v1.3/M24_DEMO_RUNBOOK.md",
+          "startSha256": "436ed561d36b74ddc98b71be7187afe7786fc6418ca2326aa58c91fda1e48484",
+          "endSha256": "436ed561d36b74ddc98b71be7187afe7786fc6418ca2326aa58c91fda1e48484",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "docs/verification/MILESTONE_24_VERIFICATION.md",
+          "startSha256": "6d419ce3867d2c21d45e0db1b95bd4203748324a0f25b32b31bd42e98c1f0d2b",
+          "endSha256": "6d419ce3867d2c21d45e0db1b95bd4203748324a0f25b32b31bd42e98c1f0d2b",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "scripts/evaluation/m15-prompt.test.mjs",
+          "startSha256": "23a34d6a46ed3c6e252319749b131be75f3185baa5f1c8321ad20b9b28568395",
+          "endSha256": "046aaae629e0df8e78a65d6919639eef6dabfa5754f6fd66692e52fb44784f07",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "scripts/evaluation/m15-recommendation-evaluate.mjs",
+          "startSha256": "fe4d42ad3a485caf73c01e487aa22633cdff5c898bf449ffced610dfbdfe334e",
+          "endSha256": "434235fd6b9091939c53f1af0cef51bb6d8f70c55331e28538e65edba3065aeb",
+          "exactBytesUnchanged": false,
+          "scopedOwnerEdit": true
+        },
+        {
+          "path": "scripts/evaluation/m8-copilot-evaluate.mjs",
+          "startSha256": "38fcb15834b62f842717de3fabb072faec9f604f658b0e7323857056fe445ae6",
+          "endSha256": "38fcb15834b62f842717de3fabb072faec9f604f658b0e7323857056fe445ae6",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "apps/web/src/lib/analysis-presentation.ts",
+          "startSha256": "19460a1f4f27bd71059ce6b010225175943d1a6fe68fc9f05b61e642ca8091c0",
+          "endSha256": "19460a1f4f27bd71059ce6b010225175943d1a6fe68fc9f05b61e642ca8091c0",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "apps/web/test/analysis-presentation.test.mjs",
+          "startSha256": "b06ec60ef7f323cb49d3a961661087e799ee05004ad710ae2d0f8035c6dc75e5",
+          "endSha256": "b06ec60ef7f323cb49d3a961661087e799ee05004ad710ae2d0f8035c6dc75e5",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "docs/v1.3/LOCAL_AI_DEMO_STABILITY_2026_10_05_VERIFICATION.md",
+          "startSha256": "3a43b57e32154d139fdb50f7b1b8d478f3279642c8a61b32bfab93159563ce3f",
+          "endSha256": "3a43b57e32154d139fdb50f7b1b8d478f3279642c8a61b32bfab93159563ce3f",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "docs/v1.3/LOCAL_DEMO_2026_10_05_VERIFICATION.md",
+          "startSha256": "bafeb84400f848c18289649c942dd5bbfde12f4e7b103a362ba2daeda108df03",
+          "endSha256": "bafeb84400f848c18289649c942dd5bbfde12f4e7b103a362ba2daeda108df03",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "docs/v1.3/evidence/LOCAL_AI_DEMO_STABILITY_2026_10_05.json",
+          "startSha256": "0963c14ba5e7a8cc26f5c0dff188fe08c7453c5c435b2874f9eba6e104b8f3b1",
+          "endSha256": "0963c14ba5e7a8cc26f5c0dff188fe08c7453c5c435b2874f9eba6e104b8f3b1",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        },
+        {
+          "path": "docs/v1.3/evidence/LOCAL_DEMO_2026_10_05.json",
+          "startSha256": "b21273bfe8d5c058071037205295907f729b6326d14277caf567ba31c03503cb",
+          "endSha256": "b21273bfe8d5c058071037205295907f729b6326d14277caf567ba31c03503cb",
+          "exactBytesUnchanged": true,
+          "scopedOwnerEdit": false
+        }
+      ],
+      "savedOriginalWorkingFilesPreserved": 21,
+      "originalCheckoutFilesUnchanged": 26,
+      "originalArtifactsUnchanged": 69,
+      "priorReportsUnchanged": true,
+      "frozen": {
+        "datasets/ai-evaluation/m15-recommendation-v2.json": "d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9",
+        "scripts/evaluation/m15-dataset.mjs": "a65e377de5932d03be9a296302bb033760d7bc25f6814e245e315b8e9ba234ca",
+        "scripts/evaluation/m15-metrics.mjs": "a9b240a0748fe73e3f41ed09c1ade25f9dab815a10d55418c8ceadc611196b9a",
+        "scripts/evaluation/m15-evaluation.test.mjs": "ee21b244bd6b231f3cef268eb90088db21b04190e37bb7837f0c87c62d49fefb",
+        "scripts/evaluation/m15-dataset.test.mjs": "aabf66bc67d5f6fde1a1c57b0ce90c8cea1f5d1e6d1801aefa896a37cfa8dae2",
+        "packages/contracts/src/recommendation.ts": "8b75065e212a92d790cc4c521a5e142b6e68b2af46b3362d99af78fc342481eb",
+        "packages/contracts/src/knowledge.ts": "afc7071f1b4f4f7c76edffc47cc9b422bc990654dea2f6eec0e13ae49f972f8b"
+      },
+      "configSourceSha256": "bbeeafa6d9d262d36d191aa41d9143612dab5bff5327d6f1566a0c12e4aecd88",
+      "pureDecisionSha256": "2e28cd5ff92df0ac41f4a21c92153e5fae4b59fe20e3d596ec58b575c5a6c7f9",
+      "caseSpecificRules": false,
+      "fixtureTitleRule": false,
+      "developerDatabaseAccess": "NONE",
+      "developerPreservation": "FAIL retained; no new exception",
+      "commitPushMergeTagDeploy": false
+    },
+    "originalDemoRequests": 9,
+    "originalDemoRows": {
+      "Request": {
+        "count": 9,
+        "sha256": "557039bb901c1f11e86d9ae77549fd7c2248a08d641a98a5bb9634c3356176fc",
+        "seedSha256": "557039bb901c1f11e86d9ae77549fd7c2248a08d641a98a5bb9634c3356176fc",
+        "exactSeedHash": true
+      },
+      "AiRun": {
+        "count": 5,
+        "sha256": "f02d6fd2a66d4babdd3722e41c8d4d800fdc8aa4ed4bb064e3ba579a6cd36e36",
+        "seedSha256": "f02d6fd2a66d4babdd3722e41c8d4d800fdc8aa4ed4bb064e3ba579a6cd36e36",
+        "exactSeedHash": true
+      },
+      "AiAnalysis": {
+        "count": 1,
+        "sha256": "8e7440f4eeca86cf600a89c0c5cf1ac681ccf49679218aa933223485feeb56fe",
+        "seedSha256": "8e7440f4eeca86cf600a89c0c5cf1ac681ccf49679218aa933223485feeb56fe",
+        "exactSeedHash": true
+      },
+      "Assignment": {
+        "count": 7,
+        "sha256": "8758594b811910881d26964d53cd58e68e7518a9cc64f458db9890ab1ee3f704",
+        "seedSha256": "8758594b811910881d26964d53cd58e68e7518a9cc64f458db9890ab1ee3f704",
+        "exactSeedHash": true
+      },
+      "RequestResolution": {
+        "count": 4,
+        "sha256": "f0d1f5471fe847590fb0d4093d6c19efbbf4005baf9055d2cae37560fbc60f39",
+        "seedSha256": "f0d1f5471fe847590fb0d4093d6c19efbbf4005baf9055d2cae37560fbc60f39",
+        "exactSeedHash": true
+      },
+      "Checklist": {
+        "count": 1,
+        "sha256": "ed8d3dd102d7222a90c6ae90a88ea54fa95d985e5e19b3f3c1636e5964dff49d",
+        "seedSha256": "ed8d3dd102d7222a90c6ae90a88ea54fa95d985e5e19b3f3c1636e5964dff49d",
+        "exactSeedHash": true
+      },
+      "SlaInstance": {
+        "count": 7,
+        "sha256": "749a5cd2d6977200ef051b3f59c2d6eefd09c16220015641a166411ef2750f0b",
+        "seedSha256": "ba034c7fc7db2c1c3a591a8a41ccb4c9c2f17b3d02d22ca24ba789cc24820202",
+        "exactSeedHash": false,
+        "limitation": "Pre-existing seed hash discrepancy retained. The unchanged canonical SLA monitor updates runtime clock fields; do not certify original SLA row equality from seed hashes."
+      },
+      "RequestInternalNote": {
+        "count": 1,
+        "sha256": "8e1f806c0027a965ac591dfbe1ecf48d4d5910d1d8f949a13c8f728cd549e0a8",
+        "seedSha256": "8e1f806c0027a965ac591dfbe1ecf48d4d5910d1d8f949a13c8f728cd549e0a8",
+        "exactSeedHash": true
+      },
+      "RequestWatcher": {
+        "count": 1,
+        "sha256": "6ca49f027dd2c47e096f945865147835f05dcd64bf1ef0bceb0756164085fd29",
+        "seedSha256": "6ca49f027dd2c47e096f945865147835f05dcd64bf1ef0bceb0756164085fd29",
+        "exactSeedHash": true
+      },
+      "RequestStatusHistory": {
+        "count": 49,
+        "sha256": "44b02d7879cec10df84bd5464d31bd09731cf264d4b6a66b41f4576ab34afc57",
+        "seedSha256": "44b02d7879cec10df84bd5464d31bd09731cf264d4b6a66b41f4576ab34afc57",
+        "exactSeedHash": true
+      },
+      "AuditLog": {
+        "count": 75,
+        "sha256": "843405b3df26fd4af7fe9d65e7fef532b42e483c7af06569bb55d155b5f7c37a",
+        "seedSha256": "843405b3df26fd4af7fe9d65e7fef532b42e483c7af06569bb55d155b5f7c37a",
+        "exactSeedHash": true
+      }
+    },
+    "slaObservation": "artifacts/v130-evidence-decision-20261006/sla-observation.json",
+    "slaOriginalEquality": "UNPROVED: pre-existing seed hash discrepancy, canonical changes proven only for new 35-second interval",
+    "priorReportsUnchanged": true
+  },
+  "git": {
+    "branch": "fix/v1.3-local-ai-demo-stability",
+    "head": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "refs": {
+      "HEAD": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+      "main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+      "origin/main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+      "v1.3.0": "b1e2c3364ce205493871f84331cd6061c70f5918",
+      "v1.3.0^{}": "56e97f1e522f2bef2340fd9986e0507f6c2bc172"
+    },
+    "commitCreated": false,
+    "push": false,
+    "merge": false,
+    "tag": false,
+    "deploy": false,
+    "localExistingDemoContainersRestarted": true,
+    "production": "NOT_RUN",
+    "v14": "NOT_STARTED"
+  },
+  "remainingBlockers": [
+    "Real workflow Copilot GENERATE_CHECKLIST had one provider-reported length truncation rejected by the adapter before parser/public schema, then bounded repair succeeded. First-attempt stability FAIL: 24/25 runs,26 provider attempts,1 retry,0 terminal failures. Copilot/provider owners match task baseline; causality to the evidence-decision patch is NOT_PROVEN. No output/timeout increase or selective rerun was used.",
+    "Developer baseline preservation remains independent FAIL; original baseline differs from the latest prior offline hash; later start initiator/logical/per-file preservation unproved. No developer DB access or new accepted exception in this task.",
+    "Independent human review NOT_RUN. Native regex presentation enforcement is incomplete: retained M15-061 wording omits the longer assignment/start prefix while retaining manager approval; no permission/business-state bypass observed.",
+    "Conservative documented V1 applicability grammar and frozen synthetic oracle are bounded. No general accuracy, production SLO, retrieval-ranking or exhaustive language-meaning certification.",
+    "Exact evaluator interruption cause UNKNOWN; retain incomplete 100+2 run separately. Later host reboot is observed, without proof of the prior process exit cause."
+  ],
+  "finalGate": {
+    "aiQualityWithinFrozenSyntheticProtocols": "PASS",
+    "functional": "PASS",
+    "runtime": "READY",
+    "developerPreservation": "FAIL",
+    "humanReview": "NOT_RUN",
+    "overall": "FAIL",
+    "aiQuality": "FAIL for full demo first-attempt stability; frozen full M15 and scoped M8 evaluations PASS",
+    "m15Remediation": "PASS",
+    "operationalFirstAttemptStability": "FAIL"
+  },
+  "nextSafeAction": "Review the uncommitted evidence-decision delta and perform independent human language review. For the separately observed Copilot truncation, audit its existing output-budget owner and add a real regression before any scoped V1.3 fix; do not raise the frozen token/timeout limits or weaken source validation. Developer preservation needs a separately authorized data-safe investigation with an appropriate historical baseline/backup. No automatic commit/merge/tag/production/V1.4.",
+  "commandResults": [
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/red.json",
+      "startedAt": "2026-10-06T03:12:41.292Z",
+      "finishedAt": "2026-10-06T03:12:57.680Z",
+      "command": "node --test --test-name-pattern=M15-061 regression scripts/evaluation/m15-prompt.test.mjs",
+      "exitCode": 1,
+      "hashes": {
+        "apps/api/src/ai/prompts/recommendation.ts": "7986177ed8e50cfa94fad8c1b6edad3c9e12c164145993cde7e7f1758bd6c961",
+        "apps/api/src/ai/recommendation-output.ts": "6e10880b3afa541f1588f5c2808504df1195d4b78e855524f00bd5fcb7fd533a",
+        "apps/api/dist/ai/prompts/recommendation.js": "66af8f091ab86cd1aa0dae3a3f8825df723f990dab6c3b23dcf8b109015d5feb",
+        "apps/api/dist/ai/recommendation-output.js": "ad7a8beda60fecbf8fe30854bee9be45075770092e897e1e072470fbcfed1c45",
+        "packages/config/src/index.ts": "bbeeafa6d9d262d36d191aa41d9143612dab5bff5327d6f1566a0c12e4aecd88",
+        "scripts/evaluation/m15-prompt.test.mjs": "82975db1e133efa68cab443f905de866c247be5d29e98e6283e78afc89a8ed25"
+      },
+      "log": "artifacts/v130-evidence-decision-20261006/red.log",
+      "expected": "Two real old-behavior regression failures; no missing import/module failure.",
+      "logSha256": "5328eeeb22d414ddc9ea9f4ad61d41235fd6bbe06566a397796162c59fe38247"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/builder-build.json",
+      "startedAt": "2026-10-06T03:28:16.767Z",
+      "finishedAt": "2026-10-06T03:28:32.260Z",
+      "command": "docker build --target api-build -t mobiflow-v130-evidence-decision-20261006-builder -f docker/Dockerfile .",
+      "exitCode": 0,
+      "elapsedMs": 15491,
+      "log": "artifacts/v130-evidence-decision-20261006/builder-build.log",
+      "logSha256": "0bed585a82b7b3408bd0c4fabd36bf3c0d2e39aca611f785f69fdd351928ee7e"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted.json",
+      "startedAt": "2026-10-06T03:28:55.664Z",
+      "finishedAt": "2026-10-06T03:29:09.980Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder node --test scripts/evaluation/m15-prompt.test.mjs scripts/evaluation/m15-dataset.test.mjs scripts/evaluation/m15-evaluation.test.mjs apps/api/test/recommendation-v2.test.mjs apps/api/test/recommendation.test.mjs apps/api/test/knowledge.test.mjs apps/api/test/m15-reliability.test.mjs",
+      "exitCode": 1,
+      "elapsedMs": 14315,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted.log",
+      "logSha256": "f720c296bfa6c2f5ba89cb7240611b1b4f2c160f2eca55f11dfa23357bfd3259"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/builder-build-attempt2.json",
+      "startedAt": "2026-10-06T03:35:12.673Z",
+      "finishedAt": "2026-10-06T03:35:25.914Z",
+      "command": "docker build --target api-build -t mobiflow-v130-evidence-decision-20261006-builder -f docker/Dockerfile .",
+      "exitCode": 0,
+      "elapsedMs": 13240,
+      "log": "artifacts/v130-evidence-decision-20261006/builder-build-attempt2.log",
+      "logSha256": "9ae695f4c86fb0c170aed4dd9673d72573fc1e4da43ab4e8815cd2e27e22313d"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/builder-build-attempt3.json",
+      "startedAt": "2026-10-06T03:37:41.687Z",
+      "finishedAt": "2026-10-06T03:39:47.000Z",
+      "command": "docker build --target api-build -t mobiflow-v130-evidence-decision-20261006-builder -f docker/Dockerfile .",
+      "exitCode": 1,
+      "elapsedMs": 125312,
+      "log": "artifacts/v130-evidence-decision-20261006/builder-build-attempt3.log",
+      "logSha256": "e834ffe72778c51f29da0e7a2a10e45d0ebf38a3a0bb6c4322e839b04179a713"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-evaluation.json",
+      "startedAt": "2026-10-06T03:39:10.665Z",
+      "finishedAt": "2026-10-06T03:39:12.065Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder node --test scripts/evaluation/m15-prompt.test.mjs scripts/evaluation/m15-dataset.test.mjs scripts/evaluation/m15-evaluation.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 1399,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-evaluation.log",
+      "logSha256": "94d14342619578fb21fc3681791821fdf6c254a9929a0161d466e1ca6d69a092"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-api.json",
+      "startedAt": "2026-10-06T03:39:12.066Z",
+      "finishedAt": "2026-10-06T03:39:20.020Z",
+      "command": "docker run --rm --network none -w /app/apps/api mobiflow-v130-evidence-decision-20261006-builder node --test test/recommendation-v2.test.mjs test/recommendation.test.mjs test/knowledge.test.mjs test/m15-reliability.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 7953,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-api.log",
+      "logSha256": "ed763c578a014537f4fbd0fc140c5e98d1c12ebbe6ade439a63e0d122ea14ac3"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/builder-build-attempt4.json",
+      "startedAt": "2026-10-06T03:42:13.643Z",
+      "finishedAt": "2026-10-06T03:42:33.281Z",
+      "command": "docker build --target api-build -t mobiflow-v130-evidence-decision-20261006-builder -f artifacts/v130-evidence-decision-20261006/Dockerfile .",
+      "exitCode": 0,
+      "elapsedMs": 19637,
+      "log": "artifacts/v130-evidence-decision-20261006/builder-build-attempt4.log",
+      "logSha256": "0986f04399e5a25f50b35ff06f7bc7e1b87037e32454a1ab2fc8bfbf8e7be7c9"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-evaluation-attempt2.json",
+      "startedAt": "2026-10-06T03:42:49.920Z",
+      "finishedAt": "2026-10-06T03:42:51.303Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder node --test scripts/evaluation/m15-prompt.test.mjs scripts/evaluation/m15-dataset.test.mjs scripts/evaluation/m15-evaluation.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 1382,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-evaluation-attempt2.log",
+      "logSha256": "cac57a495d2ab9860b8acc256751757c1f8090c27db6a952a7b9d0ef42e6cff3"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-api-attempt2.json",
+      "startedAt": "2026-10-06T03:42:51.305Z",
+      "finishedAt": "2026-10-06T03:42:59.043Z",
+      "command": "docker run --rm --network none -w /app/apps/api mobiflow-v130-evidence-decision-20261006-builder node --test test/recommendation-v2.test.mjs test/recommendation.test.mjs test/knowledge.test.mjs test/m15-reliability.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 7738,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-api-attempt2.log",
+      "logSha256": "0ae5c7a33dacb7037d03b975aff903d337ed2d6c07a09e5602a5d071c5002187"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-live-1.json",
+      "startedAt": "2026-10-06T03:43:06.424Z",
+      "finishedAt": "2026-10-06T03:43:38.743Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env scripts/evaluation/m15-recommendation-evaluate.mjs --evidence-root=artifacts/v130-evidence-decision-20261006/targeted-live-1 --case-ids=M15-061-triaged-no-candidate-missing --skip-consistency",
+      "exitCode": 0,
+      "elapsedMs": 32318,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-live-1.log",
+      "logSha256": "7c0f9234d66b76b4f843f70f1db52d3b8b4a720fdaf1c27d59795ab3c1f564e3"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-live-2.json",
+      "startedAt": "2026-10-06T03:43:44.519Z",
+      "finishedAt": "2026-10-06T03:44:10.641Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env scripts/evaluation/m15-recommendation-evaluate.mjs --evidence-root=artifacts/v130-evidence-decision-20261006/targeted-live-2 --case-ids=M15-061-triaged-no-candidate-missing --skip-consistency",
+      "exitCode": 0,
+      "elapsedMs": 26120,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-live-2.log",
+      "logSha256": "e31cab0c46bcffd6acb543bd74b28e6a723796b3a2fac43cf748592513513241"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/targeted-live-3.json",
+      "startedAt": "2026-10-06T03:45:14.076Z",
+      "finishedAt": "2026-10-06T03:45:38.206Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env --import=./artifacts/v130-evidence-decision-20261006/observe.mjs scripts/evaluation/m15-recommendation-evaluate.mjs --evidence-root=artifacts/v130-evidence-decision-20261006/targeted-live-3 --case-ids=M15-061-triaged-no-candidate-missing --skip-consistency",
+      "exitCode": 0,
+      "elapsedMs": 24129,
+      "log": "artifacts/v130-evidence-decision-20261006/targeted-live-3.log",
+      "logSha256": "8b6b482856c44a2ac9689622d35bf46807242e9e233b28d32cfe42c22a538db5"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres.json",
+      "startedAt": "2026-10-06T03:46:37.174Z",
+      "finishedAt": "2026-10-06T03:46:46.293Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test --test-name-pattern=V1.3 real PostgreSQL evidence decision apps/api/test/recommendation-v2.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 9118,
+      "log": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres.log",
+      "logSha256": "eb0cc1391a55548c1e8321a71246d1667456b7ce91c901fe15a4565aba3e1d4e"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m2-integration.json",
+      "startedAt": "2026-10-06T03:47:12.057Z",
+      "finishedAt": "2026-10-06T03:47:15.153Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m2.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test --test-name-pattern=M6 real PostgreSQL tools|M6 .*validation|M8 Copilot apps/api/test/recommendation.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 3095,
+      "log": "artifacts/v130-evidence-decision-20261006/m2-integration.log",
+      "logSha256": "f02070370526e5584ea715e4d6d1692767c19858f460996e450a6c42735b7eed"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m14-integration.json",
+      "startedAt": "2026-10-06T03:47:15.351Z",
+      "finishedAt": "2026-10-06T03:47:44.718Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test apps/api/test/recommendation-v2.integration.test.mjs",
+      "exitCode": 1,
+      "elapsedMs": 29366,
+      "log": "artifacts/v130-evidence-decision-20261006/m14-integration.log",
+      "logSha256": "fea262064c2274d407c5674181b980abe51fcb5f1769146ea1c594b8e92cafe4"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/builder-build-attempt5.json",
+      "startedAt": "2026-10-06T03:48:56.932Z",
+      "finishedAt": "2026-10-06T03:49:07.905Z",
+      "command": "docker build --target api-build -t mobiflow-v130-evidence-decision-20261006-builder -f artifacts/v130-evidence-decision-20261006/Dockerfile .",
+      "exitCode": 0,
+      "elapsedMs": 10971,
+      "log": "artifacts/v130-evidence-decision-20261006/builder-build-attempt5.log",
+      "logSha256": "f68d4951fed50b4fd8555b1de85c951eeca40b09823a3f19506941ac36240e50"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres-attempt2.json",
+      "startedAt": "2026-10-06T03:49:59.626Z",
+      "finishedAt": "2026-10-06T03:50:08.638Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test --test-name-pattern=V1.3 real PostgreSQL evidence decision apps/api/test/recommendation-v2.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 9011,
+      "log": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres-attempt2.log",
+      "logSha256": "2eeb712c9d94d9ea40a5ebd9e88d7bd4a1632824ad304e6ade56a41e53e5df6a"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m2-integration-attempt2.json",
+      "startedAt": "2026-10-06T03:50:09.330Z",
+      "finishedAt": "2026-10-06T03:50:12.235Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m2.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test --test-name-pattern=M6 real PostgreSQL tools|M6 .*validation|M8 Copilot apps/api/test/recommendation.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 2902,
+      "log": "artifacts/v130-evidence-decision-20261006/m2-integration-attempt2.log",
+      "logSha256": "99c44b7af57757a24c03cdecfa0879e1ad2c088cba82831247496ad4a0b78230"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m14-integration-attempt2.json",
+      "startedAt": "2026-10-06T03:50:12.443Z",
+      "finishedAt": "2026-10-06T03:50:42.427Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test apps/api/test/recommendation-v2.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 29985,
+      "log": "artifacts/v130-evidence-decision-20261006/m14-integration-attempt2.log",
+      "logSha256": "1b3fd7c1de9e5585e401ae9bfdec9daa205c83965a7fe104732c87865aad3720"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/recovery-integration.json",
+      "startedAt": "2026-10-06T03:50:42.610Z",
+      "finishedAt": "2026-10-06T03:50:43.807Z",
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-evidence-decision-20261006/m2.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-stability-followup\\MobiFlow AI\\artifacts\\v130-evidence-decision-20261006\\integration-output,target=/app/docs -w /app mobiflow-v130-evidence-decision-20261006-builder node --test apps/api/test/ai-stability.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 1197,
+      "log": "artifacts/v130-evidence-decision-20261006/recovery-integration.log",
+      "logSha256": "9c6721e58e45e15e6ee1ac9d9abadc7fb7740aa4cb8a9ccf1aa241179f687612"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/lint.json",
+      "startedAt": "2026-10-06T03:51:02.107Z",
+      "finishedAt": "2026-10-06T03:51:12.361Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 10252,
+      "log": "artifacts/v130-evidence-decision-20261006/lint.log",
+      "logSha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/typecheck.json",
+      "startedAt": "2026-10-06T03:51:12.363Z",
+      "finishedAt": "2026-10-06T03:51:24.189Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 11826,
+      "log": "artifacts/v130-evidence-decision-20261006/typecheck.log",
+      "logSha256": "a92cae91c52fedfa32bc4ad776b846e5b5b22c1405c0b7c8b9d63c5b021c344a"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/test.json",
+      "startedAt": "2026-10-06T03:51:24.191Z",
+      "finishedAt": "2026-10-06T03:51:42.687Z",
+      "command": "docker run --rm --network none -w /app mobiflow-v130-evidence-decision-20261006-builder npm run test",
+      "exitCode": 0,
+      "elapsedMs": 18496,
+      "log": "artifacts/v130-evidence-decision-20261006/test.log",
+      "logSha256": "8f36b89a17f587e05bc3d4fe2b93c12778530da44d5ce144c116f7fef24548fd"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/compose-config.json",
+      "startedAt": "2026-10-06T03:52:00.485Z",
+      "finishedAt": "2026-10-06T03:52:00.864Z",
+      "command": "docker compose --env-file artifacts/v130-evidence-decision-20261006/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml config --quiet",
+      "exitCode": 0,
+      "elapsedMs": 378,
+      "log": "artifacts/v130-evidence-decision-20261006/compose-config.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/api-web-build.json",
+      "startedAt": "2026-10-06T03:52:00.866Z",
+      "finishedAt": "2026-10-06T03:52:16.424Z",
+      "command": "docker compose --env-file artifacts/v130-evidence-decision-20261006/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml -f artifacts/v130-evidence-decision-20261006/build-override.yml build api web",
+      "exitCode": 0,
+      "elapsedMs": 15559,
+      "log": "artifacts/v130-evidence-decision-20261006/api-web-build.log",
+      "logSha256": "06d468c82093d8eecb664c9ed3cf946ba19521e13e0e08c634ff4a55615ac997"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/api-web-start.json",
+      "startedAt": "2026-10-06T03:52:57.331Z",
+      "finishedAt": "2026-10-06T03:53:04.710Z",
+      "command": "docker compose --env-file artifacts/v130-evidence-decision-20261006/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml up -d --no-deps --wait api web",
+      "exitCode": 0,
+      "elapsedMs": 7378,
+      "log": "artifacts/v130-evidence-decision-20261006/api-web-start.log",
+      "logSha256": "3f8c13cc45230af7020e1cdaa9e222072e7b7dc87b80403bd9565fb531757201"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m15-full-attempt2.json",
+      "startedAt": "2026-10-06T06:23:08.659Z",
+      "finishedAt": "2026-10-06T06:55:06.470Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env --import=./artifacts/v130-evidence-decision-20261006/observe.mjs scripts/evaluation/m15-recommendation-evaluate.mjs --evidence-root=artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption",
+      "exitCode": 0,
+      "elapsedMs": 1917810,
+      "log": "artifacts/v130-evidence-decision-20261006/m15-full-attempt2.log",
+      "logSha256": "401fed97c3d936c676ce9d11171faac76a6a80187ffee2600726919286d04541"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m8-summary-evaluation.json",
+      "startedAt": "2026-10-06T07:01:04.872Z",
+      "finishedAt": "2026-10-06T07:01:28.304Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env --import=./artifacts/v130-evidence-decision-20261006/observe.mjs scripts/evaluation/m8-summary-evaluate.mjs",
+      "exitCode": 0,
+      "elapsedMs": 23430,
+      "log": "artifacts/v130-evidence-decision-20261006/m8-summary-evaluation.log",
+      "logSha256": "004553ea6d8e71265dedda02bb1e95713a1bf9d6aa69add7aaf9989a7543f90b"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/m8-copilot-evaluation.json",
+      "startedAt": "2026-10-06T07:01:28.306Z",
+      "finishedAt": "2026-10-06T07:01:50.652Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env --import=./artifacts/v130-evidence-decision-20261006/observe.mjs scripts/evaluation/m8-copilot-evaluate.mjs",
+      "exitCode": 0,
+      "elapsedMs": 22346,
+      "log": "artifacts/v130-evidence-decision-20261006/m8-copilot-evaluation.log",
+      "logSha256": "ab756a6347072516e75706b419b244894a3f77e436f8d69ce588babc0a879fe0"
+    },
+    {
+      "artifact": "artifacts/v130-evidence-decision-20261006/smoke-final.json",
+      "startedAt": "2026-10-06T07:07:38.969Z",
+      "finishedAt": "2026-10-06T07:12:25.992Z",
+      "command": "node --env-file=artifacts/v130-evidence-decision-20261006/demo.env artifacts/v130-evidence-decision-20261006/smoke.mjs --batch=smoke-final",
+      "exitCode": 0,
+      "elapsedMs": 287022,
+      "log": "artifacts/v130-evidence-decision-20261006/smoke-final.log",
+      "logSha256": "94e9ddad9f9652aedf7de80d0f5dfa91305b50c2f13034bb055643b9f2159be6"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/api-web-build.json",
+      "sha256": "d1d38b7d81ab1d58dcb196f6cf5850265539831d3d2791e4a7aceac0553682fc",
+      "bytes": 425
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/api-web-build.log",
+      "sha256": "06d468c82093d8eecb664c9ed3cf946ba19521e13e0e08c634ff4a55615ac997",
+      "bytes": 8979
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/api-web-start.json",
+      "sha256": "72236f63d8047cf3c15fc97b34705180d0155a5aba5b92db2e9b6a0e9ed96a35",
+      "bytes": 377
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/api-web-start.log",
+      "sha256": "3f8c13cc45230af7020e1cdaa9e222072e7b7dc87b80403bd9565fb531757201",
+      "bytes": 656
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/audit-after-interruption.json",
+      "sha256": "aa57b428132ebea565a49f13b899c2b0e433b8becffb3d62ccbd0b4de6e7197f",
+      "bytes": 10340
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/audit-during-quality.json",
+      "sha256": "4a115286fdb71cc8bdad7c7b20970c2dcc211e9b41e63349699d8a47c237eb71",
+      "bytes": 10336
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/audit-pre-report.json",
+      "sha256": "c23cc058d67470a6354f0c1ac6168dd163b1a7bacdbafdb353f5335b1630a5aa",
+      "bytes": 10332
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/baseline.json",
+      "sha256": "df1fdc565bbd950948364420c0325783b0168bf68ee1584b8be2b60b998b8fb0",
+      "bytes": 6410
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt2.json",
+      "sha256": "e5c86cb5d51d9da17ead26a1b72dd6fdce11488c1e0e2aade925afe3ad99aded",
+      "bytes": 333
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt2.log",
+      "sha256": "9ae695f4c86fb0c170aed4dd9673d72573fc1e4da43ab4e8815cd2e27e22313d",
+      "bytes": 3782
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt3.json",
+      "sha256": "ea85819a9cf8a5e1522557e1f88404035b039a0c3ff9a0ca6c2e1c37023bcf6c",
+      "bytes": 334
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt3.log",
+      "sha256": "e834ffe72778c51f29da0e7a2a10e45d0ebf38a3a0bb6c4322e839b04179a713",
+      "bytes": 3987
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt4.json",
+      "sha256": "b5ffbe7299b02641d2d3841496b8ab222a38c767d3ae9762b9d1f9ea3298d58e",
+      "bytes": 368
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt4.log",
+      "sha256": "0986f04399e5a25f50b35ff06f7bc7e1b87037e32454a1ab2fc8bfbf8e7be7c9",
+      "bytes": 7149
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt5.json",
+      "sha256": "c5bb23f1b3382f36195333976fad71280a91423a4ad251aa5183a24645036ae2",
+      "bytes": 368
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build-attempt5.log",
+      "sha256": "f68d4951fed50b4fd8555b1de85c951eeca40b09823a3f19506941ac36240e50",
+      "bytes": 4444
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build.json",
+      "sha256": "fac3601595200a6401fed8359c111a7201d1183c106e6fbd8b8de99f70109afb",
+      "bytes": 324
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/builder-build.log",
+      "sha256": "0bed585a82b7b3408bd0c4fabd36bf3c0d2e39aca611f785f69fdd351928ee7e",
+      "bytes": 3786
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/compiled-handoff.json",
+      "sha256": "201aad9d4bf2495f41fde3733d297093d61863f06c862c5aaaa4fe175fde1116",
+      "bytes": 50763
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/compiled-identity.json",
+      "sha256": "d5e744685bf74c2e501dd47c23a108bb28b67484209cc52888f3a18b10d28850",
+      "bytes": 50763
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/compose-config.json",
+      "sha256": "baf2904948f1eef3ba5f87677f4c3586b2283d2e1b877d1f3b20c5dbffdedb8a",
+      "bytes": 361
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/compose-config.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/copilot-regression.json",
+      "sha256": "a339796182114fda97c6185ddded0e79fba29717e2fd1fde682d862bf91c2bef",
+      "bytes": 5406
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/demo-runtime-restored.json",
+      "sha256": "c1e0f42f7dde8b4613d4c3361eef42ce01019e8c13e3ec9176e093302e8fc0a0",
+      "bytes": 2713
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/diagnosis.md",
+      "sha256": "37b37559e0fac5cf52e2c2ace7040974a4e8eb94a872b0344ae31ac5925ac7c3",
+      "bytes": 4410
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/embedding-handoff.json",
+      "sha256": "69bbb7ea905bbc2026136d19892cadde8c4a40dbcd31ee2eba781cd83747fe2b",
+      "bytes": 694
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres-attempt2.json",
+      "sha256": "b6a2aedc776a305c970aa8e7ada7b290ed8c7370ae842e8afeba7ff4dcd1cff9",
+      "bytes": 842
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres-attempt2.log",
+      "sha256": "2eeb712c9d94d9ea40a5ebd9e88d7bd4a1632824ad304e6ade56a41e53e5df6a",
+      "bytes": 1494
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres.json",
+      "sha256": "18d36332f1e83701251a273c5f7e570d744a18d3897014285482a0cf306b6e59",
+      "bytes": 833
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/evidence-decision-postgres.log",
+      "sha256": "eb0cc1391a55548c1e8321a71246d1667456b7ce91c901fe15a4565aba3e1d4e",
+      "bytes": 1491
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/git-diff-start.patch",
+      "sha256": "58b4e58d780f96b7fa82d3cfc4ee98bf1d437d8badb157accf16f60641c43d75",
+      "bytes": 55252
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/hardware.json",
+      "sha256": "4c31e296ef222271b6b94cdfcda3269a063081813f6ab50ad2598ef2d71a3398",
+      "bytes": 653
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/host-recovery-observation.json",
+      "sha256": "a3bdf5076ef56bf1d8d14218402b17f1c953d44356e9e7ac3c04ac189002a91b",
+      "bytes": 239
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/integration-output/evidence-decision-postgres.json",
+      "sha256": "c8571fb68e81ff1c7ce3d09843fa939b42c60a6acb1eff5fcc54a198a87e5a5b",
+      "bytes": 1898
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/interrupted-full-m15.json",
+      "sha256": "bd301700757177ebd17af6c6ff93ba7efe63df236b74a98083b03feae9a08aa5",
+      "bytes": 1992
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/lint.json",
+      "sha256": "883c3fa8d00d9c1e63a4d5fd7f929fccf49ae0628312dfec614f1ee7c503b78b",
+      "bytes": 309
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/lint.log",
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b",
+      "bytes": 55
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m14-integration-attempt2.json",
+      "sha256": "078b934e5164e42b5724ba528e234901dd03b5d3bf8644dea59aaaa954776480",
+      "bytes": 773
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m14-integration-attempt2.log",
+      "sha256": "1b3fd7c1de9e5585e401ae9bfdec9daa205c83965a7fe104732c87865aad3720",
+      "bytes": 4391
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m14-integration.json",
+      "sha256": "db2a3bac470b1689b0e1f33bf50ab5ba31defeb20ccc770a82fdea90867a83a4",
+      "bytes": 764
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m14-integration.log",
+      "sha256": "fea262064c2274d407c5674181b980abe51fcb5f1769146ea1c594b8e92cafe4",
+      "bytes": 8738
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-full-attempt2.json",
+      "sha256": "70b870558baa9122ecf6a3f4e526581ca65cd4a78640fa102e4f32c17ba97cfe",
+      "bytes": 494
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-full-attempt2.log",
+      "sha256": "401fed97c3d936c676ce9d11171faac76a6a80187ffee2600726919286d04541",
+      "bytes": 18693
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-full.log",
+      "sha256": "be8973488702a33d980dfe4b4e9f5e271b891bdfe3664e3362918ea672465e79",
+      "bytes": 14532
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption-transport.jsonl",
+      "sha256": "28b511c522f49f902030e6ee28e6fe738a34e39388a04bfbb99f82d0f67a989d",
+      "bytes": 123528
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/details.jsonl",
+      "sha256": "c31402571de706c78fef53d53a514931b9d963f89c7af4ef3fef00fa70c90814",
+      "bytes": 1991224
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/manifest.json",
+      "sha256": "b623e081da56bfa56230e30c7892e48ea6daa731be2c720af6dcf7cec87ffda4",
+      "bytes": 15097
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-replay-after-interruption/2026-10-06T06-23-08-852Z-e8bdec01-945f-4d80-bc8f-ed269eef651e/summary.json",
+      "sha256": "44d93b934f42eca6d99eb25f7a1ef13f37c79582fc0fa38d3e668915c3cf5fec",
+      "bytes": 29260
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15-transport.jsonl",
+      "sha256": "e10fc1b55e47e64c87c10dbe9c99c464118c8e8c6a80d6cfae33a3f36373abf2",
+      "bytes": 96979
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15/2026-10-06T04-02-13-651Z-aaf055aa-4c1a-4b18-b23c-140b72b5ad7e/details.jsonl",
+      "sha256": "7f0693ff1d0e0e0e23113c79e9e8a0adbf7e710dfdd0ccbf129615bf834cad4e",
+      "bytes": 1569704
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m15/2026-10-06T04-02-13-651Z-aaf055aa-4c1a-4b18-b23c-140b72b5ad7e/manifest.json",
+      "sha256": "e878efb1ba0eb40d1a5ab50c4320625490e7327b1a11bb99a268030d2d01eeea",
+      "bytes": 15019
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m2-integration-attempt2.json",
+      "sha256": "53b1a32e6295d08d5a44311ebdee53514fcc046ed627ff01761c20f8b956a1bd",
+      "bytes": 839
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m2-integration-attempt2.log",
+      "sha256": "99c44b7af57757a24c03cdecfa0879e1ad2c088cba82831247496ad4a0b78230",
+      "bytes": 384
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m2-integration.json",
+      "sha256": "1515a0c6fb0d17503412c765f20bf0f5bc19e94d07fa8d556cde80eb1b6d98d4",
+      "bytes": 830
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m2-integration.log",
+      "sha256": "f02070370526e5584ea715e4d6d1692767c19858f460996e450a6c42735b7eed",
+      "bytes": 385
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-copilot-evaluation.json",
+      "sha256": "8c68809b3ea009b2389fe4331635dd6983cd62021650b05de0e4f57d97e400ed",
+      "bytes": 400
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-copilot-evaluation.log",
+      "sha256": "ab756a6347072516e75706b419b244894a3f77e436f8d69ce588babc0a879fe0",
+      "bytes": 4390
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-copilot-transport.jsonl",
+      "sha256": "c0cba90538d23e7c0377823deba5109b6f39e457a5a36f51262b92af99e8e2b7",
+      "bytes": 7521
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-summary-evaluation.json",
+      "sha256": "996db3afd1aa18667fe1006f063fa04cae45c06e03f3e270cc52d37cf0323254",
+      "bytes": 400
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-summary-evaluation.log",
+      "sha256": "004553ea6d8e71265dedda02bb1e95713a1bf9d6aa69add7aaf9989a7543f90b",
+      "bytes": 1111
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8-summary-transport.jsonl",
+      "sha256": "58ef9b5e21670453dafc889a72df0ae11c5733a290d7bbb4d90ed184baf077a6",
+      "bytes": 953
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8/M8_COPILOT_EVAL.json",
+      "sha256": "0aee0e8a83eaaedb0e1e5091f336d50fb782856aa236f7aed6c1743eeedfcec2",
+      "bytes": 7607
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/m8/M8_SUMMARY_EVAL.json",
+      "sha256": "108a9965cb8454e54fd704acbec2e308913e6f646ec3dd3e68cb56f8bc033d62",
+      "bytes": 1302
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/native-presentation-observation.md",
+      "sha256": "9f9842744966b1b349b83b0c729bd602599d8a7837c16c93130d9f784e4a77fc",
+      "bytes": 2113
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/offline-build.json",
+      "sha256": "152130876826316151ddb6ada2d8352d11a1b75463fc63073c7a031f643639ba",
+      "bytes": 886
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/operations-results.json",
+      "sha256": "0836f4c0462329d34408b460af2bdfdd247082b912f98766fa28ef8dd212662c",
+      "bytes": 39489
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/operator-notes.md",
+      "sha256": "c1b7a640d7358b405ca0a4b0d4490fb27a8c58d17098f0da303bcfbe506daa9e",
+      "bytes": 5971
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/privacy-during-quality.json",
+      "sha256": "2775c612790154e0e7c996d3c6bccbd826f153a658c837bcabd8a5045d429836",
+      "bytes": 534
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/privacy-pre-report.json",
+      "sha256": "755eca267dbc2fee753a83186c6f3ac46d86f889bcdeeccfd9e5fd0cb5ccaffa",
+      "bytes": 530
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/profile-handoff.json",
+      "sha256": "e52b12d10f952bdc015e4651b52678b55b4923e46f4729ee7d1c753ea86b4636",
+      "bytes": 3071
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/profile-replay-start.json",
+      "sha256": "2c1872f39953d46524ae7ee973edcc96f5e2138b803f468b403e85ca93ab92ff",
+      "bytes": 2774
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/quality-results.json",
+      "sha256": "5764c32fd13c3ddbee68beb6d6b60fb82791af91326c021d6c52ec668ae8558d",
+      "bytes": 28528
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/recovery-integration.json",
+      "sha256": "7e58816546bd196a74d59be2b06019b4aa75fec5dacf209d07ce0b5400b53a84",
+      "bytes": 762
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/recovery-integration.log",
+      "sha256": "9c6721e58e45e15e6ee1ac9d9abadc7fb7740aa4cb8a9ccf1aa241179f687612",
+      "bytes": 1148
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/red.json",
+      "sha256": "c77c88386d00da88aa865cbb9aad3d6e7ec077bb23fce6b3775639eb87a7575c",
+      "bytes": 1073
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/red.log",
+      "sha256": "5328eeeb22d414ddc9ea9f4ad61d41235fd6bbe06566a397796162c59fe38247",
+      "bytes": 2281
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/runtime-after-interruption.json",
+      "sha256": "d9ee53b0afe68a3df5b62df47e9b807cea6ab95d34c46b8a6ea9634825a51692",
+      "bytes": 11106
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/runtime-before-quality.json",
+      "sha256": "e2e1a888e2e0d2a5e1bdad7f0bf8fcee4ad1d3faddd6a42170729affce96f3c2",
+      "bytes": 11106
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/runtime-handoff.json",
+      "sha256": "4227c3c3ad2cc947376e95ab230e3682e3423852539c9f918c9e333c975bac3f",
+      "bytes": 11106
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/sla-observation.json",
+      "sha256": "60ea43a8a76c795dd44cb4800a8c7ee994fcd55791a16224f365fc5fd16d1631",
+      "bytes": 1680
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final.json",
+      "sha256": "3e7f239b490de65cce4742fa2a8f166992dcc18b01d16550f8dbbe2aa53c74df",
+      "bytes": 355
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final.log",
+      "sha256": "94e9ddad9f9652aedf7de80d0f5dfa91305b50c2f13034bb055643b9f2159be6",
+      "bytes": 2808
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/http.jsonl",
+      "sha256": "5d4b9d8e4d63a76c7dee66f580f05ee631eb438979047e5e4b1c365f79d6aaa7",
+      "bytes": 74733
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/report.json",
+      "sha256": "5e0ab0d975454613914d90558ed3336d8a0ae910a09cb7f34ed8ac3831f10650",
+      "bytes": 180758
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/round-1.json",
+      "sha256": "1f9e8cd1fc95e051efa549784422126151d41f3c502f8749bc2ce4e5f264c53f",
+      "bytes": 81753
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/round-2.json",
+      "sha256": "798f3938cea9b7f4e620b121a3849087f7cdefc1a81aed76f01c54b1a4bab24c",
+      "bytes": 44949
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/round-3.json",
+      "sha256": "7154c17b1a57c154ad7984e75b74ea775e6ca181c66b89b8d720270f5c51ffe3",
+      "bytes": 45794
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/round-4.json",
+      "sha256": "6b9788d7851f15fce1ceb3358d2fb1c4f5e268c3171bd2e712e7d0f962b9b531",
+      "bytes": 46312
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/smoke-final/round-5.json",
+      "sha256": "59a25e7234f4f10e50ce2c59054281812b8c8629acac9a56bf0147f44d906222",
+      "bytes": 47315
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/source-after-interruption.json",
+      "sha256": "2332747a76764fe9a05314700da7d8b2ed0ed8cbd30a31b3dd6f3defebb2aa8e",
+      "bytes": 4246
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/source-before-evals.json",
+      "sha256": "a575372b86d59e5fdb4047c60cf03ffa7e0de145726021d03b18019408e5bfef",
+      "bytes": 4246
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/source-handoff.json",
+      "sha256": "4a9c90299cbacf2305c91680f25674697becd83a8a4456965b88c52f4d4b58b8",
+      "bytes": 4246
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-api-attempt2.json",
+      "sha256": "a425654a8d3a15124a3161870c5c7c36bedb3c441aae611731cf1818ab6e7b0c",
+      "bytes": 448
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-api-attempt2.log",
+      "sha256": "0ae5c7a33dacb7037d03b975aff903d337ed2d6c07a09e5602a5d071c5002187",
+      "bytes": 6443
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-api.json",
+      "sha256": "e2ff1fadaf72f034694e0af0f80d0f0936bde4ea42a1d5f8809d8e7b5eecfcf3",
+      "bytes": 439
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-api.log",
+      "sha256": "ed763c578a014537f4fbd0fc140c5e98d1c12ebbe6ade439a63e0d122ea14ac3",
+      "bytes": 6444
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-evaluation-attempt2.json",
+      "sha256": "f7b3e7d22a62a954799ea233153ee54d57460d7426933e1c9c42d3d21a50f78c",
+      "bytes": 453
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-evaluation-attempt2.log",
+      "sha256": "cac57a495d2ab9860b8acc256751757c1f8090c27db6a952a7b9d0ef42e6cff3",
+      "bytes": 6964
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-evaluation.json",
+      "sha256": "521507e1e0976eca000ce04863dc092551838cb6beae1b475bdc0ab30fae9670",
+      "bytes": 444
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-evaluation.log",
+      "sha256": "94d14342619578fb21fc3681791821fdf6c254a9929a0161d466e1ca6d69a092",
+      "bytes": 6955
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-1.json",
+      "sha256": "192a708cb0fb3ad2d53fce7593356e3a5cfb6b108a8e13b2b4b65cf5e06c535b",
+      "bytes": 478
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-1.log",
+      "sha256": "7c0f9234d66b76b4f843f70f1db52d3b8b4a720fdaf1c27d59795ab3c1f564e3",
+      "bytes": 353
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-1/2026-10-06T03-43-06-714Z-aa03f9cd-a785-42f2-9884-2edba501e600/details.jsonl",
+      "sha256": "d4b6ead1e9f9ce5cb7f30619dad4aaf7dbb5e17657c297df2c2546ffa3392473",
+      "bytes": 14628
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-1/2026-10-06T03-43-06-714Z-aa03f9cd-a785-42f2-9884-2edba501e600/manifest.json",
+      "sha256": "ad9c662eabb561a5d4681a497572972d6045b4d7f60614b87b4be65b488a471a",
+      "bytes": 10777
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-1/2026-10-06T03-43-06-714Z-aa03f9cd-a785-42f2-9884-2edba501e600/summary.json",
+      "sha256": "a60bb2063b1621680fd5eb3d03087392b04da16698a3025ba170200fa98d1e4e",
+      "bytes": 8685
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-2.json",
+      "sha256": "ab8869cb969f24792a33a648a4e20618e6ef599bb153fb73d1de1a2c1177fbe6",
+      "bytes": 478
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-2.log",
+      "sha256": "e31cab0c46bcffd6acb543bd74b28e6a723796b3a2fac43cf748592513513241",
+      "bytes": 353
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-2/2026-10-06T03-43-44-714Z-7c4b5b97-7a42-4a4d-ab2b-3f6d188f38d8/details.jsonl",
+      "sha256": "4e149897a1ba805c34804b6a682402b81c64e3f5f65879e5d6504b1e27f0e6a6",
+      "bytes": 14628
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-2/2026-10-06T03-43-44-714Z-7c4b5b97-7a42-4a4d-ab2b-3f6d188f38d8/manifest.json",
+      "sha256": "fd9860f098cd89918aad5d4b99ce5e2979419849368570e22cd2c6a3f878dafa",
+      "bytes": 10777
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-2/2026-10-06T03-43-44-714Z-7c4b5b97-7a42-4a4d-ab2b-3f6d188f38d8/summary.json",
+      "sha256": "0afbf10a6d9dc88ee691cbdb043a11cf04247c458b966240217726b3c6a66b23",
+      "bytes": 8685
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3-transport.jsonl",
+      "sha256": "a486833aa07e490ded444e622a63328b85da985fc7149b82ce2202cefa516a63",
+      "bytes": 950
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3.json",
+      "sha256": "6a1537499d233f2a516c910981b5a29e2db4ba8651fb252aa05c9be45037067a",
+      "bytes": 543
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3.log",
+      "sha256": "8b6b482856c44a2ac9689622d35bf46807242e9e233b28d32cfe42c22a538db5",
+      "bytes": 353
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3/2026-10-06T03-45-14-274Z-7a86c8cd-1fae-4103-802d-8bbf37b84734/details.jsonl",
+      "sha256": "3075f5b72a3a95636fcd991f7144b2a50d385e98a3db879b0445dd62ee238e3c",
+      "bytes": 14628
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3/2026-10-06T03-45-14-274Z-7a86c8cd-1fae-4103-802d-8bbf37b84734/manifest.json",
+      "sha256": "69025cf0bf2b835eebf38b7f7987788568dafb2c66a673cb5aea3d4d97c6d408",
+      "bytes": 10777
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-live-3/2026-10-06T03-45-14-274Z-7a86c8cd-1fae-4103-802d-8bbf37b84734/summary.json",
+      "sha256": "4d30ca2b5299e7f2965881896d53815824f0df25a315eafc5746ab83db901f03",
+      "bytes": 8685
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted-protocol.json",
+      "sha256": "9aff3d88a1b3d530d9694b5f2a0d72f27c7a9f4deeb1679e23c447cb03c38039",
+      "bytes": 4424
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted.json",
+      "sha256": "e7ecc1504223d6421940783203feb992b6aa9da813a2662cbb5452c9eccbd65b",
+      "bytes": 585
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/targeted.log",
+      "sha256": "f720c296bfa6c2f5ba89cb7240611b1b4f2c160f2eca55f11dfa23357bfd3259",
+      "bytes": 18634
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/test.json",
+      "sha256": "66fcf4ed2260341e27ff86d4280ea2d17c5242540469da1b81643d7b60284aba",
+      "bytes": 309
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/test.log",
+      "sha256": "8f36b89a17f587e05bc3d4fe2b93c12778530da44d5ce144c116f7fef24548fd",
+      "bytes": 28398
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/typecheck.json",
+      "sha256": "7531ff455c9f1fedc0f378c626934e523f045ee2342dfa8591118e0af2d93dbe",
+      "bytes": 319
+    },
+    {
+      "path": "artifacts/v130-evidence-decision-20261006/typecheck.log",
+      "sha256": "a92cae91c52fedfa32bc4ad776b846e5b5b22c1405c0b7c8b9d63c5b021c344a",
+      "bytes": 1712
+    }
+  ],
+  "finalArtifactChecks": {
+    "gitSourceAuditPath": "artifacts/v130-evidence-decision-20261006/audit-final-after-format.json",
+    "privacyAuditPath": "artifacts/v130-evidence-decision-20261006/privacy-final-after-format.json",
+    "completionPath": "artifacts/v130-evidence-decision-20261006/completion.json",
+    "requireResult": "PASS before final completion; separate completion hashes avoid circular self-hash"
+  },
+  "reportPath": "docs/v1.3/EVIDENCE_DECISION_REMEDIATION_2026_10_06_VERIFICATION.md",
+  "evidencePath": "docs/v1.3/evidence/EVIDENCE_DECISION_REMEDIATION_2026_10_06.json",
+  "operationalFailure": {
+    "at": "2026-10-06T07:20:41.309Z",
+    "result": "FAIL",
+    "kind": "Retained real operational first-attempt stability failure; do not replace with a lucky rerun or terminal-success-only gate",
+    "run": {
+      "id": "2220a738-2d57-4307-be8e-f13037bac231",
+      "requestId": "05258ad9-7ed2-44a4-b06c-4c4af37a0bbb",
+      "purpose": "COPILOT",
+      "action": "GENERATE_CHECKLIST",
+      "status": "SUCCEEDED",
+      "startedAt": "2026-10-06T07:08:37.904Z",
+      "finishedAt": "2026-10-06T07:09:10.504Z",
+      "latencyMs": 32602,
+      "retryCount": 1,
+      "inputSize": 12902,
+      "outputSize": 1902,
+      "errorCode": null,
+      "promptVersion": "copilot.m8.v3",
+      "schemaVersion": "copilot.m8.v2",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      }
+    },
+    "request": {
+      "id": "05258ad9-7ed2-44a4-b06c-4c4af37a0bbb",
+      "publicCode": "MF-2026-000038",
+      "status": "CLOSED",
+      "version": 12
+    },
+    "failedAttemptAudit": [
+      {
+        "action": "COPILOT_ATTEMPT_FAILED",
+        "safeAfterJson": {
+          "attempt": 1,
+          "errorCode": "AI_INVALID_OUTPUT",
+          "validationCategory": "TRUNCATED_GENERATION"
+        },
+        "createdAt": "2026-10-06T07:08:58.112Z"
+      }
+    ],
+    "terminalRecovered": true,
+    "manualAiRetry": false,
+    "classification": {
+      "providerReportedGenerationTruncation": true,
+      "providerEnvelopeParsed": true,
+      "timeout": false,
+      "providerAvailabilityFailure": false,
+      "applicationParserReachedOnFirstAttempt": false,
+      "publicSchemaValidationReachedOnFirstAttempt": false,
+      "guard": "OllamaProvider.generateStructured rejects done_reason=length before returning raw generation",
+      "settings": "Accepted output1200/attempt120000/run300000/temp0/seed42/ctx16384/max2 remain unchanged",
+      "exactFirstAttemptTokenCount": "NOT_RETAINED",
+      "exactWhyModelExhaustedBound": "UNKNOWN; broad existing max30-items/1-5-source-IDs public generation budget is an observed owner boundary, not proof of exact first-response contents"
+    },
+    "sourceIdentity": [
+      {
+        "path": "apps/api/src/ai/operational-ai.service.ts",
+        "sha256": "5b6da549afed67e5c84b3543182106afbd03429fe896c8786c218515dff24634",
+        "baselineSha256": "5b6da549afed67e5c84b3543182106afbd03429fe896c8786c218515dff24634",
+        "unchangedFromTaskBaseline": true
+      },
+      {
+        "path": "apps/api/src/ai/prompts/copilot.ts",
+        "sha256": "292c9181689d413e2e96a69c2dd286dfffe51be8ef0e085a0a7706c6e8b80dec",
+        "baselineSha256": "292c9181689d413e2e96a69c2dd286dfffe51be8ef0e085a0a7706c6e8b80dec",
+        "unchangedFromTaskBaseline": true
+      },
+      {
+        "path": "apps/api/src/ai/operational-output.ts",
+        "sha256": "f228e025ec20b21af8b10eae9f5f5d495046c8ab860bccca3fa18026fb6741a0",
+        "baselineSha256": "f228e025ec20b21af8b10eae9f5f5d495046c8ab860bccca3fa18026fb6741a0",
+        "unchangedFromTaskBaseline": true
+      },
+      {
+        "path": "apps/api/src/ai/ollama-provider.ts",
+        "sha256": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+        "baselineSha256": "6a180c5c55e355e5f57206061ca942faaf6e838fb7d72d210fe245840f7f156c",
+        "unchangedFromTaskBaseline": true
+      },
+      {
+        "path": "apps/api/src/ai/tools/request-vectors.ts",
+        "sha256": "8b5af7af6f375460c3eda071406bb3b0990d1cec74cd1726ba902c2a6d899a72",
+        "baselineSha256": null,
+        "unchangedFromTaskBaseline": "Not in broader baseline hash map; compiled408-file identity and no task source edit are recorded separately"
+      },
+      {
+        "path": "apps/api/src/knowledge/rag-health.ts",
+        "sha256": "f4312d60018f7231d4d251b294b381794b787a05c1c1f872166aff91204036ea",
+        "baselineSha256": null,
+        "unchangedFromTaskBaseline": "Not in broader baseline hash map; compiled408-file identity and no task source edit are recorded separately"
+      }
+    ],
+    "causedByEvidenceDecisionPatch": "NOT_PROVEN: Copilot/provider owners match task baseline; no causal inference from latency",
+    "m15Quality": "PASS 100+30/130 first-attempt,0 violations/retries; independent of this operational failure",
+    "m8SyntheticEval": "PASS Summary1 + Copilot8 first-attempt; smaller labeled contexts do not replace this full actual workflow",
+    "noRetryStabilityGate": "FAIL 24/25 first-attempt, one bounded repair,26 provider attempts,0 terminal failures",
+    "businessMutation": "No Copilot business mutation observed; unchanged version/status after each action asserted by executed smoke",
+    "ragAtSmokeEnd": {
+      "enabled": true,
+      "status": "NOT_READY",
+      "embedding": "UP",
+      "knowledge": "READY",
+      "errorCode": "REQUEST_INDEX_INCOMPLETE",
+      "documents": 9,
+      "chunks": 12,
+      "checkedAt": "2026-10-06T07:12:07.141Z"
+    },
+    "ragAtHandoff": {
+      "enabled": true,
+      "status": "READY",
+      "embedding": "UP",
+      "knowledge": "READY",
+      "errorCode": null,
+      "documents": 9,
+      "chunks": 12,
+      "checkedAt": "2026-10-06T07:15:07.129Z"
+    },
+    "coverageAtHandoff": {
+      "eligible": 49,
+      "current": 49
+    },
+    "apiRestartAfterSmoke": false,
+    "next": "Keep failure and report blocker. Any later Copilot budget remediation requires owner audit/regression and appropriate fresh evaluation; no output/token/timeout increase, no reference validation relaxation, no selective rerun in this task.",
+    "developerDatabaseAccess": "NONE"
+  }
+}

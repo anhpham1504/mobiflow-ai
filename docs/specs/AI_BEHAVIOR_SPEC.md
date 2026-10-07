@@ -60,7 +60,7 @@ Context assembly is deterministic and records omissions: include full required s
 
 ## Recommendation schema v1
 
-M14 adds a separate `recommendation.v2` contract; this section continues to own V1 history/execution. New default synthesis uses prompt `grounded-recommendation.v2.11` for the authorized V1.3 stability repair and the strict shared V2 schema. Canonical short `reasoningSummary` maps to existing `reasonSummary` naming. See [M14 plan](../v1.2/M14_RECOMMENDATION_V2_IMPLEMENTATION_PLAN.md): summary/classification/recommendedAction/evidence/warnings/missingInformation/suggestedChecklist; no confidence. Classification category/subcategory matches validated analysis, priority matches retrieved policy. Every evidence reference belongs to captured request/SOP/historical context and every excerpt is a real contiguous substring. Current request evidence is mandatory; each procedure source also has knowledge evidence. Missing fields/questions exactly cover analysis, with bounded impact text and grounded warning. Zero/insufficient SOP means empty procedural sources/checklist; historical cases cannot establish procedure truth. Native generation uses draft-7 tuples for required facts/warnings and tighter text/collection bounds within the public contract to fit the unchanged 1,200-token budget; backend validation remains authoritative.
+M14 adds a separate `recommendation.v2` contract; this section continues to own V1 history/execution. Current default synthesis uses prompt `grounded-recommendation.v2.13` for the accepted V1.3 evidence-decision repair and the strict shared V2 schema; v2.12 remains a historical presentation iteration below. Canonical short `reasoningSummary` maps to existing `reasonSummary` naming. See [M14 plan](../v1.2/M14_RECOMMENDATION_V2_IMPLEMENTATION_PLAN.md): summary/classification/recommendedAction/evidence/warnings/missingInformation/suggestedChecklist; no confidence. Classification category/subcategory matches validated analysis, priority matches retrieved policy. Every evidence reference belongs to captured request/SOP/historical context and every excerpt is a real contiguous substring. Current request evidence is mandatory; each procedure source also has knowledge evidence. Missing fields/questions exactly cover analysis, with bounded impact text and grounded warning. Zero/insufficient SOP means empty procedural sources/checklist; historical cases cannot establish procedure truth. Native generation uses draft-7 tuples for required facts/warnings and tighter text/collection bounds within the public contract to fit the unchanged 1,200-token budget; backend validation remains authoritative.
 
 V2 is synthesized only in TRIAGED under current eligibility. START_WORK and REQUEST_USER_INFO describe future steps after explicit human prerequisite actions; RESOLVE fails closed without completion prerequisites. Canonical SLA warnings require the supplied actual state (no AI clock math); conflicting approved category/subcategory/location requires actual snapshot contradiction; weak evidence is procedural insufficiency. Stale is computed live. Two attempts, existing 120s attempt/300s run deadline, 24k context and 32KiB output bounds remain. Reparse at publication/read/review; unknown schema or invalid stored JSON is unavailable, never raw response. Provider thinking is excluded and no hidden reasoning stored. Versioned V1 templates remain available for history and same-model comparison. V2 agreement does not execute the plan, and exact missing-field acknowledgment is required on accept/modify.
 
@@ -95,7 +95,36 @@ The v2.9 full attempt was interrupted after 20 completed cases when 009 again in
 
 The authorized V1.3 local stability repair uses Recommendation V2 generation prompt/native format v2.11. Each native sufficient branch binds one selected SOP set (one or two sources), its required KNOWLEDGE evidence and the checklist source-ID enum together. This closes the measured `ACTION_SOURCE_NOT_IN_PROCEDURE` generation/validation mismatch; it does not weaken the unchanged public parser or current-source checks. Existing model identity, 1,200 output tokens, attempt/run deadlines, advisory review and manual business approval remain authoritative. Historical v2.10 artifacts are retained.
 
+The retained local v2.11 evaluation was interrupted after 87 completed cases. Direct output inspection found M15-075 relevance asserting a cause from untrusted HTML absent from the source, M15-001 malformed relevance text and M15-016/031 incomplete missing-field prose despite the existing oracle accepting them. Generation v2.12 binds relevance to neutral REQUEST/KNOWLEDGE/HISTORICAL_REQUEST provenance labels and missing-field questions/impacts to complete, bounded sentences for the exact validated missing fields. The generation parser independently rejects noncanonical labels/questions before publication, and the live evaluator invokes the same guard. Historical public V2 parsing/read/review stays unchanged; old suggestions are preserved. Actions and sourced checklist proposals remain generated and advisory. This closes measured presentation/factuality gaps without increasing tokens/deadlines or weakening validation; it is not evidence of unrestricted semantic quality. The frozen M15 dataset and existing semantic oracle remain unchanged.
+
 ## Copilot action contracts
+
+V1.3 checklist truncation remediation (6 October 2026): public and historical
+draft bounds remain30items/text500/1–5citations. Only new GENERATE_CHECKLIST
+generation uses prompt `copilot.checklist.m8.v9` and stricter internal same-shape
+bounds: message160, at most8 distinct steps, text120 and1–2unique sources per
+step (prefer one directly supporting source). The source drafting amendment below
+binds complete source sentences/citation pairs in the native format;
+no sources permits zeroitems. The same owning schema validates parsed generation
+and mapped publication; excessive items/text are rejected, never sliced.
+Eight preserves the longest current synthetic IoT SOP's distinct obligations:
+confirmed impact/count/location/time, SIM registration, approvedAPN comparison,
+gateway link, approval before change/reboot, conditional escalation with confirmed
+time/place, post-work device-to-gateway check and USERconfirmation. Shorter SOPs
+need fewer steps. Ordered applicable actions must preserve safeguards/missing
+facts and remain future staff proposals, never execution/completion claims.
+Unrelated-domain warnings are not procedural steps. Source membership remains an
+independent guard; semantic grounding is separately evaluated. Other five action
+prompts/formats, shared provider/options, public schema and human adoption stay
+unchanged; output1200/attempt120000ms/run300000ms/max2 remain authoritative.
+Character bounds are not a mathematical token guarantee across languages.
+
+Documentary clarification: the earlier default recommendation prompt text
+`grounded-recommendation.v2.12` describes a historical iteration. The retained
+M15 evidence-decision implementation/report executes `grounded-recommendation.v2.13`;
+this checklist remediation does not change that recommendation owner.
+
+The V1.3 local stability follow-up measured `CASE_MEMBERSHIP` on both live attempts of FIND_SIMILAR_REQUESTS. Generation prompt m8.v3 binds native caseIds to the same STAFF-authorized retrieved ID set; no result permits only an empty caseIds array. The public copilot.m8.v2 schema, six actions and backend publication/permission validators remain unchanged. Failed attempts remain recorded. Summary generation continues to use the existing m8.v5 owner and actor provenance checks.
 
 Actor: assigned STAFF; states ASSIGNED/IN_PROGRESS/WAITING_USER/RESOLVED. Input `{action,expectedVersion}`; request ID from route and identity from session. No freeform tool prompt or client-supplied context. Output envelope includes action, aiRunId, schemaVersion, generatedAt, evidenceStatus and typed result. Human must explicitly save any draft; suggestions never mark checklist tasks complete.
 
@@ -125,3 +154,21 @@ The model selects at most eight supplied events. Both native format and backend 
 Record AiRun purpose/provider/model/promptVersion/schemaVersion/context version, start/end/latency, attempt count, validity, status and safe error. Tool calls and retrieval snapshot IDs are linked. Invalid output stays FAILED and is never shown as an approved result. Conflict after a call becomes stale/failed telemetry; no business commit.
 
 Tests: every enum/schema boundary, null/missing fields, invented IDs/sources/counts, unknown tools, timeout/cancel/recovery, output size, duplicate runs, no preapproval side effects, factual summaries and restricted Copilot context. M4 uses at least 50 labeled cases; M5 20–30 retrieval queries; M9 minimum 100 valid labeled cases plus live measurements. No model/quality result has been measured in M0.
+# V1.3 local recommendation ownership amendment
+
+For new Recommendation V2 runs, backend policy owns evidenceStatus, eligible/selected procedure IDs, the canonical missing-field set and allowed main-action scope. The provider receives this authoritative decision and cannot select an alternative insufficient/sufficient native branch. `SUFFICIENT` requires the selected eligible procedure, its exact KNOWLEDGE evidence and checklist membership. `INSUFFICIENT_EVIDENCE` requires no procedures/checklist and the corresponding warning. Missing information requires MISSING_INFORMATION and REQUEST_USER_INFO without changing sufficiency when a relevant procedure exists. Candidate/SLA availability remain separate existing policies.
+
+Generation and repair preserve one decision; mismatch is a bounded repairable validation failure, never publication success. Publication independently compares the snapshot decision with backend policy under the current configured retrieval bound, then validates the output before any artifact invalidation/insertion. Legacy persisted V1/V2 read and advisory review continue to use their existing public parser, without retroactive generation constraints. All existing schema/reference/currentness/RBAC/privacy/human-control rules remain in force. Procedural qualification and its conservative grammar are owned by RAG_SPEC.
+## Source contract drafting amendment, 2026-10-06
+
+The failed v4–v7 prompt iterations are retained in the checklist remediation evidence. The final action-specific prompt is `copilot.checklist.m8.v9`; internal contract is `checklist.source-actions.v2`. The public `copilot.m8.v2` shape and 30-item historical/public reading bound remain unchanged. Other five action prompts/formats do not change.
+
+Source sentence duplicate identity uses NFC, Vietnamese case folding and normalized whitespace while preserving diacritics. Distinct accented instructions cannot be merged. A recognized operational sentence that also contains classification/priority/protected-decision policy fails closed as unsupported context rather than silently losing its operational clause. Only a standalone negative human-control boundary with no operational clause is omitted from draft items; human-control rules remain mandatory.
+
+For GENERATE_CHECKLIST, the owning operational-output module selects at most one procedure with a positive canonical category/subcategory declaration in the actual authorized retrieved excerpts. The current approved request classification is authoritative. Titles and request text do not establish applicability. Conflicting positive declarations exclude a document. Scope propagates only to supplied sibling chunks with the same document UUID and generation encoded by validated source IDs. Source membership/current retrieval/authorization remain existing backend predicates.
+
+Draft text consists of complete operational instruction sentences from that procedure, with whitespace normalized before generation. The selection keeps conditional clauses, required intake labels, prerequisites, escalation details and after-treatment checks. Classification, priority, inferred-cause and autonomous decision policy statements remain outside checklist items; system and human-control rules continue independently. Duplicate source sentences are merged without repeating an item, retaining one actual supporting citation. No request value, test ID or fixture template is embedded in this contract.
+
+Generation's native draft-7 schema binds the complete ordered item tuple, each source/text pair and the draft/insufficient-data message to these source facts. Backend validation independently requires the same complete tuple after strict JSON parsing and source-membership validation. Missing, reordered, paraphrased or swapped-citation steps fail, with existing bounded repair/audit behavior. No post-generation string/item truncation or JSON repair is introduced.
+
+The internal bounds remain eight items, 120 characters per instruction, 160 per message and at most two source IDs per item; source drafting uses one sufficient ID per sentence. A complete instruction exceeding the field bound, a procedure exceeding eight instructions or more than one independently applicable procedure is unsupported and fails closed for human planning. No positively scoped procedure yields an empty insufficient-data draft. This conservative declaration/sentence grammar is not a general natural-language applicability or exhaustive SOP-completeness claim. Long or differently authored SOPs need explicit follow-up contract review; no budget/validation is silently relaxed.

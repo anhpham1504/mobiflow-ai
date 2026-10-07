@@ -16,7 +16,8 @@ import {ToolFailure} from './tools/registry.js';
 import {AiFailure,RECOMMENDATION_PROVIDER,type StructuredProvider} from './provider.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {recommendationMessages,recommendationFormat,recommendationPromptVersion,recommendationMessagesV2,recommendationFormatV2,recommendationPromptV2Version} from './prompts/recommendation.js';
-import {parseRecommendationForVersion} from './recommendation-output.js';
+import {parseRecommendationForVersion,parseRecommendationV2ForGeneration} from './recommendation-output.js';
+import {decideRecommendationEvidence} from './recommendation-evidence-decision.js';
 import {revalidateRecommendation} from './recommendation-validation.js';
 import {VectorRepository} from '../knowledge/vector.repository.js';
 import {assessSla} from '../requests/sla-clock.js';
@@ -86,12 +87,14 @@ export class RecommendationService {
       const base:RecommendationEvidence={analysisId:a.id,analysis,requestVersion:queued.contextVersion,retrievedAt:capturedAt.toISOString(),sources:knowledge.sources,similar,candidates:staff,workload,policy,history,embeddingIdentity:indexed.identity};
       const evidenceV2:RecommendationEvidenceV2={...base,requestContext:{id:request.id,version:request.version,status:request.status,title:request.title,description:request.description,category:request.category as RecommendationEvidenceV2['requestContext']['category'],subcategory:request.subcategory,priority:request.priority,location:analysis.entities.location,sla:sla?{state:sla.status,dueAt:sla.dueAt.toISOString(),remainingSeconds:sla.remainingSeconds}:null}};
       const evidence=v2?recommendationEvidenceV2Schema.parse(evidenceV2):base;
+      const evidenceDecision=v2?decideRecommendationEvidence(evidenceV2,this.env.RAG_MAX_DISTANCE):null;
+      if(v2)await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}))}});
       let feedback='';
       for(let attempt=0;attempt<2;attempt++){
         await this.tools.authorize(ctx);
         await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retryCount:attempt}});
         try{
-          const messages=v2?recommendationMessagesV2(request,evidenceV2,feedback||attempt>0):recommendationMessages(request,base,feedback||attempt>0),format=v2?recommendationFormatV2(evidenceV2):recommendationFormat(base);
+          const messages=v2?recommendationMessagesV2(request,evidenceV2,feedback||attempt>0,evidenceDecision!):recommendationMessages(request,base,feedback||attempt>0),format=v2?recommendationFormatV2(evidenceV2,evidenceDecision!):recommendationFormat(base);
           const generation=await this.provider.generateStructured(messages,format,signal);
           if(Buffer.byteLength(generation.raw)>32768)throw new AiFailure('AI_OUTPUT_TOO_LARGE');
           let proposal:unknown;try{proposal=JSON.parse(generation.raw);}catch{throw new AiFailure('AI_INVALID_OUTPUT',true);}
@@ -99,8 +102,8 @@ export class RecommendationService {
           if(shaped.success&&shaped.data.suggestedPriority!==(policy?.priority??analysis.prioritySuggestion)){
             policy=(await session.call('getSlaPolicy',{category:analysis.category,priority:shaped.data.suggestedPriority})).policy;base.policy=policy;evidenceV2.policy=policy;evidence.policy=policy;
           }
-          const result=parseRecommendationForVersion(queued.schemaVersion,generation.raw,evidence);
-          await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,...(v2?{_authorization:snapshot.authorization}:{})})),inputSize:JSON.stringify(messages).length}});
+          const result=v2?parseRecommendationV2ForGeneration(generation.raw,evidenceV2,evidenceDecision!):parseRecommendationForVersion(queued.schemaVersion,generation.raw,evidence,true);
+          await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,...(v2?{_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}:{})})),inputSize:JSON.stringify(messages).length}});
           await this.machine.publishRecommendation(queued.id,result,generation.identity,generation.outputSize,Math.round(performance.now()-start));return true;
         }catch(error){if(error instanceof AiFailure){feedback=error.repairFeedback;await this.prisma.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:queued.initiatingActorId,action:'RECOMMENDATION_ATTEMPT_FAILED',resourceType:'AiRun',resourceId:queued.id,requestCorrelationId:queued.id,safeAfterJson:{attempt:attempt+1,errorCode:error.code,validationRule:feedback.split(':')[0]||error.code},outcome:'FAILED'}});}if(!(error instanceof AiFailure)||!error.retryable||attempt===1||signal.aborted)throw error;await delay(1000,undefined,{signal});}
       }

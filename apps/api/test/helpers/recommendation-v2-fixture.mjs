@@ -8,22 +8,23 @@ import {RecommendationService} from '../../dist/ai/recommendation.service.js';
 import {DocumentService} from '../../dist/knowledge/document.service.js';
 import {IngestionWorker} from '../../dist/knowledge/ingestion-worker.js';
 import {identityKey} from '../../dist/knowledge/embedding-provider.js';
+import {recommendationEvidenceRelevance,recommendationMissingPresentation} from '../../dist/ai/recommendation-output.js';
 
 export const syntheticAnalysis={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'HIGH',entities:{customer:null,location:'Amata',affectedCount:17,startedAt:'8 giờ'},missingFields:[],confidence:.8,reasonSummary:'Synthetic M14 test analysis; no live inference claim.'};
 const baseIdentity={provider:'test',model:'m14-fixture',digest:'deterministic-test-only',dimension:1024,revision:'test.v1'};
 const identity={...baseIdentity,key:identityKey(baseIdentity)},vector=Array.from({length:1024},(_,i)=>i===0?1:0);
 export const syntheticEmbeddings={probe:async()=>({identity,vectors:[vector],latencyMs:0}),embedDocuments:async texts=>({identity,vectors:texts.map(()=>vector),latencyMs:0}),embedQuery:async()=>({identity,vectors:[vector],latencyMs:0})};
-export function recommendationFixture(e,version=e.requestContext?'recommendation.v2':'recommendation.v1'){
-  const candidate=e.candidates.candidates[0],source=e.sources[0],missing=e.analysis.missingFields;
+export function recommendationFixture(e,version=e.requestContext?'recommendation.v2':'recommendation.v1',decision){
+  const candidate=e.candidates.candidates[0],source=decision?e.sources.find(source=>source.sourceId===decision.selectedProcedureSourceIds[0]):e.sources[0],missing=e.analysis.missingFields;
   const shared={suggestedPriority:e.policy?.priority??e.analysis.prioritySuggestion,suggestedTeamId:candidate?.teamId??null,suggestedStaffId:candidate?.staffId??null,suggestedSlaMinutes:e.policy?.targetMinutes??null,procedureSources:source?[{sourceId:source.sourceId}]:[],similarCaseAlert:{detected:e.similar.returnedCount>0,count:e.similar.returnedCount},reasonSummary:'Nguồn được cung cấp hỗ trợ quản lý xem xét; đây chỉ là đề xuất.',evidenceStatus:source?'SUFFICIENT':'INSUFFICIENT_EVIDENCE'};
   const actions=source?[{text:'Sau khi quản lý duyệt và phân công, kiểm tra SIM và APN theo SOP.',sourceIds:[source.sourceId]}]:[];
   if(version==='recommendation.v1')return {...shared,actions,confidence:.5};
   const request=e.requestContext;
-  return {...shared,schemaVersion:'recommendation.v2',summary:'Yêu cầu mô tả sự cố kết nối. Quản lý cần xác nhận phương án trước khi triển khai.',classification:{category:e.analysis.category,subcategory:e.analysis.subcategory,priority:shared.suggestedPriority},recommendedAction:{action:missing.length?'REQUEST_USER_INFO':'START_WORK',text:missing.length?'Sau khi quản lý duyệt, phân công và bắt đầu xử lý, hỏi người dùng về thông tin còn thiếu.':'Sau khi quản lý duyệt phương án và phân công, nhân viên bắt đầu kiểm tra kết nối.'},evidence:[{type:'REQUEST',referenceId:request.id,excerpt:request.description.slice(0,200),relevance:'Đây là nội dung thực tế của yêu cầu hiện hành.'},...(source?[{type:'KNOWLEDGE',referenceId:source.sourceId,excerpt:source.excerpt.slice(0,200),relevance:'SOP là căn cứ cho checklist được đề xuất.'}]:[])],warnings:[...(!source?[{code:'INSUFFICIENT_EVIDENCE',text:'Chưa có SOP phù hợp để đưa ra checklist nghiệp vụ.',referenceIds:[request.id]}]:[]),...(missing.length?[{code:'MISSING_INFORMATION',text:'Thông tin cần được con người bổ sung trước khi sử dụng phương án.',referenceIds:[request.id]}]:[])],missingInformation:missing.map(field=>({field,question:'Vui lòng bổ sung thông tin '+field+'?',impact:'Thiếu '+field+' hạn chế việc kiểm tra phạm vi và điều kiện xử lý.'})),suggestedChecklist:actions};
+  return {...shared,schemaVersion:'recommendation.v2',summary:'Yêu cầu mô tả sự cố kết nối. Quản lý cần xác nhận phương án trước khi triển khai.',classification:{category:e.analysis.category,subcategory:e.analysis.subcategory,priority:shared.suggestedPriority},recommendedAction:{action:missing.length?'REQUEST_USER_INFO':'START_WORK',text:missing.length?'Sau khi quản lý duyệt, phân công và bắt đầu xử lý, hỏi người dùng về thông tin còn thiếu.':'Sau khi quản lý duyệt phương án và phân công, nhân viên bắt đầu kiểm tra kết nối.'},evidence:[{type:'REQUEST',referenceId:request.id,excerpt:request.description.slice(0,200),relevance:recommendationEvidenceRelevance.REQUEST},...(source?[{type:'KNOWLEDGE',referenceId:source.sourceId,excerpt:source.excerpt.slice(0,200),relevance:recommendationEvidenceRelevance.KNOWLEDGE}]:[])],warnings:[...(!source?[{code:'INSUFFICIENT_EVIDENCE',text:'Chưa có SOP phù hợp để đưa ra checklist nghiệp vụ.',referenceIds:[request.id]}]:[]),...(missing.length?[{code:'MISSING_INFORMATION',text:'Thông tin cần được con người bổ sung trước khi sử dụng phương án.',referenceIds:[request.id]}]:[])],missingInformation:missing.map(field=>({field,...recommendationMissingPresentation[field]})),suggestedChecklist:missing.length?[]:actions};
 }
 export function fixtureProvider({hook}={}){return {generateStructured:async(messages,format,signal)=>{
-  const {evidence}=JSON.parse(messages[1].content),result=recommendationFixture(evidence);
-  if(hook)await hook(evidence,result,signal,format);
+  const {evidence,evidenceDecision}=JSON.parse(messages[1].content),result=recommendationFixture(evidence,undefined,evidenceDecision);
+  if(hook)await hook(evidence,result,signal,format,evidenceDecision);
   const raw=JSON.stringify(result);return {raw,outputSize:Buffer.byteLength(raw),identity:{provider:'test',model:'m14-fixture',digest:'test-only'}};
 }};}
 
@@ -60,7 +61,7 @@ export async function createRecommendationHarness(databaseUrl,{provider,hook,emb
       }
       throw new Error('Bounded M14 recommendation drain exhausted');
     };
-    const upload=async(text='# Synthetic M14 SOP\nKiểm tra SIM và APN trước khi xử lý kết nối. ' + randomUUID(),title='SOP M14 '+randomUUID())=>{
+    const upload=async(text='# Synthetic M14 procedure\nÁp dụng cho SIM IoT bị mất kết nối. Kiểm tra SIM và APN, ghi lại kết quả trước khi đề xuất xử lý. Phân loại tham khảo NETWORK / IOT_CONNECTIVITY. ' + randomUUID(),title='Nguồn kiểm tra '+randomUUID())=>{
       const buffer=Buffer.from(text),doc=await docs.upload(manager.actor,{title},{originalname:'m14.txt',mimetype:'text/plain',buffer,size:buffer.length},randomUUID());
       await ingestion.tick();assert.equal((await docs.detail(doc.id,manager.actor)).status,'READY');return doc;
     };

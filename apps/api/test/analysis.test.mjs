@@ -7,6 +7,8 @@ import {AiFailure,parseAnalysis} from '../dist/ai/provider.js';
 import {OllamaProvider} from '../dist/ai/ollama-provider.js';
 import {analysisMessages} from '../dist/ai/prompts/request-analysis.js';
 import {executeAnalysis} from '../dist/ai/analysis-execution.js';
+import {parseStrictOutput} from '../dist/ai/operational-output.js';
+import {copilotFormat,copilotMessages} from '../dist/ai/prompts/copilot.js';
 export const valid={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'HIGH',entities:{customer:'ABC',location:null,affectedCount:17,startedAt:null},missingFields:['location','startedAt'],confidence:.8,reasonSummary:'Nhiều SIM được báo mất kết nối; cần xác nhận vị trí và thời gian.'};
 const input={title:'Demo',description:'17 SIM IoT mất kết nối.',messages:[],historyTruncated:false};
 const environment={NODE_ENV:'test',DATABASE_URL:'postgresql://a:b@localhost/test',JWT_SECRET:'a'.repeat(40),REFRESH_TOKEN_SECRET:'b'.repeat(40),OLLAMA_MODEL:'test:1',OLLAMA_EMBEDDING_MODEL:'unconfigured',OLLAMA_BASE_URL:'http://localhost:1'};
@@ -60,4 +62,61 @@ test('bounded execution retries invalid output once, never retries known model a
   assert.equal(result.retryCount,1);assert.equal(result.firstAttemptValid,false);assert.deepEqual(attempts,[0,1]);
   calls=0;await assert.rejects(executeAnalysis({generate:async()=>{calls++;throw new AiFailure('AI_MODEL_UNAVAILABLE');}},input,new AbortController().signal));assert.equal(calls,1);
   calls=0;await assert.rejects(executeAnalysis({generate:async()=>{calls++;return {raw:'{}'};}},input,new AbortController().signal),e=>e.code==='AI_INVALID_OUTPUT');assert.equal(calls,2);
+});
+
+const checklistSource='KD-11111111-1111-4111-8111-111111111111-G1-C0';
+const checklistAllowed={sourceIds:[checklistSource],eventIds:[],caseIds:[]};
+const validChecklist={message:'Bản nháp để nhân viên xem xét.',items:[{text:'Đối chiếu APN với cấu hình đã được phê duyệt.',sourceIds:[checklistSource]}]};
+async function checklistHttpFixture(t,{raw=JSON.stringify(validChecklist),doneReason='stop'}={}){
+  const calls=[];
+  const server=createServer(async(req,res)=>{
+    let body='';for await(const part of req)body+=part;
+    calls.push({url:req.url,body:body?JSON.parse(body):null});
+    res.setHeader('Content-Type','application/json');
+    if(req.url==='/api/tags'){res.end(JSON.stringify({models:[{name:'test:1',digest:'fixture-digest'}]}));return;}
+    // The count is injected transport metadata, not measured model tokenization.
+    res.end(JSON.stringify({model:'test:1',done:true,done_reason:doneReason,message:{content:raw,thinking:'PRIVATE CHECKLIST REASONING'},eval_count:1199}));
+  });
+  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
+  t.after(()=>{server.closeAllConnections();server.close();});
+  const env=parseApiEnvironment({...environment,OLLAMA_BASE_URL:'http://127.0.0.1:'+server.address().port});
+  return {provider:new OllamaProvider(env),calls,env};
+}
+
+test('COP-TRUNC-01 real HTTP adapter rejects length mid-item and before closing JSON',async t=>{
+  const raw=JSON.stringify(validChecklist);
+  for(const [name,cut] of [['mid-item',raw.slice(0,raw.indexOf('phê duyệt'))],['before-close',raw.slice(0,-1)]]){
+    await t.test(name,async sub=>{
+      const {provider,calls}=await checklistHttpFixture(sub,{raw:cut,doneReason:'length'});
+      await assert.rejects(provider.generateStructured(copilotMessages('GENERATE_CHECKLIST',{},checklistAllowed),copilotFormat('GENERATE_CHECKLIST',checklistAllowed),AbortSignal.timeout(10000)),error=>error.code==='AI_INVALID_OUTPUT'&&error.retryable===true&&error.repairFeedback.startsWith('TRUNCATED_GENERATION:')&&error.invalidOutput===cut);
+      assert.equal(calls.filter(call=>call.url==='/api/chat').length,1);
+    });
+  }
+});
+
+test('COP-TRUNC-02 complete JSON with provider length is still rejected before parser',async t=>{
+  const raw=JSON.stringify(validChecklist),{provider}=await checklistHttpFixture(t,{raw,doneReason:'length'});
+  assert.deepEqual(parseStrictOutput('GENERATE_CHECKLIST',raw),validChecklist);
+  await assert.rejects(provider.generateStructured(copilotMessages('GENERATE_CHECKLIST',{},checklistAllowed),copilotFormat('GENERATE_CHECKLIST',checklistAllowed),AbortSignal.timeout(10000)),error=>error.code==='AI_INVALID_OUTPUT'&&error.repairFeedback.startsWith('TRUNCATED_GENERATION:'));
+});
+
+test('COP-TRUNC-03 normal stop accepts unchanged checklist under frozen provider options',async t=>{
+  const {provider,calls,env}=await checklistHttpFixture(t),messages=copilotMessages('GENERATE_CHECKLIST',{},checklistAllowed),format=copilotFormat('GENERATE_CHECKLIST',checklistAllowed);
+  const result=await provider.generateStructured(messages,format,AbortSignal.timeout(10000));
+  assert.deepEqual(parseStrictOutput('GENERATE_CHECKLIST',result.raw),validChecklist);
+  assert.deepEqual(calls[1].body,{model:'test:1',messages,format,stream:false,think:false,options:{temperature:0,num_predict:1200,seed:42,num_ctx:16384}});
+  assert.equal(env.AI_ATTEMPT_TIMEOUT_MS,120000);assert.equal(env.AI_RUN_TIMEOUT_MS,300000);
+  assert.deepEqual(result.identity,{provider:'ollama',model:'test:1',digest:'fixture-digest'});
+  assert.equal(result.raw,JSON.stringify(validChecklist));assert.equal(result.outputSize,Buffer.byteLength(result.raw));
+  assert.equal(JSON.stringify(result).includes('PRIVATE CHECKLIST REASONING'),false);
+});
+
+test('COP-TRUNC-08 near-boundary checklist accepts once without truncation or content repair',async t=>{
+  // This covers exact character/cardinality bounds. eval_count1199 is an injected
+  // provider fixture; real near-budget token evidence is a separate live gate.
+  const value={message:'Bản nháp '.padEnd(160,'x'),items:Array.from({length:8},(_,index)=>({text:('Kiểm tra bước '+index+' "APN" và ghi nhận dữ kiện; ').padEnd(120,'x'),sourceIds:[checklistSource]}))};
+  const raw=JSON.stringify(value),{provider,calls}=await checklistHttpFixture(t,{raw});
+  const result=await provider.generateStructured(copilotMessages('GENERATE_CHECKLIST',{},checklistAllowed),copilotFormat('GENERATE_CHECKLIST',checklistAllowed),AbortSignal.timeout(10000));
+  assert.deepEqual(parseStrictOutput('GENERATE_CHECKLIST',result.raw),value);assert.equal(result.raw,raw);
+  assert.equal(calls.filter(call=>call.url==='/api/chat').length,1);
 });

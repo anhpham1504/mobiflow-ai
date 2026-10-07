@@ -1,0 +1,2589 @@
+{
+  "schemaVersion": "local.demo.v1.3.0.20261005.v1",
+  "generatedAt": "2026-10-05T02:39:40.335Z",
+  "timezone": "Asia/Saigon",
+  "scope": "User-authorized local synthetic demonstration; no production deployment or V1.4 work",
+  "gate": {
+    "status": "FAIL",
+    "meaning": "The environment and complete business scenario passed. Repeatable AI quality remains unverified with observed reliability defects.",
+    "environment": "PASS",
+    "workflow": "PASS",
+    "preservation": "PASS",
+    "runtimeDependencyReadiness": "PASS",
+    "liveAiExecution": "EXECUTED_MIXED"
+  },
+  "source": {
+    "head": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "tagObject": "b1e2c3364ce205493871f84331cd6061c70f5918",
+    "tagCommit": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "applicationAndSchemaChanges": false
+  },
+  "target": {
+    "project": "mobiflow-v130-demo-20261005",
+    "web": "http://localhost:33700",
+    "api": "http://localhost:33701",
+    "databaseHost": "127.0.0.1",
+    "databasePort": 55426,
+    "databaseName": "mobiflow",
+    "volumes": [
+      "mobiflow-v130-demo-20261005_postgres_data",
+      "mobiflow-v130-demo-20261005_knowledge_data"
+    ],
+    "synthetic": true
+  },
+  "readiness": {
+    "httpStatus": 200,
+    "data": {
+      "status": "READY",
+      "coreReady": true,
+      "aiReady": true,
+      "rag": {
+        "enabled": true,
+        "status": "READY",
+        "embedding": "UP",
+        "knowledge": "READY",
+        "errorCode": null,
+        "documents": 9,
+        "chunks": 12,
+        "checkedAt": "2026-10-05T02:26:47.917Z"
+      },
+      "checkedAt": "2026-10-05T02:26:57.877Z",
+      "components": {
+        "API": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "DATABASE": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "VECTOR_EXTENSION": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_SERVER": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_LLM_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_EMBEDDING_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        }
+      }
+    },
+    "requestId": "b0035595-4664-4c86-a3dd-8aa048443409"
+  },
+  "initialReadinessBeforeCorpus": {
+    "checkedAt": "2026-10-05T02:06:37.640Z",
+    "httpStatus": 200,
+    "body": {
+      "data": {
+        "status": "READY",
+        "coreReady": true,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "NOT_READY",
+          "embedding": "UP",
+          "knowledge": "EMPTY",
+          "errorCode": null,
+          "documents": 0,
+          "chunks": 0,
+          "checkedAt": "2026-10-05T02:06:15.735Z"
+        },
+        "checkedAt": "2026-10-05T02:06:37.634Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      },
+      "requestId": "b16a9ac9-f207-448f-8348-41975aaf6a23"
+    }
+  },
+  "modelProbe": {
+    "checkedAt": "2026-10-05T02:05:23.231Z",
+    "base": "http://127.0.0.1:11434",
+    "checks": [
+      {
+        "kind": "model-identity",
+        "result": "PASS",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "capabilities": [
+          "tools",
+          "thinking",
+          "completion"
+        ],
+        "details": {
+          "parent_model": "qwen3:4b-instruct-2507-q4_K_M",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "4.0B",
+          "quantization_level": "Q4_K_M"
+        }
+      },
+      {
+        "kind": "model-identity",
+        "result": "PASS",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "capabilities": [
+          "embedding"
+        ],
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16"
+        }
+      },
+      {
+        "kind": "embedding",
+        "result": "PASS",
+        "model": "bge-m3:latest",
+        "elapsedMs": 4389,
+        "loadMs": 4237.4454,
+        "totalMs": 4384.1962,
+        "dimension": 1024,
+        "norm": 0.9999999317339322,
+        "vectorSha256": "fd6968dfe76d83e1f1f8a9cc71e2725ffb4f0b2d09fdd0250e0085b304d973e5"
+      },
+      {
+        "kind": "structured-llm",
+        "result": "PASS",
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "elapsedMs": 7148,
+        "loadMs": 6588.4272,
+        "totalMs": 7144.107,
+        "validStructuredOutput": true,
+        "promptTokens": 29,
+        "outputTokens": 10
+      }
+    ],
+    "runtime": "0.35.0",
+    "result": "PASS"
+  },
+  "embeddingVerification": {
+    "result": "PASS",
+    "identityKey": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+    "identity": {
+      "provider": "ollama",
+      "model": "bge-m3:latest",
+      "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+      "dimension": 1024,
+      "revision": "m5.v1"
+    },
+    "knowledge": [
+      {
+        "modelIdentity": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+        "dimension": 1024,
+        "actual_dimension": 1024,
+        "count": 12
+      }
+    ],
+    "requests": [
+      {
+        "modelIdentity": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+        "dimension": 1024,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "actual_dimension": 1024,
+        "count": 14
+      }
+    ]
+  },
+  "config": {
+    "AI_RUN_TIMEOUT_MS": "300000",
+    "OLLAMA_EMBEDDING_MODEL": "bge-m3:latest",
+    "EMBEDDING_DIMENSION": "1024",
+    "SLA_ALERT_ENABLED": "true",
+    "API_PORT": "3001",
+    "AI_ATTEMPT_TIMEOUT_MS": "120000",
+    "OLLAMA_MODEL": "qwen3:4b-instruct-2507-q4_K_M",
+    "AI_MAX_OUTPUT_TOKENS": "1200",
+    "NODE_ENV": "production",
+    "AI_AUTO_ANALYZE": "true",
+    "EMBEDDING_INDEX_REVISION": "m5.v1",
+    "AI_PROVIDER": "ollama",
+    "RAG_TOP_K": "5",
+    "WEB_ORIGIN": "http://localhost:33700",
+    "SLA_ALERT_BATCH_SIZE": "100",
+    "AI_TEMPERATURE": "0",
+    "AI_RAG_ENABLED": "true",
+    "EMBEDDING_TIMEOUT_MS": "30000",
+    "RAG_CONTEXT_CHARS": "6000",
+    "RAG_MAX_DISTANCE": "0.50",
+    "OLLAMA_BASE_URL": "http://host.docker.internal:11434",
+    "API_HOST": "0.0.0.0",
+    "SLA_ALERT_INTERVAL_SECONDS": "60"
+  },
+  "containers": [
+    {
+      "id": "7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e",
+      "name": "/mobiflow-v130-demo-20261005-postgres-1",
+      "imageId": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+      "imageTag": "pgvector/pgvector:0.8.6-pg17",
+      "healthy": "healthy",
+      "startedAt": "2026-10-05T02:04:37.280882787Z",
+      "user": "",
+      "readOnly": false,
+      "capDrop": null,
+      "securityOpt": null,
+      "portBindings": {
+        "5432/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "55426"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "bind",
+          "destination": "/docker-entrypoint-initdb.d/10-app-role.sh",
+          "rw": false
+        },
+        {
+          "type": "bind",
+          "destination": "/docker-entrypoint-initdb.d/20-vector.sql",
+          "rw": false
+        },
+        {
+          "type": "volume",
+          "name": "mobiflow-v130-demo-20261005_postgres_data",
+          "destination": "/var/lib/postgresql/data",
+          "rw": true
+        }
+      ]
+    },
+    {
+      "id": "aa8f68996bcf811eecb4eb660c167a4ab6bb9ad0a2fe87dfc1cb8913ff336978",
+      "name": "/mobiflow-v130-demo-20261005-api-1",
+      "imageId": "sha256:ccc707e2a152f2c321045ec3034eeca121ccca5fbb7e31570bef0a43109dfbb6",
+      "imageTag": "mobiflow-v130-demo-20261005-api",
+      "healthy": "healthy",
+      "startedAt": "2026-10-05T02:26:16.362385918Z",
+      "user": "node",
+      "readOnly": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges:true"
+      ],
+      "portBindings": {
+        "3001/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "33701"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "mobiflow-v130-demo-20261005_knowledge_data",
+          "destination": "/app/storage/knowledge",
+          "rw": true
+        }
+      ]
+    },
+    {
+      "id": "fe78489e109d24853c88e0eda3af9f37f65eee44415a624c029508f3d9c94c92",
+      "name": "/mobiflow-v130-demo-20261005-web-1",
+      "imageId": "sha256:e09410e5c2817dd66e9f8250bb725dd3a41bed4ac281466c97c3c84070b0356c",
+      "imageTag": "mobiflow-v130-demo-20261005-web",
+      "healthy": "healthy",
+      "startedAt": "2026-10-05T02:05:44.422760951Z",
+      "user": "node",
+      "readOnly": true,
+      "capDrop": [
+        "ALL"
+      ],
+      "securityOpt": [
+        "no-new-privileges:true"
+      ],
+      "portBindings": {
+        "3000/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "33700"
+          }
+        ]
+      },
+      "mounts": []
+    }
+  ],
+  "database": {
+    "migrationCount": 13,
+    "migrations": [
+      {
+        "migration_name": "202609280001_enable_vector",
+        "checksum": "c298ba7c691fd9d12e1ecb61c698906bd97ddf1336c0cbb22aed9abebc285d74",
+        "finished_at": "2026-10-05T02:04:46.525Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260928085048_m2_domain_auth",
+        "checksum": "b68c9b3e9c6fa029384762237f2ac0aba719d9563f1b16da64ffad11e7744aeb",
+        "finished_at": "2026-10-05T02:04:46.660Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260928092000_m2_public_code_sequence",
+        "checksum": "529bb08bcfc650076f030b16c028d9e6f6a545f4831ee92a458ea32f176b37f8",
+        "finished_at": "2026-10-05T02:04:46.669Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260928145100_m5_knowledge_vectors",
+        "checksum": "67ee62ccdd88dd9ed56b7cf97ca9a3d2c7d5970a04e010394108336146fc1be8",
+        "finished_at": "2026-10-05T02:04:46.688Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260929034000_m6_request_embeddings",
+        "checksum": "ec75a0f842d01fed272da6fb68985bf2f60d680f4f7d76d5930202c5f52b053b",
+        "finished_at": "2026-10-05T02:04:46.703Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260929043000_m6_request_cosine_index",
+        "checksum": "45833282b1a29e1185caedda0c054ca9b01b65c77b1057f9427aab6dede5a174",
+        "finished_at": "2026-10-05T02:04:46.710Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20260930010000_m14_advisory_confidence",
+        "checksum": "f3e0227f45f2ec1d0947e12f785698a922904ef514ea7029923c3f8b9dae11b5",
+        "finished_at": "2026-10-05T02:04:46.716Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261002010000_m18_internal_notes",
+        "checksum": "58fceb4eac643a968b199905a8f9081546b48c2a904c8616345f59df439920b8",
+        "finished_at": "2026-10-05T02:04:46.735Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261002020000_m19_mentions_watchers",
+        "checksum": "d49fd732b6a513cd73ae6431e56507b556b84c619ebb6acfec76ea0394aaf074",
+        "finished_at": "2026-10-05T02:04:46.762Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261002030000_m20_response_checklist_templates",
+        "checksum": "e6e0b07c7f53e15fb51f8bed30cf93ceed5de867b61fcd75d07662079c13fb81",
+        "finished_at": "2026-10-05T02:04:46.839Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261002040000_m21_rule_based_routing",
+        "checksum": "afd3b2b1673efb48da9403226f3267ce9833bd936387f090f5ecc595b0cbdece",
+        "finished_at": "2026-10-05T02:04:46.901Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261003010000_m22_reminder_sla_escalation",
+        "checksum": "ac28f379d30a69742d64f58b2ad954f52bb957b7e7f646fb1ebe2d2a7af25282",
+        "finished_at": "2026-10-05T02:04:46.974Z",
+        "rolled_back_at": null
+      },
+      {
+        "migration_name": "20261004010000_m23_saved_request_views",
+        "checksum": "6d441e6c709d15c8a1ed6222fa5b039f806dad9d35fd63838790cedee100a97c",
+        "finished_at": "2026-10-05T02:04:46.995Z",
+        "rolled_back_at": null
+      }
+    ],
+    "counts": {
+      "users": 6,
+      "requests": 9,
+      "ready_documents": 9,
+      "embedded_chunks": 12,
+      "eligible_requests": 8,
+      "current_request_embeddings": 8
+    },
+    "roles": [
+      {
+        "rolname": "mobiflow_app",
+        "rolsuper": false,
+        "rolcreatedb": false,
+        "rolcreaterole": false
+      },
+      {
+        "rolname": "mobiflow_owner",
+        "rolsuper": true,
+        "rolcreatedb": true,
+        "rolcreaterole": true
+      }
+    ],
+    "seed": {
+      "result": "PASS",
+      "migrationCount": 13,
+      "repeatSeedRowsUnchanged": {
+        "request": 8,
+        "requestMessage": 0,
+        "requestInternalNote": 0,
+        "requestInternalNoteMention": 0,
+        "requestWatcher": 0,
+        "operationalTemplate": 0,
+        "operationalTemplateRevision": 0,
+        "routingRule": 0,
+        "routingRuleRevision": 0,
+        "savedRequestView": 0,
+        "slaOperationalAlert": 0,
+        "notification": 8,
+        "auditLog": 49,
+        "requestStatusHistory": 39,
+        "slaInstance": 6
+      },
+      "synthetic": true
+    }
+  },
+  "corpus": {
+    "checkedAt": "2026-10-05T02:06:37.779Z",
+    "base": "http://localhost:33701",
+    "documents": [
+      {
+        "code": "SOP-IOT-04",
+        "file": "SOP-IOT-04_Xu-ly-mat-ket-noi-IoT.pdf",
+        "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+        "documentId": "db2b140b-8e01-4d60-842f-7c57038e1bb8",
+        "sha256": "6a89faf144a35633f10a0802d8ca911efc8025bdcdc21372547c51ad8200ecaa",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2648
+      },
+      {
+        "code": "SOP-NET-02",
+        "file": "SOP-NET-02_Xu-ly-su-co-mang.pdf",
+        "title": "SOP-NET-02 - Sự cố mạng di động",
+        "documentId": "5a2496d9-8b4f-4315-ab26-dd271dc75afe",
+        "sha256": "51625cdf8ecd90925081781b98c04033825e818b41e0a44562269876c57050ab",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2595
+      },
+      {
+        "code": "SLA-Policy",
+        "file": "SLA-Policy.pdf",
+        "title": "SLA-Policy - Chính sách SLA minh họa",
+        "documentId": "e84a45fa-3d48-4e6d-a105-81bd09381a04",
+        "sha256": "fc9f20cfce6e97891852a65cab3a8c288c85fb63666b6be64fee7ac3636d4541",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 2,
+        "pages": 2,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2590
+      },
+      {
+        "code": "FAQ-IoT",
+        "file": "FAQ-IoT.txt",
+        "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+        "documentId": "fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f",
+        "sha256": "c598c123c416d916a2f86dd5638fbde6773d2e2cd08db6097be850fea8cb7a32",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2607
+      },
+      {
+        "code": "SOP-BILL-01",
+        "file": "SOP-BILL-01.txt",
+        "title": "SOP-BILL-01 - Đối soát cước synthetic",
+        "documentId": "e79c0053-ab8b-4a24-a60a-867a91bb85dd",
+        "sha256": "a1df8c82b191f3ee378f71bd8c93331ca3e0a18452adfcf09cc14cbe9e34150c",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2602
+      },
+      {
+        "code": "SOP-ACCOUNT-01",
+        "file": "SOP-ACCOUNT-01.txt",
+        "title": "SOP-ACCOUNT-01 - Truy cập tài khoản synthetic",
+        "documentId": "aeae901d-e6d7-4aa1-9f74-9dde5c50c7a1",
+        "sha256": "7d00d98922d654132a98d0113c28014f6fdd9533a453e0c222cb5a663a1c4286",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 50594
+      },
+      {
+        "code": "SOP-SERVICE-01",
+        "file": "SOP-SERVICE-01.txt",
+        "title": "SOP-SERVICE-01 - Kích hoạt dịch vụ synthetic",
+        "documentId": "302bd79c-16f3-4895-a50a-5aa4a09cd735",
+        "sha256": "5ecfee451e2d380c8b1502fc50031f4aececd6367539d984c774effdad87f174",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2586
+      },
+      {
+        "code": "SOP-FIBER-01",
+        "file": "SOP-FIBER-01.txt",
+        "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+        "documentId": "20e43b96-28b7-4a76-85fb-1339fd54b75e",
+        "sha256": "c37ade7bb7345ba91f222df137a1e1d93f2662a12c3287c4e6f8d0cea8d6f070",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2582
+      },
+      {
+        "code": "ADVERSARIAL-01",
+        "file": "ADVERSARIAL-01.txt",
+        "title": "ADVERSARIAL-01 - Tài liệu kiểm thử chỉ thị giả",
+        "documentId": "51ef70c3-865a-40af-8156-02b944e2544b",
+        "sha256": "e1d366dc95cd9d393327485a3488fb0724fd8d0fca9b4d72a517e7d0dc9762b0",
+        "status": "READY",
+        "errorCode": null,
+        "generation": 1,
+        "chunks": 1,
+        "pages": null,
+        "index": {
+          "model": "bge-m3:latest",
+          "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+          "dimension": 1024,
+          "chunkerVersion": "codepoint-window.v1",
+          "parserVersion": "pdfjs-6.3.289-txt-utf8.v1"
+        },
+        "elapsedMs": 2560
+      }
+    ],
+    "result": "PASS",
+    "finishedAt": "2026-10-05T02:07:49.239Z"
+  },
+  "request": {
+    "id": "d6d20c10-66a6-4209-8dd0-a59a5298080d",
+    "status": "CLOSED",
+    "version": 14,
+    "currentAssigneeId": "10000000-0000-4000-8000-000000000003",
+    "closedAt": "2026-10-05T02:24:37.124Z",
+    "resolvedAt": "2026-10-05T02:23:30.997Z",
+    "publicCode": "MF-2026-000001",
+    "sla": {
+      "status": "MET",
+      "state": "MET",
+      "startedAt": "2026-10-05T02:16:02.000Z",
+      "dueAt": "2026-10-05T04:16:03.000Z",
+      "deadlineAt": "2026-10-05T04:16:03.000Z",
+      "pausedAt": null,
+      "resolvedHoldAt": "2026-10-05T02:23:30.000Z",
+      "stoppedAt": "2026-10-05T02:24:37.000Z",
+      "stopReason": "CLOSED",
+      "remainingSeconds": 6753,
+      "elapsedSeconds": 447,
+      "targetSeconds": 7200,
+      "breachedAt": null,
+      "breachedBySeconds": 0,
+      "completedAt": "2026-10-05T02:23:30.000Z",
+      "riskThresholdSeconds": 1440,
+      "totalPausedSeconds": 1
+    },
+    "checklist": {
+      "id": "743db73e-077e-48aa-966f-5ac1f30364e5",
+      "version": 4,
+      "sourceTemplateRevisionId": null,
+      "items": [
+        {
+          "id": "dabe3d07-7cfe-4593-9607-54ea93054f02",
+          "text": "Xác minh 17 SIM IoT bị ảnh hưởng và thời điểm bắt đầu tại KCN Amata.",
+          "required": true,
+          "completedAt": "2026-10-05T02:23:30.485Z",
+          "waivedAt": null,
+          "waiverReason": null
+        },
+        {
+          "id": "39eba65c-4a93-42fe-a6f7-23238d10b525",
+          "text": "Kiểm tra trạng thái kết nối SIM và cấu hình APN theo SOP-IOT-04.",
+          "required": true,
+          "completedAt": "2026-10-05T02:23:30.609Z",
+          "waivedAt": null,
+          "waiverReason": null
+        },
+        {
+          "id": "90b83b67-34a3-43d5-a7d1-bf00ee40cb15",
+          "text": "Kiểm tra gateway và xác minh dữ liệu cảm biến đã kết nối ổn định.",
+          "required": true,
+          "completedAt": "2026-10-05T02:23:30.694Z",
+          "waivedAt": null,
+          "waiverReason": null
+        }
+      ]
+    },
+    "currentResolution": {
+      "id": "607a7e25-a028-49a1-af3e-876f7df4c592",
+      "cycle": 1,
+      "rootCause": "Kịch bản giả lập: cấu hình APN không khớp cấu hình đã được duyệt.",
+      "resolution": "Kịch bản giả lập: điều chỉnh APN và khởi động lại gateway theo phương án được duyệt và SOP-IOT-04.",
+      "verification": "Mô phỏng xác nhận dữ liệu của 17 SIM tại KCN Amata hoạt động ổn định; không phải kiểm tra thiết bị thực.",
+      "resolvedAt": "2026-10-05T02:23:30.997Z"
+    }
+  },
+  "history": [
+    {
+      "action": "CREATE",
+      "fromStatus": null,
+      "toStatus": "NEW",
+      "requestVersion": 1,
+      "createdAt": "2026-10-05T02:08:05.514Z"
+    },
+    {
+      "action": "START_AI_ANALYSIS",
+      "fromStatus": "NEW",
+      "toStatus": "AI_ANALYZING",
+      "requestVersion": 2,
+      "createdAt": "2026-10-05T02:08:05.788Z"
+    },
+    {
+      "action": "COMPLETE_AI_ANALYSIS",
+      "fromStatus": "AI_ANALYZING",
+      "toStatus": "TRIAGED",
+      "requestVersion": 3,
+      "createdAt": "2026-10-05T02:08:16.035Z"
+    },
+    {
+      "action": "SUBMIT_FOR_APPROVAL",
+      "fromStatus": "TRIAGED",
+      "toStatus": "PENDING_APPROVAL",
+      "requestVersion": 5,
+      "createdAt": "2026-10-05T02:15:28.706Z"
+    },
+    {
+      "action": "APPROVE_AND_ASSIGN",
+      "fromStatus": "PENDING_APPROVAL",
+      "toStatus": "ASSIGNED",
+      "requestVersion": 6,
+      "createdAt": "2026-10-05T02:16:02.344Z"
+    },
+    {
+      "action": "START_WORK",
+      "fromStatus": "ASSIGNED",
+      "toStatus": "IN_PROGRESS",
+      "requestVersion": 7,
+      "createdAt": "2026-10-05T02:16:03.656Z"
+    },
+    {
+      "action": "REQUEST_USER_INFO",
+      "fromStatus": "IN_PROGRESS",
+      "toStatus": "WAITING_USER",
+      "requestVersion": 8,
+      "createdAt": "2026-10-05T02:18:02.939Z"
+    },
+    {
+      "action": "USER_PROVIDE_INFO",
+      "fromStatus": "WAITING_USER",
+      "toStatus": "IN_PROGRESS",
+      "requestVersion": 9,
+      "createdAt": "2026-10-05T02:18:03.747Z"
+    },
+    {
+      "action": "RESOLVE",
+      "fromStatus": "IN_PROGRESS",
+      "toStatus": "RESOLVED",
+      "requestVersion": 13,
+      "createdAt": "2026-10-05T02:23:30.997Z"
+    },
+    {
+      "action": "USER_CONFIRM",
+      "fromStatus": "RESOLVED",
+      "toStatus": "CLOSED",
+      "requestVersion": 14,
+      "createdAt": "2026-10-05T02:24:37.124Z"
+    }
+  ],
+  "browserSteps": [
+    {
+      "action": "USER creates request",
+      "httpStatus": 201,
+      "elapsedMs": 218,
+      "requestId": "d6d20c10-66a6-4209-8dd0-a59a5298080d"
+    },
+    {
+      "action": "MANAGER triggers live recommendation",
+      "httpStatus": 202,
+      "elapsedMs": 86,
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "contextVersion": 3,
+      "requestStatus": "QUEUED"
+    },
+    {
+      "action": "MANAGER explicitly retries failed recommendation",
+      "httpStatus": 202,
+      "elapsedMs": 77,
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "contextVersion": 3,
+      "requestStatus": "QUEUED"
+    },
+    {
+      "action": "MANAGER saves reviewed manual plan",
+      "httpStatus": 200,
+      "elapsedMs": 259,
+      "expectedVersion": 3,
+      "requestStatus": "TRIAGED",
+      "requestVersion": 4
+    },
+    {
+      "action": "MANAGER submits plan for business approval",
+      "httpStatus": 200,
+      "elapsedMs": 902,
+      "expectedVersion": 4,
+      "requestStatus": "PENDING_APPROVAL",
+      "requestVersion": 5
+    },
+    {
+      "action": "MANAGER explicitly approves business assignment",
+      "httpStatus": 200,
+      "elapsedMs": 119,
+      "expectedVersion": 5,
+      "requestStatus": "ASSIGNED",
+      "requestVersion": 6
+    },
+    {
+      "action": "assigned STAFF starts from own queue",
+      "httpStatus": 200,
+      "elapsedMs": 101,
+      "expectedVersion": 6,
+      "requestStatus": "IN_PROGRESS",
+      "requestVersion": 7
+    },
+    {
+      "action": "STAFF adds internal note and mentions MANAGER",
+      "httpStatus": 201,
+      "elapsedMs": 69
+    },
+    {
+      "action": "STAFF watches authorized request",
+      "httpStatus": 200,
+      "elapsedMs": 57
+    },
+    {
+      "action": "STAFF starts live FIND_SOP Copilot from UI",
+      "httpStatus": 202,
+      "elapsedMs": 67,
+      "aiRunId": "cf3e0ee2-eb8b-4207-a375-fdda0a63d81c",
+      "expectedVersion": 7,
+      "requestStatus": "QUEUED"
+    },
+    {
+      "action": "STAFF asks USER for verification and pauses SLA",
+      "httpStatus": 200,
+      "elapsedMs": 1933,
+      "expectedVersion": 7,
+      "requestStatus": "WAITING_USER",
+      "requestVersion": 8
+    },
+    {
+      "action": "USER public view excludes internal note and private controls",
+      "privateNoteCanaryAbsent": true
+    },
+    {
+      "action": "USER provides information and resumes SLA",
+      "httpStatus": 200,
+      "elapsedMs": 91,
+      "expectedVersion": 8,
+      "requestStatus": "IN_PROGRESS",
+      "requestVersion": 9
+    },
+    {
+      "action": "STAFF_COMPLETE_CHECKLIST",
+      "ordinal": 1,
+      "httpStatus": 200,
+      "elapsedMs": 110,
+      "requestStatus": "IN_PROGRESS",
+      "requestVersion": 10,
+      "requestCorrelationId": "f9de1f98-5af1-43e9-a23c-e71236fefd52"
+    },
+    {
+      "action": "STAFF_COMPLETE_CHECKLIST",
+      "ordinal": 2,
+      "httpStatus": 200,
+      "elapsedMs": 113,
+      "requestStatus": "IN_PROGRESS",
+      "requestVersion": 11,
+      "requestCorrelationId": "bef4776a-c87a-444a-8438-37c37b0deb72"
+    },
+    {
+      "action": "STAFF_COMPLETE_CHECKLIST",
+      "ordinal": 3,
+      "httpStatus": 200,
+      "elapsedMs": 89,
+      "requestStatus": "IN_PROGRESS",
+      "requestVersion": 12,
+      "requestCorrelationId": "a7ce8d1e-71f5-49c2-89e7-672870a90f43"
+    },
+    {
+      "action": "STAFF_RESOLVE_SYNTHETIC_SCENARIO",
+      "httpStatus": 200,
+      "elapsedMs": 123,
+      "requestStatus": "RESOLVED",
+      "requestVersion": 13,
+      "requestCorrelationId": "d44fad01-355d-46a5-94a2-780c990ad794"
+    },
+    {
+      "action": "USER_CONFIRM_CLOSE",
+      "httpStatus": 200,
+      "elapsedMs": 97,
+      "requestStatus": "CLOSED",
+      "requestVersion": 14,
+      "requestCorrelationId": "b1b32538-6c4d-45d2-a458-289d7ca22f59",
+      "privateNoteCanaryAbsent": true
+    },
+    {
+      "action": "MANAGER_NOTIFICATION_INSPECTION",
+      "url": "http://localhost:33700/notifications"
+    },
+    {
+      "action": "MANAGER_FINAL_CLOSED_INSPECTION",
+      "url": "http://localhost:33700/manager/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d",
+      "internalNoteVisible": true
+    },
+    {
+      "action": "MANAGER_ANALYTICS_INSPECTION",
+      "url": "http://localhost:33700/manager/analytics"
+    },
+    {
+      "action": "FINAL_UI_READINESS",
+      "url": "http://localhost:33700/",
+      "readyComponentLabels": 6
+    }
+  ],
+  "aiRuns": [
+    {
+      "id": "0a10328b-a563-40fd-8ced-bf3ffba2edcc",
+      "purpose": "ANALYSIS",
+      "status": "SUCCEEDED",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "latencyMs": 10233,
+      "retryCount": 0,
+      "promptVersion": "request-analysis-rag.v1",
+      "schemaVersion": "analysis.v1",
+      "errorCode": null,
+      "createdAt": "2026-10-05T02:08:05.514Z",
+      "finishedAt": "2026-10-05T02:08:16.035Z"
+    },
+    {
+      "id": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "purpose": "RECOMMENDATION",
+      "status": "FAILED",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "modelIdentityJson": null,
+      "latencyMs": 38320,
+      "retryCount": 1,
+      "promptVersion": "grounded-recommendation.v2.10",
+      "schemaVersion": "recommendation.v2",
+      "errorCode": "INVALID_REFERENCE",
+      "createdAt": "2026-10-05T02:10:18.123Z",
+      "finishedAt": "2026-10-05T02:10:57.135Z"
+    },
+    {
+      "id": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "purpose": "RECOMMENDATION",
+      "status": "SUCCEEDED",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "latencyMs": 18037,
+      "retryCount": 0,
+      "promptVersion": "grounded-recommendation.v2.10",
+      "schemaVersion": "recommendation.v2",
+      "errorCode": null,
+      "createdAt": "2026-10-05T02:12:31.531Z",
+      "finishedAt": "2026-10-05T02:12:49.883Z"
+    },
+    {
+      "id": "cf3e0ee2-eb8b-4207-a375-fdda0a63d81c",
+      "purpose": "COPILOT",
+      "status": "SUCCEEDED",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "latencyMs": 4299,
+      "retryCount": 0,
+      "promptVersion": "copilot.m8.v2",
+      "schemaVersion": "copilot.m8.v2",
+      "errorCode": null,
+      "createdAt": "2026-10-05T02:17:14.652Z",
+      "finishedAt": "2026-10-05T02:17:19.193Z"
+    },
+    {
+      "id": "f73aba6c-bc3c-4948-95fa-9a84ccfe9964",
+      "purpose": "RESOLUTION_SUMMARY",
+      "status": "SUCCEEDED",
+      "model": "qwen3:4b-instruct-2507-q4_K_M",
+      "modelIdentityJson": {
+        "model": "qwen3:4b-instruct-2507-q4_K_M",
+        "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641",
+        "provider": "ollama"
+      },
+      "latencyMs": 9890,
+      "retryCount": 0,
+      "promptVersion": "resolution-summary.m8.v3",
+      "schemaVersion": "resolution-summary.m8.v3",
+      "errorCode": null,
+      "createdAt": "2026-10-05T02:23:30.997Z",
+      "finishedAt": "2026-10-05T02:23:41.866Z"
+    }
+  ],
+  "recommendationFailureAudit": [
+    {
+      "createdAt": "2026-10-05T02:10:18.125Z",
+      "action": "RECOMMENDATION_QUEUED",
+      "resourceId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "safeAfterJson": null,
+      "outcome": "SUCCEEDED"
+    },
+    {
+      "createdAt": "2026-10-05T02:10:37.638Z",
+      "action": "RECOMMENDATION_ATTEMPT_FAILED",
+      "resourceId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "safeAfterJson": {
+        "attempt": 1,
+        "errorCode": "INVALID_REFERENCE",
+        "validationRule": "ACTION_SOURCE_NOT_IN_PROCEDURE"
+      },
+      "outcome": "FAILED"
+    },
+    {
+      "createdAt": "2026-10-05T02:10:57.131Z",
+      "action": "RECOMMENDATION_ATTEMPT_FAILED",
+      "resourceId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "safeAfterJson": {
+        "attempt": 2,
+        "errorCode": "INVALID_REFERENCE",
+        "validationRule": "ACTION_SOURCE_NOT_IN_PROCEDURE"
+      },
+      "outcome": "FAILED"
+    },
+    {
+      "createdAt": "2026-10-05T02:10:57.136Z",
+      "action": "RECOMMENDATION_FAILED",
+      "resourceId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "safeAfterJson": {
+        "errorCode": "INVALID_REFERENCE"
+      },
+      "outcome": "FAILED"
+    }
+  ],
+  "ragSourceValidation": {
+    "checkedAt": "2026-10-05T02:12:51.512Z",
+    "result": "PASS",
+    "verifiedSources": [
+      {
+        "sourceId": "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+        "title": "SOP-IOT-04 - Mất kết nối SIM IoT",
+        "pageNumber": 1,
+        "documentId": "db2b140b-8e01-4d60-842f-7c57038e1bb8",
+        "generation": 1,
+        "score": 0.6837412246353589
+      },
+      {
+        "sourceId": "KD-fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f-G1-C0",
+        "title": "FAQ-IoT - Câu hỏi cấu hình IoT",
+        "pageNumber": null,
+        "documentId": "fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f",
+        "generation": 1,
+        "score": 0.6083576291713045
+      },
+      {
+        "sourceId": "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C0",
+        "title": "SOP-NET-02 - Sự cố mạng di động",
+        "pageNumber": 1,
+        "documentId": "5a2496d9-8b4f-4315-ab26-dd271dc75afe",
+        "generation": 1,
+        "score": 0.6017542228365512
+      },
+      {
+        "sourceId": "KD-20e43b96-28b7-4a76-85fb-1339fd54b75e-G1-C0",
+        "title": "SOP-FIBER-01 - Mất mạng cáp quang gia đình synthetic",
+        "pageNumber": null,
+        "documentId": "20e43b96-28b7-4a76-85fb-1339fd54b75e",
+        "generation": 1,
+        "score": 0.5982556470605795
+      },
+      {
+        "sourceId": "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C1",
+        "title": "SOP-NET-02 - Sự cố mạng di động",
+        "pageNumber": 2,
+        "documentId": "5a2496d9-8b4f-4315-ab26-dd271dc75afe",
+        "generation": 1,
+        "score": 0.5649367779870205
+      }
+    ],
+    "unassigned": true,
+    "slaNotStarted": true
+  },
+  "copilotValidation": {
+    "checkedAt": "2026-10-05T02:17:20.596Z",
+    "result": "PASS",
+    "liveSourceQuotesValidated": 1,
+    "privateNoteCanaryAbsent": true,
+    "requestVersionUnchanged": true
+  },
+  "resolutionSummaryValidation": {
+    "checkedAt": "2026-10-05T02:24:11.822Z",
+    "result": "PASS",
+    "preservedStaffFacts": true,
+    "privateNoteCanaryAbsent": true,
+    "verifiedTimelineEvents": 6,
+    "resolutionId": "607a7e25-a028-49a1-af3e-876f7df4c592"
+  },
+  "finalContract": {
+    "result": "PASS",
+    "originalRecommendationPreserved": true,
+    "recommendationReview": {
+      "status": "ACCEPTED",
+      "reviewerId": "10000000-0000-4000-8000-000000000002",
+      "reviewedAt": "2026-10-05T02:14:39.485Z"
+    },
+    "publicDtoCanaryAbsent": true,
+    "apiRestartBusinessStateUnchanged": true
+  },
+  "readOnlyToolCalls": [
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 1,
+      "toolName": "searchKnowledge",
+      "status": "SUCCEEDED",
+      "latencyMs": 153,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+          "KD-fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C0",
+          "KD-20e43b96-28b7-4a76-85fb-1339fd54b75e-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C1"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 5,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 2,
+      "toolName": "findSimilarRequests",
+      "status": "SUCCEEDED",
+      "latencyMs": 8,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "60000000-0000-4000-8000-000000000008",
+          "60000000-0000-4000-8000-000000000003"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 3,
+      "toolName": "getSlaPolicy",
+      "status": "SUCCEEDED",
+      "latencyMs": 5,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "50000000-0000-4000-8000-000000000003"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 1,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 4,
+      "toolName": "getCandidateStaff",
+      "status": "SUCCEEDED",
+      "latencyMs": 7,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "10000000-0000-4000-8000-000000000003",
+          "10000000-0000-4000-8000-000000000004"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 5,
+      "toolName": "getStaffWorkload",
+      "status": "SUCCEEDED",
+      "latencyMs": 20,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "10000000-0000-4000-8000-000000000003",
+          "10000000-0000-4000-8000-000000000004"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "c69427be-7f75-402f-9c14-5e73d6a1027f",
+      "ordinal": 6,
+      "toolName": "getRequestHistory",
+      "status": "SUCCEEDED",
+      "latencyMs": 7,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "2a228597-4646-474b-b295-55533b8aba9f",
+          "3d621c54-d3f3-42e9-b4e4-dd29d40503a6",
+          "503ddcb4-d68c-4b7d-870e-cef0894ab723"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 3,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 1,
+      "toolName": "searchKnowledge",
+      "status": "SUCCEEDED",
+      "latencyMs": 146,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+          "KD-fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C0",
+          "KD-20e43b96-28b7-4a76-85fb-1339fd54b75e-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C1"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 5,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 2,
+      "toolName": "findSimilarRequests",
+      "status": "SUCCEEDED",
+      "latencyMs": 6,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "60000000-0000-4000-8000-000000000008",
+          "60000000-0000-4000-8000-000000000003"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 3,
+      "toolName": "getSlaPolicy",
+      "status": "SUCCEEDED",
+      "latencyMs": 4,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "50000000-0000-4000-8000-000000000003"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 1,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 4,
+      "toolName": "getCandidateStaff",
+      "status": "SUCCEEDED",
+      "latencyMs": 4,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "10000000-0000-4000-8000-000000000003",
+          "10000000-0000-4000-8000-000000000004"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 5,
+      "toolName": "getStaffWorkload",
+      "status": "SUCCEEDED",
+      "latencyMs": 3,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "10000000-0000-4000-8000-000000000003",
+          "10000000-0000-4000-8000-000000000004"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 2,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d",
+      "ordinal": 6,
+      "toolName": "getRequestHistory",
+      "status": "SUCCEEDED",
+      "latencyMs": 4,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "2a228597-4646-474b-b295-55533b8aba9f",
+          "3d621c54-d3f3-42e9-b4e4-dd29d40503a6",
+          "503ddcb4-d68c-4b7d-870e-cef0894ab723"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 3,
+        "toolVersion": "v1"
+      }
+    },
+    {
+      "aiRunId": "cf3e0ee2-eb8b-4207-a375-fdda0a63d81c",
+      "ordinal": 1,
+      "toolName": "searchKnowledge",
+      "status": "SUCCEEDED",
+      "latencyMs": 151,
+      "errorCode": null,
+      "safeOutputSummaryJson": {
+        "resultIds": [
+          "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C0",
+          "KD-fc9d471f-1c2f-4f3a-97e7-5a4eebc6040f-G1-C0",
+          "KD-20e43b96-28b7-4a76-85fb-1339fd54b75e-G1-C0",
+          "KD-5a2496d9-8b4f-4315-ab26-dd271dc75afe-G1-C1"
+        ],
+        "sideEffect": "READ_ONLY",
+        "resultCount": 5
+      }
+    }
+  ],
+  "authorizationNegatives": {
+    "checkedAt": "2026-10-05T02:19:12.381Z",
+    "result": "PASS",
+    "before": {
+      "hash": "f91f9d5c95136701dbdff486fb1b9db548b3ac3066fa0971dbda614ce5f7c7cf",
+      "version": 9,
+      "status": "IN_PROGRESS",
+      "messages": "2",
+      "assignments": "1",
+      "histories": "8",
+      "audits": "19"
+    },
+    "after": {
+      "hash": "f91f9d5c95136701dbdff486fb1b9db548b3ac3066fa0971dbda614ce5f7c7cf",
+      "version": 9,
+      "status": "IN_PROGRESS",
+      "messages": "2",
+      "assignments": "1",
+      "histories": "8",
+      "audits": "19"
+    },
+    "checks": [
+      {
+        "name": "unauthenticated read",
+        "method": "GET",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d",
+        "expectedStatus": 401,
+        "actualStatus": 401,
+        "errorCode": "UNAUTHORIZED",
+        "elapsedMs": 18,
+        "result": "PASS"
+      },
+      {
+        "name": "USER manager-list denial",
+        "method": "GET",
+        "path": "/manager/requests",
+        "expectedStatus": 403,
+        "actualStatus": 403,
+        "errorCode": "FORBIDDEN",
+        "elapsedMs": 17,
+        "result": "PASS"
+      },
+      {
+        "name": "USER internal-note denial",
+        "method": "GET",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d/internal-notes",
+        "expectedStatus": 403,
+        "actualStatus": 403,
+        "errorCode": "FORBIDDEN",
+        "elapsedMs": 17,
+        "result": "PASS"
+      },
+      {
+        "name": "unassigned STAFF request denial",
+        "method": "GET",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d",
+        "expectedStatus": 404,
+        "actualStatus": 404,
+        "errorCode": "NOT_FOUND",
+        "elapsedMs": 21,
+        "result": "PASS"
+      },
+      {
+        "name": "STAFF approval denial",
+        "method": "POST",
+        "path": "/manager/approvals/d6d20c10-66a6-4209-8dd0-a59a5298080d/accept",
+        "expectedStatus": 403,
+        "actualStatus": 403,
+        "errorCode": "FORBIDDEN",
+        "elapsedMs": 8,
+        "result": "PASS"
+      },
+      {
+        "name": "MANAGER owner-confirm denial",
+        "method": "POST",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d/confirm",
+        "expectedStatus": 403,
+        "actualStatus": 403,
+        "errorCode": "FORBIDDEN",
+        "elapsedMs": 4,
+        "result": "PASS"
+      },
+      {
+        "name": "stale STAFF message changes nothing",
+        "method": "POST",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d/messages",
+        "expectedStatus": 409,
+        "actualStatus": 409,
+        "errorCode": "STALE_VERSION",
+        "elapsedMs": 14,
+        "result": "PASS"
+      },
+      {
+        "name": "incomplete required checklist blocks resolve",
+        "method": "POST",
+        "path": "/requests/d6d20c10-66a6-4209-8dd0-a59a5298080d/resolve",
+        "expectedStatus": 422,
+        "actualStatus": 422,
+        "errorCode": "INCOMPLETE_CHECKLIST",
+        "elapsedMs": 18,
+        "result": "PASS"
+      },
+      {
+        "name": "USER public history contains no internal note canary",
+        "result": "PASS"
+      }
+    ],
+    "protectedWrites": "NONE"
+  },
+  "indexRecovery": {
+    "beforeCurrent": 7,
+    "eligible": 8,
+    "afterCurrent": 8,
+    "observedDeferredLog": [
+      {
+        "time": "2026-10-05T02:23:31.197Z",
+        "event": "request.embedding.deferred",
+        "errorCode": "REQUEST_EMBEDDING_UNAVAILABLE"
+      }
+    ],
+    "action": "Restarted only the verified demo API after workflow completion; no reset/reseed/manual vector insertion",
+    "businessStateUnchanged": true
+  },
+  "warmup": {
+    "schemaVersion": "m10.warmup.v1",
+    "generatedAt": "2026-10-05T02:13:16.947Z",
+    "status": "PASS",
+    "llmLatencyMs": 10403,
+    "embeddingLatencyMs": 3745,
+    "similarity": {
+      "sourceId": "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+      "score": 0.7227537100902346
+    },
+    "before": {
+      "requests": 9,
+      "ai_runs": 3,
+      "audits": 87,
+      "assignments": 6,
+      "documents": 9
+    },
+    "after": {
+      "requests": 9,
+      "ai_runs": 3,
+      "audits": 87,
+      "assignments": 6,
+      "documents": 9
+    },
+    "businessMutation": "NONE",
+    "checks": [
+      {
+        "section": "Environment",
+        "name": "DATABASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "MIGRATION_DATABASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "JWT_SECRET",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "REFRESH_TOKEN_SECRET",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "WEB_ORIGIN",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "NEXT_PUBLIC_API_BASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_BASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_MODEL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_EMBEDDING_MODEL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "DEMO_MODE",
+        "status": "PASS",
+        "message": "explicit demo mode"
+      },
+      {
+        "section": "Database",
+        "name": "DATABASE_URL",
+        "status": "PASS",
+        "message": "allowlisted loopback demo target"
+      },
+      {
+        "section": "Database",
+        "name": "MIGRATION_DATABASE_URL",
+        "status": "PASS",
+        "message": "allowlisted loopback demo target"
+      },
+      {
+        "section": "Security config",
+        "name": "JWT_SECRET",
+        "status": "PASS",
+        "message": "configured and non-placeholder"
+      },
+      {
+        "section": "Security config",
+        "name": "REFRESH_TOKEN_SECRET",
+        "status": "PASS",
+        "message": "configured and non-placeholder"
+      },
+      {
+        "section": "Security config",
+        "name": "distinct auth secrets",
+        "status": "PASS",
+        "message": "secret values are never printed"
+      },
+      {
+        "section": "Security config",
+        "name": "WEB_ORIGIN",
+        "status": "PASS",
+        "message": "single explicit origin"
+      },
+      {
+        "section": "Security config",
+        "name": "auth cookie",
+        "status": "PASS",
+        "message": "secure or explicit loopback HTTP demo"
+      },
+      {
+        "section": "LLM",
+        "name": "configured model",
+        "status": "PASS",
+        "message": "expected M10 tag"
+      },
+      {
+        "section": "Embedding",
+        "name": "configured model",
+        "status": "PASS",
+        "message": "expected M10 tag"
+      },
+      {
+        "section": "Security config",
+        "name": "RAG mode",
+        "status": "PASS",
+        "message": "enabled for grounded demo"
+      },
+      {
+        "section": "Warmup",
+        "name": "LLM structured response",
+        "status": "PASS",
+        "message": "valid response in 10403 ms"
+      },
+      {
+        "section": "Warmup",
+        "name": "embedding response",
+        "status": "PASS",
+        "message": "1024 dimensions in 3745 ms"
+      },
+      {
+        "section": "Warmup",
+        "name": "bound pgvector retrieval",
+        "status": "PASS",
+        "message": "source KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0 retrieved"
+      },
+      {
+        "section": "Warmup",
+        "name": "business data immutability",
+        "status": "PASS",
+        "message": "business mutation NONE"
+      }
+    ]
+  },
+  "preflight": {
+    "schemaVersion": "m10.preflight.v1",
+    "generatedAt": "2026-10-05T02:26:57.523Z",
+    "status": "PASS",
+    "versions": {
+      "Node": "v24.19.0",
+      "npm": "11.17.0",
+      "Docker": "Docker version 29.6.2, build dfc4efb",
+      "Compose": "Docker Compose version v5.3.1"
+    },
+    "checks": [
+      {
+        "section": "Environment",
+        "name": "DATABASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "MIGRATION_DATABASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "JWT_SECRET",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "REFRESH_TOKEN_SECRET",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "WEB_ORIGIN",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "NEXT_PUBLIC_API_BASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_BASE_URL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_MODEL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "OLLAMA_EMBEDDING_MODEL",
+        "status": "PASS",
+        "message": "configured"
+      },
+      {
+        "section": "Environment",
+        "name": "DEMO_MODE",
+        "status": "PASS",
+        "message": "explicit demo mode"
+      },
+      {
+        "section": "Database",
+        "name": "DATABASE_URL",
+        "status": "PASS",
+        "message": "allowlisted loopback demo target"
+      },
+      {
+        "section": "Database",
+        "name": "MIGRATION_DATABASE_URL",
+        "status": "PASS",
+        "message": "allowlisted loopback demo target"
+      },
+      {
+        "section": "Security config",
+        "name": "JWT_SECRET",
+        "status": "PASS",
+        "message": "configured and non-placeholder"
+      },
+      {
+        "section": "Security config",
+        "name": "REFRESH_TOKEN_SECRET",
+        "status": "PASS",
+        "message": "configured and non-placeholder"
+      },
+      {
+        "section": "Security config",
+        "name": "distinct auth secrets",
+        "status": "PASS",
+        "message": "secret values are never printed"
+      },
+      {
+        "section": "Security config",
+        "name": "WEB_ORIGIN",
+        "status": "PASS",
+        "message": "single explicit origin"
+      },
+      {
+        "section": "Security config",
+        "name": "auth cookie",
+        "status": "PASS",
+        "message": "secure or explicit loopback HTTP demo"
+      },
+      {
+        "section": "LLM",
+        "name": "configured model",
+        "status": "PASS",
+        "message": "expected M10 tag"
+      },
+      {
+        "section": "Embedding",
+        "name": "configured model",
+        "status": "PASS",
+        "message": "expected M10 tag"
+      },
+      {
+        "section": "Security config",
+        "name": "RAG mode",
+        "status": "PASS",
+        "message": "enabled for grounded demo"
+      },
+      {
+        "section": "Toolchain",
+        "name": "Node",
+        "status": "PASS",
+        "message": "v24.19.0"
+      },
+      {
+        "section": "Toolchain",
+        "name": "npm",
+        "status": "PASS",
+        "message": "11.17.0"
+      },
+      {
+        "section": "Toolchain",
+        "name": "Docker",
+        "status": "PASS",
+        "message": "Docker version 29.6.2, build dfc4efb"
+      },
+      {
+        "section": "Toolchain",
+        "name": "Compose",
+        "status": "PASS",
+        "message": "Docker Compose version v5.3.1"
+      },
+      {
+        "section": "Generated client",
+        "name": "Prisma client",
+        "status": "PASS",
+        "message": "generated client present"
+      },
+      {
+        "section": "Storage",
+        "name": "workspace disk reserve",
+        "status": "PASS",
+        "message": "230765 MiB available"
+      },
+      {
+        "section": "Storage",
+        "name": "private Docker knowledge volume",
+        "status": "PASS",
+        "message": "read/write access and 64 MiB reserve verified"
+      },
+      {
+        "section": "Containers",
+        "name": "postgres",
+        "status": "PASS",
+        "message": "postgres running and healthy"
+      },
+      {
+        "section": "Containers",
+        "name": "api",
+        "status": "PASS",
+        "message": "api running and healthy"
+      },
+      {
+        "section": "Containers",
+        "name": "web",
+        "status": "PASS",
+        "message": "web running and healthy"
+      },
+      {
+        "section": "Database",
+        "name": "connectivity",
+        "status": "PASS",
+        "message": "connection accepted"
+      },
+      {
+        "section": "Database",
+        "name": "pgvector",
+        "status": "PASS",
+        "message": "extension 0.8.6"
+      },
+      {
+        "section": "Database",
+        "name": "migration history",
+        "status": "PASS",
+        "message": "13 completed migrations match disk"
+      },
+      {
+        "section": "Demo data",
+        "name": "synthetic marker",
+        "status": "PASS",
+        "message": "exact reset marker present"
+      },
+      {
+        "section": "Demo data",
+        "name": "accounts and history",
+        "status": "PASS",
+        "message": "6 accounts, 9 requests, 49 history rows"
+      },
+      {
+        "section": "Demo data",
+        "name": "request similarity index",
+        "status": "PASS",
+        "message": "8/8 eligible requests have current real embeddings; canceled requests excluded"
+      },
+      {
+        "section": "RAG",
+        "name": "ready corpus",
+        "status": "PASS",
+        "message": "9 ready documents, 12 embedded chunks"
+      },
+      {
+        "section": "Ports",
+        "name": "PostgreSQL",
+        "status": "PASS",
+        "message": "127.0.0.1:55426 reachable"
+      },
+      {
+        "section": "Ports",
+        "name": "API",
+        "status": "PASS",
+        "message": "127.0.0.1:33701 reachable"
+      },
+      {
+        "section": "Ports",
+        "name": "Web",
+        "status": "PASS",
+        "message": "localhost:33700 reachable"
+      },
+      {
+        "section": "Runtime",
+        "name": "API core readiness",
+        "status": "PASS",
+        "message": "database-backed API core ready"
+      },
+      {
+        "section": "Runtime",
+        "name": "AI readiness",
+        "status": "PASS",
+        "message": "LLM and embedding components ready"
+      },
+      {
+        "section": "RAG",
+        "name": "API RAG health",
+        "status": "PASS",
+        "message": "retrieval health ready"
+      },
+      {
+        "section": "Runtime",
+        "name": "web reachability",
+        "status": "PASS",
+        "message": "HTTP 200"
+      },
+      {
+        "section": "Security headers",
+        "name": "web baseline",
+        "status": "PASS",
+        "message": "CSP, frame, and MIME protections present"
+      },
+      {
+        "section": "LLM",
+        "name": "installed exact tag",
+        "status": "PASS",
+        "message": "exact model installed"
+      },
+      {
+        "section": "Embedding",
+        "name": "installed exact tag",
+        "status": "PASS",
+        "message": "exact model installed"
+      },
+      {
+        "section": "LLM",
+        "name": "completion capability",
+        "status": "PASS",
+        "message": "completion capability advertised"
+      },
+      {
+        "section": "Embedding",
+        "name": "embedding capability",
+        "status": "PASS",
+        "message": "embedding capability advertised"
+      }
+    ]
+  },
+  "checks": {
+    "unitTests": 217,
+    "unitFailures": 0,
+    "unitSkipped": 0,
+    "commands": [
+      {
+        "checkedAt": "2026-10-05T02:02:35.688Z",
+        "command": "docker compose --env-file artifacts/local-demo-20261005/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml config --quiet",
+        "exitCode": 0,
+        "elapsedMs": 381,
+        "log": "artifacts/local-demo-20261005/compose-config.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:03:43.097Z",
+        "command": "docker compose --env-file artifacts/local-demo-20261005/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml build api web",
+        "exitCode": 0,
+        "elapsedMs": 67407,
+        "log": "artifacts/local-demo-20261005/compose-build.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:04:15.441Z",
+        "command": "docker build --target api-build -t mobiflow-v130-demo-20261005-builder -f docker/Dockerfile .",
+        "exitCode": 0,
+        "elapsedMs": 32343,
+        "log": "artifacts/local-demo-20261005/builder-build.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:04:45.098Z",
+        "command": "docker run --rm --name mobiflow-v130-demo-20261005-seed --label mobiflow.demo=mobiflow-v130-demo-20261005 --network container:mobiflow-v130-demo-20261005-postgres-1 --env-file artifacts/local-demo-20261005/seed.env --mount type=bind,source=C:\\Code\\MobiFlow AI\\artifacts\\local-demo-20261005,target=/evidence -w /app mobiflow-v130-demo-20261005-builder npm run db:validate",
+        "exitCode": 0,
+        "elapsedMs": 1725,
+        "log": "artifacts/local-demo-20261005/db-validate.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:04:48.748Z",
+        "command": "docker run --rm --name mobiflow-v130-demo-20261005-seed --label mobiflow.demo=mobiflow-v130-demo-20261005 --network container:mobiflow-v130-demo-20261005-postgres-1 --env-file artifacts/local-demo-20261005/seed.env --mount type=bind,source=C:\\Code\\MobiFlow AI\\artifacts\\local-demo-20261005,target=/evidence -w /app mobiflow-v130-demo-20261005-builder node scripts/verification/m24-release-seed.mjs",
+        "exitCode": 0,
+        "elapsedMs": 3648,
+        "log": "artifacts/local-demo-20261005/migration-seed.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:05:50.312Z",
+        "command": "docker compose --env-file artifacts/local-demo-20261005/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml up -d --wait api web",
+        "exitCode": 0,
+        "elapsedMs": 7100,
+        "log": "artifacts/local-demo-20261005/runtime-start.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:04:49.992Z",
+        "command": "docker run --rm --name mobiflow-v130-demo-20261005-checks --network none -w /app mobiflow-v130-demo-20261005-builder npm run lint",
+        "exitCode": 0,
+        "elapsedMs": 14117,
+        "log": "artifacts/local-demo-20261005/lint.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:05:01.834Z",
+        "command": "docker run --rm --name mobiflow-v130-demo-20261005-checks --network none -w /app mobiflow-v130-demo-20261005-builder npm run typecheck",
+        "exitCode": 0,
+        "elapsedMs": 11840,
+        "log": "artifacts/local-demo-20261005/typecheck.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:05:20.414Z",
+        "command": "docker run --rm --name mobiflow-v130-demo-20261005-checks --network none -w /app mobiflow-v130-demo-20261005-builder npm test",
+        "exitCode": 0,
+        "elapsedMs": 18579,
+        "log": "artifacts/local-demo-20261005/unit.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:26:16.679Z",
+        "command": "docker compose --env-file artifacts/local-demo-20261005/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml restart api",
+        "exitCode": 0,
+        "elapsedMs": 15783,
+        "log": "artifacts/local-demo-20261005/demo-api-index-recovery.log"
+      },
+      {
+        "checkedAt": "2026-10-05T02:26:22.144Z",
+        "command": "docker compose --env-file artifacts/local-demo-20261005/demo.env -p mobiflow-v130-demo-20261005 -f docker-compose.yml up -d --wait api",
+        "exitCode": 0,
+        "elapsedMs": 5463,
+        "log": "artifacts/local-demo-20261005/demo-api-after-recovery.log"
+      }
+    ]
+  },
+  "preservation": {
+    "checkedAt": "2026-10-05T02:39:39.915Z",
+    "result": "PASS",
+    "tagObject": "b1e2c3364ce205493871f84331cd6061c70f5918",
+    "tagCommit": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "developerContainers": [
+      {
+        "id": "3cc22fa9e9fefe282bab8b843535ab808373c52a26c2c704a02ef7c62b1b5934",
+        "name": "/mobiflow-ai-postgres-1",
+        "image": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+        "running": false
+      },
+      {
+        "id": "b23c01309a4302a7862fe579366aa14e3f0eb0da18beb07f2d84ec6b17de8e45",
+        "name": "/mobiflow-ai-api-1",
+        "image": "sha256:25e9b10d5c952145ec5eac2874a9b41d862a58d71bc02d228dbae72ef262babd",
+        "running": true
+      },
+      {
+        "id": "46f101631dfead6dddc41479eaf32cb4853c91e130b20ad1d6dc4cfb085d0fbd",
+        "name": "/mobiflow-ai-web-1",
+        "image": "sha256:9237aeb31f97453e0d4d67df90f667d7d833309dbfca4ac8d0ff2260c11cf482",
+        "running": true
+      }
+    ],
+    "developerVolume": "mobiflow-ai_postgres_data",
+    "developerContentManifestSha256": "752f0e551986ec86d68789e05462b751f0623c6ea5ca2d1383679a9ed26a3805",
+    "developerFileCount": 1453,
+    "rootEnvUnchanged": true,
+    "migrationsUnchanged": 13
+  },
+  "browserConsole": {
+    "observedErrors": 6,
+    "errors": [
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0",
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0",
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0",
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0",
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0",
+      "[ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ http://localhost:33701/api/v1/auth/refresh:0"
+    ],
+    "classification": "401 refresh requests during explicit account/session switching. No observed JavaScript exception; no zero-console-error claim."
+  },
+  "remainingBlockers": [
+    {
+      "id": "AI_RECOMMENDATION_REFERENCE_RELIABILITY",
+      "observed": "First live recommendation failed both bounded attempts: ACTION_SOURCE_NOT_IN_PROCEDURE / INVALID_REFERENCE, 38320 ms. One explicit new run with identical configuration succeeded in 18037 ms.",
+      "status": "UNRESOLVED",
+      "protectedMutation": "NONE"
+    },
+    {
+      "id": "AI_SUMMARY_SEMANTIC_FIDELITY",
+      "observed": "Summary timeline attributes root-cause identification to the AI-analysis event; intake actually classified the report and suggested priority. Timeline IDs/order and staff facts are valid, but this wording needs review.",
+      "status": "UNRESOLVED"
+    },
+    {
+      "id": "REQUEST_EMBEDDING_BACKGROUND_PAUSE",
+      "observed": "After rapid version changes, background indexing logged REQUEST_EMBEDDING_UNAVAILABLE and paused. Index 7/8 until demo API restart, then 8/8.",
+      "cause": "STALE_CONTEXT race is consistent with the source and timing; exact swallowed exception not logged, so root cause is not proven.",
+      "status": "RECOVERED_WITH_OPERATOR_ACTION",
+      "recurrence": "UNVERIFIED"
+    }
+  ],
+  "operatorNotes": [
+    {
+      "event": "Ollama start",
+      "observed": "Initially offline. Host Ollama started; existing GUI updater applied pending 0.34.4 to 0.35.0 update. No explicit update/pull/model replacement was run; accepted model digests match historical evidence.",
+      "runtimeBinaryPreserved": false
+    },
+    {
+      "event": "Corpus rate limit",
+      "observed": "Sixth upload received 429; respected rate limit and retried after approximately 48 seconds. All 9 documents READY."
+    },
+    {
+      "event": "Warmup evidence path",
+      "observed": "First warmup could not save evidence due to an absolute DEMO_EVIDENCE_ROOT path. Fixed only private operator configuration to a relative ignored path; rerun PASS. Initial command is not counted as PASS."
+    },
+    {
+      "event": "Operator diagnostic corrections",
+      "observed": "Read-only evidence collection initially used an incorrect UUID cast/column/DTO field; corrected to owning schema. Browser heading discovery timed out once and an exact-text locator matched six status labels; subsequent observed labels and explicit assertions succeeded. No application change or masked product test."
+    }
+  ],
+  "notRun": [
+    "Fresh M15/100-case AI quality benchmark",
+    "Independent external human review",
+    "Full M24 regression replay, full accessibility/browser matrix",
+    "Backup/restore disaster recovery",
+    "Production deployment",
+    "V1.4 implementation"
+  ],
+  "artifacts": [
+    {
+      "path": "artifacts/local-demo-20261005/baseline.json",
+      "bytes": 3725,
+      "sha256": "c542bccbe6d53789033541d35082f4c0eb7ffb6d210b98fd9537cb0564c95d3b"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/preservation.json",
+      "bytes": 1185,
+      "sha256": "afa07f4e8656b85c4e0ddcd9d09d78e98e670b7ed4dee8cec60df372d442c88f"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-configuration.json",
+      "bytes": 11983,
+      "sha256": "9d38cce9644a268ab5a0326202cf9b7e62b30977a904458d279a7c4140fde6ad"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/release-seed-report.json",
+      "bytes": 401,
+      "sha256": "9b17dab014a2aa5971ff4b0747432bdf7af5fa68e195cbbce4a4dbae9acba7d1"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/model-probe.json",
+      "bytes": 1772,
+      "sha256": "577bbc38850af2aa51eb150cdf73342d82e8b7ae110721548b3673f2d4eda8ae"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/ollama-inventory.json",
+      "bytes": 3006,
+      "sha256": "bb759a19e4fbf480c3157859cdbd8e9f078bd8d47c6019bd732f2b8312979e53"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/corpus.json",
+      "bytes": 6471,
+      "sha256": "251a3e241375e5952581079b1b43f24c95ddf163f7880a5f460b247792dcc2f1"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/intake.json",
+      "bytes": 7003,
+      "sha256": "157d4b4987c1136792ff45648a3b469b81af92f9c95aabda94b566bc8a87a2ee"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/recommendation-c69427be-7f75-402f-9c14-5e73d6a1027f.json",
+      "bytes": 4670,
+      "sha256": "0a13d1de437f5bc27d91cb2e3560274027e77c50f525019ecfb6e0d470490a9b"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/recommendation-95e70de8-2ab2-44dd-b1f2-d095d5e6ca8d.json",
+      "bytes": 19684,
+      "sha256": "d75c6338f69a949df315f87d28ab6b5f2b83ba9f8a2590a7855a86782381c7e3"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/recommendation-validation-audit.json",
+      "bytes": 1111,
+      "sha256": "3d806221743e1728fd37b22054145da007e6284d22f1557ceaa89f5a87f2e2f6"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/advisory-reviewed.json",
+      "bytes": 17766,
+      "sha256": "ed809c38a07a6e1291bff514b9ed742f078361d2fb31456786b6d73ef0d1cc03"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/source-validation.json",
+      "bytes": 1554,
+      "sha256": "1695f038b7f6a30c1f7d265315862dc4ecdb97a1ce3eea5701346b837bfec837"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/copilot.json",
+      "bytes": 1874,
+      "sha256": "a97db3e8403439d554294bc0b097178b64a2729b8a536819f1cf3702148b06d7"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/copilot-validation.json",
+      "bytes": 170,
+      "sha256": "2ee025b81802b71e00de857e3abb58f21e2394842f962b3f41bf53df93762d27"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/resolution-summary.json",
+      "bytes": 3144,
+      "sha256": "a6c5f590fb9d64df7a15c839af46639cb18860ec746e9dbdf31b5d257db10439"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/resolution-summary-validation.json",
+      "bytes": 221,
+      "sha256": "6d012495007a559952d41721679444d15164e03c3fa79b5c156f2ad2940a9b09"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/authorization-negatives.json",
+      "bytes": 2973,
+      "sha256": "f5e041f1db89867bb3cea8d3e1094c811bea3fca235f585024bb46155f74a5bd"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/final-contract.json",
+      "bytes": 8263,
+      "sha256": "528db63ab1f7bea9becfb5bb907cef569204cbd76f4180cafa63f094745d2cb0"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/final-runtime.json",
+      "bytes": 10090,
+      "sha256": "b828506b665856f64424a5dd3ce8e097ef8bd7a7f1346e05f79896d39edd0ead"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-before-index-recovery.json",
+      "bytes": 10090,
+      "sha256": "96758d5756f2d13f3b59ad23f0b1830e888660bc81627c7e6293b4166c05b631"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/preflight-after-resolve-stale-index.json",
+      "bytes": 7288,
+      "sha256": "e17c250b2464d1f32f03ee51cd9665c89ba136f31170d49dc53057ede740d4d6"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-evidence/M10_PREFLIGHT.json",
+      "bytes": 7316,
+      "sha256": "de78ee6658a6f6c4e880dac8a634af5f0bca73342925c8cd5bc7ad92e46d2d20"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-evidence/M10_WARMUP.json",
+      "bytes": 4020,
+      "sha256": "d00cf73398f1f7ac2bb54128d66dd05fa4e5a342087845e2678f86a79d845f60"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/browser-steps.json",
+      "bytes": 41980,
+      "sha256": "9bdad95b5413c41175ee11846f53e1b3cf09ddbf5429c5aa1c6c97db65c2856e"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/browser-console.log",
+      "bytes": 906,
+      "sha256": "28aa0c9d36f29873f4bf70be797921ce174defe9aa94c7bbb15f24072213779f"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/browser-network.log",
+      "bytes": 195992,
+      "sha256": "51a795a03a1660817d53ee1b3c7dd3b5a1159a529171b18d106f20170f55a041"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/operator.mjs",
+      "bytes": 8971,
+      "sha256": "6a01e59ff1831477d19f8b752d94ea1815d30246faaaf4c4dd48f3b493ba0fc6"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/probe.mjs",
+      "bytes": 3101,
+      "sha256": "bfca75f33209a21198e680c912e2887835c34bcada26dc25e6420dc913126f34"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/ingest.mjs",
+      "bytes": 2033,
+      "sha256": "0195cf9ce43cd9a8f445c3c884593ea39238d52c25be894817937ab5d660cae7"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/live.mjs",
+      "bytes": 10809,
+      "sha256": "995a1943abc13dd2ee3e964f9bf0a799dc23b2a759cb146b7d790c19d4db6434"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/negative.mjs",
+      "bytes": 3602,
+      "sha256": "56a1c1eca1cd5b7d2a43e26cad3ea4b1a659bb5ddacd56340e7fd1bddb38fc84"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/collect.mjs",
+      "bytes": 4948,
+      "sha256": "12c250e7e808a3faa771372e4b8c4c0ef428d94658eb148192237e37a95acdca"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/report.mjs",
+      "bytes": 9490,
+      "sha256": "bf57b1a5cfe1b26d32bf13c85da4012b681287577a75f38f4aa8a2a0a7e6f78b"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/user-created.png",
+      "bytes": 92067,
+      "sha256": "a0c0654e4eb82a08785ed1f9bd55f2155670bf5ed9206e0961505b3ce5117dcc"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/manager-live-recommendation.png",
+      "bytes": 512225,
+      "sha256": "6d69ab4c72058335c3b87eea701848f0b936558ccd37459cd338e4588a13e0e5"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/source-sop-iot-04.png",
+      "bytes": 78133,
+      "sha256": "256bd41b65c070b52fcb18f3ac2006f7156be2629690206753d206ee38ad55a7"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/manager-assigned.png",
+      "bytes": 325542,
+      "sha256": "b35703fc9516a9681c8ed4d2376e8297bce97dfda7289b87486752c496a9bd59"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/staff-live-copilot.png",
+      "bytes": 381401,
+      "sha256": "28cd577847b46fac8e912aaa7bf83ba27f7280356f32ec21522de100d024a599"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/user-public-view.png",
+      "bytes": 171174,
+      "sha256": "03369e0314b53533d9774e5126b1effc01fa778edd7feac683d84fa1f5e12a76"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/user-closed.png",
+      "bytes": 286053,
+      "sha256": "77e317605a2adf67497d93cc9066033279ccb232291a0be293c165fb66352946"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/manager-closed.png",
+      "bytes": 533665,
+      "sha256": "689028b43e9935b3d39ae33916a9ce2fef711a48dd328659e7be26de5316347c"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/manager-analytics.png",
+      "bytes": 250459,
+      "sha256": "b42adfc8575cfcc90e980479195aa7a8265a914d37a5b815a0f5222d336bfd71"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-ready.png",
+      "bytes": 79991,
+      "sha256": "4ce666d15afd6d82e62778e22fdee4784ca32ba46118d0e5535027547314a4ae"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/compose-config.json",
+      "bytes": 293,
+      "sha256": "eac6dcd40f71236fc134d3c2e813ec604ea88b94d7cd5aac1c921c92462f6d21"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/compose-config.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/compose-build.json",
+      "bytes": 293,
+      "sha256": "db8a9c15b5d71cefef36b7276b8dd8d5558d6094e47d715723484544f67a24a0"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/compose-build.log",
+      "bytes": 88342,
+      "sha256": "98da37b9ea8ec50aaaab2bab1f8bc2dfd6087f9eac470263d5241812b75c18e8"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/builder-build.json",
+      "bytes": 255,
+      "sha256": "39c63b6e3a91f475c30c4032a58561dfcff9f81f460c92748e0fede438512a13"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/builder-build.log",
+      "bytes": 2679,
+      "sha256": "1d5e6aee6fb2af52352a0ee1367231ba92b5e654abb1468e287bb557d2723d6f"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/db-validate.json",
+      "bytes": 533,
+      "sha256": "5bc5ede21a6d81d8d68db80a91953e047841dbfe63caeab3c49a7631bec8b2d6"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/db-validate.log",
+      "bytes": 1101,
+      "sha256": "3761fdd19a4e0d6a366455a5c56a50944826f89d6196912353a6745b21227a21"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/migration-seed.json",
+      "bytes": 563,
+      "sha256": "eb9b92573f3d932f2103c5f579f4e12b49b91f7f5f102fbf3ceec616d2d4bd0e"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/migration-seed.log",
+      "bytes": 3335,
+      "sha256": "0b33e908adb062c8d4aba9885b16a449852c6bbf9b9ea974f0b1583381717c54"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-start.json",
+      "bytes": 299,
+      "sha256": "a0b7ce1752f7cdefd74a35dab02ba391bfd43b80fd1e49f1c916cffd008c56a7"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/runtime-start.log",
+      "bytes": 1068,
+      "sha256": "c60c4ef49191614f52b8dbd1c417d864fa2915ffc2e4487346d8535eb955b269"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/lint.json",
+      "bytes": 282,
+      "sha256": "8476e336ca04a21610a6bf834e954fce520522eac503d53f7fa630702d10c6b6"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/lint.log",
+      "bytes": 55,
+      "sha256": "d535f280c049b01a844800fa2b68527f70dabf6c76fe7fa18ba3dab42e07ab4b"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/typecheck.json",
+      "bytes": 292,
+      "sha256": "c972d9684b7bff408073c7a4e27125fc376582c1dac5aab6d8cb6b609425ce4c"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/typecheck.log",
+      "bytes": 1712,
+      "sha256": "353968bb556c4f63d60a298f63d39894a080965913494f26be63dc13a6e5813e"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/unit.json",
+      "bytes": 278,
+      "sha256": "7696c619cc69c418703e803d65d7cd75d6f9ad7810af0d8bea621f1b7ca92295"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/unit.log",
+      "bytes": 25059,
+      "sha256": "f9d48b09edf544fafc5b18329b3274b433148cdb9f81e60a0a2c4f89fe158c56"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/demo-api-index-recovery.json",
+      "bytes": 301,
+      "sha256": "1ac436a9da4676481c6a066c0730983fad1db80e8533f59716cd7d1c6443fe90"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/demo-api-index-recovery.log",
+      "bytes": 111,
+      "sha256": "9bc94b1521ae8dc11399db74273d41154999baa23eb54b7f64e59f01f19ca0dc"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/demo-api-after-recovery.json",
+      "bytes": 305,
+      "sha256": "4c61238ac52f8aec84f64e037d873d37231d7b19c2d354aa0c604bef869556da"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/demo-api-after-recovery.log",
+      "bytes": 457,
+      "sha256": "ccbedcef5f0a59a40ac4023002fb937a16d638e377ebcc765fde6157bcf6633e"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/handoff.json",
+      "bytes": 1896,
+      "sha256": "11c9ee198cf12bdc82a0bbd8fb78cb17f6fbdff5d353abca9b75018633208293"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/handoff.mjs",
+      "bytes": 1525,
+      "sha256": "c3b4cdcc264348d63298ac51c44fd8e43570ba017cfadbbd3174edd74ed58abc"
+    },
+    {
+      "path": "artifacts/local-demo-20261005/verify-report.mjs",
+      "bytes": 3090,
+      "sha256": "e91e082dad8f73219e46d4c786be13e10decf1dc2dbfdf97c943153ce19ee8fd"
+    }
+  ],
+  "handoff": {
+    "checkedAt": "2026-10-05T02:39:38.562Z",
+    "result": "PASS",
+    "webHttpStatus": 200,
+    "apiHttpStatus": 200,
+    "readiness": {
+      "data": {
+        "status": "READY",
+        "coreReady": true,
+        "aiReady": true,
+        "rag": {
+          "enabled": true,
+          "status": "READY",
+          "embedding": "UP",
+          "knowledge": "READY",
+          "errorCode": null,
+          "documents": 9,
+          "chunks": 12,
+          "checkedAt": "2026-10-05T02:39:17.892Z"
+        },
+        "checkedAt": "2026-10-05T02:39:38.337Z",
+        "components": {
+          "API": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "DATABASE": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "VECTOR_EXTENSION": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_SERVER": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_LLM_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          },
+          "OLLAMA_EMBEDDING_MODEL": {
+            "status": "UP",
+            "code": "OK"
+          }
+        }
+      },
+      "requestId": "652416f9-8c0f-448d-abea-2a28292131f2"
+    },
+    "containers": [
+      {
+        "id": "7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e",
+        "name": "/mobiflow-v130-demo-20261005-postgres-1",
+        "running": true,
+        "health": "healthy"
+      },
+      {
+        "id": "aa8f68996bcf811eecb4eb660c167a4ab6bb9ad0a2fe87dfc1cb8913ff336978",
+        "name": "/mobiflow-v130-demo-20261005-api-1",
+        "running": true,
+        "health": "healthy"
+      },
+      {
+        "id": "fe78489e109d24853c88e0eda3af9f37f65eee44415a624c029508f3d9c94c92",
+        "name": "/mobiflow-v130-demo-20261005-web-1",
+        "running": true,
+        "health": "healthy"
+      }
+    ],
+    "tagObject": "b1e2c3364ce205493871f84331cd6061c70f5918",
+    "tagCommit": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "servicesKeptRunning": true
+  }
+}

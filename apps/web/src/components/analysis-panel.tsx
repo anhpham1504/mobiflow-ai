@@ -3,10 +3,10 @@ import {useEffect,useState} from 'react';
 import {aiExplanationSchema,aiJobResponseSchema,type RequestView} from '@mobiflow/contracts';
 import type {z} from 'zod';
 import {api,ApiFailure} from '@/lib/session';
+import {analysisRunning,analysisStatusText} from '@/lib/analysis-presentation';
 import {SourceLink} from './knowledge';
 import {AiPanelHeader} from './ui/patterns';
 const names:Record<string,string>={customer:'Khách hàng',location:'Địa điểm',affectedCount:'Số lượng ảnh hưởng',startedAt:'Thời điểm bắt đầu',impact:'Mức ảnh hưởng',description:'Mô tả chi tiết'};
-const failureText=(code:string|null|undefined)=>code==='STALE_CONTEXT'?'Phân tích dựa trên phiên bản cũ đã được loại bỏ. Tin nhắn mới vẫn được giữ nguyên.':code==='AI_INVALID_OUTPUT'?'AI chưa tạo được kết quả hợp lệ. Không có quyết định nghiệp vụ nào được áp dụng.':code==='AI_TIMEOUT'?'Phân tích đã hết thời gian chờ. Bạn có thể thử lại hoặc xử lý thủ công.':code==='FORBIDDEN'?'Quyền của người khởi tạo đã thay đổi; kết quả không được công bố.':'AI local hiện không khả dụng. Yêu cầu đã được lưu an toàn. Có thể thử lại hoặc xử lý thủ công.';
 export function AnalysisPanel({request,role,onFinished,disabled}:{request:RequestView;role:'USER'|'STAFF'|'MANAGER';onFinished:()=>void;disabled:boolean}){
   const [data,setData]=useState<z.infer<typeof aiExplanationSchema>['data']|null>(null),[error,setError]=useState(''),[revision,setRevision]=useState(0),[busy,setBusy]=useState(false),[stale,setStale]=useState(false),[paused,setPaused]=useState(false);
   useEffect(()=>{
@@ -15,7 +15,7 @@ export function AnalysisPanel({request,role,onFinished,disabled}:{request:Reques
       try{
         const result=await api('/requests/'+request.id+'/ai/explanation',aiExplanationSchema,undefined,'GET',controller.signal);if(!active)return;
         setData(result.data);setError('');
-        const running=['QUEUED','RUNNING'].includes(result.data.job?.status??'');
+        const running=analysisRunning(result.data);
         if(running&&Date.now()-started<330000){hadActive=true;timer=setTimeout(()=>{void poll();},Math.min(5000,2000+polls++*500));}
         else if(running)setPaused(true);
         else if(hadActive||(result.data.job&&['SUCCEEDED','FAILED','CANCELED'].includes(result.data.job.status)&&(request.status==='AI_ANALYZING'||request.aiAnalysisStatus!==result.data.status))){onFinished();}
@@ -29,9 +29,9 @@ export function AnalysisPanel({request,role,onFinished,disabled}:{request:Reques
     catch(e){setError((e as Error).message);if(e instanceof ApiFailure&&e.status===409)setStale(true);}
     finally{setBusy(false);}
   }
-  const running=['QUEUED','RUNNING'].includes(data?.job?.status??'');
+  const running=analysisRunning(data);
   return <section className="workflow-card ai-analysis" aria-label="Phân tích AI hỗ trợ"><AiPanelHeader title="Phân tích yêu cầu" description="Đề xuất hỗ trợ. Quản lý quyết định phân loại, ưu tiên và phân công."/>
-    <div role="status" aria-live="polite">{!data&&!error?'Đang tải trạng thái AI…':running?data?.job?.status==='QUEUED'?'AI đang chờ xử lý.':'AI đang phân tích…':data?.job?.status==='SUCCEEDED'?'Phân tích AI hoàn tất.':data?.job?.status==='FAILED'?failureText(data.job.errorCode):data?.job?.status==='CANCELED'?'Phân tích đã được hủy.':'Chưa có phân tích AI.'}</div>
+    <div role="status" aria-live="polite">{analysisStatusText(data,error)}</div>
     {paused?<p>Đã dừng theo dõi tự động sau thời hạn. Tải lại để kiểm tra trạng thái hiện tại.</p>:null}
     {error?<p role="alert">{error}</p>:null}
     {data?.missingFields.length?<div><h3>Thông tin còn thiếu</h3><ul>{data.missingFields.map(f=><li key={f}>{names[f]}</li>)}</ul></div>:null}

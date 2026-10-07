@@ -5,12 +5,68 @@ import {Client} from 'pg';
 import {recommendationResponseSchema} from '@mobiflow/contracts';
 import {AiFailure} from '../dist/ai/provider.js';
 import {saveEvidence} from '../../../scripts/verification/evidence.mjs';
-import {createRecommendationHarness,businessSnapshot,humanDecision,syntheticAnalysis,syntheticEmbeddings} from './helpers/recommendation-v2-fixture.mjs';
+import {createRecommendationHarness,businessSnapshot,humanDecision,syntheticAnalysis,syntheticEmbeddings,recommendationFixture} from './helpers/recommendation-v2-fixture.mjs';
+import {decideRecommendationEvidence} from '../dist/ai/recommendation-evidence-decision.js';
+import {recommendationSnapshot} from '../dist/ai/recommendation-snapshot.js';
+import {parseRecommendationV2} from '../dist/ai/recommendation-output.js';
 
 const databaseUrl=process.env.M14_DATABASE_URL;
 if(!databaseUrl||new URL(databaseUrl).pathname!=='/mobiflow_m14_test'||!['localhost','127.0.0.1'].includes(new URL(databaseUrl).hostname))throw new Error('Dedicated local M14 test DB required');
 const path=id=>'/manager/requests/'+id+'/ai/recommendation';
 const review=(s,r,view,kind,extra={})=>s.call(s.manager.token,'/manager/approvals/'+r.id+'/'+kind,{expectedVersion:r.version,reviewKind:'AI',recommendationId:view.recommendationId,...extra});
+
+test('V1.3 real PostgreSQL evidence decision publication, bounded repair and historical compatibility',async t=>{
+  const checks=[];
+  const check=async(name,work,options={})=>t.test(name,async()=>{const s=await createRecommendationHarness(databaseUrl,options),start=performance.now();try{await work(s);checks.push({name,result:'PASS',durationMs:Math.round(performance.now()-start)});}catch(error){checks.push({name,result:'FAIL',message:error.message});throw error;}finally{await s.close();}});
+  try{
+    await check('relevant MOBILE procedure plus missing location and no candidates publishes sufficient advisory without business mutation',async s=>{
+      await s.upload('Áp dụng khi điện thoại di động bị mất sóng. Xác nhận phạm vi và kiểm tra trạng thái SIM; ghi lại kết quả để quản lý xem xét. '+randomUUID(),'Nguồn kiểm tra điện thoại');
+      const staff=await s.prisma.user.findMany({where:{role:'STAFF',available:true}});await s.prisma.user.updateMany({where:{id:{in:staff.map(user=>user.id)}},data:{available:false}});
+      try{
+        const analysis={...syntheticAnalysis,subcategory:'MOBILE_NETWORK',entities:{...syntheticAnalysis.entities,location:null},missingFields:['location']};
+        const request=await s.create(undefined,analysis),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request),view=await s.service.view(request.id,s.manager.actor);
+        assert.equal(run.status,'SUCCEEDED',run.errorCode);assert.equal(run.retryCount,0);assert.equal(view.recommendation.evidenceStatus,'SUFFICIENT');assert.equal(view.recommendation.recommendedAction.action,'REQUEST_USER_INFO');assert.equal(view.recommendation.suggestedStaffId,null);assert.equal(view.recommendation.suggestedTeamId,null);assert.deepEqual(view.recommendation.missingInformation.map(item=>item.field),['location']);assert.equal(view.recommendation.procedureSources.length,1);assert.deepEqual(view.recommendation.suggestedChecklist,[]);assert.equal(view.recommendation.warnings.some(w=>w.code==='INSUFFICIENT_EVIDENCE'),false);
+        const stored=recommendationSnapshot(run.retrievalSnapshotJson);assert.equal(stored.evidenceDecision.evidenceStatus,'SUFFICIENT');assert.deepEqual(stored.evidenceDecision.selectedProcedureSourceIds,view.recommendation.procedureSources.map(source=>source.sourceId));assert.equal(JSON.stringify(view).includes('_evidenceDecision'),false);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+      }finally{await s.prisma.user.updateMany({where:{id:{in:staff.map(user=>user.id)}},data:{available:true}});}
+    });
+    const seen=[];
+    await check('one rejected status flip repairs under identical backend decision and publishes only the validated attempt',async s=>{
+      await s.upload();const request=await s.create(),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request);
+      assert.equal(run.status,'SUCCEEDED',run.errorCode);assert.equal(run.retryCount,1);assert.equal(seen.length,2);assert.deepEqual(seen[0],seen[1]);
+      const failures=await s.prisma.auditLog.findMany({where:{resourceId:run.id,action:'RECOMMENDATION_ATTEMPT_FAILED'}});assert.equal(failures.length,1);assert.equal(failures[0].safeAfterJson.validationRule,'EVIDENCE_DECISION_MISMATCH');assert.equal(await s.prisma.aiRecommendation.count({where:{aiRunId:run.id}}),1);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    },{hook:async(e,r,signal,format,decision)=>{seen.push({decision,format});if(seen.length===1){r.evidenceStatus='INSUFFICIENT_EVIDENCE';r.procedureSources=[];r.suggestedChecklist=[];r.warnings.push({code:'INSUFFICIENT_EVIDENCE',text:'Synthetic deliberate invalid branch.',referenceIds:[e.requestContext.id]});}}});
+    const rejectedDecisions=[];
+    await check('both invalid provider attempts fail with retained decision and no artifact or business changes',async s=>{
+      await s.upload();const request=await s.create(),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request);
+      assert.equal(run.status,'FAILED');assert.equal(run.errorCode,'INVALID_REFERENCE');assert.equal(run.retryCount,1);assert.equal(rejectedDecisions.length,2);assert.deepEqual(rejectedDecisions[0],rejectedDecisions[1]);assert.deepEqual(recommendationSnapshot(run.retrievalSnapshotJson).evidenceDecision,rejectedDecisions[0]);
+      const failures=await s.prisma.auditLog.findMany({where:{resourceId:run.id,action:'RECOMMENDATION_ATTEMPT_FAILED'}});assert.equal(failures.length,2);assert.ok(failures.every(failure=>failure.safeAfterJson.validationRule==='EVIDENCE_DECISION_MISMATCH'));assert.equal(await s.prisma.aiRecommendation.count({where:{aiRunId:run.id}}),0);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    },{hook:async(e,r,signal,format,decision)=>{rejectedDecisions.push(decision);r.evidenceStatus='INSUFFICIENT_EVIDENCE';r.procedureSources=[];r.suggestedChecklist=[];r.warnings.push({code:'INSUFFICIENT_EVIDENCE',text:'Synthetic deliberate invalid branch.',referenceIds:[e.requestContext.id]});}});
+    for(const mutation of ['sufficient-to-insufficient','insufficient-to-sufficient','forged-decision','missing-decision','unselected-procedure'])await check('direct publication blocks '+mutation+' before invalidating pending artifact or writing business state',async s=>{
+      if(mutation==='insufficient-to-sufficient')await s.upload('Khi có sai lệch hóa đơn, đối chiếu kỳ cước. Phân loại tham khảo BILLING / BILLING_DISCREPANCY. '+randomUUID(),'Nguồn hóa đơn');else await s.upload();
+      if(mutation==='unselected-procedure')await s.upload('Áp dụng cho SIM IoT mất kết nối. Xác nhận trạng thái APN, ghi lại kết quả. Phân loại NETWORK / IOT_CONNECTIVITY. '+randomUUID(),'Một nguồn kiểm tra khác');
+      const request=await s.create(),before=await businessSnapshot(s.prisma,request.id),original=await s.recommend(request);assert.equal(original.status,'SUCCEEDED',original.errorCode);const view=await s.service.view(request.id,s.manager.actor),e=view.evidence,d=decideRecommendationEvidence(e,s.env.RAG_MAX_DISTANCE),run=await s.service.schedule(request.id,s.manager.actor,request.version,randomUUID());
+      const authorization=recommendationSnapshot(run.retrievalSnapshotJson).authorization,snapshot={...e,_authorization:authorization,_evidenceDecision:globalThis.structuredClone(d)};
+      let result=globalThis.structuredClone(view.recommendation),expectedRule;
+      if(mutation==='sufficient-to-insufficient'){result.evidenceStatus='INSUFFICIENT_EVIDENCE';result.procedureSources=[];result.suggestedChecklist=[];result.warnings.push({code:'INSUFFICIENT_EVIDENCE',text:'Synthetic invalid flip.',referenceIds:[request.id]});expectedRule='EVIDENCE_DECISION_MISMATCH';}
+      if(mutation==='insufficient-to-sufficient'){assert.equal(e.sources.length>0,true);assert.equal(d.evidenceStatus,'INSUFFICIENT_EVIDENCE');result=recommendationFixture(e);expectedRule='EVIDENCE_DECISION_MISMATCH';}
+      if(mutation==='forged-decision'){snapshot._evidenceDecision.evidenceStatus='INSUFFICIENT_EVIDENCE';snapshot._evidenceDecision.evidenceReasonCode='NO_ALLOWED_RELEVANT_PROCEDURE';snapshot._evidenceDecision.eligibleProcedureSourceIds=[];snapshot._evidenceDecision.selectedProcedureSourceIds=[];expectedRule='EVIDENCE_DECISION_CONTEXT_MISMATCH';}
+      if(mutation==='missing-decision')delete snapshot._evidenceDecision;
+      if(mutation==='unselected-procedure'){const alternative=e.sources.find(source=>!d.selectedProcedureSourceIds.includes(source.sourceId));assert.ok(alternative);result.procedureSources=[{sourceId:alternative.sourceId}];result.suggestedChecklist=[];result.evidence=[result.evidence[0],{type:'KNOWLEDGE',referenceId:alternative.sourceId,excerpt:alternative.excerpt.slice(0,200),relevance:'Nguồn kiến thức được truy xuất để tham khảo.'}];expectedRule='PROCEDURE_DECISION_MEMBERSHIP';}
+      assert.doesNotThrow(()=>parseRecommendationV2(JSON.stringify(result),e),'Old public parser accepts the controlled bypass, so this exercises the new independent guard.');
+      await s.prisma.aiRun.update({where:{id:run.id},data:{status:'RUNNING',startedAt:new Date(),retrievalSnapshotJson:snapshot}});
+      const artifactsBefore=await s.prisma.aiRecommendation.findMany({where:{requestId:request.id},orderBy:{id:'asc'}}),auditsBefore=await s.prisma.auditLog.count({where:{requestId:request.id}});
+      await assert.rejects(()=>s.machine.publishRecommendation(run.id,result,{provider:'test',model:'guard',digest:'test-only'},100,1),error=>mutation==='missing-decision'?error.code==='AI_INVALID_CONTEXT':error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith(expectedRule+':'));
+      assert.deepEqual(await s.prisma.aiRecommendation.findMany({where:{requestId:request.id},orderBy:{id:'asc'}}),artifactsBefore);assert.equal(await s.prisma.auditLog.count({where:{requestId:request.id}}),auditsBefore);assert.equal((await s.prisma.aiRun.findUniqueOrThrow({where:{id:run.id}})).status,'RUNNING');assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    });
+    await check('historical V2 insufficient choice without decision metadata remains readable and reviewable',async s=>{
+      const {request,before,run,view}=await ready(s),stored=recommendationSnapshot(run.retrievalSnapshotJson),historical=globalThis.structuredClone(view.recommendation);
+      historical.evidenceStatus='INSUFFICIENT_EVIDENCE';historical.procedureSources=[];historical.suggestedChecklist=[];historical.warnings.push({code:'INSUFFICIENT_EVIDENCE',text:'Historical decision requiring human verification.',referenceIds:[request.id]});
+      await s.prisma.aiRun.update({where:{id:run.id},data:{promptVersion:'grounded-recommendation.v2.12',safeResultJson:historical,retrievalSnapshotJson:{...stored.evidence,_authorization:stored.authorization}}});
+      await s.prisma.aiRecommendation.update({where:{id:view.recommendationId},data:{evidenceStatus:historical.evidenceStatus,procedureRefsJson:[],actionsJson:[]}});
+      const response=await s.call(s.manager.token,path(request.id)+'?aiRunId='+run.id);assert.equal(response.status,200);assert.deepEqual(response.body.data.recommendation,historical);assert.equal((await review(s,request,response.body.data,'accept',{acknowledgedMissingFields:[]})).status,200);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    });
+  }finally{await saveEvidence(process.env.EVIDENCE_DECISION_DATABASE_PATH??'artifacts/evidence-decision-postgres.json',{at:new Date().toISOString(),synthetic:true,database:'mobiflow_m14_test',provider:'deterministic controlled test provider; not live inference or human review',result:checks.length===9&&checks.every(check=>check.result==='PASS')?'PASS':'FAIL',checks});}
+});
 async function ready(s,{source=true,analysis=syntheticAnalysis}={}){
   if(source)await s.upload();const request=await s.create(undefined,analysis),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request);
   assert.equal(run.status,'SUCCEEDED',run.errorCode);const view=await s.service.view(request.id,s.manager.actor);
@@ -128,6 +184,21 @@ test('M14 isolated PostgreSQL recommendation V1/V2 contract, artifact-only revie
         mutationApplied=true;
       }});
     }
+    await check('new generation rejects captured unsupported relevance before publication on both attempts without business changes',async s=>{
+      await s.upload();const request=await s.create(),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request);
+      assert.equal(run.status,'FAILED');assert.equal(run.errorCode,'INVALID_REFERENCE');assert.equal(run.retryCount,1);
+      const attempts=await s.prisma.auditLog.findMany({where:{resourceId:run.id,action:'RECOMMENDATION_ATTEMPT_FAILED'},orderBy:{createdAt:'asc'}});
+      assert.equal(attempts.length,2);assert.ok(attempts.every(a=>a.safeAfterJson.validationRule==='EVIDENCE_RELEVANCE_PROVENANCE'));
+      assert.equal(await s.prisma.aiRecommendation.count({where:{requestId:request.id}}),0);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    },{hook:async(e,r)=>{r.evidence[0].relevance='Dữ kiện mô tả hiện tượng mất kết nối do HTML có event, nhưng';}});
+    await check('historical V2 relevance stays readable and reviewable without applying new generation presentation retroactively',async s=>{
+      const {request,before,run,view}=await ready(s),historical=globalThis.structuredClone(view.recommendation);
+      historical.evidence[0].relevance='Nội dung yêu cầu được cung cấp trong snapshot lịch sử.';
+      await s.prisma.aiRun.update({where:{id:run.id},data:{safeResultJson:historical,promptVersion:'grounded-recommendation.v2.11'}});
+      const response=await s.call(s.manager.token,path(request.id)+'?aiRunId='+run.id);assert.equal(response.status,200);recommendationResponseSchema.parse(response.body);assert.deepEqual(response.body.data.recommendation,historical);
+      const accepted=await review(s,request,response.body.data,'accept',{acknowledgedMissingFields:[]});assert.equal(accepted.status,200,JSON.stringify(accepted.body));
+      const after=await s.service.view(request.id,s.manager.actor);assert.deepEqual(after.recommendation,historical);assert.equal(after.reviewStatus,'ACCEPTED');assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);
+    });
     for(const failure of ['unavailable','timeout','malformed','fabricated-source','embedding'])await check('bounded '+failure+' failure leaves core workflow available',async s=>{
       const request=await s.create(),before=await businessSnapshot(s.prisma,request.id),run=await s.recommend(request);assert.equal(run.status,'FAILED');assert.equal(await s.prisma.aiRecommendation.count({where:{requestId:request.id}}),0);assert.deepEqual(await businessSnapshot(s.prisma,request.id),before);assert.ok(run.retryCount<=1);const view=await s.service.view(request.id,s.manager.actor);assert.equal(view.recommendation,null);
       await s.machine.transition(request.id,'MANUAL_TRIAGE',s.manager.actor,{expectedVersion:request.version,finalDecision:{category:'NETWORK',subcategory:'IOT_CONNECTIVITY',priority:'HIGH',teamId:'20000000-0000-4000-8000-000000000001',staffId:s.staff.actor.id,actions:[],acknowledgedMissingFields:[],reason:'Manual core workflow remains usable during AI outage.'}},randomUUID());

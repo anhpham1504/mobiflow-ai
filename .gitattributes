@@ -1,3 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.sh text eol=lf
+
+# Preserve historical verification bytes, including Markdown hard breaks and EOF.
+# Exact two-space hard breaks and historical hashes are checked before publication.
+docs/v1.3/EVIDENCE_DECISION_REMEDIATION_2026_10_06_VERIFICATION.md whitespace=-blank-at-eol,-blank-at-eof
+docs/v1.3/LOCAL_AI_DEMO_STABILITY_2026_10_05_VERIFICATION.md whitespace=-blank-at-eol,-blank-at-eof

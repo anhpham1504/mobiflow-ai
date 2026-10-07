@@ -13,8 +13,8 @@ import {AiFailure,RECOMMENDATION_PROVIDER,normalizedFailure,type StructuredProvi
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {KnowledgeRetriever} from '../knowledge/retriever.js';
 import {RequestVectors} from './tools/request-vectors.js';
-import {copilotModelSchemas,parseStrictOutput,parseSummaryOutput,type CopilotAction} from './operational-output.js';
-import {copilotFormat,copilotMessages,copilotPromptVersion,resolutionSummaryPromptVersion,summaryFormat,summaryMessages} from './prompts/copilot.js';
+import {checklistGenerationSchema,copilotModelSchemas,parseStrictOutput,parseSummaryOutput,validateChecklistSourcePlan,type CopilotAction} from './operational-output.js';
+import {copilotFormat,copilotMessages,copilotPromptVersionFor,resolutionSummaryPromptVersion,summaryFormat,summaryMessages} from './prompts/copilot.js';
 import {resolutionSummaryFacts,summaryEventLabels,validateSummaryFacts} from './resolution-summary-facts.js';
 
 const allowedStates=new Set<RequestStatus>(['ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED']);
@@ -36,7 +36,7 @@ export class OperationalAiService {
       const active=await tx.aiRun.findFirst({where:{requestId,purpose:'COPILOT',status:{in:['QUEUED','RUNNING']}}});
       if(active){if(active.action!==input.action||active.contextVersion!==request.version)throw new ApiError(409,'AI_RUN_ACTIVE','Another Copilot action is active.');return active;}
       const now=new Date();
-      const run=await tx.aiRun.create({data:{requestId,purpose:'COPILOT',action:input.action,initiatingActorId:actor.id,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:copilotPromptVersion,schemaVersion:copilotSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+      const run=await tx.aiRun.create({data:{requestId,purpose:'COPILOT',action:input.action,initiatingActorId:actor.id,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:copilotPromptVersionFor(input.action),schemaVersion:copilotSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
       await tx.auditLog.create({data:{requestId,actorType:'STAFF',actorId:actor.id,action:'COPILOT_ACTION_QUEUED',resourceType:'AiRun',resourceId:run.id,requestCorrelationId:correlationId,safeAfterJson:{action:input.action,contextVersion:request.version},outcome:'SUCCEEDED',createdAt:now}});
       return run;
     });
@@ -99,7 +99,8 @@ export class OperationalAiService {
       const prompt=copilotMessages(action,context,allowed,repair);lastInputSize=JSON.stringify(prompt).length;if(lastInputSize>24000)throw new AiFailure('CONTEXT_TOO_LARGE');
       await this.prisma.aiRun.updateMany({where:{id:run.id,status:'RUNNING'},data:{retryCount:attempt,inputSize:lastInputSize}});
       try{
-        const generated=await this.provider.generateStructured(prompt,copilotFormat(action),signal),output=parseStrictOutput(action,generated.raw),data=this.mapCopilot(action,output,generated.raw,sources,history,similarCases,request.latestAnalysis?.id??null);
+        const generated=await this.provider.generateStructured(prompt,copilotFormat(action,allowed,action==='GENERATE_CHECKLIST'?context:undefined),signal),output=parseStrictOutput(action,generated.raw),data=this.mapCopilot(action,output,generated.raw,sources,history,similarCases,request.latestAnalysis?.id??null);
+        if(action==='GENERATE_CHECKLIST')validateChecklistSourcePlan(checklistGenerationSchema.parse(output),context,generated.raw);
         return {data,identity:generated.identity,outputSize:generated.outputSize,inputSize:lastInputSize,retryCount:attempt,snapshot:{action,sourceIds:allowed.sourceIds,eventIds:allowed.eventIds,caseIds:allowed.caseIds,analysisId:request.latestAnalysis?.id??null}};
       }catch(error){
         const failure=normalizedFailure(error,signal);await this.attemptFailed(run,attempt,failure);
@@ -125,7 +126,7 @@ export class OperationalAiService {
       const output=copilotModelSchemas.SUGGEST_NEXT_STEP.parse(value),canonical=refs(output.steps.flatMap(step=>step.sourceIds));return {...base,evidenceStatus:output.steps.length?'SUFFICIENT':'INSUFFICIENT_EVIDENCE',answer:output.message,sources:canonical,suggestedNextSteps:output.steps.map(step=>step.text),warnings:output.steps.length?[]:['Không đủ căn cứ để đề xuất bước tiếp theo.']};
     }
     if(action==='GENERATE_CHECKLIST'){
-      const output=copilotModelSchemas.GENERATE_CHECKLIST.parse(value),canonical=refs(output.items.flatMap(item=>item.sourceIds));return {...base,evidenceStatus:output.items.length?'SUFFICIENT':'INSUFFICIENT_EVIDENCE',answer:output.message,sources:canonical,checklistDraft:output.items.map(item=>({text:item.text,required:true,sourceIds:item.sourceIds})),warnings:output.items.length?[]:['Không đủ căn cứ để tạo checklist.']};
+      const output=checklistGenerationSchema.parse(value),canonical=refs(output.items.flatMap(item=>item.sourceIds));return {...base,evidenceStatus:output.items.length?'SUFFICIENT':'INSUFFICIENT_EVIDENCE',answer:output.message,sources:canonical,checklistDraft:output.items.map(item=>({text:item.text,required:true,sourceIds:item.sourceIds})),warnings:output.items.length?[]:['Không đủ căn cứ để tạo checklist.']};
     }
     if(action==='FIND_SIMILAR_REQUESTS'){
       const output=copilotModelSchemas.FIND_SIMILAR_REQUESTS.parse(value);if(output.caseIds.some(id=>!allowedCases.has(id)))invalid('CASE_MEMBERSHIP');const cases=output.caseIds.map(id=>allowedCases.get(id)!);return {...base,evidenceStatus:cases.length?'SUFFICIENT':'INSUFFICIENT_EVIDENCE',answer:output.message,similarCases:cases.map(item=>({requestId:item.requestId,publicCode:item.publicCode,title:item.title,status:item.status,score:item.score})),warnings:cases.length?[]:['Không có yêu cầu tương tự trong phạm vi được phép.']};

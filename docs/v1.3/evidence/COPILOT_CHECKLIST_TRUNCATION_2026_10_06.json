@@ -1,0 +1,786 @@
+{
+  "at": "2026-10-06T15:09:28.189Z",
+  "timestampAsiaSaigon": "2026-10-06 22:09:28 GMT+7 +07:00",
+  "title": "MOBIFLOW AI V1.3 — COPILOT CHECKLIST TRUNCATION REMEDIATION",
+  "technicalGate": "COPILOT REMEDIATION PASS",
+  "runtimeGate": "CORE / AI / RAG READY at observed handoff",
+  "functionalGate": "PASS within executed protocol",
+  "aiQualityGate": "PASS only frozen targeted semantic/grounding protocol; generalized/human quality NOT_ASSESSED",
+  "checkpoint": "BLOCKED",
+  "baselineSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+  "candidateBranch": "fix/v1.3-copilot-checklist-truncation",
+  "candidateHead": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+  "productDirtyIdentity": "bd52ba83aa7f392ca652623d402ee39e6e6bbb3804712ed0252d6bf146531730",
+  "targetSourceIdentity": "2125f8014cbe8960e2b3e0ade3056dc2b9175aecbb9254537311067812d861e8",
+  "compiledApiIdentity": "dea9c0bb7d8081ae96f22347e3d6d8a498909361521beb15c371eb46d53c6a1e",
+  "compiledPaths": 408,
+  "promptVersion": "copilot.checklist.m8.v9",
+  "sourceContract": "checklist.source-actions.v2",
+  "publicSchema": "copilot.m8.v2",
+  "nativeFormat": {
+    "COP-LIVE-01-MULTISTEP": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-02-SUBSET": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-03-REPEATED": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-04-MISSING": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-05-PRIVACY": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    }
+  },
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "embedding": {
+    "name": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "dimension": 1024,
+    "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+    "revision": "m5.v1",
+    "inputVersion": "request-title-description-head.v1"
+  },
+  "settings": {
+    "temperature": 0,
+    "num_predict": 1200,
+    "seed": 42,
+    "num_ctx": 16384,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "maxAttempts": 2
+  },
+  "publicApiChanged": false,
+  "dbSchemaChanged": false,
+  "migrationsChanged": false,
+  "appliedMigrations": 13,
+  "modelChanged": false,
+  "embeddingChanged": false,
+  "tokenOrTimeoutChanged": false,
+  "rootCause": {
+    "historicalRunId": "2220a738-2d57-4307-be8e-f13037bac231",
+    "historicalRequestId": "05258ad9-7ed2-44a4-b06c-4c4af37a0bbb",
+    "historicalRetryCount": 1,
+    "historicalTotalMs": 32602,
+    "historicalFirstRawTokensAndDuration": "NOT_AVAILABLE",
+    "newReproduction": "Broad30/500/1000/1–5 generation contract expanded checklist/citations beyond frozen1200tokenbudget; real JSON cut inside sourceId, done_reason=length; correct adapter rejected before parser",
+    "adapterFault": "NOT_FOUND",
+    "timeoutFault": "NOT_FOUND",
+    "m15Causality": "NOT_ESTABLISHED",
+    "finalOwnerCorrection": "Accent-preserving duplicate key + fail-closed mixed operational/decision clauses; complete source plan/citation pairing before native generation and independent publication validation"
+  },
+  "targeted": {
+    "at": "2026-10-06T14:43:31.658Z",
+    "result": "PASS",
+    "counts": {
+      "runs": 20,
+      "successes": 20,
+      "firstAttemptSuccesses": 20,
+      "providerAttempts": 20,
+      "orchestrationAttempts": 20,
+      "retries": 0,
+      "terminalFailures": 0,
+      "lengthFailures": 0,
+      "parserFailures": 0,
+      "validationFailures": 0,
+      "sourceViolations": 0,
+      "semanticViolations": 0,
+      "privateLeaks": 0,
+      "protectedBusinessMutations": 0
+    },
+    "latencyMs": {
+      "min": 7980,
+      "median": 9320,
+      "max": 14886
+    },
+    "manifestPath": "artifacts/v130-copilot-checklist-20261006/iteration7/candidate-live-manifest.json",
+    "fixtureHash": "8548162877df77273fe8111b22d8b69649984dd30803ddae9544611ae4c7407c",
+    "sourceIdentity": "2125f8014cbe8960e2b3e0ade3056dc2b9175aecbb9254537311067812d861e8",
+    "compiledIdentity": "dea9c0bb7d8081ae96f22347e3d6d8a498909361521beb15c371eb46d53c6a1e",
+    "allFailuresRetained": true,
+    "databaseAccess": "NONE",
+    "humanReview": "NOT_RUN",
+    "limitations": [
+      "Source membership is necessary but does not establish semantic entailment. The fixed labeled oracle checks known IoT obligations, source-role correspondence, coarse procedure order, duplicates, missing-fact and protected-action claims. It is not exhaustive language understanding.",
+      "Private projection here is a deterministic fixture mirroring the existing service field allowlist; PostgreSQL private-canary tests and actual workflows separately exercise the real service."
+    ],
+    "providerAccounting": {
+      "counts": {
+        "cold": 1,
+        "warm": 19,
+        "unknown": 0
+      },
+      "inputTokens": {
+        "n": 20,
+        "min": 3420,
+        "median": 4160,
+        "max": 5139
+      },
+      "outputTokens": {
+        "n": 20,
+        "min": 491,
+        "median": 588,
+        "max": 588
+      },
+      "providerLatencyMs": {
+        "cold": {
+          "n": 1,
+          "min": 14852,
+          "median": 14852,
+          "max": 14852
+        },
+        "warm": {
+          "n": 19,
+          "min": 7960,
+          "median": 9248,
+          "max": 11145
+        }
+      },
+      "formatTokenOverhead": "NOT_AVAILABLE: provider reports combined prompt tokens, no separate schema token attribution"
+    }
+  },
+  "m8": {
+    "at": "2026-10-06T14:44:06.332Z",
+    "result": "PASS",
+    "counts": {
+      "runs": 8,
+      "successes": 8,
+      "first": 8,
+      "providerAttempts": 8,
+      "retries": 0,
+      "length": 0,
+      "terminal": 0,
+      "referenceInvalid": 0
+    },
+    "latencyMs": {
+      "min": 461,
+      "median": 1426,
+      "max": 3015
+    },
+    "humanReview": "NOT_RUN",
+    "limitation": "Accepted M8 schema/reference suite; generalized semantic accuracy is not established. Legacy global promptVersion field stays copilot.m8.v3; actual GEN version is recorded in wrapper manifest."
+  },
+  "workflow": {
+    "result": "PASS",
+    "counts": {
+      "rounds": 5,
+      "functionalPassed": 5,
+      "aiSmokePassed": 5,
+      "aiRuns": 29,
+      "first": 29,
+      "providerAttempts": 29,
+      "retries": 0,
+      "truncations": 0,
+      "terminalFailures": 0
+    },
+    "rows": [
+      {
+        "ordinal": 1,
+        "requestId": "d1ee8129-561d-476f-8308-6e02c2a35903",
+        "publicCode": "MF-2026-000082",
+        "functional": "PASS",
+        "aiSmoke": "PASS",
+        "status": "CLOSED",
+        "version": 12,
+        "elapsedMs": 91477,
+        "checklistLatencyMs": 10929,
+        "aiRuns": 9,
+        "retries": 0,
+        "slaState": "MET",
+        "slaElapsedSeconds": 45,
+        "slaTargetSeconds": 7200,
+        "embeddingVersion": 12,
+        "embeddingDimension": 1024
+      },
+      {
+        "ordinal": 2,
+        "requestId": "d7e61224-262a-482b-8c3c-839eb1997cb6",
+        "publicCode": "MF-2026-000083",
+        "functional": "PASS",
+        "aiSmoke": "PASS",
+        "status": "CLOSED",
+        "version": 12,
+        "elapsedMs": 59130,
+        "checklistLatencyMs": 10844,
+        "aiRuns": 5,
+        "retries": 0,
+        "slaState": "MET",
+        "slaElapsedSeconds": 17,
+        "slaTargetSeconds": 7200,
+        "embeddingVersion": 12,
+        "embeddingDimension": 1024
+      },
+      {
+        "ordinal": 3,
+        "requestId": "fe2fe65f-1152-413a-814e-b8ba6bcd4eb1",
+        "publicCode": "MF-2026-000084",
+        "functional": "PASS",
+        "aiSmoke": "PASS",
+        "status": "CLOSED",
+        "version": 12,
+        "elapsedMs": 59017,
+        "checklistLatencyMs": 10834,
+        "aiRuns": 5,
+        "retries": 0,
+        "slaState": "MET",
+        "slaElapsedSeconds": 20,
+        "slaTargetSeconds": 7200,
+        "embeddingVersion": 12,
+        "embeddingDimension": 1024
+      },
+      {
+        "ordinal": 4,
+        "requestId": "4211c984-c514-476d-949b-6b40c1e3e8bf",
+        "publicCode": "MF-2026-000085",
+        "functional": "PASS",
+        "aiSmoke": "PASS",
+        "status": "CLOSED",
+        "version": 12,
+        "elapsedMs": 57547,
+        "checklistLatencyMs": 11097,
+        "aiRuns": 5,
+        "retries": 0,
+        "slaState": "MET",
+        "slaElapsedSeconds": 20,
+        "slaTargetSeconds": 7200,
+        "embeddingVersion": 12,
+        "embeddingDimension": 1024
+      },
+      {
+        "ordinal": 5,
+        "requestId": "2aa26efc-a85e-4e15-a693-507210fcd053",
+        "publicCode": "MF-2026-000086",
+        "functional": "PASS",
+        "aiSmoke": "PASS",
+        "status": "CLOSED",
+        "version": 12,
+        "elapsedMs": 55887,
+        "checklistLatencyMs": 11029,
+        "aiRuns": 5,
+        "retries": 0,
+        "slaState": "MET",
+        "slaElapsedSeconds": 17,
+        "slaTargetSeconds": 7200,
+        "embeddingVersion": 12,
+        "embeddingDimension": 1024
+      }
+    ]
+  },
+  "ui": {
+    "result": "PASS",
+    "checks": [
+      {
+        "name": "Default/empty state has six enabled actions and no prior result/error",
+        "result": "PASS"
+      },
+      {
+        "name": "Actual live loading/success/no autoapply",
+        "result": "PASS",
+        "aiRunId": "c37d6f9a-13a7-4a93-89f0-14802194fce5",
+        "latencyMs": 11085
+      },
+      {
+        "name": "Copilot responsive desktop/tablet/mobile",
+        "result": "PASS",
+        "measurements": [
+          {
+            "viewport": 1440,
+            "documentWidth": 1440,
+            "bodyWidth": 1440,
+            "result": "PASS"
+          },
+          {
+            "viewport": 768,
+            "documentWidth": 768,
+            "bodyWidth": 768,
+            "result": "PASS"
+          },
+          {
+            "viewport": 390,
+            "documentWidth": 390,
+            "bodyWidth": 390,
+            "result": "PASS"
+          }
+        ]
+      },
+      {
+        "name": "Actual scoped Copilot source anchor opens exact citation by Enter",
+        "result": "PASS",
+        "sourceId": "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+        "focus": {
+          "width": "3px",
+          "style": "solid"
+        }
+      },
+      {
+        "name": "Controlled terminal truncation visible error/no silent retry",
+        "result": "PASS",
+        "kind": "UI transport fixture derived from executed real-PG COP-TRUNC09; not live provider output"
+      },
+      {
+        "name": "Explicit keyboard retry onePOST/focus/success/no autoapply",
+        "result": "PASS",
+        "kind": "Controlled UI fixture from COP-TRUNC10; browser is not human review"
+      },
+      {
+        "name": "Role/logout USER projection and no refresh loop",
+        "result": "PASS",
+        "internalApi": 403,
+        "knowledgeApi": 403
+      },
+      {
+        "name": "Console/pageerrors/browser network",
+        "result": "PASS",
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requests": 39
+      }
+    ],
+    "liveRuns": [
+      {
+        "id": "7c468b7d-d165-4ae6-b8b3-3819d8f4f7b3",
+        "purpose": "ANALYSIS",
+        "action": null,
+        "status": "SUCCEEDED",
+        "retryCount": 0,
+        "latencyMs": 7794,
+        "promptVersion": "request-analysis-rag.v1",
+        "contextVersion": 2
+      },
+      {
+        "id": "c37d6f9a-13a7-4a93-89f0-14802194fce5",
+        "purpose": "COPILOT",
+        "action": "GENERATE_CHECKLIST",
+        "status": "SUCCEEDED",
+        "retryCount": 0,
+        "latencyMs": 11085,
+        "promptVersion": "copilot.checklist.m8.v9",
+        "contextVersion": 7
+      }
+    ],
+    "controlledPosts": 2,
+    "actualCopilotPosts": 1,
+    "independentHumanReview": "NOT_RUN"
+  },
+  "shortReviewSample": {
+    "first": 1,
+    "providerAttempts": 1,
+    "retries": 0,
+    "latencyMs": 2534,
+    "items": 2,
+    "kind": "Supplementary direct native sample, no business publication"
+  },
+  "finalLiveCounts": {
+    "requiredProtocols": {
+      "native": 20,
+      "m8": 8,
+      "workflow": 29,
+      "total": 57,
+      "first": 57,
+      "retries": 0,
+      "terminal": 0
+    },
+    "additionalUiAndShort": {
+      "runs": 3,
+      "first": 3,
+      "retries": 0
+    },
+    "all60CurrentCallsFirst": 60,
+    "historicFailuresSeparatelyRetained": true
+  },
+  "static": {
+    "unitCounts": {
+      "config": 7,
+      "api": 172,
+      "web": 3,
+      "evaluationRelease": 83,
+      "total": 265
+    },
+    "allNoSkipped": true
+  },
+  "pg": {
+    "tests": 57,
+    "all57Passed": true,
+    "allNoSkipped": true
+  },
+  "commands": [
+    {
+      "command": "docker run --rm --network none -w /app sha256:af2d6f52f2b2edec7694b6e8f3ad8cec79b9db8684792fddf082b8a71ec23654 npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 15845,
+      "tests": 0,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/lint-v9-final.json"
+    },
+    {
+      "command": "docker run --rm --network none -w /app sha256:af2d6f52f2b2edec7694b6e8f3ad8cec79b9db8684792fddf082b8a71ec23654 npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 19096,
+      "tests": 0,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/typecheck-v9-final.json"
+    },
+    {
+      "command": "docker run --rm --network none -w /app sha256:af2d6f52f2b2edec7694b6e8f3ad8cec79b9db8684792fddf082b8a71ec23654 npm test",
+      "exitCode": 0,
+      "elapsedMs": 23609,
+      "tests": 265,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/unit-v9-final.json"
+    },
+    {
+      "command": "docker run --rm --network none -w /app sha256:af2d6f52f2b2edec7694b6e8f3ad8cec79b9db8684792fddf082b8a71ec23654 npm run build",
+      "exitCode": 0,
+      "elapsedMs": 24929,
+      "tests": 0,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/build-v9-final.json"
+    },
+    {
+      "command": "docker run --rm --network none -w /app sha256:af2d6f52f2b2edec7694b6e8f3ad8cec79b9db8684792fddf082b8a71ec23654 node --test apps/api/test/recommendation-v2.test.mjs scripts/evaluation/m15-prompt.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 2854,
+      "tests": 35,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/m15-affected-v9-final.json"
+    },
+    {
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-copilot-checklist-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-checklist-truncation\\MobiFlow AI/artifacts/v130-copilot-checklist-20261006/pg-output-iteration7b,target=/app/docs -w /app sha256:276e07a12d0cb30532dbb289ae844be2b1441110a628a90d38b545dfd6bb525c node --test apps/api/test/copilot-truncation.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 6301,
+      "tests": 7,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/copilot-postgres-iteration7b.json"
+    },
+    {
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-copilot-checklist-20261006/m14.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-checklist-truncation\\MobiFlow AI/artifacts/v130-copilot-checklist-20261006/pg-output-iteration7b,target=/app/docs -w /app sha256:276e07a12d0cb30532dbb289ae844be2b1441110a628a90d38b545dfd6bb525c node --test apps/api/test/recommendation-v2.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 29314,
+      "tests": 38,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/recommendation-postgres-iteration7b.json"
+    },
+    {
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-copilot-checklist-20261006/m2.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-checklist-truncation\\MobiFlow AI/artifacts/v130-copilot-checklist-20261006/pg-output-iteration7b,target=/app/docs -w /app sha256:276e07a12d0cb30532dbb289ae844be2b1441110a628a90d38b545dfd6bb525c node --test --test-name-pattern=M6 real PostgreSQL tools|M6 .*validation|M8 Copilot apps/api/test/recommendation.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 3027,
+      "tests": 2,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/legacy-postgres-iteration7b.json"
+    },
+    {
+      "command": "docker run --rm --network container:7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e --env-file artifacts/v130-copilot-checklist-20261006/m2.env -e EVIDENCE_DECISION_DATABASE_PATH=/app/docs/evidence-decision-postgres.json --mount type=bind,source=C:\\Users\\AnhPhamPC\\.codex\\worktrees\\v130-checklist-truncation\\MobiFlow AI/artifacts/v130-copilot-checklist-20261006/pg-output-iteration7b,target=/app/docs -w /app sha256:276e07a12d0cb30532dbb289ae844be2b1441110a628a90d38b545dfd6bb525c node --test apps/api/test/ai-stability.integration.test.mjs",
+      "exitCode": 0,
+      "elapsedMs": 1163,
+      "tests": 10,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/recovery-postgres-iteration7b.json"
+    }
+  ],
+  "m15": {
+    "result": "PASS",
+    "kind": "REUSED_ACTUAL_EXECUTED_PASS_BY_HASH, not new130 provider calls",
+    "evaluation": 100,
+    "consistency": 30,
+    "attempts": 130,
+    "retries": 0,
+    "semanticViolations": 0,
+    "affectedDeterministicTests": 35,
+    "publicationPgTests": 38,
+    "watchedOwners": 12,
+    "datasetSha256": "d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9",
+    "proof": "artifacts/v130-copilot-checklist-20261006/preservation-final.json",
+    "details": {
+      "evaluation": 100,
+      "consistency": 30,
+      "attempts": 130,
+      "retries": 0,
+      "executionFailures": 0,
+      "validationFailures": 0,
+      "semanticFindings": 0,
+      "gateViolations": 0,
+      "detailsSha256": "c31402571de706c78fef53d53a514931b9d963f89c7af4ef3fef00fa70c90814",
+      "summarySha256": "44d93b934f42eca6d99eb25f7a1ef13f37c79582fc0fa38d3e668915c3cf5fec",
+      "manifestSha256": "b623e081da56bfa56230e30c7892e48ea6daa731be2c720af6dcf7cec87ffda4",
+      "datasetSha256": "d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9",
+      "kind": "INHERITED EXECUTED PASS; hash-bound reuse, not new130 calls"
+    }
+  },
+  "readiness": {
+    "observedAt": "2026-10-06T15:01:12.678Z",
+    "api": {
+      "status": "READY",
+      "coreReady": true,
+      "aiReady": true,
+      "rag": {
+        "enabled": true,
+        "status": "READY",
+        "embedding": "UP",
+        "knowledge": "READY",
+        "errorCode": null,
+        "documents": 9,
+        "chunks": 12,
+        "checkedAt": "2026-10-06T15:00:43.909Z"
+      },
+      "checkedAt": "2026-10-06T15:01:12.458Z",
+      "components": {
+        "API": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "DATABASE": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "VECTOR_EXTENSION": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_SERVER": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_LLM_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        },
+        "OLLAMA_EMBEDDING_MODEL": {
+          "status": "UP",
+          "code": "OK"
+        }
+      }
+    },
+    "webHttpStatus": 200,
+    "ollamaVersion": "0.35.0",
+    "embeddingProbe": {
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "latencyMs": 155,
+      "vectors": 1,
+      "dimension": 1024,
+      "finite": true,
+      "nonzero": true,
+      "vectorHash": "6b3e7edb997d513b71def8b4c43393b644b1bb53d7d91c9260da7bdb63d05b9d",
+      "providerAttempts": 1,
+      "retries": 0,
+      "transport": [
+        {
+          "httpStatus": 200,
+          "elapsedMs": 123
+        }
+      ]
+    },
+    "requestCoverage": {
+      "eligibleRequests": 62,
+      "currentEmbeddings": 62,
+      "missing": 0
+    },
+    "knowledge": {
+      "documents": 9,
+      "chunks": 12,
+      "embedded": 12
+    },
+    "duplicates": 0,
+    "activeAiJobs": 0,
+    "containers": {
+      "postgres": {
+        "id": "7639217d1e3383693fbf37d8ea0ff479700cecc804c1da19d9038a7be94cfb1e",
+        "image": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+        "startedAt": "2026-10-06T14:37:25.088230032Z",
+        "health": "healthy"
+      },
+      "api": {
+        "id": "5a427532b656d3db45e7998dbe67dea546ddcec418a705b366f319529d88c5d8",
+        "image": "sha256:ce768484b2d271374c3f9230375b2b10aaecaeca08f3c94b4aed4817ade74264",
+        "startedAt": "2026-10-06T14:41:42.593405713Z",
+        "health": "healthy"
+      },
+      "web": {
+        "id": "6e001cbf5a89a1b3e8c19abfa864365b170741b51e1093608370b2952b294424",
+        "image": "sha256:c3bc68207d8d09e64d9f464a7c31872444f9a1b789b08cef7e0f6a37f3bbe8de",
+        "startedAt": "2026-10-06T14:41:42.740456981Z",
+        "health": "healthy"
+      }
+    }
+  },
+  "embeddingRecovery": {
+    "transientFailures": 9,
+    "recoveryEvents": 4,
+    "firstRecoveryAfterProcessCreationMs": 60127,
+    "originalFailedRequestVectorAfterProcessCreationMs": 79920,
+    "errorToPersistenceMs": 286949,
+    "apiRestartDuringRecovery": false,
+    "duplicates": 0,
+    "measurementLimitations": [
+      "Observed launch time is process creation, not exact provider-ready time.",
+      "The outage duration is included in error-to-persistence time; this is not pure embedding inference latency.",
+      "First recovery log may be for a different fair-scan candidate; the original failed request vector is independently checked.",
+      "Cause of Ollama process exit remains UNKNOWN."
+    ]
+  },
+  "failedAndSupersededExecutions": [
+    {
+      "phase": "pre-fix reproduction",
+      "runs": 3,
+      "lengthFailures": 1,
+      "otherSucceeded": 2,
+      "outputItems": "15+ cut /13 /10",
+      "artifact": "artifacts/v130-copilot-checklist-20261006/prefix-live.json"
+    },
+    {
+      "phase": "iteration1",
+      "prompt": "copilot.checklist.m8.v4",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 0,
+      "semanticFailed": 20,
+      "findings": 152,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/candidate-live-summary.json"
+    },
+    {
+      "phase": "iteration2",
+      "prompt": "copilot.checklist.m8.v5",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 0,
+      "semanticFailed": 20,
+      "findings": 48,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/iteration2/candidate-live-summary.json"
+    },
+    {
+      "phase": "iteration3",
+      "prompt": "copilot.checklist.m8.v6",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 0,
+      "semanticFailed": 20,
+      "findings": 104,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/iteration3/candidate-live-summary.json"
+    },
+    {
+      "phase": "iteration4",
+      "prompt": "copilot.checklist.m8.v7",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 0,
+      "semanticFailed": 20,
+      "findings": 84,
+      "artifact": "artifacts/v130-copilot-checklist-20261006/iteration4/candidate-live-summary.json"
+    },
+    {
+      "phase": "iteration5",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 20,
+      "nativeCoverage": "FAIL — DISQUALIFIED",
+      "reason": "Runner sent generic format; frozen manifest described context-native format",
+      "artifact": "artifacts/v130-copilot-checklist-20261006/iteration5/coverage-audit.json"
+    },
+    {
+      "phase": "iteration6",
+      "runs": 20,
+      "first": 20,
+      "retries": 0,
+      "semanticPassed": 20,
+      "nativeCoverage": "PASS historical v8; superseded for final source by v9",
+      "artifact": "artifacts/v130-copilot-checklist-20261006/iteration6/candidate-live-summary.json"
+    },
+    {
+      "phase": "original workflow v8 interrupted",
+      "completed": 3,
+      "planned": 5,
+      "actualAiRuns": 22,
+      "firstAiRuns": 22,
+      "retries": 0,
+      "remaining": {
+        "4": "INCOMPLETE_HARNESS IN_PROGRESS",
+        "5": "NOT_RUN"
+      },
+      "artifact": "artifacts/v130-copilot-checklist-20261006/gap-workflow-outcome.json"
+    },
+    {
+      "phase": "original workflow v9 interrupted",
+      "completed": 2,
+      "planned": 5,
+      "actualAiRuns": 15,
+      "firstAiRuns": 15,
+      "retries": 0,
+      "remaining": {
+        "3": "INCOMPLETE_HARNESS TRIAGED",
+        "4": "NOT_RUN",
+        "5": "NOT_RUN"
+      },
+      "artifact": "artifacts/v130-copilot-checklist-20261006/v9-interrupted-workflow-outcome.json"
+    },
+    {
+      "phase": "PG v9 initial",
+      "pass": 6,
+      "fail": 1,
+      "reason": "Test metadata expectation remained v8, actual product v9; test-only correction and new full57PG gate passed",
+      "artifact": "artifacts/v130-copilot-checklist-20261006/copilot-postgres-iteration7.json"
+    }
+  ],
+  "sourcePreservation": {
+    "old30Exact": true,
+    "oldBranchAndHeadUnchanged": true,
+    "oldStagingEmpty": true,
+    "historicalReportsExact": 6,
+    "frozenFiles": 58,
+    "otherFiveEmittedIdentities": 45,
+    "originalDemoRequestsExact": 50,
+    "originalRelatedTablesAndCorpusExact": true,
+    "newSyntheticRequests": 13,
+    "migrations": 13,
+    "proof": "artifacts/v130-copilot-checklist-20261006/preservation-final.json"
+  },
+  "rbacPrivacySources": "PASS executed negative/source/private-canary gates; public API and backend ownership unchanged",
+  "aiProtectedBusinessMutations": 0,
+  "humanControl": "Protected decisions only explicit synthetic operator API operations; no agent/human-review substitution",
+  "developerPreservation": "INHERITED FAIL — UNRESOLVED",
+  "developerAccess": "NONE",
+  "independentHumanReview": "NOT_RUN",
+  "checkpointPublication": {
+    "state": "BLOCKED before commit/push by exact user request §12/16",
+    "commitSha": null,
+    "newCommit": false,
+    "pushed": false,
+    "localHead": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "candidateRemoteSha": "ABSENT",
+    "remoteLookupAt": "2026-10-06T15:04:56.559Z",
+    "mainMerged": false,
+    "newTag": false,
+    "production": "NOT_RUN",
+    "v14": "NOT_STARTED"
+  },
+  "remainingBlockers": [
+    "Checkpoint publication requires a user decision explicitly covering the inherited developer DB/current hash incident."
+  ],
+  "limitations": [
+    "Original first raw/per-attempt tokens and provider duration unavailable.",
+    "Separate native-format token overhead unavailable.",
+    "Final20 outputs491–588tokens; COP08near1199metadata is controlled, not measured near-budget live.",
+    "Native source grammar is conservative: current canonical declaration, supplied complete recognized instructions, one procedure, max8/text120; unsupported clauses/procedures require human planning.",
+    "Accepted unchanged M8 exercises legacy generic-format invocation; actual API-native coverage is proven separately by20wire-hash matches +5workflows +UI.",
+    "Point-in-time readiness and descriptive samples, no SLO/generalized accuracy claim.",
+    "Ollama/runtime process exits across interruptions remain UNKNOWN; detached hidden launch retains the accepted process-only Vulkan profile but does not prove the exit cause or future availability.",
+    "Automated MANAGER fixture decisions and agent browser are not independent human review.",
+    "Inherited demo SLA monitor hashes were not claimed byte-identical; actual final canonical SLA state/time is reported."
+  ],
+  "reviewPack": "artifacts/v130-copilot-checklist-20261006/human-review-pack/REVIEW.md",
+  "artifactsRoot": "artifacts/v130-copilot-checklist-20261006",
+  "reportPath": "docs/v1.3/COPILOT_CHECKLIST_TRUNCATION_VERIFICATION.md",
+  "closurePath": "docs/v1.3/COPILOT_CHECKLIST_TRUNCATION_CHECKPOINT_CLOSURE.md",
+  "finalSecretScan": "artifacts/v130-copilot-checklist-20261006/final-security-source-audit.json"
+}

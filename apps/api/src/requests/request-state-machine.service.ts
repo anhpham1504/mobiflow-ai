@@ -20,7 +20,8 @@ import {VectorRepository} from '../knowledge/vector.repository.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
 import {recommendationEvidenceSchema,recommendationEvidenceV2Schema,recommendationVersion,recommendationV2Version,isRecommendationV2,recommendationActions,type AnyRecommendation,type RecommendationEvidence} from '@mobiflow/contracts';
-import {parseRecommendation,parseRecommendationV2} from '../ai/recommendation-output.js';
+import {parseRecommendation,parseRecommendationV2,parseRecommendationV2ForGeneration} from '../ai/recommendation-output.js';
+import {validateRecommendationEvidenceDecision} from '../ai/recommendation-evidence-decision.js';
 import {revalidateRecommendation} from '../ai/recommendation-validation.js';
 import {ToolFailure} from '../ai/tools/registry.js';
 import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
@@ -328,7 +329,11 @@ export class RequestStateMachineService {
       const evidence=evidenceV2??recommendationEvidenceSchema.parse(snapshot.evidence);
       if(request.latestAnalysisId!==evidence.analysisId||evidence.requestVersion!==request.version)throw new ApiError(409,'STALE_CONTEXT','The analysis changed.');
       if(evidenceV2&&(evidenceV2.requestContext.id!==request.id||evidenceV2.requestContext.version!==request.version||evidenceV2.requestContext.status!==request.status))throw new ApiError(409,'STALE_CONTEXT','The request snapshot changed.');
-      const r=evidenceV2?parseRecommendationV2(JSON.stringify(result),evidenceV2):parseRecommendation(JSON.stringify(result),evidence);
+      if(evidenceV2){
+        if(!snapshot.evidenceDecision)throw new ApiError(409,'AI_INVALID_CONTEXT','The backend evidence decision is unavailable.');
+        validateRecommendationEvidenceDecision(evidenceV2,snapshot.evidenceDecision,this.env.RAG_MAX_DISTANCE);
+      }
+      const r=evidenceV2?parseRecommendationV2ForGeneration(JSON.stringify(result),evidenceV2,snapshot.evidenceDecision!):parseRecommendation(JSON.stringify(result),evidence);
       await revalidateRecommendation(tx,evidence,true,r.suggestedPriority);
       await this.vectors.validateCurrent(tx,evidence.sources);
       await this.vectors.compatible(evidence.embeddingIdentity,tx);

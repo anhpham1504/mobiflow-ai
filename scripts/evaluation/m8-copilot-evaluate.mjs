@@ -39,7 +39,7 @@ try{
     for(let attempt=0;attempt<2;attempt++){
       attempts=attempt+1;
       const attemptStarted=performance.now(),outcome={ordinal:attempt+1,status:'FAILED'};attemptOutcomes.push(outcome);
-      try{const generation=await provider.generateStructured(copilotMessages(c.action,c.context,c.allowed,repair),copilotFormat(c.action),AbortSignal.timeout(env.AI_RUN_TIMEOUT_MS));result=parseStrictOutput(c.action,generation.raw);referenceValid=references(c.action,result,c.allowed);if(!referenceValid)throw new AiFailure('INVALID_REFERENCE',true,'REFERENCE_MEMBERSHIP',generation.raw.slice(0,6000));firstAttemptValid=attempt===0;status='SUCCEEDED';errorCode=null;outcome.status='SUCCEEDED';outcome.identity=generation.identity;break;}
+      try{const generation=await provider.generateStructured(copilotMessages(c.action,c.context,c.allowed,repair),copilotFormat(c.action,c.allowed),AbortSignal.timeout(env.AI_RUN_TIMEOUT_MS));result=parseStrictOutput(c.action,generation.raw);referenceValid=references(c.action,result,c.allowed);if(!referenceValid)throw new AiFailure('INVALID_REFERENCE',true,'REFERENCE_MEMBERSHIP',generation.raw.slice(0,6000));firstAttemptValid=attempt===0;status='SUCCEEDED';errorCode=null;outcome.status='SUCCEEDED';outcome.identity=generation.identity;break;}
       catch(error){const failure=normalizedFailure(error);errorCode=failure.code;outcome.errorCode=errorCode;outcome.validationCategory=failure.repairFeedback.split(':')[0]||failure.code;if(!failure.retryable||attempt===1)break;repair={raw:failure.invalidOutput,feedback:failure.repairFeedback||failure.code};}
       finally{outcome.elapsedMs=Math.round(performance.now()-attemptStarted);}
     }
