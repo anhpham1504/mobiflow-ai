@@ -55,7 +55,7 @@ export function SavedViews({ filters, selectedId, onChoose, onDeleted, disabled 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault(); if (busy) return;
     const payload = createSavedViewSchema.safeParse({ name: new FormData(event.currentTarget).get('name'), filters });
-    if (mode !== 'delete' && !payload.success) { setFormError('Nhập tên từ 1 đến 80 ký tự và kiểm tra bộ lọc.'); return; }
+    if (mode !== 'delete' && !payload.success) { setFormError('Nhập tên từ 1 đến 80 ký tự và kiểm tra bộ lọc.'); (event.currentTarget.elements.namedItem('name') as HTMLInputElement)?.focus(); return; }
     if (mode !== 'create' && !editing) return;
     const ticket = generation.current; setBusy(true); setFormError('');
     try {
@@ -91,7 +91,7 @@ export function SavedViews({ filters, selectedId, onChoose, onDeleted, disabled 
     <dialog ref={dialog} className="saved-view-dialog" aria-labelledby="saved-view-title" onCancel={e => { if (busy) e.preventDefault(); }}>
       <form ref={form} key={mode + ':' + (editing?.id ?? '') + ':' + (editing?.version ?? '')} onSubmit={submit}>
         <h2 id="saved-view-title">{mode === 'delete' ? 'Xóa chế độ xem?' : mode === 'update' ? 'Cập nhật chế độ xem' : 'Lưu chế độ xem'}</h2>
-        {mode === 'delete' ? <p>Xóa “{editing?.name}”? Các yêu cầu vẫn được giữ nguyên.</p> : <><label htmlFor="saved-view-name">Tên chế độ xem<input id="saved-view-name" name="name" required defaultValue={editing?.name ?? ''} aria-invalid={!!formError} aria-describedby={formError ? 'saved-view-form-error' : 'saved-view-name-hint'} /></label><p id="saved-view-name-hint">1–80 ký tự. Bộ lọc đã áp dụng sẽ thay toàn bộ định nghĩa đang lưu.</p></>}
+        {mode === 'delete' ? <p>Xóa “{editing?.name}”? Các yêu cầu vẫn được giữ nguyên.</p> : <><label htmlFor="saved-view-name">Tên chế độ xem<input id="saved-view-name" name="name" required defaultValue={editing?.name ?? ''} aria-invalid={!!formError} aria-describedby={'saved-view-name-hint' + (formError ? ' saved-view-form-error' : '')} /></label><p id="saved-view-name-hint">1–80 ký tự. Bộ lọc đã áp dụng sẽ thay toàn bộ định nghĩa đang lưu.</p></>}
         {formError ? <p id="saved-view-form-error" role="alert">{formError}</p> : null}
         <div className="filter-actions"><button type="submit" disabled={busy}>{busy ? 'Đang lưu…' : mode === 'delete' ? 'Xác nhận xóa' : 'Lưu'}</button><button type="button" disabled={busy} onClick={() => dialog.current?.close()}>Hủy</button></div>
       </form>

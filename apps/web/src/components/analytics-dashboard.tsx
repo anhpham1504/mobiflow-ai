@@ -2,14 +2,15 @@
 import {useEffect,useId,useState} from 'react';
 import {analyticsQuerySchema,analyticsResponseSchema,categories,priorities,statuses,type AnalyticsData} from '@mobiflow/contracts';
 import {api} from '@/lib/session';
+import {categoryLabels,statusLabels} from '@/lib/presentation-labels';
 import {EmptyState,ErrorState,LoadingState,PageHeader,priorityLabels} from './ui/patterns';
-const statusLabels:Record<string,string>={NEW:'Mới tiếp nhận',AI_ANALYZING:'Đang phân tích',TRIAGED:'Đã phân loại',PENDING_APPROVAL:'Chờ duyệt',ASSIGNED:'Đã phân công',IN_PROGRESS:'Đang xử lý',WAITING_USER:'Chờ bổ sung',RESOLVED:'Chờ xác nhận',CLOSED:'Đã đóng',CANCELED:'Đã hủy'};
+
 const numberFormat=new Intl.NumberFormat('vi-VN',{maximumFractionDigits:1});
 const number=(value:number|null,suffix='')=>value===null?'Chưa có mẫu':`${numberFormat.format(value)}${suffix}`;
 const percent=(value:number|null)=>value===null?'Chưa có mẫu':number(value*100,'%');
 const duration=(value:number|null)=>{if(value===null)return 'Chưa có mẫu';const total=Math.round(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return hours?`${hours} giờ ${minutes} phút`:minutes?`${minutes} phút ${seconds} giây`:`${seconds} giây`;};
 const date=(value:string)=>value.split('-').reverse().join('/');
-const categoryLabels:Record<string,string>={NETWORK:'Mạng',IOT:'IoT',BILLING:'Cước phí',ACCOUNT:'Tài khoản',SERVICE:'Dịch vụ',OTHER:'Khác'};
+
 const actionLabels:Record<string,string>={SUMMARIZE_REQUEST:'Tóm tắt yêu cầu',FIND_SOP:'Tìm SOP',SUGGEST_NEXT_STEP:'Gợi ý bước tiếp theo',GENERATE_CHECKLIST:'Tạo checklist',FIND_SIMILAR_REQUESTS:'Tìm yêu cầu tương tự',EXPLAIN_CLASSIFICATION:'Giải thích phân loại'};
 const initialFilters={preset:'30d',from:'',to:'',priority:'',status:'',teamId:'',category:''};
 
