@@ -1,0 +1,490 @@
+{
+  "at": "2026-10-07T02:20:36.140Z",
+  "timestampAsiaSaigon": "2026-10-07 09:20:36 +07:00",
+  "title": "MOBIFLOW AI V1.3 — COPILOT CHECKPOINT CLOSURE",
+  "checkpoint": "CHECKPOINT CLOSED for the measured source publication",
+  "technicalGate": "COPILOT REMEDIATION PASS",
+  "functionalGate": "PASS within executed protocol",
+  "aiQualityGate": "PASS within frozen targeted protocol and independently reviewed samples",
+  "independentHumanReview": "PASS",
+  "developerPreservation": "INHERITED FAIL — ACCEPTED EXCEPTION",
+  "developerPreservationPassed": false,
+  "bitwiseEqualityClaim": false,
+  "logicalEqualityClaim": false,
+  "evidenceDataNeverChanged": false,
+  "baselineSha": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+  "candidateBranch": "fix/v1.3-copilot-checklist-truncation",
+  "sourceCommit": "5bc640077324866be9522745a98d24802131bc5e",
+  "sourceTree": "21ba5f612422aff2e12632c8b03b5393025ec166",
+  "sourcePublication": {
+    "observedAt": "2026-10-07T02:12:23.676Z",
+    "localSha": "5bc640077324866be9522745a98d24802131bc5e",
+    "remoteSha": "5bc640077324866be9522745a98d24802131bc5e",
+    "worktree": "CLEAN",
+    "ordinaryPush": true,
+    "remainingBlockers": 0
+  },
+  "candidateProductDeltaIdentity": "bd52ba83aa7f392ca652623d402ee39e6e6bbb3804712ed0252d6bf146531730",
+  "testedSourceIdentity": "2125f8014cbe8960e2b3e0ade3056dc2b9175aecbb9254537311067812d861e8",
+  "compiledApiIdentity": "dea9c0bb7d8081ae96f22347e3d6d8a498909361521beb15c371eb46d53c6a1e",
+  "compiledPaths": 408,
+  "promptVersion": "copilot.checklist.m8.v9",
+  "sourceContract": "checklist.source-actions.v2",
+  "publicSchema": "copilot.m8.v2",
+  "nativeFormat": {
+    "COP-LIVE-01-MULTISTEP": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-02-SUBSET": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-03-REPEATED": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-04-MISSING": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    },
+    "COP-LIVE-05-PRIVACY": {
+      "hash": "ddc4e3dfa4f7da608e30047c1990f55e1c6b6dce1137e619389c17c6bca27489",
+      "chars": 2929
+    }
+  },
+  "model": {
+    "name": "qwen3:4b-instruct-2507-q4_K_M",
+    "digest": "d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641"
+  },
+  "embedding": {
+    "name": "bge-m3:latest",
+    "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+    "dimension": 1024,
+    "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9",
+    "revision": "m5.v1",
+    "inputVersion": "request-title-description-head.v1"
+  },
+  "settings": {
+    "temperature": 0,
+    "num_predict": 1200,
+    "seed": 42,
+    "num_ctx": 16384,
+    "attemptTimeoutMs": 120000,
+    "runTimeoutMs": 300000,
+    "maxAttempts": 2
+  },
+  "contractChanges": {
+    "publicApi": false,
+    "publicSchema": false,
+    "dbSchema": false,
+    "migrations": false,
+    "modelOrEmbedding": false,
+    "tokenOrTimeout": false
+  },
+  "priorExecutedEvidence": {
+    "path": "docs/v1.3/evidence/COPILOT_CHECKLIST_TRUNCATION_2026_10_06.json",
+    "sha256": "4d4873c236b3569ef99aa56487841910107df9462dd80e49fff249cf9fa2a47a",
+    "executionDate": "2026-10-06",
+    "reuse": "Actual executed gates reused by exact source identity; no invented rerun."
+  },
+  "quality": {
+    "adapterTruncation": "PASS within172 API units; strict incomplete/length output rejection retained",
+    "units": {
+      "config": 7,
+      "api": 172,
+      "web": 3,
+      "evaluationRelease": 83,
+      "total": 265
+    },
+    "pg": {
+      "tests": 57,
+      "all57Passed": true,
+      "allNoSkipped": true
+    },
+    "affectedM15Deterministic": 35,
+    "m8": {
+      "counts": {
+        "runs": 8,
+        "successes": 8,
+        "first": 8,
+        "providerAttempts": 8,
+        "retries": 0,
+        "length": 0,
+        "terminal": 0,
+        "referenceInvalid": 0
+      },
+      "latencyMs": {
+        "min": 461,
+        "median": 1426,
+        "max": 3015
+      }
+    },
+    "targeted": {
+      "counts": {
+        "runs": 20,
+        "successes": 20,
+        "firstAttemptSuccesses": 20,
+        "providerAttempts": 20,
+        "orchestrationAttempts": 20,
+        "retries": 0,
+        "terminalFailures": 0,
+        "lengthFailures": 0,
+        "parserFailures": 0,
+        "validationFailures": 0,
+        "sourceViolations": 0,
+        "semanticViolations": 0,
+        "privateLeaks": 0,
+        "protectedBusinessMutations": 0
+      },
+      "latencyMs": {
+        "min": 7980,
+        "median": 9320,
+        "max": 14886
+      },
+      "providerAccounting": {
+        "counts": {
+          "cold": 1,
+          "warm": 19,
+          "unknown": 0
+        },
+        "inputTokens": {
+          "n": 20,
+          "min": 3420,
+          "median": 4160,
+          "max": 5139
+        },
+        "outputTokens": {
+          "n": 20,
+          "min": 491,
+          "median": 588,
+          "max": 588
+        },
+        "providerLatencyMs": {
+          "cold": {
+            "n": 1,
+            "min": 14852,
+            "median": 14852,
+            "max": 14852
+          },
+          "warm": {
+            "n": 19,
+            "min": 7960,
+            "median": 9248,
+            "max": 11145
+          }
+        },
+        "formatTokenOverhead": "NOT_AVAILABLE: provider reports combined prompt tokens, no separate schema token attribution"
+      }
+    },
+    "workflow": {
+      "result": "PASS",
+      "counts": {
+        "rounds": 5,
+        "functionalPassed": 5,
+        "aiSmokePassed": 5,
+        "aiRuns": 29,
+        "first": 29,
+        "providerAttempts": 29,
+        "retries": 0,
+        "truncations": 0,
+        "terminalFailures": 0
+      },
+      "rows": [
+        {
+          "ordinal": 1,
+          "requestId": "d1ee8129-561d-476f-8308-6e02c2a35903",
+          "publicCode": "MF-2026-000082",
+          "functional": "PASS",
+          "aiSmoke": "PASS",
+          "status": "CLOSED",
+          "version": 12,
+          "elapsedMs": 91477,
+          "checklistLatencyMs": 10929,
+          "aiRuns": 9,
+          "retries": 0,
+          "slaState": "MET",
+          "slaElapsedSeconds": 45,
+          "slaTargetSeconds": 7200,
+          "embeddingVersion": 12,
+          "embeddingDimension": 1024
+        },
+        {
+          "ordinal": 2,
+          "requestId": "d7e61224-262a-482b-8c3c-839eb1997cb6",
+          "publicCode": "MF-2026-000083",
+          "functional": "PASS",
+          "aiSmoke": "PASS",
+          "status": "CLOSED",
+          "version": 12,
+          "elapsedMs": 59130,
+          "checklistLatencyMs": 10844,
+          "aiRuns": 5,
+          "retries": 0,
+          "slaState": "MET",
+          "slaElapsedSeconds": 17,
+          "slaTargetSeconds": 7200,
+          "embeddingVersion": 12,
+          "embeddingDimension": 1024
+        },
+        {
+          "ordinal": 3,
+          "requestId": "fe2fe65f-1152-413a-814e-b8ba6bcd4eb1",
+          "publicCode": "MF-2026-000084",
+          "functional": "PASS",
+          "aiSmoke": "PASS",
+          "status": "CLOSED",
+          "version": 12,
+          "elapsedMs": 59017,
+          "checklistLatencyMs": 10834,
+          "aiRuns": 5,
+          "retries": 0,
+          "slaState": "MET",
+          "slaElapsedSeconds": 20,
+          "slaTargetSeconds": 7200,
+          "embeddingVersion": 12,
+          "embeddingDimension": 1024
+        },
+        {
+          "ordinal": 4,
+          "requestId": "4211c984-c514-476d-949b-6b40c1e3e8bf",
+          "publicCode": "MF-2026-000085",
+          "functional": "PASS",
+          "aiSmoke": "PASS",
+          "status": "CLOSED",
+          "version": 12,
+          "elapsedMs": 57547,
+          "checklistLatencyMs": 11097,
+          "aiRuns": 5,
+          "retries": 0,
+          "slaState": "MET",
+          "slaElapsedSeconds": 20,
+          "slaTargetSeconds": 7200,
+          "embeddingVersion": 12,
+          "embeddingDimension": 1024
+        },
+        {
+          "ordinal": 5,
+          "requestId": "2aa26efc-a85e-4e15-a693-507210fcd053",
+          "publicCode": "MF-2026-000086",
+          "functional": "PASS",
+          "aiSmoke": "PASS",
+          "status": "CLOSED",
+          "version": 12,
+          "elapsedMs": 55887,
+          "checklistLatencyMs": 11029,
+          "aiRuns": 5,
+          "retries": 0,
+          "slaState": "MET",
+          "slaElapsedSeconds": 17,
+          "slaTargetSeconds": 7200,
+          "embeddingVersion": 12,
+          "embeddingDimension": 1024
+        }
+      ]
+    },
+    "ui": [
+      {
+        "name": "Default/empty state has six enabled actions and no prior result/error",
+        "result": "PASS"
+      },
+      {
+        "name": "Actual live loading/success/no autoapply",
+        "result": "PASS",
+        "aiRunId": "c37d6f9a-13a7-4a93-89f0-14802194fce5",
+        "latencyMs": 11085
+      },
+      {
+        "name": "Copilot responsive desktop/tablet/mobile",
+        "result": "PASS",
+        "measurements": [
+          {
+            "viewport": 1440,
+            "documentWidth": 1440,
+            "bodyWidth": 1440,
+            "result": "PASS"
+          },
+          {
+            "viewport": 768,
+            "documentWidth": 768,
+            "bodyWidth": 768,
+            "result": "PASS"
+          },
+          {
+            "viewport": 390,
+            "documentWidth": 390,
+            "bodyWidth": 390,
+            "result": "PASS"
+          }
+        ]
+      },
+      {
+        "name": "Actual scoped Copilot source anchor opens exact citation by Enter",
+        "result": "PASS",
+        "sourceId": "KD-db2b140b-8e01-4d60-842f-7c57038e1bb8-G1-C0",
+        "focus": {
+          "width": "3px",
+          "style": "solid"
+        }
+      },
+      {
+        "name": "Controlled terminal truncation visible error/no silent retry",
+        "result": "PASS",
+        "kind": "UI transport fixture derived from executed real-PG COP-TRUNC09; not live provider output"
+      },
+      {
+        "name": "Explicit keyboard retry onePOST/focus/success/no autoapply",
+        "result": "PASS",
+        "kind": "Controlled UI fixture from COP-TRUNC10; browser is not human review"
+      },
+      {
+        "name": "Role/logout USER projection and no refresh loop",
+        "result": "PASS",
+        "internalApi": 403,
+        "knowledgeApi": 403
+      },
+      {
+        "name": "Console/pageerrors/browser network",
+        "result": "PASS",
+        "consoleErrors": [],
+        "pageErrors": [],
+        "requests": 39
+      }
+    ],
+    "firstAttemptRequired": 57,
+    "additionalFirstAttemptUiAndShortSample": 3,
+    "retries": 0,
+    "terminalFailures": 0,
+    "m15": "Hash-bound reuse of100evaluation+30consistency actual first-attempt PASS;12 watched owners/dataset/oracle/raw130 unchanged; affected35 and PG guards rerun on tested candidate"
+  },
+  "rbacPrivacySources": "PASS executed negative/source/private-canary gates; public API and backend ownership unchanged",
+  "protectedBusinessMutations": 0,
+  "runtime": {
+    "observedAt": "2026-10-07T02:20:36.140Z",
+    "httpStatus": 200,
+    "coreReady": true,
+    "aiReady": true,
+    "rag": {
+      "enabled": true,
+      "status": "READY",
+      "embedding": "UP",
+      "knowledge": "READY",
+      "errorCode": null,
+      "documents": 9,
+      "chunks": 12,
+      "checkedAt": "2026-10-07T02:20:27.138Z"
+    },
+    "webStatus": 200,
+    "ollamaVersion": "0.35.0",
+    "fullRuntimeObservedAt": "2026-10-07T01:49:54.927Z",
+    "embeddingProbe": {
+      "identity": {
+        "provider": "ollama",
+        "model": "bge-m3:latest",
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "dimension": 1024,
+        "revision": "m5.v1",
+        "key": "a6cd9ebb83b4c9c07a14cb63e4cbef8789a7dabd3257d35cbed412ead4b621d9"
+      },
+      "latencyMs": 138,
+      "vectors": 1,
+      "dimension": 1024,
+      "finite": true,
+      "nonzero": true,
+      "vectorHash": "6b3e7edb997d513b71def8b4c43393b644b1bb53d7d91c9260da7bdb63d05b9d",
+      "providerAttempts": 1,
+      "retries": 0,
+      "transport": [
+        {
+          "httpStatus": 200,
+          "elapsedMs": 115
+        }
+      ]
+    },
+    "indexCoverage": {
+      "eligibleRequests": 62,
+      "currentEmbeddings": 62,
+      "missing": 0
+    },
+    "knowledgeDocuments": 9,
+    "knowledgeChunks": 12,
+    "duplicates": 0,
+    "activeAiRuns": 0,
+    "appliedMigrations": 13,
+    "migrationChecksumHash": "fd1b4f72a218516a2aa860593687850881c974b9fc33984d2457599d17a85a98",
+    "servingApi408MatchesNativeSource": true
+  },
+  "runtimeRestore": {
+    "onlyExistingDemoContainersStarted": true,
+    "idsImagesMountsUnchanged": true,
+    "noRecreateResetMigrateReseed": true,
+    "ollamaAcceptedProcessProfileRestored": true,
+    "earlierExitCode": 255,
+    "earlierExitCause": "UNKNOWN",
+    "developerAccess": "NONE"
+  },
+  "humanAuthority": {
+    "path": "docs/v1.3/evidence/COPILOT_CHECKLIST_HUMAN_REVIEW_2026_10_07.json",
+    "sha256": "d62b46de1fd68af08c7ed3d035e66489eef09434e5d96861d049840ed382dad9",
+    "reviewPackSha256": "6aeada870645217520327663a00d2756ef1cc059e7cdb7270c520bb1f8169848",
+    "maximumEightStepsAccepted": true,
+    "generalizedAccuracy": "NOT_CERTIFIED",
+    "productionReadiness": "NOT_CERTIFIED"
+  },
+  "developerExceptionAuthority": {
+    "path": "docs/v1.3/evidence/DEVELOPER_DB_PRESERVATION_EXCEPTION_2026_10_07.json",
+    "sha256": "59336f7899609941ec4df99a44cd5a915c20a3eed5037def6229ebd15998ded5",
+    "decision": "ACCEPTED EXCEPTION — USER AUTHORIZED FOR THIS CHECKPOINT",
+    "scope": "Current Copilot checkpoint only; no general exception or later milestone authorization",
+    "historicalFailureRetained": true,
+    "equalityOrDataUnchangedEvidence": false
+  },
+  "cumulativeDeltaReview": {
+    "sourceCommitPaths": 45,
+    "individuallyAdoptedPaths": 30,
+    "sourceAll45IndexBlobsVerified": true,
+    "fullStagedDiffSha256": "e7640147b6a7814be31d31516cbbb7d52be508057d2049f4ae50b7ff8320213e",
+    "stagedDiffCheck": "PASS",
+    "stagedSecretScan": {
+      "result": "PASS",
+      "privateCandidates": 4,
+      "leakedPaths": [],
+      "valuesLogged": false
+    },
+    "gitMetadata": "Only two exact historical Markdown paths allow87 intentional hard breaks and1 EOF blank; those reports remain byte-identical, normal whitespace checks stay enabled elsewhere"
+  },
+  "mainTagRefs": {
+    "main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "originMain": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "tag": "b1e2c3364ce205493871f84331cd6061c70f5918",
+    "peeled": "56e97f1e522f2bef2340fd9986e0507f6c2bc172"
+  },
+  "remoteRefsAtSourcePublication": {
+    "refs/heads/fix/v1.3-copilot-checklist-truncation": "5bc640077324866be9522745a98d24802131bc5e",
+    "refs/heads/fix/v1.3-local-ai-demo-stability": "b3f39f6b858ef32b2aafef07ea99b1ab254ba583",
+    "refs/heads/main": "56e97f1e522f2bef2340fd9986e0507f6c2bc172",
+    "refs/tags/v1.3.0": "b1e2c3364ce205493871f84331cd6061c70f5918",
+    "refs/tags/v1.3.0^{}": "56e97f1e522f2bef2340fd9986e0507f6c2bc172"
+  },
+  "mainMerged": false,
+  "newTag": false,
+  "production": "NOT_RUN",
+  "v14": "NOT_STARTED",
+  "developerDatabaseAccess": "NONE",
+  "retainedFailures": "All historical AI failures, semantic failures, disqualified native iteration, partial workflows, runtime outages and operator bookkeeping failures remain in source reports and ignored evidence.",
+  "limitations": [
+    "Manual review is acceptance of supplied demo samples, not general accuracy/production certification.",
+    "Runtime READY is point-in-time; repeated runtime exits have UNKNOWN cause; no continuous availability/SLO claim.",
+    "Conservative positive-scope/sentence grammar, one applicable procedure, max8 complete items/text120; unsupported SOPs fail closed for human planning.",
+    "Original historical first raw/tokens/per-attempt duration and independent format token overhead unavailable.",
+    "No bitwise/logical equality of developer data with the initial baseline is asserted."
+  ],
+  "remainingCheckpointBlockers": 0,
+  "documentationFollowup": {
+    "kind": "This report is written after the measured source commit/push/ref verification. A separate ordinary documentation commit/push will publish it; final HEAD/remote/CLEAN proof must be recorded afterwards.",
+    "expectedParent": "5bc640077324866be9522745a98d24802131bc5e",
+    "finalProofPath": "artifacts/v130-copilot-checklist-20261006/checkpoint-final-publication-20261007.json"
+  },
+  "reportPath": "docs/v1.3/COPILOT_CHECKLIST_CHECKPOINT_2026_10_07_VERIFICATION.md",
+  "evidencePath": "docs/v1.3/evidence/COPILOT_CHECKLIST_CHECKPOINT_2026_10_07.json"
+}

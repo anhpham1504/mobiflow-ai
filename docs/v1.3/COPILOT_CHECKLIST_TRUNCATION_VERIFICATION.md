@@ -77,3 +77,9 @@ Các dòng NOT RUN phía trên là snapshot tại thời điểm thực thi ngà
 Người dùng đã cho phép ngoại lệ riêng cho checkpoint Copilot hiện tại: **DEVELOPER PRESERVATION = INHERITED FAIL — ACCEPTED EXCEPTION**. Failure và các snapshot UNRESOLVED trước đó vẫn được giữ nguyên; không đổi thành PASS hoặc dùng làm bằng chứng equality/dữ liệu chưa từng thay đổi. Xem [quyết định và điều kiện](DEVELOPER_DB_PRESERVATION_EXCEPTION_2026_10_07.md).
 
 Human review **PASS trong phạm vi mẫu**; điều kiện authorization của EXECUTE §12/16 đã được đáp ứng. Trạng thái checkpoint: **AUTHORIZED — PUBLICATION PENDING**, chờ kiểm tra source/security/readiness và commit/push/exact refs thực tế. Main, tag v1.3.0, migrations được bảo toàn; không truy cập DB developer, không production/V1.4.
+
+## Source checkpoint closure — 2026-10-07
+
+**COPILOT REMEDIATION PASS / INDEPENDENT HUMAN REVIEW PASS / SOURCE CHECKPOINT CLOSED** tại 2026-10-07T02:12:23.676Z. Source commit `5bc640077324866be9522745a98d24802131bc5e` đã ordinary push đúng nhánh `fix/v1.3-copilot-checklist-truncation`; exact local/remoteSHA khớp, worktreeCLEAN tại lần xác minh. Developer preservation **INHERITED FAIL — ACCEPTED EXCEPTION**, không phải PASS hoặc chứng minh equality; user-authorized riêng cho checkpoint. Main/tag/migrations nguyên vẹn, không production/V1.4.
+
+Xem [biên bản closure hiện hành](COPILOT_CHECKLIST_CHECKPOINT_2026_10_07_VERIFICATION.md) và [evidence](evidence/COPILOT_CHECKLIST_CHECKPOINT_2026_10_07.json). Runtime Core/AI/RAGREADY được kiểm tra lại ngày07/10; các gate AI/static/PG ngày06/10 được tái dùng bằng exact product/source identity. Các snapshot BLOCKED/NOTRUN/UNRESOLVED và mọi failure phía trên được giữ nguyên. Tài liệu closure là follow-up sau source publication; final documentary HEAD/remote/CLEAN phải được xác minh sau commit/push tài liệu.
