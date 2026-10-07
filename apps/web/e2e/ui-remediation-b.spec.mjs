@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test, axe, login, noOverflow } from './remediation-support.mjs';
+import { test, axe, login, noOverflow, openListControls } from './remediation-support.mjs';
 
 async function invalidField(page, field) {
   await expect(field).toBeFocused();
@@ -67,6 +67,7 @@ test('Phase B: saved view and invalid date range field errors', async ({page},te
   const writes=[];
   page.on('request',request => { if (request.method() !== 'GET' && new URL(request.url()).pathname.startsWith('/api/v1/saved-request-views')) writes.push(request.url()); });
   await login(page,'USER'); await page.goto('/user/requests');
+  await openListControls(page);
   const trigger=page.getByRole('button',{name:'Lưu chế độ xem',exact:true});
   await trigger.click();
   const dialog=page.getByRole('dialog'),name=dialog.getByRole('textbox',{name:'Tên chế độ xem'});

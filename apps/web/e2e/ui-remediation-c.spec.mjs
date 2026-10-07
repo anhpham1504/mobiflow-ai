@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test, axe, login, noOverflow } from './remediation-support.mjs';
+import { test, axe, login, noOverflow, openListControls } from './remediation-support.mjs';
 
 const paths={USER:'/user/requests',STAFF:'/staff/work-queue',MANAGER:'/manager/requests'};
 for (const role of ['USER','STAFF','MANAGER']) test(`Phase C: current-page Unicode search, labels and page context for ${role}`,async ({page},testInfo)=>{
@@ -21,6 +21,7 @@ for (const role of ['USER','STAFF','MANAGER']) test(`Phase C: current-page Unico
   }
   expect(calls.length).toBe(baselineCalls);
   await page.getByRole('button',{name:'Xóa tìm kiếm',exact:true}).click(); await expect(search).toHaveValue(''); await expect(links).toHaveCount(initial);
+  await openListControls(page);
   await expect(page.getByRole('combobox',{name:'Ưu tiên',exact:true}).getByRole('option',{name:'Cao',exact:true})).toHaveAttribute('value','HIGH');
   await expect(page.getByRole('combobox',{name:'Nhóm vấn đề',exact:true}).getByRole('option',{name:'Mạng',exact:true})).toHaveAttribute('value','NETWORK');
   await expect(page.locator('.topbar-context strong')).not.toHaveText('Không gian làm việc');
@@ -67,6 +68,7 @@ for(const role of ['USER','MANAGER']) test(`Phase C: live cursor pagination, sea
   const firstDetail=page.locator('.data-table .request-title').first();await firstDetail.click();
   await expect(page.getByRole('navigation',{name:'Đường dẫn yêu cầu'})).toBeVisible();
   await page.goBack();await expect(pagination).toContainText('Trang '+(number-1)+' ·');await expect(previous).toBeEnabled();
+  await openListControls(page);
   await page.getByRole('combobox',{name:'Ưu tiên',exact:true}).selectOption('HIGH');
   const filtered=page.waitForResponse(response=>{const url=new URL(response.url());return url.pathname==='/api/v1'+(role==='USER'?'/requests/mine':'/manager/requests')&&url.searchParams.get('priority')==='HIGH';});
   await page.getByRole('button',{name:'Áp dụng',exact:true}).click();expect((await filtered).status()).toBe(200);

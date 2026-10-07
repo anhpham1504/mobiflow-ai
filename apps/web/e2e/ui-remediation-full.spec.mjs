@@ -1,6 +1,6 @@
 /* global document, window, getComputedStyle */
 import { expect } from '@playwright/test';
-import { test, axe, login, noOverflow, viewports } from './remediation-support.mjs';
+import { test, axe, login, noOverflow, viewports, openListControls } from './remediation-support.mjs';
 
 const deepWidths = new Set([375, 390, 430, 1440]);
 const listPaths = { USER: '/user/requests', STAFF: '/staff/work-queue', MANAGER: '/manager/requests' };
@@ -97,6 +97,7 @@ for (const role of ['USER', 'STAFF', 'MANAGER']) {
 
   test(`Full regression: ${role} mobile date errors, native arrow keys and local empty search`, async ({ page }, testInfo) => {
     await login(page, role); await page.goto(listPaths[role]); await ready(page, 'list');
+    await openListControls(page);
     const from = page.getByLabel('Tạo từ (UTC)', { exact: true }), to = page.getByLabel('Tạo trước (UTC)', { exact: true });
     for (const [width, height] of viewports.filter(([width]) => deepWidths.has(width))) {
       await page.setViewportSize({ width, height });
@@ -219,6 +220,7 @@ test('Full regression: inspect contrast on nodes marked incomplete by Axe', asyn
   }
   await login(page, 'MANAGER'); await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/manager/requests'); await ready(page, 'list');
+  await openListControls(page);
   for (const selector of ['.topbar-context > span', '.topbar-context > strong', '.environment-status']) await inspect(page.locator(selector), selector);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Lưu chế độ xem', exact: true }).click();

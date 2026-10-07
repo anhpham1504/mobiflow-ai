@@ -80,10 +80,10 @@ export function SavedViews({ filters, selectedId, onChoose, onDeleted, disabled 
   return <section className="saved-views" aria-label="Chế độ xem đã lưu">
     <div className="saved-views-controls"><label htmlFor="saved-view-selector">Chế độ xem đã lưu<select ref={selector} id="saved-view-selector" value={selected?.id ?? ''} disabled={loading || busy} onChange={e => { void choose(e.target.value); }}>
       <option value="">Chọn chế độ xem</option>{rows.map(row => <option key={row.id} value={row.id}>{row.name}{row.availability === 'UNAVAILABLE' ? ' — Không khả dụng' : ''}</option>)}
-    </select></label><div className="filter-actions"><button type="button" disabled={busy || !selected} onClick={() => { if (selected) void choose(selected.id); }}>Áp dụng chế độ xem</button><button type="button" disabled={busy || disabled} onClick={() => open('create')}>Lưu chế độ xem</button>
-      <button type="button" disabled={busy || !selected || disabled} onClick={() => open('update')}>Cập nhật chế độ xem</button>
-      <button type="button" disabled={busy || !selected} onClick={() => open('delete')}>Xóa chế độ xem</button>
-      <button type="button" disabled={busy} onClick={() => { setLoading(true); setRefresh(n => n + 1); }}>Tải lại chế độ xem</button></div></div>
+    </select></label><div className="filter-actions"><button className="button button-secondary" type="button" disabled={busy || !selected} onClick={() => { if (selected) void choose(selected.id); }}>Áp dụng chế độ xem</button><button className="button button-secondary" type="button" disabled={busy || disabled} onClick={() => open('create')}>Lưu chế độ xem</button>
+      <button className="button button-secondary" type="button" disabled={busy || !selected || disabled} onClick={() => open('update')}>Cập nhật chế độ xem</button>
+      <button className="button button-ghost" type="button" disabled={busy || !selected} onClick={() => open('delete')}>Xóa chế độ xem</button>
+      <button className="button button-ghost" type="button" disabled={busy} onClick={() => { setLoading(true); setRefresh(n => n + 1); }}>Tải lại chế độ xem</button></div></div>
     <p className="saved-view-help">Chỉ lưu bộ lọc đã áp dụng. Tìm trong trang không được lưu. Thứ tự: mới nhất trước.</p>
     {loading ? <p role="status">Đang tải chế độ xem…</p> : !rows.length && !error ? <p>Bạn chưa lưu chế độ xem nào.</p> : null}
     {dirty ? <p role="status">Đã chỉnh sửa — chưa lưu thay đổi.</p> : null}
@@ -93,7 +93,7 @@ export function SavedViews({ filters, selectedId, onChoose, onDeleted, disabled 
         <h2 id="saved-view-title">{mode === 'delete' ? 'Xóa chế độ xem?' : mode === 'update' ? 'Cập nhật chế độ xem' : 'Lưu chế độ xem'}</h2>
         {mode === 'delete' ? <p>Xóa “{editing?.name}”? Các yêu cầu vẫn được giữ nguyên.</p> : <><label htmlFor="saved-view-name">Tên chế độ xem<input id="saved-view-name" name="name" required defaultValue={editing?.name ?? ''} aria-invalid={!!formError} aria-describedby={'saved-view-name-hint' + (formError ? ' saved-view-form-error' : '')} /></label><p id="saved-view-name-hint">1–80 ký tự. Bộ lọc đã áp dụng sẽ thay toàn bộ định nghĩa đang lưu.</p></>}
         {formError ? <p id="saved-view-form-error" role="alert">{formError}</p> : null}
-        <div className="filter-actions"><button type="submit" disabled={busy}>{busy ? 'Đang lưu…' : mode === 'delete' ? 'Xác nhận xóa' : 'Lưu'}</button><button type="button" disabled={busy} onClick={() => dialog.current?.close()}>Hủy</button></div>
+        <div className="filter-actions"><button className={mode === 'delete' ? 'button button-danger' : 'button button-primary'} type="submit" disabled={busy}>{busy ? 'Đang lưu…' : mode === 'delete' ? 'Xác nhận xóa' : 'Lưu'}</button><button className="button button-secondary" type="button" disabled={busy} onClick={() => dialog.current?.close()}>Hủy</button></div>
       </form>
     </dialog>
   </section>;

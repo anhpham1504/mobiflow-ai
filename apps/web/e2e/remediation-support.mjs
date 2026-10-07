@@ -64,6 +64,12 @@ export async function login(page, role, email = role === 'STAFF' ? 'staff.iot@mo
 export async function noOverflow(page) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
 }
+export async function openListControls(page) {
+  const controls=page.locator('.list-controls');
+  await expect(controls).toBeVisible();
+  if(await controls.getAttribute('open')===null)await controls.locator(':scope > summary').press('Enter');
+  await expect(controls).toHaveAttribute('open');
+}
 export async function axe(page, testInfo, label) {
   const result = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa','wcag22aa','best-practice']).analyze();
   await testInfo.attach(label, { body: JSON.stringify({ violations: result.violations, incomplete: result.incomplete }), contentType: 'application/json' });

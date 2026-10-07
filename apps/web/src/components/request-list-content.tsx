@@ -95,7 +95,7 @@ function RequestListContent({ role, approvals = false }: Props) {
   }
   function reload() { setDashboardLoading(true); setDashboardError(''); setRevision(v => v + 1); }
   const heading = isDashboard ? dashboardCopy[role] : { title: approvals ? 'Phê duyệt yêu cầu' : role === 'STAFF' ? 'Công việc của tôi' : role === 'USER' ? 'Yêu cầu của tôi' : 'Quản lý yêu cầu', description: approvals ? 'Xem xét các phương án đang chờ quyết định của quản lý.' : 'Quản lý và theo dõi các yêu cầu trong phạm vi bạn được phép truy cập.' };
-  const primary = role === 'USER' ? <Link className="button button-primary" href="/user/requests/new"><Plus size={17} />Tạo yêu cầu</Link> : role === 'MANAGER' ? <Link className="button button-secondary" href={approvals ? '/manager/requests' : '/manager/approvals'}>{approvals ? 'Tất cả yêu cầu' : 'Chờ phê duyệt'}</Link> : undefined;
+  const primary = role === 'USER' ? <Link className="button button-primary" href="/user/requests/new"><Plus size={17} />Tạo yêu cầu</Link> : role === 'MANAGER' ? <Link className={isDashboard?'button button-primary':'button button-secondary'} href={approvals ? '/manager/requests' : '/manager/approvals'}>{approvals ? 'Tất cả yêu cầu' : 'Chờ phê duyệt'}</Link> : isDashboard ? <Link className="button button-primary" href="/staff/work-queue">Mở công việc của tôi</Link> : undefined;
   return <SessionGate role={role}><PageHeader title={heading.title} description={heading.description} actions={primary} />
     {isDashboard ? <div className="dashboard-summary"><DashboardMetrics data={dashboard} loading={dashboardLoading} error={dashboardError} onRetry={reload} /></div> : null}
     {isDashboard ? <h2 className="section-title">{role === 'USER' ? 'Yêu cầu của tôi' : role === 'STAFF' ? 'Cần xử lý' : 'Yêu cầu gần đây'}</h2> : null}
@@ -104,7 +104,7 @@ function RequestListContent({ role, approvals = false }: Props) {
       <p id="page-search-hint">Chỉ tìm trong các yêu cầu trên trang hiện tại.</p>
       {search ? <button type="button" className="button button-secondary" onClick={() => commitSearch('')}>Xóa tìm kiếm</button> : null}
     </form>
-    <details className="list-controls" open={!isDashboard}><summary>Bộ lọc và chế độ xem đã lưu{Object.keys(filters).length ? ` · ${Object.keys(filters).length} bộ lọc đang áp dụng` : ''}</summary>
+    <details className="list-controls" open={Object.keys(filters).length>0}><summary>Bộ lọc và chế độ xem đã lưu{Object.keys(filters).length ? ` · ${Object.keys(filters).length} bộ lọc đang áp dụng` : ''}</summary>
     {user?.role === role ? <SavedViews key={user.id + role} filters={filters} selectedId={params.get('view') ?? ''} onChoose={choose} onDeleted={() => { const next = new URLSearchParams(url); next.delete('view'); navigate(next); }} disabled={!!parsed.error} /> : null}
     <form key={JSON.stringify(filters)} className="filter-row request-filter-form" onSubmit={e => {
       e.preventDefault(); const values = new FormData(e.currentTarget), input: Record<string, string> = {};

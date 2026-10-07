@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test, axe, login, noOverflow, viewports } from './remediation-support.mjs';
+import { test, axe, login, noOverflow, viewports, openListControls } from './remediation-support.mjs';
 
 async function target44(locator){const box=await locator.boundingBox();expect(box.width).toBeGreaterThanOrEqual(44);expect(box.height).toBeGreaterThanOrEqual(44);}
 test('Phase D: login password toggle keeps a 44px hit area at every viewport',async({page},testInfo)=>{
@@ -46,6 +46,7 @@ test('Phase D: USER states without commands have meaningful next-step context',a
 
 for(const role of ['USER','STAFF','MANAGER'])test(`Phase D: native Saved Views dialog inset, scrolling, Escape and return for ${role}`,async({page},testInfo)=>{
   const positions=[];await login(page,role);await page.goto(role==='STAFF'?'/staff/work-queue':'/'+role.toLowerCase()+'/requests');
+  await openListControls(page);
   for(const [width,height]of [[320,760],[375,667],[390,844],[430,932],[768,1024],[1440,900],[320,240]]){
     await page.setViewportSize({width,height});
     const trigger=page.getByRole('button',{name:'Lưu chế độ xem',exact:true});await trigger.focus();await page.keyboard.press('Enter');
