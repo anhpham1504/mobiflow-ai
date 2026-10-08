@@ -1,11 +1,12 @@
 'use client';
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from 'react';
 import { ROUTING_FIELD_DEFINITIONS, routingFields, routingStatuses, createRoutingRuleSchema, createRoutingRevisionSchema, routingListResponseSchema, routingDetailResponseSchema, routingHistoryResponseSchema, routingTargetsResponseSchema, type RoutingCondition, type RoutingRule, type RoutingRevision, type RoutingTargetView } from '@mobiflow/contracts';
 import { api, getProfile, serverProfile, subscribe } from '@/lib/session';
 import { SessionGate } from './session-shell';
 import { PageHeader } from './ui/patterns';
 import { formatTime } from './request-list';
 import {categoryLabels,priorityLabels,subcategoryLabels} from '@/lib/presentation-labels';
+import { focusFirstInvalid, routingValidationErrors, type FieldErrors } from '@/lib/form-errors';
 const routingLabels={category:categoryLabels,subcategory:subcategoryLabels,priority:priorityLabels};
 
 const fieldLabels = { category: 'Nhóm vấn đề', subcategory: 'Phân loại chi tiết', priority: 'Mức ưu tiên yêu cầu' };
@@ -16,29 +17,36 @@ function RuleDefinition({ revision, targets }: { revision: RoutingRevision; targ
 }
 function RuleEditor({ current, targets, onSaved, onClose }: { current: RoutingRule | null; targets: RoutingTargetView[]; onSaved: (rule: RoutingRule) => void; onClose: () => void }) {
   const [conditions, setConditions] = useState<RoutingCondition[]>(current?.current.conditions ?? [firstCondition]), [busy, setBusy] = useState(false), [error, setError] = useState('');
+  const [invalid, setInvalid] = useState<FieldErrors>({}), id = useId(), formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => { if (formRef.current) focusFirstInvalid(formRef.current, invalid); }, [invalid]);
   const update = (index: number, condition: RoutingCondition) => setConditions(old => old.map((item, i) => i === index ? condition : item));
   async function save(form: HTMLFormElement) {
     const f = new FormData(form), input = { name: String(f.get('name')), ...(String(f.get('description')).trim() ? { description: String(f.get('description')) } : {}), priority: Number(f.get('priority')), target: { type: 'TEAM', id: String(f.get('target')) }, conditions, ...(current ? { expectedRevision: current.currentRevision, expectedRuleVersion: current.version } : {}) };
     const checked = (current ? createRoutingRevisionSchema : createRoutingRuleSchema).safeParse(input);
-    if (!checked.success) { setError('Kiểm tra tên, nhóm đủ điều kiện, ưu tiên 1–10000 và 1–10 điều kiện với giá trị hợp lệ.'); return; }
-    setBusy(true); setError('');
+    if (!checked.success) { setInvalid(routingValidationErrors(checked.error.issues)); setError(''); return; }
+    setInvalid({}); setBusy(true); setError('');
     try { onSaved((await api(current ? '/routing-rules/' + current.id + '/revisions' : '/routing-rules', routingDetailResponseSchema, checked.data)).data); }
     catch (e) { setError((e as Error).message + ' Nếu quy tắc đã thay đổi, đóng biểu mẫu và tải lại trước khi sửa tiếp.'); }
     finally { setBusy(false); }
   }
-  return <section className="workflow-card"><form className="action-form" onKeyDown={e => { if (e.key === 'Escape' && !busy) { e.preventDefault(); onClose(); } }} onSubmit={e => { e.preventDefault(); void save(e.currentTarget); }}><fieldset disabled={busy}>
+  return <section className="workflow-card"><form ref={formRef} noValidate className="action-form" onKeyDown={e => { if (e.key === 'Escape' && !busy) { e.preventDefault(); onClose(); } }} onSubmit={e => { e.preventDefault(); void save(e.currentTarget); }}><fieldset disabled={busy}>
     <legend>{current ? 'Tạo phiên bản quy tắc mới' : 'Tạo quy tắc'}</legend><p>{current ? 'Phiên bản đã lưu được giữ nguyên trong lịch sử.' : 'Quy tắc mới chưa hoạt động. Bạn cần kích hoạt sau khi kiểm tra.'}</p>
-    <label>Tên quy tắc<input name="name" required maxLength={240} autoFocus defaultValue={current?.current.name ?? ''} /></label>
-    <label>Mô tả quy tắc<textarea name="description" maxLength={1000} defaultValue={current?.current.description ?? ''} /></label>
-    <label>Ưu tiên quy tắc<input name="priority" type="number" min={1} max={10000} step={1} required defaultValue={current?.current.priority ?? 10} /></label><p>Số nhỏ hơn có ưu tiên cao hơn. Các điều kiện kết hợp bằng AND.</p>
-    <label>Nhóm gợi ý<select name="target" required defaultValue={current?.current.target.id ?? ''}><option value="">Chọn nhóm đủ điều kiện</option>{targets.map(target => <option key={target.id} value={target.id}>{target.displayName}</option>)}</select></label>
-    {conditions.map((condition, index) => <fieldset className="routing-condition" key={index}><legend>Điều kiện {index + 1}</legend>
+    <label>Tên quy tắc<input name="name" data-error-field="name" aria-invalid={!!invalid.name} aria-describedby={id + '-name-hint' + (invalid.name ? ' ' + id + '-name-error' : '')} required maxLength={240} autoFocus defaultValue={current?.current.name ?? ''} /></label>
+    <p id={id + '-name-hint'}>Tên quy tắc tối đa 120 ký tự.</p>{invalid.name ? <p className="field-error" role="alert" id={id + '-name-error'}>{invalid.name}</p> : null}
+    <label>Mô tả quy tắc<textarea name="description" data-error-field="description" aria-invalid={!!invalid.description} aria-describedby={invalid.description ? id + '-description-error' : undefined} maxLength={1000} defaultValue={current?.current.description ?? ''} /></label>
+    {invalid.description ? <p className="field-error" role="alert" id={id + '-description-error'}>{invalid.description}</p> : null}
+    <label>Ưu tiên quy tắc<input name="priority" data-error-field="priority" aria-invalid={!!invalid.priority} aria-describedby={id + '-priority-hint' + (invalid.priority ? ' ' + id + '-priority-error' : '')} type="number" min={1} max={10000} step={1} required defaultValue={current?.current.priority ?? 10} /></label><p id={id + '-priority-hint'}>Số nhỏ hơn có ưu tiên cao hơn. Các điều kiện kết hợp bằng AND.</p>
+    {invalid.priority ? <p className="field-error" role="alert" id={id + '-priority-error'}>{invalid.priority}</p> : null}
+    <label>Nhóm gợi ý<select name="target" data-error-field="target.id" aria-invalid={!!invalid['target.id']} aria-describedby={invalid['target.id'] ? id + '-target-error' : undefined} required defaultValue={current?.current.target.id ?? ''}><option value="">Chọn nhóm đủ điều kiện</option>{targets.map(target => <option key={target.id} value={target.id}>{target.displayName}</option>)}</select></label>
+    {invalid['target.id'] ? <p className="field-error" role="alert" id={id + '-target-error'}>{invalid['target.id']}</p> : null}
+    {conditions.map((condition, index) => { const path = 'conditions.' + index, conditionError = Object.entries(invalid).find(([key]) => key === 'conditions' || key === path || key.startsWith(path + '.'))?.[1], errorId = id + '-condition-' + index + '-error'; return <fieldset className="routing-condition" key={index}><legend>Điều kiện {index + 1}</legend>
       <label>Trường {index + 1}<select value={condition.field} onChange={e => { const field = e.target.value as typeof routingFields[number]; update(index, { field, operator: 'EQ', values: [ROUTING_FIELD_DEFINITIONS[field].options[0]!] } as RoutingCondition); }}>{routingFields.map(field => <option key={field} value={field}>{fieldLabels[field]}</option>)}</select></label>
       <label>Toán tử {index + 1}<select value={condition.operator} onChange={e => update(index, { ...condition, operator: e.target.value as 'EQ' | 'IN', values: condition.values.slice(0, 1) } as RoutingCondition)}><option value="EQ">EQ — bằng</option><option value="IN">IN — thuộc tập giá trị</option></select></label>
-      <label>Giá trị {index + 1}<select key={condition.field + condition.operator} multiple={condition.operator === 'IN'} value={condition.operator === 'IN' ? condition.values : condition.values[0]} required onChange={e => update(index, { ...condition, values: Array.from(e.target.selectedOptions, option => option.value) } as RoutingCondition)}>{ROUTING_FIELD_DEFINITIONS[condition.field].options.map(option => <option key={option} value={option}>{routingLabels[condition.field][option]??option}</option>)}</select></label>
+      <label>Giá trị {index + 1}<select data-error-field={path + '.values'} aria-invalid={!!conditionError} aria-describedby={conditionError ? errorId : undefined} key={condition.field + condition.operator} multiple={condition.operator === 'IN'} value={condition.operator === 'IN' ? condition.values : condition.values[0]} required onChange={e => update(index, { ...condition, values: Array.from(e.target.selectedOptions, option => option.value) } as RoutingCondition)}>{ROUTING_FIELD_DEFINITIONS[condition.field].options.map(option => <option key={option} value={option}>{routingLabels[condition.field][option]??option}</option>)}</select></label>
+      {conditionError ? <p className="field-error" role="alert" id={errorId}>{conditionError}</p> : null}
       {condition.operator === 'IN' ? <p>Chọn nhiều giá trị bằng Ctrl hoặc Shift trên bàn phím.</p> : null}
       <button className="button button-ghost" type="button" disabled={conditions.length <= 1} onClick={() => setConditions(old => old.filter((_, i) => i !== index))}>Xóa điều kiện {index + 1}</button>
-    </fieldset>)}
+    </fieldset>; })}
     <button className="button button-secondary" type="button" disabled={conditions.length >= 10} onClick={() => setConditions(old => [...old, firstCondition])}>Thêm điều kiện</button>
     {error ? <p role="alert" className="form-error">{error}</p> : null}
     <div className="template-actions"><button>{busy ? 'Đang lưu…' : current ? 'Lưu phiên bản quy tắc' : 'Lưu quy tắc'}</button><button className="button button-secondary" type="button" onClick={onClose}>Đóng biểu mẫu</button></div>
