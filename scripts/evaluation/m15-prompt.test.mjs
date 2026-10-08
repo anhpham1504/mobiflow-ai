@@ -3,7 +3,8 @@ import {test} from 'node:test';
 import {loadM15Dataset} from './m15-dataset.mjs';
 import {recommendationFormatV2} from '../../apps/api/dist/ai/prompts/recommendation.js';
 import {parseRecommendationV2,parseRecommendationV2ForGeneration} from '../../apps/api/dist/ai/recommendation-output.js';
-import {recommendationFixture} from '../../apps/api/test/helpers/recommendation-v2-fixture.mjs';
+import {recommendationFixture,syntheticAnalysis} from '../../apps/api/test/helpers/recommendation-v2-fixture.mjs';
+import {releaseProcedureText,releaseRecommendationFixture} from '../../apps/api/test/helpers/release-hardening-fixture.mjs';
 import {measureAttempt} from './m15-metrics.mjs';
 import {decideRecommendationEvidence,validateRecommendationEvidenceDecision} from '../../apps/api/dist/ai/recommendation-evidence-decision.js';
 import {recommendationMessagesV2} from '../../apps/api/dist/ai/prompts/recommendation.js';
@@ -27,6 +28,44 @@ function decisionContext({missing=false,candidates=true,excerpt='Quy trình xử
 }
 function generated(e,decision=decideRecommendationEvidence(e)){return recommendationFixture(e,'recommendation.v2',decision);}
 const parseGenerated=(r,e,d)=>parseRecommendationV2ForGeneration(JSON.stringify(r),e,d);
+
+function releaseEvidence(excerpt=releaseProcedureText){
+  const e=decisionContext({excerpt});e.analysis=clone(syntheticAnalysis);
+  e.requestContext.title='SIM IoT mất kết nối';e.requestContext.description='17 SIM IoT tại Amata mất kết nối từ 8 giờ.';
+  e.requestContext.location=e.analysis.entities.location;
+  return e;
+}
+
+test('RC-001 scoped M24 procedure and release provider preserve the canonical sufficient decision',()=>{
+  const e=releaseEvidence(),d=decideRecommendationEvidence(e),r=releaseRecommendationFixture(recommendationMessagesV2(e.requestContext,e,false,d));
+  assert.equal(d.evidenceStatus,'SUFFICIENT');assert.deepEqual(d.selectedProcedureSourceIds,[e.sources[0].sourceId]);
+  assert.equal(r.evidenceStatus,d.evidenceStatus);assert.deepEqual(r.procedureSources,[{sourceId:e.sources[0].sourceId}]);
+  assert.deepEqual(parseGenerated(r,e,d),r);
+});
+
+test('RC-001 original generic SOP stays insufficient and a stale sufficient proposal fails closed',()=>{
+  const e=releaseEvidence('Synthetic SOP: kiểm tra SIM và APN cho thiết bị IoT mất kết nối tại Amata.'),d=decideRecommendationEvidence(e);
+  const r=releaseRecommendationFixture(recommendationMessagesV2(e.requestContext,e,false,d));
+  assert.equal(d.evidenceStatus,'INSUFFICIENT_EVIDENCE');assert.deepEqual(d.selectedProcedureSourceIds,[]);
+  assert.equal(r.evidenceStatus,d.evidenceStatus);assert.deepEqual(r.procedureSources,[]);assert.deepEqual(r.suggestedChecklist,[]);
+  assert.ok(r.warnings.some(w=>w.code==='INSUFFICIENT_EVIDENCE'));assert.deepEqual(parseGenerated(r,e,d),r);
+  const stale=recommendationFixture(e);assert.equal(stale.evidenceStatus,'SUFFICIENT');
+  assert.throws(()=>parseGenerated(stale,e,d),error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('EVIDENCE_DECISION_MISMATCH:'));
+});
+
+test('RC-001 release provider skips a closer ineligible source and fabricated references remain rejected',()=>{
+  const e=releaseEvidence(),eligible=e.sources[0];eligible.distance=.2;
+  const ineligible={...eligible,sourceId:'KD-'+randomUUID()+'-G1-C0',documentId:randomUUID(),chunkId:randomUUID(),distance:.1,excerpt:'Danh mục SIM IoT và APN. Kiểm tra danh mục tài liệu.'};
+  e.sources.unshift(ineligible);const d=decideRecommendationEvidence(e),r=releaseRecommendationFixture(recommendationMessagesV2(e.requestContext,e,false,d));
+  assert.deepEqual(d.eligibleProcedureSourceIds,[eligible.sourceId]);assert.deepEqual(r.procedureSources,[{sourceId:eligible.sourceId}]);
+  assert.deepEqual(parseGenerated(r,e,d),r);
+  const invalid=clone(r);invalid.procedureSources=[{sourceId:ineligible.sourceId}];invalid.suggestedChecklist=[];
+  invalid.evidence.push({type:'KNOWLEDGE',referenceId:ineligible.sourceId,excerpt:ineligible.excerpt,relevance:'Nguồn kiến thức được truy xuất để tham khảo.'});
+  assert.doesNotThrow(()=>parseRecommendationV2(JSON.stringify(invalid),e));
+  assert.throws(()=>parseGenerated(invalid,e,d),error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('PROCEDURE_DECISION_MEMBERSHIP:'));
+  const fabricated=clone(r);fabricated.procedureSources=[{sourceId:'KD-'+randomUUID()+'-G1-C0'}];fabricated.suggestedChecklist=[];
+  assert.throws(()=>parseGenerated(fabricated,e,d),error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('SOURCE_MEMBERSHIP:'));
+});
 
 for(const [name,options]of [['T1 complete request and relevant procedure',{}],['T2 location missing with relevant procedure',{missing:true}],['T3 absent candidates with relevant procedure',{candidates:false}],['T4 location missing and absent candidates with relevant procedure',{missing:true,candidates:false}]])test(name,()=>{
   const e=decisionContext(options),d=decideRecommendationEvidence(e),r=generated(e,d);

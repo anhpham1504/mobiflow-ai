@@ -9,6 +9,13 @@ import { AuthService } from '../../dist/auth/auth.service.js';
 import { RequestStateMachineService } from '../../dist/requests/request-state-machine.service.js';
 import { syntheticAnalysis, syntheticEmbeddings, recommendationFixture } from './recommendation-v2-fixture.mjs';
 
+export const releaseProcedureText = 'Áp dụng cho SIM IoT bị mất kết nối. Kiểm tra trạng thái SIM và cấu hình APN, ghi lại kết quả để quản lý xem xét.';
+
+export function releaseRecommendationFixture(messages) {
+  const { evidence, evidenceDecision } = JSON.parse(messages[1].content);
+  return recommendationFixture(evidence, undefined, evidenceDecision);
+}
+
 export async function createReleaseHarness(databaseUrl, { port = 33024, webOrigin = 'http://localhost:3000', clock = { now: new Date() }, listenHost = '127.0.0.1' } = {}) {
   const target = new URL(databaseUrl);
   if (target.pathname !== '/mobiflow_m24_test' || !['localhost', '127.0.0.1'].includes(target.hostname)) throw new Error('Dedicated loopback M24 test target required');
@@ -20,7 +27,7 @@ export async function createReleaseHarness(databaseUrl, { port = 33024, webOrigi
   const recommendationProvider = { generateStructured: async messages => {
     captured.structured.push(messages);
     if (messages[0].content.includes('Action=SUMMARIZE_REQUEST')) return generation({ summary: 'Tóm tắt dữ kiện synthetic công khai của yêu cầu.', eventIds: [] });
-    return generation(recommendationFixture(JSON.parse(messages[1].content).evidence));
+    return generation(releaseRecommendationFixture(messages));
   } };
   const embeddingProvider = { ...syntheticEmbeddings, embedQuery: async (...args) => { captured.embedding.push(args[0]); return syntheticEmbeddings.embedQuery(...args); } };
   const env = parseApiEnvironment({ ...process.env, NODE_ENV: 'test', DATABASE_URL: databaseUrl, WEB_ORIGIN: webOrigin, AI_AUTO_ANALYZE: 'false', AI_RAG_ENABLED: 'false', OLLAMA_BASE_URL: 'http://127.0.0.1:9', KNOWLEDGE_STORAGE_ROOT: 'artifacts/m24/knowledge-storage' });
