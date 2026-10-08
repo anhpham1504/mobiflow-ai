@@ -1,11 +1,13 @@
 import type {RequestView} from '@mobiflow/contracts';
 import {AlertTriangle,Bot,CheckCircle2,Clock3,Inbox,RefreshCw} from 'lucide-react';
 import {slaPresentation} from '@/lib/sla-presentation';
+import {priorityLabels} from '@/lib/presentation-labels';
+import {PageTitle} from './page-title';
 
-export const priorityLabels:Record<string,string>={LOW:'Thấp',MEDIUM:'Trung bình',HIGH:'Cao',URGENT:'Khẩn cấp'};
+export {priorityLabels} from '@/lib/presentation-labels';
 export function StatusBadge({status,label}:{status:string;label:string}){const tone:Record<string,string>={NEW:'info',AI_ANALYZING:'info',TRIAGED:'info',PENDING_APPROVAL:'warning',ASSIGNED:'info',IN_PROGRESS:'primary',WAITING_USER:'warning',RESOLVED:'success',CLOSED:'neutral',CANCELED:'neutral',READY:'success',PROCESSING:'info',UPLOADED:'info',FAILED:'danger',DISABLED:'neutral'};return <span className={`badge badge-${tone[status]??'neutral'}`}>{label}</span>}
 export function PriorityBadge({priority}:{priority:string}){return <span className={`priority priority-${priority.toLowerCase()}`}>{priorityLabels[priority]??priority}</span>}
-export function PageHeader({title,description,actions}:{title:string;description:string;actions?:React.ReactNode}){return <header className="page-header"><div><h1>{title}</h1><p>{description}</p></div>{actions?<div className="page-actions">{actions}</div>:null}</header>}
+export function PageHeader({title,description,actions,documentTitle}:{title:string;description:string;actions?:React.ReactNode;documentTitle?:string}){return <header className="page-header" data-page-title={documentTitle??title}><PageTitle title={documentTitle??title}/><div><h1>{title}</h1><p>{description}</p></div>{actions?<div className="page-actions">{actions}</div>:null}</header>}
 export function LoadingState({label='Đang tải dữ liệu'}:{label?:string}){return <div className="skeleton-panel" role="status" aria-label={label}><div/><div/><div/></div>}
 export function EmptyState({title,description,action}:{title:string;description:string;action?:React.ReactNode}){return <div className="state-panel"><Inbox size={26} aria-hidden="true"/><h2>{title}</h2><p>{description}</p>{action}</div>}
 export function ErrorState({message,onRetry}:{message:string;onRetry?:()=>void}){return <div className="state-panel state-error" role="alert"><AlertTriangle size={26} aria-hidden="true"/><h2>Không thể tải dữ liệu</h2><p>{message}</p>{onRetry?<button className="button button-secondary" onClick={onRetry}><RefreshCw size={17}/>Thử lại</button>:null}</div>}

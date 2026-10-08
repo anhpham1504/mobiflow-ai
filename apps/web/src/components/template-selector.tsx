@@ -8,7 +8,7 @@ export function TemplatePreview({ revision }: { revision: TemplateRevision }) {
     {revision.type === 'RESPONSE' ? <p className="preserve-text">{revision.content.body}</p> : <ol>{revision.content.items.map((item, i) => <li key={i}>{item.text} {item.required ? '(bắt buộc)' : '(tùy chọn)'}</li>)}</ol>}</div>;
 }
 
-export function TemplateSelector({ type, hasDraft, disabled, onApply, onApplyingChange }: { type: TemplateType; hasDraft: boolean; disabled: boolean; onApply: (revision: TemplateRevision) => void; onApplyingChange: (applying: boolean) => void }) {
+export function TemplateSelector({ type, hasDraft, disabled, onApply, onApplyingChange, context }: { type: TemplateType; hasDraft: boolean; disabled: boolean; onApply: (revision: TemplateRevision) => void; onApplyingChange: (applying: boolean) => void; context?: string }) {
   const label = type === 'RESPONSE' ? 'Mẫu phản hồi' : 'Mẫu checklist', id = useId();
   const [rows, setRows] = useState<TemplateSummary[]>([]), [next, setNext] = useState<string | null>(null), [selected, setSelected] = useState(''), [preview, setPreview] = useState<TemplateRevision | null>(null);
   const [loading, setLoading] = useState(true), [busy, setBusy] = useState(false), [error, setError] = useState(''), [query, setQuery] = useState(''), [search, setSearch] = useState(''), [confirm, setConfirm] = useState(false), [notice, setNotice] = useState('');
@@ -43,8 +43,8 @@ export function TemplateSelector({ type, hasDraft, disabled, onApply, onApplying
       onApply(response.data.current); returnApplyFocus.current = true; setConfirm(false); setNotice('Đã chép vào bản nháp. Bạn có thể chỉnh sửa trước khi gửi hoặc lưu.');
     } catch (e) { returnApplyFocus.current = true; setConfirm(false); setError((e as Error).message); } finally { setBusy(false); onApplyingChange(false); }
   }
-  return <div className="template-selector" aria-label={label}>
-    <h3>{label}</h3><p>Chỉ chuẩn bị bản nháp. Bạn quyết định nội dung và thực hiện thao tác tiếp theo.</p>
+  return <section className="template-selector" aria-labelledby={id + '-heading'}>
+    <h3 id={id + '-heading'}>{label}{context ? ' — ' + context : ''}</h3><p>Chỉ chuẩn bị bản nháp. Bạn quyết định nội dung và thực hiện thao tác tiếp theo.</p>
     <label htmlFor={id + '-search'}>Tìm {label.toLocaleLowerCase('vi')}<input id={id + '-search'} value={query} maxLength={120} onChange={e => { setQuery(e.target.value); }} disabled={disabled || busy} /></label>
     <button type="button" disabled={disabled || busy || loading} onClick={() => { setSelected(''); setPreview(null); setConfirm(false); setLoading(true); setError(''); if (query === search) void load(); else setSearch(query); }}>Tìm mẫu</button>
     {loading ? <p role="status">Đang tải mẫu…</p> : null}
@@ -57,5 +57,5 @@ export function TemplateSelector({ type, hasDraft, disabled, onApply, onApplying
       <button type="button" disabled={disabled || busy} onClick={() => { setSelected(''); setPreview(null); setConfirm(false); }}>Bỏ chọn mẫu</button></> : null}
     {confirm ? <div className="template-confirm" role="group" aria-label="Xác nhận thay thế bản nháp"><p>Bản nháp hiện có sẽ được thay thế. Các thay đổi chưa lưu sẽ mất.</p><button ref={confirmButton} type="button" disabled={disabled || busy} onClick={() => { void apply(); }}>Xác nhận thay thế bản nháp</button><button type="button" disabled={busy} onClick={() => { returnApplyFocus.current = true; setConfirm(false); }}>Giữ bản nháp hiện tại</button></div> : null}
     {notice ? <p role="status">{notice}</p> : null}
-  </div>;
+  </section>;
 }

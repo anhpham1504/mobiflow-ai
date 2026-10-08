@@ -1,21 +1,26 @@
 'use client';
-import {useEffect,useId,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import {analyticsQuerySchema,analyticsResponseSchema,categories,priorities,statuses,type AnalyticsData} from '@mobiflow/contracts';
 import {api} from '@/lib/session';
+import {categoryLabels,statusLabels} from '@/lib/presentation-labels';
 import {EmptyState,ErrorState,LoadingState,PageHeader,priorityLabels} from './ui/patterns';
-const statusLabels:Record<string,string>={NEW:'Mới tiếp nhận',AI_ANALYZING:'Đang phân tích',TRIAGED:'Đã phân loại',PENDING_APPROVAL:'Chờ duyệt',ASSIGNED:'Đã phân công',IN_PROGRESS:'Đang xử lý',WAITING_USER:'Chờ bổ sung',RESOLVED:'Chờ xác nhận',CLOSED:'Đã đóng',CANCELED:'Đã hủy'};
+import {analyticsValidationErrors,focusFirstInvalid,type FieldErrors} from '@/lib/form-errors';
+
 const numberFormat=new Intl.NumberFormat('vi-VN',{maximumFractionDigits:1});
 const number=(value:number|null,suffix='')=>value===null?'Chưa có mẫu':`${numberFormat.format(value)}${suffix}`;
 const percent=(value:number|null)=>value===null?'Chưa có mẫu':number(value*100,'%');
 const duration=(value:number|null)=>{if(value===null)return 'Chưa có mẫu';const total=Math.round(value),hours=Math.floor(total/3600),minutes=Math.floor(total%3600/60),seconds=total%60;return hours?`${hours} giờ ${minutes} phút`:minutes?`${minutes} phút ${seconds} giây`:`${seconds} giây`;};
 const date=(value:string)=>value.split('-').reverse().join('/');
-const categoryLabels:Record<string,string>={NETWORK:'Mạng',IOT:'IoT',BILLING:'Cước phí',ACCOUNT:'Tài khoản',SERVICE:'Dịch vụ',OTHER:'Khác'};
+
 const actionLabels:Record<string,string>={SUMMARIZE_REQUEST:'Tóm tắt yêu cầu',FIND_SOP:'Tìm SOP',SUGGEST_NEXT_STEP:'Gợi ý bước tiếp theo',GENERATE_CHECKLIST:'Tạo checklist',FIND_SIMILAR_REQUESTS:'Tìm yêu cầu tương tự',EXPLAIN_CLASSIFICATION:'Giải thích phân loại'};
 const initialFilters={preset:'30d',from:'',to:'',priority:'',status:'',teamId:'',category:''};
 
 export function AnalyticsDashboard(){
   const [data,setData]=useState<AnalyticsData|null>(null),[error,setError]=useState(''),[loading,setLoading]=useState(true),[revision,setRevision]=useState(0);
   const [filters,setFilters]=useState(initialFilters),[query,setQuery]=useState('preset=30d'),[filterError,setFilterError]=useState('');
+  const [invalid,setInvalid]=useState<FieldErrors>({}),formRef=useRef<HTMLFormElement>(null),dateErrorId=useId();
+  const dateError=[...new Set([invalid.from,invalid.to].filter(Boolean))].join(' ');
+  useEffect(()=>{if(formRef.current)focusFirstInvalid(formRef.current,invalid);},[invalid]);
   useEffect(()=>{
     const controller=new AbortController(),signal=AbortSignal.any([controller.signal,AbortSignal.timeout(15000)]);
     void api('/analytics?'+query,analyticsResponseSchema,undefined,'GET',signal).then(result=>{if(!controller.signal.aborted)setData(result.data);})
@@ -27,24 +32,27 @@ export function AnalyticsDashboard(){
     if(filters.preset==='custom'){values.from=filters.from;values.to=filters.to;}else values.preset=filters.preset;
     for(const key of ['priority','status','teamId','category'] as const)if(filters[key])values[key]=filters[key];
     const parsed=analyticsQuerySchema.safeParse(values);
-    if(!parsed.success){setFilterError('Chọn đủ hai ngày hợp lệ, ngày bắt đầu trước ngày kết thúc và tối đa 365 ngày.');return;}
-    setFilterError('');setError('');setLoading(true);setQuery(new URLSearchParams(values).toString());setRevision(value=>value+1);
+    if(!parsed.success){const errors=analyticsValidationErrors(parsed.error.issues,values);setInvalid(errors);setFilterError(errors.from||errors.to?'':'Kiểm tra giá trị của bộ lọc trước khi áp dụng.');return;}
+    setInvalid({});setFilterError('');setError('');setLoading(true);setQuery(new URLSearchParams(values).toString());setRevision(value=>value+1);
   };
   const field=(key:keyof typeof filters,value:string)=>setFilters(old=>({...old,[key]:value}));
   const hasActivity=data&&(data.operations.createdCount+data.operations.resolvedCount+data.operations.closedCount+data.sla.slaEligibleCount+data.ai.runs.total+data.ai.recommendations.generated+data.ai.recommendations.denominator+data.feedback.feedbackCount)>0;
   return <div className="analytics-page analytics-v2">
     <PageHeader title="Analytics vận hành" description="Theo dõi yêu cầu, hiệu quả SLA và việc sử dụng AI theo thời gian. Các chỉ số được tính từ dữ liệu đã lưu."/>
-    <form className="analytics-filters workflow-card" aria-label="Bộ lọc analytics" onSubmit={event=>{event.preventDefault();apply();}}>
+    <form ref={formRef} noValidate className="analytics-filters workflow-card" aria-label="Bộ lọc analytics" onSubmit={event=>{event.preventDefault();apply();}}>
       <div className="analytics-filter-fields">
-        <label>Khoảng thời gian<select name="preset" value={filters.preset} onChange={event=>{const value=event.target.value;setFilters(old=>({...old,preset:value,...(value==='custom'&&data&&!old.from?{from:data.period.fromDate,to:data.period.toDate}:{})}));}}><option value="7d">7 ngày</option><option value="30d">30 ngày</option><option value="90d">90 ngày</option><option value="custom">Tùy chọn</option></select></label>
-        {filters.preset==='custom'?<><label>Từ ngày (bao gồm)<input name="from" type="date" required value={filters.from} onChange={event=>field('from',event.target.value)} aria-describedby="analytics-date-hint"/></label><label>Đến ngày (không gồm)<input name="to" type="date" required value={filters.to} onChange={event=>field('to',event.target.value)} aria-describedby="analytics-date-hint"/></label></>:null}
+        <label>Khoảng thời gian<select name="preset" value={filters.preset} onChange={event=>{const value=event.target.value;setInvalid({});setFilterError('');setFilters(old=>({...old,preset:value,...(value==='custom'&&data&&!old.from?{from:data.period.fromDate,to:data.period.toDate}:{})}));}}><option value="7d">7 ngày</option><option value="30d">30 ngày</option><option value="90d">90 ngày</option><option value="custom">Tùy chọn</option></select></label>
+        {filters.preset==='custom'?<><label>Từ ngày (bao gồm)<input name="from" data-error-field="from" aria-invalid={!!invalid.from} type="date" required value={filters.from} onChange={event=>field('from',event.target.value)} aria-describedby={'analytics-date-hint'+(invalid.from?' '+dateErrorId:'')}/></label><label>Đến ngày (không gồm)<input name="to" data-error-field="to" aria-invalid={!!invalid.to} type="date" required value={filters.to} onChange={event=>field('to',event.target.value)} aria-describedby={'analytics-date-hint'+(invalid.to?' '+dateErrorId:'')}/></label>{dateError?<p className="field-error" role="alert" id={dateErrorId}>{dateError}</p>:null}</>:null}
+        <details className="analytics-extra-filters"><summary>Bộ lọc bổ sung{[filters.priority,filters.status,filters.teamId,filters.category].filter(Boolean).length?` · ${[filters.priority,filters.status,filters.teamId,filters.category].filter(Boolean).length} đã chọn`:''}</summary><div className="analytics-extra-fields">
         <label>Ưu tiên<select name="priority" value={filters.priority} onChange={event=>field('priority',event.target.value)}><option value="">Tất cả</option>{priorities.map(value=><option key={value} value={value}>{priorityLabels[value]}</option>)}</select></label>
         <label>Trạng thái<select name="status" value={filters.status} onChange={event=>field('status',event.target.value)}><option value="">Tất cả</option>{statuses.map(value=><option key={value} value={value}>{statusLabels[value]}</option>)}</select></label>
         <label>Đội phụ trách<select name="teamId" value={filters.teamId} onChange={event=>field('teamId',event.target.value)}><option value="">Tất cả</option>{data?.filterOptions.teams.map(team=><option key={team.id} value={team.id}>{team.name}</option>)}</select></label>
         <label>Danh mục<select name="category" value={filters.category} onChange={event=>field('category',event.target.value)}><option value="">Tất cả</option>{categories.map(value=><option key={value} value={value}>{categoryLabels[value]}</option>)}</select></label>
+        </div></details>
       </div>
-      <div className="analytics-filter-footer"><p id="analytics-date-hint">Ngày theo giờ Việt Nam. Từ ngày bao gồm, đến ngày không gồm; tối đa 365 ngày. Bộ lọc dùng trạng thái, ưu tiên và đội hiện tại.</p><div className="filter-actions"><button className="button button-primary" type="submit">Áp dụng</button><button className="button button-secondary" type="button" onClick={()=>{setFilters(initialFilters);setFilterError('');setError('');setLoading(true);setQuery('preset=30d');setRevision(value=>value+1);}}>Đặt lại</button></div></div>
+      <div className="analytics-filter-footer"><p id="analytics-date-hint">Ngày theo giờ Việt Nam. Từ ngày bao gồm, đến ngày không gồm; tối đa 365 ngày. Bộ lọc dùng trạng thái, ưu tiên và đội hiện tại.</p><div className="filter-actions"><button className="button button-primary" type="submit">Áp dụng</button><button className="button button-secondary" type="button" onClick={()=>{setFilters(initialFilters);setInvalid({});setFilterError('');setError('');setLoading(true);setQuery('preset=30d');setRevision(value=>value+1);}}>Đặt lại</button></div></div>
       {filterError?<p className="form-error" role="alert">{filterError}</p>:null}
+      {dateError||filterError?<p role="status">Bộ lọc chưa được áp dụng. Kết quả bên dưới vẫn dùng bộ lọc đã áp dụng trước đó.</p>:null}
     </form>
     {loading?<LoadingState label="Đang tải analytics"/>:error?<ErrorState message={error} onRetry={()=>{setError('');setLoading(true);setRevision(value=>value+1);}}/>:data?<>
       <p className="analytics-period" data-testid="analytics-period"><strong>{date(data.period.fromDate)} – trước {date(data.period.toDate)}</strong><span>{data.period.days} ngày · Giờ Việt Nam</span><time dateTime={data.period.asOf}>Cập nhật {new Date(data.period.asOf).toLocaleString('vi-VN',{timeZone:data.period.timeZone})}</time></p>
