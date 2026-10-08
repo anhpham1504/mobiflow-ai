@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test,before,after} from 'node:test';
 import {randomUUID} from 'node:crypto';
 import {writeFileSync,mkdirSync} from 'node:fs';
-import {createReleaseHarness,workflowSnapshot} from './helpers/release-hardening-fixture.mjs';
+import {createReleaseHarness,workflowSnapshot,releaseProcedureText} from './helpers/release-hardening-fixture.mjs';
 import {RoutingService} from '../dist/routing/routing.service.js';
 import {SlaAlertService} from '../dist/requests/sla-alert.service.js';
 import {AuthorizationPolicyService} from '../dist/authorization/authorization-policy.service.js';
@@ -78,7 +78,7 @@ test('M24 actual AI builders exclude all V1.3 private objects with deterministic
  const run=await s.machine.scheduleAnalysis(fixture.id,s.manager.actor,fixture.version,false,randomUUID());await s.app.get(AnalysisWorker).tick();assert.equal((await s.prisma.aiRun.findUniqueOrThrow({where:{id:run.id}})).status,'SUCCEEDED');
  fixture=await s.prisma.request.findUniqueOrThrow({where:{id:fixture.id}});const docs=s.app.get(DocumentService);
  for(const doc of await s.prisma.knowledgeDocument.findMany({where:{status:{not:'DISABLED'}}}))await docs.command(doc.id,s.manager.actor,doc.version,'disable',randomUUID(),'Synthetic M24 isolation');
- const buffer=Buffer.from('Synthetic SOP: kiểm tra SIM và APN cho thiết bị IoT mất kết nối tại Amata.');
+ const buffer=Buffer.from(releaseProcedureText);
  const doc=await docs.upload(s.manager.actor,{title:'M24 synthetic SOP'},{originalname:'m24.txt',mimetype:'text/plain',buffer,size:buffer.length},randomUUID());await s.app.get(IngestionWorker).tick();assert.equal((await docs.detail(doc.id,s.manager.actor)).status,'READY');
  const recommendation=s.app.get(RecommendationService),rec=await recommendation.schedule(fixture.id,s.manager.actor,fixture.version,randomUUID());await recommendation.cycle(AbortSignal.timeout(30000));assert.equal((await s.prisma.aiRun.findUniqueOrThrow({where:{id:rec.id}})).status,'SUCCEEDED');
  fixture=await s.assign(fixture);const before=await business(fixture.id),operations=s.app.get(OperationalAiService),copilot=await operations.scheduleCopilot(fixture.id,s.staff.actor,{expectedVersion:fixture.version,action:'SUMMARIZE_REQUEST'},randomUUID());
