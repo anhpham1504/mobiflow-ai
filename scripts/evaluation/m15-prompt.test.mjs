@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {loadM15Dataset} from './m15-dataset.mjs';
 import {recommendationFormatV2} from '../../apps/api/dist/ai/prompts/recommendation.js';
-import {parseRecommendationV2,parseRecommendationV2ForGeneration} from '../../apps/api/dist/ai/recommendation-output.js';
+import {parseRecommendationV2,parseRecommendationV2ForGeneration,recommendationMissingActionText} from '../../apps/api/dist/ai/recommendation-output.js';
 import {recommendationFixture,syntheticAnalysis} from '../../apps/api/test/helpers/recommendation-v2-fixture.mjs';
 import {releaseProcedureText,releaseRecommendationFixture} from '../../apps/api/test/helpers/release-hardening-fixture.mjs';
 import {measureAttempt} from './m15-metrics.mjs';
@@ -172,9 +172,20 @@ test('M15-061 regression native schema preserves a selected procedure while aski
   for(const branch of native){
     assert.deepEqual(branch.properties.procedureSources.items.map(item=>item.properties.sourceId.const),[e.sources[0].sourceId]);
     assert.equal(branch.properties.recommendedAction.properties.action.const,'REQUEST_USER_INFO');
+    assert.equal(branch.properties.recommendedAction.properties.text.const,recommendationMissingActionText);
     assert.equal(branch.properties.suggestedStaffId.type,'null');
     assert.equal(required(branch).some(w=>w.properties.code.const==='INSUFFICIENT_EVIDENCE'),false);
   }
+});
+test('RCV2-001 rejects a customer literal reassigned as the missing device before acceptance',()=>{
+  const c=dataset.cases.find(c=>c.id==='M15-026-device-reproduction-omitted'),proposal=recommendationFixture(c.evidence);
+  proposal.recommendedAction.text='Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, nhân viên xác minh thiết bị DEMO-DEVICE-03 tại DEMO-BienHoa-C3.';
+  assert.equal(parseRecommendationV2(JSON.stringify(proposal),c.evidence).recommendedAction.text,proposal.recommendedAction.text,'Historical V2 remains readable.');
+  assert.throws(()=>parseRecommendationV2ForGeneration(JSON.stringify(proposal),c.evidence),error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('MISSING_INFORMATION_ACTION_PRESENTATION:'));
+  const canonical=recommendationFixture(c.evidence);
+  assert.equal(canonical.recommendedAction.text,recommendationMissingActionText);
+  assert.doesNotThrow(()=>parseRecommendationV2ForGeneration(JSON.stringify(canonical),c.evidence));
+  for(const branch of branches(c.evidence))assert.equal(branch.properties.recommendedAction.properties.text.const,recommendationMissingActionText);
 });
 test('local demo regression binds checklist IDs and required evidence to the selected procedure set',()=>{
   const e=globalThis.structuredClone(dataset.cases.find(c=>c.evidence.sources.length&&!c.evidence.analysis.missingFields.length).evidence);
@@ -239,6 +250,11 @@ test('native generation requires explicit human approval and assignment before a
       const field=branch.properties.recommendedAction,actions=field.oneOf??[field];
       assert.deepEqual(actions.map(item=>item.properties.action.const),c.evidence.analysis.missingFields.length?['REQUEST_USER_INFO']:['START_WORK','REQUEST_USER_INFO']);
       for(const action of actions){
+        if(action.properties.text.const){
+          assert.equal(action.properties.text.const,recommendationMissingActionText);
+          assert.match(action.properties.text.const,/^Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, /);
+          continue;
+        }
         const prefix=new RegExp(action.properties.text.pattern);
         const text=action.properties.action.const==='START_WORK'?'Sau khi quản lý phê duyệt và phân công, bắt đầu kiểm tra.':'Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, hỏi người dùng.';
         assert.ok(prefix.test(text));

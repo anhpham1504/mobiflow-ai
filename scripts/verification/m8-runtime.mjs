@@ -31,8 +31,8 @@ async function exercise(mode){
     const action=mode==='offline-llm'?'SUMMARIZE_REQUEST':'GENERATE_CHECKLIST',queued=await operational.scheduleCopilot(id,staff,{expectedVersion:request.version,action},randomUUID()),run=await drain(queued.id);
     assert.equal(run.status,'FAILED');assert.equal(run.errorCode,mode==='offline-llm'?'AI_PROVIDER_UNAVAILABLE':'EMBEDDING_UNAVAILABLE');
     request=await service.prisma.request.findUniqueOrThrow({where:{id}});assert.equal(request.status,'IN_PROGRESS');
-    const sla=await service.prisma.slaInstance.findUniqueOrThrow({where:{requestId:id}}),riskAt=new Date(sla.startedAt.getTime()+sla.targetSeconds*800);await monitor.tick(riskAt);await monitor.tick(riskAt);assert.ok(await service.prisma.notification.count({where:{slaInstanceId:sla.id,warningLevel:'AT_RISK'}})>0);
-    const result={requestId:id,copilotRunId:run.id,copilotErrorCode:run.errorCode,manualStatus:request.status,slaStatus:'AT_RISK_DEDUPED',coreReady:true};
+    const sla=await service.prisma.slaInstance.findUniqueOrThrow({where:{requestId:id}}),notices=await service.prisma.notification.count(),riskAt=new Date(sla.startedAt.getTime()+sla.targetSeconds*800);await monitor.tick(riskAt);await monitor.tick(riskAt);assert.equal((await service.prisma.slaInstance.findUniqueOrThrow({where:{id:sla.id}})).status,'AT_RISK');assert.equal(await service.prisma.notification.count(),notices);
+    const result={requestId:id,copilotRunId:run.id,copilotErrorCode:run.errorCode,manualStatus:request.status,slaStatus:'AT_RISK_PERSISTED_NO_LEGACY_DELIVERY',coreReady:true};
     if(mode==='offline-llm'){
       await machine.transition(id,'RESOLVE',staff,{expectedVersion:request.version,rootCause:'Thiết bị mất cấu hình kết nối hợp lệ',resolution:'Khôi phục cấu hình kết nối thiết bị',verification:'Thiết bị đã truyền dữ liệu ổn định'},randomUUID());request=await service.prisma.request.findUniqueOrThrow({where:{id}});
       const summary=await service.prisma.aiRun.findFirstOrThrow({where:{requestId:id,resolutionId:request.currentResolutionId,purpose:'RESOLUTION_SUMMARY'},orderBy:{createdAt:'desc'}}),terminal=await drain(summary.id);
@@ -46,4 +46,4 @@ try{
   const llm=await exercise('offline-llm');record('LLM outage leaves core, manual workflow, deterministic SLA and resolution intact',llm);
   const embedding=await exercise('offline-embedding');record('embedding outage fails Copilot retrieval closed while core, manual workflow and SLA remain intact',embedding);
   assert.equal(baseEnv.AI_PROVIDER,'ollama');report.result='PASS';
-}finally{await saveEvidence('docs/verification/evidence/M8_RUNTIME_OFFLINE.json',report);}
+}finally{await saveEvidence((process.env.AI_EVAL_EVIDENCE_ROOT??'docs/verification/evidence')+'/M8_RUNTIME_OFFLINE.json',report);}

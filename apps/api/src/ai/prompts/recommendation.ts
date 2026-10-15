@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import {recommendationSchema,recommendationV2Schema,type RecommendationEvidence,type RecommendationEvidenceV2,type RecommendationV2} from '@mobiflow/contracts';
 import {AiFailure} from '../provider.js';
-import {recommendationEvidenceRelevance,recommendationMissingPresentation} from '../recommendation-output.js';
+import {recommendationEvidenceRelevance,recommendationMissingActionText,recommendationMissingPresentation} from '../recommendation-output.js';
 import {decideRecommendationEvidence,validateRecommendationEvidenceDecision,type RecommendationEvidenceDecision} from '../recommendation-evidence-decision.js';
 export const recommendationPromptVersion='grounded-recommendation.v3';
 export function recommendationMessages(request:{title:string;description:string},evidence:RecommendationEvidence,repair:boolean|string=false){
@@ -25,7 +25,7 @@ export function recommendationFormat(e?:RecommendationEvidence){
   return z.toJSONSchema(z.union([sufficient,insufficient]));
 }
 
-export const recommendationPromptV2Version='grounded-recommendation.v2.13';
+export const recommendationPromptV2Version='grounded-recommendation.v2.14';
 export function recommendationMessagesV2(request:{title:string;description:string},evidence:RecommendationEvidenceV2,repair:boolean|string=false,decision:RecommendationEvidenceDecision=decideRecommendationEvidence(evidence)){
   validateRecommendationEvidenceDecision(evidence,decision);
   const {confidence:_confidence,...analysis}=evidence.analysis;void _confidence;
@@ -72,7 +72,8 @@ export function recommendationFormatV2(e?:RecommendationEvidenceV2,providedDecis
     return (required.length?z.tuple([required[0]!,...required.slice(1)]):z.tuple([])).rest(recommendationV2Schema.shape.warnings.element);
   };
   const requestUserInfo=z.object({action:z.literal('REQUEST_USER_INFO'),text:z.string().min(1).max(180).regex(/^Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, /)}).strict();
-  const recommendedAction=missing.length?requestUserInfo:z.discriminatedUnion('action',[
+  const missingRequestUserInfo=z.object({action:z.literal('REQUEST_USER_INFO'),text:z.literal(recommendationMissingActionText)}).strict();
+  const recommendedAction=missing.length?missingRequestUserInfo:z.discriminatedUnion('action',[
     z.object({action:z.literal('START_WORK'),text:z.string().min(1).max(180).regex(/^Sau khi quản lý phê duyệt và phân công, /)}).strict(),
     requestUserInfo,
     ...(decision.allowedMainActions.includes('RESOLVE')?[z.object({action:z.literal('RESOLVE'),text:z.string().min(1).max(180).regex(/^Sau khi nhân viên xác minh hoàn tất, /)}).strict()]:[]),

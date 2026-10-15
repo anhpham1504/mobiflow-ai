@@ -412,7 +412,7 @@ Các ranh giới chính:
 | Lớp | Công nghệ |
 | --- | --- |
 | Monorepo | npm workspaces |
-| Frontend | Next.js `16.3.6`, React `19.3.0`, App Router, TypeScript strict |
+| Frontend | Next.js `16.3.8`, React `19.3.0`, App Router, TypeScript strict |
 | Backend | NestJS `12.1.0`, Express `5.2.1`, TypeScript strict |
 | Hợp đồng dữ liệu | Zod, class-validator, package contracts dùng chung |
 | ORM | Prisma `7.10.0` |
@@ -421,8 +421,8 @@ Các ranh giới chính:
 | AI runtime | Ollama trên Windows host |
 | Xác thực | JWT access token, rotating refresh session, Argon2id |
 | API | REST dưới prefix `/api/v1`, tài liệu OpenAPI/Swagger |
-| Kiểm thử trình duyệt | Playwright với Microsoft Edge |
-| Accessibility | Axe qua Playwright |
+| Kiểm thử | Node test runner, integration PostgreSQL và kiểm tra runtime/security |
+| Accessibility | Semantic HTML, keyboard/focus checks và kiểm tra component |
 | Container | Docker Compose, Linux containers |
 
 ## Cấu trúc repository
@@ -431,7 +431,7 @@ Các ranh giới chính:
 MobiFlow AI/
 ├─ apps/
 │  ├─ api/                    # NestJS API và domain services
-│  │  ├─ prisma/              # Prisma schema và sáu migration
+│  │  ├─ prisma/              # Prisma schema và 13 migration
 │  │  ├─ src/
 │  │  │  ├─ ai/              # Provider, orchestration, schema validation
 │  │  │  ├─ analytics/       # Chỉ số vận hành
@@ -486,7 +486,7 @@ Môi trường chính đã được kiểm chứng:
 - npm `>=11.17.0 <12`.
 - Docker Desktop chạy Linux containers.
 - Ollama chạy trực tiếp trên Windows host.
-- Microsoft Edge cho browser E2E.
+- Trình duyệt hiện đại để xem và chấm luồng demo.
 - Dung lượng đủ cho PostgreSQL, hai model Ollama và Docker images.
 
 Kiểm tra nhanh phiên bản:
@@ -500,6 +500,26 @@ ollama.exe --version
 ```
 
 ## Khởi chạy nhanh
+
+### Dành cho giám thị / người chấm
+
+Trên Windows với Node.js 24, Docker Desktop và PowerShell, chạy toàn bộ stack bằng một lệnh:
+
+```powershell
+.\scripts\demo\judge-start.ps1
+```
+
+Lệnh này kiểm tra công cụ, cài dependency khi cần, tạo `.env` cục bộ nếu chưa có, khởi động PostgreSQL, chạy migration, seed dữ liệu tổng hợp và build/start API + Web. Nếu máy đã cài model Ollama dùng cho cuộc thi, có thể chỉ định model khi tạo `.env` lần đầu:
+
+```powershell
+.\scripts\demo\judge-start.ps1 -Model 'qwen3:4b-instruct-2507-q4_K_M'
+```
+
+Mở <http://localhost:3000/login> và dùng các tài khoản demo ở phần bên dưới. Dừng stack mà vẫn giữ dữ liệu demo:
+
+```powershell
+.\scripts\demo\judge-stop.ps1
+```
 
 ### 1. Cài dependencies
 
@@ -765,28 +785,6 @@ npm run test:integration:m10
 ```
 
 Các bài integration cần những dịch vụ tương ứng đang chạy. Bộ M2/M3 tạo database kiểm thử riêng, migrate/seed sạch, kiểm tra transaction thật rồi dọn database kiểm thử; không giả lập kết quả production.
-
-### Browser E2E
-
-```powershell
-npm run test:e2e:m3
-npm run test:e2e:m4
-npm run test:e2e:m5
-npm run test:e2e:m6
-npm run test:e2e:m7
-npm run test:e2e:m8
-npm run test:e2e:m9
-npm run test:e2e:m10
-npm run test:e2e:ui-v1-1
-```
-
-Root command sau chạy gate M10:
-
-```powershell
-npm run e2e
-```
-
-Browser E2E dùng Microsoft Edge và dữ liệu tổng hợp. Một số bài tạo thêm record demo nhưng không reset database chính.
 
 ### Runtime và security checks
 

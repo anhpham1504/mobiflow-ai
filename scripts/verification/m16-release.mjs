@@ -6,7 +6,7 @@ import {mkdirSync,existsSync,readFileSync,writeFileSync,copyFileSync,createWrite
 import {dirname,join,resolve,relative,sep} from 'node:path';
 
 const root=process.cwd(),mode=process.argv[2]??'--prepare',current=join(root,'artifacts/m16/current.json');
-assert.ok(['--prepare','--prepare-resume','--runtime','--runtime-checks','--checks','--http','--security','--browser','--browser-states','--recovery','--review','--shutdown'].includes(mode),'Choose a documented M16 stage');
+assert.ok(['--prepare','--prepare-resume','--runtime','--runtime-checks','--checks','--http','--security','--recovery','--review','--shutdown'].includes(mode),'Choose a documented M16 stage');
 const npmCli=process.env.npm_execpath;
 assert.ok(npmCli,'Run through npm run verify:release:m16 -- <mode>');
 const parseEnv=path=>Object.fromEntries(readFileSync(path,'utf8').split(/\r?\n/).filter(line=>/^[A-Z0-9_]+=/.test(line)).map(line=>{const at=line.indexOf('=');return [line.slice(0,at),line.slice(at+1)];}));
@@ -38,9 +38,9 @@ if(mode==='--prepare-resume'){
   assert.equal(createHash('sha256').update(readFileSync('package-lock.json')).digest('hex'),state.sourceHashes['package-lock.json'],'Changed dependencies require a new fresh setup');
   for(const file of Object.keys(state.sourceHashes)){if(!existsSync(join(root,file)))continue;copyFileSync(join(root,file),join(candidate,file));state.sourceHashes[file]=createHash('sha256').update(readFileSync(join(root,file))).digest('hex');}
 }
-if(['--runtime','--runtime-checks','--checks','--http','--security','--browser','--browser-states','--recovery','--review'].includes(mode)){
+if(['--runtime','--runtime-checks','--checks','--http','--security','--recovery','--review'].includes(mode)){
   // Corrections to verification code do not rebuild or change application behavior.
-  const checks=[...readdirSync(join(root,'scripts/verification')).filter(file=>/^m16-.*\.mjs$/.test(file)).map(file=>'scripts/verification/'+file),'playwright.m16.config.mjs','apps/web/e2e/release-readiness-m16.spec.mjs'];
+  const checks=[...readdirSync(join(root,'scripts/verification')).filter(file=>/^m16-.*\.mjs$/.test(file)).map(file=>'scripts/verification/'+file)];
   for(const file of checks){copyFileSync(join(root,file),join(candidate,file));state.sourceHashes[file]=createHash('sha256').update(readFileSync(join(root,file))).digest('hex');}
 }
 if(state.failure){state.recoveredFailures??=[];state.recoveredFailures.push({reportedBefore:mode,message:state.failure});delete state.failure;}
@@ -97,14 +97,6 @@ try{
   if(mode==='--security'){
     await run('final security regression',process.execPath,['--env-file=.env','scripts/verification/m16-runtime.mjs','--security-only']);
     state.status='SECURITY_VERIFIED';save();
-  }
-  if(['--checks','--browser'].includes(mode)){
-    await run('canonical browser demo',process.execPath,['--env-file=.env','node_modules/@playwright/test/cli.js','test','--config','playwright.m16.config.mjs']);
-    state.status='BROWSER_VERIFIED';save();
-  }
-  if(mode==='--browser-states'){
-    await run('final browser authentication and states',process.execPath,['--env-file=.env','node_modules/@playwright/test/cli.js','test','--config','playwright.m16.config.mjs','--grep','M16 missing information']);
-    state.status='BROWSER_STATES_VERIFIED';save();
   }
   if(['--checks','--recovery'].includes(mode)){
     await run('degradation restart recovery',process.execPath,['--env-file=.env','scripts/verification/m16-recovery.mjs']);

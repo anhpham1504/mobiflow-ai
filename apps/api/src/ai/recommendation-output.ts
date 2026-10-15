@@ -90,6 +90,12 @@ export const recommendationMissingPresentation={
   description:{question:'Bạn có thể mô tả triệu chứng và cách tái hiện?',impact:'Cần dữ kiện để xác minh sự cố.'},
 } as const satisfies Record<RecommendationV2['missingInformation'][number]['field'],{question:string;impact:string}>;
 
+// When analysis says request facts are missing, keep the model-authored action
+// free of supplied literals that could be reassigned to the missing role. The
+// concrete questions remain in missingInformation, where the backend binds
+// their field, wording and impact.
+export const recommendationMissingActionText='Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, nhân viên hỏi người dùng để bổ sung các thông tin còn thiếu đã liệt kê.';
+
 export function parseRecommendationV2ForGeneration(raw:string,input:RecommendationEvidenceV2,decision:RecommendationEvidenceDecision=decideRecommendationEvidence(input)):RecommendationV2 {
   const result=parseRecommendationV2(raw,input);
   validateRecommendationEvidenceDecision(input,decision);
@@ -99,6 +105,7 @@ export function parseRecommendationV2ForGeneration(raw:string,input:Recommendati
     const expected=recommendationMissingPresentation[item.field];
     if(item.question!==expected.question||item.impact!==expected.impact)fail('MISSING_INFORMATION_PRESENTATION');
   }
+  if(decision.missingFields.length&&result.recommendedAction.text!==recommendationMissingActionText)fail('MISSING_INFORMATION_ACTION_PRESENTATION');
   return result;
 }
 

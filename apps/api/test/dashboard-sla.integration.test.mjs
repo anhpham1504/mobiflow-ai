@@ -11,6 +11,7 @@ import {AuthorizationPolicyService} from '../dist/authorization/authorization-po
 import {slaView,assessSla,changeSla,clockFields} from '../dist/requests/sla-clock.js';
 import {slaStateSql,slaRemainingSql} from '../dist/requests/sla-sql.js';
 import {Prisma} from '../dist/generated/prisma/client.js';
+import {expectedMigrationNames} from '../../../scripts/demo/release-core.mjs';
 
 const url=process.env.M2_INTEGRATION_DATABASE_URL;
 if(!url||!['localhost','127.0.0.1'].includes(new URL(url).hostname)||new URL(url).pathname!=='/mobiflow_m2_test')throw new Error('Dedicated loopback integration DB required');
@@ -91,7 +92,7 @@ test('M11 real PostgreSQL role aggregates, 120-row pagination invariant, query c
   await counted.snapshot(actors.MANAGER);assert.equal(queryCount,1);
   for(let i=0;i<10;i++){const began=performance.now();await snapshot('MANAGER');samples.push(Number((performance.now()-began).toFixed(3)));}
   const explain=await db.$queryRaw(Prisma.sql`EXPLAIN (ANALYZE,BUFFERS,FORMAT JSON) ${query}`);
-  const migrations=await db.$queryRaw(Prisma.sql`SELECT COUNT(*)::int AS count FROM "_prisma_migrations" WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL`);assert.equal(migrations[0].count,6);
-  const evidence={database:'mobiflow_m2_test',migrations:6,pagination:{authorizedRows:120,limits:[1,10,20,50],roles:Object.keys(actors),passed:true},parityCases:parity.length,aggregateStatements:queryCount,responseMs:samples,requestRows:await db.request.count(),explain};
+  const expectedMigrationCount=expectedMigrationNames().length,migrations=await db.$queryRaw(Prisma.sql`SELECT COUNT(*)::int AS count FROM "_prisma_migrations" WHERE finished_at IS NOT NULL AND rolled_back_at IS NULL`);assert.equal(migrations[0].count,expectedMigrationCount);
+  const evidence={database:'mobiflow_m2_test',migrations:expectedMigrationCount,pagination:{authorizedRows:120,limits:[1,10,20,50],roles:Object.keys(actors),passed:true},parityCases:parity.length,aggregateStatements:queryCount,responseMs:samples,requestRows:await db.request.count(),explain};
   mkdirSync('artifacts/v1-2',{recursive:true});writeFileSync('artifacts/v1-2/integration.json',JSON.stringify(evidence,null,2));console.log(JSON.stringify({...evidence,explain:'artifacts/v1-2/integration.json'}));
 });

@@ -1,7 +1,7 @@
 import {mkdirSync,readdirSync,writeFileSync} from 'node:fs';
 import {connect} from 'node:net';
 import {spawnSync} from 'node:child_process';
-import {dirname,join} from 'node:path';
+import {dirname,resolve} from 'node:path';
 
 export const REQUIRED_LLM='qwen3:4b-instruct-2507-q4_K_M';
 export const REQUIRED_EMBEDDING='bge-m3:latest';
@@ -81,7 +81,7 @@ export async function ollamaCapability(origin,model,capability,{timeout=5000}={}
   return Array.isArray(body.capabilities)&&body.capabilities.includes(capability);
 }
 
-export function evidencePath(name){return join(process.cwd(),process.env.DEMO_EVIDENCE_ROOT??'docs/verification/evidence',name);}
+export function evidencePath(name){return resolve(process.cwd(),process.env.DEMO_EVIDENCE_ROOT??'docs/verification/evidence',name);}
 export function expectedMigrationNames(){return readdirSync(new URL('../../apps/api/prisma/migrations/',import.meta.url),{withFileTypes:true}).filter(entry=>entry.isDirectory()).map(entry=>entry.name).sort();}
 export function writeEvidence(path,data){mkdirSync(dirname(path),{recursive:true});writeFileSync(path,JSON.stringify(data,null,2)+'\n','utf8');}
 
