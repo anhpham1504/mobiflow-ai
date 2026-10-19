@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {randomUUID} from 'node:crypto';
 import {recommendationV2Schema,recommendationAnySchema,recommendationEvidenceV2Schema,recommendationVersion,recommendationV2Version,isRecommendationV2,recommendationActions} from '@mobiflow/contracts';
-import {parseRecommendationV2,parseRecommendationForVersion} from '../dist/ai/recommendation-output.js';
+import {parseRecommendationV2,parseRecommendationV2ForGeneration,parseRecommendationForVersion,recommendationEvidenceRelevance,recommendationMissingActionText,recommendationMissingPresentation} from '../dist/ai/recommendation-output.js';
 import {recommendationV2Messages,recommendationV2Format} from '../dist/ai/prompts/recommendation.js';
 import {recommendationSnapshot} from '../dist/ai/recommendation-snapshot.js';
 
@@ -80,4 +80,52 @@ test('M14 private authorization snapshot never enters strict evidence or model m
   assert.equal(JSON.stringify(recommendationV2Messages(evidence.requestContext,snapshot.evidence)).includes(sessionId),false);
   assert.equal(recommendationSnapshot({...evidence,_authorization:{initiatingSessionId:sessionId,permission:'bypass'}}).authorization,null);
   assert.equal(recommendationSnapshot(evidence).authorization,null);
+});
+
+test('BL-001 generated recommendation rejects customer identifiers relabeled as devices across narrative fields',()=>{
+  const {evidence,result}=fixture();
+  evidence.analysis.entities.customer='CUSTOMER-CASE-03';
+  evidence.sources[0].excerpt='Áp dụng khi điện thoại di động mất dịch vụ mạng. Kiểm tra trạng thái mạng trước khi xử lý. Phân loại NETWORK / MOBILE_NETWORK.';
+  result.recommendedAction.text=recommendationMissingActionText;
+  result.suggestedChecklist=[];
+  result.missingInformation=evidence.analysis.missingFields.map(field=>({field,...recommendationMissingPresentation[field]}));
+  result.evidence[0].relevance=recommendationEvidenceRelevance.REQUEST;
+  result.evidence[1].relevance=recommendationEvidenceRelevance.KNOWLEDGE;
+  const completeEvidence=copy(evidence),completeResult=copy(result);
+  completeEvidence.analysis.entities.location='Hà Nội';
+  completeEvidence.analysis.entities.startedAt='sáng nay';
+  completeEvidence.analysis.missingFields=[];
+  completeResult.recommendedAction={action:'START_WORK',text:'Bắt đầu kiểm tra kết nối theo SOP.'};
+  completeResult.warnings=[];
+  completeResult.missingInformation=[];
+  completeResult.suggestedChecklist=[{text:'Kiểm tra trạng thái mạng.',sourceIds:[completeResult.procedureSources[0].sourceId]}];
+  const cases=[
+    {base:result,evidence,mutate:r=>r.summary='Thiết bị CUSTOMER-CASE-03 cần được kiểm tra.'},
+    {base:completeResult,evidence:completeEvidence,mutate:r=>r.recommendedAction.text='Kiểm tra device CUSTOMER-CASE-03.'},
+    {base:result,evidence,mutate:r=>r.reasonSummary='CUSTOMER-CASE-03 là một hệ thống cần cấu hình.'},
+    {base:result,evidence,mutate:r=>r.warnings[0].text='Mã thiết bị CUSTOMER-CASE-03 chưa xác minh.'},
+    {base:completeResult,evidence:completeEvidence,mutate:r=>r.suggestedChecklist[0].text='Đối chiếu CUSTOMER-CASE-03 as a router.'},
+  ];
+  for(const item of cases){
+    const relabeled=copy(item.base);item.mutate(relabeled);
+    assert.throws(
+      ()=>parseRecommendationV2ForGeneration(JSON.stringify(relabeled),item.evidence),
+      error=>error.code==='INVALID_REFERENCE'&&error.retryable===true&&error.repairFeedback.startsWith('ENTITY_ROLE_SUBSTITUTION:'),
+    );
+  }
+});
+
+test('BL-001 preserves legitimate customer references and historical artifact readability',()=>{
+  const {evidence,result}=fixture();
+  evidence.analysis.entities.customer='CUSTOMER-CASE-03';
+  evidence.sources[0].excerpt='Áp dụng khi điện thoại di động mất dịch vụ mạng. Kiểm tra trạng thái mạng trước khi xử lý. Phân loại NETWORK / MOBILE_NETWORK.';
+  result.recommendedAction.text=recommendationMissingActionText;
+  result.suggestedChecklist=[];
+  result.missingInformation=evidence.analysis.missingFields.map(field=>({field,...recommendationMissingPresentation[field]}));
+  result.evidence[0].relevance=recommendationEvidenceRelevance.REQUEST;
+  result.evidence[1].relevance=recommendationEvidenceRelevance.KNOWLEDGE;
+  result.reasonSummary='Liên hệ khách hàng CUSTOMER-CASE-03 để xác minh thiết bị đang sử dụng.';
+  assert.deepEqual(parseRecommendationV2ForGeneration(JSON.stringify(result),evidence),result);
+  const historical=copy(result);historical.reasonSummary='Thiết bị CUSTOMER-CASE-03 cần được kiểm tra cấu hình.';
+  assert.deepEqual(parseRecommendationV2(JSON.stringify(historical),evidence),historical);
 });
