@@ -140,12 +140,24 @@ jobs:
           mkdir -p artifacts
           set -o pipefail
           npm audit --omit=dev --audit-level=high 2>&1 | tee artifacts/security-audit.log
+      - name: Inventory development dependency advisories
+        shell: bash
+        run: |
+          set +e
+          npm audit --audit-level=high --json > artifacts/development-dependency-audit.json
+          audit_status=$?
+          set -e
+          if [ "$audit_status" -ne 0 ]; then
+            echo "::warning::Development dependency advisories are recorded in the audit artifact; production dependencies remain the blocking gate."
+          fi
       - name: Upload audit log
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: security-audit-log
-          path: artifacts/security-audit.log
+          path: |
+            artifacts/security-audit.log
+            artifacts/development-dependency-audit.json
           if-no-files-found: warn
           retention-days: 14
 
