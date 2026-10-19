@@ -1,0 +1,176 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev, test]
+  pull_request:
+    branches: [main, test]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 24.19.0
+  MIGRATION_DATABASE_URL: postgresql://ci:ci@127.0.0.1:5432/mobiflow_ci
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Run lint
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run lint 2>&1 | tee artifacts/lint.log
+      - name: Upload lint log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: lint-log
+          path: artifacts/lint.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  typecheck:
+    name: typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Run typecheck
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run typecheck 2>&1 | tee artifacts/typecheck.log
+      - name: Upload typecheck log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: typecheck-log
+          path: artifacts/typecheck.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Run deterministic test suite
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm test 2>&1 | tee artifacts/unit-test.log
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: unit-test-log
+          path: artifacts/unit-test.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  production-build:
+    name: production-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Run production build
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run build 2>&1 | tee artifacts/production-build.log
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: production-build-log
+          path: artifacts/production-build.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  security-audit:
+    name: security-audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Audit production dependencies
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm audit --omit=dev --audit-level=high 2>&1 | tee artifacts/security-audit.log
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: security-audit-log
+          path: artifacts/security-audit.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  prisma-schema-validation:
+    name: prisma-schema-validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Validate Prisma schema
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run db:validate 2>&1 | tee artifacts/prisma-schema-validation.log
+      - name: Upload Prisma validation log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: prisma-schema-validation-log
+          path: artifacts/prisma-schema-validation.log
+          if-no-files-found: warn
+          retention-days: 14
