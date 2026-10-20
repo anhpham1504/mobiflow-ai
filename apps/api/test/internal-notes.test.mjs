@@ -4,9 +4,43 @@ import { createInternalNoteSchema, internalNoteQuerySchema, internalNoteResponse
 import { AuthorizationPolicyService } from '../dist/authorization/authorization-policy.service.js';
 import { InternalNoteService } from '../dist/requests/internal-note.service.js';
 import { pagination, page } from '../dist/requests/request-query.service.js';
+import { validateRecommendationEvidenceOutput } from '../dist/ai/recommendation-evidence-decision.js';
+import { internalNotesRecommendationFixture } from './helpers/internal-notes-fixture.mjs';
 
 const id = '11111111-1111-4111-8111-111111111111';
 const actor = role => ({ id, role, sessionId: id, email: 'synthetic@test.local', displayName: 'Synthetic', active: true, available: true });
+
+const recommendationContext = () => ({
+  analysis: { category: 'NETWORK', subcategory: 'IOT_CONNECTIVITY', prioritySuggestion: 'HIGH', missingFields: [] },
+  sources: [{ sourceId: 'KD-source-G1-C0', excerpt: 'Synthetic procedure.' }],
+  similar: { returnedCount: 0 },
+  candidates: { candidates: [{ teamId: id, staffId: id }] },
+  policy: { priority: 'HIGH', targetMinutes: 60 },
+  requestContext: { id, description: 'Synthetic request.' },
+});
+const evidenceDecision = (status, sourceIds) => ({
+  version: 'recommendation-evidence.v1', maxDistance: 0.5, evidenceStatus: status,
+  evidenceReasonCode: status === 'SUFFICIENT' ? 'RELEVANT_PROCEDURE_AVAILABLE' : 'NO_ALLOWED_RELEVANT_PROCEDURE',
+  eligibleProcedureSourceIds: sourceIds, selectedProcedureSourceIds: sourceIds,
+  missingFields: [], allowedMainActions: ['START_WORK', 'REQUEST_USER_INFO'],
+});
+const recommendationMessages = (evidence, decision) => [{ content: 'Action=GENERATE_RECOMMENDATION' }, { content: JSON.stringify({ evidence, evidenceDecision: decision }) }];
+
+test('M18 recommendation fixture obeys authoritative sufficient and insufficient evidence decisions', () => {
+  const evidence = recommendationContext(), sufficient = evidenceDecision('SUFFICIENT', ['KD-source-G1-C0']);
+  const grounded = internalNotesRecommendationFixture(recommendationMessages(evidence, sufficient));
+  assert.equal(grounded.evidenceStatus, 'SUFFICIENT');
+  assert.deepEqual(grounded.procedureSources, [{ sourceId: 'KD-source-G1-C0' }]);
+  assert.doesNotThrow(() => validateRecommendationEvidenceOutput(grounded, sufficient));
+
+  const insufficient = evidenceDecision('INSUFFICIENT_EVIDENCE', []);
+  const abstained = internalNotesRecommendationFixture(recommendationMessages(evidence, insufficient));
+  assert.equal(abstained.evidenceStatus, 'INSUFFICIENT_EVIDENCE');
+  assert.deepEqual(abstained.procedureSources, []);
+  assert.deepEqual(abstained.suggestedChecklist, []);
+  assert.doesNotThrow(() => validateRecommendationEvidenceOutput(abstained, insufficient));
+  assert.throws(() => validateRecommendationEvidenceOutput(grounded, insufficient), error => error.code === 'INVALID_REFERENCE' && error.repairFeedback.startsWith('EVIDENCE_DECISION_MISMATCH:'));
+});
 
 test('M18 body trims, rejects blanks and unknown fields, and retains literal Vietnamese/emoji/newlines/HTML', () => {
   const body = 'Đã kiểm tra gateway 🙂\n<img src=x onerror=alert(1)>\n<script>alert(1)</script> @staff';
