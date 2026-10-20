@@ -6,7 +6,7 @@ export const rcv2Protocol=Object.freeze({
   caseId:'M15-026-device-reproduction-omitted',
   runCount:10,
   datasetVersion:'m15.recommendation.synthetic.v2',
-  datasetSha256:'d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9',
+  datasetSha256:Object.freeze({crlf:'d011105c106711cf7848e20d757099aa62c4152336fc2672a5e09719c01ba6e9',lf:'e3e9022433a4378ce98294169b2ae1b77799ee2cce6acba2d0f2c4d9673c5290'}),
   promptVersion:'grounded-recommendation.v2.14',
   model:Object.freeze({name:'qwen3:4b-instruct-2507-q4_K_M',digest:'d5364eb63691d8dc2812a1749a6bd621e26b1ff3aceb320bf223372276dcf641'}),
   embedding:Object.freeze({name:'bge-m3:latest',digest:'7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab'}),
@@ -18,7 +18,7 @@ export const rcv2CaseHash=caseItem=>sha256(caseItem);
 
 export function validateRcv2Protocol({datasetVersion,datasetSha256,caseItem,promptVersion,model,embedding,settings}){
   assert.equal(datasetVersion,rcv2Protocol.datasetVersion,'RCV2 dataset version changed');
-  assert.equal(datasetSha256.toLowerCase(),rcv2Protocol.datasetSha256,'RCV2 dataset bytes changed');
+  assert.ok(Object.values(rcv2Protocol.datasetSha256).includes(datasetSha256.toLowerCase()),'RCV2 dataset bytes changed beyond the pinned Git LF/CRLF representations');
   assert.equal(caseItem?.id,rcv2Protocol.caseId,'RCV2 must run only the original target case');
   assert.deepEqual(caseItem.expected?.missingFields,['description'],'RCV2 missing-field oracle changed');
   assert.deepEqual(caseItem.expected?.mainActions,['REQUEST_USER_INFO'],'RCV2 action oracle changed');

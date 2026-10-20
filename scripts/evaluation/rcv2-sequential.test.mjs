@@ -12,6 +12,7 @@ test('RCV2 preflight locks original dataset, case, model, prompt and inference s
   const loaded=await loadM15Dataset(),caseItem=loaded.dataset.cases.find(item=>item.id===rcv2Protocol.caseId);
   const input={datasetVersion:loaded.dataset.version,datasetSha256:loaded.sha256,caseItem,promptVersion:rcv2Protocol.promptVersion,model:rcv2Protocol.model,embedding:rcv2Protocol.embedding,settings:rcv2Protocol.settings};
   assert.equal(validateRcv2Protocol(input).caseContentHash,rcv2CaseHash(caseItem));
+  assert.doesNotThrow(()=>validateRcv2Protocol({...input,datasetSha256:rcv2Protocol.datasetSha256.lf}));
   for(const mutate of [value=>{value.datasetSha256='0'.repeat(64);},value=>{value.caseItem={...value.caseItem,id:'M15-027-substitute'};},value=>{value.model={...value.model,digest:'wrong'};},value=>{value.embedding={...value.embedding,name:'other'};},value=>{value.promptVersion='relaxed';},value=>{value.settings={...value.settings,attemptTimeoutMs:240000};}]){
     const changed=clone(input);mutate(changed);assert.throws(()=>validateRcv2Protocol(changed));
   }
