@@ -100,9 +100,18 @@ const normalizedEntityText=(text:string)=>text.normalize('NFKD').replace(/\p{M}/
 const escapedPattern=(text:string)=>text.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
 const customerAsDevice=(text:string,customer:string)=>{
   const narrative=normalizedEntityText(text),identifier=escapedPattern(normalizedEntityText(customer));
-  const deviceRole='(?:thiet\\s+bi|device|he\\s+thong|system|sim|modem|router)';
-  return new RegExp('(?:ma\\s+)?'+deviceRole+'(?:\\s+(?:ma|id|so))?\\s*[:#-]?\\s*'+identifier+'(?:\\b|$)','u').test(narrative)
-    ||new RegExp(identifier+'(?:\\b|$)\\s*(?:[-:,]|la\\b|is\\b|as\\b)\\s*(?:mot\\s+|an?\\s+)?'+deviceRole+'\\b','u').test(narrative);
+  // Synthetic and persisted request identifiers use Unicode letter/number/underscore
+  // segments joined by dot or hyphen. A terminal dot/hyphen remains prose punctuation.
+  // Require the complete literal so a customer code cannot match only one segment of
+  // a distinct device identifier.
+  const identifierAtom='[\\p{L}\\p{N}_]',wordCharacter='[\\p{L}\\p{N}_]';
+  const completeIdentifier='(?<!'+identifierAtom+')(?<!'+identifierAtom+'[.-])'+identifier+'(?!'+identifierAtom+'|[.-]'+identifierAtom+')';
+  const deviceRole='(?<!'+wordCharacter+')(?:thiet\\s+bi|device|he\\s+thong|system|sim|modem|router)(?!'+wordCharacter+')';
+  const preRoleLabel='(?:(?<!'+wordCharacter+')ma(?!'+wordCharacter+')\\s+)?';
+  const postRoleLabel='(?:\\s+(?<!'+wordCharacter+')(?:ma|id|so)(?!'+wordCharacter+'))?';
+  const relation='(?:[-:,]|(?<!'+wordCharacter+')(?:la|is|as)(?!'+wordCharacter+'))';
+  return new RegExp(preRoleLabel+deviceRole+postRoleLabel+'\\s*[:#-]?\\s*'+completeIdentifier,'u').test(narrative)
+    ||new RegExp(completeIdentifier+'\\s*'+relation+'\\s*(?:(?:mot|an?)\\s+)?'+deviceRole,'u').test(narrative);
 };
 
 function validateRecommendationEntityRoles(result:RecommendationV2,input:RecommendationEvidenceV2){
