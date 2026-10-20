@@ -16,6 +16,30 @@ function fixture(){
 }
 function parse(result,evidence){return parseRecommendationV2(JSON.stringify(result),evidence);}
 
+function generationFixture(customer='CUSTOMER-CASE-03'){
+  const {evidence,result}=fixture();
+  evidence.analysis.entities.customer=customer;
+  evidence.sources[0].excerpt='Áp dụng khi điện thoại di động mất dịch vụ mạng. Kiểm tra trạng thái mạng trước khi xử lý. Phân loại NETWORK / MOBILE_NETWORK.';
+  result.recommendedAction.text=recommendationMissingActionText;
+  result.suggestedChecklist=[];
+  result.missingInformation=evidence.analysis.missingFields.map(field=>({field,...recommendationMissingPresentation[field]}));
+  result.evidence[0].relevance=recommendationEvidenceRelevance.REQUEST;
+  result.evidence[1].relevance=recommendationEvidenceRelevance.KNOWLEDGE;
+  return {evidence,result};
+}
+
+function completeGenerationFixture(customer='CUSTOMER-CASE-03'){
+  const {evidence,result}=generationFixture(customer);
+  evidence.analysis.entities.location='Hà Nội';
+  evidence.analysis.entities.startedAt='sáng nay';
+  evidence.analysis.missingFields=[];
+  result.recommendedAction={action:'START_WORK',text:'Bắt đầu kiểm tra kết nối theo SOP.'};
+  result.warnings=[];
+  result.missingInformation=[];
+  result.suggestedChecklist=[{text:'Kiểm tra trạng thái mạng.',sourceIds:[result.procedureSources[0].sourceId]}];
+  return {evidence,result};
+}
+
 test('M14 strict version union preserves V1 and excludes confidence, arbitrary actions and unknown V2 keys',()=>{
   const {result,evidence}=fixture();assert.deepEqual(parse(result,evidence),result);
   assert.equal(isRecommendationV2(result),true);assert.deepEqual(recommendationActions(result),result.suggestedChecklist);
@@ -128,4 +152,98 @@ test('BL-001 preserves legitimate customer references and historical artifact re
   assert.deepEqual(parseRecommendationV2ForGeneration(JSON.stringify(result),evidence),result);
   const historical=copy(result);historical.reasonSummary='Thiết bị CUSTOMER-CASE-03 cần được kiểm tra cấu hình.';
   assert.deepEqual(parseRecommendationV2(JSON.stringify(historical),evidence),historical);
+});
+
+test('BL-001-EDGE-01 uses complete customer identifiers at the entity-role boundary',()=>{
+  const cases=[
+    {customer:'CUSTOMER-CASE-03',narrative:'Thiết bị CUSTOMER-CASE-03',reject:true},
+    {customer:'CUSTOMER-CASE-03',narrative:'Thiết bị CUSTOMER-CASE-03-BACKUP',reject:false},
+    {customer:'CASE-03',narrative:'DEVICE-CASE-03 là router',reject:false},
+    {customer:'CUSTOMER-CASE-03',narrative:'Liên hệ khách hàng CUSTOMER-CASE-03',reject:false},
+  ];
+  for(const item of cases){
+    const {evidence,result}=generationFixture(item.customer);
+    result.summary=item.narrative;
+    const run=()=>parseRecommendationV2ForGeneration(JSON.stringify(result),evidence);
+    if(item.reject){
+      assert.throws(run,error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('ENTITY_ROLE_SUBSTITUTION:'));
+    }else{
+      assert.deepEqual(run(),result);
+    }
+  }
+});
+
+test('BL-001-EDGE-01 still rejects exact customer identifiers for every device role and narrative field',()=>{
+  const cases=[
+    {field:'summary',text:'Mã thiết bị: CUSTOMER-CASE-03'},
+    {field:'recommendedAction',text:'Sau khi quản lý phê duyệt và phân công, kiểm tra device id CUSTOMER-CASE-03.'},
+    {field:'reasonSummary',text:'CUSTOMER-CASE-03 là một hệ thống cần cấu hình.'},
+    {field:'warning',text:'SIM số CUSTOMER-CASE-03 chưa xác minh.'},
+    {field:'checklist',text:'Đối chiếu modem CUSTOMER-CASE-03.'},
+    {field:'summary',text:'CUSTOMER-CASE-03: ROUTER cần kiểm tra.'},
+    {field:'summary',text:'He thong ma CUSTOMER-CASE-03 cần kiểm tra.'},
+    {field:'summary',text:`${'Ghi chú. '.repeat(100)}Thiết bị CUSTOMER-CASE-03 cần kiểm tra.`},
+  ];
+  for(const item of cases){
+    const {evidence,result}=item.field==='recommendedAction'||item.field==='checklist'?completeGenerationFixture():generationFixture();
+    if(item.field==='summary')result.summary=item.text;
+    if(item.field==='recommendedAction')result.recommendedAction.text=item.text;
+    if(item.field==='reasonSummary')result.reasonSummary=item.text;
+    if(item.field==='warning')result.warnings=[{code:'MISSING_INFORMATION',text:item.text,referenceIds:[evidence.requestContext.id]}];
+    if(item.field==='checklist')result.suggestedChecklist[0].text=item.text;
+    assert.throws(
+      ()=>parseRecommendationV2ForGeneration(JSON.stringify(result),evidence),
+      error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('ENTITY_ROLE_SUBSTITUTION:'),
+      `${item.field}: ${item.text}`,
+    );
+  }
+});
+
+test('BL-001-EDGE-01 allows distinct complete identifiers, customer-role prose and bounded role words',()=>{
+  const cases=[
+    {customer:'CUSTOMER-CASE-03',text:'Thiết bị CUSTOMER-CASE-03-BACKUP cần kiểm tra.'},
+    {customer:'CASE-03',text:'DEVICE-CASE-03 là router.'},
+    {customer:'CASE-03',text:'Thiết bị DEVICE_CASE-03_PRIMARY cần kiểm tra.'},
+    {customer:'CASE-03',text:'Thiết bị DEVICE.CASE-03.BACKUP cần kiểm tra.'},
+    {customer:'CUSTOMER-CASE-03',text:'Liên hệ khách hàng CUSTOMER-CASE-03 để xác minh.'},
+    {customer:'CUSTOMER-CASE-03',text:'Tham chiếu "CUSTOMER-CASE-03" là mã khách hàng, không phải mã thiết bị.'},
+    {customer:'CUSTOMER-CASE-03',text:'Kiểm tra thiết bị DEVICE-IOT-017, modem EDGE-2; khách hàng CUSTOMER-CASE-03 chỉ là bên liên hệ.'},
+    {customer:'CÔNG-TY-ÁNH-DƯƠNG',text:'Thiết bị công-ty-ánh-dương-backup cần kiểm tra.'},
+    {customer:'03',text:'DEVICE-03 là router.'},
+    {customer:'CUSTOMER-CASE-03',text:'Microdevice CUSTOMER-CASE-03 là tên trường dữ liệu, không phải nhãn device.'},
+  ];
+  for(const item of cases){
+    const {evidence,result}=generationFixture(item.customer);
+    result.summary=item.text;
+    assert.deepEqual(parseRecommendationV2ForGeneration(JSON.stringify(result),evidence),result,item.text);
+  }
+});
+
+test('BL-001-EDGE-01 escapes literal metacharacters and preserves exact-vs-longer counterfactuals',()=>{
+  const customer='CUSTOMER.(03)+A';
+  for(const [text,reject] of [
+    ['Thiết bị CUSTOMER.(03)+A',true],
+    ['Thiết bị CUSTOMER.(03)+A-BACKUP',false],
+  ]){
+    const {evidence,result}=generationFixture(customer);result.summary=text;
+    const run=()=>parseRecommendationV2ForGeneration(JSON.stringify(result),evidence);
+    if(reject)assert.throws(run,error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('ENTITY_ROLE_SUBSTITUTION:'));
+    else assert.deepEqual(run(),result);
+  }
+});
+
+test('BL-001-EDGE-01 rejects an exact misuse even when a safe longer identifier coexists',()=>{
+  const {evidence,result}=generationFixture();
+  result.summary='Thiết bị CUSTOMER-CASE-03-BACKUP là mã riêng; modem CUSTOMER-CASE-03 vẫn là gán sai vai trò.';
+  assert.throws(
+    ()=>parseRecommendationV2ForGeneration(JSON.stringify(result),evidence),
+    error=>error.code==='INVALID_REFERENCE'&&error.repairFeedback.startsWith('ENTITY_ROLE_SUBSTITUTION:'),
+  );
+});
+
+test('BL-001-EDGE-01 keeps null customer safe and rejects whitespace customer at context validation',()=>{
+  const absent=generationFixture(null);
+  assert.deepEqual(parseRecommendationV2ForGeneration(JSON.stringify(absent.result),absent.evidence),absent.result);
+  const invalid=generationFixture('   ');
+  assert.throws(()=>parseRecommendationV2ForGeneration(JSON.stringify(invalid.result),invalid.evidence),error=>error.code==='AI_INVALID_CONTEXT');
 });
