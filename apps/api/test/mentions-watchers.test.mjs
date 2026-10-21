@@ -6,7 +6,34 @@ import { AuthorizationPolicyService } from '../dist/authorization/authorization-
 import { InternalNoteService } from '../dist/requests/internal-note.service.js';
 import { RequestCollaborationService } from '../dist/requests/request-collaboration.service.js';
 import { WATCH_ACTIONS, internalRecipients, notifyCollaboration } from '../dist/requests/collaboration-notifications.js';
+import { decideRecommendationEvidence, validateRecommendationEvidenceOutput } from '../dist/ai/recommendation-evidence-decision.js';
+import { m19AiContextSopText, m19RecommendationFixture } from './helpers/mentions-watchers-fixture.mjs';
 const id = randomUUID(), other = randomUUID(), actor = { id, role: 'STAFF', sessionId: id };
+
+const m19LegacySopText = '# Synthetic M19 SOP\nKiểm tra SIM và cấu hình APN cho thiết bị IoT mất kết nối tại Amata. Dữ liệu synthetic dùng kiểm tra context.';
+const m19RecommendationEvidence = (excerpt = m19AiContextSopText) => ({
+  analysis: { category: 'NETWORK', subcategory: 'IOT_CONNECTIVITY', prioritySuggestion: 'HIGH', missingFields: [] },
+  sources: [{ sourceId: 'KD-m19-G1-C0', excerpt, distance: 0, unavailableForLiveUse: false }],
+  similar: { returnedCount: 0 },
+  candidates: { candidates: [{ teamId: id, staffId: other }] },
+  policy: { priority: 'HIGH', targetMinutes: 60 },
+  requestContext: { id, description: '17 SIM IoT tại Amata mất kết nối từ 8 giờ.', status: 'TRIAGED' },
+});
+test('ER-P1-001 M19-AI-CONTEXT-001 source fixture is an eligible procedure for the intended successful status invariant', () => {
+  const decision = decideRecommendationEvidence(m19RecommendationEvidence(), 0.5);
+  assert.equal(decision.evidenceStatus, 'SUFFICIENT');
+  assert.deepEqual(decision.selectedProcedureSourceIds, ['KD-m19-G1-C0']);
+});
+
+test('ER-P1-001 M19 deterministic provider preserves the authoritative insufficient decision', () => {
+  const evidence = m19RecommendationEvidence(m19LegacySopText), decision = decideRecommendationEvidence(evidence, 0.5);
+  assert.equal(decision.evidenceStatus, 'INSUFFICIENT_EVIDENCE');
+  const proposal = m19RecommendationFixture([{ content: 'Action=GENERATE_RECOMMENDATION' }, { content: JSON.stringify({ evidence, evidenceDecision: decision }) }]);
+  assert.equal(proposal.evidenceStatus, 'INSUFFICIENT_EVIDENCE');
+  assert.deepEqual(proposal.procedureSources, []);
+  assert.deepEqual(proposal.suggestedChecklist, []);
+  assert.doesNotThrow(() => validateRecommendationEvidenceOutput(proposal, decision));
+});
 
 test('M19 optional structured IDs keep M18 input, deduplicate/canonicalize UUIDs, bound unique/input counts and reject overrides', () => {
   assert.deepEqual(createInternalNoteSchema.parse({ body: '  @someone plain text  ' }), { body: '@someone plain text' });

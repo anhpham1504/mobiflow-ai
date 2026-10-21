@@ -5,7 +5,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { Client } from 'pg';
 import { internalNoteResponseSchema, mentionCandidateListSchema, watchStateResponseSchema, notificationListSchema } from '@mobiflow/contracts';
-import { createMentionsWatchersHarness, workflowSnapshot } from './helpers/mentions-watchers-fixture.mjs';
+import { createMentionsWatchersHarness, m19AiContextSopText, workflowSnapshot } from './helpers/mentions-watchers-fixture.mjs';
 import { AuthorizationPolicyService } from '../dist/authorization/authorization-policy.service.js';
 import { notifyCollaboration, WATCH_ACTIONS } from '../dist/requests/collaboration-notifications.js';
 import { Prisma } from '../dist/generated/prisma/client.js';
@@ -260,7 +260,7 @@ test('M19 real PostgreSQL/API: mentions, manual watches, safe delivery, dedup, r
     fixture = await s.prisma.request.findUniqueOrThrow({ where: { id: fixture.id } });
     const docs = s.app.get(DocumentService);
     for (const doc of await s.prisma.knowledgeDocument.findMany({ where: { status: { not: 'DISABLED' } } })) await docs.command(doc.id, s.manager.actor, doc.version, 'disable', randomUUID(), 'Isolate deterministic M19 context fixture');
-    const buffer = Buffer.from('# Synthetic M19 SOP\nKiểm tra SIM và cấu hình APN cho thiết bị IoT mất kết nối tại Amata. Dữ liệu synthetic dùng kiểm tra context.');
+    const buffer = Buffer.from(m19AiContextSopText);
     const doc = await docs.upload(s.manager.actor, { title: 'Synthetic M19 SOP' }, { originalname: 'm19.txt', mimetype: 'text/plain', buffer, size: buffer.length }, randomUUID());
     await s.app.get(IngestionWorker).tick(); assert.equal((await docs.detail(doc.id, s.manager.actor)).status, 'READY');
     const recommendations = s.app.get(RecommendationService), recommendation = await recommendations.schedule(fixture.id, s.manager.actor, fixture.version, randomUUID());
@@ -271,6 +271,23 @@ test('M19 real PostgreSQL/API: mentions, manual watches, safe delivery, dedup, r
     assert.equal((await s.prisma.aiRun.findUniqueOrThrow({ where: { id: copilot.id } })).status, 'SUCCEEDED');
     assert.ok(s.captured.intake.length && s.captured.embedding.length && s.captured.structured.some(rows => rows[0].content.includes('Action=SUMMARIZE_REQUEST')) && s.captured.structured.some(rows => rows[1].content.includes('evidence')));
     for (const value of [privateBody, canary.id, audit.id, watchAudit.id, extraManagers[9].id, 'RequestInternalNote', 'RequestWatcher', 'INTERNAL_NOTE_CREATED', 'REQUEST_WATCH_STARTED']) assert.equal(JSON.stringify(s.captured).includes(value), false, 'Private collaboration entered AI context');
+
+    let failureFixture = await s.create('ai-provider-failure');
+    const failureAnalysis = await s.machine.scheduleAnalysis(failureFixture.id, s.manager.actor, failureFixture.version, false, randomUUID());
+    await s.app.get(AnalysisWorker).tick(); assert.equal((await s.prisma.aiRun.findUniqueOrThrow({ where: { id: failureAnalysis.id } })).status, 'SUCCEEDED');
+    failureFixture = await s.prisma.request.findUniqueOrThrow({ where: { id: failureFixture.id } });
+    const failureBusinessBefore = await workflowSnapshot(s.prisma, failureFixture.id);
+    s.setRecommendationProviderFailure(true);
+    try {
+      const failedRecommendation = await recommendations.schedule(failureFixture.id, s.manager.actor, failureFixture.version, randomUUID());
+      await recommendations.cycle(AbortSignal.timeout(30000));
+      const failedRun = await s.prisma.aiRun.findUniqueOrThrow({ where: { id: failedRecommendation.id } });
+      assert.equal(failedRun.status, 'FAILED'); assert.equal(failedRun.errorCode, 'AI_PROVIDER_UNAVAILABLE'); assert.equal(failedRun.retryCount, 1);
+      assert.equal(await s.prisma.aiRecommendation.count({ where: { aiRunId: failedRun.id } }), 0);
+      const failureAudits = await s.prisma.auditLog.findMany({ where: { resourceId: failedRun.id, action: 'RECOMMENDATION_ATTEMPT_FAILED' }, orderBy: { createdAt: 'asc' } });
+      assert.equal(failureAudits.length, 2); assert.ok(failureAudits.every(row => row.outcome === 'FAILED' && row.safeAfterJson.errorCode === 'AI_PROVIDER_UNAVAILABLE' && row.safeAfterJson.validationRule === 'AI_PROVIDER_UNAVAILABLE'));
+      assert.deepEqual(await workflowSnapshot(s.prisma, failureFixture.id), failureBusinessBefore);
+    } finally { s.setRecommendationProviderFailure(false); }
     report.checks.aiContextIsolation = 'PASS';
   });
   await t.test('50 notes, multiple mentions and10 watchers use bounded SQL/fan-out with local latency samples', async () => {
