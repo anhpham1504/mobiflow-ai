@@ -96,6 +96,31 @@ export const recommendationMissingPresentation={
 // their field, wording and impact.
 export const recommendationMissingActionText='Sau khi quản lý phê duyệt, phân công và nhân viên bắt đầu xử lý, nhân viên hỏi người dùng để bổ sung các thông tin còn thiếu đã liệt kê.';
 
+const normalizedEntityText=(text:string)=>text.normalize('NFKD').replace(/\p{M}/gu,'').replace(/[đĐ]/g,'d').toLowerCase();
+const escapedPattern=(text:string)=>text.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const customerAsDevice=(text:string,customer:string)=>{
+  const narrative=normalizedEntityText(text),identifier=escapedPattern(normalizedEntityText(customer));
+  // Synthetic and persisted request identifiers use Unicode letter/number/underscore
+  // segments joined by dot or hyphen. A terminal dot/hyphen remains prose punctuation.
+  // Require the complete literal so a customer code cannot match only one segment of
+  // a distinct device identifier.
+  const identifierAtom='[\\p{L}\\p{N}_]',wordCharacter='[\\p{L}\\p{N}_]';
+  const completeIdentifier='(?<!'+identifierAtom+')(?<!'+identifierAtom+'[.-])'+identifier+'(?!'+identifierAtom+'|[.-]'+identifierAtom+')';
+  const deviceRole='(?<!'+wordCharacter+')(?:thiet\\s+bi|device|he\\s+thong|system|sim|modem|router)(?!'+wordCharacter+')';
+  const preRoleLabel='(?:(?<!'+wordCharacter+')ma(?!'+wordCharacter+')\\s+)?';
+  const postRoleLabel='(?:\\s+(?<!'+wordCharacter+')(?:ma|id|so)(?!'+wordCharacter+'))?';
+  const relation='(?:[-:,]|(?<!'+wordCharacter+')(?:la|is|as)(?!'+wordCharacter+'))';
+  return new RegExp(preRoleLabel+deviceRole+postRoleLabel+'\\s*[:#-]?\\s*'+completeIdentifier,'u').test(narrative)
+    ||new RegExp(completeIdentifier+'\\s*'+relation+'\\s*(?:(?:mot|an?)\\s+)?'+deviceRole,'u').test(narrative);
+};
+
+function validateRecommendationEntityRoles(result:RecommendationV2,input:RecommendationEvidenceV2){
+  const customer=input.analysis.entities.customer;
+  if(!customer)return;
+  const narratives=[result.summary,result.recommendedAction.text,result.reasonSummary,...result.warnings.map(item=>item.text),...result.suggestedChecklist.map(item=>item.text)];
+  if(narratives.some(text=>customerAsDevice(text,customer)))fail('ENTITY_ROLE_SUBSTITUTION');
+}
+
 export function parseRecommendationV2ForGeneration(raw:string,input:RecommendationEvidenceV2,decision:RecommendationEvidenceDecision=decideRecommendationEvidence(input)):RecommendationV2 {
   const result=parseRecommendationV2(raw,input);
   validateRecommendationEvidenceDecision(input,decision);
@@ -106,6 +131,7 @@ export function parseRecommendationV2ForGeneration(raw:string,input:Recommendati
     if(item.question!==expected.question||item.impact!==expected.impact)fail('MISSING_INFORMATION_PRESENTATION');
   }
   if(decision.missingFields.length&&result.recommendedAction.text!==recommendationMissingActionText)fail('MISSING_INFORMATION_ACTION_PRESENTATION');
+  validateRecommendationEntityRoles(result,input);
   return result;
 }
 
