@@ -7,12 +7,20 @@ import { PrismaClient } from '../../dist/generated/prisma/client.js';
 import { createApplication } from '../../dist/app.js';
 import { AuthService } from '../../dist/auth/auth.service.js';
 import { RequestStateMachineService } from '../../dist/requests/request-state-machine.service.js';
+import { AiFailure } from '../../dist/ai/provider.js';
 import { syntheticAnalysis, syntheticEmbeddings, recommendationFixture } from './recommendation-v2-fixture.mjs';
+
+export const m19AiContextSopText = '# Synthetic M19 SOP\nÁp dụng cho SIM IoT bị mất kết nối. Kiểm tra SIM và cấu hình APN, ghi lại kết quả để quản lý xem xét. Dữ liệu synthetic dùng kiểm tra context.';
+export function m19RecommendationFixture(messages) {
+  const { evidence, evidenceDecision } = JSON.parse(messages[1].content);
+  return recommendationFixture(evidence, undefined, evidenceDecision);
+}
 
 export async function createMentionsWatchersHarness(databaseUrl, { port = 33019, webOrigin = 'http://localhost:3000' } = {}) {
   const target = new URL(databaseUrl);
   if (target.pathname !== '/mobiflow_m19_test' || !['localhost', '127.0.0.1'].includes(target.hostname)) throw new Error('Dedicated loopback M19 test target required');
   const logs = [], queries = [], captured = { intake: [], structured: [], embedding: [] };
+  let failRecommendationProvider = false;
   const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: databaseUrl }), log: [{ level: 'query', emit: 'event' }] });
   prisma.$on('query', event => queries.push({ sql: event.query, durationMs: event.duration }));
   const generation = value => { const raw = JSON.stringify(value); return { raw, outputSize: Buffer.byteLength(raw), identity: { provider: 'test', model: 'm19-context-fixture', digest: 'deterministic-synthetic' } }; };
@@ -20,7 +28,8 @@ export async function createMentionsWatchersHarness(databaseUrl, { port = 33019,
   const recommendationProvider = { generateStructured: async messages => {
     captured.structured.push(messages);
     if (messages[0].content.includes('Action=SUMMARIZE_REQUEST')) return generation({ summary: 'Tóm tắt dữ kiện synthetic công khai của yêu cầu.', eventIds: [] });
-    return generation(recommendationFixture(JSON.parse(messages[1].content).evidence));
+    if (failRecommendationProvider) throw new AiFailure('AI_PROVIDER_UNAVAILABLE', true);
+    return generation(m19RecommendationFixture(messages));
   } };
   const embeddingProvider = { ...syntheticEmbeddings, embedQuery: async (...args) => { captured.embedding.push(args[0]); return syntheticEmbeddings.embedQuery(...args); } };
   const env = parseApiEnvironment({ ...process.env, NODE_ENV: 'test', DATABASE_URL: databaseUrl, WEB_ORIGIN: webOrigin, AI_AUTO_ANALYZE: 'false', AI_RAG_ENABLED: 'false', OLLAMA_BASE_URL: 'http://127.0.0.1:9', KNOWLEDGE_STORAGE_ROOT: 'artifacts/m19/knowledge-storage' });
@@ -50,7 +59,8 @@ export async function createMentionsWatchersHarness(databaseUrl, { port = 33019,
     };
     let closed = false;
     const close = async () => { if (closed) return; closed = true; await s.app.close(); await prisma.$disconnect(); await s.database.close(); };
-    return { ...s, env, base, logs, queries, captured, call, login, command, create, assign, decision, user, staff, manager, otherStaff, machine: s.app.get(RequestStateMachineService), close };
+    const setRecommendationProviderFailure = value => { failRecommendationProvider = value === true; };
+    return { ...s, env, base, logs, queries, captured, call, login, command, create, assign, decision, user, staff, manager, otherStaff, machine: s.app.get(RequestStateMachineService), setRecommendationProviderFailure, close };
   } catch (error) { await s.app.close(); await prisma.$disconnect(); await s.database.close(); throw error; }
 }
 
