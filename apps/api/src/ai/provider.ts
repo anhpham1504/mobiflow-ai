@@ -3,8 +3,20 @@ import type { AnalysisInput } from './prompts/request-analysis.js';
 export class AiFailure extends Error {
   constructor(readonly code:string,readonly retryable=false,readonly repairFeedback='',readonly invalidOutput=''){super(code);}
 }
-export interface Generation {raw:string;identity:{provider:string;model:string;digest:string};outputSize:number}
+export interface GenerationUsage {
+  promptTokens:number;completionTokens:number;totalTokens:number;
+  promptCacheHitTokens:number;promptCacheMissTokens:number;
+}
+export interface GenerationIdentity {
+  provider:string;model:string;digest:string;
+  usage?:GenerationUsage;
+  estimatedCostUsd?:number;
+  pricing?:{currency:'USD';effectiveDate:string;cacheHitInputPerMillion:number;cacheMissInputPerMillion:number;outputPerMillion:number};
+}
+export interface Generation {raw:string;identity:GenerationIdentity;outputSize:number}
 export interface AiProvider {generate(input:AnalysisInput,signal:AbortSignal,repair:boolean|string):Promise<Generation>}
+export interface GenerationHealthSnapshot {status:'UP'|'DOWN'|'DISABLED';code:'OK'|'UNAVAILABLE'|'LIVE_CALLS_DISABLED'}
+export interface HealthAwareAiProvider extends AiProvider {healthSnapshot():GenerationHealthSnapshot}
 export interface StructuredProvider {generateStructured(messages:{role:string;content:string}[],format:object,signal:AbortSignal):Promise<Generation>}
 export const RECOMMENDATION_PROVIDER=Symbol('RECOMMENDATION_PROVIDER');
 export const AI_PROVIDER_TOKEN=Symbol('AI_PROVIDER');

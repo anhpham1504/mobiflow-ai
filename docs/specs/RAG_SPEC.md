@@ -2,6 +2,16 @@
 
 Authority: master-plan §3.4–3.6, M5, §§23–24. RAG must retrieve real persisted chunks and identify their provenance. Source membership checks are necessary but do not prove semantic entailment; labeled retrieval tests and manager review remain required.
 
+## Active V1.3 lexical retrieval amendment (2026-10-23)
+
+`RAG_RETRIEVAL_MODE=lexical` is the default candidate path and performs zero embedding probes, document embeddings, query embeddings or request-vector backfills. A READY document contributes only chunks from its active immutable generation. Ranking combines exact source-code matches, PostgreSQL `simple` full-text rank over unaccented original content, bounded trigram word similarity and a small title signal; Vietnamese diacritic folding and a controlled synonym set improve recall. Queries and IDs are bound parameters, input is capped at 2,000 Unicode code points, topK remains 1–5, statement time is bounded, results are deterministically ordered and duplicate content is removed. Title match alone is not evidence.
+
+Retrieval is candidate discovery, not authorization or semantic truth. The backend applies current source/generation checks and the existing category/subcategory `evidenceDecision` after retrieval. Disabled, stale, unauthorized, contradictory or category-mismatched sources cannot become a procedural recommendation. No usable source returns `INSUFFICIENT_EVIDENCE`; scores must not be inflated to manufacture a match. Request similarity uses bounded local lexical rank plus the existing category/location/recency components and never claims semantic-vector equivalence.
+
+Lexical ingestion stores the unchanged normalized chunk text, offsets, content hash, document/generation provenance and metadata with NULL vector/model/dimension fields. Chunker v2 prefers sentence/word boundaries while preserving deterministic bounded windows. Citation/display bounding fails closed when no safe word boundary exists: any citation quote must be a substantive exact whole-word span from the retrieved content, not a title, section label, source ID or partial token such as `NETWO`. Excerpts use exact source text and transparent bounds; they are never repaired by invented text.
+
+Migration `20261023010000_v13_lexical_retrieval` additively enables `unaccent` and `pg_trgm`, adds the immutable `mobiflow_unaccent(text)` wrapper and GIN indexes for content FTS/content trigram/title trigram. It does not drop or rewrite pgvector, embeddings or historical generations. `RAG_RETRIEVAL_MODE=vector` remains available only with the explicit `ollama` generation rollback profile. The vector sections below remain the normative rollback contract; they are not executed by the active lexical profile.
+
 ## Actors and storage
 
 Only MANAGER uploads, reindexes or disables knowledge. MANAGER and STAFF can read eligible READY synthetic SOPs under [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md); USER cannot access internal files. Only controlled tools pass scoped excerpts into AI. Store business/chunk/vector data in the same PostgreSQL instance and original files in a configured local private storage root outside the web public directory. Return authorized resource IDs, never local paths.

@@ -39,7 +39,7 @@ test('M3 manager cancellation covers assigned, working, waiting and reserved ana
 
 const databaseUrl=process.env.M2_INTEGRATION_DATABASE_URL;
 if(!databaseUrl||new URL(databaseUrl).pathname!=='/mobiflow_m2_test') throw new Error('A dedicated integration database is required.');
-const env=parseApiEnvironment({NODE_ENV:'test',AI_AUTO_ANALYZE:'false',DATABASE_URL:databaseUrl,WEB_ORIGIN:'http://localhost:3000',JWT_SECRET:'m3-test-jwt'.padEnd(48,'a'),REFRESH_TOKEN_SECRET:'m3-test-refresh'.padEnd(48,'b'),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'unconfigured',OLLAMA_EMBEDDING_MODEL:'unconfigured',AUTH_COOKIE_SECURE:'false'});
+const env=parseApiEnvironment({NODE_ENV:'test',AI_GENERATION_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector',AI_AUTO_ANALYZE:'false',DATABASE_URL:databaseUrl,WEB_ORIGIN:'http://localhost:3000',JWT_SECRET:'m3-test-jwt'.padEnd(48,'a'),REFRESH_TOKEN_SECRET:'m3-test-refresh'.padEnd(48,'b'),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'unconfigured',OLLAMA_EMBEDDING_MODEL:'unconfigured',AUTH_COOKIE_SECURE:'false'});
 async function setup(t) {
   const server=await createApplication(env,{quiet:true,log:e=>{if(e.status===500)console.log(e);}});
   await server.app.listen(0,'127.0.0.1');const base=await server.app.getUrl();

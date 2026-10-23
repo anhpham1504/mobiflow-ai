@@ -15,13 +15,14 @@ import {validateUpload,type UploadFile} from './parser.js';
 import {hash} from './chunker.js';
 import {KnowledgeFailure} from './embedding-provider.js';
 import {VectorRepository} from './vector.repository.js';
+import {LexicalRepository} from './lexical.repository.js';
 
-export interface IndexManifest {generation:number;identity:{model:string;digest:string;dimension:number;key:string};chunkerVersion:string;parserVersion:string;chunkCount:number;normalizedHash:string;jobId:string;actorId:string}
+export interface IndexManifest {generation:number;retrievalMode?:'lexical'|'vector';identity:{model:string;digest:string;dimension:number;key:string};chunkerVersion:string;parserVersion:string;chunkCount:number;normalizedHash:string;jobId:string;actorId:string}
 export const manifest=(d:KnowledgeDocument)=>d.indexManifestJson as unknown as IndexManifest|null;
 @Injectable()
 export class DocumentService {
   readonly files:PrivateFileStore;
-  constructor(private readonly prisma:PrismaService,private readonly vectors:VectorRepository,@Inject(API_ENV)private readonly env:ApiEnvironment){this.files=new PrivateFileStore(env.KNOWLEDGE_STORAGE_ROOT);}
+  constructor(private readonly prisma:PrismaService,private readonly vectors:VectorRepository,@Inject(API_ENV)private readonly env:ApiEnvironment,private readonly lexical:LexicalRepository){this.files=new PrivateFileStore(env.KNOWLEDGE_STORAGE_ROOT);}
   private view(d:KnowledgeDocument){const m=manifest(d);return {id:d.id,title:d.title,originalFileName:d.originalFileName,mimeType:d.mimeType,byteSize:Number(d.byteSize),sha256:d.sha256,status:d.status,version:d.version,activeGeneration:d.activeGeneration,pageCount:d.pageCount,chunkCount:m?.chunkCount??0,indexedAt:d.indexedAt,createdAt:d.createdAt,errorCode:d.errorCode,index:m?.identity?{model:m.identity.model,digest:m.identity.digest,dimension:m.identity.dimension,chunkerVersion:m.chunkerVersion,parserVersion:m.parserVersion}:null};}
   async upload(actor:AuthenticatedActor,titleInput:unknown,file:UploadFile|undefined,correlationId:string){
     const {title}=parse(z.object({title:z.string().trim().min(1).max(200)}).strict(),titleInput);
@@ -56,7 +57,7 @@ export class DocumentService {
     });
   }
   async detail(id:string,actor:AuthenticatedActor){
-    return this.prisma.$transaction(async tx=>{await knowledgeIdentity(tx,actor);const d=await this.allowed(tx,id,actor);const sources=d.status==='READY'&&d.activeGeneration!==null?await this.vectors.documentSources(tx,id,d.activeGeneration):[];return {...this.view(d),sources};});
+    return this.prisma.$transaction(async tx=>{await knowledgeIdentity(tx,actor);const d=await this.allowed(tx,id,actor);const sources=d.status==='READY'&&d.activeGeneration!==null?await (this.env.RAG_RETRIEVAL_MODE==='lexical'?this.lexical.documentSources(tx,id,d.activeGeneration):this.vectors.documentSources(tx,id,d.activeGeneration)):[];return {...this.view(d),sources};});
   }
   private async allowed(tx:Prisma.TransactionClient,id:string,actor:AuthenticatedActor){
     const row=await tx.knowledgeDocument.findFirst({where:{id,...(actor.role==='STAFF'?{status:'READY'}:{})}});

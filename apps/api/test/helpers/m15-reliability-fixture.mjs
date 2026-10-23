@@ -135,7 +135,7 @@ async function harness(mode){
     res.end(JSON.stringify({model:body.model,done:true,done_reason:'stop',message:{content:output,thinking:'Fixture private reasoning must not escape'}}));
   });
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
-  const env=parseApiEnvironment({NODE_ENV:'test',DATABASE_URL:'postgresql://synthetic:synthetic@localhost/m15_in_memory_only',JWT_SECRET:'a'.repeat(40),REFRESH_TOKEN_SECRET:'b'.repeat(40),OLLAMA_MODEL:'qwen3:4b-instruct-2507-q4_K_M',OLLAMA_EMBEDDING_MODEL:'bge-m3:latest',OLLAMA_BASE_URL:`http://127.0.0.1:${server.address().port}`,EMBEDDING_DIMENSION:'1024',AI_ATTEMPT_TIMEOUT_MS:'150',AI_RUN_TIMEOUT_MS:'15000'});
+  const env=parseApiEnvironment({NODE_ENV:'test',DATABASE_URL:'postgresql://synthetic:synthetic@localhost/m15_in_memory_only',JWT_SECRET:'a'.repeat(40),REFRESH_TOKEN_SECRET:'b'.repeat(40),AI_GENERATION_PROVIDER:'ollama',AI_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector',OLLAMA_MODEL:'qwen3:4b-instruct-2507-q4_K_M',OLLAMA_EMBEDDING_MODEL:'bge-m3:latest',OLLAMA_BASE_URL:`http://127.0.0.1:${server.address().port}`,EMBEDDING_DIMENSION:'1024',AI_ATTEMPT_TIMEOUT_MS:'150',AI_RUN_TIMEOUT_MS:'15000'});
   const realEmbeddings=new OllamaEmbeddingProvider(env);
   // Keep provider-offline injection at generation so request/retrieval preparation
   // still executes. Embedding failure uses the real HTTP embedding adapter.

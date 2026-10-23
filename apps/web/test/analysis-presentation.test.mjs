@@ -10,7 +10,7 @@ test('STAFF explanation with private job omitted still reports the actual analys
   assert.equal(analysisRunning(staff('RUNNING')),true);
   assert.equal(analysisStatusText(staff('RUNNING'),''),'AI đang phân tích…');
   assert.equal(analysisStatusText(staff('NOT_STARTED'),''),'Chưa có phân tích AI.');
-  assert.ok(analysisStatusText(staff('FAILED'),'').includes('AI local hiện không khả dụng'));
+  assert.ok(analysisStatusText(staff('FAILED'),'').includes('Dịch vụ AI hiện không khả dụng hoặc đang được tắt có chủ ý'));
   assert.equal(analysisStatusText(null,''),'Đang tải trạng thái AI…');
   assert.equal(analysisStatusText(null,'Network error'),'Chưa tải được trạng thái AI.');
 });

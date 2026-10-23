@@ -12,6 +12,8 @@ import {buildContext} from '../dist/knowledge/retriever.js';
 import {parseRagOutput,validateCitations} from '../dist/knowledge/rag-output.js';
 import {analysisMessages,formatFor,quoteOptions} from '../dist/ai/prompts/request-analysis.js';
 import {distanceScore} from '../dist/knowledge/vector.repository.js';
+import {boundedExactSpan,exactEvidenceSpan} from '../dist/knowledge/excerpt.js';
+import {lexicalQuery,lexicalIdentity} from '../dist/knowledge/lexical.repository.js';
 const signal=()=>AbortSignal.timeout(10000),id='00000000-0000-4000-8000-000000000001';
 const src=(text='demo',extra={})=>({sourceId:`KD-${id}-G1-C0`,chunkId:id,documentId:id,generation:1,title:'Synthetic',pageNumber:null,section:null,excerpt:text,contentHash:hash(text),distance:.2,score:.8,...extra});
 const backfillFixture=()=>{
@@ -109,10 +111,10 @@ test('M5 vector validity, finite norm, exact dimensions and cosine score are ind
   assert.throws(()=>validateVector([1,2],3),e=>e.code==='EMBEDDING_DIMENSION_MISMATCH');assert.deepEqual(validateVector([1,2],2),[1,2]);assert.equal(distanceScore(.25),.75);assert.throws(()=>distanceScore(NaN));
 });
 test('M5 context budget/dedup and exact source/quote membership reject fabrication',()=>{
-  const s=src(),other=src('different',{sourceId:`KD-${id}-G1-C1`});
-  assert.equal(buildContext([s,s,src('demo',{sourceId:`KD-${id}-G1-C2`})]).length,1);assert.equal(buildContext([src('x'.repeat(1200)),src('y'.repeat(1200),{sourceId:`KD-${id}-G1-C1`})],1200).length,1);
-  validateCitations([{sourceId:s.sourceId,quote:'demo'}],[s]);
-  assert.throws(()=>validateCitations([{sourceId:other.sourceId,quote:'demo'}],[s]));assert.throws(()=>validateCitations([{sourceId:s.sourceId,quote:'invented'}],[s]));
+  const text='Kiểm tra SIM IoT mất kết nối tại hiện trường trước khi thay đổi cấu hình.',s=src(text),other=src('Đối chiếu cước trên hóa đơn đã được phê duyệt.',{sourceId:`KD-${id}-G1-C1`});
+  assert.equal(buildContext([s,s,src(text,{sourceId:`KD-${id}-G1-C2`})]).length,1);assert.equal(buildContext([src('x '.repeat(600).trim()),src('y '.repeat(600).trim(),{sourceId:`KD-${id}-G1-C1`})],1200).length,1);
+  validateCitations([{sourceId:s.sourceId,quote:text}],[s]);
+  assert.throws(()=>validateCitations([{sourceId:other.sourceId,quote:text}],[s]));assert.throws(()=>validateCitations([{sourceId:s.sourceId,quote:'invented'}],[s]));
   const analysis={intent:'UNKNOWN',category:'OTHER',subcategory:'UNSPECIFIED',prioritySuggestion:'MEDIUM',entities:{customer:null,location:null,affectedCount:null,startedAt:null},missingFields:['description'],confidence:.2,reasonSummary:'Thiếu thông tin.'};
   assert.equal(parseRagOutput(JSON.stringify({analysis,citations:[]}),{sources:[]}).grounding.evidenceStatus,'INSUFFICIENT_EVIDENCE');
   assert.throws(()=>parseRagOutput(JSON.stringify({analysis,citations:[{sourceId:s.sourceId,quote:'demo'}]}),{sources:[]}));
@@ -130,6 +132,22 @@ test('M5 context budget/dedup and exact source/quote membership reject fabricati
   const format=formatFor(input);assert.equal(format.properties.citations.minItems,1);assert.equal(format.properties.citations.maxItems,1);assert.deepEqual(format.properties.citations.items.oneOf[0].properties.quote.enum,[injection]);
   assert.deepEqual(quoteOptions('Synthetic demo document - not an actual enterprise SOP\n# SOP-IOT-04 - title\nMobiFlow AI / DEMO_SYNTHETIC_KNOWLEDGE / 1\nThis is a sufficiently specific evidentiary sentence for the request.'),['This is a sufficiently specific evidentiary sentence for the request.']);
   assert.equal(formatFor({...input,retrieval:{sources:[src('# Heading\nXác minh ảnh hưởng\nSynthetic demo document - not an actual enterprise SOP')]}}).properties.citations.maxItems,0);
+});
+test('V1.3 semantic citations reject title-only/wrong SOP and never cut the NETWORK token at NETWO',()=>{
+  const title='SOP-IOT-04 - Xử lý mất kết nối IoT',body='Nếu SIM IoT mất kết nối, nhân viên kiểm tra trạng thái mạng trước khi đổi cấu hình.',source=src(`${title}\n${body}`,{title,section:title});
+  assert.throws(()=>validateCitations([{sourceId:source.sourceId,quote:title}],[source]),error=>error.code==='INVALID_CITATION');
+  const wrong=src('Đối chiếu hóa đơn và chu kỳ cước trước khi xử lý khiếu nại thanh toán.',{title:'SOP-BILLING-02'});
+  assert.throws(()=>parseRagOutput(JSON.stringify({analysis:{intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'MEDIUM',entities:{customer:null,location:null,affectedCount:null,startedAt:null},missingFields:['location','startedAt'],confidence:.5,reasonSummary:'SIM IoT mất kết nối.'},citations:[{sourceId:wrong.sourceId,quote:wrong.excerpt}]}),{sources:[wrong]},'SIM IoT mất kết nối mạng.'),error=>error.code==='INVALID_CITATION');
+  const regression='X'.repeat(114)+' NETWORK connectivity procedure continues with complete evidence.';
+  assert.equal(Array.from(regression).slice(0,120).join('').endsWith('NETWO'),true);
+  const fixed=boundedExactSpan(regression,120);assert.equal(fixed.endsWith('NETWO'),false);assert.equal(regression.includes(fixed),true);
+  assert.equal(boundedExactSpan('NETWORK'.repeat(30),120),'');
+  const selected=exactEvidenceSpan(`${title}\n${body}`,120,[title,title,source.sourceId]);assert.equal(selected,body);assert.equal(source.excerpt.includes(selected),true);
+  assert.equal(exactEvidenceSpan(title,120,[title]),'');assert.deepEqual(buildContext([src(title,{title,section:title})]),[]);
+});
+test('V1.3 lexical query is deterministic, diacritic tolerant and keeps exact SOP codes without embeddings',()=>{
+  const accented=lexicalQuery('SOP-IOT-04: SIM IoT mất kết nối mạng'),plain=lexicalQuery('sop-iot-04 sim iot mat ket noi mang');
+  assert.equal(accented.normalized,plain.normalized);assert.equal(accented.exactCode,'SOP-IOT-04');assert.equal(plain.exactCode,'SOP-IOT-04');assert.match(accented.websearch,/"disconnect"/);assert.equal(lexicalIdentity.dimension,0);assert.equal(lexicalIdentity.provider,'postgresql');
 });
 test('M5 embedding HTTP adapter validates model identity, batches, retries, malformed response and timeout',async t=>{
   let mode='valid',calls=0;

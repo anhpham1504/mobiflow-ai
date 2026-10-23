@@ -13,7 +13,7 @@ import { TextEncoder } from 'node:util';
 
 const up = { status: 'UP', code: 'OK' };
 const down = { status: 'DOWN', code: 'UNAVAILABLE' };
-const base = { NODE_ENV: 'test', DATABASE_URL: 'postgresql://test:test@127.0.0.1:1/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), OLLAMA_MODEL: 'fixture-llm:1', OLLAMA_EMBEDDING_MODEL: 'fixture-embed:1', HEALTH_TIMEOUT_MS: 200 };
+const base = { NODE_ENV: 'test', DATABASE_URL: 'postgresql://test:test@127.0.0.1:1/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), AI_GENERATION_PROVIDER:'ollama',AI_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector',AI_RAG_ENABLED:'false', OLLAMA_MODEL: 'fixture-llm:1', OLLAMA_EMBEDDING_MODEL: 'fixture-embed:1', HEALTH_TIMEOUT_MS: 200 };
 async function fixture(t, mode = 'online') {
   const server = createServer(async (req, res) => {
     res.setHeader('Content-Type', 'application/json');
@@ -69,6 +69,10 @@ test('database outage is 503, independent liveness still 200', async (t) => {
 test('missing vector extension is a core readiness failure', async (t) => {
   const app = await api(t, { database: { check: async () => ({ database: up, vector: { status: 'DOWN', code: 'EXTENSION_MISSING' } }), close: async () => {} } });
   assert.equal((await fetch(app.url + '/health/ready')).status, 503);
+});
+test('DeepSeek lexical profile boots without Ollama; disabled live calls are truthful degraded health',async t=>{
+  const app=await api(t,{database:{check:async()=>({database:up,vector:{status:'DOWN',code:'EXTENSION_MISSING'}}),close:async()=>{}},changes:{AI_GENERATION_PROVIDER:'deepseek',AI_PROVIDER:'deepseek',RAG_RETRIEVAL_MODE:'lexical',AI_LIVE_CALLS_ENABLED:'false'}});
+  const response=await fetch(app.url+'/health/ready'),{data}=await response.json();assert.equal(response.status,200);assert.equal(data.coreReady,true);assert.equal(data.aiReady,false);assert.equal(data.status,'DEGRADED');assert.deepEqual(data.components.DEEPSEEK_API,{status:'DISABLED',code:'LIVE_CALLS_DISABLED'});assert.equal(data.components.OLLAMA_SERVER.status,'DISABLED');assert.equal(data.rag.retrievalMode,'lexical');
 });
 test('missing model is not reported installed; unconfigured embedding is distinct', async (t) => {
   const origin = await fixture(t);

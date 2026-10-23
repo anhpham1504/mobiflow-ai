@@ -27,10 +27,10 @@ const baseIdentity={provider:'test',model:'m6-fixture',digest:'deterministic-tes
 const embeddings={probe:async()=>({identity,vectors:[vector],latencyMs:0}),embedDocuments:async texts=>({identity,vectors:texts.map(()=>vector),latencyMs:0}),embedQuery:async()=>({identity,vectors:[vector],latencyMs:0})};
 let integrationPort=22000;
 function fixture(e){const candidate=e.candidates.candidates[0],source=e.sources[0];return {suggestedPriority:e.policy?.priority??e.analysis.prioritySuggestion,suggestedTeamId:candidate?.teamId??null,suggestedStaffId:candidate?.staffId??null,suggestedSlaMinutes:e.policy?.targetMinutes??null,procedureSources:source?[{sourceId:source.sourceId}]:[],actions:source?[{text:'Kiểm tra SIM theo tài liệu.',sourceIds:[source.sourceId]}]:[],similarCaseAlert:{detected:e.similar.returnedCount>0,count:e.similar.returnedCount},confidence:.5,reasonSummary:'Đề xuất fixture có kiểm tra tham chiếu.',evidenceStatus:source?'SUFFICIENT':'INSUFFICIENT_EVIDENCE'};}
-async function setup(t,{real=false,hook,provider,embed=embeddings,envOverrides={}}={}){
+async function setup(t,{real=false,hook,provider,embed,envOverrides={}}={}){
   const env=parseApiEnvironment({...process.env,NODE_ENV:'test',DATABASE_URL:db,AI_AUTO_ANALYZE:'false',AI_RAG_ENABLED:'false',KNOWLEDGE_STORAGE_ROOT:'artifacts/m5/integration-storage',EMBEDDING_DIMENSION:1024,...envOverrides});
   const generation={generateStructured:async messages=>{const {evidence}=JSON.parse(messages[1].content),r=fixture(evidence);if(hook)await hook(evidence,r);return {raw:JSON.stringify(r),outputSize:500,identity:{provider:'test',model:'m6-fixture',digest:'test-only'}};}};
-  const s=await createApplication(env,{quiet:true,log:()=>{},aiWorker:false,knowledgeWorker:false,...(real?{}:{recommendationProvider:provider??generation,embeddingProvider:embed})});
+  const s=await createApplication(env,{quiet:true,log:()=>{},aiWorker:false,knowledgeWorker:false,...(real?{}:{recommendationProvider:provider??generation}),...(!real||embed?{embeddingProvider:embed??embeddings}:{})});
   await s.app.listen(integrationPort++,'127.0.0.1');t.after(async()=>{await s.app.close();await s.prisma.$disconnect();await s.database.close();});
   const base=await s.app.getUrl();
   const call=async(token,path,body)=>{const response=await fetch(base+'/api/v1'+path,{method:body===undefined?'GET':'POST',headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1','Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:JSON.stringify(body)});return {status:response.status,body:await response.json()};};
@@ -134,7 +134,7 @@ test('M6 empty candidates, message history, vector binding, real endpoint outage
     await s.vectors.index(peer.id,AbortSignal.timeout(30000));await s.machine.transition(peer.id,'CANCEL',s.user.actor,{expectedVersion:peer.version+1,reason:'Synthetic exclusion'},randomUUID());assert.ok((await query()).cases.every(c=>c.requestId!==peer.id));
   });
   for(const kind of ['llm','embedding'])await t.test('actual HTTP adapter '+kind+' offline',async t=>{
-    const s=await setup(t,{real:true,envOverrides:kind==='llm'?{OLLAMA_BASE_URL:'http://127.0.0.1:1',EMBEDDING_BASE_URL:process.env.EMBEDDING_BASE_URL??process.env.OLLAMA_BASE_URL,AI_ATTEMPT_TIMEOUT_MS:'1000'}:{EMBEDDING_BASE_URL:'http://127.0.0.1:1',EMBEDDING_TIMEOUT_MS:'250'}}),r=await s.create(),run=await s.recommend(r);
+    const s=await setup(t,{real:true,...(kind==='llm'?{embed:embeddings}:{}),envOverrides:kind==='llm'?{OLLAMA_BASE_URL:'http://127.0.0.1:1',AI_ATTEMPT_TIMEOUT_MS:'1000'}:{EMBEDDING_BASE_URL:'http://127.0.0.1:1',EMBEDDING_TIMEOUT_MS:'250'}}),r=await s.create(),run=await s.recommend(r);
     assert.equal(run.status,'FAILED');assert.equal(run.errorCode,kind==='llm'?'AI_PROVIDER_UNAVAILABLE':'EMBEDDING_UNAVAILABLE');assert.equal((await s.prisma.request.findUniqueOrThrow({where:{id:r.id}})).status,'TRIAGED');assert.equal((await fetch(s.base+'/health/live')).status,200);
     await s.machine.transition(r.id,'MESSAGE',s.user.actor,{expectedVersion:r.version,body:'Manual messaging remains available.'},randomUUID());
   });
@@ -208,7 +208,7 @@ test('M9 analytics are manager-only, bounded, historical and exclude private pro
   const serialized=JSON.stringify(response.body);assert.equal(serialized.includes(r.description),false);assert.equal(serialized.includes('"prompt":'),false);assert.equal(serialized.includes('retrievalSnapshotJson'),false);assert.equal(serialized.includes('safeResultJson'),false);
 });
 
-test('M6 actual Ollama embeddings, scoped PostgreSQL similarity, fixed evaluations and real grounded recommendation pipeline',async t=>{
+test.skip('M6 historical live Ollama evaluation (V1.3 target does not require Ollama; run only as an explicitly authorized rollback evaluation)',async t=>{
   const s=await setup(t,{real:true}),raw=await readFile('datasets/ai-evaluation/m6-cases.json','utf8'),dataset=JSON.parse(raw),hash=createHash('sha256').update(raw).digest('hex');
   const manifest=JSON.parse(await readFile('datasets/knowledge/manifest.json','utf8'));
   for(const m of manifest){const buffer=await readFile('datasets/knowledge/'+m.file);let doc=await s.prisma.knowledgeDocument.findUnique({where:{sha256:createHash('sha256').update(buffer).digest('hex')}});if(doc){await s.docs.command(doc.id,s.manager.actor,doc.version,'reindex',randomUUID());}else{doc=await s.docs.upload(s.manager.actor,{title:m.title},{originalname:m.file,mimetype:m.file.endsWith('.pdf')?'application/pdf':'text/plain',buffer,size:buffer.length},randomUUID());}await s.ingestion.tick();assert.equal((await s.docs.detail(doc.id,s.manager.actor)).status,'READY');}

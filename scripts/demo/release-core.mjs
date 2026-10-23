@@ -29,7 +29,7 @@ function unsafeSecret(value){return typeof value!=='string'||value.length<32||/c
 
 export function validateReleaseConfig(env){
   const checks=[];
-  const required=['DATABASE_URL','MIGRATION_DATABASE_URL','JWT_SECRET','REFRESH_TOKEN_SECRET','WEB_ORIGIN','NEXT_PUBLIC_API_BASE_URL','OLLAMA_BASE_URL','OLLAMA_MODEL','OLLAMA_EMBEDDING_MODEL'];
+  const required=['DATABASE_URL','MIGRATION_DATABASE_URL','JWT_SECRET','REFRESH_TOKEN_SECRET','WEB_ORIGIN','NEXT_PUBLIC_API_BASE_URL','AI_GENERATION_PROVIDER','RAG_RETRIEVAL_MODE'];
   for(const name of required)checks.push(check('Environment',name,env[name]?'PASS':'FAIL',env[name]?'configured':'not configured'));
   checks.push(check('Environment','DEMO_MODE',env.DEMO_MODE==='true'?'PASS':'FAIL',env.DEMO_MODE==='true'?'explicit demo mode':'must be true'));
   for(const name of ['DATABASE_URL','MIGRATION_DATABASE_URL']){
@@ -43,8 +43,17 @@ export function validateReleaseConfig(env){
   let cookieOk=false;
   try{const origin=new URL(env.WEB_ORIGIN);cookieOk=env.AUTH_COOKIE_SECURE==='true'||(origin.protocol==='http:'&&LOOPBACK_HOSTS.has(origin.hostname));}catch{cookieOk=false;}
   checks.push(check('Security config','auth cookie',cookieOk?'PASS':'FAIL',cookieOk?'secure or explicit loopback HTTP demo':'unsafe cookie/origin combination'));
-  checks.push(check('LLM','configured model',env.OLLAMA_MODEL===REQUIRED_LLM?'PASS':'FAIL',env.OLLAMA_MODEL===REQUIRED_LLM?'expected M10 tag':'unexpected tag'));
-  checks.push(check('Embedding','configured model',env.OLLAMA_EMBEDDING_MODEL===REQUIRED_EMBEDDING?'PASS':'FAIL',env.OLLAMA_EMBEDDING_MODEL===REQUIRED_EMBEDDING?'expected M10 tag':'unexpected tag'));
+  const deepseek=env.AI_GENERATION_PROVIDER==='deepseek'&&env.RAG_RETRIEVAL_MODE==='lexical',legacy=env.AI_GENERATION_PROVIDER==='ollama'&&env.RAG_RETRIEVAL_MODE==='vector';
+  checks.push(check('AI','compatible provider/retrieval profile',deepseek||legacy?'PASS':'FAIL',deepseek?'DeepSeek generation with PostgreSQL lexical retrieval':legacy?'Ollama rollback with vector retrieval':'unsupported mixed profile'));
+  if(deepseek){
+    let origin=false;try{const url=new URL(env.DEEPSEEK_BASE_URL);origin=url.protocol==='https:'&&url.hostname==='api.deepseek.com'&&url.pathname==='/'&&!url.port&&!url.username&&!url.password&&!url.search&&!url.hash;}catch{origin=false;}
+    checks.push(check('AI','DeepSeek egress origin',origin?'PASS':'FAIL',origin?'official HTTPS origin allowlisted':'invalid or non-official DeepSeek origin'));
+    checks.push(check('AI','billable-call gate',['true','false'].includes(env.AI_LIVE_CALLS_ENABLED)?'PASS':'FAIL',env.AI_LIVE_CALLS_ENABLED==='true'?'live calls explicitly enabled':'live calls disabled; owner approval pending'));
+    checks.push(check('AI','backend key',env.AI_LIVE_CALLS_ENABLED==='true'?(env.DEEPSEEK_API_KEY?'PASS':'FAIL'):'PASS',env.AI_LIVE_CALLS_ENABLED==='true'?(env.DEEPSEEK_API_KEY?'configured without disclosure':'missing for enabled live calls'):'not required while live calls are disabled'));
+  }else if(legacy){
+    checks.push(check('LLM','configured rollback model',env.OLLAMA_MODEL===REQUIRED_LLM?'PASS':'FAIL',env.OLLAMA_MODEL===REQUIRED_LLM?'expected rollback tag':'unexpected tag'));
+    checks.push(check('Embedding','configured rollback model',env.OLLAMA_EMBEDDING_MODEL===REQUIRED_EMBEDDING?'PASS':'FAIL',env.OLLAMA_EMBEDDING_MODEL===REQUIRED_EMBEDDING?'expected rollback tag':'unexpected tag'));
+  }
   checks.push(check('Security config','RAG mode',env.AI_RAG_ENABLED==='true'?'PASS':'FAIL',env.AI_RAG_ENABLED==='true'?'enabled for grounded demo':'must be true for the competition flow'));
   return checks;
 }

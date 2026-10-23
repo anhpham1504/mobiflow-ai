@@ -2,7 +2,7 @@ import type {z} from 'zod';
 import type {aiExplanationSchema} from '@mobiflow/contracts';
 
 type Explanation=z.infer<typeof aiExplanationSchema>['data'];
-const failureText=(code:string|null|undefined)=>code==='STALE_CONTEXT'?'Phân tích dựa trên phiên bản cũ đã được loại bỏ. Tin nhắn mới vẫn được giữ nguyên.':code==='AI_INVALID_OUTPUT'?'AI chưa tạo được kết quả hợp lệ. Không có quyết định nghiệp vụ nào được áp dụng.':code==='AI_TIMEOUT'?'Phân tích đã hết thời gian chờ. Bạn có thể thử lại hoặc xử lý thủ công.':code==='FORBIDDEN'?'Quyền của người khởi tạo đã thay đổi; kết quả không được công bố.':'AI local hiện không khả dụng. Yêu cầu đã được lưu an toàn. Có thể thử lại hoặc xử lý thủ công.';
+const failureText=(code:string|null|undefined)=>code==='STALE_CONTEXT'?'Phân tích dựa trên phiên bản cũ đã được loại bỏ. Tin nhắn mới vẫn được giữ nguyên.':code==='AI_INVALID_OUTPUT'?'AI chưa tạo được kết quả hợp lệ. Không có quyết định nghiệp vụ nào được áp dụng.':code==='AI_TIMEOUT'?'Phân tích đã hết thời gian chờ. Bạn có thể thử lại hoặc xử lý thủ công.':code==='FORBIDDEN'?'Quyền của người khởi tạo đã thay đổi; kết quả không được công bố.':'Dịch vụ AI hiện không khả dụng hoặc đang được tắt có chủ ý. Yêu cầu đã được lưu an toàn. Có thể thử lại hoặc xử lý thủ công.';
 
 export function analysisRunning(data:Explanation|null){
   return data?.status==='RUNNING'||['QUEUED','RUNNING'].includes(data?.job?.status??'');

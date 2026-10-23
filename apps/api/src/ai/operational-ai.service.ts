@@ -36,7 +36,7 @@ export class OperationalAiService {
       const active=await tx.aiRun.findFirst({where:{requestId,purpose:'COPILOT',status:{in:['QUEUED','RUNNING']}}});
       if(active){if(active.action!==input.action||active.contextVersion!==request.version)throw new ApiError(409,'AI_RUN_ACTIVE','Another Copilot action is active.');return active;}
       const now=new Date();
-      const run=await tx.aiRun.create({data:{requestId,purpose:'COPILOT',action:input.action,initiatingActorId:actor.id,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:copilotPromptVersionFor(input.action),schemaVersion:copilotSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+      const run=await tx.aiRun.create({data:{requestId,purpose:'COPILOT',action:input.action,initiatingActorId:actor.id,contextVersion:request.version,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion:copilotPromptVersionFor(input.action),schemaVersion:copilotSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
       await tx.auditLog.create({data:{requestId,actorType:'STAFF',actorId:actor.id,action:'COPILOT_ACTION_QUEUED',resourceType:'AiRun',resourceId:run.id,requestCorrelationId:correlationId,safeAfterJson:{action:input.action,contextVersion:request.version},outcome:'SUCCEEDED',createdAt:now}});
       return run;
     });
@@ -57,7 +57,7 @@ export class OperationalAiService {
     if(!['RESOLVED','CLOSED'].includes(request.status)||request.currentResolutionId!==resolutionId)throw new ApiError(409,'STALE_RESOLUTION','Only the latest effective resolution can be summarized.');
     const prior=await this.prisma.aiRun.findFirst({where:{resolutionId,purpose:'RESOLUTION_SUMMARY'},orderBy:{createdAt:'desc'}});
     if(!prior||prior.status!=='FAILED')throw new ApiError(409,'INVALID_RETRY','A failed summary is required.');
-    return this.prisma.aiRun.create({data:{requestId,resolutionId,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:summarySchemaVersion,deadlineAt:new Date(Date.now()+this.env.AI_RUN_TIMEOUT_MS)}});
+    return this.prisma.aiRun.create({data:{requestId,resolutionId,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:summarySchemaVersion,deadlineAt:new Date(Date.now()+this.env.AI_RUN_TIMEOUT_MS)}});
   }
 
   async cycle(parentSignal:AbortSignal){
@@ -72,7 +72,7 @@ export class OperationalAiService {
       const current=await this.prisma.request.findUnique({where:{id:next.requestId!},select:{version:true,status:true,currentAssigneeId:true,currentResolutionId:true}});
       const valid=next.purpose==='COPILOT'?current?.version===next.contextVersion&&current.currentAssigneeId===next.initiatingActorId&&allowedStates.has(current.status):current?.currentResolutionId===next.resolutionId&&['RESOLVED','CLOSED'].includes(current.status);
       if(!valid){await this.prisma.aiRun.updateMany({where:{id:next.id,status:'RUNNING'},data:{status:'FAILED',finishedAt:new Date(),leaseUntil:null,errorCode:'STALE_CONTEXT',errorSummary:'Request context changed before publication.'}});return true;}
-      await this.prisma.aiRun.updateMany({where:{id:next.id,status:'RUNNING'},data:{status:'SUCCEEDED',safeResultJson:result.data,finishedAt:new Date(),leaseUntil:null,latencyMs:Math.round(performance.now()-start),modelIdentityJson:result.identity,model:result.identity.model,outputSize:result.outputSize,inputSize:result.inputSize,retryCount:result.retryCount,retrievalSnapshotJson:result.snapshot}});
+      await this.prisma.aiRun.updateMany({where:{id:next.id,status:'RUNNING'},data:{status:'SUCCEEDED',safeResultJson:result.data,finishedAt:new Date(),leaseUntil:null,latencyMs:Math.round(performance.now()-start),modelIdentityJson:JSON.parse(JSON.stringify(result.identity)),model:result.identity.model,outputSize:result.outputSize,inputSize:result.inputSize,retryCount:result.retryCount,retrievalSnapshotJson:result.snapshot}});
     }catch(error){const failure=error instanceof KnowledgeFailure?new AiFailure(error.code,error.retryable):normalizedFailure(error,signal);await this.prisma.aiRun.updateMany({where:{id:next.id,status:'RUNNING'},data:{status:'FAILED',finishedAt:new Date(),leaseUntil:null,latencyMs:Math.round(performance.now()-start),errorCode:failure.code,errorSummary:'AI output was unavailable or invalid; business state is unchanged.'}});}
     return true;
   }

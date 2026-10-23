@@ -5,7 +5,7 @@ import {join,resolve} from 'node:path';
 import {assertResetAuthorization,countsEqual,evidencePath,expectedMigrationNames,finalStatus,jsonRequest,safeDatabaseTarget,validateReleaseConfig} from './release-core.mjs';
 
 const postgresProtocol='postgres'+'ql://';
-const validEnv={DATABASE_URL:postgresProtocol+'app:secret@127.0.0.1:5432/mobiflow',MIGRATION_DATABASE_URL:postgresProtocol+'owner:secret@localhost:5432/mobiflow',JWT_SECRET:'aB3!long-secret-with-entropy-123456789',REFRESH_TOKEN_SECRET:'zY7!another-secret-with-entropy-987654',WEB_ORIGIN:'http://localhost:3000',NEXT_PUBLIC_API_BASE_URL:'http://localhost:3001/api/v1',OLLAMA_BASE_URL:'http://localhost:11434',OLLAMA_MODEL:'qwen3:4b-instruct-2507-q4_K_M',OLLAMA_EMBEDDING_MODEL:'bge-m3:latest',AUTH_COOKIE_SECURE:'false',AI_RAG_ENABLED:'true',DEMO_MODE:'true'};
+const validEnv={DATABASE_URL:postgresProtocol+'app:secret@127.0.0.1:5432/mobiflow',MIGRATION_DATABASE_URL:postgresProtocol+'owner:secret@localhost:5432/mobiflow',JWT_SECRET:'aB3!long-secret-with-entropy-123456789',REFRESH_TOKEN_SECRET:'zY7!another-secret-with-entropy-987654',WEB_ORIGIN:'http://localhost:3000',NEXT_PUBLIC_API_BASE_URL:'http://localhost:3001/api/v1',AI_GENERATION_PROVIDER:'deepseek',RAG_RETRIEVAL_MODE:'lexical',AI_LIVE_CALLS_ENABLED:'false',DEEPSEEK_BASE_URL:'https://api.deepseek.com/',DEEPSEEK_MODEL:'deepseek-flash',AUTH_COOKIE_SECURE:'false',AI_RAG_ENABLED:'true',DEMO_MODE:'true'};
 
 test('database target guard accepts only explicit loopback demo targets',()=>{
   assert.equal(safeDatabaseTarget(validEnv.DATABASE_URL,{demoMode:'true'}).database,'mobiflow');

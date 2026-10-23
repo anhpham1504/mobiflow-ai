@@ -33,7 +33,7 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
     if(!next){
       const controller=new AbortController();this.controller=controller;
       try{
-        if(!await this.recommendations.cycle(controller.signal)&&!await this.operational.cycle(controller.signal)){
+        if(!await this.recommendations.cycle(controller.signal)&&!await this.operational.cycle(controller.signal)&&this.env.RAG_RETRIEVAL_MODE==='vector'){
           try{
             const recovery=await this.requestVectors.next(AbortSignal.any([controller.signal,AbortSignal.timeout(30000)]));
             if(recovery)this.log(recovery);

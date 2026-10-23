@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseApiEnvironment } from '../dist/index.js';
 
-const valid = { DATABASE_URL: 'postgresql://app:local@localhost:5432/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), OLLAMA_BASE_URL: 'http://localhost:11434', OLLAMA_MODEL: 'installed:tag', OLLAMA_EMBEDDING_MODEL: 'unconfigured' };
+const valid = { DATABASE_URL: 'postgresql://app:local@localhost:5432/mobiflow', JWT_SECRET: 'a'.repeat(40), REFRESH_TOKEN_SECRET: 'b'.repeat(40), AI_GENERATION_PROVIDER:'ollama',AI_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector', OLLAMA_BASE_URL: 'http://localhost:11434', OLLAMA_MODEL: 'installed:tag', OLLAMA_EMBEDDING_MODEL: 'unconfigured' };
 test('M5 rejects invalid embedding/retrieval bounds without silently clamping',()=>{
   assert.equal(parseApiEnvironment(valid).AI_RAG_ENABLED,false);
   assert.equal(parseApiEnvironment(valid).EMBEDDING_DIMENSION,undefined);
@@ -21,6 +21,13 @@ test('AI settings enable intake by default and enforce bounded inference at star
 test('validates native and Docker Ollama origins and coerces bounded ports', () => {
   assert.equal(parseApiEnvironment({ ...valid, API_PORT: '3001' }).API_PORT, 3001);
   assert.equal(parseApiEnvironment({ ...valid, OLLAMA_BASE_URL: 'http://host.docker.internal:11434' }).AI_PROVIDER, 'ollama');
+});
+test('DeepSeek lexical profile is non-billable by default and requires a backend key before live calls',()=>{
+  const base={DATABASE_URL:valid.DATABASE_URL,JWT_SECRET:valid.JWT_SECRET,REFRESH_TOKEN_SECRET:valid.REFRESH_TOKEN_SECRET};
+  const offline=parseApiEnvironment(base);assert.equal(offline.AI_GENERATION_PROVIDER,'deepseek');assert.equal(offline.RAG_RETRIEVAL_MODE,'lexical');assert.equal(offline.AI_LIVE_CALLS_ENABLED,false);assert.equal(offline.DEEPSEEK_API_KEY,undefined);
+  assert.throws(()=>parseApiEnvironment({...base,AI_LIVE_CALLS_ENABLED:'true'}),/DEEPSEEK_API_KEY/);
+  const live=parseApiEnvironment({...base,AI_LIVE_CALLS_ENABLED:'true',DEEPSEEK_API_KEY:'ds-'+'x'.repeat(32)});assert.equal(live.AI_LIVE_CALLS_ENABLED,true);
+  for(const change of [{AI_GENERATION_PROVIDER:'deepseek',RAG_RETRIEVAL_MODE:'vector'},{AI_GENERATION_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'lexical'},{AI_GENERATION_PROVIDER:'deepseek',AI_PROVIDER:'ollama'}])assert.throws(()=>parseApiEnvironment({...base,...change}),/Invalid environment keys:/);
 });
 test('rejects missing config, invalid protocols, bounds and reused secrets without echoing values', () => {
   for (const change of [{ DATABASE_URL: undefined }, { API_PORT: 0 }, { HEALTH_TIMEOUT_MS: 50000 }, { OLLAMA_MODEL: '' }, { OLLAMA_BASE_URL: 'file:///private' }, { OLLAMA_BASE_URL: 'http://user:secret@localhost:11434' }, { REFRESH_TOKEN_SECRET: valid.JWT_SECRET }]) {

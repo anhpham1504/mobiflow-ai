@@ -16,7 +16,7 @@ import { ApiError } from '../http.js';
 import { transitionTarget, type Action } from './transition-rules.js';
 import { changeSla, second } from './sla-clock.js';
 import { parse } from './validation.js';
-import {VectorRepository} from '../knowledge/vector.repository.js';
+import {KnowledgeRetriever} from '../knowledge/retriever.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
 import {recommendationEvidenceSchema,recommendationEvidenceV2Schema,recommendationVersion,recommendationV2Version,isRecommendationV2,recommendationActions,type AnyRecommendation,type RecommendationEvidence} from '@mobiflow/contracts';
@@ -42,7 +42,7 @@ export interface Command {
 }
 @Injectable()
 export class RequestStateMachineService {
-  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:VectorRepository) {}
+  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:KnowledgeRetriever) {}
 
   private async identity(tx: Tx, actor: Pick<AuthenticatedActor,'id'|'role'|'sessionId'>) {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actor.id}::uuid FOR SHARE`);
@@ -165,7 +165,7 @@ export class RequestStateMachineService {
         const latest=await tx.requestResolution.aggregate({where:{requestId:id},_max:{cycle:true}});
         const resolution=await tx.requestResolution.create({data:{requestId:id,cycle:(latest._max.cycle??0)+1,resolvedById:actor.id,rootCause:command.rootCause!,resolution:command.resolution!,verification:command.verification!,resolvedAt:now,eventId:event.id}});
         data.resolvedAt=now;data.currentResolutionId=resolution.id;
-        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
         notification='REQUEST_RESOLVED';recipients=[request.createdById];
       }
       if (action==='USER_REOPEN' || action==='USER_CONFIRM') {
@@ -221,7 +221,7 @@ export class RequestStateMachineService {
     },{isolationLevel:Prisma.TransactionIsolationLevel.ReadCommitted,timeout:15000});
   }
   private queueAnalysis(tx:Tx,request:DomainRequest,initiatingActorId:string,now:Date) {
-    return tx.aiRun.create({data:{requestId:request.id,purpose:'ANALYSIS',initiatingActorId,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion,schemaVersion:analysisSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+    return tx.aiRun.create({data:{requestId:request.id,purpose:'ANALYSIS',initiatingActorId,contextVersion:request.version,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion,schemaVersion:analysisSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
   }
   async scheduleAnalysis(id:string,actor:AuthenticatedActor,expectedVersion:number,retry:boolean,correlationId:string){
     if(!['USER','MANAGER'].includes(actor.role))throw new ApiError(403,'FORBIDDEN','This role cannot schedule intake.');
@@ -308,7 +308,7 @@ export class RequestStateMachineService {
         await this.vectors.compatible(result.retrieval.identity,tx);
       }
       const analysis=await tx.aiAnalysis.create({data:{requestId:request.id,aiRunId:run.id,intent:a.intent,category:a.category,subcategory:a.subcategory,prioritySuggestion:a.prioritySuggestion,entitiesJson:a.entities,missingFieldsJson:a.missingFields,confidence:a.confidence,reasonSummary:a.reasonSummary,schemaVersion:analysisSchemaVersion,createdAt:now}});
-      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:result.identity,safeResultJson:'grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG',evidenceStatus:'NOT_REQUESTED',citations:[]},errorCode:null,errorSummary:null}});
+      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:JSON.parse(JSON.stringify(result.identity)),safeResultJson:'grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG',evidenceStatus:'NOT_REQUESTED',citations:[]},errorCode:null,errorSummary:null}});
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }

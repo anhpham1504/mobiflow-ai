@@ -1,6 +1,7 @@
 import {recommendationSchema,recommendationV2Schema,recommendationVersion,recommendationV2Version,recommendationEvidenceSchema,recommendationEvidenceV2Schema,type Recommendation,type RecommendationV2,type RecommendationEvidence,type RecommendationEvidenceV2,type AnyRecommendation} from '@mobiflow/contracts';
 import {AiFailure} from './provider.js';
 import {validateCitations} from '../knowledge/rag-output.js';
+import {exactEvidenceSpan} from '../knowledge/excerpt.js';
 import {decideRecommendationEvidence,validateRecommendationEvidenceDecision,validateRecommendationEvidenceOutput,type RecommendationEvidenceDecision} from './recommendation-evidence-decision.js';
 export function parseRecommendation(raw:string,evidence:RecommendationEvidence):Recommendation {
   if(Buffer.byteLength(raw)>32768)throw new AiFailure('AI_OUTPUT_TOO_LARGE');
@@ -17,7 +18,8 @@ function validateBindings(r:BoundSuggestion,actions:Recommendation['actions'],ev
   for(const ref of [...r.procedureSources,...actions.flatMap(a=>a.sourceIds.map(sourceId=>({sourceId})))]){
     const source=evidence.sources.find(s=>s.sourceId===ref.sourceId);if(!source)fail('SOURCE_MEMBERSHIP');
     // Reuse M5 source membership validation. M6 has references, not a model-authored quote field.
-    validateCitations([{sourceId:ref.sourceId,quote:source!.excerpt.slice(0,100)}],evidence.sources);
+    const quote=exactEvidenceSpan(source!.excerpt,100,[source!.title,source!.section??'',source!.sourceId]);if(!quote)fail('SOURCE_CONTENT_REQUIRED');
+    validateCitations([{sourceId:ref.sourceId,quote}],evidence.sources);
   }
   if(actions.some(a=>a.sourceIds.some(id=>!r.procedureSources.some(s=>s.sourceId===id))))fail('ACTION_SOURCE_NOT_IN_PROCEDURE');
   const staff=evidence.candidates.candidates.find(c=>c.staffId===r.suggestedStaffId);
@@ -51,7 +53,7 @@ export function parseRecommendationV2(raw:string,input:RecommendationEvidenceV2)
     const key=item.type+':'+item.referenceId;if(keys.has(key))fail('DUPLICATE_EVIDENCE');keys.add(key);
     let facts:string[]=[];
     if(item.type==='REQUEST'&&item.referenceId===request.id)facts=requestFacts;
-    if(item.type==='KNOWLEDGE'){const source=evidence.sources.find(s=>s.sourceId===item.referenceId);if(source)facts=[source.excerpt];}
+    if(item.type==='KNOWLEDGE'){const source=evidence.sources.find(s=>s.sourceId===item.referenceId);if(source){facts=[source.excerpt];validateCitations([{sourceId:source.sourceId,quote:item.excerpt}],[source]);}}
     if(item.type==='HISTORICAL_REQUEST'){const prior=evidence.similar.cases.find(c=>c.requestId===item.referenceId);if(prior)facts=[prior.title,prior.publicCode,prior.status,...(prior.category?[prior.category]:[]),...(prior.location?[prior.location]:[]),JSON.stringify({title:prior.title,status:prior.status,category:prior.category,location:prior.location})];}
     if(!facts.some(fact=>fact.includes(item.excerpt)))fail('EVIDENCE_EXCERPT_MEMBERSHIP');
     referenceIds.add(item.referenceId);

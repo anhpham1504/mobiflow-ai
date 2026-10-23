@@ -15,7 +15,7 @@ import {expectedMigrationNames} from '../../../scripts/demo/release-core.mjs';
 
 const url=process.env.M2_INTEGRATION_DATABASE_URL;
 if(!url||!['localhost','127.0.0.1'].includes(new URL(url).hostname)||new URL(url).pathname!=='/mobiflow_m2_test')throw new Error('Dedicated loopback integration DB required');
-const env=parseApiEnvironment({NODE_ENV:'test',AI_AUTO_ANALYZE:'false',DATABASE_URL:url,WEB_ORIGIN:'http://localhost:3000',JWT_SECRET:'v12-test-jwt'.padEnd(48,'a'),REFRESH_TOKEN_SECRET:'v12-test-refresh'.padEnd(48,'b'),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'unconfigured',OLLAMA_EMBEDDING_MODEL:'unconfigured',AUTH_COOKIE_SECURE:'false'});
+const env=parseApiEnvironment({NODE_ENV:'test',AI_GENERATION_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector',AI_AUTO_ANALYZE:'false',DATABASE_URL:url,WEB_ORIGIN:'http://localhost:3000',JWT_SECRET:'v12-test-jwt'.padEnd(48,'a'),REFRESH_TOKEN_SECRET:'v12-test-refresh'.padEnd(48,'b'),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'unconfigured',OLLAMA_EMBEDDING_MODEL:'unconfigured',AUTH_COOKIE_SECURE:'false'});
 
 test('M11 real PostgreSQL role aggregates, 120-row pagination invariant, query count/performance and OpenAPI; M12 SQL/scalar parity',async t=>{
   const s=await createApplication(env,{quiet:true,log:e=>{if(e.status===500)console.log(e);}});await s.app.listen(0,'127.0.0.1');

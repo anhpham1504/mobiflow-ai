@@ -2,6 +2,12 @@
 
 Authority: master-plan §5, M2–M9; later authorized storage amendments are recorded below. PostgreSQL with pgvector in one instance; Prisma for supported types and parameterized SQL where required. Verification records distinguish the implemented repository schema from any applied environment.
 
+## V1.3 lexical retrieval migration14 (2026-10-23)
+
+Additive migration14 `20261023010000_v13_lexical_retrieval` enables `unaccent` and `pg_trgm`, creates immutable `mobiflow_unaccent(text)`, and adds GIN indexes `KnowledgeChunk_content_fts_simple_gin`, `KnowledgeChunk_content_trgm_gin` and `KnowledgeDocument_title_trgm_gin`. It changes no business column, role, state, foreign key, vector dimension or stored row. Existing `vector(1024)` columns, pgvector extension, cosine HNSW indexes and historical embeddings remain rollback assets. New lexical generations intentionally store NULL embedding/modelIdentity/dimension and retain complete content/provenance.
+
+The runtime application role can execute the normalization function and read/index through its existing least-privilege grants, but it cannot update knowledge chunks or perform DDL. Retrieval uses parameterized Prisma SQL, active READY-generation predicates, bounded statement/transaction time and deterministic order. The migration is applied only to a fresh task-owned synthetic database during candidate verification; protected/demo/developer databases are not migrated, reset or reseeded.
+
 ## M21 routing storage amendment (2026-10-02)
 
 Current M22 migration12 `20261003010000_m22_reminder_sla_escalation` adds operational observations/durable scan progress and nullable Notification linkage. Historical migrations1–11 remain byte-identical; no developer database migration. Historical M21 migration11 `20261002040000_m21_rule_based_routing` added `RoutingRuleStatus`, `RoutingRule` and `RoutingRuleRevision` only.

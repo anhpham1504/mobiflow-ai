@@ -1,5 +1,7 @@
 # Tool Calling Specification
 
+V1.3 lexical amendment (2026-10-23): the six-tool allowlist, schemas, permission checks, call budget and read-only behavior are unchanged. In `RAG_RETRIEVAL_MODE=lexical`, `searchKnowledge` and `findSimilarRequests` use current local PostgreSQL lexical results and the `postgresql-lexical-v1` identity; they do not require or create RequestEmbedding rows. Similar-request score keeps the existing 0.60 retrieval + 0.20 category + 0.10 location + 0.10 recency composition, but the retrieval component is bounded FTS/trigram relevance rather than cosine similarity. Scope is still applied before ranking and the wording remains “possible related cases.” The vector paragraphs below own only the explicit rollback profile.
+
 Authority: master-plan §4.3, M6, §25–26. Runtime tools are internal backend functions, not public arbitrary invocation endpoints. Depends on [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md), [RAG_SPEC](RAG_SPEC.md) and [AI_BEHAVIOR_SPEC](AI_BEHAVIOR_SPEC.md).
 
 ## Registry contract

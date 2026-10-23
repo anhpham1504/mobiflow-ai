@@ -30,12 +30,14 @@ import { AnalysisController } from './ai/analysis.controller.js';
 import { AnalysisWorker } from './ai/analysis-worker.js';
 import { AnalysisQueryService } from './ai/analysis-query.service.js';
 import { OllamaProvider } from './ai/ollama-provider.js';
+import { DeepSeekProvider } from './ai/deepseek-provider.js';
 import { AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,type AiProvider } from './ai/provider.js';
 import {EMBEDDING_PROVIDER,KNOWLEDGE_WORKER_ENABLED,OllamaEmbeddingProvider,type EmbeddingProvider} from './knowledge/embedding-provider.js';
 import {DocumentService} from './knowledge/document.service.js';
 import {VectorRepository} from './knowledge/vector.repository.js';
 import {IngestionWorker} from './knowledge/ingestion-worker.js';
 import {KnowledgeRetriever} from './knowledge/retriever.js';
+import {LexicalRepository} from './knowledge/lexical.repository.js';
 import {SourceService} from './knowledge/source.service.js';
 import {KnowledgeController} from './knowledge/knowledge.controller.js';
 import {KnowledgeGuard} from './knowledge/knowledge.guard.js';
@@ -67,6 +69,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   const database = options.database ?? new PostgresProbe(env.DATABASE_URL, env.HEALTH_TIMEOUT_MS);
   const prisma = options.prisma ?? new PrismaService(env.DATABASE_URL);
   const log = options.log ?? ((entry) => console.log(JSON.stringify({ time: new Date().toISOString(), ...entry })));
+  const configuredProvider=env.AI_GENERATION_PROVIDER==='deepseek'?new DeepSeekProvider(env):new OllamaProvider(env);
   @Module({
     controllers: [HealthController, AuthController, UsersController, RequestsController, InternalNoteController, RequestCollaborationController,TemplateController,RoutingController,RequestRoutingController,SavedViewController,AnalysisController,KnowledgeController,RecommendationController,OperationalAiController,AnalyticsController,DashboardController],
     providers: [
@@ -75,11 +78,11 @@ export async function createApplication(env: ApiEnvironment, options: { database
       AnalysisWorker,AnalysisQueryService,
       RecommendationService,DomainTools,RequestVectors,OperationalAiService,SlaMonitorService,SlaAlertService,AnalyticsService,
       { provide: SLA_ALERT_CLOCK, useValue: options.slaAlertClock ?? databaseNow }, { provide: SLA_ALERT_LOG, useValue: log },
-      {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??new OllamaProvider(env)},
-      DocumentService,VectorRepository,IngestionWorker,KnowledgeRetriever,SourceService,KnowledgeGuard,RagHealth,
+      {provide:RECOMMENDATION_PROVIDER,useValue:options.recommendationProvider??configuredProvider},
+      DocumentService,VectorRepository,LexicalRepository,IngestionWorker,KnowledgeRetriever,SourceService,KnowledgeGuard,RagHealth,
       {provide:EMBEDDING_PROVIDER,useValue:options.embeddingProvider??new OllamaEmbeddingProvider(env)},
       {provide:KNOWLEDGE_WORKER_ENABLED,useValue:options.knowledgeWorker??env.NODE_ENV!=='test'},
-      {provide:AI_PROVIDER_TOKEN,useValue:options.aiProvider??new OllamaProvider(env)},
+      {provide:AI_PROVIDER_TOKEN,useValue:options.aiProvider??configuredProvider},
       {provide:AI_LOG,useValue:log},{provide:AI_WORKER_ENABLED,useValue:options.aiWorker??env.NODE_ENV!=='test'},
       { provide: API_ENV, useValue: env }, { provide: PrismaService, useValue: prisma },
       { provide: DATABASE_PROBE, useValue: database }, { provide: OLLAMA_HEALTH, useValue: new OllamaHealthClient(env) },
@@ -98,7 +101,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — M10 local release').setDescription('Local-first request workflow with bounded AI, retrieval, human approval, analytics, and explicit degraded operation.').setVersion('1.0.0-rc.1').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — V1.3 DeepSeek/lexical candidate').setDescription('Local request workflow with bounded DeepSeek generation, PostgreSQL lexical retrieval, human approval, analytics, and explicit degraded operation.').setVersion('1.3.0-candidate').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

@@ -1,5 +1,18 @@
 # Architecture
 
+## V1.3 active candidate topology (2026-10-23)
+
+```mermaid
+flowchart LR
+  B[Browser: USER / STAFF / MANAGER] --> W[Next.js web]
+  W --> A[NestJS REST API /api/v1]
+  A --> D[(Local PostgreSQL: business + lexical + retained pgvector)]
+  A --> F[Private local document storage]
+  A -. live gate + HTTPS .-> S[DeepSeek chat completions]
+```
+
+The API routes every generation purpose through one configured DeepSeek adapter and every active knowledge/request-similarity lookup through PostgreSQL lexical repositories. Live egress is disabled by default. Core/manual/lexical operation has no Ollama dependency; health exposes database, retrieval, generation and disabled rollback components separately. `ollama` + `vector` remains an explicit operator-selected rollback pair with no automatic fallback. See [ADR 0006](adr/0006-deepseek-postgres-lexical.md). The historical V1 topology below is retained for lineage.
+
 Authority: master-plan §§3, 5–10, M1–M10. Status: M0 design freeze; no services or dependencies have been created. Decisions are recorded in ADRs [0001](adr/0001-monorepo.md), [0002](adr/0002-postgres-pgvector.md), [0003](adr/0003-local-ollama.md), [0004](adr/0004-controlled-ai-orchestration.md), [0005](adr/0005-human-in-the-loop.md).
 
 ## Local deployment and trust boundaries

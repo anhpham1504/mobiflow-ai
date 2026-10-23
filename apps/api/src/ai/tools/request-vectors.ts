@@ -5,6 +5,9 @@ import {Prisma} from '../../generated/prisma/client.js';
 import {PrismaService} from '../../database/prisma.service.js';
 import {EMBEDDING_PROVIDER,KnowledgeFailure,validateVector,type EmbeddingProvider,type EmbeddingIdentity} from '../../knowledge/embedding-provider.js';
 import {isDatabaseUnavailable} from '../../http.js';
+import type {ApiEnvironment} from '@mobiflow/config';
+import {API_ENV} from '../../tokens.js';
+import {lexicalIdentity} from '../../knowledge/lexical.repository.js';
 
 export const requestInputVersion='request-title-description-head.v1';
 export function requestEmbeddingInput(title:string,description:string){
@@ -28,12 +31,13 @@ export class RequestVectors {
   private cursor='00000000-0000-0000-0000-000000000000';
   private busy=false;
   private observation:{correlationId:string;stage:string;requestId:string|null;contextVersion:number|null;category:string|null;errorType:string|null}|null=null;
-  get backfillStatus(){return {...this.observation,state:this.state,failureCount:this.failureCount,errorCode:this.errorCode,nextRetryAt:this.nextRetryAt?new Date(this.nextRetryAt).toISOString():null,attemptTimeoutMs:30000,maxBackoffMs:60000};}
-  constructor(private readonly prisma:PrismaService,@Inject(EMBEDDING_PROVIDER)private readonly embeddings:EmbeddingProvider){}
+  get backfillStatus(){return {...this.observation,state:this.env.RAG_RETRIEVAL_MODE==='lexical'?'STOPPED':this.state,failureCount:this.failureCount,errorCode:this.errorCode,nextRetryAt:this.nextRetryAt?new Date(this.nextRetryAt).toISOString():null,attemptTimeoutMs:30000,maxBackoffMs:60000};}
+  constructor(private readonly prisma:PrismaService,@Inject(EMBEDDING_PROVIDER)private readonly embeddings:EmbeddingProvider,@Inject(API_ENV)private readonly env:Pick<ApiEnvironment,'RAG_RETRIEVAL_MODE'>={RAG_RETRIEVAL_MODE:'vector'}){}
   async index(requestId:string,signal:AbortSignal,observe?:(stage:string,version:number)=>void){
     if(signal.aborted)throw new KnowledgeFailure('KNOWLEDGE_CANCELED');
     const request=await this.prisma.request.findUniqueOrThrow({where:{id:requestId}});
     if(request.status==='CANCELED')throw new KnowledgeFailure('STALE_CONTEXT');
+    if(this.env.RAG_RETRIEVAL_MODE==='lexical'){observe?.('LEXICAL',request.version);return {identity:lexicalIdentity,contextVersion:request.version};}
     observe?.('INFERENCE',request.version);
     const input=requestEmbeddingInput(request.title,request.description),batch=await this.embeddings.embedQuery(input.text,signal);
     validateVector(batch.vectors[0],1024);
@@ -55,6 +59,7 @@ export class RequestVectors {
     return {identity:batch.identity,contextVersion:request.version};
   }
   async next(signal:AbortSignal,now?:number){
+    if(this.env.RAG_RETRIEVAL_MODE==='lexical')return;
     // One candidate per worker tick, with capped backoff for temporary failures.
     // Identity/schema failures remain blocked and require operator intervention.
     const asOf=now??Date.now();
@@ -91,6 +96,7 @@ export class RequestVectors {
     }finally{this.busy=false;}
   }
   async similar(tx:Prisma.TransactionClient,requestId:string,identity:EmbeddingIdentity,timeWindow:number,limit:number,asOf:Date,staffScope?:string){
+    if(identity.key===lexicalIdentity.key)return this.similarLexical(tx,requestId,timeWindow,limit,asOf,staffScope);
     const rows=await tx.$queryRaw<(SimilarCase&{cosine:number;vector:number;categoryMatch:number;locationMatch:number;recency:number})[]>(Prisma.sql`
       WITH current_request AS MATERIALIZED (
         SELECT r.*,COALESCE(r.category,a.category) AS category_value,
@@ -115,6 +121,30 @@ export class RequestVectors {
       SELECT *, .60*vector+.20*"categoryMatch"+.10*"locationMatch"+.10*recency AS score FROM scored
       WHERE vector>=0.70 ORDER BY score DESC,"createdAt" DESC,"requestId" ASC LIMIT ${limit+1}`);
     const cases:SimilarCase[]=rows.slice(0,limit).map(r=>({requestId:r.requestId,publicCode:r.publicCode,title:r.title,status:r.status,category:r.category,location:r.location,createdAt:new Date(r.createdAt).toISOString(),contextVersion:r.contextVersion,score:r.score,scoreComponents:{cosineSimilarity:Math.max(-1,Math.min(1,r.cosine)),vector:r.vector,category:r.categoryMatch,location:r.locationMatch,recency:r.recency}}));
+    return {cases,windowMinutes:timeWindow,returnedCount:cases.length,truncated:rows.length>limit};
+  }
+  private async similarLexical(tx:Prisma.TransactionClient,requestId:string,timeWindow:number,limit:number,asOf:Date,staffScope?:string){
+    const rows=await tx.$queryRaw<(SimilarCase&{cosine:number;vector:number;categoryMatch:number;locationMatch:number;recency:number})[]>(Prisma.sql`
+      WITH current_request AS MATERIALIZED (
+        SELECT r.*,COALESCE(r.category,a.category) AS category_value,
+          NULLIF(lower(regexp_replace(trim(normalize(a."entitiesJson"->>'location',NFC)), '[[:space:]]+', ' ', 'g')),'') AS location_value,
+          mobiflow_unaccent(r.title||' '||r.description) AS lexical_text
+        FROM "Request" r LEFT JOIN "AiAnalysis" a ON a.id=r."latestAnalysisId" WHERE r.id=${requestId}::uuid
+      ), eligible AS MATERIALIZED (
+        SELECT r.id AS "requestId",r."publicCode",r.title,r.status,COALESCE(r.category,a.category) AS category,
+          a."entitiesJson"->>'location' AS location,r."createdAt",r.version AS "contextVersion",
+          greatest(ts_rank_cd(to_tsvector('simple',mobiflow_unaccent(r.title||' '||r.description)),websearch_to_tsquery('simple',q.lexical_text),32),word_similarity(q.lexical_text,mobiflow_unaccent(r.title||' '||r.description)))::float8 AS vector,
+          CASE WHEN COALESCE(r.category,a.category)=q.category_value THEN 1 ELSE 0 END AS "categoryMatch",
+          CASE WHEN NULLIF(lower(regexp_replace(trim(normalize(a."entitiesJson"->>'location',NFC)), '[[:space:]]+', ' ', 'g')),'')=q.location_value THEN 1 ELSE 0 END AS "locationMatch",
+          1-EXTRACT(EPOCH FROM (${asOf}::timestamptz-r."createdAt"))::float8/(${timeWindow}*60) AS recency
+        FROM "Request" r LEFT JOIN "AiAnalysis" a ON a.id=r."latestAnalysisId" CROSS JOIN current_request q
+        WHERE r.id<>${requestId}::uuid AND r.status<>'CANCELED'
+          AND r."createdAt">=${asOf}::timestamptz-(${timeWindow}*interval '1 minute') AND r."createdAt"<=${asOf}::timestamptz
+          ${staffScope?Prisma.sql`AND r."currentAssigneeId"=${staffScope}::uuid`:Prisma.empty}
+      ), scored AS (SELECT *,greatest(-1,least(1,2*vector-1)) AS cosine FROM eligible WHERE vector>=0.20)
+      SELECT *, .60*vector+.20*"categoryMatch"+.10*"locationMatch"+.10*recency AS score FROM scored
+      ORDER BY score DESC,"createdAt" DESC,"requestId" ASC LIMIT ${limit+1}`);
+    const cases:SimilarCase[]=rows.slice(0,limit).map(r=>({requestId:r.requestId,publicCode:r.publicCode,title:r.title,status:r.status,category:r.category,location:r.location,createdAt:new Date(r.createdAt).toISOString(),contextVersion:r.contextVersion,score:r.score,scoreComponents:{cosineSimilarity:r.cosine,vector:r.vector,category:r.categoryMatch,location:r.locationMatch,recency:r.recency}}));
     return {cases,windowMinutes:timeWindow,returnedCount:cases.length,truncated:rows.length>limit};
   }
 }

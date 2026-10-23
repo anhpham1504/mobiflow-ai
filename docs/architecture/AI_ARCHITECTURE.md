@@ -1,5 +1,21 @@
 # AI Architecture
 
+## V1.3 provider and retrieval routing (2026-10-23)
+
+The active candidate uses one `DeepSeekProvider` instance for analysis, recommendation, Copilot and summary. The provider normalizes official chat-completion responses to the existing generation contract, records bounded token/cost identity, rejects incomplete JSON and never exposes reasoning. `KnowledgeRetriever` selects `LexicalRepository` in lexical mode; ingestion and request-similarity paths also bypass embeddings. `ollama` generation and pgvector retrieval remain a coupled, explicit rollback mode only. Provider selection cannot be supplied by browser/model input and never falls back silently.
+
+```mermaid
+flowchart TD
+  C[Authorized bounded context] --> P{Configured pair}
+  P -->|deepseek + lexical| L[PostgreSQL exact/FTS/trigram]
+  L --> E[Backend evidence decision]
+  E --> G[DeepSeek JSON generation]
+  P -->|ollama + vector rollback| V[Retained pgvector + Ollama]
+  G --> Q[Schema/source/currentness validation]
+  V --> Q
+  Q --> H[Human approval boundary]
+```
+
 Authority: master-plan §4, M4–M9, §§23–27. Controlled orchestration uses local providers behind stable interfaces; business authority remains in NestJS services. See [AI behavior](../specs/AI_BEHAVIOR_SPEC.md), [tools](../specs/TOOL_CALLING_SPEC.md), [RAG](../specs/RAG_SPEC.md) and [safety](../specs/AI_SAFETY_SPEC.md) for normative detail.
 
 ## Provider ports
