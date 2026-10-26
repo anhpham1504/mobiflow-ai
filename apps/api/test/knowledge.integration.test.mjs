@@ -32,6 +32,17 @@ const generation=input=>{
   }).slice(0,1)??[];
   return {raw:JSON.stringify(input.retrieval?{analysis,citations:grounded}:analysis),identity:{provider:'test',model:'fixture:1',digest:'fixture'},outputSize:800};
 };
+async function listenFetchSafe(app,maxAttempts=20){
+  for(let attempt=1;attempt<=maxAttempts;attempt++){
+    await app.listen(0,'127.0.0.1');const base=await app.getUrl();
+    try{await fetch(base,{method:'HEAD'});return {base,port:Number(new URL(base).port),portRetries:attempt-1};}
+    catch(error){
+      if(!(error instanceof TypeError&&error.cause instanceof Error&&error.cause.message==='bad port'))throw error;
+      await new Promise((resolve,reject)=>app.getHttpServer().close(closeError=>closeError?reject(closeError):resolve()));
+    }
+  }
+  throw new Error(`Unable to allocate a Fetch-safe loopback port after ${maxAttempts} attempts`);
+}
 async function setup(t,{provider={generate:async input=>generation(input)},embed=embedding,rag=true}={}){
   const env=parseApiEnvironment({...process.env,NODE_ENV:'test',DATABASE_URL:db,AI_RAG_ENABLED:String(rag),AI_AUTO_ANALYZE:'false',KNOWLEDGE_STORAGE_ROOT:'artifacts/m5/integration-storage',EMBEDDING_DIMENSION:1024});
   const embeddingCalls={probe:0,documents:0,query:0},trackedEmbedding={
@@ -40,8 +51,8 @@ async function setup(t,{provider={generate:async input=>generation(input)},embed
     embedQuery:(...args)=>{embeddingCalls.query++;return embed.embedQuery(...args);},
   };
   const s=await createApplication(env,{quiet:true,log:()=>{},aiWorker:false,knowledgeWorker:false,aiProvider:provider,embeddingProvider:trackedEmbedding});
-  await s.app.listen(0,'127.0.0.1');t.after(async()=>{await s.app.close();await s.prisma.$disconnect();await s.database.close();});
-  const base=await s.app.getUrl();
+  t.after(async()=>{await s.app.close();await s.prisma.$disconnect();await s.database.close();});
+  const {base,port,portRetries}=await listenFetchSafe(s.app);
   async function call(token,path,body,method=body===undefined?'GET':'POST'){
     const r=await fetch(base+'/api/v1'+path,{method,headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1',...(body instanceof FormData?{}:{'Content-Type':'application/json'}),...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:body instanceof FormData?body:JSON.stringify(body)});const b=await r.json();return {status:r.status,body:b};
   }
@@ -54,7 +65,7 @@ async function setup(t,{provider={generate:async input=>generation(input)},embed
   }
   async function formUpload(token,bytes=Buffer.from('Synthetic '+randomUUID()),name='demo.txt',mime='text/plain') {const f=new FormData();f.set('title','Synthetic HTTP');f.set('file',new Blob([bytes],{type:mime}),name);return call(token,'/knowledge/documents',f);}
   async function start(){const r=await call(user,'/requests',{description:'17 SIM IoT mất kết nối tại Amata từ 8 giờ.'});assert.equal(r.status,201);const job=await call(manager,'/requests/'+r.body.data.id+'/ai/analyze',{expectedVersion:r.body.data.version});assert.equal(job.status,202);return {request:r.body.data,job:job.body.data};}
-  return {...s,env,profile,embeddingCalls,base,call,manager,user,staff,actor,docs,worker,retriever,upload,formUpload,start};
+  return {...s,env,profile,embeddingCalls,base,port,portRetries,call,manager,user,staff,actor,docs,worker,retriever,upload,formUpload,start};
 }
 test('M5 PostgreSQL upload/RBAC/duplicate race, immutable reindex, disable and historical source behavior',async t=>{
   const s=await setup(t),text='Synthetic IoT connectivity '+randomUUID();
@@ -106,16 +117,27 @@ test('M5 RAG citations persist, owner projection hides evidence, stale corpus/re
   for(const r of [first.request,second.request,forged.request,empty.request]){const current=await s.prisma.request.findUniqueOrThrow({where:{id:r.id}});assert.equal(current.category,null);assert.equal(current.priority,'MEDIUM');assert.equal(current.currentAssigneeId,null);assert.equal(await s.prisma.aiRecommendation.count({where:{requestId:r.id}}),0);}
 });
 test('M5 real clean-DB PDF/TXT corpus embedding + pgvector + offline provider RAG and repeat ingestion',async t=>{
+  const uniqueLexicalSignal='zeta17recovery',uniqueTargetText=`Synthetic demo document - not an actual enterprise SOP
+# SOP-IOT-04 - Mất kết nối SIM IoT synthetic
+## Tiếp nhận sự cố kết nối IoT
+Áp dụng cho cụm thiết bị thử nghiệm zeta17recovery khi SIM IoT mất kết nối. Ghi nhận số thiết bị, địa điểm và thời điểm bắt đầu.
+## Kiểm tra và chuyển cấp
+Đối chiếu APN và trạng thái đăng ký mạng; không tự thay đổi cấu hình hoặc thực hiện quyết định được bảo vệ.`;
   const targetVector=vector,distractorVector=Array.from({length:1024},(_,i)=>i<2?Math.SQRT1_2:0),embeddingCounts={target:0,distractor:0};
   const corpusEmbedding={...embedding,embedDocuments:async texts=>({identity,vectors:texts.map(text=>{const target=/Tiếp nhận sự cố kết nối IoT|Kiểm tra và chuyển cấp/u.test(text);embeddingCounts[target?'target':'distractor']++;return target?targetVector:distractorVector;}),latencyMs:0}),embedQuery:async()=>({identity,vectors:[targetVector],latencyMs:0})};
   const s=await setup(t,{embed:corpusEmbedding}),items=JSON.parse(await readFile('datasets/knowledge/manifest.json','utf8')),corpus=[];
   for(const document of await s.prisma.knowledgeDocument.findMany({where:{status:{not:'DISABLED'}}}))await s.docs.command(document.id,s.actor,document.version,'disable',randomUUID(),'Isolate profile corpus');
-  for(const item of items){const bytes=await readFile('datasets/knowledge/'+item.file);const d=await s.upload(bytes,item.file,item.file.endsWith('.pdf')?'application/pdf':'text/plain');await s.worker.tick();const ready=await s.docs.detail(d.id,s.actor);assert.equal(ready.status,'READY',ready.errorCode);corpus.push({code:item.code,id:d.id,generation:ready.activeGeneration,chunks:ready.chunkCount});await assert.rejects(s.upload(bytes,item.file,item.file.endsWith('.pdf')?'application/pdf':'text/plain'),e=>e.getStatus()===409);}
-  assert.equal(embeddingCounts.target,corpus[0].chunks);assert.equal(embeddingCounts.target+embeddingCounts.distractor,corpus.reduce((count,item)=>count+item.chunks,0));
-  const hits=await s.retriever.search('17 SIM IoT tại KCN Amata mất kết nối từ 8 giờ',AbortSignal.timeout(30000)),nearest=hits.sources[0],distractor=hits.sources.find(source=>source.documentId!==corpus[0].id);assert.equal(nearest.documentId,corpus[0].id);assert.equal(nearest.distance,0);assert.ok(distractor);assert.ok(distractor.distance>nearest.distance&&distractor.distance<=s.env.RAG_MAX_DISTANCE);
+  for(const item of items){const target=item.code==='SOP-IOT-04',file=target?'SOP-IOT-04-unique-synthetic.txt':item.file,bytes=target?Buffer.from(uniqueTargetText):await readFile('datasets/knowledge/'+item.file),mime=file.endsWith('.pdf')?'application/pdf':'text/plain';const d=await s.upload(bytes,file,mime);await s.worker.tick();const ready=await s.docs.detail(d.id,s.actor);assert.equal(ready.status,'READY',ready.errorCode);corpus.push({code:item.code,id:d.id,generation:ready.activeGeneration,chunks:ready.chunkCount});await assert.rejects(s.upload(bytes,file,mime),e=>e.getStatus()===409);}
+  if(lexical)assert.deepEqual(embeddingCounts,{target:0,distractor:0});
+  else{assert.equal(embeddingCounts.target,corpus[0].chunks);assert.equal(embeddingCounts.target+embeddingCounts.distractor,corpus.reduce((count,item)=>count+item.chunks,0));}
+  const target=corpus.find(item=>item.code==='SOP-IOT-04');assert.ok(target);
+  const chunks=await s.prisma.knowledgeChunk.findMany({where:{documentId:{in:corpus.map(item=>item.id)}},select:{documentId:true,content:true}}),occurrences=content=>content.toLocaleLowerCase('vi').split(uniqueLexicalSignal).length-1;assert.ok(chunks.filter(chunk=>chunk.documentId===target.id).reduce((count,chunk)=>count+occurrences(chunk.content),0)>=1);assert.equal(chunks.filter(chunk=>chunk.documentId!==target.id).reduce((count,chunk)=>count+occurrences(chunk.content),0),0);
+  const hits=await s.retriever.search(uniqueLexicalSignal,AbortSignal.timeout(30000)),nearest=hits.sources[0];assert.ok(nearest);assert.equal(hits.retrievalMode,retrievalMode);assert.ok(hits.sources.every(source=>corpus.some(item=>item.id===source.documentId)));
+  if(lexical){assert.equal(nearest.documentId,target.id);assert.match(nearest.excerpt,/zeta17recovery/u);}
+  else{const distractor=hits.sources.find(source=>source.documentId!==target.id);assert.equal(nearest.documentId,target.id);assert.equal(nearest.distance,0);assert.ok(distractor);assert.ok(distractor.distance>nearest.distance&&distractor.distance<=s.env.RAG_MAX_DISTANCE);}
   const r=await s.start();await s.app.get(AnalysisWorker).tick();const run=await s.prisma.aiRun.findUniqueOrThrow({where:{id:r.job.aiRunId}});assert.equal(run.status,'SUCCEEDED',run.errorCode);assert.ok(run.safeResultJson.citations.length>0);
   await s.app.get(RagHealth).refresh();const health=s.app.get(RagHealth).view();assert.equal(health.embedding,lexical?'NOT_REQUIRED':'UP');assert.equal(health.knowledge,'READY');
   if(lexical){assert.equal(health.status,'READY');assert.equal(health.errorCode,null);assert.deepEqual(s.embeddingCalls,{probe:0,documents:0,query:0});}
   else{assert.equal(health.status,'NOT_READY');assert.equal(health.errorCode,'REQUEST_INDEX_INCOMPLETE');assert.ok(s.embeddingCalls.probe>0&&s.embeddingCalls.documents>0&&s.embeddingCalls.query>0);}
-  await mkdir('artifacts/m2',{recursive:true});await writeFile(`artifacts/m2/${profile}-knowledge.json`,JSON.stringify({at:new Date().toISOString(),profile,corpus,identity:hits.identity,sourceIds:hits.sources.map(r=>r.sourceId),runId:run.id,status:run.status,citations:run.safeResultJson.citations,latencyMs:run.latencyMs,embeddingCalls:s.embeddingCalls,health},null,2)+'\n');
+  await mkdir('artifacts/m2',{recursive:true});await writeFile(`artifacts/m2/${profile}-knowledge.json`,JSON.stringify({at:new Date().toISOString(),profile,port:s.port,portRetries:s.portRetries,corpus,identity:hits.identity,sourceIds:hits.sources.map(r=>r.sourceId),runId:run.id,status:run.status,citations:run.safeResultJson.citations,latencyMs:run.latencyMs,embeddingCalls:s.embeddingCalls,health},null,2)+'\n');
 });
