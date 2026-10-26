@@ -7,7 +7,7 @@ import {SessionGate} from './session-shell';
 import {BookOpen,Upload} from 'lucide-react';
 import {EmptyState,PageHeader,StatusBadge} from './ui/patterns';
 const labels:Record<string,string>={UPLOADED:'Đã tải lên',PROCESSING:'Đang lập chỉ mục',READY:'Có thể tra cứu',FAILED:'Lập chỉ mục thất bại',DISABLED:'Đã vô hiệu hóa'};
-export function SourceLink({source}:{source:Source}){return <Link href={'/knowledge/sources/'+encodeURIComponent(source.sourceId)}>{source.title}{source.pageNumber?' · Trang '+source.pageNumber:source.section?' · '+source.section:''}</Link>;}
+export function SourceLink({source}:{source:Source}){return <Link className="source-link" href={'/knowledge/sources/'+encodeURIComponent(source.sourceId)}>{source.title}{source.pageNumber?' · Trang '+source.pageNumber:source.section?' · '+source.section:''}</Link>;}
 export function Knowledge(){
   const user=useSyncExternalStore(subscribe,getProfile,serverProfile),[rows,setRows]=useState<KnowledgeDocumentView[]>([]),[selected,setSelected]=useState<KnowledgeDocumentView|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[loading,setLoading]=useState(true),[revision,setRevision]=useState(0),[cursor,setCursor]=useState(''),[next,setNext]=useState<string|null>(null),[stale,setStale]=useState(false);
   useEffect(()=>{

@@ -9,6 +9,7 @@ import {DocumentService} from '../dist/knowledge/document.service.js';
 import {KnowledgeRetriever} from '../dist/knowledge/retriever.js';
 import {VectorRepository} from '../dist/knowledge/vector.repository.js';
 import {RagHealth} from '../dist/knowledge/rag-health.js';
+import {LexicalRepository} from '../dist/knowledge/lexical.repository.js';
 import {AnalysisWorker} from '../dist/ai/analysis-worker.js';
 import {AuthService} from '../dist/auth/auth.service.js';
 import {KnowledgeFailure,identityKey} from '../dist/knowledge/embedding-provider.js';
@@ -17,6 +18,9 @@ import {citationHasRequestTerm} from '../dist/knowledge/rag-output.js';
 import {Client} from 'pg';
 /* global FormData, Blob */
 const db=process.env.M2_INTEGRATION_DATABASE_URL;if(!db||new URL(db).pathname!=='/mobiflow_m2_test')throw Error('Dedicated test database required');
+const generationProvider=process.env.AI_GENERATION_PROVIDER,retrievalMode=process.env.RAG_RETRIEVAL_MODE;
+assert.ok(generationProvider==='deepseek'&&retrievalMode==='lexical'||generationProvider==='ollama'&&retrievalMode==='vector','Explicit compatible integration profile required');
+const lexical=retrievalMode==='lexical',profile=`${generationProvider}-${retrievalMode}`;
 const baseIdentity={provider:'test',model:'fixture:1',digest:'explicit-fixture',dimension:1024,revision:'test.v1'},identity={...baseIdentity,key:identityKey(baseIdentity)},vector=Array.from({length:1024},(_,i)=>i===0?1:0);
 const embedding={probe:async()=>({identity,vectors:[vector],latencyMs:0}),embedDocuments:async texts=>({identity,vectors:texts.map(()=>vector),latencyMs:0}),embedQuery:async()=>({identity,vectors:[vector],latencyMs:0})};
 const analysis={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'HIGH',entities:{customer:null,location:null,affectedCount:17,startedAt:null},missingFields:['location','startedAt'],confidence:.8,reasonSummary:'Nhiều SIM được báo mất kết nối.'};
@@ -30,7 +34,12 @@ const generation=input=>{
 };
 async function setup(t,{provider={generate:async input=>generation(input)},embed=embedding,rag=true}={}){
   const env=parseApiEnvironment({...process.env,NODE_ENV:'test',DATABASE_URL:db,AI_RAG_ENABLED:String(rag),AI_AUTO_ANALYZE:'false',KNOWLEDGE_STORAGE_ROOT:'artifacts/m5/integration-storage',EMBEDDING_DIMENSION:1024});
-  const s=await createApplication(env,{quiet:true,log:()=>{},aiWorker:false,knowledgeWorker:false,aiProvider:provider,embeddingProvider:embed});
+  const embeddingCalls={probe:0,documents:0,query:0},trackedEmbedding={
+    probe:(...args)=>{embeddingCalls.probe++;return embed.probe(...args);},
+    embedDocuments:(...args)=>{embeddingCalls.documents++;return embed.embedDocuments(...args);},
+    embedQuery:(...args)=>{embeddingCalls.query++;return embed.embedQuery(...args);},
+  };
+  const s=await createApplication(env,{quiet:true,log:()=>{},aiWorker:false,knowledgeWorker:false,aiProvider:provider,embeddingProvider:trackedEmbedding});
   await s.app.listen(0,'127.0.0.1');t.after(async()=>{await s.app.close();await s.prisma.$disconnect();await s.database.close();});
   const base=await s.app.getUrl();
   async function call(token,path,body,method=body===undefined?'GET':'POST'){
@@ -45,12 +54,14 @@ async function setup(t,{provider={generate:async input=>generation(input)},embed
   }
   async function formUpload(token,bytes=Buffer.from('Synthetic '+randomUUID()),name='demo.txt',mime='text/plain') {const f=new FormData();f.set('title','Synthetic HTTP');f.set('file',new Blob([bytes],{type:mime}),name);return call(token,'/knowledge/documents',f);}
   async function start(){const r=await call(user,'/requests',{description:'17 SIM IoT mất kết nối tại Amata từ 8 giờ.'});assert.equal(r.status,201);const job=await call(manager,'/requests/'+r.body.data.id+'/ai/analyze',{expectedVersion:r.body.data.version});assert.equal(job.status,202);return {request:r.body.data,job:job.body.data};}
-  return {...s,env,base,call,manager,user,staff,actor,docs,worker,retriever,upload,formUpload,start};
+  return {...s,env,profile,embeddingCalls,base,call,manager,user,staff,actor,docs,worker,retriever,upload,formUpload,start};
 }
 test('M5 PostgreSQL upload/RBAC/duplicate race, immutable reindex, disable and historical source behavior',async t=>{
   const s=await setup(t),text='Synthetic IoT connectivity '+randomUUID();
   for(const [token,status]of [[null,401],[s.user,403],[s.staff,403]])assert.equal((await s.formUpload(token)).status,status);
   assert.equal((await s.formUpload(s.manager,Buffer.from('hello'),'../bad.txt')).status,400);
+  assert.equal((await s.formUpload(s.manager,Buffer.alloc(10485761),'large.txt','text/plain')).status,413);
+  assert.equal((await s.formUpload(s.manager,Buffer.from('<html>synthetic</html>'),'payload.html','text/html')).status,415);
   const duplicate=await Promise.allSettled([s.upload(text),s.upload(text)]);assert.equal(duplicate.filter(r=>r.status==='fulfilled').length,1);assert.equal(duplicate.find(r=>r.status==='rejected').reason.getStatus(),409);
   const id=duplicate.find(r=>r.status==='fulfilled').value.id;
   assert.equal((await s.call(s.staff,'/knowledge/documents/'+id)).status,404);await s.worker.tick();let d=await s.docs.detail(id,s.actor);assert.equal(d.status,'READY');assert.equal(d.pageCount,null);assert.equal(d.sources.length,1);
@@ -65,8 +76,11 @@ test('M5 PostgreSQL upload/RBAC/duplicate race, immutable reindex, disable and h
 });
 test('M5 partial embeddings fail atomically; disable during embedding and expired lease cannot publish',async t=>{
   let calls=0;const s=await setup(t,{embed:{...embedding,embedDocuments:async texts=>{if(++calls===2)throw new KnowledgeFailure('EMBEDDING_UNAVAILABLE');return embedding.embedDocuments(texts);}}});
-  const d=await s.upload('Synthetic '+('x'.repeat(18000)));await s.worker.tick();assert.equal((await s.docs.detail(d.id,s.actor)).status,'FAILED');assert.equal(await s.prisma.knowledgeChunk.count({where:{documentId:d.id}}),0);
-  let release,entered;const waiting=new Promise(r=>{entered=r;});const s2=await setup(t,{embed:{...embedding,embedDocuments:async texts=>{entered();await new Promise(r=>{release=r;});return embedding.embedDocuments(texts);}}});
+  const d=await s.upload('Synthetic '+('x'.repeat(18000)));await s.worker.tick();
+  if(lexical){assert.equal((await s.docs.detail(d.id,s.actor)).status,'READY');assert.equal(calls,0);assert.ok(await s.prisma.knowledgeChunk.count({where:{documentId:d.id}})>0);}
+  else{assert.equal((await s.docs.detail(d.id,s.actor)).status,'FAILED');assert.equal(await s.prisma.knowledgeChunk.count({where:{documentId:d.id}}),0);}
+  let release,entered;const waiting=new Promise(r=>{entered=r;});const s2=await setup(t,{embed:lexical?{probe:async()=>{throw new Error('LEXICAL_PROFILE_MUST_NOT_EMBED');},embedDocuments:async()=>{throw new Error('LEXICAL_PROFILE_MUST_NOT_EMBED');},embedQuery:async()=>{throw new Error('LEXICAL_PROFILE_MUST_NOT_EMBED');}}:{...embedding,embedDocuments:async texts=>{entered();await new Promise(r=>{release=r;});return embedding.embedDocuments(texts);}}});
+  if(lexical){const repository=s2.app.get(LexicalRepository),compatible=repository.compatible.bind(repository);let calls=0;repository.compatible=async tx=>{if(!tx&&++calls===1){entered();await new Promise(r=>{release=r;});}return compatible(tx);};}
   const racing=await s2.upload();const work=s2.worker.tick();await waiting;let current=await s2.docs.detail(racing.id,s2.actor);await s2.docs.command(current.id,s2.actor,current.version,'disable',randomUUID(),'Disable in flight');release();await work;assert.equal((await s2.docs.detail(current.id,s2.actor)).status,'DISABLED');assert.equal(await s2.prisma.knowledgeChunk.count({where:{documentId:current.id}}),0);
   const expired=await s2.upload();await s2.prisma.knowledgeDocument.update({where:{id:expired.id},data:{status:'PROCESSING',leaseUntil:new Date(0)}});await s2.worker.tick();current=await s2.docs.detail(expired.id,s2.actor);assert.equal(current.status,'FAILED');assert.equal(current.errorCode,'INDEX_TIMEOUT');
 });
@@ -93,9 +107,12 @@ test('M5 RAG citations persist, owner projection hides evidence, stale corpus/re
 });
 test('M5 real clean-DB PDF/TXT corpus embedding + pgvector + offline provider RAG and repeat ingestion',async t=>{
   const s=await setup(t),items=JSON.parse(await readFile('datasets/knowledge/manifest.json','utf8')),corpus=[];
+  for(const document of await s.prisma.knowledgeDocument.findMany({where:{status:{not:'DISABLED'}}}))await s.docs.command(document.id,s.actor,document.version,'disable',randomUUID(),'Isolate profile corpus');
   for(const item of items){const bytes=await readFile('datasets/knowledge/'+item.file);const d=await s.upload(bytes,item.file,item.file.endsWith('.pdf')?'application/pdf':'text/plain');await s.worker.tick();const ready=await s.docs.detail(d.id,s.actor);assert.equal(ready.status,'READY',ready.errorCode);corpus.push({code:item.code,id:d.id,generation:ready.activeGeneration,chunks:ready.chunkCount});await assert.rejects(s.upload(bytes,item.file,item.file.endsWith('.pdf')?'application/pdf':'text/plain'),e=>e.getStatus()===409);}
   const hits=await s.retriever.search('17 SIM IoT tại KCN Amata mất kết nối từ 8 giờ',AbortSignal.timeout(30000));assert.ok(hits.sources.some(r=>r.documentId===corpus[0].id));
   const r=await s.start();await s.app.get(AnalysisWorker).tick();const run=await s.prisma.aiRun.findUniqueOrThrow({where:{id:r.job.aiRunId}});assert.equal(run.status,'SUCCEEDED',run.errorCode);assert.ok(run.safeResultJson.citations.length>0);
-  await s.app.get(RagHealth).refresh();const health=s.app.get(RagHealth).view();assert.equal(health.embedding,'UP');assert.equal(health.knowledge,'READY');assert.equal(health.status,'NOT_READY');assert.equal(health.errorCode,'REQUEST_INDEX_INCOMPLETE');
-  await mkdir('docs/verification/evidence',{recursive:true});await writeFile('docs/verification/evidence/M5_CLEAN_DATABASE_LIVE.json',JSON.stringify({at:new Date().toISOString(),corpus,identity:hits.identity,sourceIds:hits.sources.map(r=>r.sourceId),runId:run.id,status:run.status,citations:run.safeResultJson.citations,latencyMs:run.latencyMs,health},null,2)+'\n');
+  await s.app.get(RagHealth).refresh();const health=s.app.get(RagHealth).view();assert.equal(health.embedding,lexical?'NOT_REQUIRED':'UP');assert.equal(health.knowledge,'READY');
+  if(lexical){assert.equal(health.status,'READY');assert.equal(health.errorCode,null);assert.deepEqual(s.embeddingCalls,{probe:0,documents:0,query:0});}
+  else{assert.equal(health.status,'NOT_READY');assert.equal(health.errorCode,'REQUEST_INDEX_INCOMPLETE');assert.ok(s.embeddingCalls.probe>0&&s.embeddingCalls.documents>0&&s.embeddingCalls.query>0);}
+  await mkdir('artifacts/m2',{recursive:true});await writeFile(`artifacts/m2/${profile}-knowledge.json`,JSON.stringify({at:new Date().toISOString(),profile,corpus,identity:hits.identity,sourceIds:hits.sources.map(r=>r.sourceId),runId:run.id,status:run.status,citations:run.safeResultJson.citations,latencyMs:run.latencyMs,embeddingCalls:s.embeddingCalls,health},null,2)+'\n');
 });

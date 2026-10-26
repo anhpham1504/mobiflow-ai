@@ -90,7 +90,7 @@ export class RecommendationService {
       const evidenceDecision=v2?decideRecommendationEvidence(evidenceV2,this.env.RAG_MAX_DISTANCE):null;
       if(v2)await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}))}});
       let feedback='';
-      for(let attempt=0;attempt<2;attempt++){
+      for(let attempt=0;attempt<this.env.AI_GENERATION_MAX_ATTEMPTS;attempt++){
         await this.tools.authorize(ctx);
         await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retryCount:attempt}});
         try{
@@ -105,7 +105,7 @@ export class RecommendationService {
           const result=v2?parseRecommendationV2ForGeneration(generation.raw,evidenceV2,evidenceDecision!):parseRecommendationForVersion(queued.schemaVersion,generation.raw,evidence,true);
           await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,...(v2?{_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}:{})})),inputSize:JSON.stringify(messages).length}});
           await this.machine.publishRecommendation(queued.id,result,generation.identity,generation.outputSize,Math.round(performance.now()-start));return true;
-        }catch(error){if(error instanceof AiFailure){feedback=error.repairFeedback;await this.prisma.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:queued.initiatingActorId,action:'RECOMMENDATION_ATTEMPT_FAILED',resourceType:'AiRun',resourceId:queued.id,requestCorrelationId:queued.id,safeAfterJson:{attempt:attempt+1,errorCode:error.code,validationRule:feedback.split(':')[0]||error.code},outcome:'FAILED'}});}if(!(error instanceof AiFailure)||!error.retryable||attempt===1||signal.aborted)throw error;await delay(1000,undefined,{signal});}
+        }catch(error){if(error instanceof AiFailure){feedback=error.repairFeedback;await this.prisma.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:queued.initiatingActorId,action:'RECOMMENDATION_ATTEMPT_FAILED',resourceType:'AiRun',resourceId:queued.id,requestCorrelationId:queued.id,safeAfterJson:{attempt:attempt+1,errorCode:error.code,validationRule:feedback.split(':')[0]||error.code},outcome:'FAILED'}});}if(!(error instanceof AiFailure)||!error.retryable||attempt===this.env.AI_GENERATION_MAX_ATTEMPTS-1||signal.aborted)throw error;await delay(1000,undefined,{signal});}
       }
     }catch(error){const code=signal.aborted?'AI_TIMEOUT':error instanceof ApiError||error instanceof AiFailure||error instanceof ToolFailure||error instanceof KnowledgeFailure?error.code:'RECOMMENDATION_UNAVAILABLE';await this.fail(queued.id,code,Math.round(performance.now()-start));}
     return true;

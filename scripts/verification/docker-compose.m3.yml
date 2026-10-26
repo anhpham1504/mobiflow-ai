@@ -1,0 +1,39 @@
+services:
+  postgres:
+    ports: !override ["127.0.0.1:55449:5432"]
+  api:
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('node:http').get('http://127.0.0.1:3001/health/ready',r=>process.exit(r.statusCode>=200&&r.statusCode<300?0:1)).on('error',()=>process.exit(1))"]
+    environment:
+      NODE_OPTIONS: --import=/m3/deepseek-canary-fetch-guard.mjs
+      DEEPSEEK_CANARY_GUARD_ENABLED: ${DEEPSEEK_CANARY_GUARD_ENABLED:-false}
+      DEEPSEEK_CANARY_LEDGER_PATH: /m3-runtime/ledger.json
+      DEEPSEEK_CANARY_MAX_HTTP_ATTEMPTS: "20"
+      DEEPSEEK_CANARY_BUDGET_USD: "0.50"
+      AI_GENERATION_MAX_ATTEMPTS: "1"
+      AI_GENERATION_PROVIDER: deepseek
+      AI_PROVIDER: deepseek
+      RAG_RETRIEVAL_MODE: lexical
+      AI_LIVE_CALLS_ENABLED: ${AI_LIVE_CALLS_ENABLED:-false}
+      DEEPSEEK_BUDGET_USD: "0.25"
+      DEEPSEEK_MAX_CALLS_PER_PROCESS: "20"
+      DEEPSEEK_MAX_REQUESTS_PER_MINUTE: "10"
+      DEEPSEEK_MAX_CONCURRENT_REQUESTS: "1"
+      DEEPSEEK_MODEL: deepseek-flash
+      DEEPSEEK_BASE_URL: https://api.deepseek.com/
+      DEEPSEEK_PRICE_CACHE_HIT_INPUT_PER_MILLION_USD: "0.006"
+      DEEPSEEK_PRICE_CACHE_MISS_INPUT_PER_MILLION_USD: "0.30"
+      DEEPSEEK_PRICE_OUTPUT_PER_MILLION_USD: "1.20"
+      DEEPSEEK_PRICING_EFFECTIVE_DATE: "2026-10-24"
+      AI_MAX_OUTPUT_TOKENS: "1200"
+      AI_ATTEMPT_TIMEOUT_MS: "120000"
+      AI_RUN_TIMEOUT_MS: "300000"
+      AI_TEMPERATURE: "0"
+      AI_AUTO_ANALYZE: "true"
+      AI_RAG_ENABLED: "true"
+    ports: !override ["127.0.0.1:35411:3001"]
+    volumes:
+      - ./scripts/verification/deepseek-canary-fetch-guard.mjs:/m3/deepseek-canary-fetch-guard.mjs:ro
+      - ./artifacts/m3/runtime:/m3-runtime
+  web:
+    ports: !override ["127.0.0.1:35410:3000"]

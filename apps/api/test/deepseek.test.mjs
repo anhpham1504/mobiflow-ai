@@ -32,7 +32,7 @@ test('DeepSeek adapter uses JSON mode, redacts outbound PII and records usage/co
   assert.equal(result.raw,output);assert.equal(result.identity.provider,'deepseek');assert.equal(result.identity.model,'deepseek-flash');assert.equal(result.identity.usage.promptCacheHitTokens,40);assert.equal(result.identity.usage.promptCacheMissTokens,60);
   assert.equal(result.identity.estimatedCostUsd,(40*env.DEEPSEEK_PRICE_CACHE_HIT_INPUT_PER_MILLION_USD+60*env.DEEPSEEK_PRICE_CACHE_MISS_INPUT_PER_MILLION_USD+20*env.DEEPSEEK_PRICE_OUTPUT_PER_MILLION_USD)/1e6);
   assert.equal(JSON.stringify(result).includes('PRIVATE_REASONING'),false);assert.equal(calls[0].url,'/chat/completions');assert.equal(calls[0].authorization,'Bearer '+base.DEEPSEEK_API_KEY);
-  assert.deepEqual(calls[0].body.response_format,{type:'json_object'});assert.equal(calls[0].body.stream,false);assert.equal(calls[0].body.model,'deepseek-flash');
+  assert.deepEqual(calls[0].body.thinking,{type:'disabled'});assert.deepEqual(calls[0].body.response_format,{type:'json_object'});assert.equal(calls[0].body.stream,false);assert.equal(calls[0].body.model,'deepseek-flash');
   const sent=JSON.stringify(calls[0].body);assert.equal(sent.includes('synthetic@example.test'),false);assert.equal(sent.includes('+84 912 345 678'),false);assert.match(sent,/REDACTED_EMAIL/);assert.match(sent,/REDACTED_PHONE/);
 });
 
@@ -60,9 +60,31 @@ test('DeepSeek timeout, cancellation and transport failures are bounded and neve
   const canceledFixture=await fixture(t,'timeout'),controller=new AbortController(),pending=canceledFixture.provider.generateStructured(messages,format,controller.signal);controller.abort();await assert.rejects(pending,error=>error.code==='AI_CANCELED'&&!String(error).includes(base.DEEPSEEK_API_KEY));
 });
 
+test('DeepSeek adapter classifies an untrusted TLS certificate without exposing transport details',async t=>{
+  const originalFetch=globalThis.fetch;
+  t.after(()=>{globalThis.fetch=originalFetch;});
+  globalThis.fetch=async()=>{const error=new TypeError('synthetic transport failure');error.cause={code:'SELF_SIGNED_CERT_IN_CHAIN'};throw error;};
+  const env=parseApiEnvironment({...base,DEEPSEEK_BASE_URL:'https://api.deepseek.com/'}),provider=new DeepSeekProvider(env);
+  await assert.rejects(provider.generateStructured(messages,format,AbortSignal.timeout(1000)),error=>error.code==='AI_TLS_CERTIFICATE_UNTRUSTED'&&!error.retryable&&!String(error).includes(base.DEEPSEEK_API_KEY));
+  assert.deepEqual(provider.healthSnapshot(),{status:'DOWN',code:'UNAVAILABLE'});
+});
+
 test('bounded analysis orchestration retries DeepSeek 429 and 5xx once, then publishes only valid JSON',async t=>{
   const analysis={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'MEDIUM',entities:{customer:null,location:null,affectedCount:null,startedAt:null},missingFields:['location','startedAt'],confidence:.5,reasonSummary:'SIM IoT mất kết nối; cần bổ sung vị trí và thời gian.'},input={title:'Sự cố',description:'SIM IoT mất kết nối.',messages:[],historyTruncated:false};
   for(const first of ['429','500'])await t.test(first,async sub=>{const {provider,calls}=await fixture(sub,[first,'ok'],JSON.stringify(analysis)),result=await executeAnalysis(provider,input,AbortSignal.timeout(5000));assert.equal(result.retryCount,1);assert.equal(result.analysis.category,'NETWORK');assert.equal(calls.length,2);});
 });
 
+test('canary attempt limit disables orchestration retries before a second HTTP dispatch',async t=>{
+  const analysis={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNECTIVITY',prioritySuggestion:'HIGH',entities:{customer:'Công ty Mô phỏng Sao Mai',location:'Khu Thử Nghiệm Alpha',affectedCount:17,startedAt:'08:00'},missingFields:[],confidence:.8,reasonSummary:'Mười bảy thiết bị IoT synthetic mất kết nối tại địa điểm thử nghiệm.'},input={title:'Sự cố synthetic',description:'Mười bảy thiết bị IoT synthetic mất kết nối.',messages:[],historyTruncated:false};
+  const {provider,calls}=await fixture(t,'429',JSON.stringify(analysis));
+  await assert.rejects(executeAnalysis(provider,input,AbortSignal.timeout(5000),async()=>{},1),error=>error.code==='AI_RATE_LIMITED');
+  assert.equal(calls.length,1);
+});
+
 test('privacy redactor never returns configured secret-like values',()=>{const synthetic='ds-'+'abcdefghijklmnop';assert.equal(redactCloudContent(`Bearer secret_token_1234567890 ${synthetic}`).includes('abcdefghijklmnop'),false);});
+
+test('privacy redactor preserves ISO dates and numeric UUIDs while masking real phone numbers',()=>{
+  const date='2026-10-23',uuid='10000000-0000-4000-8000-000000000003',phone='+84 901 234 567';
+  const redacted=redactCloudContent(`Snapshot ${date}; staff ${uuid}; synthetic contact ${phone}.`);
+  assert.match(redacted,new RegExp(date));assert.match(redacted,new RegExp(uuid));assert.equal(redacted.includes(phone),false);assert.match(redacted,/REDACTED_PHONE/u);
+});

@@ -13,8 +13,10 @@ test('AI settings enable intake by default and enforce bounded inference at star
   assert.equal(env.AI_AUTO_ANALYZE,true);
   assert.equal(env.AI_ATTEMPT_TIMEOUT_MS,120000);
   assert.equal(env.AI_RUN_TIMEOUT_MS,300000);
+  assert.equal(env.AI_GENERATION_MAX_ATTEMPTS,2);
+  assert.equal(parseApiEnvironment({...valid,AI_GENERATION_MAX_ATTEMPTS:'1'}).AI_GENERATION_MAX_ATTEMPTS,1);
   assert.equal(parseApiEnvironment({...valid,AI_AUTO_ANALYZE:'false'}).AI_AUTO_ANALYZE,false);
-  for(const change of [{AI_AUTO_ANALYZE:'yes'},{AI_ATTEMPT_TIMEOUT_MS:120001},{AI_RUN_TIMEOUT_MS:300001},{AI_TEMPERATURE:2},{AI_MAX_OUTPUT_TOKENS:4097},{AI_PROVIDER:'cloud'}]){
+  for(const change of [{AI_AUTO_ANALYZE:'yes'},{AI_ATTEMPT_TIMEOUT_MS:120001},{AI_RUN_TIMEOUT_MS:300001},{AI_GENERATION_MAX_ATTEMPTS:0},{AI_GENERATION_MAX_ATTEMPTS:3},{AI_TEMPERATURE:2},{AI_MAX_OUTPUT_TOKENS:4097},{AI_PROVIDER:'cloud'}]){
     assert.throws(()=>parseApiEnvironment({...valid,...change}),/Invalid environment keys:/);
   }
 });

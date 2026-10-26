@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {test,before,after} from 'node:test';
 import {randomUUID} from 'node:crypto';
+import {request as httpRequest} from 'node:http';
 import {writeFileSync,mkdirSync} from 'node:fs';
 import {createReleaseHarness,workflowSnapshot,releaseProcedureText} from './helpers/release-hardening-fixture.mjs';
 import {RoutingService} from '../dist/routing/routing.service.js';
@@ -83,7 +84,7 @@ test('M24 actual AI builders exclude all V1.3 private objects with deterministic
  const recommendation=s.app.get(RecommendationService),rec=await recommendation.schedule(fixture.id,s.manager.actor,fixture.version,randomUUID());await recommendation.cycle(AbortSignal.timeout(30000));assert.equal((await s.prisma.aiRun.findUniqueOrThrow({where:{id:rec.id}})).status,'SUCCEEDED');
  fixture=await s.assign(fixture);const before=await business(fixture.id),operations=s.app.get(OperationalAiService),copilot=await operations.scheduleCopilot(fixture.id,s.staff.actor,{expectedVersion:fixture.version,action:'SUMMARIZE_REQUEST'},randomUUID());
  for(let i=0;i<6&&['QUEUED','RUNNING'].includes((await s.prisma.aiRun.findUniqueOrThrow({where:{id:copilot.id}})).status);i++)await operations.cycle(AbortSignal.timeout(30000));assert.equal((await s.prisma.aiRun.findUniqueOrThrow({where:{id:copilot.id}})).status,'SUCCEEDED');assert.deepEqual(await business(fixture.id),before);
- assert.ok(s.captured.intake.length&&s.captured.embedding.length&&s.captured.structured.length>=2);
+ assert.ok(s.captured.intake.length&&s.captured.structured.length>=2);assert.equal(s.captured.embedding.length>0,s.env.RAG_RETRIEVAL_MODE==='vector');
  for(const value of [privateBody,canary.id,responseTemplate.id,checklistTemplate.id,rule.id,view.id,'RequestInternalNote','RequestWatcher','SavedRequestView','SlaOperationalAlert'])assert.equal(JSON.stringify(s.captured).includes(value),false,'Private AI context '+value);
  pass('deterministicAiIsolationNoProtectedWrites');
 });
@@ -113,6 +114,9 @@ test('M24 current guards reject strict/media/origin/payload/rate/session violati
  assert.equal((await s.call(s.staff.token,path,body,'POST',{Origin:'https://invalid.example'})).status,403);
  assert.equal((await s.call(s.staff.token,path,body,'POST',{'Content-Type':'text/plain'})).status,415);
  assert.equal((await s.call(s.staff.token,path,{...body,name:'x'.repeat(70000)})).status,413);
+ const documentsBefore=await s.prisma.knowledgeDocument.count(),target=new URL('/api/v1/knowledge/documents',s.base);
+ await new Promise(resolve=>{const request=httpRequest(target,{method:'POST',headers:{Origin:s.env.WEB_ORIGIN,'X-CSRF-Protection':'1',Authorization:'Bearer '+s.manager.token,'Content-Type':'multipart/form-data; boundary=m24-aborted','Content-Length':'4096'}});request.on('error',()=>resolve());request.on('close',()=>resolve());request.write('--m24-aborted\r\nContent-Disposition: form-data; name="title"\r\n\r\nInterrupted upload\r\n--m24-aborted\r\nContent-Disposition: form-data; name="file"; filename="partial.txt"\r\nContent-Type: text/plain\r\n\r\npartial');setTimeout(()=>request.destroy(),20);});
+ assert.equal((await s.call(s.manager.token,'/knowledge/documents')).status,200);assert.equal(await s.prisma.knowledgeDocument.count(),documentsBefore);
  const seed=await s.prisma.user.findUniqueOrThrow({where:{id:s.staff.actor.id}}),row=await s.prisma.user.create({data:{id:randomUUID(),email:randomUUID()+'@synthetic.local',displayName:'M24 rate',passwordHash:seed.passwordHash,role:'STAFF'}}),actor=await s.login(row.email),original=Date.now;let now=original();Date.now=()=>now;
  try{for(let i=0;i<120;i++)assert.equal((await s.call(actor.token,path,undefined,'GET',{},1)).status,200);const limited=await s.call(actor.token,path,undefined,'GET',{},1);assert.equal(limited.status,429);const retry=Number(limited.headers.get('retry-after'));assert.ok(retry>0);now+=retry*1000+1;assert.equal((await s.call(actor.token,path)).status,200);await s.prisma.refreshSession.update({where:{id:actor.actor.sessionId},data:{revokedAt:new Date()}});assert.equal((await s.call(actor.token,path)).status,401);}finally{Date.now=original;}
  pass('transportRateSessionGuards');

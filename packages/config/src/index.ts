@@ -43,6 +43,7 @@ const apiEnvironmentSchema = z.object({
   RAG_CONTEXT_CHARS: z.coerce.number().int().min(1200).max(6000).default(6000),
   AI_ATTEMPT_TIMEOUT_MS: z.coerce.number().int().min(100).max(120000).default(120000),
   AI_RUN_TIMEOUT_MS: z.coerce.number().int().min(1000).max(300000).default(300000),
+  AI_GENERATION_MAX_ATTEMPTS: z.coerce.number().int().min(1).max(2).default(2),
   AI_TEMPERATURE: z.coerce.number().min(0).max(1).default(0),
   AI_MAX_OUTPUT_TOKENS: z.coerce.number().int().min(128).max(4096).default(1200),
   DEEPSEEK_BASE_URL: httpUrl.default('https://api.deepseek.com/'),

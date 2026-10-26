@@ -2,9 +2,10 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {AiFailure,normalizedFailure,parseAnalysis,type AiProvider} from './provider.js';
 import type {AnalysisInput} from './prompts/request-analysis.js';
 import {parseRagOutput} from '../knowledge/rag-output.js';
-export async function executeAnalysis(provider:AiProvider,input:AnalysisInput,signal:AbortSignal,onAttempt:(attempt:number)=>Promise<void>=async()=>{}){
+export async function executeAnalysis(provider:AiProvider,input:AnalysisInput,signal:AbortSignal,onAttempt:(attempt:number)=>Promise<void>=async()=>{},maxAttempts=2){
+  if(!Number.isInteger(maxAttempts)||maxAttempts<1||maxAttempts>2)throw new AiFailure('AI_INVALID_ATTEMPT_LIMIT');
   const started=performance.now();let firstAttemptValid=false,feedback='';
-  for(let attempt=0;attempt<2;attempt++){
+  for(let attempt=0;attempt<maxAttempts;attempt++){
     if(signal.aborted)throw new AiFailure('AI_CANCELED');
     await onAttempt(attempt);
     try{
@@ -14,7 +15,7 @@ export async function executeAnalysis(provider:AiProvider,input:AnalysisInput,si
     }catch(error){
       const failure=normalizedFailure(error,signal);
       feedback=failure.repairFeedback;
-      if(!failure.retryable||attempt===1||signal.aborted)throw failure;
+      if(!failure.retryable||attempt===maxAttempts-1||signal.aborted)throw failure;
       try{await delay(1000,undefined,{signal});}catch{throw new AiFailure('AI_CANCELED');}
     }
   }

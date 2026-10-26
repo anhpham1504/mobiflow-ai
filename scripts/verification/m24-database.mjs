@@ -10,21 +10,23 @@ import { m24Environment } from './m24-runtime.mjs';
 import { seedDemo } from '../demo/seed-data.mjs';
 
 export const m24Migration = '20261004010000_m23_saved_request_views';
+export const v13Migration = '20261023010000_v13_lexical_retrieval';
 export const migrationNames = readdirSync('apps/api/prisma/migrations').filter(name => /^\d/.test(name)).sort();
 export function runNode(args, env = {}) {
   const result = spawnSync(process.execPath, args, { cwd: process.cwd(), env: { ...process.env, ...env }, stdio: 'inherit', windowsHide: true });
   if (result.status !== 0) throw new Error('M24 child command failed: ' + args.join(' '));
 }
 function configFor(count) {
-  assert.ok([7, 8, 9, 10, 11, 12, 13].includes(count)); assert.equal(migrationNames.length, 13); assert.equal(migrationNames[12], m24Migration);
+  assert.ok([7, 8, 9, 10, 11, 12, 13, 14].includes(count)); assert.equal(migrationNames.length, 14); assert.equal(migrationNames[12], m24Migration); assert.equal(migrationNames[13],v13Migration);
   mkdirSync('artifacts/m24', { recursive: true });
   const folder = mkdtempSync(resolve('artifacts/m24/migrations-' + count + '-'));
   const schemaPath = join(folder, 'schema.prisma'), migrationsPath = join(folder, 'migrations');
   const ref = count === 7 ? 'v1.2.0' : '4735afafe7cda4dbf98bdd387cc2fd49db22f764';
-  writeFileSync(schemaPath, count === 13 ? readFileSync('apps/api/prisma/schema.prisma') : execFileSync('git', ['show', ref + ':apps/api/prisma/schema.prisma'], { windowsHide: true }));
+  writeFileSync(schemaPath, count === 14 ? readFileSync('apps/api/prisma/schema.prisma') : execFileSync('git', ['show', ref + ':apps/api/prisma/schema.prisma'], { windowsHide: true }));
   for (const name of migrationNames.slice(0, count)) {
     const path = 'apps/api/prisma/migrations/' + name + '/migration.sql', bytes = readFileSync(path);
-    if (name !== m24Migration) assert.equal(bytes.toString().replaceAll('\r\n', '\n'), execFileSync('git', ['show', '4735afafe7cda4dbf98bdd387cc2fd49db22f764:' + path], { windowsHide: true, encoding: 'utf8' }).replaceAll('\r\n', '\n'), 'Historical migration changed');
+    const reference=name===v13Migration?'9e90c438e351d4a46eec4f717681a5c67a871722':'4735afafe7cda4dbf98bdd387cc2fd49db22f764';
+    if (name !== m24Migration) assert.equal(bytes.toString().replaceAll('\r\n', '\n'), execFileSync('git', ['show', reference + ':' + path], { windowsHide: true, encoding: 'utf8' }).replaceAll('\r\n', '\n'), 'Historical migration changed');
     mkdirSync(join(migrationsPath, name), { recursive: true }); writeFileSync(join(migrationsPath, name, 'migration.sql'), bytes);
   }
   copyFileSync('apps/api/prisma/migrations/migration_lock.toml', join(migrationsPath, 'migration_lock.toml'));
@@ -38,7 +40,7 @@ async function seed(url) {
   const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: url }), omit: { notification: { slaAlertId: true }, request: { manualDraftSourceTemplateRevisionId: true }, requestMessage: { sourceTemplateRevisionId: true }, checklist: { sourceTemplateRevisionId: true } } });
   try { return await seedDemo(prisma, { databaseUrl: url }); } finally { await prisma.$disconnect(); }
 }
-export async function withM24Database(work, { baseline = 13 } = {}) {
+export async function withM24Database(work, { baseline = 14 } = {}) {
   if (process.env.DEMO_MODE !== 'true') throw new Error('M24 requires explicit synthetic DEMO_MODE=true');
   const isolated = m24Environment();
   const owner = new URL(isolated.MIGRATION_DATABASE_URL), runtime = new URL(isolated.DATABASE_URL);

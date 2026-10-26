@@ -126,6 +126,13 @@ test('malformed and oversized JSON receive safe client errors without exposing t
   assert.ok(!JSON.stringify(app.logs).includes('do-not-log'));
 });
 
+test('invalid compressed JSON is rejected safely without leaking payload or parser details',async t=>{
+  const app=await api(t),marker='compressed-private-do-not-log';
+  const response=await fetch(app.url+'/health/live',{method:'POST',headers:{'Content-Type':'application/json','Content-Encoding':'gzip'},body:marker});
+  assert.equal(response.status,400);const body=await response.json();assert.equal(body.error.code,'INVALID_INPUT');
+  assert.equal(JSON.stringify(body).includes(marker)||JSON.stringify(app.logs).includes(marker),false);
+});
+
 test('unavailable real database gives sanitized bounded login dependency errors', async (t) => {
   const app=await api(t),started=Date.now();
   const response=await fetch(app.url+'/api/v1/auth/login',{method:'POST',headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1','Content-Type':'application/json'},body:JSON.stringify({email:'synthetic@example.test',password:'do-not-log-password'})});

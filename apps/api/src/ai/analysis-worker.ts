@@ -1,7 +1,7 @@
 import {Inject,Injectable,type OnModuleInit,type OnModuleDestroy} from '@nestjs/common';
 import {PrismaService} from '../database/prisma.service.js';
 import {RequestStateMachineService} from '../requests/request-state-machine.service.js';
-import {AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,normalizedFailure,type AiProvider} from './provider.js';
+import {AI_PROVIDER_TOKEN,AI_LOG,AI_WORKER_ENABLED,AiFailure,normalizedFailure,type AiProvider} from './provider.js';
 import type {LogSink} from '../http.js';
 import {executeAnalysis} from './analysis-execution.js';
 import type {ApiEnvironment} from '@mobiflow/config';
@@ -54,10 +54,11 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
     let generated=false;
     try{
       if(this.env.AI_RAG_ENABLED)job.input.retrieval=await this.retriever.forAnalysis(job.run.id,job.input.description,signal);
+      if(!await this.machine.authorizeAnalysisDispatch(job.run.id))throw new AiFailure('FORBIDDEN');
       const result=await executeAnalysis(this.provider,job.input,signal,async attempt=>{
         await this.prisma.aiRun.updateMany({where:{id:job.run.id,status:'RUNNING'},data:{retryCount:attempt}});
         this.log({event:'ai.run.attempt',runId:job.run.id,attempt:attempt+1});
-      });
+      },this.env.AI_GENERATION_MAX_ATTEMPTS);
       result.latencyMs=Math.round(performance.now()-start);
       generated=true;await this.machine.finishAnalysis(job.run.id,result);
     }catch(error){

@@ -12,9 +12,11 @@ import {DocumentService} from '../../apps/api/dist/knowledge/document.service.js
 import {IngestionWorker} from '../../apps/api/dist/knowledge/ingestion-worker.js';
 import {decideRecommendationEvidence} from '../../apps/api/dist/ai/recommendation-evidence-decision.js';
 
-const {Pool}=pg,ownerUrl=process.env.MIGRATION_DATABASE_URL,appUrl=process.env.DATABASE_URL,testDatabase='mobiflow_v13_lexical_test';
-assert.equal(process.env.V13_ISOLATED_DATABASE_ACK,'mobiflow-deepseek-lexical-20261023','Explicit isolated database acknowledgement required');
-for(const raw of [ownerUrl,appUrl]){assert.ok(raw);const url=new URL(raw);assert.ok(['127.0.0.1','localhost'].includes(url.hostname));assert.equal(url.port,'55439');assert.equal(url.pathname,process.env.V13_LEXICAL_CHILD==='1'?`/${testDatabase}`:'/mobiflow');}
+const {Pool}=pg,ownerUrl=process.env.MIGRATION_DATABASE_URL,appUrl=process.env.DATABASE_URL,testDatabase='mobiflow_v13_lexical_test',isolationAck=process.env.V13_ISOLATED_DATABASE_ACK;
+const isolatedTargets=new Map([['mobiflow-m24-verification','55424'],['mobiflow-deepseek-lexical-20261023','55439'],['mobiflow-deepseek-canary-20261023','55449'],['mobiflow-business-postkey-20261023','55459']]);
+const expectedPort=isolatedTargets.get(isolationAck);
+assert.ok(expectedPort,'Explicit isolated database acknowledgement required');
+for(const raw of [ownerUrl,appUrl]){assert.ok(raw);const url=new URL(raw);assert.ok(['127.0.0.1','localhost'].includes(url.hostname));assert.equal(url.port,expectedPort);assert.equal(url.pathname,process.env.V13_LEXICAL_CHILD==='1'?`/${testDatabase}`:'/mobiflow');}
 if(process.env.V13_LEXICAL_CHILD!=='1'){
   const adminUrl=new URL(ownerUrl);adminUrl.pathname='/postgres';
   const ownerTestUrl=new URL(ownerUrl);ownerTestUrl.pathname=`/${testDatabase}`;

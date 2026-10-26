@@ -21,10 +21,29 @@ const completionSchema=z.object({
   }).passthrough(),
 }).passthrough();
 
+const phoneCandidate=/(?<![\p{L}\p{N}])(?:\+?\d[\d .()-]{7,}\d)(?![\p{L}\p{N}])/gu;
+const isoDate=/^\d{4}-\d{2}-\d{2}$/u;
+const numericUuid=/^\d{8}-\d{4}-\d{4}-\d{4}-\d{12}$/u;
+const tlsTrustErrorCodes=new Set(['SELF_SIGNED_CERT_IN_CHAIN','UNABLE_TO_VERIFY_LEAF_SIGNATURE','DEPTH_ZERO_SELF_SIGNED_CERT','CERT_HAS_EXPIRED','ERR_TLS_CERT_ALTNAME_INVALID']);
+function isTlsTrustError(error:unknown){
+  let current:unknown=error;
+  for(let depth=0;depth<4&&current&&typeof current==='object';depth++){
+    const candidate=current as {code?:unknown;cause?:unknown};
+    if(typeof candidate.code==='string'&&tlsTrustErrorCodes.has(candidate.code))return true;
+    current=candidate.cause;
+  }
+  return false;
+}
+function redactPhones(value:string){
+  return value.replace(phoneCandidate,candidate=>{
+    if(isoDate.test(candidate)||numericUuid.test(candidate))return candidate;
+    return candidate.replace(/\D/gu,'').length>=9?'[REDACTED_PHONE]':candidate;
+  });
+}
+
 export function redactCloudContent(value:string){
-  return value
+  return redactPhones(value)
     .replace(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/giu,'[REDACTED_EMAIL]')
-    .replace(/(?<![\p{L}\p{N}])(?:\+?\d[\d .()-]{7,}\d)(?![\p{L}\p{N}])/gu,'[REDACTED_PHONE]')
     .replace(/\b(?:sk|ds)-[A-Za-z0-9_-]{16,}\b/gu,'[REDACTED_SECRET]')
     .replace(/\bBearer\s+[A-Za-z0-9._~-]{12,}\b/giu,'Bearer [REDACTED_SECRET]');
 }
@@ -69,7 +88,7 @@ export class DeepSeekProvider implements AiProvider {
     let reservation:Reservation;try{reservation=this.budget.reserve(maximumUsd);}catch(error){if(error instanceof AiFailure&&!['AI_LIVE_CALLS_DISABLED','AI_LOCAL_CONCURRENCY_LIMIT','AI_LOCAL_RATE_LIMIT'].includes(error.code))this.health={status:'DOWN',code:'UNAVAILABLE'};throw error;}
     const deadline=AbortSignal.timeout(this.env.AI_ATTEMPT_TIMEOUT_MS),combined=AbortSignal.any([signal,deadline]);
     try{
-      const response=await fetch(new URL('/chat/completions',this.env.DEEPSEEK_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{Authorization:`Bearer ${this.env.DEEPSEEK_API_KEY!}`,'Content-Type':'application/json'},body:JSON.stringify({model:this.env.DEEPSEEK_MODEL,messages:outbound,response_format:{type:'json_object'},stream:false,temperature:this.env.AI_TEMPERATURE,max_tokens:this.env.AI_MAX_OUTPUT_TOKENS})});
+      const response=await fetch(new URL('/chat/completions',this.env.DEEPSEEK_BASE_URL),{method:'POST',signal:combined,redirect:'error',headers:{Authorization:`Bearer ${this.env.DEEPSEEK_API_KEY!}`,'Content-Type':'application/json'},body:JSON.stringify({model:this.env.DEEPSEEK_MODEL,thinking:{type:'disabled'},messages:outbound,response_format:{type:'json_object'},stream:false,temperature:this.env.AI_TEMPERATURE,max_tokens:this.env.AI_MAX_OUTPUT_TOKENS})});
       if(response.status===401)throw new AiFailure('AI_AUTHENTICATION_FAILED');
       if(response.status===402)throw new AiFailure('AI_INSUFFICIENT_BALANCE');
       if(response.status===429)throw new AiFailure('AI_RATE_LIMITED',true);
@@ -95,6 +114,7 @@ export class DeepSeekProvider implements AiProvider {
       if(deadline.aborted){this.health={status:'DOWN',code:'UNAVAILABLE'};throw new AiFailure('AI_TIMEOUT',true);}
       if(error instanceof AiFailure){if(!['AI_CANCELED','AI_LOCAL_CONCURRENCY_LIMIT','AI_LOCAL_RATE_LIMIT'].includes(error.code))this.health={status:'DOWN',code:'UNAVAILABLE'};throw error;}
       this.health={status:'DOWN',code:'UNAVAILABLE'};
+      if(isTlsTrustError(error))throw new AiFailure('AI_TLS_CERTIFICATE_UNTRUSTED');
       throw new AiFailure('AI_PROVIDER_UNAVAILABLE',true);
     }
   }
