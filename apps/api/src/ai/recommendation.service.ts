@@ -19,9 +19,9 @@ import {recommendationMessages,recommendationFormat,recommendationPromptVersion,
 import {parseRecommendationForVersion,parseRecommendationV2ForGeneration} from './recommendation-output.js';
 import {decideRecommendationEvidence} from './recommendation-evidence-decision.js';
 import {revalidateRecommendation} from './recommendation-validation.js';
-import {VectorRepository} from '../knowledge/vector.repository.js';
 import {assessSla} from '../requests/sla-clock.js';
 import {recommendationSnapshot} from './recommendation-snapshot.js';
+import {KnowledgeRetriever} from '../knowledge/retriever.js';
 const storedDecisionSchema=finalDecisionSchema.safeExtend({policyId:z.uuid().optional(),policyVersion:z.number().int().positive().optional(),targetSeconds:z.number().int().positive().optional()});
 const storedFailure=()=>new ApiError(500,'AI_INVALID_STORED_OUTPUT','The stored recommendation is unavailable. Reload or use manual work.');
 function storedDecision(value:unknown){
@@ -32,7 +32,7 @@ function storedDecision(value:unknown){
 
 @Injectable()
 export class RecommendationService {
-  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,private readonly tools:DomainTools,private readonly requests:RequestVectors,private readonly vectors:VectorRepository,@Inject(API_ENV)private readonly env:ApiEnvironment,@Inject(RECOMMENDATION_PROVIDER)private readonly provider:StructuredProvider){}
+  constructor(private readonly prisma:PrismaService,private readonly machine:RequestStateMachineService,private readonly tools:DomainTools,private readonly requests:RequestVectors,private readonly retriever:KnowledgeRetriever,@Inject(API_ENV)private readonly env:ApiEnvironment,@Inject(RECOMMENDATION_PROVIDER)private readonly provider:StructuredProvider){}
   async schedule(id:string,actor:AuthenticatedActor,version:number,correlationId:string,schemaVersion:typeof recommendationVersion|typeof recommendationV2Version=recommendationV2Version){
     if(schemaVersion!==recommendationVersion&&schemaVersion!==recommendationV2Version)throw new ApiError(400,'INVALID_INPUT','Unsupported recommendation version.');
     if(actor.role!=='MANAGER')throw new ApiError(403,'FORBIDDEN','Manager access required.');
@@ -44,7 +44,7 @@ export class RecommendationService {
       if(r.version!==version)throw new ApiError(409,'STALE_VERSION','Reload the request.');
       if(r.status!=='TRIAGED'||!r.latestAnalysisId)throw new ApiError(409,'INVALID_STATE','A TRIAGED request with validated analysis is required.');
       const active=await tx.aiRun.findFirst({where:{requestId:id,purpose:'RECOMMENDATION',status:{in:['QUEUED','RUNNING']}}});if(active)return active;
-      const run=await tx.aiRun.create({data:{requestId:id,purpose:'RECOMMENDATION',initiatingActorId:actor.id,contextVersion:r.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:schemaVersion===recommendationV2Version?recommendationPromptV2Version:recommendationPromptVersion,schemaVersion,deadlineAt:new Date(Date.now()+this.env.AI_RUN_TIMEOUT_MS),retrievalSnapshotJson:{analysisId:r.latestAnalysisId,...(schemaVersion===recommendationV2Version?{_authorization:{initiatingSessionId:actor.sessionId}}:{})}}});
+      const run=await tx.aiRun.create({data:{requestId:id,purpose:'RECOMMENDATION',initiatingActorId:actor.id,contextVersion:r.version,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion:schemaVersion===recommendationV2Version?recommendationPromptV2Version:recommendationPromptVersion,schemaVersion,deadlineAt:new Date(Date.now()+this.env.AI_RUN_TIMEOUT_MS),retrievalSnapshotJson:{analysisId:r.latestAnalysisId,...(schemaVersion===recommendationV2Version?{_authorization:{initiatingSessionId:actor.sessionId}}:{})}}});
       await tx.auditLog.create({data:{requestId:id,actorType:'MANAGER',actorId:actor.id,action:'RECOMMENDATION_QUEUED',resourceType:'AiRun',resourceId:run.id,requestCorrelationId:correlationId,outcome:'SUCCEEDED'}});return run;
     });
   }
@@ -90,7 +90,7 @@ export class RecommendationService {
       const evidenceDecision=v2?decideRecommendationEvidence(evidenceV2,this.env.RAG_MAX_DISTANCE):null;
       if(v2)await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}))}});
       let feedback='';
-      for(let attempt=0;attempt<2;attempt++){
+      for(let attempt=0;attempt<this.env.AI_GENERATION_MAX_ATTEMPTS;attempt++){
         await this.tools.authorize(ctx);
         await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retryCount:attempt}});
         try{
@@ -105,7 +105,7 @@ export class RecommendationService {
           const result=v2?parseRecommendationV2ForGeneration(generation.raw,evidenceV2,evidenceDecision!):parseRecommendationForVersion(queued.schemaVersion,generation.raw,evidence,true);
           await this.prisma.aiRun.updateMany({where:{id:queued.id,status:'RUNNING'},data:{retrievalSnapshotJson:JSON.parse(JSON.stringify({...evidence,...(v2?{_authorization:snapshot.authorization,_evidenceDecision:evidenceDecision}:{})})),inputSize:JSON.stringify(messages).length}});
           await this.machine.publishRecommendation(queued.id,result,generation.identity,generation.outputSize,Math.round(performance.now()-start));return true;
-        }catch(error){if(error instanceof AiFailure){feedback=error.repairFeedback;await this.prisma.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:queued.initiatingActorId,action:'RECOMMENDATION_ATTEMPT_FAILED',resourceType:'AiRun',resourceId:queued.id,requestCorrelationId:queued.id,safeAfterJson:{attempt:attempt+1,errorCode:error.code,validationRule:feedback.split(':')[0]||error.code},outcome:'FAILED'}});}if(!(error instanceof AiFailure)||!error.retryable||attempt===1||signal.aborted)throw error;await delay(1000,undefined,{signal});}
+        }catch(error){if(error instanceof AiFailure){feedback=error.repairFeedback;await this.prisma.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:queued.initiatingActorId,action:'RECOMMENDATION_ATTEMPT_FAILED',resourceType:'AiRun',resourceId:queued.id,requestCorrelationId:queued.id,safeAfterJson:{attempt:attempt+1,errorCode:error.code,validationRule:feedback.split(':')[0]||error.code},outcome:'FAILED'}});}if(!(error instanceof AiFailure)||!error.retryable||attempt===this.env.AI_GENERATION_MAX_ATTEMPTS-1||signal.aborted)throw error;await delay(1000,undefined,{signal});}
       }
     }catch(error){const code=signal.aborted?'AI_TIMEOUT':error instanceof ApiError||error instanceof AiFailure||error instanceof ToolFailure||error instanceof KnowledgeFailure?error.code:'RECOMMENDATION_UNAVAILABLE';await this.fail(queued.id,code,Math.round(performance.now()-start));}
     return true;
@@ -137,7 +137,7 @@ export class RecommendationService {
         const latest=r.status==='PENDING'?await this.prisma.aiRecommendation.findFirst({where:{requestId,status:'PENDING',invalidatedAt:null},orderBy:[{createdAt:'desc'},{id:'desc'}],select:{id:true}}):null;
         if(r.invalidatedAt||request.version!==run.contextVersion||snapshot.id!==requestId||snapshot.version!==request.version||request.status!==snapshot.status||request.latestAnalysisId!==evidence.analysisId||r.status==='PENDING'&&latest?.id!==r.id)staleReasons.push('STALE_CONTEXT');
       }else if(r.invalidatedAt||request.pendingRecommendationId!==r.id||request.status!=='PENDING_APPROVAL'||request.version!==run.contextVersion+1)staleReasons.push('STALE_CONTEXT');
-      if(evidence)try{await this.prisma.$transaction(async tx=>{await revalidateRecommendation(tx,evidence,false,r.suggestedPriority);await this.vectors.validateCurrent(tx,evidence.sources,false);await this.vectors.compatible(evidence.embeddingIdentity,tx);});}catch(error){staleReasons.push(error instanceof ToolFailure||error instanceof KnowledgeFailure?error.code:'REVALIDATION_UNAVAILABLE');}
+      if(evidence)try{await this.prisma.$transaction(async tx=>{await revalidateRecommendation(tx,evidence,false,r.suggestedPriority);await this.retriever.validateCurrent(tx,evidence.sources,false);await this.retriever.compatible(evidence.embeddingIdentity,tx);});}catch(error){staleReasons.push(error instanceof ToolFailure||error instanceof KnowledgeFailure?error.code:'REVALIDATION_UNAVAILABLE');}
     }else if(run.status==='SUCCEEDED')throw storedFailure();
     const job=recommendationJobSchema.safeParse({aiRunId:run.id,requestId,purpose:'RECOMMENDATION',status:run.status,errorCode:run.errorCode,createdAt:run.createdAt.toISOString(),finishedAt:run.finishedAt?.toISOString()??null,contextVersion:run.contextVersion,schemaVersion:run.schemaVersion,recommendationId:r?.id??null,recommendation,evidence,reviewStatus:r?.status??null,reviewerId:r?.reviewedById??null,reviewedAt:r?.reviewedAt?.toISOString()??null,finalDecision,managerChanges,stale:staleReasons.length>0,staleReasons,model:run.model,latencyMs:run.latencyMs,toolCalls:run.toolCalls.map(c=>({toolName:c.toolName,ordinal:c.ordinal,latencyMs:c.latencyMs,status:c.status,errorCode:c.errorCode,summary:c.safeOutputSummaryJson}))});
     if(!job.success)throw storedFailure();return job.data;

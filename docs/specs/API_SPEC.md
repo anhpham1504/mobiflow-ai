@@ -2,6 +2,8 @@
 
 Authority: master-plan §7 and M1–M9. This is the M0 transport contract; routes are not implemented yet. NestJS serves REST under `/api/v1`, with OpenAPI generated in M2 from implemented shared contracts. Public routes never expose arbitrary state updates, tool execution or model endpoints.
 
+V1.3 provider/retrieval amendment (2026-10-23): public business DTOs and authorization semantics are unchanged. Readiness now reports `AI_GENERATION`, `RAG_RETRIEVAL`, `DEEPSEEK_API` and the retained Ollama/vector components separately. In lexical mode, API+DATABASE determine `coreReady`; an absent vector/embedding/Ollama dependency is not a core failure. Disabled DeepSeek live calls or cloud outage produces HTTP 200 with overall `DEGRADED`, `coreReady=true`, `aiReady=false`; HTTP 503 remains reserved for a core dependency failure. Responses never disclose keys, provider URLs, prompts or private model errors.
+
 ## Common transport and validation
 
 JSON UTF-8 except multipart knowledge upload. Strict unknown-field rejection; UUID IDs; ISO-8601 UTC timestamps; string trim except passwords; no coercion of booleans/numbers/enums. General JSON body cap 64 KiB. Plain text only for request/message/reason/checklist fields; escape on display. Return `X-Request-ID`, generated server-side or accept a sanitized UUID supplied for correlation; never use correlation ID as authorization.
@@ -87,7 +89,7 @@ Paths in tables are relative to `/api/v1`. Role/state abbreviations refer to exa
 | GET /users/me | Any active authenticated role | 200 same safe profile projection; no edit/role-management route |
 | GET /users/staff | MANAGER; teamId?, skills?, limit/cursor | 200 bounded eligible directory with current skills/availability/workload; used for human modification |
 | GET /health/live | Public | 200 API liveness only, no secrets/config |
-| GET /health/ready | Public local deployment | 200 when API+DATABASE+VECTOR_EXTENSION ready, else 503; component statuses API/DATABASE/OLLAMA_SERVER/OLLAMA_LLM_MODEL/OLLAMA_EMBEDDING_MODEL/VECTOR_EXTENSION and aiReady boolean. Ollama failure alone means degraded AI, not process failure. No paths/model credentials. |
+| GET /health/ready | Public local deployment | 200 when mode-specific core dependencies are ready, else 503; components include API/DATABASE/VECTOR_EXTENSION/AI_GENERATION/RAG_RETRIEVAL/DEEPSEEK_API and retained Ollama statuses. In lexical mode, disabled/unavailable generation is DEGRADED while coreReady remains true. No paths, origins, prompts, keys or credentials. |
 
 Auth credential transport/lifetimes are fully specified in AUTHORIZATION_SPEC. Minimal public health is intentional; detailed operational configuration is never exposed.
 

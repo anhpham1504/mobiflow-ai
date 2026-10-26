@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "mobiflow-v1.3-gate-summary.v1",
+  "capturedAt": "2026-10-23T21:20:15+07:00",
+  "baseline": "30d47c8d13bb0f44aada79c50527dba88196d32a",
+  "branch": "codex/deepseek-lexical-v1.3",
+  "verdict": "DEEPSEEK_LEXICAL_RAG_CANDIDATE_PASS — OWNER_LIVE_APPROVAL_PENDING",
+  "paidDeepSeekCalls": 0,
+  "deepSeekLiveCallsEnabled": false,
+  "deepSeekKeyLength": 0,
+  "gates": {
+    "deterministic": {"status": "PASS", "passed": 320, "failed": 0},
+    "realPostgresRollback": {"status": "PASS", "passed": 47, "failed": 0, "skipped": 1, "skipReason": "historical live Ollama evaluation"},
+    "realPostgresLexical": {"status": "PASS", "failedAssertions": 0, "migrations": 14, "embeddingCalls": {"probe": 0, "documents": 0, "query": 0}},
+    "lint": {"status": "PASS"},
+    "typecheck": {"status": "PASS"},
+    "build": {"status": "PASS"},
+    "prismaValidate": {"status": "PASS"},
+    "productionDependencyAudit": {"status": "PASS", "vulnerabilities": 0},
+    "developmentDependencyAudit": {"status": "RESIDUAL", "high": 5, "critical": 0},
+    "browser": {"status": "PASS", "deepSeekRequests": 0, "ollamaRequests": 0, "mobileHorizontalOverflowPx": 0}
+  },
+  "notRun": [
+    "paid DeepSeek live canary",
+    "expanded live DeepSeek evaluation and human grading",
+    "production deployment",
+    "push, pull request or merge",
+    "protected database migration",
+    "real customer data processing"
+  ],
+  "isolation": {
+    "clone": "C:\\Code\\MobiFlow-AI-DeepSeek-Lexical-20261023",
+    "composeProject": "mobiflow-deepseek-lexical-20261023",
+    "ports": {"web": 35400, "api": 35401, "postgres": 55439},
+    "lexicalTestDatabase": "mobiflow_v13_lexical_test",
+    "rollbackTestDatabase": "mobiflow_m2_test",
+    "postflight": {"taskContainers": 0, "taskVolumes": 0, "taskPortListeners": 0}
+  }
+}

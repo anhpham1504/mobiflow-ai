@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { analysisSchema,taxonomy,categories } from '@mobiflow/contracts';
 import type {Retrieval} from '../../knowledge/retriever.js';
 import {citationHasRequestTerm,ragOutputSchema} from '../../knowledge/rag-output.js';
+import {boundedExactSpan} from '../../knowledge/excerpt.js';
 export const promptVersion='request-analysis.v4';
 export interface AnalysisInput {title:string;description:string;messages:{id:string;body:string}[];historyTruncated:boolean;retrieval?:Retrieval}
 const baseFormat=z.toJSONSchema(analysisSchema,{io:'input'});
@@ -11,7 +12,7 @@ export const ragOutputFormat={...z.toJSONSchema(ragOutputSchema,{io:'input'}),pr
 // Candidates are exact contiguous substrings, never generated or normalized quotes.
 // Restrict the decoder too, while still independently validating membership below.
 const boilerplate=/^(?:Synthetic demo document - not an actual enterprise SOP|MobiFlow AI\s*\/\s*DEMO_SYNTHETIC_KNOWLEDGE\s*\/\s*\d+|(?:SOP|FAQ|SLA|ADVERSARIAL)-[A-Z0-9-]+)$/iu;
-export function quoteOptions(excerpt:string):string[]{return [...new Set(excerpt.split('\n').map(s=>s.trim()).filter(s=>Array.from(s).length>=40&&!s.startsWith('#')&&!boilerplate.test(s)).flatMap(s=>s.length<=500?[s]:[s.slice(0,500)]))].slice(0,12);}
+export function quoteOptions(excerpt:string):string[]{return [...new Set(excerpt.split('\n').map(s=>s.trim()).filter(s=>Array.from(s).length>=40&&!s.startsWith('#')&&!boilerplate.test(s)).map(s=>boundedExactSpan(s,500)).filter(s=>Array.from(s).length>=20))].slice(0,12);}
 function citableSources(input:AnalysisInput){
   if(!input.retrieval)return [];
   const originalText=[input.title,input.description,...input.messages.map(message=>message.body)].join('\n');

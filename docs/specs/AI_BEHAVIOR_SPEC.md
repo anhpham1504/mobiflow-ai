@@ -2,6 +2,14 @@
 
 Authority: master-plan §§2.3, 4, M4/M6/M8 and §§23–26. Depends on [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md), [TOOL_CALLING_SPEC](TOOL_CALLING_SPEC.md), [RAG_SPEC](RAG_SPEC.md) and [AI_SAFETY_SPEC](AI_SAFETY_SPEC.md). All output is untrusted; JSON-schema/Zod validation and referential validation run before persistence as a valid artifact.
 
+## Active V1.3 generation-provider amendment (2026-10-23)
+
+`AI_GENERATION_PROVIDER=deepseek` is the candidate default for analysis, recommendation, all six Copilot actions and resolution summary. The NestJS backend alone calls the official HTTPS origin with configured model `DEEPSEEK_MODEL`; browser code never receives the key or selects a provider. Requests use JSON-object mode plus a trusted schema instruction, temperature 0, bounded context/output, one concurrent call, bounded retry and the existing run/publication idempotency. Response envelopes, finish reason, returned model, JSON shape, source IDs and domain references are untrusted and validated before publication. Reasoning fields are discarded.
+
+`AI_LIVE_CALLS_ENABLED=false` is the safe default and fails before HTTP. Enabling live calls additionally requires a backend-only key, official origin, maximum three calls per process, two starts per minute, one concurrent request and an application budget no greater than USD 0.25. Prompt/completion/cache token usage, the returned model and estimated cost under the dated configured price table are persisted as safe model identity metadata. The application guard is conservative but is not a provider-side hard spending cap. Authentication, balance, rate, provider, timeout, cancellation, truncated/empty/invalid JSON and unexpected-model failures are typed; only retryable failures receive the already bounded retry.
+
+The adapter redacts common email, phone and token patterns before egress and receives only the minimum authorized context. Private notes, credentials, cookies, audit internals and unrelated requests remain excluded by context builders. No real customer data may be sent. A missing key, disabled live mode or provider outage leaves manual business workflow intact and reports truthful degraded health; it never silently falls back to Ollama. The historical Ollama bounds below remain applicable to the explicit rollback profile.
+
 ## Permitted and prohibited behavior
 
 Permitted: parse Vietnamese requests, detect intent, extract stated entities, classify controlled taxonomy, suggest priority, retrieve knowledge/similar cases/SLA/candidates/workload through allowlisted tools, draft checklists/recommendations, summarize persisted facts, explain deterministic SLA risk and provide concise reasonSummary.

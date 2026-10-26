@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "m10.preflight.v1",
+  "generatedAt": "2026-10-23T13:39:41.053Z",
+  "status": "PASS",
+  "versions": {
+    "Node": "v24.19.0",
+    "npm": "11.17.0",
+    "Docker": "Docker version 29.6.2, build dfc4efb",
+    "Compose": "Docker Compose version v5.3.1"
+  },
+  "checks": [
+    {
+      "section": "Environment",
+      "name": "DATABASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "MIGRATION_DATABASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "JWT_SECRET",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "REFRESH_TOKEN_SECRET",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "WEB_ORIGIN",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "NEXT_PUBLIC_API_BASE_URL",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "AI_GENERATION_PROVIDER",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "RAG_RETRIEVAL_MODE",
+      "status": "PASS",
+      "message": "configured"
+    },
+    {
+      "section": "Environment",
+      "name": "DEMO_MODE",
+      "status": "PASS",
+      "message": "explicit demo mode"
+    },
+    {
+      "section": "Database",
+      "name": "DATABASE_URL",
+      "status": "PASS",
+      "message": "allowlisted loopback demo target"
+    },
+    {
+      "section": "Database",
+      "name": "MIGRATION_DATABASE_URL",
+      "status": "PASS",
+      "message": "allowlisted loopback demo target"
+    },
+    {
+      "section": "Security config",
+      "name": "JWT_SECRET",
+      "status": "PASS",
+      "message": "configured and non-placeholder"
+    },
+    {
+      "section": "Security config",
+      "name": "REFRESH_TOKEN_SECRET",
+      "status": "PASS",
+      "message": "configured and non-placeholder"
+    },
+    {
+      "section": "Security config",
+      "name": "distinct auth secrets",
+      "status": "PASS",
+      "message": "secret values are never printed"
+    },
+    {
+      "section": "Security config",
+      "name": "WEB_ORIGIN",
+      "status": "PASS",
+      "message": "single explicit origin"
+    },
+    {
+      "section": "Security config",
+      "name": "auth cookie",
+      "status": "PASS",
+      "message": "secure or explicit loopback HTTP demo"
+    },
+    {
+      "section": "AI",
+      "name": "compatible provider/retrieval profile",
+      "status": "PASS",
+      "message": "DeepSeek generation with PostgreSQL lexical retrieval"
+    },
+    {
+      "section": "AI",
+      "name": "DeepSeek egress origin",
+      "status": "PASS",
+      "message": "official HTTPS origin allowlisted"
+    },
+    {
+      "section": "AI",
+      "name": "billable-call gate",
+      "status": "PASS",
+      "message": "live calls disabled; owner approval pending"
+    },
+    {
+      "section": "AI",
+      "name": "backend key",
+      "status": "PASS",
+      "message": "not required while live calls are disabled"
+    },
+    {
+      "section": "Security config",
+      "name": "RAG mode",
+      "status": "PASS",
+      "message": "enabled for grounded demo"
+    },
+    {
+      "section": "Toolchain",
+      "name": "Node",
+      "status": "PASS",
+      "message": "v24.19.0"
+    },
+    {
+      "section": "Toolchain",
+      "name": "npm",
+      "status": "PASS",
+      "message": "11.17.0"
+    },
+    {
+      "section": "Toolchain",
+      "name": "Docker",
+      "status": "PASS",
+      "message": "Docker version 29.6.2, build dfc4efb"
+    },
+    {
+      "section": "Toolchain",
+      "name": "Compose",
+      "status": "PASS",
+      "message": "Docker Compose version v5.3.1"
+    },
+    {
+      "section": "Generated client",
+      "name": "Prisma client",
+      "status": "PASS",
+      "message": "generated client present"
+    },
+    {
+      "section": "Storage",
+      "name": "workspace disk reserve",
+      "status": "PASS",
+      "message": "157832 MiB available"
+    },
+    {
+      "section": "Storage",
+      "name": "private Docker knowledge volume",
+      "status": "PASS",
+      "message": "read/write access and 64 MiB reserve verified"
+    },
+    {
+      "section": "Containers",
+      "name": "postgres",
+      "status": "PASS",
+      "message": "postgres running and healthy"
+    },
+    {
+      "section": "Containers",
+      "name": "api",
+      "status": "PASS",
+      "message": "api running and healthy"
+    },
+    {
+      "section": "Containers",
+      "name": "web",
+      "status": "PASS",
+      "message": "web running and healthy"
+    },
+    {
+      "section": "Database",
+      "name": "connectivity",
+      "status": "PASS",
+      "message": "connection accepted"
+    },
+    {
+      "section": "Database",
+      "name": "pgvector",
+      "status": "PASS",
+      "message": "extension 0.8.6"
+    },
+    {
+      "section": "Database",
+      "name": "migration history",
+      "status": "PASS",
+      "message": "14 completed migrations match disk"
+    },
+    {
+      "section": "Demo data",
+      "name": "synthetic marker",
+      "status": "PASS",
+      "message": "exact reset marker present"
+    },
+    {
+      "section": "Demo data",
+      "name": "accounts and history",
+      "status": "PASS",
+      "message": "6 accounts, 8 requests, 39 history rows"
+    },
+    {
+      "section": "Demo data",
+      "name": "request similarity mode",
+      "status": "PASS",
+      "message": "PostgreSQL lexical similarity; request embeddings are not required"
+    },
+    {
+      "section": "RAG",
+      "name": "ready corpus",
+      "status": "PASS",
+      "message": "9 ready documents, 12 active chunks"
+    },
+    {
+      "section": "Ports",
+      "name": "PostgreSQL",
+      "status": "PASS",
+      "message": "127.0.0.1:55439 reachable"
+    },
+    {
+      "section": "Ports",
+      "name": "API",
+      "status": "PASS",
+      "message": "127.0.0.1:35401 reachable"
+    },
+    {
+      "section": "Ports",
+      "name": "Web",
+      "status": "PASS",
+      "message": "127.0.0.1:35400 reachable"
+    },
+    {
+      "section": "Runtime",
+      "name": "API core readiness",
+      "status": "PASS",
+      "message": "database-backed API core ready"
+    },
+    {
+      "section": "Runtime",
+      "name": "AI readiness",
+      "status": "PASS",
+      "message": "DeepSeek live calls intentionally disabled; manual workflow and lexical RAG remain available"
+    },
+    {
+      "section": "RAG",
+      "name": "API RAG health",
+      "status": "PASS",
+      "message": "retrieval health ready"
+    },
+    {
+      "section": "Runtime",
+      "name": "web reachability",
+      "status": "PASS",
+      "message": "HTTP 200"
+    },
+    {
+      "section": "Security headers",
+      "name": "web baseline",
+      "status": "PASS",
+      "message": "CSP, frame, and MIME protections present"
+    },
+    {
+      "section": "AI",
+      "name": "Ollama dependency",
+      "status": "PASS",
+      "message": "not required by the DeepSeek/lexical profile"
+    }
+  ]
+}

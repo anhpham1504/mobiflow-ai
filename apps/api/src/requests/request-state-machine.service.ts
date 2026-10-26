@@ -16,7 +16,7 @@ import { ApiError } from '../http.js';
 import { transitionTarget, type Action } from './transition-rules.js';
 import { changeSla, second } from './sla-clock.js';
 import { parse } from './validation.js';
-import {VectorRepository} from '../knowledge/vector.repository.js';
+import {KnowledgeRetriever} from '../knowledge/retriever.js';
 import {validateCitations} from '../knowledge/rag-output.js';
 import {snapshotOf} from '../knowledge/retriever.js';
 import {recommendationEvidenceSchema,recommendationEvidenceV2Schema,recommendationVersion,recommendationV2Version,isRecommendationV2,recommendationActions,type AnyRecommendation,type RecommendationEvidence} from '@mobiflow/contracts';
@@ -28,6 +28,7 @@ import {KnowledgeFailure} from '../knowledge/embedding-provider.js';
 import {recommendationSnapshot} from '../ai/recommendation-snapshot.js';
 import { notifyCollaboration } from './collaboration-notifications.js';
 import { validateTemplateSource, recordTemplateUsage } from '../templates/template-provenance.js';
+import {authorizationSnapshot,backgroundAuthorization,validateBackgroundAuthorization} from '../ai/background-authorization.js';
 
 type Tx = Prisma.TransactionClient;
 export interface Command {
@@ -42,7 +43,7 @@ export interface Command {
 }
 @Injectable()
 export class RequestStateMachineService {
-  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:VectorRepository) {}
+  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:KnowledgeRetriever) {}
 
   private async identity(tx: Tx, actor: Pick<AuthenticatedActor,'id'|'role'|'sessionId'>) {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actor.id}::uuid FOR SHARE`);
@@ -68,7 +69,7 @@ export class RequestStateMachineService {
       }});
       const event = await this.event(tx,request,actor,'CREATE',correlationId,now,undefined, {status:'NEW',version:1});
       await tx.requestStatusHistory.create({data:{requestId:request.id,toStatus:'NEW',action:'CREATE',actorType:actor.role,actorId:actor.id,requestVersion:1,eventId:event.id,createdAt:now}});
-      if(this.env.AI_AUTO_ANALYZE)await this.queueAnalysis(tx,request,actor.id,now);
+      if(this.env.AI_AUTO_ANALYZE)await this.queueAnalysis(tx,request,actor,now);
       return request.id;
     });
   }
@@ -165,7 +166,7 @@ export class RequestStateMachineService {
         const latest=await tx.requestResolution.aggregate({where:{requestId:id},_max:{cycle:true}});
         const resolution=await tx.requestResolution.create({data:{requestId:id,cycle:(latest._max.cycle??0)+1,resolvedById:actor.id,rootCause:command.rootCause!,resolution:command.resolution!,verification:command.verification!,resolvedAt:now,eventId:event.id}});
         data.resolvedAt=now;data.currentResolutionId=resolution.id;
-        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+        await tx.aiRun.create({data:{requestId:id,resolutionId:resolution.id,purpose:'RESOLUTION_SUMMARY',contextVersion:request.version+1,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion:resolutionSummaryPromptVersion,schemaVersion:'resolution-summary.m8.v3',deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
         notification='REQUEST_RESOLVED';recipients=[request.createdById];
       }
       if (action==='USER_REOPEN' || action==='USER_CONFIRM') {
@@ -220,8 +221,8 @@ export class RequestStateMachineService {
       return {id,message};
     },{isolationLevel:Prisma.TransactionIsolationLevel.ReadCommitted,timeout:15000});
   }
-  private queueAnalysis(tx:Tx,request:DomainRequest,initiatingActorId:string,now:Date) {
-    return tx.aiRun.create({data:{requestId:request.id,purpose:'ANALYSIS',initiatingActorId,contextVersion:request.version,provider:this.env.AI_PROVIDER,model:this.env.OLLAMA_MODEL,promptVersion,schemaVersion:analysisSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now}});
+  private queueAnalysis(tx:Tx,request:DomainRequest,actor:AuthenticatedActor,now:Date) {
+    return tx.aiRun.create({data:{requestId:request.id,purpose:'ANALYSIS',initiatingActorId:actor.id,contextVersion:request.version,provider:this.env.AI_GENERATION_PROVIDER,model:this.env.AI_GENERATION_PROVIDER==='deepseek'?this.env.DEEPSEEK_MODEL:this.env.OLLAMA_MODEL,promptVersion,schemaVersion:analysisSchemaVersion,deadlineAt:new Date(now.getTime()+this.env.AI_RUN_TIMEOUT_MS),createdAt:now,retrievalSnapshotJson:authorizationSnapshot(actor)}});
   }
   async scheduleAnalysis(id:string,actor:AuthenticatedActor,expectedVersion:number,retry:boolean,correlationId:string){
     if(!['USER','MANAGER'].includes(actor.role))throw new ApiError(403,'FORBIDDEN','This role cannot schedule intake.');
@@ -234,7 +235,7 @@ export class RequestStateMachineService {
       const active=await tx.aiRun.findFirst({where:{requestId:id,purpose:'ANALYSIS',status:{in:['QUEUED','RUNNING']}}});
       if(active)return active;
       if(request.status!=='NEW'||(retry&&request.aiAnalysisStatus!=='FAILED'))throw new ApiError(409,'INVALID_STATE','Intake requires NEW; retry requires failed intake.');
-      const now=await this.now(tx),run=await this.queueAnalysis(tx,request,actor.id,now);
+      const now=await this.now(tx),run=await this.queueAnalysis(tx,request,actor,now);
       await this.event(tx,request,actor,retry?'AI_RETRY_QUEUED':'AI_ANALYSIS_QUEUED',correlationId,now);
       return run;
     });
@@ -248,20 +249,20 @@ export class RequestStateMachineService {
     await tx.request.update({where:{id:request.id,version:request.version},data:{...data,status:target[action],version,updatedAt:now}});
     await tx.requestStatusHistory.create({data:{requestId:request.id,fromStatus:request.status,toStatus:target[action],action,actorType:'SYSTEM',requestVersion:version,eventId:event.id,createdAt:now}});
   }
-  private async analysisActor(tx:Tx,actorId:string|null,request:DomainRequest){
-    if(!actorId)return false;
-    await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actorId}::uuid FOR SHARE`);
-    const actor=await tx.user.findUnique({where:{id:actorId}});
-    return !!actor?.active&&(actor.role==='MANAGER'||(actor.role==='USER'&&actor.id===request.createdById));
+  private async analysisActor(tx:Tx,run:Prisma.AiRunGetPayload<object>,request:DomainRequest,lock=false){
+    const authorization=backgroundAuthorization(run.retrievalSnapshotJson);
+    if(!await validateBackgroundAuthorization(tx,run.initiatingActorId,authorization,lock))return false;
+    return authorization?.initiatingRole==='MANAGER'||(authorization?.initiatingRole==='USER'&&run.initiatingActorId===request.createdById);
   }
   async claimAnalysis(runId:string){
     const pending=await this.prisma.aiRun.findUnique({where:{id:runId}});if(!pending?.requestId)return null;
     return this.prisma.$transaction(async tx=>{
+      const queued=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),unlockedRequest=await tx.request.findUniqueOrThrow({where:{id:pending.requestId!}});
+      const authorized=await this.analysisActor(tx,queued,unlockedRequest,true);
       await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${pending.requestId}::uuid FOR UPDATE`);
       const request=await tx.request.findUniqueOrThrow({where:{id:pending.requestId!}});
       const run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),now=await this.now(tx);
       if(run.status!=='QUEUED'||run.purpose!=='ANALYSIS')return null;
-      const authorized=await this.analysisActor(tx,run.initiatingActorId,request);
       if(!authorized||request.status!=='NEW'||request.version!==run.contextVersion||!run.deadlineAt||run.deadlineAt<=now){
         await this.failAnalysisLocked(tx,request,run,now,!authorized?'FORBIDDEN':run.deadlineAt&&run.deadlineAt<=now?'AI_TIMEOUT':'STALE_CONTEXT');return null;
       }
@@ -272,9 +273,16 @@ export class RequestStateMachineService {
         input.messages.unshift(message);
       }
       if(JSON.stringify(input).length>24000){await this.failAnalysisLocked(tx,request,run,now,'CONTEXT_TOO_LARGE');return null;}
-      const claimed=await tx.aiRun.update({where:{id:runId},data:{status:'RUNNING',startedAt:now,leaseUntil:run.deadlineAt,contextVersion:request.version+1,inputSize:JSON.stringify(input).length,retrievalSnapshotJson:{messageIds:input.messages.map(m=>m.id),historyTruncated:input.historyTruncated}}});
+      const claimed=await tx.aiRun.update({where:{id:runId},data:{status:'RUNNING',startedAt:now,leaseUntil:run.deadlineAt,contextVersion:request.version+1,inputSize:JSON.stringify(input).length,retrievalSnapshotJson:{...(run.retrievalSnapshotJson as Prisma.JsonObject),messageIds:input.messages.map(m=>m.id),historyTruncated:input.historyTruncated}}});
       await this.systemEdge(tx,request,runId,'START_AI_ANALYSIS',now,{aiAnalysisStatus:'RUNNING',activeAnalysisRunId:runId},run.initiatingActorId);
       return {run:claimed,input};
+    });
+  }
+  async authorizeAnalysisDispatch(runId:string){
+    const initial=await this.prisma.aiRun.findUnique({where:{id:runId},select:{requestId:true}});if(!initial?.requestId)return false;
+    return this.prisma.$transaction(async tx=>{
+      const run=await tx.aiRun.findUnique({where:{id:runId}}),request=await tx.request.findUnique({where:{id:initial.requestId!}});
+      return !!run&&!!request&&run.status==='RUNNING'&&run.purpose==='ANALYSIS'&&request.status==='AI_ANALYZING'&&request.activeAnalysisRunId===run.id&&request.version===run.contextVersion&&await this.analysisActor(tx,run,request);
     });
   }
   private async failAnalysisLocked(tx:Tx,request:DomainRequest,run:Prisma.AiRunGetPayload<object>,now:Date,code:string,latencyMs?:number){
@@ -290,10 +298,11 @@ export class RequestStateMachineService {
   async finishAnalysis(runId:string,result?:Awaited<ReturnType<typeof executeAnalysis>>,errorCode='AI_ANALYSIS_FAILED',latencyMs?:number){
     const initial=await this.prisma.aiRun.findUnique({where:{id:runId}});if(!initial?.requestId)return;
     await this.prisma.$transaction(async tx=>{
+      const unfinished=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),unlockedRequest=await tx.request.findUniqueOrThrow({where:{id:initial.requestId!}});
+      const authorized=await this.analysisActor(tx,unfinished,unlockedRequest,true);
       await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${initial.requestId}::uuid FOR UPDATE`);
       const request=await tx.request.findUniqueOrThrow({where:{id:initial.requestId!}}),run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}}),now=await this.now(tx);
       if(!['QUEUED','RUNNING'].includes(run.status))return;
-      const authorized=await this.analysisActor(tx,run.initiatingActorId,request);
       const matches=request.status==='AI_ANALYZING'&&request.activeAnalysisRunId===runId&&request.version===run.contextVersion;
       const expired=!run.deadlineAt||run.deadlineAt<=now;
       if(!result||!matches||!authorized||expired){await this.failAnalysisLocked(tx,request,run,now,!authorized?'FORBIDDEN':expired?'AI_TIMEOUT':result&&!matches?'STALE_CONTEXT':errorCode,latencyMs??result?.latencyMs);return;}
@@ -308,7 +317,7 @@ export class RequestStateMachineService {
         await this.vectors.compatible(result.retrieval.identity,tx);
       }
       const analysis=await tx.aiAnalysis.create({data:{requestId:request.id,aiRunId:run.id,intent:a.intent,category:a.category,subcategory:a.subcategory,prioritySuggestion:a.prioritySuggestion,entitiesJson:a.entities,missingFieldsJson:a.missingFields,confidence:a.confidence,reasonSummary:a.reasonSummary,schemaVersion:analysisSchemaVersion,createdAt:now}});
-      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:result.identity,safeResultJson:'grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG',evidenceStatus:'NOT_REQUESTED',citations:[]},errorCode:null,errorSummary:null}});
+      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:JSON.parse(JSON.stringify(result.identity)),safeResultJson:'grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG',evidenceStatus:'NOT_REQUESTED',citations:[]},errorCode:null,errorSummary:null}});
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }

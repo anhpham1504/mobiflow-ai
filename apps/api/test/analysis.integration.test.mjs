@@ -13,7 +13,7 @@ const valid={intent:'REPORT_INCIDENT',category:'NETWORK',subcategory:'IOT_CONNEC
 const generation={raw:JSON.stringify(valid),identity:{provider:'test',model:'fixture:1',digest:'fixture-only'},outputSize:500};
 const completion={analysis:valid,identity:generation.identity,outputSize:500,retryCount:0,latencyMs:10,firstAttemptValid:true};
 async function setup(t,{provider={generate:async()=>generation},auto=false}={}){
-  const env=parseApiEnvironment({NODE_ENV:'test',AI_AUTO_ANALYZE:String(auto),DATABASE_URL:databaseUrl,JWT_SECRET:'a'.repeat(40),REFRESH_TOKEN_SECRET:'b'.repeat(40),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'missing:1',OLLAMA_EMBEDDING_MODEL:'unconfigured'});
+  const env=parseApiEnvironment({NODE_ENV:'test',AI_GENERATION_PROVIDER:'ollama',RAG_RETRIEVAL_MODE:'vector',AI_AUTO_ANALYZE:String(auto),DATABASE_URL:databaseUrl,JWT_SECRET:'a'.repeat(40),REFRESH_TOKEN_SECRET:'b'.repeat(40),OLLAMA_BASE_URL:'http://127.0.0.1:1',OLLAMA_MODEL:'missing:1',OLLAMA_EMBEDDING_MODEL:'unconfigured'});
   const logs=[];const s=await createApplication(env,{quiet:true,log:x=>logs.push(x),...(provider?{aiProvider:provider}:{}),aiWorker:false});
   await s.app.listen(0,'127.0.0.1');t.after(async()=>{await s.app.close();await s.database.close();await s.prisma.$disconnect();});
   const base=await s.app.getUrl();

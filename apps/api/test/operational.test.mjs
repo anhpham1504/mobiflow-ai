@@ -1,12 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {copilotActionSchema,copilotResultSchema,resolutionSummarySchema,feedbackSchema} from '@mobiflow/contracts';
+import {copilotActionSchema,copilotResultSchema,resolutionSummarySchema,feedbackSchema,finalDecisionSchema} from '@mobiflow/contracts';
 import {transitionTarget} from '../dist/requests/transition-rules.js';
 import {copilotModelSchemas,parseStrictOutput,parseSummaryOutput} from '../dist/ai/operational-output.js';
 import {resolutionSummaryFacts,summaryFactsFormat,validateSummaryFacts} from '../dist/ai/resolution-summary-facts.js';
 import {copilotFormat,copilotMessages} from '../dist/ai/prompts/copilot.js';
 
 const id='11111111-1111-4111-8111-111111111111';
+test('bounded business collections reject oversized inputs without accepting a partial result',()=>{
+  const input={category:'NETWORK',subcategory:'IOT_CONNECTIVITY',priority:'HIGH',teamId:id,staffId:'22222222-2222-4222-8222-222222222222',actions:Array.from({length:5000},(_,index)=>({text:'Synthetic bounded action '+index,required:true,sourceIds:[],provenance:'HUMAN'})),acknowledgedMissingFields:[],reason:'Synthetic bounded validation'};
+  const parsed=finalDecisionSchema.safeParse(input);assert.equal(parsed.success,false);if(!parsed.success)assert.ok(parsed.error.issues.some(issue=>issue.path[0]==='actions'));
+});
 test('live CASE_MEMBERSHIP regression binds similar-case IDs to scoped evidence on first and repair attempts',()=>{
   const second='22222222-2222-4222-8222-222222222222',forged='33333333-3333-4333-8333-333333333333',allowed={sourceIds:[],eventIds:[],caseIds:[id,second]};
   assert.deepEqual(parseStrictOutput('FIND_SIMILAR_REQUESTS',JSON.stringify({message:'Ca giả lập',caseIds:[forged]})).caseIds,[forged]);

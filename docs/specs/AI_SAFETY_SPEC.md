@@ -2,6 +2,12 @@
 
 Authority: master-plan §§0.2, 2.3, 9, 23–24, 37 and M10.7–M10.8. Depends on [AUTHORIZATION_SPEC](AUTHORIZATION_SPEC.md), [TOOL_CALLING_SPEC](TOOL_CALLING_SPEC.md), [AI_BEHAVIOR_SPEC](AI_BEHAVIOR_SPEC.md) and [RAG_SPEC](RAG_SPEC.md).
 
+## V1.3 cloud-generation amendment (2026-10-23)
+
+The only approved external AI egress is the backend DeepSeek adapter to the exact official HTTPS origin, and it is disabled by default. A separate owner decision is required before any paid synthetic canary. The key stays in untracked local backend configuration, never a `NEXT_PUBLIC_*` value, log, screenshot, evidence manifest or model prompt. Context is minimized and common email/phone/token patterns are redacted, but this is not approval to process real customer data; enterprise privacy/legal review remains open. No Cloudflare or embedding API is used.
+
+DeepSeek remains an untrusted suggestion source. All current RBAC, ownership, source membership/availability, evidence, schema, expected-version, state-machine, audit and human-approval checks run after generation. Provider failure, missing balance/key or local budget exhaustion cannot mutate priority, assignment, status, SLA, checklist or approval and cannot trigger an Ollama fallback. The historical Ollama clauses below apply only to the explicit rollback profile.
+
 ## Trust boundaries and enforcement
 
 | Boundary / threat | Mandatory backend control | Observable failure |

@@ -2,22 +2,7 @@ import { randomBytes } from 'node:crypto';
 import { writeFileSync, existsSync } from 'node:fs';
 
 if (existsSync('.env')) throw new Error('.env already exists; refusing to overwrite local configuration.');
-const origin = process.env.OLLAMA_BASE_URL ?? 'http://localhost:11434';
-const requested = process.argv[2];
-let llm = 'unconfigured';
-let embedding = 'unconfigured';
-try {
-  const response = await fetch(`${origin}/api/tags`, { signal: AbortSignal.timeout(5000) });
-  if (!response.ok) throw new Error('tags failed');
-  const { models } = await response.json();
-  for (const model of models) {
-    const show = await fetch(`${origin}/api/show`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: model.name }), signal: AbortSignal.timeout(5000) });
-    const details = await show.json();
-    if (model.name === requested && details.capabilities?.includes('completion')) llm = model.name;
-    if (details.capabilities?.includes('embedding') && embedding === 'unconfigured') embedding = model.name;
-  }
-} catch { console.warn('Ollama could not be inspected; missing models remain explicitly unconfigured.'); }
-if (requested && llm !== requested) throw new Error('Requested LLM is not a verified installed completion model; .env was not written.');
+if(process.argv[2])throw new Error('V1.3 DeepSeek/lexical setup takes no model argument. Configure the documented rollback profile manually when needed.');
 const ownerPassword = randomBytes(24).toString('hex');
 const appPassword = randomBytes(24).toString('hex');
 const content = [
@@ -28,7 +13,10 @@ const content = [
   `MIGRATION_DATABASE_URL=postgresql://mobiflow_owner:${ownerPassword}@localhost:5432/mobiflow`,
   `JWT_SECRET=${randomBytes(32).toString('hex')}`, `REFRESH_TOKEN_SECRET=${randomBytes(32).toString('hex')}`,
   'JWT_ISSUER=mobiflow-ai', 'JWT_AUDIENCE=mobiflow-web', 'ACCESS_TOKEN_TTL_SECONDS=900', 'REFRESH_SESSION_TTL_SECONDS=604800', 'AUTH_COOKIE_SECURE=false', 'DEMO_MODE=true',
-  'AI_PROVIDER=ollama', `OLLAMA_BASE_URL=${origin}`, `OLLAMA_MODEL=${llm}`, `OLLAMA_EMBEDDING_MODEL=${embedding}`, 'HEALTH_TIMEOUT_MS=2000', '',
+  'AI_GENERATION_PROVIDER=deepseek','RAG_RETRIEVAL_MODE=lexical','AI_LIVE_CALLS_ENABLED=false','DEEPSEEK_API_KEY=',
+  'DEEPSEEK_BASE_URL=https://api.deepseek.com/','DEEPSEEK_MODEL=deepseek-flash','DEEPSEEK_BUDGET_USD=0.25','DEEPSEEK_MAX_CALLS_PER_PROCESS=3','DEEPSEEK_MAX_REQUESTS_PER_MINUTE=2','DEEPSEEK_MAX_CONCURRENT_REQUESTS=1',
+  'DEEPSEEK_PRICE_CACHE_HIT_INPUT_PER_MILLION_USD=0.006','DEEPSEEK_PRICE_CACHE_MISS_INPUT_PER_MILLION_USD=0.30','DEEPSEEK_PRICE_OUTPUT_PER_MILLION_USD=1.20','DEEPSEEK_PRICING_EFFECTIVE_DATE=2026-10-23',
+  'AI_RAG_ENABLED=true','HEALTH_TIMEOUT_MS=2000','',
 ].join('\n');
 writeFileSync('.env', content, { flag: 'wx', mode: 0o600 });
-console.log(`Created ignored .env with generated local secrets. LLM: ${llm}; embedding: ${embedding}. No models downloaded.`);
+console.log('Created ignored .env with generated local secrets. DeepSeek live calls remain disabled and no Ollama/model process was inspected or started.');

@@ -32,8 +32,9 @@ export class ApiExceptionFilter implements ExceptionFilter {
     const res = host.switchToHttp().getResponse<Response>();
     // Express body-parser's size error is not a Nest HttpException.
     const oversized = exception instanceof Error && 'type' in exception && exception.type === 'entity.too.large' && 'status' in exception && exception.status === 413;
+    const invalidBody = isSafeBodyParserClientError(exception);
     const databaseUnavailable = !(exception instanceof HttpException) && isDatabaseUnavailable(exception);
-    const status = exception instanceof HttpException ? exception.getStatus() : oversized ? 413 : databaseUnavailable ? 503 : 500;
+    const status = exception instanceof HttpException ? exception.getStatus() : oversized ? 413 : invalidBody ? 400 : databaseUnavailable ? 503 : 500;
     const apiError = exception instanceof ApiError ? exception : undefined;
     const code = apiError?.code ?? (databaseUnavailable ? 'DATABASE_UNAVAILABLE' : status === 400 ? 'INVALID_INPUT' : status === 401 ? 'UNAUTHORIZED' : status === 403 ? 'FORBIDDEN' : status === 404 ? 'NOT_FOUND' : status === 413 ? 'PAYLOAD_TOO_LARGE' : status === 429 ? 'RATE_LIMITED' : 'INTERNAL_ERROR');
     const requestId: string = res.locals.requestId ?? randomUUID();
@@ -43,6 +44,12 @@ export class ApiExceptionFilter implements ExceptionFilter {
     this.log({ event: 'http.error', requestId, status, code, ...(internalErrorCode ? { internalErrorCode } : {}), ...(databaseErrorCode ? { databaseErrorCode } : {}) });
     res.status(status).json({ error: { code, message: apiError?.publicMessage ?? (databaseUnavailable ? 'The database is temporarily unavailable.' : status < 500 ? 'The request could not be processed.' : 'An internal error occurred.') }, requestId });
   }
+}
+
+function isSafeBodyParserClientError(exception: unknown): boolean {
+  if (typeof exception !== 'object' || exception === null || !('status' in exception) || exception.status !== 400 || !('expose' in exception) || exception.expose !== true) return false;
+  if (!('type' in exception) || exception.type === undefined) return exception instanceof Error;
+  return typeof exception.type === 'string' && ['encoding.unsupported', 'entity.parse.failed', 'entity.verify.failed', 'request.aborted'].includes(exception.type);
 }
 
 export function isDatabaseUnavailable(exception: unknown): boolean {

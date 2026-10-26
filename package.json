@@ -85,13 +85,18 @@
     "verify:security:m23": "node --env-file=.env scripts/verification/m23-security.mjs",
     "test:database:m24": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m24-migrations.mjs",
     "test:integration:m24": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node --env-file=.env scripts/verification/m24-integration.mjs",
+    "test:integration:v13-lexical": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/v13-lexical-integration.mjs",
+    "test:integration:deepseek-lexical": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs deepseek-lexical",
+    "test:integration:ollama-vector": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs ollama-vector",
+    "test:integration:all-profiles": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs all",
+    "test:integration:all-profiles:reverse": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs all --reverse",
     "verify:security:m24": "node --env-file=.env scripts/verification/m24-security.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
     "@types/node": "24.10.1",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.3.8",
+    "eslint-config-next": "16.4.2",
     "prisma": "7.10.0",
     "typescript": "6.0.3",
     "typescript-eslint": "8.70.1"
@@ -104,7 +109,12 @@
     "unrs-resolver": false
   },
   "overrides": {
+    "@nestjs/platform-express": {
+      "multer": "2.5.0"
+    },
+    "body-parser": "2.4.0",
     "deepmerge-ts": "8.0.2",
+    "fast-uri": "3.1.9",
     "mysql2": "3.24.4"
   }
 }
