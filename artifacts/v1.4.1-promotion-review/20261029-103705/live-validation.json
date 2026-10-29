@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "mobiflow-v141-promotion-live.v1",
+  "checkedAt": "2026-10-29T03:42:22.640Z",
+  "result": "PASS",
+  "syntheticOnly": true,
+  "resumedExistingRequest": true,
+  "liveAttempts": {
+    "attemptCount": 1,
+    "remainingAttempts": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "finishReason": "stop",
+    "estimatedCostUsd": 0.001765488
+  },
+  "rag": {
+    "documentId": "9e48dea7-be73-49c0-88b0-c0d369dc3f7e",
+    "sourceId": "KD-9e48dea7-be73-49c0-88b0-c0d369dc3f7e-G1-C0",
+    "top1": true,
+    "evidenceStatus": "SUFFICIENT",
+    "citationValid": true
+  },
+  "ai": {
+    "runId": "6ce7c7ca-9c9d-42b3-8a2a-8f39d959a861",
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "latencyMs": 1798,
+    "category": "NETWORK",
+    "subcategory": "IOT_CONNECTIVITY",
+    "prioritySuggestion": "HIGH",
+    "protectedWorkforceKeysAbsent": true,
+    "staffIdsAbsent": true
+  },
+  "routing": {
+    "requestId": "b367dc07-e005-4e5c-b38e-aea6be6ba9dd",
+    "publicCode": "MF-2026-000001",
+    "outcome": "AUTO_ASSIGNED",
+    "source": "AUTO_ROUTING",
+    "requiredSkills": [
+      "IOT"
+    ],
+    "reasons": [
+      "GROUNDED_RAG",
+      "DEFAULT_TEAM_MAPPING",
+      "EXACT_SKILL_MATCH",
+      "TEAM_MATCH",
+      "AVAILABLE",
+      "LOWEST_WORKLOAD",
+      "STABLE_TIE_BREAK",
+      "SLA_POLICY_MATCH"
+    ],
+    "candidateCount": 2,
+    "selectedWorkload": 1,
+    "expectedLowestWorkload": 1,
+    "deterministicSelection": true
+  },
+  "stateMachine": {
+    "status": "ASSIGNED",
+    "assignmentCount": 1,
+    "slaCount": 1,
+    "historyAutoAssign": true,
+    "notificationCount": 1
+  },
+  "audit": {
+    "actorType": "SYSTEM",
+    "action": "REQUEST_AUTO_ASSIGNED",
+    "routingSource": "AUTO_ROUTING",
+    "assignedByIsInitiatorProvenance": true,
+    "assignedByNotExposedAsDecisionActor": true
+  },
+  "roles": {
+    "userInternalRoutingHidden": true,
+    "staffQueueVisible": true,
+    "staffInternalRoutingHidden": true,
+    "managerRoutingVisible": true
+  }
+}

@@ -60,7 +60,7 @@ export class AnalysisWorker implements OnModuleInit,OnModuleDestroy {
         this.log({event:'ai.run.attempt',runId:job.run.id,attempt:attempt+1});
       },this.env.AI_GENERATION_MAX_ATTEMPTS);
       result.latencyMs=Math.round(performance.now()-start);
-      generated=true;await this.machine.finishAnalysis(job.run.id,result);
+      generated=true;await this.machine.finishAnalysis(job.run.id,result);await this.machine.autoRouteAnalysis(job.run.id);
     }catch(error){
       const code=error instanceof KnowledgeFailure?error.code:generated?'AI_PERSISTENCE_UNAVAILABLE':deadline.aborted?'AI_TIMEOUT':normalizedFailure(error,signal).code;
       // If this transaction also fails, the durable lease remains recoverable.

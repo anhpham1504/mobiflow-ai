@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import {autoRoutingViewSchema} from './auto-routing.js';
 
 export const statuses = ['NEW','AI_ANALYZING','TRIAGED','PENDING_APPROVAL','ASSIGNED','IN_PROGRESS','WAITING_USER','RESOLVED','CLOSED','CANCELED'] as const;
 export const priorities = ['LOW','MEDIUM','HIGH','URGENT'] as const;
@@ -72,6 +73,7 @@ export const requestViewSchema=z.object({
   id:z.uuid(),publicCode:z.string(),title:z.string(),description:z.string(),status:z.enum(statuses),version:z.number().int().positive(),
   category:z.string().nullable(),subcategory:z.string().nullable(),priority:z.enum(priorities),teamId:z.uuid().nullable(),
   currentAssignee:z.object({id:z.uuid(),displayName:z.string()}).nullable(),
+  assignmentSource:z.enum(['AUTO_ROUTING','MANAGER_DECISION']).nullable().optional(),autoRouting:autoRoutingViewSchema.nullable().optional(),
   createdAt:z.iso.datetime(),updatedAt:z.iso.datetime(),resolvedAt:nullableDate,closedAt:nullableDate,canceledAt:nullableDate,aiAnalysisStatus:z.string(),
   sla:slaViewSchema.nullable(),
   currentResolution:z.object({id:z.uuid(),cycle:z.number(),rootCause:z.string(),resolution:z.string(),verification:z.string(),resolvedAt:z.iso.datetime()}).nullable(),

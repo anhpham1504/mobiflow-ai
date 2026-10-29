@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "mobiflow-v141-promotion-override.v1",
+  "checkedAt": "2026-10-29T03:45:16.531Z",
+  "result": "PASS",
+  "requestId": "b367dc07-e005-4e5c-b38e-aea6be6ba9dd",
+  "managerActor": true,
+  "previousAutoAuditPreserved": true,
+  "decisionKind": "REASSIGN",
+  "routingSource": "MANAGER_OVERRIDE",
+  "backgroundReassignmentAbsent": true,
+  "liveAttemptsAfterOverride": 1
+}
