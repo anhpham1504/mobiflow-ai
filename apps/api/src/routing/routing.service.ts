@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { randomUUID } from 'node:crypto';
-import { createRoutingRuleSchema, createRoutingRevisionSchema, routingCommandSchema, routingConditionsSchema, routingHistoryQuerySchema, routingListQuerySchema, routingEmptySchema, normalizeRoutingConditions, type RoutingDefinition, type RoutingTargetView } from '@mobiflow/contracts';
+import { createRoutingRuleSchema, createRoutingRevisionSchema, routingCommandSchema, routingConditionsSchema, routingHistoryQuerySchema, routingListQuerySchema, routingEmptySchema, normalizeRoutingConditions, type RoutingDefinition, type RoutingFacts, type RoutingTargetView } from '@mobiflow/contracts';
 import { Prisma, type RoutingRuleRevision } from '../generated/prisma/client.js';
 import { PrismaService } from '../database/prisma.service.js';
 import { AuthorizationPolicyService } from '../authorization/authorization-policy.service.js';
@@ -130,6 +130,15 @@ export class RoutingService {
       return ruleView(updated);
     });
   }
+  async evaluateFacts(tx:Prisma.TransactionClient,facts:RoutingFacts,requestVersion:number) {
+    const rules=await tx.routingRule.findMany({where:{status:'ACTIVE'},include:ruleInclude,orderBy:{id:'asc'},take:501});
+    if(rules.length>500)throw new ApiError(503,'ROUTING_LIMIT_EXCEEDED','Routing capacity exceeded. Manual assignment remains available.');
+    const targets=new Map((await this.targetViews(tx,[...new Set(rules.map(rule=>rule.current.targetTeamId))])).map(target=>[target.id,target]));
+    return this.evaluator.evaluate(facts,requestVersion,rules.map(rule=>({ruleId:rule.id,revisionId:rule.current.id,revision:rule.currentRevision,ruleVersion:rule.version,status:rule.status,
+      name:rule.current.name,priority:rule.current.priority,conditions:routingConditionsSchema.parse(rule.current.conditions),
+      target:targets.get(rule.current.targetTeamId)??{type:'TEAM',id:rule.current.targetTeamId,displayName:'Unavailable team',eligible:false},
+    })));
+  }
   async evaluate(id: string, actor: AuthenticatedActor, input: unknown) {
     this.policy.assertCanRoute(actor); parse(routingEmptySchema, input === undefined ? {} : input);
     return this.prisma.$transaction(async tx => {
@@ -137,13 +146,7 @@ export class RoutingService {
       const request = await tx.request.findFirst({ where: { AND: [{ id }, this.policy.requestScope(actor)] }, select: { version: true, category: true, subcategory: true, priority: true, createdById: true, currentAssigneeId: true } });
       this.policy.assertCanReadRequest(actor, request);
       if (!request) throw new ApiError(404, 'NOT_FOUND', 'The resource was not found.');
-      const rules = await tx.routingRule.findMany({ where: { status: 'ACTIVE' }, include: ruleInclude, orderBy: { id: 'asc' }, take: 501 });
-      if (rules.length > 500) throw new ApiError(503, 'ROUTING_LIMIT_EXCEEDED', 'Routing capacity exceeded. Manual assignment remains available.');
-      const targets = new Map((await this.targetViews(tx, [...new Set(rules.map(rule => rule.current.targetTeamId))])).map(target => [target.id, target]));
-      return this.evaluator.evaluate(this.facts.build(request), request.version, rules.map(rule => ({ ruleId: rule.id, revisionId: rule.current.id, revision: rule.currentRevision, ruleVersion: rule.version, status: rule.status,
-        name: rule.current.name, priority: rule.current.priority, conditions: routingConditionsSchema.parse(rule.current.conditions),
-        target: targets.get(rule.current.targetTeamId) ?? { type: 'TEAM', id: rule.current.targetTeamId, displayName: 'Unavailable team', eligible: false },
-      })));
+      return this.evaluateFacts(tx,this.facts.build(request),request.version);
     }, { isolationLevel: Prisma.TransactionIsolationLevel.RepeatableRead });
   }
 }

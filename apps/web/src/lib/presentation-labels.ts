@@ -24,6 +24,7 @@ export const eventLabels: Record<string, string> = {
   KNOWLEDGE_RETRIEVED:'Tra cứu nguồn tri thức', COPILOT_ACTION_QUEUED:'Đã xếp hàng hỗ trợ Copilot',
   RECOMMENDATION_QUEUED:'Đã xếp hàng đề xuất phương án', RECOMMENDATION_STALE:'Đề xuất dựa trên dữ liệu cũ', RECOMMENDATION_FAILED:'Không tạo được đề xuất', RECOMMENDATION_ATTEMPT_FAILED:'Lần tạo đề xuất không thành công',
   AI_RECOMMENDATION_V2_CREATED:'AI đã tạo đề xuất để quản lý xem xét', AI_RECOMMENDATION_V2_ACCEPTED:'Quản lý đã chấp nhận đề xuất', AI_RECOMMENDATION_V2_MODIFIED:'Quản lý đã chỉnh sửa đề xuất', AI_RECOMMENDATION_V2_REJECTED:'Quản lý đã từ chối đề xuất',
+  REQUEST_AUTO_ASSIGNED:'Hệ thống tự động điều phối', AUTO_ASSIGN:'Hệ thống tự động điều phối', AUTO_ROUTING_REVIEW_REQUIRED:'Chuyển quản lý xử lý ngoại lệ điều phối',
   RESOLUTION_SUMMARY_QUEUED:'Đã xếp hàng tóm tắt xử lý', COPILOT_SUCCEEDED:'Hoàn tất hỗ trợ Copilot', COPILOT_FAILED:'Hỗ trợ Copilot không thành công',
 };
 export function classificationLabel(category: string | null, subcategory: string | null) {

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import {eligibleStaffPredicate} from './staff-eligibility.js';
 import type { ApiEnvironment } from '@mobiflow/config';
 import { API_ENV } from '../tokens.js';
-import { analysisSchema, analysisSchemaVersion } from '@mobiflow/contracts';
+import { analysisSchema, analysisSchemaVersion,sourceSchema,type Source } from '@mobiflow/contracts';
 import { promptVersion, type AnalysisInput } from '../ai/prompts/request-analysis.js';
 import {resolutionSummaryPromptVersion} from '../ai/prompts/copilot.js';
 import type { executeAnalysis } from '../ai/analysis-execution.js';
@@ -29,8 +29,27 @@ import {recommendationSnapshot} from '../ai/recommendation-snapshot.js';
 import { notifyCollaboration } from './collaboration-notifications.js';
 import { validateTemplateSource, recordTemplateUsage } from '../templates/template-provenance.js';
 import {authorizationSnapshot,backgroundAuthorization,validateBackgroundAuthorization} from '../ai/background-authorization.js';
+import {AutoRoutingService} from '../routing/auto-routing.service.js';
+import {setTimeout as delay} from 'node:timers/promises';
 
 type Tx = Prisma.TransactionClient;
+function transactionWriteConflict(error:unknown){
+  if(error instanceof Prisma.PrismaClientKnownRequestError&&error.code==='P2034')return true;
+  const adapter=error instanceof Prisma.PrismaClientKnownRequestError?error.meta?.driverAdapterError:error;
+  if(!adapter||typeof adapter!=='object'||!('cause' in adapter))return false;
+  const cause=(adapter as {cause?:{kind?:unknown}}).cause;
+  return cause?.kind==='TransactionWriteConflict';
+}
+const retrievalSnapshotSourcesSchema=sourceSchema.omit({excerpt:true}).array().max(5);
+function citedSnapshotSources(snapshot:Prisma.JsonValue|null,grounding:Prisma.JsonValue|null):Source[]|null{
+  if(!snapshot||typeof snapshot!=='object'||Array.isArray(snapshot)||!grounding||typeof grounding!=='object'||Array.isArray(grounding))return null;
+  if(grounding.mode!=='RAG'||grounding.evidenceStatus!=='SUFFICIENT'||!Array.isArray(grounding.citations)||!grounding.citations.length)return null;
+  const ids=grounding.citations.flatMap(value=>value&&typeof value==='object'&&!Array.isArray(value)&&typeof value.sourceId==='string'?[value.sourceId]:[]);
+  if(ids.length!==grounding.citations.length||new Set(ids).size!==ids.length)return null;
+  const parsed=retrievalSnapshotSourcesSchema.safeParse(snapshot.sources);if(!parsed.success)return null;
+  const sources=ids.map(id=>parsed.data.find(source=>source.sourceId===id));
+  return sources.every((source):source is NonNullable<typeof source>=>!!source)?sources.map(source=>({...source,excerpt:''})):null;
+}
 export interface Command {
   expectedVersion: number; reason?: string; body?: string; finalDecision?: FinalDecision;
   manualDraftRevision?: number; reviewKind?: 'AI'|'MANUAL'; recommendationId?:string; acknowledgedMissingFields?: string[];
@@ -43,7 +62,7 @@ export interface Command {
 }
 @Injectable()
 export class RequestStateMachineService {
-  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:KnowledgeRetriever) {}
+  constructor(private readonly prisma: PrismaService, private readonly policy: AuthorizationPolicyService, @Inject(API_ENV) private readonly env:ApiEnvironment,private readonly vectors:KnowledgeRetriever,private readonly autoRouting:AutoRoutingService) {}
 
   private async identity(tx: Tx, actor: Pick<AuthenticatedActor,'id'|'role'|'sessionId'>) {
     await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "User" WHERE "id"=${actor.id}::uuid FOR SHARE`);
@@ -196,7 +215,7 @@ export class RequestStateMachineService {
         await this.eligibleStaff(tx,command.teamId!,command.staffId!);
         const previous=await tx.assignment.findFirst({where:{requestId:id},orderBy:{assignedAt:'desc'}});
         if(!previous) throw new ApiError(422,'INVALID_ASSIGNMENT','Assignment is required.');
-        await tx.assignment.create({data:{requestId:id,staffId:command.staffId!,teamId:command.teamId!,assignedById:actor.id,assignedAt:now,reason:command.reason!,decisionKind:'REASSIGN',finalDecisionJson:{...(previous.finalDecisionJson as Prisma.JsonObject),teamId:command.teamId!,staffId:command.staffId!},eventId:event.id}});
+        await tx.assignment.create({data:{requestId:id,staffId:command.staffId!,teamId:command.teamId!,assignedById:actor.id,assignedAt:now,reason:command.reason!,decisionKind:'REASSIGN',finalDecisionJson:{...(previous.finalDecisionJson as Prisma.JsonObject),teamId:command.teamId!,staffId:command.staffId!,routingSource:'MANAGER_OVERRIDE'},eventId:event.id}});
         data.currentAssigneeId=command.staffId!;data.teamId=command.teamId!;
         notification='REQUEST_ASSIGNED';recipients=[command.staffId!];
       }
@@ -321,6 +340,52 @@ export class RequestStateMachineService {
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }
+  async autoRouteAnalysis(runId:string){
+    const initial=await this.prisma.aiRun.findUnique({where:{id:runId},select:{requestId:true}});if(!initial?.requestId)return null;
+    for(let attempt=0;attempt<5;attempt++)try{
+      return await this.prisma.$transaction(async tx=>{
+        await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${initial.requestId}::uuid FOR UPDATE`);
+        const request=await tx.request.findUniqueOrThrow({where:{id:initial.requestId!},include:{latestAnalysis:true}}),run=await tx.aiRun.findUniqueOrThrow({where:{id:runId}});
+        const existing=await tx.auditLog.findFirst({where:{requestId:request.id,requestCorrelationId:runId,action:{in:['REQUEST_AUTO_ASSIGNED','AUTO_ROUTING_REVIEW_REQUIRED']}},orderBy:{createdAt:'desc'}});if(existing)return null;
+        if(run.status!=='SUCCEEDED'||run.purpose!=='ANALYSIS'||request.status!=='TRIAGED'||request.latestAnalysis?.aiRunId!==runId||request.version!==run.contextVersion+1)return null;
+        if(!run.initiatingActorId)throw new ApiError(409,'STALE_CONTEXT','The analysis initiator is unavailable.');
+        const analysis=analysisSchema.parse({intent:request.latestAnalysis.intent,category:request.latestAnalysis.category,subcategory:request.latestAnalysis.subcategory,prioritySuggestion:request.latestAnalysis.prioritySuggestion,entities:request.latestAnalysis.entitiesJson,missingFields:request.latestAnalysis.missingFieldsJson,confidence:Number(request.latestAnalysis.confidence),reasonSummary:request.latestAnalysis.reasonSummary});
+        const sources=citedSnapshotSources(run.retrievalSnapshotJson,run.safeResultJson);let grounded=!!sources;
+        if(sources)try{await this.vectors.validateCurrent(tx,sources);}catch{grounded=false;}
+        const now=await this.now(tx),decision=await this.autoRouting.evaluate(tx,{analysis,grounded,appliedPriority:request.priority,requestVersion:request.version,evaluatedAt:now});
+        if(decision.view.outcome==='MANAGER_REVIEW_REQUIRED'){
+          const event=await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'AUTO_ROUTING_REVIEW_REQUIRED',resourceType:'Request',resourceId:request.id,requestCorrelationId:runId,safeBeforeJson:{status:request.status,version:request.version},safeAfterJson:{status:request.status,version:request.version,autoRouting:decision.view},outcome:'SUCCEEDED',createdAt:now}});
+          const managers=await tx.user.findMany({where:{active:true,role:'MANAGER'},select:{id:true}});
+          await tx.notification.createMany({data:managers.map(manager=>({recipientId:manager.id,requestId:request.id,eventId:event.id,type:'APPROVAL_REQUIRED',safeActorMetadataJson:{actorType:'SYSTEM',routingSource:'AUTO_ROUTING'},createdAt:now}))});
+          return decision.view;
+        }
+        await this.eligibleStaff(tx,decision.view.teamId!,decision.view.staffId!);
+        if(!decision.policy)throw new ApiError(422,'MISSING_SLA_POLICY','No active SLA policy matches this decision.');
+        const version=request.version+1,event=await tx.auditLog.create({data:{requestId:request.id,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'REQUEST_AUTO_ASSIGNED',resourceType:'Request',resourceId:request.id,requestCorrelationId:runId,safeBeforeJson:{status:request.status,version:request.version},safeAfterJson:{status:'ASSIGNED',version,autoRouting:decision.view},outcome:'SUCCEEDED',createdAt:now}});
+        const snapshot={category:analysis.category,subcategory:analysis.subcategory,priority:request.priority,prioritySuggestion:analysis.prioritySuggestion,teamId:decision.view.teamId!,staffId:decision.view.staffId!,actions:[],acknowledgedMissingFields:analysis.missingFields,reason:'Deterministic grounded auto-routing.',policyId:decision.policy.id,policyVersion:decision.policy.version,targetSeconds:decision.policy.targetMinutes*60,routingSource:'AUTO_ROUTING',routingReasons:decision.view.reasons,requiredSkills:decision.view.requiredSkills,candidateCount:decision.view.candidateCount,selectedWorkload:decision.view.selectedWorkload};
+        await tx.assignment.create({data:{requestId:request.id,staffId:decision.view.staffId!,teamId:decision.view.teamId!,assignedById:run.initiatingActorId,assignedAt:now,reason:'Deterministic grounded auto-routing.',decisionKind:'AI_ACCEPT',finalDecisionJson:snapshot,eventId:event.id}});
+        const started=second(now);await tx.slaInstance.create({data:{requestId:request.id,policyId:decision.policy.id,policyVersion:decision.policy.version,targetSeconds:decision.policy.targetMinutes*60,startedAt:started,dueAt:new Date(started.getTime()+decision.policy.targetMinutes*60000),assessedAt:started}});
+        await tx.request.update({where:{id:request.id,version:request.version},data:{status:'ASSIGNED',version,updatedAt:now,category:analysis.category,subcategory:analysis.subcategory,teamId:decision.view.teamId,currentAssigneeId:decision.view.staffId}});
+        await tx.requestStatusHistory.create({data:{requestId:request.id,fromStatus:'TRIAGED',toStatus:'ASSIGNED',action:'AUTO_ASSIGN',actorType:'SYSTEM',requestVersion:version,eventId:event.id,createdAt:now}});
+        await tx.notification.create({data:{recipientId:decision.view.staffId!,requestId:request.id,eventId:event.id,type:'REQUEST_ASSIGNED',safeActorMetadataJson:{actorType:'SYSTEM',routingSource:'AUTO_ROUTING'},createdAt:now}});
+        return decision.view;
+      },{isolationLevel:Prisma.TransactionIsolationLevel.Serializable,timeout:15000});
+    }catch(error){
+      if(transactionWriteConflict(error)&&attempt<4){await delay(Math.min(10*2**attempt,80));continue;}
+      await this.recordAutoRoutingFailure(initial.requestId,runId);return null;
+    }
+    return null;
+  }
+  private async recordAutoRoutingFailure(requestId:string,runId:string){
+    try{await this.prisma.$transaction(async tx=>{
+      await tx.$queryRaw(Prisma.sql`SELECT "id" FROM "Request" WHERE "id"=${requestId}::uuid FOR UPDATE`);
+      const request=await tx.request.findUnique({where:{id:requestId}}),run=await tx.aiRun.findUnique({where:{id:runId}});if(!request||!run||request.status!=='TRIAGED')return;
+      if(await tx.auditLog.findFirst({where:{requestId,requestCorrelationId:runId,action:{in:['REQUEST_AUTO_ASSIGNED','AUTO_ROUTING_REVIEW_REQUIRED']}}}))return;
+      const now=await this.now(tx),route={source:'AUTO_ROUTING' as const,outcome:'MANAGER_REVIEW_REQUIRED' as const,category:null,subcategory:null,prioritySuggestion:null,appliedPriority:request.priority,requiredSkills:[],recommendedTeamCode:null,teamId:null,staffId:null,candidateCount:0,selectedWorkload:null,reasons:['ROUTING_TECHNICAL_FAILURE' as const],requestVersion:request.version,evaluatedAt:now.toISOString()};
+      const event=await tx.auditLog.create({data:{requestId,actorType:'SYSTEM',initiatingActorId:run.initiatingActorId,action:'AUTO_ROUTING_REVIEW_REQUIRED',resourceType:'Request',resourceId:requestId,requestCorrelationId:runId,safeAfterJson:{status:request.status,version:request.version,autoRouting:route},outcome:'FAILED',createdAt:now}});
+      const managers=await tx.user.findMany({where:{active:true,role:'MANAGER'},select:{id:true}});await tx.notification.createMany({data:managers.map(manager=>({recipientId:manager.id,requestId,eventId:event.id,type:'APPROVAL_REQUIRED',safeActorMetadataJson:{actorType:'SYSTEM',routingSource:'AUTO_ROUTING'},createdAt:now}))});
+    });}catch{return;}
+  }
   async publishRecommendation(runId:string,result:AnyRecommendation,identity:{provider:string;model:string;digest:string},outputSize:number,latencyMs:number){
     const initial=await this.prisma.aiRun.findUniqueOrThrow({where:{id:runId}});
     return this.prisma.$transaction(async tx=>{
@@ -424,7 +489,6 @@ export class RequestStateMachineService {
   }
   private async checklist(tx:Tx,request:DomainRequest,actor:AuthenticatedActor,command:Command,now:Date) {
     const checklist=await tx.checklist.findUnique({where:{requestId:request.id},include:{items:true}});
-    if(!checklist) throw new ApiError(422,'MISSING_CHECKLIST','No approved checklist exists.');
     if(command.items) {
       let allowedSources=new Set<string>();
       if(command.sourceRunId){
@@ -438,12 +502,14 @@ export class RequestStateMachineService {
         }
       }
       if(command.items.some(item=>item.sourceIds.some(id=>!allowedSources.has(id))))throw new ApiError(422,'INVALID_SOURCE','Checklist source was not produced by the selected draft.');
+      if(!checklist){await tx.checklist.create({data:{requestId:request.id,createdById:actor.id,provenance:'STAFF',sourceRunId:command.sourceRunId,items:{create:command.items.map((item,i)=>({ordinal:i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))},createdAt:now,updatedAt:now}});return;}
       if(checklist.items.length+command.items.length>30) throw new ApiError(422,'CHECKLIST_LIMIT','At most 30 checklist items are allowed.');
       const existing=new Set(checklist.items.map(i=>i.text.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('vi')));
       const fresh=command.items.filter(item=>{const key=item.text.normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('vi');if(existing.has(key))return false;existing.add(key);return true;});
       if(!fresh.length)throw new ApiError(409,'DUPLICATE_CHECKLIST','All selected items already exist.');
       await tx.checklistItem.createMany({data:fresh.map((item,i)=>({checklistId:checklist.id,ordinal:checklist.items.length+i+1,text:item.text,required:item.required,sourceRefsJson:item.sourceIds,createdAt:now,updatedAt:now}))});
     } else {
+      if(!checklist) throw new ApiError(422,'MISSING_CHECKLIST','No approved checklist exists.');
       const item=checklist.items.find(i=>i.id===command.itemId);
       if(!item) throw new ApiError(404,'NOT_FOUND','The checklist item was not found.');
       const data:Prisma.ChecklistItemUncheckedUpdateInput={};
@@ -455,7 +521,7 @@ export class RequestStateMachineService {
       if(command.operation==='UNWAIVE') Object.assign(data,{waivedAt:null,waivedById:null,waiverReason:null});
       await tx.checklistItem.update({where:{id:item.id},data});
     }
-    await tx.checklist.update({where:{id:checklist.id},data:{version:{increment:1}}});
+    if(checklist)await tx.checklist.update({where:{id:checklist.id},data:{version:{increment:1}}});
   }
 }
 

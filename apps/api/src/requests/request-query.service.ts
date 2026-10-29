@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { z } from 'zod';
-import { requestListQuerySchema } from '@mobiflow/contracts';
+import { autoRoutingViewSchema,requestListQuerySchema } from '@mobiflow/contracts';
 import type { Prisma } from '../generated/prisma/client.js';
 import { PrismaService } from '../database/prisma.service.js';
 import { AuthorizationPolicyService } from '../authorization/authorization-policy.service.js';
@@ -26,14 +26,18 @@ export function page<T extends {id:string;createdAt:Date}>(rows:T[],limit:number
   const data=rows.slice(0,limit),last=data.at(-1);
   return {data,page:{hasMore:rows.length>limit,nextCursor:rows.length>limit&&last?Buffer.from(JSON.stringify({id:last.id,createdAt:last.createdAt.toISOString()})).toString('base64url'):null}};
 }
-const relations={currentAssignee:{select:{id:true,displayName:true}},slaInstance:true,currentResolution:{select:{id:true,cycle:true,rootCause:true,resolution:true,verification:true,resolvedAt:true}},feedback:{select:{rating:true,comment:true,createdAt:true}},aiRuns:{where:{purpose:'RESOLUTION_SUMMARY' as const},orderBy:{createdAt:'desc' as const},take:1}} satisfies Prisma.RequestInclude;
+const relations={currentAssignee:{select:{id:true,displayName:true}},slaInstance:true,currentResolution:{select:{id:true,cycle:true,rootCause:true,resolution:true,verification:true,resolvedAt:true}},feedback:{select:{rating:true,comment:true,createdAt:true}},aiRuns:{where:{purpose:'RESOLUTION_SUMMARY' as const},orderBy:{createdAt:'desc' as const},take:1},
+  assignments:{orderBy:{assignedAt:'desc' as const},take:1,select:{decisionKind:true,finalDecisionJson:true}},audits:{where:{action:{in:['REQUEST_AUTO_ASSIGNED','AUTO_ROUTING_REVIEW_REQUIRED']}},orderBy:{createdAt:'desc' as const},take:1,select:{safeAfterJson:true}}} satisfies Prisma.RequestInclude;
 type Row=Prisma.RequestGetPayload<{include:typeof relations}>;
 @Injectable()
 export class RequestQueryService {
   constructor(private readonly prisma:PrismaService,private readonly policy:AuthorizationPolicyService) {}
   private view(r:Row,actor:AuthenticatedActor,now:Date) {
     const sla=r.slaInstance?slaView(r.slaInstance,now):null;
+    const assignment=r.assignments[0],assignmentJson=assignment?.finalDecisionJson,source=assignmentJson&&typeof assignmentJson==='object'&&!Array.isArray(assignmentJson)&&assignmentJson.routingSource==='AUTO_ROUTING'?'AUTO_ROUTING':assignment?'MANAGER_DECISION':null;
+    const audit=r.audits[0]?.safeAfterJson,auditRoute=audit&&typeof audit==='object'&&!Array.isArray(audit)?autoRoutingViewSchema.safeParse(audit.autoRouting):null;
     return {id:r.id,publicCode:r.publicCode,title:r.title,description:r.description,status:r.status,version:r.version,category:r.category,subcategory:r.subcategory,priority:r.priority,teamId:r.teamId,currentAssignee:r.currentAssignee,
+      assignmentSource:source,...(actor.role==='MANAGER'?{autoRouting:auditRoute?.success?auditRoute.data:null}:{}),
       createdAt:r.createdAt,updatedAt:r.updatedAt,resolvedAt:r.resolvedAt,closedAt:r.closedAt,canceledAt:r.canceledAt,aiAnalysisStatus:r.aiAnalysisStatus,
       sla,
       currentResolution:r.currentResolution,feedback:r.feedback,resolutionSummary:r.aiRuns[0]?{aiRunId:r.aiRuns[0].id,requestId:r.id,purpose:'RESOLUTION_SUMMARY' as const,action:null,status:r.aiRuns[0].status,errorCode:r.aiRuns[0].errorCode,createdAt:r.aiRuns[0].createdAt,finishedAt:r.aiRuns[0].finishedAt,contextVersion:r.aiRuns[0].contextVersion,stale:r.currentResolution?.id!==r.aiRuns[0].resolutionId,result:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].safeResultJson:null,model:r.aiRuns[0].status==='SUCCEEDED'?r.aiRuns[0].model:null,latencyMs:r.aiRuns[0].latencyMs}:null,
