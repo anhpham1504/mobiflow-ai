@@ -18,7 +18,7 @@ async function setup(t,{provider={generate:async()=>generation},auto=false}={}){
   await s.app.listen(0,'127.0.0.1');t.after(async()=>{await s.app.close();await s.database.close();await s.prisma.$disconnect();});
   const base=await s.app.getUrl();
   async function call(token,path,body,method=body===undefined?'GET':'POST'){
-    const r=await fetch(base+'/api/v1'+path,{method,headers:{'Content-Type':'application/json',Origin:'http://localhost:3000','X-CSRF-Protection':'1',...(token?{Authorization:'Bearer '+token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
+    const r=await fetch(base+'/api/v1'+path,{method,headers:{'Content-Type':'application/json',Origin:env.WEB_ORIGIN,'X-CSRF-Protection':'1',...(token?{Authorization:'Bearer '+token}:{})},...(body===undefined?{}:{body:JSON.stringify(body)})});
     return {status:r.status,body:await r.json()};
   }
   const login=async email=>{const r=await call(null,'/auth/login',{email,password:'MobiFlowDemo!2026'});assert.equal(r.status,200);return r.body.data.accessToken;};

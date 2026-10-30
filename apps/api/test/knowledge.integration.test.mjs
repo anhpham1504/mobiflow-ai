@@ -54,7 +54,7 @@ async function setup(t,{provider={generate:async input=>generation(input)},embed
   t.after(async()=>{await s.app.close();await s.prisma.$disconnect();await s.database.close();});
   const {base,port,portRetries}=await listenFetchSafe(s.app);
   async function call(token,path,body,method=body===undefined?'GET':'POST'){
-    const r=await fetch(base+'/api/v1'+path,{method,headers:{Origin:'http://localhost:3000','X-CSRF-Protection':'1',...(body instanceof FormData?{}:{'Content-Type':'application/json'}),...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:body instanceof FormData?body:JSON.stringify(body)});const b=await r.json();return {status:r.status,body:b};
+    const r=await fetch(base+'/api/v1'+path,{method,headers:{Origin:env.WEB_ORIGIN,'X-CSRF-Protection':'1',...(body instanceof FormData?{}:{'Content-Type':'application/json'}),...(token?{Authorization:'Bearer '+token}:{})},body:body===undefined?undefined:body instanceof FormData?body:JSON.stringify(body)});const b=await r.json();return {status:r.status,body:b};
   }
   const login=async email=>{const r=await call(null,'/auth/login',{email,password:'MobiFlowDemo!2026'});assert.equal(r.status,200);return r.body.data.accessToken;};
   const manager=await login('manager@mobiflow.local'),user=await login('user@mobiflow.local'),staff=await login('staff.iot@mobiflow.local'),actor=await s.app.get(AuthService).authenticateAccessToken('Bearer '+manager);

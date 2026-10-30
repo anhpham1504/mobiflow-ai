@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {createServer} from 'node:http';
 import test from 'node:test';
+import {readFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {assertResetAuthorization,countsEqual,evidencePath,expectedMigrationNames,finalStatus,jsonRequest,safeDatabaseTarget,validateReleaseConfig} from './release-core.mjs';
 
@@ -16,6 +17,14 @@ test('preflight diagnostics never contain configured secret values',()=>{
   const serialized=JSON.stringify(validateReleaseConfig(validEnv));
   assert.equal(finalStatus(validateReleaseConfig(validEnv)),'PASS');
   assert.equal(serialized.includes(validEnv.JWT_SECRET),false);assert.equal(serialized.includes(validEnv.REFRESH_TOKEN_SECRET),false);
+});
+
+test('profile integration request helpers use the parsed web origin',()=>{
+  for(const path of ['apps/api/test/knowledge.integration.test.mjs','apps/api/test/analysis.integration.test.mjs','apps/api/test/recommendation.integration.test.mjs']){
+    const source=readFileSync(path,'utf8');
+    assert.match(source,/Origin:env\.WEB_ORIGIN/);
+    assert.doesNotMatch(source,/Origin:'http:\/\/localhost:3000'/);
+  }
 });
 
 test('reset authorization refuses active API, absent marker, and migration drift',()=>{
