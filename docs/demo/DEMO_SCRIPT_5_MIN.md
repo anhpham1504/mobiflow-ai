@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # Five-minute demonstration script
 
 This is a planned presentation budget, not a measured completion-time benchmark. Complete [the runbook](DEMO_RUNBOOK.md) first. The V1 gate passes for the documented local synthetic scope; disclose both the historical RED runs and the final controlled PASS. Do not edit out failures and describe them as live success.

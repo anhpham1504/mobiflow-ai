@@ -2,9 +2,10 @@ import {mkdirSync,readdirSync,writeFileSync} from 'node:fs';
 import {connect} from 'node:net';
 import {spawnSync} from 'node:child_process';
 import {dirname,resolve} from 'node:path';
+import releaseMetadata from '../../packages/config/src/release-metadata.json' with {type:'json'};
 
-export const REQUIRED_LLM='qwen3:4b-instruct-2507-q4_K_M';
-export const REQUIRED_EMBEDDING='bge-m3:latest';
+export const REQUIRED_LLM=releaseMetadata.rollbackProfile.generationModel;
+export const REQUIRED_EMBEDDING=releaseMetadata.rollbackProfile.embeddingModel;
 export const DEMO_MARKER_ID='a0000000-0000-4000-8000-000000000010';
 export const DEMO_MARKER_ACTION='DEMO_BASELINE_SEEDED';
 export const DEMO_DATABASES=new Set(['mobiflow','mobiflow_m2_test','mobiflow_m10_test']);

@@ -1,3 +1,10 @@
+---
+status: archived
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # Video shot list
 
 No new video has been recorded by M10. This list is a capture plan.
