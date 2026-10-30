@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # MobiFlow AI — competition submission package
 
 Prepared 2026-09-30 for a local synthetic demonstration. Release status: **PASS** for the documented V1 scope after one controlled final evaluation passed the unchanged comparator. Historical RED runs remain disclosed; this is not an enterprise-production certification.

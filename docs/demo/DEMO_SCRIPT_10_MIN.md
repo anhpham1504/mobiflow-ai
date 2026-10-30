@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # Ten-minute demonstration script
 
 This is a presentation plan, not measured operator timing. Use [DEMO_RUNBOOK](DEMO_RUNBOOK.md); disclose the current M10 release block.

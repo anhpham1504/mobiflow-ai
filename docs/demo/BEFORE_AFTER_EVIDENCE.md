@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # Before/after evidence
 
 The comparison is between implemented manual and assisted workflows, not a productivity study.

@@ -5,7 +5,7 @@ import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
 import {Client} from 'pg';
 import {setTimeout as delay} from 'node:timers/promises';
 import {fileURLToPath} from 'node:url';
-const project='mobiflow-m24-verification',container=project+'-postgres',manifest='artifacts/m24/runtime-private.json';
+const project='mobiflow-m24-verification',container=project+'-postgres',manifest=process.env.M24_RUNTIME_MANIFEST??'artifacts/m24/runtime-private.json';
 const docker=(...args)=>execFileSync('docker',args,{encoding:'utf8',windowsHide:true}).trim();
 export function m24Environment(){
   const data=JSON.parse(readFileSync(manifest,'utf8'));

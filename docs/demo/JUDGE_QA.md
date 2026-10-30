@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RELEASE.md
+---
+
 # Judge Q&A
 
 **Why AI instead of ordinary rules?** AI extracts proposed structure from varied Vietnamese descriptions and drafts context-specific assistance. Rules still own authorization, transitions, SLA math, eligible candidates and protected decisions.

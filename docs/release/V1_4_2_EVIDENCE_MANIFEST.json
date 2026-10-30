@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "release": {
+    "product": "MobiFlow AI",
+    "version": "1.4.2",
+    "status": "patch-candidate",
+    "baseCommit": "d225f0ebacbaf0521ac64349fb4ce9ba6600c092",
+    "baseTree": "5b3de63f2eee6441a5845ac0fcb29dc5bb861794",
+    "baseTag": "v1.4.1"
+  },
+  "providerExecution": {
+    "liveDeepSeekAuthorized": false,
+    "liveDeepSeekRun": false,
+    "statement": "No live DeepSeek call was authorized or executed during V1.4.2 remediation."
+  },
+  "identityLayers": {
+    "repositoryManifest": "Base identity only. This manifest does not claim that a final V1.4.2 release commit or signed tag already exists.",
+    "finalReleaseAttestation": {
+      "status": "not-recorded-in-repository",
+      "timing": "Created externally after an authorized signed tag.",
+      "requiredFields": [
+        "release commit",
+        "release tree",
+        "signed tag name",
+        "annotated tag object",
+        "signer and verification status",
+        "GitHub Actions run ID",
+        "required check results",
+        "artifact SHA-256 values"
+      ]
+    }
+  },
+  "externalArtifactSets": [
+    {
+      "id": "v1.4.1-final-competition-freeze/20261029-153346",
+      "storage": "external immutable artifact store",
+      "artifacts": [
+        {"path": "PentaPrime_MobiFlowAI_v1.4.1_Competition_VI.pptx", "sha256": "34544CCF83B0969E89130E44149E6D03115FCB4247909BA3FCF6589ACFAA7E50"},
+        {"path": "FINAL_SPEAKER_FLOW.md", "sha256": "8DAD0486B2F03A7F1A68AED99967514318B168AD7331B15F6C55DD282EC9080C"},
+        {"path": "11_QA_FREEZE.md", "sha256": "B419C2113B8ED8EBBE224B2EAB2EBF981E92A664DB071B9501479BEA8E3EC66D"},
+        {"path": "12_TIMING_FREEZE.md", "sha256": "8856BBA88C5495EE1678D8875D145468721F232C0EF1EB8920FAE9BFAB4661C2"},
+        {"path": "14_MACHINE_CHECKLIST_FREEZE.md", "sha256": "8BBDA27CF9C851905AB54287525A1EA8AC11F3050258D8F194467BF90E401B44"}
+      ]
+    },
+    {
+      "id": "playwright-cli-reaudit/20261029-155121",
+      "storage": "external immutable artifact store",
+      "artifacts": [
+        {"path": "21_FINAL_PLAYWRIGHT_CLI_REAUDIT.md", "sha256": "DD0F5A2E31F30F44D73D98111E909A09145EC0FB34C4371AA40429D4857D82D8"}
+      ]
+    }
+  ],
+  "testMatrix": [
+    {"gate": "baseline locked install", "command": "npm ci --offline --no-audit --no-fund", "result": "PASS"},
+    {"gate": "baseline lint", "command": "npm run lint", "result": "PASS"},
+    {"gate": "baseline typecheck", "command": "npm run typecheck", "result": "PASS"},
+    {"gate": "baseline deterministic tests", "command": "npm test", "result": "PASS"},
+    {"gate": "baseline production build", "command": "npm run build", "result": "PASS"},
+    {"gate": "candidate lint", "command": "npm run lint", "result": "PASS"},
+    {"gate": "candidate typecheck", "command": "npm run typecheck", "result": "PASS"},
+    {"gate": "candidate deterministic tests", "command": "npm test", "result": "PASS", "tests": 354, "failed": 0, "skipped": 0},
+    {"gate": "candidate production build", "command": "npm run build", "result": "PASS"},
+    {"gate": "current documentation", "command": "npm run verify:docs:current", "result": "PASS"},
+    {"gate": "clean ephemeral PostgreSQL migration", "command": "npm run db:migrate", "result": "PASS", "migrations": 14},
+    {"gate": "DeepSeek lexical PostgreSQL integration", "command": "npm run test:integration:deepseek-lexical", "result": "PASS", "liveAi": "NOT_RUN", "historicalOllamaEvaluationSkipped": 1},
+    {"gate": "V1.4.1/V1.4.2 auto-routing PostgreSQL integration", "command": "npm run test:integration:auto-routing:v142", "result": "PASS"},
+    {"gate": "lexical RAG PostgreSQL integration", "command": "npm run test:integration:v13-lexical", "result": "PASS", "embeddingCalls": 0, "businessRowsUnchanged": true},
+    {"gate": "CI YAML syntax", "command": "python -c yaml.safe_load(...) .github/workflows/ci.yml", "result": "PASS"},
+    {"gate": "diff whitespace", "command": "git diff --check", "result": "PASS"}
+  ],
+  "knownLimits": [
+    "This patch is not a production-readiness certification.",
+    "No live model quality or latency result was produced.",
+    "Large frozen binaries and screenshots remain external and are referenced by immutable SHA-256.",
+    "Historical V1.4.1 tags and artifacts are not rewritten."
+  ]
+}

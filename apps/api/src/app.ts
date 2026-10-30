@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { json } from 'express';
 import type { Request, Response } from 'express';
-import type { ApiEnvironment } from '@mobiflow/config';
+import { RELEASE_METADATA, type ApiEnvironment } from '@mobiflow/config';
 import { HealthController } from './health/health.controller.js';
 import { DATABASE_PROBE, OLLAMA_HEALTH, HealthService } from './health/health.service.js';
 import { PostgresProbe, type DatabaseProbe } from './health/database.js';
@@ -102,7 +102,7 @@ export async function createApplication(env: ApiEnvironment, options: { database
   app.enableCors({ origin: env.WEB_ORIGIN, credentials: true, exposedHeaders: ['X-Request-ID'] });
   app.useGlobalPipes(validationPipe());
   app.useGlobalFilters(new ApiExceptionFilter(log));
-  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle('MobiFlow AI — V1.3 DeepSeek/lexical candidate').setDescription('Local request workflow with bounded DeepSeek generation, PostgreSQL lexical retrieval, human approval, analytics, and explicit degraded operation.').setVersion('1.3.0-candidate').addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
+  const document = SwaggerModule.createDocument(app, new DocumentBuilder().setTitle(RELEASE_METADATA.apiTitle).setDescription('Request workflow with bounded DeepSeek generation, PostgreSQL lexical retrieval, validated citations, deterministic routing, protected assignment, analytics, and explicit degraded operation.').setVersion(RELEASE_METADATA.releaseVersion).addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }).addCookieAuth('mobiflow_refresh').build());
   SwaggerModule.setup('api/docs', app, document, { jsonDocumentUrl: 'api/docs-json' });
   // A dependency-free alias is useful for Docker probes; canonical REST routes remain /api/v1.
   app.getHttpAdapter().get('/health/live', (_req: Request, res: Response) => res.json({ data: { status: 'UP' }, requestId: res.locals.requestId }));

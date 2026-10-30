@@ -1,4 +1,7 @@
 import { z } from 'zod';
+import releaseMetadata from './release-metadata.json' with { type: 'json' };
+
+export const RELEASE_METADATA = releaseMetadata;
 
 const httpUrl = z.url().refine((value) => {
   if (!URL.canParse(value)) return false;
@@ -58,7 +61,7 @@ const apiEnvironmentSchema = z.object({
   DEEPSEEK_PRICE_OUTPUT_PER_MILLION_USD: usdRate.default(1.20),
   DEEPSEEK_PRICING_EFFECTIVE_DATE: z.iso.date().default('2026-10-23'),
   OLLAMA_BASE_URL: httpUrl.default('http://127.0.0.1:11434'),
-  OLLAMA_MODEL: model.default('qwen2.5:7b-instruct'), OLLAMA_EMBEDDING_MODEL: model.default('bge-m3:latest'),
+  OLLAMA_MODEL: model.default(RELEASE_METADATA.rollbackProfile.generationModel), OLLAMA_EMBEDDING_MODEL: model.default(RELEASE_METADATA.rollbackProfile.embeddingModel),
   HEALTH_TIMEOUT_MS: z.coerce.number().int().min(100).max(10000).default(2000),
   SLA_ALERT_ENABLED: explicitBoolean.default(true),
   SLA_ALERT_EARLY_RATIO: z.coerce.number().gt(0).lt(0.8).default(0.5),

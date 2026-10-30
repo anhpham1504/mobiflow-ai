@@ -123,6 +123,125 @@ jobs:
           if-no-files-found: warn
           retention-days: 14
 
+  current-documentation:
+    name: current-documentation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Verify current release documentation
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run verify:docs:current 2>&1 | tee artifacts/current-documentation.log
+      - name: Upload current documentation log
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: current-documentation-log
+          path: artifacts/current-documentation.log
+          if-no-files-found: warn
+          retention-days: 14
+
+  postgresql-critical-integration:
+    name: postgresql-critical-integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    services:
+      postgres:
+        image: pgvector/pgvector:0.8.6-pg17
+        env:
+          POSTGRES_DB: mobiflow
+          POSTGRES_USER: mobiflow_owner
+          POSTGRES_PASSWORD: ci-owner-password
+        ports:
+          - 55424:5432
+        options: >-
+          --health-cmd "pg_isready -U mobiflow_owner -d mobiflow"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 20
+    env:
+      DATABASE_URL: postgresql://mobiflow_app:ci-app-password@127.0.0.1:55424/mobiflow
+      MIGRATION_DATABASE_URL: postgresql://mobiflow_owner:ci-owner-password@127.0.0.1:55424/mobiflow
+      DEMO_MODE: 'true'
+      AI_GENERATION_PROVIDER: deepseek
+      AI_PROVIDER: deepseek
+      RAG_RETRIEVAL_MODE: lexical
+      AI_LIVE_CALLS_ENABLED: 'false'
+      DEEPSEEK_API_KEY: ''
+      V13_ISOLATED_DATABASE_ACK: mobiflow-m24-verification
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - name: Initialize private runtime manifest path
+        shell: bash
+        run: |
+          manifest_path="$RUNNER_TEMP/mobiflow-m24-runtime-private.json"
+          printf 'M24_RUNTIME_MANIFEST=%s\n' "$manifest_path" >> "$GITHUB_ENV"
+      - name: Create least-privilege runtime role
+        shell: bash
+        run: |
+          docker exec "${{ job.services.postgres.id }}" psql -v ON_ERROR_STOP=1 -U mobiflow_owner -d mobiflow \
+            -c "CREATE ROLE mobiflow_app LOGIN PASSWORD 'ci-app-password'" \
+            -c "GRANT CONNECT ON DATABASE mobiflow TO mobiflow_app" \
+            -c "REVOKE CREATE ON SCHEMA public FROM PUBLIC" \
+            -c "GRANT USAGE ON SCHEMA public TO mobiflow_app"
+          umask 077
+          node --input-type=module -e "import{writeFileSync}from'node:fs';writeFileSync(process.env.M24_RUNTIME_MANIFEST,JSON.stringify({project:'mobiflow-m24-verification',DATABASE_URL:process.env.DATABASE_URL,MIGRATION_DATABASE_URL:process.env.MIGRATION_DATABASE_URL}),{encoding:'utf8',mode:0o600})"
+          chmod 600 "$M24_RUNTIME_MANIFEST"
+      - name: Migrate clean PostgreSQL
+        shell: bash
+        run: |
+          mkdir -p artifacts/ci-postgresql
+          set -o pipefail
+          npm run db:migrate 2>&1 | tee artifacts/ci-postgresql/migration.log
+      - name: DeepSeek lexical profile integration
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:integration:deepseek-lexical 2>&1 | tee artifacts/ci-postgresql/deepseek-lexical.log
+      - name: V1.4.1 and V1.4.2 auto-routing integration
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:integration:auto-routing:v142 2>&1 | tee artifacts/ci-postgresql/auto-routing.log
+      - name: PostgreSQL lexical RAG integration
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:integration:v13-lexical 2>&1 | tee artifacts/ci-postgresql/lexical-rag.log
+      - name: Current documentation release gate
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:docs:current 2>&1 | tee artifacts/ci-postgresql/current-documentation.log
+      - name: Upload PostgreSQL gate logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: postgresql-critical-integration-logs
+          path: artifacts/ci-postgresql
+          if-no-files-found: error
+          retention-days: 14
+      - name: Remove private runtime manifest
+        if: always()
+        shell: bash
+        run: |
+          rm -f -- "${M24_RUNTIME_MANIFEST:-$RUNNER_TEMP/mobiflow-m24-runtime-private.json}"
+
   security-audit:
     name: security-audit
     runs-on: ubuntu-latest

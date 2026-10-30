@@ -1,0 +1,22 @@
+{
+  "productTitle": "MobiFlow AI",
+  "apiTitle": "MobiFlow AI API",
+  "releaseVersion": "1.4.2",
+  "releaseStatus": "patch-candidate",
+  "baseCommit": "d225f0ebacbaf0521ac64349fb4ce9ba6600c092",
+  "baseTree": "5b3de63f2eee6441a5845ac0fcb29dc5bb861794",
+  "baseTag": "v1.4.1",
+  "activeProfile": {
+    "generationProvider": "deepseek",
+    "retrievalMode": "lexical",
+    "liveCallsDefault": false
+  },
+  "rollbackProfile": {
+    "generationProvider": "ollama",
+    "retrievalMode": "vector",
+    "generationModel": "qwen3:4b-instruct-2507-q4_K_M",
+    "embeddingModel": "bge-m3:latest"
+  },
+  "canonicalDocument": "docs/release/V1_4_2_RELEASE.md",
+  "evidenceManifest": "docs/release/V1_4_2_EVIDENCE_MANIFEST.json"
+}

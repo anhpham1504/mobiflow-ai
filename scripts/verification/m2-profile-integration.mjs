@@ -8,7 +8,8 @@ const definitions={
 };
 const requested=process.argv[2]??'all',reverse=process.argv.includes('--reverse');
 assert.ok(requested==='all'||requested in definitions,'Expected deepseek-lexical, ollama-vector, or all');
-const runtime=JSON.parse(readFileSync('artifacts/m24/runtime-private.json','utf8'));
+const runtimeManifest=process.env.M24_RUNTIME_MANIFEST??'artifacts/m24/runtime-private.json';
+const runtime=JSON.parse(readFileSync(runtimeManifest,'utf8'));
 for(const key of ['DATABASE_URL','MIGRATION_DATABASE_URL']){
   const target=new URL(runtime[key]);
   assert.equal(target.protocol,'postgresql:');assert.ok(['127.0.0.1','localhost'].includes(target.hostname));assert.equal(target.pathname,'/mobiflow');

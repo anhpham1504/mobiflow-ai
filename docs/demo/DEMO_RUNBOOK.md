@@ -1,3 +1,10 @@
+---
+status: historical
+appliesTo: v1.4.0
+notForCompetitionDemo: true
+supersededBy: ../release/V1_4_2_RUNBOOK.md
+---
+
 # Local demo runbook — V1.2 operator update
 
 Current V1.2 operators should follow [the M16 canonical runbook](../v1.2/M16_DEMO_RUNBOOK.md), which preserves Recommendation V2 advisory review separately from explicit business approval. The V1 release evidence below remains historical.
