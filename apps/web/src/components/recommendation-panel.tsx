@@ -66,6 +66,7 @@ function RecommendationContent({request,onFinished,disabled}:{request:RequestVie
     <p role="status" aria-live="polite">{status}</p>
     {error?<p role="alert">{error}</p>:null}
     {data?.stale||conflict?<p className="notice" role="alert"><strong>Đề xuất đã cũ.</strong> Yêu cầu hoặc căn cứ đã thay đổi. Bản gốc vẫn được giữ để đối chiếu; hãy tải lại và tạo đề xuất mới trước khi review.</p>:null}
+    {reviewPending?<p className="manager-review-notice" role="status"><strong>Quản lý cần xem xét đề xuất này.</strong><span>Review ghi nhận quyết định của con người; đề xuất AI không tự phân công hoặc thực hiện workflow.</span></p>:null}
     {data?.errorCode?<p>Mã trạng thái: {data.errorCode}</p>:null}
     <div className="recommendation-actions">
       {!permissionLost&&request.status==='TRIAGED'&&request.aiAnalysisStatus==='SUCCEEDED'?<button className="button button-primary" disabled={disabled||busy||running||conflict||loading} onClick={()=>{void trigger();}}>{busy?'Đang gửi…':'Tạo đề xuất AI'}</button>:null}
