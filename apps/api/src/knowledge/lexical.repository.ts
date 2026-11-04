@@ -10,6 +10,9 @@ import {randomUUID} from 'node:crypto';
 type Tx=Prisma.TransactionClient;
 const fields=Prisma.sql`c."sourceId", c."id" AS "chunkId", c."documentId", c."generation", d."title", c."pageNumber", c."section", c."content" AS "excerpt", c."contentHash"`;
 export const lexicalIdentity:EmbeddingIdentity={provider:'postgresql',model:'simple+unaccent+pg_trgm',digest:'lexical-v1',dimension:0,revision:'lexical.v1',key:'postgresql-lexical-v1'};
+// Suppress weak tail results caused by short-document trigram similarity while
+// retaining contradictory sources whose scores are comparable to the top result.
+export const LEXICAL_MIN_SCORE_RATIO=0.99;
 const fold=(value:string)=>value.normalize('NFKD').replace(/\p{M}/gu,'').toLocaleLowerCase('vi').replace(/đ/gu,'d');
 const tokens=(value:string)=>fold(value).match(/[\p{L}\p{N}]+(?:-[\p{L}\p{N}]+)*/gu)??[];
 const groups:[RegExp,string[]][]=[
@@ -64,9 +67,11 @@ export class LexicalRepository {
       ), scored AS (
         SELECT *,least(1.0,code_match+least(0.70,fts*4.0)+least(0.25,trgm*0.25)+title_match*0.05)::float8 AS score
         FROM eligible
-      ), dedup AS (SELECT *,row_number() OVER (PARTITION BY "contentHash" ORDER BY score DESC,"chunkId") AS rank FROM scored)
+      ), dedup AS (SELECT *,row_number() OVER (PARTITION BY "contentHash" ORDER BY score DESC,"chunkId") AS rank FROM scored), ranked AS (
+        SELECT *,max(score) OVER () AS top_score FROM dedup WHERE rank=1
+      )
       SELECT "sourceId","chunkId","documentId",generation,title,"pageNumber",section,excerpt,"contentHash",score,(1-score)::float8 AS distance
-      FROM dedup WHERE rank=1 ORDER BY score DESC,"chunkId" LIMIT ${topK}`);
+      FROM ranked WHERE score >= top_score*${LEXICAL_MIN_SCORE_RATIO} ORDER BY score DESC,"chunkId" LIMIT ${topK}`);
       return rows;
     },{timeout:10000});}catch(error){if(error instanceof KnowledgeFailure)throw error;throw new KnowledgeFailure('LEXICAL_RETRIEVAL_UNAVAILABLE',true);}
   }

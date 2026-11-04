@@ -52,6 +52,12 @@ For incident/location-dependent network/IoT work, missing location and startedAt
 
 Store immutable AiAnalysis with schemaVersion, promptVersion via AiRun and source request/context version. Proposed category/priority are separate from final approved Request fields. No analysis parser output becomes ORM update input directly.
 
+### Literal fact-retention projection (2026-11-02 remediation)
+
+New intake publications additionally carry `fact-retention.v1`, computed by the backend from the immutable request title/description and the exact bounded message snapshot used by the run. It is separate from model classification and contains bounded reported observations, byte-preserved technical identifiers, attempted troubleshooting actions with reported outcomes, and explicit/cross-sentence contradictions. Every item is labeled `USER_REPORTED`; the projection must never present a reported observation as an independently verified cause or model inference. Existing `missingFields` continues to own missing-information reporting.
+
+The provider cannot author or edit this projection. Execution creates it deterministically, and publication recomputes it from the locked source snapshot and requires exact equality before persistence. A missing, altered, stale or unavailable projection fails publication; it is never silently accepted or repaired with unsupported facts. Sensitive key-like, email and phone-shaped text is redacted from displayed evidence, while the stored hash binds the complete source snapshot without storing a second raw prompt. `AiRun.safeResultJson` stores the validated projection beside grounding; no database migration is required. MANAGER and currently authorized STAFF receive the projection, while USER keeps the existing limited intake projection. Prompt `request-analysis.v5` also asks the model to preserve these facts in its concise summary, but the backend projection is the authoritative lossless path. This deterministic closure is not live-model quality evidence.
+
 ## Controlled orchestration and execution bounds
 
 1. Persist run and input snapshot references; reauthorize. Intake in NEW uses START_AI_ANALYSIS.

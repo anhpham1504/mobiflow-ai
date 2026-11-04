@@ -1,0 +1,1116 @@
+{
+  "schemaVersion": "final-live-reverification-audit.v1",
+  "checkedAt": "2026-11-03T02:38:52.222Z",
+  "result": "PASS",
+  "environment": {
+    "worktree": "C:/Users/AnhPhamPC/.codex/worktrees/competition-hardening/MobiFlow AI",
+    "branch": "codex/competition-hardening",
+    "database": "task-owned isolated PostgreSQL",
+    "provider": "live guarded DeepSeek",
+    "model": "deepseek-flash",
+    "retrievalMode": "lexical",
+    "lexicalMinScoreRatio": 0.99,
+    "embeddingCalls": 0
+  },
+  "summary": {
+    "total": 24,
+    "pass": 24,
+    "fail": 0
+  },
+  "liveRequests": {
+    "conflict": "5989690a-afd5-43f6-a67c-315fc5ce9310",
+    "noAnswer": "7f5f9369-69fb-408f-b39a-6f281500701b",
+    "iot": "3688cd03-688e-4da0-8c08-e90a19fdd788"
+  },
+  "retrievalMetrics": {
+    "queries": 3,
+    "positiveQueries": 1,
+    "hitAt1": 1,
+    "recallAtK": 1,
+    "mrr": 1,
+    "precisionReturned": 1,
+    "noAnswerCorrect": true,
+    "disabledSource": "covered by deterministic lexical integration gate",
+    "duplicateChunks": "covered by deterministic lexical integration gate",
+    "relevantSourceRetention": "covered by deterministic lexical integration gate"
+  },
+  "rawVsPublished": {
+    "rawProviderContentPersisted": false,
+    "rawProviderContentAvailableForClaim": false,
+    "providerResponseDigestStored": true,
+    "publishedProjectionValidated": true,
+    "systemFactRetentionSource": "BACKEND_LITERAL_EXTRACTION",
+    "limitation": "The guard and application intentionally retain hashes, usage, validated structured output and published facts; raw provider text was not retained, so no raw-model fact-retention claim is made."
+  },
+  "requests": [
+    {
+      "id": "5989690a-afd5-43f6-a67c-315fc5ce9310",
+      "publicCode": "MF-2026-000001",
+      "title": "Hệ thống báo mạng bình thường nhưng toàn bộ thiết bị vẫn offline",
+      "status": "TRIAGED",
+      "version": 3,
+      "priority": "MEDIUM",
+      "currentAssignee": null,
+      "analysis": {
+        "id": "c8804212-c5e4-4f28-b675-6040ab110cd4",
+        "requestId": "5989690a-afd5-43f6-a67c-315fc5ce9310",
+        "aiRunId": "b6096172-6453-495c-9d3a-847d8ee5f70f",
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entitiesJson": {
+          "customer": null,
+          "location": "nhà máy Delta",
+          "startedAt": null,
+          "affectedCount": 12
+        },
+        "missingFieldsJson": [
+          "customer",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": "0.82",
+        "reasonSummary": "Bộ phận vận hành báo mạng tại nhà máy Delta đã khôi phục hoàn toàn lúc 14:00, nhưng hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT offline sau thời điểm đó; nhân viên hiện trường xác nhận nguồn điện bình thường. Có mâu thuẫn giữa báo cáo trạng thái mạng và dữ liệu thực tế từ thiết bị; đề nghị xác minh nguyên nhân và đối chiếu nguồn thông tin, không kết luận đã khắc phục khi chưa có bằng chứng. Nguyên nhân chưa được xác minh.",
+        "schemaVersion": "analysis.v1",
+        "createdAt": "2026-11-02T09:46:36.647Z"
+      },
+      "factRetention": {
+        "source": "BACKEND_LITERAL_EXTRACTION",
+        "identifiers": [],
+        "observations": [
+          {
+            "text": "Hệ thống báo mạng bình thường nhưng toàn bộ thiết bị vẫn offline",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Bộ phận vận hành báo cáo kết nối mạng tại nhà máy Delta đã được khôi phục hoàn toàn lúc 14:00.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Tuy nhiên, hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT ở trạng thái offline sau thời điểm trên.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Nhân viên tại hiện trường xác nhận nguồn điện hoạt động bình thường.",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "schemaVersion": "fact-retention.v1",
+        "contradictions": [
+          {
+            "evidence": [
+              "Tuy nhiên, hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT ở trạng thái offline sau thời điểm trên.",
+              "Nhân viên tại hiện trường xác nhận nguồn điện hoạt động bình thường.",
+              "Hiện có sự khác biệt giữa báo cáo trạng thái mạng và dữ liệu thực tế từ thiết bị."
+            ],
+            "provenance": "USER_REPORTED",
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+          },
+          {
+            "evidence": [
+              "Hệ thống báo mạng bình thường nhưng toàn bộ thiết bị vẫn offline"
+            ],
+            "provenance": "USER_REPORTED",
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+          }
+        ],
+        "sourceTextHash": "4b5fd5b3ca2c245ec58b359faa6a0c2641ba8664e8ef489edb5520121e1afc2e",
+        "troubleshootingAttempts": []
+      },
+      "retrieval": {
+        "sources": [],
+        "citations": []
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "NEW",
+          "action": "CREATE",
+          "actorType": "USER",
+          "version": 1
+        },
+        {
+          "from": "NEW",
+          "to": "AI_ANALYZING",
+          "action": "START_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 2
+        },
+        {
+          "from": "AI_ANALYZING",
+          "to": "TRIAGED",
+          "action": "COMPLETE_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 3
+        }
+      ],
+      "resolution": null
+    },
+    {
+      "id": "7f5f9369-69fb-408f-b39a-6f281500701b",
+      "publicCode": "MF-2026-000002",
+      "title": "Thiết bị truyền dữ liệu vệ tinh gặp lỗi giao thức chưa xác định",
+      "status": "TRIAGED",
+      "version": 3,
+      "priority": "MEDIUM",
+      "currentAssignee": null,
+      "analysis": {
+        "id": "1a525ed9-9ebc-4df0-9aeb-5892196aeb5c",
+        "requestId": "7f5f9369-69fb-408f-b39a-6f281500701b",
+        "aiRunId": "cda58455-35bd-4b11-a705-d6dee2b8a4f5",
+        "intent": "REPORT_INCIDENT",
+        "category": "OTHER",
+        "subcategory": "INTERNAL_SUPPORT",
+        "prioritySuggestion": "MEDIUM",
+        "entitiesJson": {
+          "customer": null,
+          "location": null,
+          "startedAt": null,
+          "affectedCount": null
+        },
+        "missingFieldsJson": [
+          "customer",
+          "location",
+          "affectedCount",
+          "startedAt",
+          "impact"
+        ],
+        "confidence": "0.55",
+        "reasonSummary": "Thiết bị truyền dữ liệu vệ tinh thử nghiệm báo mã lỗi PROTO-DEMO-917 và không thể đồng bộ dữ liệu về hệ thống trung tâm; chưa có tài liệu xử lý mã lỗi này trong kho kiến thức của nhóm thử nghiệm. Yêu cầu là kiểm tra, xác định chuyên gia phù hợp hoặc chuyển người quản lý đánh giá nếu chưa đủ bằng chứng kỹ thuật — đây là hỗ trợ nội bộ, không phải sự cố mạng IoT được xác nhận. Chưa rõ mức độ ảnh hưởng, số lượng thiết bị, vị trí và thời điểm bắt đầu.",
+        "schemaVersion": "analysis.v1",
+        "createdAt": "2026-11-02T09:51:29.211Z"
+      },
+      "factRetention": {
+        "source": "BACKEND_LITERAL_EXTRACTION",
+        "identifiers": [
+          {
+            "kind": "TECHNICAL_IDENTIFIER",
+            "value": "PROTO-DEMO-917",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "observations": [
+          {
+            "text": "Thiết bị truyền dữ liệu vệ tinh gặp lỗi giao thức chưa xác định",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Một thiết bị truyền dữ liệu vệ tinh thử nghiệm đang báo mã lỗi PROTO-DEMO-917.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Hiện chưa có tài liệu hướng dẫn xử lý mã lỗi này trong kho kiến thức được cung cấp cho nhóm thử nghiệm.",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "schemaVersion": "fact-retention.v1",
+        "contradictions": [],
+        "sourceTextHash": "e3728d17f3f995bb93c935b96710448f381e0d5ec65c8604da02c8826d01091f",
+        "troubleshootingAttempts": []
+      },
+      "retrieval": {
+        "sources": [],
+        "citations": []
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "NEW",
+          "action": "CREATE",
+          "actorType": "USER",
+          "version": 1
+        },
+        {
+          "from": "NEW",
+          "to": "AI_ANALYZING",
+          "action": "START_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 2
+        },
+        {
+          "from": "AI_ANALYZING",
+          "to": "TRIAGED",
+          "action": "COMPLETE_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 3
+        }
+      ],
+      "resolution": null
+    },
+    {
+      "id": "3688cd03-688e-4da0-8c08-e90a19fdd788",
+      "publicCode": "MF-2026-000035",
+      "title": "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega",
+      "status": "CLOSED",
+      "version": 7,
+      "priority": "MEDIUM",
+      "currentAssignee": {
+        "email": "staff.iot@mobiflow.local",
+        "displayName": "IoT Specialist",
+        "role": "STAFF"
+      },
+      "analysis": {
+        "id": "a92f737c-8742-4980-9d92-d2d11011ff87",
+        "requestId": "3688cd03-688e-4da0-8c08-e90a19fdd788",
+        "aiRunId": "12829cb7-d004-45b8-85f4-cf7480502272",
+        "intent": "REPORT_INCIDENT",
+        "category": "NETWORK",
+        "subcategory": "IOT_CONNECTIVITY",
+        "prioritySuggestion": "HIGH",
+        "entitiesJson": {
+          "customer": null,
+          "location": "khu thử nghiệm Omega",
+          "startedAt": "09:15",
+          "affectedCount": 23
+        },
+        "missingFieldsJson": [
+          "customer",
+          "impact"
+        ],
+        "confidence": "0.9",
+        "reasonSummary": "Sự cố mất kết nối đồng loạt 23 SIM IoT tại khu thử nghiệm Omega từ 09:15; thiết bị không gửi được dữ liệu về máy chủ quản lý. Đã thử khởi động lại gateway nhưng NO_IMPROVEMENT. Một số SIM hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu. Đề nghị kiểm tra trạng thái SIM, cấu hình APN, kết nối mạng và xác định nguyên nhân gián đoạn; nguyên nhân chưa được xác minh.",
+        "schemaVersion": "analysis.v1",
+        "createdAt": "2026-11-03T02:34:27.581Z"
+      },
+      "factRetention": {
+        "source": "BACKEND_LITERAL_EXTRACTION",
+        "identifiers": [],
+        "observations": [
+          {
+            "text": "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Từ 09:15, hệ thống giám sát ghi nhận 23 SIM IoT tại khu thử nghiệm Omega đồng loạt mất kết nối mạng di động.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "schemaVersion": "fact-retention.v1",
+        "contradictions": [
+          {
+            "evidence": [
+              "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+              "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega"
+            ],
+            "provenance": "USER_REPORTED",
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+          }
+        ],
+        "sourceTextHash": "072449d5bf333c3bb3ea5bf4d74dff281da85423ff421f3a5fbec0aebc830c92",
+        "troubleshootingAttempts": [
+          {
+            "action": "Đã thử khởi động lại gateway nhưng tình trạng không cải thiện (NO_IMPROVEMENT).",
+            "outcome": "NO_IMPROVEMENT",
+            "provenance": "USER_REPORTED"
+          }
+        ]
+      },
+      "retrieval": {
+        "sources": [
+          {
+            "score": 0.7491666682064533,
+            "title": "SOP-IOT-04 Synthetic Competition Audit",
+            "chunkId": "b974cd0f-f192-4604-bbd8-38685707f49b",
+            "section": "SOP-IOT-04 — Synthetic IoT connectivity procedure",
+            "distance": 0.2508333317935467,
+            "sourceId": "KD-9f4214c3-7b05-4a60-bd70-93e09690cda9-G1-C0",
+            "documentId": "9f4214c3-7b05-4a60-bd70-93e09690cda9",
+            "generation": 1,
+            "pageNumber": null,
+            "contentHash": "ab722f0892fea03566b6055fa6d2a65989f578d377fea675a53e1d9344e933a2"
+          }
+        ],
+        "citations": [
+          {
+            "quote": "When multiple IoT SIM devices lose data connectivity, record the affected count, location and incident start time.",
+            "sourceId": "KD-9f4214c3-7b05-4a60-bd70-93e09690cda9-G1-C0"
+          }
+        ]
+      },
+      "history": [
+        {
+          "from": null,
+          "to": "NEW",
+          "action": "CREATE",
+          "actorType": "USER",
+          "version": 1
+        },
+        {
+          "from": "NEW",
+          "to": "AI_ANALYZING",
+          "action": "START_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 2
+        },
+        {
+          "from": "AI_ANALYZING",
+          "to": "TRIAGED",
+          "action": "COMPLETE_AI_ANALYSIS",
+          "actorType": "SYSTEM",
+          "version": 3
+        },
+        {
+          "from": "TRIAGED",
+          "to": "ASSIGNED",
+          "action": "AUTO_ASSIGN",
+          "actorType": "SYSTEM",
+          "version": 4
+        },
+        {
+          "from": "ASSIGNED",
+          "to": "IN_PROGRESS",
+          "action": "START_WORK",
+          "actorType": "STAFF",
+          "version": 5
+        },
+        {
+          "from": "IN_PROGRESS",
+          "to": "RESOLVED",
+          "action": "RESOLVE",
+          "actorType": "STAFF",
+          "version": 6
+        },
+        {
+          "from": "RESOLVED",
+          "to": "CLOSED",
+          "action": "USER_CONFIRM",
+          "actorType": "USER",
+          "version": 7
+        }
+      ],
+      "resolution": {
+        "id": "b53519b7-ab24-4bce-a875-2522c328de21",
+        "requestId": "3688cd03-688e-4da0-8c08-e90a19fdd788",
+        "cycle": 1,
+        "resolvedById": "10000000-0000-4000-8000-000000000003",
+        "rootCause": "Bằng chứng synthetic: cấu hình APN thử nghiệm không đồng bộ với profile dữ liệu của 23 SIM; không phải dữ liệu khách hàng thật.",
+        "resolution": "STAFF synthetic đối chiếu trạng thái SIM, cập nhật profile APN thử nghiệm và kiểm tra lại gateway theo SOP-IOT-04.",
+        "verification": "Bằng chứng synthetic: 23/23 SIM tại Omega truyền dữ liệu ổn định sau cửa sổ kiểm tra; lần khởi động gateway trước đó giữ nguyên kết quả NO_IMPROVEMENT.",
+        "resolvedAt": "2026-11-03T02:34:44.912Z",
+        "reopenedAt": null,
+        "confirmedAt": "2026-11-03T02:36:12.239Z",
+        "eventId": "7d708ef3-5b89-43aa-8f56-1c42b0020840"
+      }
+    }
+  ],
+  "api": {
+    "unauthorized": [
+      {
+        "name": "priority",
+        "status": 403,
+        "errorCode": "FORBIDDEN"
+      },
+      {
+        "name": "start",
+        "status": 403,
+        "errorCode": "FORBIDDEN"
+      },
+      {
+        "name": "resolve",
+        "status": 403,
+        "errorCode": "FORBIDDEN"
+      }
+    ],
+    "stale": {
+      "status": 409,
+      "errorCode": "STALE_VERSION"
+    },
+    "matrix": [
+      {
+        "name": "unauthenticated read",
+        "expected": 401,
+        "actual": 401,
+        "errorCode": "UNAUTHORIZED"
+      },
+      {
+        "name": "unknown request",
+        "expected": 404,
+        "actual": 404,
+        "errorCode": "NOT_FOUND"
+      },
+      {
+        "name": "whitespace create",
+        "expected": 400,
+        "actual": 400,
+        "errorCode": "INVALID_INPUT"
+      },
+      {
+        "name": "manager read",
+        "expected": 200,
+        "actual": 200,
+        "errorCode": null
+      }
+    ]
+  },
+  "providerLedger": {
+    "schemaVersion": "mobiflow-deepseek-m3-ledger.v2",
+    "createdAt": "2026-11-02T09:46:34.596Z",
+    "maxHttpAttempts": 6,
+    "budgetUsd": 0.2,
+    "attemptCount": 4,
+    "completedCount": 4,
+    "failedCount": 0,
+    "timeoutCount": 0,
+    "reservedCostUsd": 0,
+    "reportedCostUsd": 0.005119872,
+    "uncertainCostUsd": 0,
+    "entries": [
+      {
+        "dispatchId": "4e99ec14-9833-4695-b87d-04ae6c18c5d4",
+        "attempt": 1,
+        "dispatchStartedAt": "2026-11-02T09:46:34.596Z",
+        "origin": "https://api.deepseek.com",
+        "path": "/chat/completions",
+        "model": "deepseek-flash",
+        "thinking": "disabled",
+        "bodyBytes": 26679,
+        "bodySha256": "554542ce4f7757dae997ae9a10004b05ebc1f8d4a24bae63bd8d5fd1988bfd8e",
+        "maxOutputTokens": 1200,
+        "reservedCostUsd": 0,
+        "reportedCostUsd": 0.001658688,
+        "uncertainCostUsd": 0,
+        "status": "HTTP_OK",
+        "httpStatus": 200,
+        "providerRequestId": "13054cb3-a1ac-421d-8c6b-11d7c1a21ce4",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 6480,
+          "completionTokens": 264,
+          "totalTokens": 6744,
+          "promptCacheHitTokens": 2048,
+          "promptCacheMissTokens": 4432
+        },
+        "usageStatus": "REPORTED",
+        "completedAt": "2026-11-02T09:46:36.626Z"
+      },
+      {
+        "dispatchId": "161aa130-0066-4b9e-aaae-61831f72e505",
+        "attempt": 2,
+        "dispatchStartedAt": "2026-11-02T09:51:27.392Z",
+        "origin": "https://api.deepseek.com",
+        "path": "/chat/completions",
+        "model": "deepseek-flash",
+        "thinking": "disabled",
+        "bodyBytes": 26532,
+        "bodySha256": "4cc20997fc004e9b1715586fb7d2d4e8a8cd6c7742e4ece678426bb817411ea9",
+        "maxOutputTokens": 1200,
+        "reservedCostUsd": 0,
+        "reportedCostUsd": 0.000501696,
+        "uncertainCostUsd": 0,
+        "status": "HTTP_OK",
+        "httpStatus": 200,
+        "providerRequestId": "05600bb3-b458-4a21-9bc9-44ad25f93e61",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 6444,
+          "completionTokens": 281,
+          "totalTokens": 6725,
+          "promptCacheHitTokens": 6016,
+          "promptCacheMissTokens": 428
+        },
+        "usageStatus": "REPORTED",
+        "completedAt": "2026-11-02T09:51:29.195Z"
+      },
+      {
+        "dispatchId": "52d70a86-a7cc-4d5a-8a77-b5da992e54ce",
+        "attempt": 3,
+        "dispatchStartedAt": "2026-11-03T02:34:25.319Z",
+        "origin": "https://api.deepseek.com",
+        "path": "/chat/completions",
+        "model": "deepseek-flash",
+        "thinking": "disabled",
+        "bodyBytes": 28708,
+        "bodySha256": "4597c2079967ba3edf36552f9840a7f994f295cd830cdc2d01ac2ac99b9d1923",
+        "maxOutputTokens": 1200,
+        "reservedCostUsd": 0,
+        "reportedCostUsd": 0.001850088,
+        "uncertainCostUsd": 0,
+        "status": "HTTP_OK",
+        "httpStatus": 200,
+        "providerRequestId": "0e474072-9275-4e49-a6e0-a37948d23517",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 6962,
+          "completionTokens": 303,
+          "totalTokens": 7265,
+          "promptCacheHitTokens": 2048,
+          "promptCacheMissTokens": 4914
+        },
+        "usageStatus": "REPORTED",
+        "completedAt": "2026-11-03T02:34:27.551Z"
+      },
+      {
+        "dispatchId": "ae7dca55-b1af-4a06-8e9c-767ddd4d8202",
+        "attempt": 4,
+        "dispatchStartedAt": "2026-11-03T02:34:45.438Z",
+        "origin": "https://api.deepseek.com",
+        "path": "/chat/completions",
+        "model": "deepseek-flash",
+        "thinking": "disabled",
+        "bodyBytes": 5838,
+        "bodySha256": "a6f56ce19c1bf40814f82c672c2b6d2e41d8643e455d6703d81e392db57e33a1",
+        "maxOutputTokens": 1200,
+        "reservedCostUsd": 0,
+        "reportedCostUsd": 0.0011094000000000002,
+        "uncertainCostUsd": 0,
+        "status": "HTTP_OK",
+        "httpStatus": 200,
+        "providerRequestId": "237d746f-feae-4d9c-aa7b-950b4961698a",
+        "finishReason": "stop",
+        "usage": {
+          "promptTokens": 1798,
+          "completionTokens": 475,
+          "totalTokens": 2273,
+          "promptCacheHitTokens": 0,
+          "promptCacheMissTokens": 1798
+        },
+        "usageStatus": "REPORTED",
+        "completedAt": "2026-11-03T02:34:47.555Z"
+      }
+    ],
+    "remainingAttempts": 2,
+    "remainingBudgetUsd": 0.194880128,
+    "actualOrReservedSpendUsd": 0.005119872,
+    "updatedAt": "2026-11-03T02:34:47.555Z"
+  },
+  "historicalLedgerSha256": "50BD5170EA696E2D45226001213C61E296890DD669465ABD921EE241E9FA6BB0",
+  "checks": [
+    {
+      "id": "LIVE-THREE-REQUESTS",
+      "status": "PASS",
+      "expected": "three exact live requests",
+      "actual": 3
+    },
+    {
+      "id": "LIVE-DEEPSEEK-ANALYSES",
+      "status": "PASS",
+      "expected": "three successful live deepseek-flash analyses with zero retries",
+      "actual": [
+        {
+          "status": "SUCCEEDED",
+          "provider": "deepseek",
+          "model": "deepseek-flash",
+          "retryCount": 0
+        },
+        {
+          "status": "SUCCEEDED",
+          "provider": "deepseek",
+          "model": "deepseek-flash",
+          "retryCount": 0
+        },
+        {
+          "status": "SUCCEEDED",
+          "provider": "deepseek",
+          "model": "deepseek-flash",
+          "retryCount": 0
+        }
+      ]
+    },
+    {
+      "id": "LEXICAL-ZERO-EMBEDDING",
+      "status": "PASS",
+      "expected": "lexical retrieval and zero embedding calls",
+      "actual": [
+        {
+          "mode": "lexical",
+          "embeddingMs": 0
+        },
+        {
+          "mode": "lexical",
+          "embeddingMs": 0
+        },
+        {
+          "mode": "lexical",
+          "embeddingMs": 0
+        }
+      ]
+    },
+    {
+      "id": "CONFLICT-FACTS",
+      "status": "PASS",
+      "expected": "12 offline, 14:00 restoration, power working, contradiction preserved",
+      "actual": {
+        "source": "BACKEND_LITERAL_EXTRACTION",
+        "identifiers": [],
+        "observations": [
+          {
+            "text": "Hệ thống báo mạng bình thường nhưng toàn bộ thiết bị vẫn offline",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Bộ phận vận hành báo cáo kết nối mạng tại nhà máy Delta đã được khôi phục hoàn toàn lúc 14:00.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Tuy nhiên, hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT ở trạng thái offline sau thời điểm trên.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Nhân viên tại hiện trường xác nhận nguồn điện hoạt động bình thường.",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "schemaVersion": "fact-retention.v1",
+        "contradictions": [
+          {
+            "evidence": [
+              "Tuy nhiên, hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT ở trạng thái offline sau thời điểm trên.",
+              "Nhân viên tại hiện trường xác nhận nguồn điện hoạt động bình thường.",
+              "Hiện có sự khác biệt giữa báo cáo trạng thái mạng và dữ liệu thực tế từ thiết bị."
+            ],
+            "provenance": "USER_REPORTED",
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+          },
+          {
+            "evidence": [
+              "Hệ thống báo mạng bình thường nhưng toàn bộ thiết bị vẫn offline"
+            ],
+            "provenance": "USER_REPORTED",
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+          }
+        ],
+        "sourceTextHash": "4b5fd5b3ca2c245ec58b359faa6a0c2641ba8664e8ef489edb5520121e1afc2e",
+        "troubleshootingAttempts": []
+      }
+    },
+    {
+      "id": "CONFLICT-NO-FALSE-ROOT",
+      "status": "PASS",
+      "expected": "no verified root cause and not falsely completed",
+      "actual": {
+        "reasonSummary": "Bộ phận vận hành báo mạng tại nhà máy Delta đã khôi phục hoàn toàn lúc 14:00, nhưng hệ thống giám sát vẫn ghi nhận 12 thiết bị IoT offline sau thời điểm đó; nhân viên hiện trường xác nhận nguồn điện bình thường. Có mâu thuẫn giữa báo cáo trạng thái mạng và dữ liệu thực tế từ thiết bị; đề nghị xác minh nguyên nhân và đối chiếu nguồn thông tin, không kết luận đã khắc phục khi chưa có bằng chứng. Nguyên nhân chưa được xác minh.",
+        "status": "TRIAGED"
+      }
+    },
+    {
+      "id": "NOANSWER-IDENTIFIER",
+      "status": "PASS",
+      "expected": "exact PROTO-DEMO-917 retained",
+      "actual": [
+        {
+          "kind": "TECHNICAL_IDENTIFIER",
+          "value": "PROTO-DEMO-917",
+          "provenance": "USER_REPORTED"
+        }
+      ]
+    },
+    {
+      "id": "NOANSWER-NO-CITATION",
+      "status": "PASS",
+      "expected": "no fabricated source or citation",
+      "actual": {
+        "sources": [],
+        "citations": []
+      }
+    },
+    {
+      "id": "IOT-FACTS",
+      "status": "PASS",
+      "expected": "23 SIMs, 09:15, gateway attempt, NO_IMPROVEMENT retained",
+      "actual": {
+        "entities": {
+          "customer": null,
+          "location": "khu thử nghiệm Omega",
+          "startedAt": "09:15",
+          "affectedCount": 23
+        },
+        "factRetention": {
+          "source": "BACKEND_LITERAL_EXTRACTION",
+          "identifiers": [],
+          "observations": [
+            {
+              "text": "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega",
+              "provenance": "USER_REPORTED"
+            },
+            {
+              "text": "Từ 09:15, hệ thống giám sát ghi nhận 23 SIM IoT tại khu thử nghiệm Omega đồng loạt mất kết nối mạng di động.",
+              "provenance": "USER_REPORTED"
+            },
+            {
+              "text": "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+              "provenance": "USER_REPORTED"
+            }
+          ],
+          "schemaVersion": "fact-retention.v1",
+          "contradictions": [
+            {
+              "evidence": [
+                "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+                "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega"
+              ],
+              "provenance": "USER_REPORTED",
+              "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh."
+            }
+          ],
+          "sourceTextHash": "072449d5bf333c3bb3ea5bf4d74dff281da85423ff421f3a5fbec0aebc830c92",
+          "troubleshootingAttempts": [
+            {
+              "action": "Đã thử khởi động lại gateway nhưng tình trạng không cải thiện (NO_IMPROVEMENT).",
+              "outcome": "NO_IMPROVEMENT",
+              "provenance": "USER_REPORTED"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "IOT-GROUNDED",
+      "status": "PASS",
+      "expected": "one current SOP-IOT-04 source and citation",
+      "actual": {
+        "sources": [
+          {
+            "score": 0.7491666682064533,
+            "title": "SOP-IOT-04 Synthetic Competition Audit",
+            "chunkId": "b974cd0f-f192-4604-bbd8-38685707f49b",
+            "section": "SOP-IOT-04 — Synthetic IoT connectivity procedure",
+            "distance": 0.2508333317935467,
+            "sourceId": "KD-9f4214c3-7b05-4a60-bd70-93e09690cda9-G1-C0",
+            "documentId": "9f4214c3-7b05-4a60-bd70-93e09690cda9",
+            "generation": 1,
+            "pageNumber": null,
+            "contentHash": "ab722f0892fea03566b6055fa6d2a65989f578d377fea675a53e1d9344e933a2"
+          }
+        ],
+        "citations": [
+          {
+            "quote": "When multiple IoT SIM devices lose data connectivity, record the affected count, location and incident start time.",
+            "sourceId": "KD-9f4214c3-7b05-4a60-bd70-93e09690cda9-G1-C0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "IOT-LIFECYCLE",
+      "status": "PASS",
+      "expected": "complete controlled lifecycle",
+      "actual": [
+        "NEW",
+        "AI_ANALYZING",
+        "TRIAGED",
+        "ASSIGNED",
+        "IN_PROGRESS",
+        "RESOLVED",
+        "CLOSED"
+      ]
+    },
+    {
+      "id": "IOT-HUMAN-CONTROL",
+      "status": "PASS",
+      "expected": "STAFF resolved and USER closed",
+      "actual": [
+        {
+          "action": "CREATE",
+          "actorType": "USER"
+        },
+        {
+          "action": "START_AI_ANALYSIS",
+          "actorType": "SYSTEM"
+        },
+        {
+          "action": "COMPLETE_AI_ANALYSIS",
+          "actorType": "SYSTEM"
+        },
+        {
+          "action": "AUTO_ASSIGN",
+          "actorType": "SYSTEM"
+        },
+        {
+          "action": "START_WORK",
+          "actorType": "STAFF"
+        },
+        {
+          "action": "RESOLVE",
+          "actorType": "STAFF"
+        },
+        {
+          "action": "USER_CONFIRM",
+          "actorType": "USER"
+        }
+      ]
+    },
+    {
+      "id": "IOT-RESOLUTION-SUMMARY",
+      "status": "PASS",
+      "expected": "successful live summary retains repair evidence",
+      "actual": {
+        "status": "SUCCEEDED",
+        "retryCount": 0,
+        "result": {
+          "timeline": [
+            {
+              "at": "2026-11-03T02:34:24.242Z",
+              "eventId": "92b80ea1-54f2-4dd1-90c4-6a9fbad2f97a",
+              "summary": "Người dùng đã gửi yêu cầu."
+            },
+            {
+              "at": "2026-11-03T02:34:25.234Z",
+              "eventId": "7e91f8f8-b09f-4072-b664-c2ceb29fcb91",
+              "summary": "AI bắt đầu phân tích dữ kiện được cung cấp."
+            },
+            {
+              "at": "2026-11-03T02:34:27.581Z",
+              "eventId": "ae015635-5ca2-4096-915b-f89127525fc3",
+              "summary": "AI đã ghi nhận phân loại và đề xuất ưu tiên; chưa xác minh nguyên nhân."
+            },
+            {
+              "at": "2026-11-03T02:34:44.738Z",
+              "eventId": "0ce74962-3c65-43f9-b1d2-4d9e46e73977",
+              "summary": "Nhân viên đã ghi nhận bắt đầu xử lý."
+            },
+            {
+              "at": "2026-11-03T02:34:44.912Z",
+              "eventId": "7d708ef3-5b89-43aa-8f56-1c42b0020840",
+              "summary": "Nhân viên đã gửi bản ghi nguyên nhân, xử lý và kiểm chứng."
+            }
+          ],
+          "rootCause": "Bằng chứng synthetic: cấu hình APN thử nghiệm không đồng bộ với profile dữ liệu của 23 SIM; không phải dữ liệu khách hàng thật.",
+          "resolution": "STAFF synthetic đối chiếu trạng thái SIM, cập nhật profile APN thử nghiệm và kiểm tra lại gateway theo SOP-IOT-04.",
+          "verification": "Bằng chứng synthetic: 23/23 SIM tại Omega truyền dữ liệu ổn định sau cửa sổ kiểm tra; lần khởi động gateway trước đó giữ nguyên kết quả NO_IMPROVEMENT.",
+          "sourceEventIds": [
+            "92b80ea1-54f2-4dd1-90c4-6a9fbad2f97a",
+            "7e91f8f8-b09f-4072-b664-c2ceb29fcb91",
+            "ae015635-5ca2-4096-915b-f89127525fc3",
+            "0ce74962-3c65-43f9-b1d2-4d9e46e73977",
+            "7d708ef3-5b89-43aa-8f56-1c42b0020840"
+          ],
+          "executiveSummary": "Theo bản ghi xử lý do nhân viên gửi: Nguyên nhân: \"Bằng chứng synthetic: cấu hình APN thử nghiệm không đồng bộ với profile dữ liệu của 23 SIM; không phải dữ liệu khách hàng thật.\". Xử lý: \"STAFF synthetic đối chiếu trạng thái SIM, cập nhật profile APN thử nghiệm và kiểm tra lại gateway theo SOP-IOT-04.\". Kiểm chứng: \"Bằng chứng synthetic: 23/23 SIM tại Omega truyền dữ liệu ổn định sau cửa sổ kiểm tra; lần khởi động gateway trước đó giữ nguyên kết quả NO_IMPROVEMENT.\". Chi tiết nguyên văn nằm trong bản ghi xử lý của nhân viên.",
+          "resolutionSeconds": 20
+        }
+      }
+    },
+    {
+      "id": "USER-FACT-PROJECTION-HIDDEN",
+      "status": "PASS",
+      "expected": "USER response omits internal fact-retention projection",
+      "actual": {
+        "status": "SUCCEEDED",
+        "job": {
+          "aiRunId": "12829cb7-d004-45b8-85f4-cf7480502272",
+          "requestId": "3688cd03-688e-4da0-8c08-e90a19fdd788",
+          "purpose": "ANALYSIS",
+          "status": "SUCCEEDED",
+          "errorCode": null,
+          "createdAt": "2026-11-03T02:34:24.242Z",
+          "finishedAt": "2026-11-03T02:34:27.581Z",
+          "contextVersion": 2,
+          "missingFields": [
+            "customer",
+            "impact"
+          ]
+        },
+        "missingFields": [
+          "customer",
+          "impact"
+        ]
+      }
+    },
+    {
+      "id": "MANAGER-FACT-PROJECTION",
+      "status": "PASS",
+      "expected": "MANAGER sees validated fact-retention projection",
+      "actual": {
+        "schemaVersion": "fact-retention.v1",
+        "source": "BACKEND_LITERAL_EXTRACTION",
+        "sourceTextHash": "072449d5bf333c3bb3ea5bf4d74dff281da85423ff421f3a5fbec0aebc830c92",
+        "observations": [
+          {
+            "text": "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Từ 09:15, hệ thống giám sát ghi nhận 23 SIM IoT tại khu thử nghiệm Omega đồng loạt mất kết nối mạng di động.",
+            "provenance": "USER_REPORTED"
+          },
+          {
+            "text": "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "identifiers": [],
+        "troubleshootingAttempts": [
+          {
+            "action": "Đã thử khởi động lại gateway nhưng tình trạng không cải thiện (NO_IMPROVEMENT).",
+            "outcome": "NO_IMPROVEMENT",
+            "provenance": "USER_REPORTED"
+          }
+        ],
+        "contradictions": [
+          {
+            "description": "Các quan sát do người dùng cung cấp có dấu hiệu mâu thuẫn và cần được xác minh.",
+            "evidence": [
+              "Một số SIM vẫn hiển thị trạng thái hoạt động trên hệ thống quản lý nhưng không truyền được dữ liệu.",
+              "23 SIM IoT mất kết nối đồng loạt tại khu thử nghiệm Omega"
+            ],
+            "provenance": "USER_REPORTED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "RBAC-UNAUTHORIZED",
+      "status": "PASS",
+      "expected": "USER protected mutations return 403",
+      "actual": [
+        {
+          "name": "priority",
+          "status": 403,
+          "errorCode": "FORBIDDEN"
+        },
+        {
+          "name": "start",
+          "status": 403,
+          "errorCode": "FORBIDDEN"
+        },
+        {
+          "name": "resolve",
+          "status": 403,
+          "errorCode": "FORBIDDEN"
+        }
+      ]
+    },
+    {
+      "id": "RBAC-NO-MUTATION",
+      "status": "PASS",
+      "expected": "unauthorized writes change no state/version/audit",
+      "actual": {
+        "before": {
+          "status": "TRIAGED",
+          "version": 3,
+          "audits": 6
+        },
+        "after": {
+          "status": "TRIAGED",
+          "version": 3,
+          "audits": 6
+        }
+      }
+    },
+    {
+      "id": "STALE-409",
+      "status": "PASS",
+      "expected": "stale expectedVersion rejected",
+      "actual": {
+        "status": 409,
+        "errorCode": "STALE_VERSION",
+        "data": null
+      }
+    },
+    {
+      "id": "STALE-NO-MUTATION",
+      "status": "PASS",
+      "expected": "stale write changes no state/version/audit",
+      "actual": {
+        "before": {
+          "status": "ASSIGNED",
+          "version": 4,
+          "audits": 5
+        },
+        "after": {
+          "status": "ASSIGNED",
+          "version": 4,
+          "audits": 5
+        }
+      }
+    },
+    {
+      "id": "API-NEGATIVE-MATRIX",
+      "status": "PASS",
+      "expected": "401/404/400/200 contract matrix",
+      "actual": [
+        {
+          "name": "unauthenticated read",
+          "expected": 401,
+          "actual": 401,
+          "errorCode": "UNAUTHORIZED"
+        },
+        {
+          "name": "unknown request",
+          "expected": 404,
+          "actual": 404,
+          "errorCode": "NOT_FOUND"
+        },
+        {
+          "name": "whitespace create",
+          "expected": 400,
+          "actual": 400,
+          "errorCode": "INVALID_INPUT"
+        },
+        {
+          "name": "manager read",
+          "expected": 200,
+          "actual": 200,
+          "errorCode": null
+        }
+      ]
+    },
+    {
+      "id": "LEDGER-LIMIT",
+      "status": "PASS",
+      "expected": "at most 6 completed calls, zero failures/timeouts",
+      "actual": {
+        "attemptCount": 4,
+        "completedCount": 4,
+        "failedCount": 0,
+        "timeoutCount": 0
+      }
+    },
+    {
+      "id": "LEDGER-BUDGET",
+      "status": "PASS",
+      "expected": "at most USD 0.20 and zero uncertain cost",
+      "actual": {
+        "spendUsd": 0.005119872,
+        "uncertainCostUsd": 0
+      }
+    },
+    {
+      "id": "HISTORICAL-LEDGER-UNCHANGED",
+      "status": "PASS",
+      "expected": "historical ledger SHA-256 unchanged",
+      "actual": "50BD5170EA696E2D45226001213C61E296890DD669465ABD921EE241E9FA6BB0"
+    },
+    {
+      "id": "MIGRATIONS",
+      "status": "PASS",
+      "expected": "14 completed migrations",
+      "actual": [
+        "202609280001_enable_vector",
+        "20260928085048_m2_domain_auth",
+        "20260928092000_m2_public_code_sequence",
+        "20260928145100_m5_knowledge_vectors",
+        "20260929034000_m6_request_embeddings",
+        "20260929043000_m6_request_cosine_index",
+        "20260930010000_m14_advisory_confidence",
+        "20261002010000_m18_internal_notes",
+        "20261002020000_m19_mentions_watchers",
+        "20261002030000_m20_response_checklist_templates",
+        "20261002040000_m21_rule_based_routing",
+        "20261003010000_m22_reminder_sla_escalation",
+        "20261004010000_m23_saved_request_views",
+        "20261023010000_v13_lexical_retrieval"
+      ]
+    },
+    {
+      "id": "SYNTHETIC-KNOWLEDGE",
+      "status": "PASS",
+      "expected": "one task-owned READY synthetic document and one current chunk",
+      "actual": {
+        "documents": [
+          {
+            "id": "9f4214c3-7b05-4a60-bd70-93e09690cda9",
+            "title": "SOP-IOT-04 Synthetic Competition Audit",
+            "status": "READY",
+            "activeGeneration": 1
+          }
+        ],
+        "chunks": 1
+      }
+    }
+  ]
+}

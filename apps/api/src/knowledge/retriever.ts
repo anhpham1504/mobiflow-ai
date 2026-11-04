@@ -10,7 +10,7 @@ import {LexicalRepository,lexicalIdentity} from './lexical.repository.js';
 import {hash} from './chunker.js';
 import {exactEvidenceSpan} from './excerpt.js';
 export const retrievalVersion='cosine-exact.v1';
-export const lexicalRetrievalVersion='postgres-simple-trgm.v1';
+export const lexicalRetrievalVersion='postgres-simple-trgm.v2';
 export interface Retrieval {sources:Source[];identity:EmbeddingIdentity;retrievalMode:'lexical'|'vector';queryHash:string;queryChars:number;queryTruncated:boolean;configVersion:string;topK:number;maxDistance:number;embeddingMs:number;retrievalMs:number}
 export function buildContext(candidates:Source[],maxChars=6000):Source[]{
   const ids=new Set<string>(),hashes=new Set<string>();const result:Source[]=[];let size=0;

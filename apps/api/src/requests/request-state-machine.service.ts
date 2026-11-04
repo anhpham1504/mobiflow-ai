@@ -6,6 +6,7 @@ import { analysisSchema, analysisSchemaVersion,sourceSchema,type Source } from '
 import { promptVersion, type AnalysisInput } from '../ai/prompts/request-analysis.js';
 import {resolutionSummaryPromptVersion} from '../ai/prompts/copilot.js';
 import type { executeAnalysis } from '../ai/analysis-execution.js';
+import {validateFactRetention} from '../ai/fact-retention.js';
 import { randomUUID } from 'node:crypto';
 import { finalDecisionSchema, type FinalDecision } from '@mobiflow/contracts';
 import { Prisma, type Request as DomainRequest } from '../generated/prisma/client.js';
@@ -325,10 +326,14 @@ export class RequestStateMachineService {
       const matches=request.status==='AI_ANALYZING'&&request.activeAnalysisRunId===runId&&request.version===run.contextVersion;
       const expired=!run.deadlineAt||run.deadlineAt<=now;
       if(!result||!matches||!authorized||expired){await this.failAnalysisLocked(tx,request,run,now,!authorized?'FORBIDDEN':expired?'AI_TIMEOUT':result&&!matches?'STALE_CONTEXT':errorCode,latencyMs??result?.latencyMs);return;}
-      const a=analysisSchema.parse(result.analysis);
+      const snapshot=run.retrievalSnapshotJson as Prisma.JsonObject;
+      const messageIds=Array.isArray(snapshot.messageIds)?snapshot.messageIds.filter((id):id is string=>typeof id==='string'):[];
+      const messages=messageIds.length?await tx.requestMessage.findMany({where:{requestId:request.id,id:{in:messageIds}},orderBy:[{createdAt:'asc'},{id:'asc'}],select:{id:true,body:true}}):[];
+      if(messages.length!==messageIds.length||messages.some(message=>!messageIds.includes(message.id)))throw new ApiError(409,'STALE_CONTEXT','The retained-fact source snapshot is unavailable.');
+      const publicationInput:AnalysisInput={title:request.title,description:request.description,messages,historyTruncated:snapshot.historyTruncated===true};
+      const a=analysisSchema.parse(result.analysis),factRetention=validateFactRetention(publicationInput,result.factRetention);
       if('retrieval' in result&&result.retrieval&&'grounding' in result&&result.grounding){
         validateCitations(result.grounding.citations,result.retrieval.sources);
-        const snapshot=run.retrievalSnapshotJson as Prisma.JsonObject;
         const expected=snapshotOf(result.retrieval).sources;
         const saved=Array.isArray(snapshot.sources)?snapshot.sources:[];
         if(saved.length!==expected.length||expected.some(s=>!saved.some(v=>v&&typeof v==='object'&&!Array.isArray(v)&&v.sourceId===s.sourceId&&v.chunkId===s.chunkId&&v.documentId===s.documentId&&v.generation===s.generation&&v.contentHash===s.contentHash)))throw new ApiError(422,'INVALID_CITATION','The evidence snapshot does not match.');
@@ -336,7 +341,8 @@ export class RequestStateMachineService {
         await this.vectors.compatible(result.retrieval.identity,tx);
       }
       const analysis=await tx.aiAnalysis.create({data:{requestId:request.id,aiRunId:run.id,intent:a.intent,category:a.category,subcategory:a.subcategory,prioritySuggestion:a.prioritySuggestion,entitiesJson:a.entities,missingFieldsJson:a.missingFields,confidence:a.confidence,reasonSummary:a.reasonSummary,schemaVersion:analysisSchemaVersion,createdAt:now}});
-      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:JSON.parse(JSON.stringify(result.identity)),safeResultJson:'grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG',evidenceStatus:'NOT_REQUESTED',citations:[]},errorCode:null,errorSummary:null}});
+      const grounding='grounding' in result&&result.grounding?result.grounding:{mode:'NON_RAG' as const,evidenceStatus:'NOT_REQUESTED' as const,citations:[]};
+      await tx.aiRun.update({where:{id:runId},data:{status:'SUCCEEDED',finishedAt:now,leaseUntil:null,latencyMs:result.latencyMs,retryCount:result.retryCount,outputSize:result.outputSize,modelIdentityJson:JSON.parse(JSON.stringify(result.identity)),safeResultJson:JSON.parse(JSON.stringify({...grounding,factRetention})),errorCode:null,errorSummary:null}});
       await this.systemEdge(tx,request,runId,'COMPLETE_AI_ANALYSIS',now,{aiAnalysisStatus:'SUCCEEDED',activeAnalysisRunId:null,latestAnalysisId:analysis.id},run.initiatingActorId);
     });
   }

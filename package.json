@@ -92,7 +92,8 @@
     "test:integration:ollama-vector": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs ollama-vector",
     "test:integration:all-profiles": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs all",
     "test:integration:all-profiles:reverse": "npm run build:foundation && npm run prisma:generate && npm run build -w @mobiflow/api && node scripts/verification/m2-profile-integration.mjs all --reverse",
-    "verify:security:m24": "node --env-file=.env scripts/verification/m24-security.mjs"
+    "verify:security:current": "node scripts/verification/competition-hardening-security.mjs",
+    "verify:security:m24": "npm run verify:security:current"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
@@ -111,6 +112,7 @@
     "unrs-resolver": false
   },
   "overrides": {
+    "minimatch": "11.0.1",
     "@nestjs/platform-express": {
       "multer": "2.5.0"
     },

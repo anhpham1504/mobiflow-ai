@@ -13,7 +13,7 @@ import {parseRagOutput,validateCitations} from '../dist/knowledge/rag-output.js'
 import {analysisMessages,formatFor,quoteOptions} from '../dist/ai/prompts/request-analysis.js';
 import {distanceScore} from '../dist/knowledge/vector.repository.js';
 import {boundedExactSpan,exactEvidenceSpan} from '../dist/knowledge/excerpt.js';
-import {lexicalQuery,lexicalIdentity} from '../dist/knowledge/lexical.repository.js';
+import {lexicalQuery,lexicalIdentity,LEXICAL_MIN_SCORE_RATIO} from '../dist/knowledge/lexical.repository.js';
 const signal=()=>AbortSignal.timeout(10000),id='00000000-0000-4000-8000-000000000001';
 const src=(text='demo',extra={})=>({sourceId:`KD-${id}-G1-C0`,chunkId:id,documentId:id,generation:1,title:'Synthetic',pageNumber:null,section:null,excerpt:text,contentHash:hash(text),distance:.2,score:.8,...extra});
 const backfillFixture=()=>{
@@ -148,6 +148,14 @@ test('V1.3 semantic citations reject title-only/wrong SOP and never cut the NETW
 test('V1.3 lexical query is deterministic, diacritic tolerant and keeps exact SOP codes without embeddings',()=>{
   const accented=lexicalQuery('SOP-IOT-04: SIM IoT mất kết nối mạng'),plain=lexicalQuery('sop-iot-04 sim iot mat ket noi mang');
   assert.equal(accented.normalized,plain.normalized);assert.equal(accented.exactCode,'SOP-IOT-04');assert.equal(plain.exactCode,'SOP-IOT-04');assert.match(accented.websearch,/"disconnect"/);assert.equal(lexicalIdentity.dimension,0);assert.equal(lexicalIdentity.provider,'postgresql');
+});
+test('lexical retrieval keeps the top result and suppresses weak tail scores by a relative margin',()=>{
+  assert.equal(LEXICAL_MIN_SCORE_RATIO,.99);
+  assert.equal(1>=1*LEXICAL_MIN_SCORE_RATIO,true);
+  assert.equal(.805>=.89*LEXICAL_MIN_SCORE_RATIO,false);
+  assert.equal(.869>=.95*LEXICAL_MIN_SCORE_RATIO,false);
+  assert.equal(.94>=.95*LEXICAL_MIN_SCORE_RATIO,false);
+  assert.equal(.941>=.95*LEXICAL_MIN_SCORE_RATIO,true);
 });
 test('M5 embedding HTTP adapter validates model identity, batches, retries, malformed response and timeout',async t=>{
   let mode='valid',calls=0;

@@ -143,7 +143,7 @@ State/eligibility/source/policy changed since review returns 409/422 with stable
 | POST /requests/:id/ai/analyze | Own USER/MANAGER; VersionCommand; NEW and no active run | 202 Job; idempotent scheduling by persisted request/purpose key |
 | POST /requests/:id/ai/retry | Own USER/MANAGER; VersionCommand; NEW with failed intake | 202 new Job, preserving old failed telemetry |
 | POST /requests/:id/ai/copilot/action | Assigned STAFF; `{expectedVersion,action}` six-action enum; allowed Copilot states | 202 Job; no arbitrary prompt/context/tool fields |
-| GET /requests/:id/ai/explanation | Own USER/current STAFF/MANAGER | 200 role-projected facts/reason/sources; USER only progress/missing facts and approved resolution, not manager evidence |
+| GET /requests/:id/ai/explanation | Own USER/current STAFF/MANAGER | 200 role-projected facts/reason/sources; MANAGER/current STAFF may receive backend-owned `factRetention` (`USER_REPORTED` observations, exact technical identifiers, troubleshooting outcomes and contradictions); USER only progress/missing facts and approved resolution, not manager/internal retained-fact evidence |
 | GET /ai/runs/:id | Current permitted reader by purpose: owner/MANAGER intake status, assigned STAFF initiator for Copilot, MANAGER recommendations, scoped readers for safe resolution summary | 200 Job and safe typed result by projection; SYSTEM-scheduled intake is pollable by owner; staff cannot read manager review traces |
 | POST /requests/:id/ai/resolution-summary/retry | Current assigned STAFF or MANAGER; `{expectedVersion,resolutionId}`; RESOLVED/CLOSED | 202 Job only for latest effective resolution with failed summary; state/facts unchanged |
 
