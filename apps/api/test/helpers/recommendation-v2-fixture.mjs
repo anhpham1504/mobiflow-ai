@@ -4,6 +4,7 @@ import {parseApiEnvironment} from '@mobiflow/config';
 import {createApplication} from '../../dist/app.js';
 import {AuthService} from '../../dist/auth/auth.service.js';
 import {RequestStateMachineService} from '../../dist/requests/request-state-machine.service.js';
+import {extractFactRetention} from '../../dist/ai/fact-retention.js';
 import {RecommendationService} from '../../dist/ai/recommendation.service.js';
 import {DocumentService} from '../../dist/knowledge/document.service.js';
 import {IngestionWorker} from '../../dist/knowledge/ingestion-worker.js';
@@ -50,8 +51,8 @@ export async function createRecommendationHarness(databaseUrl,{provider,hook,emb
     for(const doc of await s.prisma.knowledgeDocument.findMany({where:{status:{not:'DISABLED'}}}))await docs.command(doc.id,manager.actor,doc.version,'disable',randomUUID(),'Isolate synthetic M14 knowledge corpus');
     const create=async(description='17 SIM IoT tại Amata mất kết nối từ 8 giờ. Synthetic M14.',analysis=syntheticAnalysis)=>{
       const id=await machine.create(user.actor,{description},randomUUID());const request=await s.prisma.request.findUniqueOrThrow({where:{id}});
-      const run=await machine.scheduleAnalysis(id,manager.actor,request.version,false,randomUUID());await machine.claimAnalysis(run.id);
-      await machine.finishAnalysis(run.id,{analysis,identity:{provider:'test',model:'m14-analysis-fixture',digest:'test-only'},outputSize:500,retryCount:0,latencyMs:1,firstAttemptValid:true});
+      const run=await machine.scheduleAnalysis(id,manager.actor,request.version,false,randomUUID()),claimed=await machine.claimAnalysis(run.id);
+      await machine.finishAnalysis(run.id,{analysis,factRetention:extractFactRetention(claimed.input),identity:{provider:'test',model:'m14-analysis-fixture',digest:'test-only'},outputSize:500,retryCount:0,latencyMs:1,firstAttemptValid:true});
       return s.prisma.request.findUniqueOrThrow({where:{id}});
     };
     const recommend=async(request,version)=>{

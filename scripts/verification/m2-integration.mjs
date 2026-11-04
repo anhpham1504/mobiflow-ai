@@ -1,6 +1,6 @@
-import { spawnSync } from 'node:child_process';
 import { Client } from 'pg';
 import { expectedMigrationNames } from '../demo/release-core.mjs';
+import {runBoundedNode} from './bounded-node-process.mjs';
 
 const ownerUrl = process.env.MIGRATION_DATABASE_URL;
 const appUrl = process.env.DATABASE_URL;
@@ -15,8 +15,7 @@ const appTestUrl = new URL(app); appTestUrl.pathname = `/${testDatabase}`;
 const admin = new Client({ connectionString: ownerAdminUrl.toString() });
 
 function run(args, env) {
-  const result = spawnSync(process.execPath, args, { cwd: process.cwd(), env: { ...process.env, ...env }, stdio: 'inherit' });
-  if (result.status !== 0) throw new Error(`Command failed with exit code ${result.status}: node ${args.join(' ')}`);
+  runBoundedNode(args,{env:{...process.env,...env},timeoutMs:8*60*1000,label:`m2:${args.at(-1)}`});
 }
 
 await admin.connect();

@@ -9,6 +9,7 @@ import {createApplication} from '../dist/app.js';
 import {AuthService} from '../dist/auth/auth.service.js';
 import {RequestStateMachineService} from '../dist/requests/request-state-machine.service.js';
 import {AnalysisWorker} from '../dist/ai/analysis-worker.js';
+import {extractFactRetention} from '../dist/ai/fact-retention.js';
 import {RecommendationService} from '../dist/ai/recommendation.service.js';
 import {RequestVectors} from '../dist/ai/tools/request-vectors.js';
 import {DomainTools} from '../dist/ai/tools/domain-tools.js';
@@ -44,7 +45,7 @@ async function setup(t,{real=false,realGeneration=false,hook,provider,embed,envO
   async function create(text='17 SIM IoT tại Amata mất kết nối từ 8 giờ. Synthetic M6',live=false){
     const id=await machine.create(user.actor,{description:text},randomUUID()),r=await s.prisma.request.findUniqueOrThrow({where:{id}});
     const run=await machine.scheduleAnalysis(id,manager.actor,r.version,false,randomUUID());
-    if(live)await worker.tick();else{await machine.claimAnalysis(run.id);await machine.finishAnalysis(run.id,{analysis,identity:{provider:'test',model:'fixture',digest:'test-only'},outputSize:500,retryCount:0,latencyMs:1,firstAttemptValid:true});}
+    if(live)await worker.tick();else{const claimed=await machine.claimAnalysis(run.id);await machine.finishAnalysis(run.id,{analysis,factRetention:extractFactRetention(claimed.input),identity:{provider:'test',model:'fixture',digest:'test-only'},outputSize:500,retryCount:0,latencyMs:1,firstAttemptValid:true});}
     return s.prisma.request.findUniqueOrThrow({where:{id}});
   }
   // These historical M6/M7 fixtures return V1. V2's default/artifact-only path
