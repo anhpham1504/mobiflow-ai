@@ -4,6 +4,18 @@ import {groundingSchema} from './knowledge.js';
 
 export const analysisSchemaVersion = 'analysis.v1';
 export const missingFieldNames = ['customer','location','affectedCount','startedAt','impact','description'] as const;
+const retainedFactText=z.string().trim().min(1).max(1000);
+const retainedProvenance=z.literal('USER_REPORTED');
+export const factRetentionSchema=z.object({
+  schemaVersion:z.literal('fact-retention.v1'),
+  source:z.literal('BACKEND_LITERAL_EXTRACTION'),
+  sourceTextHash:z.string().regex(/^[a-f0-9]{64}$/u),
+  observations:z.array(z.object({text:retainedFactText,provenance:retainedProvenance}).strict()).max(16),
+  identifiers:z.array(z.object({value:z.string().min(1).max(128),kind:z.literal('TECHNICAL_IDENTIFIER'),provenance:retainedProvenance}).strict()).max(16),
+  troubleshootingAttempts:z.array(z.object({action:retainedFactText,outcome:z.enum(['NO_IMPROVEMENT','FAILED','SUCCEEDED','UNKNOWN']),provenance:retainedProvenance}).strict()).max(12),
+  contradictions:z.array(z.object({description:retainedFactText,evidence:z.array(retainedFactText).min(1).max(4),provenance:retainedProvenance}).strict()).max(8),
+}).strict();
+export type FactRetention=z.infer<typeof factRetentionSchema>;
 const nullableText = (max:number) => z.string().trim().min(1).max(max).nullable();
 export const analysisSchema = z.object({
   intent:z.enum(['REPORT_INCIDENT','REQUEST_SERVICE','ASK_INFORMATION','UNKNOWN']),
@@ -24,6 +36,6 @@ export const analysisSchema = z.object({
 });
 export type Analysis = z.infer<typeof analysisSchema>;
 export const aiRunStatusSchema=z.enum(['QUEUED','RUNNING','SUCCEEDED','FAILED','CANCELED']);
-export const aiJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('ANALYSIS'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),provider:z.string().optional(),model:z.string().nullable().optional(),latencyMs:z.number().nullable().optional(),grounding:groundingSchema.optional()});
+export const aiJobSchema=z.object({aiRunId:z.uuid(),requestId:z.uuid(),purpose:z.literal('ANALYSIS'),status:aiRunStatusSchema,errorCode:z.string().nullable(),createdAt:z.iso.datetime(),finishedAt:z.iso.datetime().nullable(),contextVersion:z.number().int(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),factRetention:factRetentionSchema.optional(),provider:z.string().optional(),model:z.string().nullable().optional(),latencyMs:z.number().nullable().optional(),grounding:groundingSchema.optional()});
 export const aiJobResponseSchema=z.object({data:aiJobSchema,requestId:z.uuid()});
-export const aiExplanationSchema=z.object({data:z.object({status:z.enum(['NOT_STARTED','RUNNING','SUCCEEDED','FAILED']),job:aiJobSchema.nullable(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),entities:analysisSchema.shape.entities.optional(),grounding:groundingSchema.optional()}),requestId:z.uuid()});
+export const aiExplanationSchema=z.object({data:z.object({status:z.enum(['NOT_STARTED','RUNNING','SUCCEEDED','FAILED']),job:aiJobSchema.nullable(),missingFields:z.array(z.enum(missingFieldNames)),analysis:analysisSchema.optional(),entities:analysisSchema.shape.entities.optional(),factRetention:factRetentionSchema.optional(),grounding:groundingSchema.optional()}),requestId:z.uuid()});

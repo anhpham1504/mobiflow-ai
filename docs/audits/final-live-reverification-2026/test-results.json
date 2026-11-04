@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "final-live-reverification-test-results.v1",
+  "generatedAt": "2026-11-03T02:44:26.829Z",
+  "verdict": "COMPETITION_GO",
+  "qualification": "SYSTEM-LEVEL PASS / RAW-MODEL LIMITATION",
+  "worktree": {
+    "path": "C:/Users/AnhPhamPC/.codex/worktrees/competition-hardening/MobiFlow AI",
+    "branch": "codex/competition-hardening",
+    "head": "5ecb182ce6afce0b93227b0f5472185768f2c805"
+  },
+  "provider": {
+    "sessionId": "7fb850b3-2aac-41c1-80ec-b00d68732105",
+    "attempts": 4,
+    "maxAttempts": 6,
+    "completed": 4,
+    "failed": 0,
+    "timeouts": 0,
+    "costUsd": 0.005119872,
+    "maxCostUsd": 0.2,
+    "retries": 0,
+    "concurrency": 1
+  },
+  "scenarios": [
+    {
+      "id": "QA-CONFLICT-008",
+      "requestId": "5989690a-afd5-43f6-a67c-315fc5ce9310",
+      "status": "TRIAGED",
+      "systemFactRetention": "PASS",
+      "rawModel": "LIMITATION_RAW_TEXT_NOT_RETAINED",
+      "final": "PASS"
+    },
+    {
+      "id": "QA-NOANSWER-009",
+      "requestId": "7f5f9369-69fb-408f-b39a-6f281500701b",
+      "status": "TRIAGED",
+      "systemFactRetention": "PASS",
+      "rawModel": "LIMITATION_RAW_TEXT_NOT_RETAINED",
+      "final": "PASS"
+    },
+    {
+      "id": "QA-IOT-001",
+      "requestId": "3688cd03-688e-4da0-8c08-e90a19fdd788",
+      "status": "CLOSED",
+      "systemFactRetention": "PASS",
+      "rawModel": "LIMITATION_RAW_TEXT_NOT_RETAINED",
+      "final": "PASS"
+    }
+  ],
+  "liveAudit": {
+    "result": "PASS",
+    "total": 24,
+    "pass": 24,
+    "fail": 0,
+    "retrievalMetrics": {
+      "queries": 3,
+      "positiveQueries": 1,
+      "hitAt1": 1,
+      "recallAtK": 1,
+      "mrr": 1,
+      "precisionReturned": 1,
+      "noAnswerCorrect": true,
+      "disabledSource": "covered by deterministic lexical integration gate",
+      "duplicateChunks": "covered by deterministic lexical integration gate",
+      "relevantSourceRetention": "covered by deterministic lexical integration gate"
+    }
+  },
+  "regression": {
+    "npmTest": {
+      "result": "PASS",
+      "config": 8,
+      "api": 224,
+      "web": 27,
+      "releaseEvaluation": 111,
+      "total": 370
+    },
+    "typecheck": "PASS",
+    "build": "PASS",
+    "lint": "PASS",
+    "security": {
+      "result": "PASS",
+      "high": 0,
+      "critical": 0,
+      "moderate": 0
+    },
+    "docs": "PASS",
+    "npmAudit": {
+      "result": "PASS",
+      "vulnerabilities": 0
+    },
+    "lexicalIntegration": {
+      "result": "PASS",
+      "migrations": 14,
+      "embeddingCalls": 0,
+      "ftsPlanUsesIndex": true
+    },
+    "gitDiffCheck": "PASS"
+  },
+  "integrity": {
+    "historicalLedgerSha256": "50BD5170EA696E2D45226001213C61E296890DD669465ABD921EE241E9FA6BB0",
+    "historicalLedgerUnchanged": true,
+    "liveAiDisabled": true,
+    "taskProcessesStopped": true,
+    "disposableDatabaseRemoved": true,
+    "taskPortsListening": 0,
+    "commit": false,
+    "push": false,
+    "merge": false,
+    "tag": false,
+    "deploy": false,
+    "secretExposure": false
+  },
+  "evidence": {
+    "databaseApi": "evidence/database-api-audit.json",
+    "providerLedger": "evidence/provider-ledger.json",
+    "session": "evidence/session.json",
+    "screenshots": "screenshots/"
+  }
+}

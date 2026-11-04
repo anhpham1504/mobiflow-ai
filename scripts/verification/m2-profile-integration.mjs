@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
-import {spawnSync} from 'node:child_process';
 import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
+import {runBoundedNode} from './bounded-node-process.mjs';
 
 const definitions={
   'deepseek-lexical':{AI_GENERATION_PROVIDER:'deepseek',AI_PROVIDER:'deepseek',RAG_RETRIEVAL_MODE:'lexical'},
@@ -20,8 +20,7 @@ for(const profile of profiles){
   const started=Date.now(),env={...process.env,...definitions[profile],NODE_ENV:'test',M2_PROFILE_INTEGRATION:'true',AI_LIVE_CALLS_ENABLED:'false',DEEPSEEK_API_KEY:'',DATABASE_URL:runtime.DATABASE_URL,MIGRATION_DATABASE_URL:runtime.MIGRATION_DATABASE_URL,DEMO_MODE:'true',JWT_SECRET:'m2-profile-jwt-secret-'.padEnd(48,'a'),REFRESH_TOKEN_SECRET:'m2-profile-refresh-secret-'.padEnd(48,'b')};
   for(const script of ['scripts/verification/m2-integration.mjs','scripts/verification/m24-integration.mjs']){
     console.log(JSON.stringify({event:'m2.profile.start',profile,script,liveAi:false}));
-    const child=spawnSync(process.execPath,[script],{cwd:process.cwd(),env,stdio:'inherit',windowsHide:true});
-    if(child.status!==0)throw new Error(`${profile} failed in ${script} with exit code ${child.status}`);
+    runBoundedNode([script],{env,timeoutMs:15*60*1000,label:`m2-profile:${profile}:${script}`});
   }
   matrix.push({profile,generationProvider:definitions[profile].AI_GENERATION_PROVIDER,retrievalMode:definitions[profile].RAG_RETRIEVAL_MODE,m2:'PASS',m24:'PASS',liveAi:'NOT RUN',durationMs:Date.now()-started});
 }

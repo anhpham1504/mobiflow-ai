@@ -1,0 +1,15 @@
+{
+  "sessionId": "7fb850b3-2aac-41c1-80ec-b00d68732105",
+  "authorizedMaxRequests": 6,
+  "authorizedBudgetUsd": 0.2,
+  "concurrency": 1,
+  "automaticRetries": 0,
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "baseUrl": "https://api.deepseek.com/",
+  "pricingSource": "https://api-docs.deepseek.com/quick_start/pricing/",
+  "pricingPeakCacheHitInputPerMillionUsd": 0.006,
+  "pricingPeakCacheMissInputPerMillionUsd": 0.3,
+  "pricingPeakOutputPerMillionUsd": 1.2,
+  "liveCallsBeforeDispatch": 0
+}
